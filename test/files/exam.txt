@@ -1,0 +1,126 @@
+﻿<exam>
+  <title bg_image="cover.jpg" title_str="「我是齒輪達人」測驗" content="各位同學，在學完「我是齒輪達人」後，我們來進行個小小的測驗，讓你了解一下你對齒輪究竟了解了多少！" />
+  <questions bg_image="content.jpg">
+    <question file="" title="請問下列裝置，哪一個裡面沒有齒輪？" ans="4" feedback="電腦螢幕裡沒有齒輪！">
+      <option file="" title="電鑽" />
+      <option file="" title="時鐘" />
+      <option file="" title="音樂盒" />
+      <option file="" title="電腦螢幕" />
+    </question>
+    <question file="" title="下列哪一個不是齒輪的特性或功能：" ans="1" feedback="齒輪要二個以上才能接合，發揮功效哦！">
+      <option file="" title="一個齒輪就可發揮功效" />
+      <option file="" title="能夠傳遞動力" />
+      <option file="" title="可以改變運動方向" />
+      <option file="" title="可達到省力或省時的功效" />
+    </question>
+    <question file="" title="以下哪一種齒輪具有傳遞動力到垂直軸齒輪的功能：" ans="3" feedback="冠狀齒輪具有傳遞動力到垂直軸齒輪的功能！">
+      <option file="" title="正齒輪" />
+      <option file="" title="齒條" />
+      <option file="" title="冠狀齒輪" />
+      <option file="" title="蝸輪" />
+    </question>
+    <question file="04_0.jpg" title="請問下面的齒輪組合，當我們順時針轉動左邊的齒輪，請問，右邊的齒輪運動方向為何？" ans="2" feedback="相鄰的齒輪轉動方向會相反，所以是逆時針！">
+      <option file="" title="順時針旋轉" />
+      <option file="" title="逆時針旋轉" />
+      <option file="" title="往右邊滾過去" />
+      <option file="" title="停住不動" />
+    </question>
+    <question file="05_0.jpg" title="請問下面的齒輪組合，當我們逆時針轉動右邊的齒輪，請問另外二個齒輪的轉動方向為何？" ans="3" feedback="相鄰的齒輪轉動方向會相反哦！">
+      <option file="05_1.jpg" title="" />
+      <option file="05_2.jpg" title="" />
+      <option file="05_3.jpg" title="" />
+      <option file="05_4.jpg" title="" />
+    </question>
+    <question file="06_0.jpg" title="請問下面的齒輪組合，當我們順時針轉動右邊的齒輪，請問最左邊的齒輪的運動方向為何？" ans="1" feedback="相鄰的齒輪轉動方向會相反哦！">
+      <option file="" title="順時針旋轉" />
+      <option file="" title="逆時針旋轉" />
+      <option file="" title="往左邊滾過去" />
+      <option file="" title="停住不動" />
+    </question>
+    <question file="07_0.jpg" title="請問下面的齒輪組合，當我們順時針轉動上方的齒輪，請問另外二個齒輪的轉動方向為何？" ans="4" feedback="三個齒輪會互相卡住，所以不會動！">
+      <option file="07_1.jpg" title="" />
+      <option file="07_2.jpg" title="" />
+      <option file="07_3.jpg" title="" />
+      <option file="" title="所有齒輪都不會動" />
+    </question>
+    <question file="08_0.jpg" title="請問下面的齒輪組合，當我們轉動左邊的齒輪一圈時，右邊的齒輪轉動的圈數會比左邊齒輪多還是少？" ans="1" feedback="大齒輪帶動小齒輪，小齒輪轉得快，所以轉動較多圈！">
+      <option file="" title="多" />
+      <option file="" title="少" />
+      <option file="" title="一樣多" />
+      <option file="" title="不會動" />
+    </question>
+    <question file="09_0.jpg" title="請問下面的齒輪組合，當我們轉動左邊的齒輪一圈時，右邊的齒輪轉動的圈數會比左邊齒輪多還是少？" ans="2" feedback="小齒輪帶動大齒輪，大齒輪轉得慢，所以轉動較少圈！">
+      <option file="" title="多" />
+      <option file="" title="少" />
+      <option file="" title="一樣多" />
+      <option file="" title="不會動" />
+    </question>
+    <question file="" title="當我們騎變速腳踏車時，如果在平地，我們希望騎得較快時，請問腳踏車的齒輪配置應該是如何？" ans="1" feedback="大齒輪帶動小齒輪，小齒輪轉得快，所以轉動較多圈，可以跑比較快！">
+      <option file="" title="前面大齒輪，後面小齒輪" />
+      <option file="" title="前面小齒輪，後面大齒輪" />
+      <option file="" title="前後用一樣大的齒輪" />
+      <option file="" title="不需變速" />
+    </question>
+    <question file="" title="當我們騎變速腳踏車騎上山坡，我們希望騎得較輕鬆省力時，請問腳踏車的齒輪配置應該是如何？" ans="2" feedback="小齒輪帶動大齒輪，大齒輪轉得慢，所以轉動較少圈，可以讓我們騎得省力！">
+      <option file="" title="前面大齒輪，後面小齒輪" />
+      <option file="" title="前面小齒輪，後面大齒輪" />
+      <option file="" title="前後用一樣大的齒輪" />
+      <option file="" title="不需變速" />
+    </question>
+    <question file="" title="以下哪一個敘述是錯的？" ans="4" feedback="使用齒輪具有省力或省時的效果！">
+      <option file="" title="大齒輪帶小齒輪費力省時" />
+      <option file="" title="小齒輪帶大齒輪省力費時" />
+      <option file="" title="一樣的齒輪轉動圈數一樣" />
+      <option file="" title="使用齒輪無法省力或省時" />
+    </question>
+    <question file="" title="以下哪一種齒輪的組合，無法將動力傳遞到互相垂直軸心齒輪上的能力？" ans="3" feedback="正齒輪和正齒輪無法傳遞動力到垂直軸上的齒輪！">
+      <option file="" title="正齒輪配冠狀齒輪" />
+      <option file="" title="傘齒輪配傘齒輪" />
+      <option file="" title="正齒輪配正齒輪" />
+      <option file="" title="冠狀齒輪配冠狀齒輪" />
+    </question>
+    <question file="" title="請問以下的裝置，哪一種不是齒輪搭配齒條的齒輪組合？" ans="1" feedback="手搖鑽裡面沒有齒條！">
+      <option file="" title="手搖鑽" />
+      <option file="" title="戰鬥陀螺的發射器" />
+      <option file="" title="車輪的轉向裝置" />
+      <option file="" title="電動門" />
+    </question>
+    <question file="" title="當需要用到齒輪進行長距離的動力傳遞時，以下哪一種裝置用不上？" ans="4" feedback="斜面無法傳遞齒輪的動力！">
+      <option file="" title="履帶" />
+      <option file="" title="鏈條" />
+      <option file="" title="傳動軸" />
+      <option file="" title="斜面" />
+    </question>
+    <question file="" title="請問，若有一個40齒的大齒輪帶動一個20齒的小齒輪，當大齒輪轉動一圈時，小齒輪會轉動幾圈？" ans="3" feedback="40齒齒輪轉動一圈，20齒齒輪會轉動二圈！">
+      <option file="" title="3圈" />
+      <option file="" title="1圈" />
+      <option file="" title="2圈" />
+      <option file="" title="4圈" />
+    </question>
+    <question file="" title="請問，若有一個8齒的小齒輪要帶動一個24齒的大齒輪，請問小齒輪轉動幾圈時，大齒輪會轉動一圈？" ans="1" feedback="8齒齒輪需轉動三圈，才能讓24齒齒輪轉動一圈！">
+      <option file="" title="3圈" />
+      <option file="" title="1圈" />
+      <option file="" title="2圈" />
+      <option file="" title="4圈" />
+    </question>
+    <question file="" title="用旋轉的齒輪去帶動齒條，能讓齒條呈現怎樣的運動方式？" ans="2" feedback="齒輪帶動齒條，能讓齒條沿著直線方向運動！">
+      <option file="" title="旋轉運動" />
+      <option file="" title="直線運動" />
+      <option file="" title="跳躍運動" />
+      <option file="" title="無法運動" />
+    </question>
+    <question file="" title="汽車有二輪傳動及四輪傳動的方式，你認為要把引擎的動力傳動到四個輪子，應該是應用到下面哪一種組合？" ans="2" feedback="四輪傳動汽車是靠齒輪加傳動軸才能將引擎動力傳遞到四個輪子！">
+      <option file="" title="齒輪加履帶" />
+      <option file="" title="齒輪加傳動軸" />
+      <option file="" title="齒輪加鏈條" />
+      <option file="" title="滑輪加皮帶" />
+    </question>
+    <question file="" title="手搖鑽的功用在於希望能夠快速的鑽穿木頭，所以你認為它的齒輪組組合應該是如何？" ans="2" feedback="大齒輪帶動小齒輪才能達到快速的功效哦！">
+      <option file="" title="小齒輪帶大齒輪" />
+      <option file="" title="大齒輪帶小齒輪" />
+      <option file="" title="二個同齒數齒輪" />
+      <option file="" title="和齒輪齒數大小無關" />
+    </question>
+  </questions>
+  <ending bg_image="ending.jpg" title_str="「我是齒輪達人」測驗結果" content="希望這個小小的測驗，能讓你知道你對齒輪性質的了解程度！" />
+</exam>
