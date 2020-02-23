@@ -16,7 +16,7 @@
 			}
 			setTimeout(function(){
 				setCategoryName("category_liou", Blockly.Msg.CATEGORY_LIOU);
-				//Blockly.updateToolbox(toolbox);  //目前會造成目錄大風吹，可考慮不執行這行程式碼，目錄僅顯示toolbox.xml內設定的名稱
+				// Blockly.updateToolbox(toolbox);  //目前會造成目錄大風吹，可考慮不執行這行程式碼，目錄僅顯示toolbox.xml內設定的名稱
 			}, 1000);
 		}
 	}, 100); 
