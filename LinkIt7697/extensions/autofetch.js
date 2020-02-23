@@ -38,12 +38,7 @@
 		addScript(javascript_path);
 		var xml = $.ajax({url: toolbox_path, async: false}).responseXML;
 		//toolbox.children[fatherCategoryID].append(xml.firstChild);
-		//mySize=x.firstChild.children.length;
 		for(i=0;i< 21;i++){
 			toolbox.children[fatherCategoryID].append(xml.firstChild.children[20-i]);
 		}
-		//toolbox.children[fatherCategoryID].append(xml.firstChild.children[3]);
-		//toolbox.children[fatherCategoryID].append(xml.firstChild.children[2]);
-		//toolbox.children[fatherCategoryID].append(xml.firstChild.children[1]);
-		//toolbox.children[fatherCategoryID].append(xml.firstChild.children[0]);
 	}
