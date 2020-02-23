@@ -15,6 +15,7 @@
 				addScript(en_path);  //載入自訂積木英文語系設定檔覆蓋繁體語系設定
 			}
 			setTimeout(function(){
+				setCategoryName("category_liou", Blockly.Msg.CATEGORY_LIOU);
 				//Blockly.updateToolbox(toolbox);  //目前會造成目錄大風吹，可考慮不執行這行程式碼，目錄僅顯示toolbox.xml內設定的名稱
 			}, 1000);
 		}
