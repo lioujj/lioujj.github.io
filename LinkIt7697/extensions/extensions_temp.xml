@@ -1,0 +1,51 @@
+		<category id="category_mqtt">
+		<block type="connect_mqtt">
+			<value name="BROKER">
+				<block type="text">
+					<field name="TEXT"></field>
+				</block>
+			</value>
+			<value name="PORT">
+				<block type="math_number">
+					<field name="NUM">1883</field>
+				</block>
+			</value>
+			<value name="ID">
+				<block type="text">
+					<field name="TEXT"></field>
+				</block>
+			</value>
+			<value name="USERNAME">
+				<block type="text">
+					<field name="TEXT"></field>
+				</block>
+			</value>
+			<value name="PASSWORD">
+				<block type="text">
+					<field name="TEXT"></field>
+				</block>
+			</value>
+		</block>
+		<block type="subscribe_mqtt">
+			<value name="TOPIC">
+				<block type="text">
+					<field name="TEXT"></field>
+				</block>
+			</value>
+		</block>
+		<block type="publish_mqtt">
+			<value name="TOPIC">
+				<block type="text">
+					<field name="TEXT"></field>
+				</block>
+			</value>
+			<value name="MESSAGE">
+				<block type="text">
+					<field name="TEXT"></field>
+				</block>
+			</value>
+		</block>
+		<block type="mqtt_event"></block>
+		<block type="mqtt_received_topic"></block>
+		<block type="mqtt_received_msg"></block>
+		</category>
