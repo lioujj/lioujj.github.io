@@ -5,6 +5,23 @@ Blockly.Msg.LIOU_ROBOT_LEFT = "左轉";
 Blockly.Msg.LIOU_ROBOT_RIGHT = "右轉";
 Blockly.Msg.LIOU_ROBOT_STOP = "停止";
 Blockly.Msg.LIOU_ROBOT_MOVE_SPEED = "速度(0~255)";
+Blockly.Msg.LIOU_ROBOT_LEFT_SIDE= "左";
+Blockly.Msg.LIOU_ROBOT_RIGHT_SIDE= "右";
+Blockly.Msg.LIOU_ROBOT_WHEEL = "輪";
+Blockly.Msg.LIOU_ROBOT_LINE_FOLLOWER = "巡線感應器";
+Blockly.Msg.LIOU_ROBOT_BLACK = "黑";
+Blockly.Msg.LIOU_ROBOT_WHITE = "白";
+Blockly.Msg.LIOU_ROBOT_SERVO = "伺服馬達";
+Blockly.Msg.LIOU_ROBOT_ANGLE = "轉動角度(0~180)";
+Blockly.Msg.LIOU_ROBOT_WHEN = "當";
+Blockly.Msg.LIOU_ROBOT_BUTTON = "按鈕";
+Blockly.Msg.LIOU_ROBOT_BUTTON_CHECK = "被按下";
+Blockly.Msg.LIOU_ROBOT_SONAR = "超音波感測距離(cm)";
+Blockly.Msg.LIOU_ROBOT_IR_RECEIVED1 = "如果紅外線訊號來自遙控器按鈕：";
+Blockly.Msg.LIOU_ROBOT_IR_EVENT = "當接收到紅外線訊號時";
+Blockly.Msg.LIOU_ROBOT_IR_WARNING = "需要放置在「"+Blockly.Msg.LIOU_ROBOT_IR_EVENT+"」積木裡面";
+Blockly.Msg.LIOU_ROBOT_IR_RECEIVED2_TYPE = "如果接收到的紅外線訊號類型為：";
+Blockly.Msg.LIOU_ROBOT_IR_RECEIVED2_MSG = "訊號編碼為：";
 
 //jetmole
 Blockly.Msg.CATEGORY_JETMOLE = "噴射鼴鼠";
@@ -89,3 +106,24 @@ Blockly.Msg.CATEGORY_LJJ_TOOLS = "工具程式";
 Blockly.Msg.TOOLS_HELPURL = "TOOLS";
 Blockly.Msg.LJJ_TOOLS_TOOLTIP = "TOOLS";
 Blockly.Msg.LJJ_TOOLS_CONVERT_STR_INY = "轉換字串為數字";
+
+//Maqueen
+Blockly.Msg.CATEGORY_MAQUEEN = "麥昆小車";
+Blockly.Msg.MAQUEEN_HELPURL = "Maqueen";
+Blockly.Msg.MAQUEEN_TOOLTIP = "Maqueen";
+Blockly.Msg.MAQUEEN_LIGHT_LEFT = "左前燈";
+Blockly.Msg.MAQUEEN_LIGHT_RIGHT = "右前燈";
+Blockly.Msg.MAQUEEN_LIGHT_ON = "開";
+Blockly.Msg.MAQUEEN_LIGHT_OFF = "關";
+Blockly.Msg.MAQUEEN_TONE_PRETEXT = "播放音調";
+Blockly.Msg.MAQUEEN_NO_TONE_PRETEXT = "停止播放音調";
+
+//IR
+Blockly.Msg.CATEGORY_IR = "紅外線";
+Blockly.Msg.IR_HELPURL = "紅外線";
+Blockly.Msg.IR_RECEIVED_TYPE = "接收到的紅外線編碼類型";
+Blockly.Msg.IR_RECEIVED_CODE = "接收到的紅外線編碼";
+Blockly.Msg.IR_TOOLTIP = "紅外線";
+Blockly.Msg.IR_RECEIVE_PIN_TITLE = "設定紅外線接收器腳位";
+Blockly.Msg.IR_SENDER_PIN_TITLE = "設定紅外線發送器腳位";
+Blockly.Msg.IR_PIN_WARNING = "需先設定紅外線接收器腳位";

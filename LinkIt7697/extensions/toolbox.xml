@@ -47,8 +47,97 @@
 			<block type="mp3_loop_options"></block>
 			<block type="mp3_random"></block>
 		</category>
+        <category id="category_ir" name="InfraRed">
+			<block type="ir_receiver_pin"></block>
+			<block type="ir_event"></block>
+            <block type="ir_received_type"></block>
+            <block type="ir_received_code"></block>
+        </category>
 	</category>
 	<category id="category_liou_robot" name="Robot">
+		<category id="category_maqueen" name="Maqueen">
+			<block type="maqueen_head_light"></block>
+			<block type="maqueen_move_car">
+				<value name="SPEED">
+					<block type="math_number">
+					<field name="NUM">0</field>
+					</block>
+				</value>
+			</block>
+			<block type="maqueen_move_motor">
+				<value name="SPEED">
+					<block type="math_number">
+						<field name="NUM">0</field>
+						</block>
+				</value>
+			</block>
+			<block type="maqueen_servo">
+				<value name="ANGLE">
+					<block type="math_number">
+						<field name="NUM">0</field>
+						</block>
+				</value>
+			</block>
+			<block type="maqueen_button"></block>
+            <block type="maqueen_sonar"></block>
+            <block type="maqueen_line_follower"></block>
+			<block type="maqueen_ir_event"></block>
+			<block type="maqueen_ir_remote_received1"></block>
+			<block type="maqueen_ir_remote_received2">
+                <value name="IR_SIGNAL">
+                    <block type="text">
+                        <field name="TEXT"></field>
+                    </block>
+                </value>
+            </block>
+            <block type="maqueen_ir_received_type"></block>
+			<block type="maqueen_ir_received_code"></block>
+            <block type="maqueen_tone"></block>
+            <block type="maqueen_no_tone"></block>
+            <block type="maqueen_custom_tone">
+                <value name="FREQ">
+                    <block type="math_number">
+                        <field name="NUM">255</field>
+                    </block>
+                </value>
+                <value name="DURATION">
+                    <block type="math_number">
+                        <field name="NUM">300</field>
+                    </block>
+                </value>
+            </block>
+			<block type="neopixel_begin_maqueen"></block>
+			<block type="neopixel_setpixelcolor">
+				<value name="TARGET">
+					<block type="math_number">
+						<field name="NUM">0</field>
+					</block>
+				</value>
+			</block>
+			<block type="neopixel_custom_setpixelcolor">
+				<value name="TARGET">
+					<block type="math_number">
+						<field name="NUM">0</field>
+					</block>
+				</value>
+				<value name="R">
+					<block type="math_number">
+						<field name="NUM">255</field>
+					</block>
+				</value>
+				<value name="G">
+					<block type="math_number">
+						<field name="NUM">0</field>
+					</block>
+				</value>
+				<value name="B">
+					<block type="math_number">
+						<field name="NUM">0</field>
+					</block>
+				</value>
+			</block>
+			<block type="neopixel_show"></block>
+		</category>
 		<category id="category_jetmole" name="Jet Mole">
 			<block type="mole_move_car">
 				<value name="SPEED">

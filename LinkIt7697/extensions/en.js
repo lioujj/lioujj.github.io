@@ -1,10 +1,27 @@
 //robot car
 Blockly.Msg.LIOU_ROBOT_FORWARD = "FORWARD";
 Blockly.Msg.LIOU_ROBOT_BACKWARD = "BACKWARD";
-Blockly.Msg.LIOU_ROBOT_LEFT = "LEFT";
-Blockly.Msg.LIOU_ROBOT_RIGHT = "RIGHT";
+Blockly.Msg.LIOU_ROBOT_LEFT = "LEFTWARD";
+Blockly.Msg.LIOU_ROBOT_RIGHT = "RIGHTWARD";
 Blockly.Msg.LIOU_ROBOT_STOP = "STOP";
 Blockly.Msg.LIOU_ROBOT_MOVE_SPEED = "Speed(0~255)";
+Blockly.Msg.LIOU_ROBOT_LEFT_SIDE= "Left";
+Blockly.Msg.LIOU_ROBOT_RIGHT_SIDE= "Right";
+Blockly.Msg.LIOU_ROBOT_WHEEL = "wheel";
+Blockly.Msg.LIOU_ROBOT_LINE_FOLLOWER = "Line Follower";
+Blockly.Msg.LIOU_ROBOT_BLACK = "black";
+Blockly.Msg.LIOU_ROBOT_WHITE = "white";
+Blockly.Msg.LIOU_ROBOT_SERVO = "SERVO";
+Blockly.Msg.LIOU_ROBOT_ANGLE = "Angle(0~180)";
+Blockly.Msg.LIOU_ROBOT_WHEN = "When ";
+Blockly.Msg.LIOU_ROBOT_BUTTON = "button";
+Blockly.Msg.LIOU_ROBOT_BUTTON_CHECK = "is pressed";
+Blockly.Msg.LIOU_ROBOT_SONAR = "The distance of sonar(cm)";
+Blockly.Msg.LIOU_ROBOT_IR_RECEIVED1 = "If receive the IR code of button:";
+Blockly.Msg.LIOU_ROBOT_IR_EVENT = "When receive IR signal";
+Blockly.Msg.LIOU_ROBOT_IR_WARNING = "Need to Begin Block.";
+Blockly.Msg.LIOU_ROBOT_IR_RECEIVED2_TYPE = "If receive the IR code type:";
+Blockly.Msg.LIOU_ROBOT_IR_RECEIVED2_MSG = "code:";
 
 //jetmole
 Blockly.Msg.CATEGORY_JETMOLE = "Jet Mole";
@@ -40,6 +57,7 @@ Blockly.Msg.MQTT_MESSAGE = "Message";
 Blockly.Msg.MQTT_EVENT = "When message received from MQTT";
 Blockly.Msg.MQTT_RECEIVED_TOPIC = "received topic name";
 Blockly.Msg.MQTT_RECEIVED_MSG = "received message";
+Blockly.Msg.LIOU_ROBOT_IR_RECEIVED = "When button of IR remote controller is pressed";
 
 //ThingSpeak
 Blockly.Msg.CATEGORY_THINGSPEAK = "ThingSpeak";
@@ -89,3 +107,24 @@ Blockly.Msg.CATEGORY_LJJ_TOOLS = "Tools";
 Blockly.Msg.TOOLS_HELPURL = "TOOLS";
 Blockly.Msg.LJJ_TOOLS_TOOLTIP = "TOOLS";
 Blockly.Msg.LJJ_TOOLS_CONVERT_STR_INY = "Convert String to Int";
+
+//Maqueen
+Blockly.Msg.CATEGORY_MAQUEEN = "Maqueen";
+Blockly.Msg.MAQUEEN_HELPURL = "Maqueen";
+Blockly.Msg.MAQUEEN_TOOLTIP = "Maqueen";
+Blockly.Msg.MAQUEEN_LIGHT_LEFT = "Left Head Light";
+Blockly.Msg.MAQUEEN_LIGHT_RIGHT = "Right Head Light";
+Blockly.Msg.MAQUEEN_LIGHT_ON = "ON";
+Blockly.Msg.MAQUEEN_LIGHT_OFF = "OFF";
+Blockly.Msg.MAQUEEN_TONE_PRETEXT = "Tone";
+Blockly.Msg.MAQUEEN_NO_TONE_PRETEXT = "No tone";
+
+//IR
+Blockly.Msg.CATEGORY_IR = "InfraRed";
+Blockly.Msg.IR_HELPURL = "InfraRed";
+Blockly.Msg.IR_RECEIVED_TYPE = "the received IR Type";
+Blockly.Msg.IR_RECEIVED_CODE = "the received IR Code";
+Blockly.Msg.IR_TOOLTIP = "InfraRed";
+Blockly.Msg.IR_RECEIVE_PIN_TITLE = "Set IR receiver pin:";
+Blockly.Msg.IR_PIN_WARNING = "You have to set IR receiver pin first.";
+Blockly.Msg.IR_SENDER_PIN_TITLE = "Set IR sender pin:";
