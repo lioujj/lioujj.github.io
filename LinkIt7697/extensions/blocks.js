@@ -589,3 +589,72 @@ Blockly.Blocks.ir_sender_pin={init:function(){
   this.setNextStatement(!0);
   this.setTooltip(Blockly.Msg.IR_TOOLTIP)}
 };
+
+//weather
+Blockly.Blocks.weather={};
+Blockly.Blocks.weather.HUE=180;
+Blockly.Blocks.weather_fetchWeatherInfo={init:function(){
+  this.setHelpUrl(Blockly.Msg.WEATHER_HELPURL);
+  this.setColour(Blockly.Blocks.weather.HUE);
+  this.appendDummyInput().appendField(Blockly.Msg.FETCH_WEATHER_TITLE);
+  this.appendValueInput("CITYID").setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg.WEATHER_CITYID);
+  this.appendValueInput("KEY")
+      .setCheck("String")
+	  .setAlign(Blockly.ALIGN_RIGHT)
+	  .appendField(Blockly.Msg.WEATHER_KEY);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.WEATHER_TOOLTIP)}
+};
+
+Blockly.Blocks.weather_getID={init:function(){
+  var CityID=[["Taipei","1668341"],["Hong Kong","1819729"],["Tokyo","1850147"],["Seoul","1835848"],["Beijing","1816670"],["Shanghai","1796236"],
+      ["Singapore","1880252"],["London","2643743"],["Berlin","2950159"],["Paris","2988507"],["NewYork","5128638"],["Sydney","2147714"]];
+  this.setHelpUrl(Blockly.Msg.WEATHER_HELPURL);
+  this.setColour(Blockly.Blocks.weather.HUE);
+  this.appendDummyInput().appendField(Blockly.Msg.WEATHER_GET_CITYID);
+  this.appendDummyInput()  
+      .appendField(new Blockly.FieldDropdown(CityID),"CITY_ID");
+  this.setInputsInline(!0);
+  this.setOutput(!0,"String");
+  this.setTooltip(Blockly.Msg.WEATHER_TOOLTIP)}
+};
+
+Blockly.Blocks.weather_getID_TW={init:function(){
+  var CityID=[["基隆市","6724654"],["台北市","1668341"],["新北市","1670029"],["桃園市","1667905"],["新竹市","1675107"],["苗栗縣","1671971"],["台中市","1668399"],
+      ["彰化縣","1679136"],["南投縣","1671564"],["雲林縣","1665194"],["嘉義市","1678836"],["台南市","1668352"],["高雄市","7280289"],["屏東縣","1670479"],
+      ["宜蘭縣","1674197"],["花蓮縣","1674502"],["台東縣","1668295"],["澎湖縣","1670651"],["金門金城縣","1678008"],["馬祖南竿","7552914"]];
+  this.setHelpUrl(Blockly.Msg.WEATHER_HELPURL);
+  this.setColour(Blockly.Blocks.weather.HUE);
+  this.appendDummyInput().appendField(Blockly.Msg.WEATHER_GET_CITYID_TW);
+  this.appendDummyInput()  
+      .appendField(new Blockly.FieldDropdown(CityID),"CITY_ID");
+  this.setInputsInline(!0);
+  this.setOutput(!0,"String");
+  this.setTooltip(Blockly.Msg.WEATHER_TOOLTIP)}
+};
+
+Blockly.Blocks.weather_getValue={init:function(){
+  this.setHelpUrl(Blockly.Msg.WEATHER_HELPURL);
+  this.setColour(Blockly.Blocks.weather.HUE);
+  this.appendDummyInput().appendField(Blockly.Msg.WEATHER_GET_VALUE);
+  this.appendDummyInput()  
+      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.WEATHER_CITY_NAME,"doc[\"name\"].as<char*>()"],
+                                              [Blockly.Msg.WEATHER_CITY_WEATHER,"doc[\"weather\"][0][\"main\"].as<char*>()"],
+                                              [Blockly.Msg.WEATHER_CITY_DESCRIPTION,"doc[\"weather\"][0][\"description\"].as<char*>()"],
+                                              [Blockly.Msg.WEATHER_CITY_TEMP,"(doc[\"main\"][\"temp\"].as<float>()-273.15)"],
+                                              [Blockly.Msg.WEATHER_CITY_TEMP_MIN,"(doc[\"main\"][\"temp_min\"].as<float>()-273.15)"],
+                                              [Blockly.Msg.WEATHER_CITY_TEMP_MAX,"(doc[\"main\"][\"temp_max\"].as<float>()-273.15)"],
+                                              [Blockly.Msg.WEATHER_CITY_PRESSURE,"doc[\"main\"][\"pressure\"].as<long>()"],
+                                              [Blockly.Msg.WEATHER_CITY_HUMIDITY,"doc[\"main\"][\"humidity\"].as<long>()"],
+                                              [Blockly.Msg.WEATHER_CITY_WIND_SPEED,"doc[\"wind\"][\"speed\"].as<float>()"],
+                                              [Blockly.Msg.WEATHER_CITY_WIND_DEG,"doc[\"wind\"][\"deg\"].as<long>()"],
+                                              [Blockly.Msg.WEATHER_CITY_SUNRISE,"convMyTime(doc[\"sys\"][\"sunrise\"].as<long>()+doc[\"timezone\"].as<long>())"],
+                                              [Blockly.Msg.WEATHER_CITY_SUNSET,"convMyTime(doc[\"sys\"][\"sunset\"].as<long>()+doc[\"timezone\"].as<long>())"]
+      
+      ]),"VALUE_NAME");
+  this.setInputsInline(!0);
+  this.setOutput(!0,"String");
+  this.setTooltip(Blockly.Msg.WEATHER_TOOLTIP)}
+};

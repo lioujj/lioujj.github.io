@@ -128,3 +128,27 @@ Blockly.Msg.IR_TOOLTIP = "InfraRed";
 Blockly.Msg.IR_RECEIVE_PIN_TITLE = "Set IR receiver pin:";
 Blockly.Msg.IR_PIN_WARNING = "You have to set IR receiver pin first.";
 Blockly.Msg.IR_SENDER_PIN_TITLE = "Set IR sender pin:";
+
+//weather
+Blockly.Msg.CATEGORY_CRAWLER = "Web Crawler";
+Blockly.Msg.CATEGORY_WEATHER = "World Weather";
+Blockly.Msg.WEATHER_HELPURL = "World Weather";
+Blockly.Msg.FETCH_WEATHER_TITLE = "Fetch weather info from web";
+Blockly.Msg.WEATHER_CITYID = "City ID";
+Blockly.Msg.WEATHER_KEY = "API key";
+Blockly.Msg.WEATHER_TOOLTIP = "World Weather";
+Blockly.Msg.WEATHER_GET_CITYID = "Get city ID of big city";
+Blockly.Msg.WEATHER_GET_CITYID_TW = "Get city ID of Taiwan";
+Blockly.Msg.WEATHER_GET_VALUE = "Get";
+Blockly.Msg.WEATHER_CITY_NAME = "city name";
+Blockly.Msg.WEATHER_CITY_WEATHER = "weather";
+Blockly.Msg.WEATHER_CITY_DESCRIPTION = "weather description";
+Blockly.Msg.WEATHER_CITY_TEMP = "temperature";
+Blockly.Msg.WEATHER_CITY_TEMP_MIN = "temp min";
+Blockly.Msg.WEATHER_CITY_TEMP_MAX = "temp max";
+Blockly.Msg.WEATHER_CITY_PRESSURE = "pressure";
+Blockly.Msg.WEATHER_CITY_HUMIDITY = "humidity";
+Blockly.Msg.WEATHER_CITY_WIND_SPEED = "wind speed";
+Blockly.Msg.WEATHER_CITY_WIND_DEG = "wind direction degree";
+Blockly.Msg.WEATHER_CITY_SUNRISE = "sunrise(local time)";
+Blockly.Msg.WEATHER_CITY_SUNSET = "sunset(local time)";

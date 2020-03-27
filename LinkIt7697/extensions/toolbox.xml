@@ -162,6 +162,25 @@
 			</block>
 		</category>
 	</category>
+    <category id="category_crawler" name="Web Crawler">
+    	<category id="category_weather" name="World Weather">
+			<block type="weather_fetchWeatherInfo">
+				<value name="CITYID">
+					<block type="text">
+						<field name="TEXT">City ID</field>
+					</block>
+				</value>
+                <value name="KEY">
+					<block type="text">
+						<field name="TEXT">your OpenWeather key</field>
+					</block>
+				</value>
+            </block>
+						<block type="weather_getID"></block>
+            <block type="weather_getID_TW"></block>
+            <block type="weather_getValue"></block>
+        </category>
+	</category>
 	<category id="category_iot" name="IoT">
 		<category id="category_mqtt" name="MQTT">
 			<block type="connect_mqtt">

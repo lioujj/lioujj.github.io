@@ -391,3 +391,32 @@ Blockly.Arduino.ir_received_type=function(){
 Blockly.Arduino.ir_received_code=function(){
   return["String(results.value, HEX)",Blockly.Arduino.ORDER_ATOMIC];
 };
+
+//weather
+Blockly.Arduino.weather={};
+Blockly.Arduino.weather_fetchWeatherInfo=function(){
+	Blockly.Arduino.definitions_.define_linkit_wifi_include="#include <LWiFi.h>";
+  Blockly.Arduino.definitions_.define_json_include="#include <ArduinoJson.h>";
+  Blockly.Arduino.definitions_.define_ctimes_include="#include <ctime>";
+  Blockly.Arduino.definitions_.define_json_invoke="const size_t capacity = JSON_ARRAY_SIZE(1) + JSON_OBJECT_SIZE(1) + 2*JSON_OBJECT_SIZE(2) + JSON_OBJECT_SIZE(4) + JSON_OBJECT_SIZE(5) + JSON_OBJECT_SIZE(6) + JSON_OBJECT_SIZE(13) + 280;\nDynamicJsonDocument doc(capacity);";
+	Blockly.Arduino.definitions_.define_fetch_weather_invoke='void fetchWeatherInfo(char* cityID, char* myKey)\n{\n  static WiFiClient client;\n  client.setTimeout(10000);\n  if (!client.connect("api.openweathermap.org", 80)) {\n    return;\n  }\n  const String url = String() + "/data/2.5/weather?id="+cityID+"&appid="+myKey;\n  client.println("GET " + url + " HTTP/1.1");\n  client.println(F("Host: api.openweathermap.org"));\n  client.println(F("Accept: */*"));\n  client.println(F("Connection: close"));\n  if (client.println() == 0) {\n    return;\n  }\n  char status[32] = {0};\n  client.readBytesUntil(\'\\r\', status, sizeof(status));\n  if (strcmp(status, "HTTP/1.1 200 OK") != 0) {\n    return;\n  }\n  char endOfHeaders[] = "\\r\\n\\r\\n";\n  if (!client.find(endOfHeaders)) {\n    return;\n  }\n  DeserializationError error = deserializeJson(doc, client);\n  if (error) {\n    return;\n  }\n  client.stop();\n}\n';
+  Blockly.Arduino.definitions_.define_weather_ctime='String convMyTime(long myTimeStamp)\n{\n  static char time_text[]="YYYY-MM-DDTHH:MM:SS";\n  const time_t myTime = myTimeStamp;\n  strftime(time_text, sizeof(time_text), "%Y-%m-%dT%H:%M:%S", gmtime(&myTime));\n  return String((const char*)time_text);\n}\n';
+  var a=Blockly.Arduino.valueToCode(this,"CITYID",Blockly.Arduino.ORDER_ATOMIC)||"0",
+	b=Blockly.Arduino.valueToCode(this,"KEY",Blockly.Arduino.ORDER_ATOMIC)||"";
+	return'fetchWeatherInfo('+a+','+b+');\n'
+};
+
+Blockly.Arduino.weather_getID=function(){
+  var a=this.getFieldValue("CITY_ID");
+  return['"'+a+'"',Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.weather_getID_TW=function(){
+  var a=this.getFieldValue("CITY_ID");
+  return['"'+a+'"',Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.weather_getValue=function(){
+  var a=this.getFieldValue("VALUE_NAME");
+  return[a,Blockly.Arduino.ORDER_ATOMIC];
+};

@@ -127,3 +127,28 @@ Blockly.Msg.IR_TOOLTIP = "紅外線";
 Blockly.Msg.IR_RECEIVE_PIN_TITLE = "設定紅外線接收器腳位";
 Blockly.Msg.IR_SENDER_PIN_TITLE = "設定紅外線發送器腳位";
 Blockly.Msg.IR_PIN_WARNING = "需先設定紅外線接收器腳位";
+
+
+//weather
+Blockly.Msg.CATEGORY_CRAWLER = "網路爬蟲";
+Blockly.Msg.CATEGORY_WEATHER = "天氣資訊";
+Blockly.Msg.WEATHER_HELPURL = "天氣資訊";
+Blockly.Msg.FETCH_WEATHER_TITLE = "網路擷取天氣資訊";
+Blockly.Msg.WEATHER_CITYID = "城市編號";
+Blockly.Msg.WEATHER_KEY = "金鑰";
+Blockly.Msg.WEATHER_TOOLTIP = "天氣資訊";
+Blockly.Msg.WEATHER_GET_CITYID = "取得國際城市編號";
+Blockly.Msg.WEATHER_GET_CITYID_TW = "取得台灣各城市編號";
+Blockly.Msg.WEATHER_GET_VALUE = "取得";
+Blockly.Msg.WEATHER_CITY_NAME = "城市名稱";
+Blockly.Msg.WEATHER_CITY_WEATHER = "天氣";
+Blockly.Msg.WEATHER_CITY_DESCRIPTION = "天氣詳細描述";
+Blockly.Msg.WEATHER_CITY_TEMP = "目前溫度";
+Blockly.Msg.WEATHER_CITY_TEMP_MIN = "最低溫";
+Blockly.Msg.WEATHER_CITY_TEMP_MAX = "最高溫";
+Blockly.Msg.WEATHER_CITY_PRESSURE = "氣壓";
+Blockly.Msg.WEATHER_CITY_HUMIDITY = "濕度";
+Blockly.Msg.WEATHER_CITY_WIND_SPEED = "風速";
+Blockly.Msg.WEATHER_CITY_WIND_DEG = "風向角度";
+Blockly.Msg.WEATHER_CITY_SUNRISE = "日出時間(當地時間)";
+Blockly.Msg.WEATHER_CITY_SUNSET = "日落時間(當地時間)";
