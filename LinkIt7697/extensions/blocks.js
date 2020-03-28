@@ -590,9 +590,22 @@ Blockly.Blocks.ir_sender_pin={init:function(){
   this.setTooltip(Blockly.Msg.IR_TOOLTIP)}
 };
 
+
+
 //weather
 Blockly.Blocks.weather={};
 Blockly.Blocks.weather.HUE=180;
+Blockly.Blocks.weather.checkBlocks=function(a){
+	var b=null,
+	    d=a.type;
+		a=a.workspace.getAllBlocks();
+		for(var c=0;c<a.length;c++)
+			if("weather_getID"!=a[c].type&&"weather_getID_TW"!=a[c].type&&"weather_getValue"!=a[c].type||null!=b||(b=a[c].type!=d?!0:!1),"weather_fetchWeatherInfo"==a[c].type)
+				return!0;
+		return b
+};
+
+
 Blockly.Blocks.weather_fetchWeatherInfo={init:function(){
   this.setHelpUrl(Blockly.Msg.WEATHER_HELPURL);
   this.setColour(Blockly.Blocks.weather.HUE);
@@ -605,7 +618,7 @@ Blockly.Blocks.weather_fetchWeatherInfo={init:function(){
   this.setInputsInline(!0);
   this.setPreviousStatement(!0);
   this.setNextStatement(!0);
-  this.setTooltip(Blockly.Msg.WEATHER_TOOLTIP)}
+  this.setTooltip(Blockly.Msg.WEATHER_TOOLTIP)},onchange:function(){}
 };
 
 Blockly.Blocks.weather_getID={init:function(){
@@ -618,7 +631,8 @@ Blockly.Blocks.weather_getID={init:function(){
       .appendField(new Blockly.FieldDropdown(CityID),"CITY_ID");
   this.setInputsInline(!0);
   this.setOutput(!0,"String");
-  this.setTooltip(Blockly.Msg.WEATHER_TOOLTIP)}
+  this.setTooltip(Blockly.Msg.WEATHER_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.weather.checkBlocks(this)?this.setWarningText(null):this.setWarningText(Blockly.Msg.WEATHER_WARNING))}
 };
 
 Blockly.Blocks.weather_getID_TW={init:function(){
@@ -632,7 +646,8 @@ Blockly.Blocks.weather_getID_TW={init:function(){
       .appendField(new Blockly.FieldDropdown(CityID),"CITY_ID");
   this.setInputsInline(!0);
   this.setOutput(!0,"String");
-  this.setTooltip(Blockly.Msg.WEATHER_TOOLTIP)}
+  this.setTooltip(Blockly.Msg.WEATHER_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.weather.checkBlocks(this)?this.setWarningText(null):this.setWarningText(Blockly.Msg.WEATHER_WARNING))}
 };
 
 Blockly.Blocks.weather_getValue={init:function(){
@@ -656,5 +671,6 @@ Blockly.Blocks.weather_getValue={init:function(){
       ]),"VALUE_NAME");
   this.setInputsInline(!0);
   this.setOutput(!0,"String");
-  this.setTooltip(Blockly.Msg.WEATHER_TOOLTIP)}
+  this.setTooltip(Blockly.Msg.WEATHER_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.weather.checkBlocks(this)?this.setWarningText(null):this.setWarningText(Blockly.Msg.WEATHER_WARNING))}
 };

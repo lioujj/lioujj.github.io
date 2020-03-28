@@ -25,7 +25,7 @@ Blockly.Msg.LIOU_ROBOT_IR_RECEIVED2_MSG = "code:";
 
 //jetmole
 Blockly.Msg.CATEGORY_JETMOLE = "Jet Mole";
-Blockly.Msg.JETMOLE_HELPURL = "Jet Mole";
+Blockly.Msg.JETMOLE_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/噴射鼴鼠";
 Blockly.Msg.MOLE_MOVE_CAR = "Jet Mole Move";
 Blockly.Msg.MOLE_MOVE_CAR_TOOLTIP = "Jet Mole";
 Blockly.Msg.MOLE_MOVE_MOTOR_L = "Jet Mole Left Drill";
@@ -42,7 +42,7 @@ Blockly.Msg.CATEGORY_LIOU_ROBOT = "Robot";
 
 //mqtt
 Blockly.Msg.CATEGORY_MQTT = "MQTT";
-Blockly.Msg.MOTT_HELPURL = "MQTT";
+Blockly.Msg.MOTT_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/mqtt積木";
 Blockly.Msg.SET_MQTT_UNTIL_READY_TITLE = "Connect to MQTT";
 Blockly.Msg.MQTT_TOOLTIP = "MQTT";
 Blockly.Msg.MQTT_BROKER = "MQTT broker";
@@ -61,7 +61,7 @@ Blockly.Msg.LIOU_ROBOT_IR_RECEIVED = "When button of IR remote controller is pre
 
 //ThingSpeak
 Blockly.Msg.CATEGORY_THINGSPEAK = "ThingSpeak";
-Blockly.Msg.THINGS_GET_URL_HELPURL = "ThingSpeak";
+Blockly.Msg.THINGS_GET_URL_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/thingspeak";
 Blockly.Msg.THINGS_GET_URL_TITLE = "Send data to ThingSpeak";
 Blockly.Msg.THINGS_KEY = "write key";
 Blockly.Msg.THINGS_FIELD1 = "Field1";
@@ -79,7 +79,7 @@ Blockly.Msg.CATEGORY_LIOU_MODULES = "modules";
 
 //MP3 DFRobot Player mini
 Blockly.Msg.CATEGORY_MP3 = "MP3";
-Blockly.Msg.MP3_HELPURL = "MP3";
+Blockly.Msg.MP3_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/mp3播放積木";
 Blockly.Msg.MP3_SET_PINS_TITLE = "set DFPlayer mini pin";
 Blockly.Msg.MP3_TOOLTIP = "MP3";
 Blockly.Msg.MP3_RX_PIN = "RX Pin connect to Pin";
@@ -110,7 +110,7 @@ Blockly.Msg.LJJ_TOOLS_CONVERT_STR_INY = "Convert String to Int";
 
 //Maqueen
 Blockly.Msg.CATEGORY_MAQUEEN = "Maqueen";
-Blockly.Msg.MAQUEEN_HELPURL = "Maqueen";
+Blockly.Msg.MAQUEEN_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/麥昆小車積木";
 Blockly.Msg.MAQUEEN_TOOLTIP = "Maqueen";
 Blockly.Msg.MAQUEEN_LIGHT_LEFT = "Left Head Light";
 Blockly.Msg.MAQUEEN_LIGHT_RIGHT = "Right Head Light";
@@ -132,8 +132,9 @@ Blockly.Msg.IR_SENDER_PIN_TITLE = "Set IR sender pin:";
 //weather
 Blockly.Msg.CATEGORY_CRAWLER = "Web Crawler";
 Blockly.Msg.CATEGORY_WEATHER = "World Weather";
-Blockly.Msg.WEATHER_HELPURL = "World Weather";
+Blockly.Msg.WEATHER_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/天氣查詢積木";
 Blockly.Msg.FETCH_WEATHER_TITLE = "Fetch weather info from web";
+Blockly.Msg.WEATHER_WARNING = "You have to set \"Fetch weather info from web\" first.";
 Blockly.Msg.WEATHER_CITYID = "City ID";
 Blockly.Msg.WEATHER_KEY = "API key";
 Blockly.Msg.WEATHER_TOOLTIP = "World Weather";

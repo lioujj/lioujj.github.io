@@ -25,7 +25,7 @@ Blockly.Msg.LIOU_ROBOT_IR_RECEIVED2_MSG = "訊號編碼為：";
 
 //jetmole
 Blockly.Msg.CATEGORY_JETMOLE = "噴射鼴鼠";
-Blockly.Msg.JETMOLE_HELPURL = "噴射鼴鼠";
+Blockly.Msg.JETMOLE_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/噴射鼴鼠";
 Blockly.Msg.MOLE_MOVE_CAR = "鼴鼠移動";
 Blockly.Msg.MOLE_MOVE_CAR_TOOLTIP = "用於噴射鼴鼠移動";
 Blockly.Msg.MOLE_MOVE_MOTOR_L = "噴射鼴鼠左鑽頭";
@@ -42,7 +42,7 @@ Blockly.Msg.CATEGORY_LIOU_ROBOT = "自走車";
 
 //mqtt
 Blockly.Msg.CATEGORY_MQTT = "MQTT";
-Blockly.Msg.MOTT_HELPURL = "MQTT";
+Blockly.Msg.MOTT_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/mqtt積木";
 Blockly.Msg.SET_MQTT_UNTIL_READY_TITLE = "連線到MQTT";
 Blockly.Msg.MQTT_TOOLTIP = "MQTT";
 Blockly.Msg.MQTT_BROKER = "MQTT伺服器";
@@ -60,7 +60,7 @@ Blockly.Msg.MQTT_RECEIVED_MSG = "接收到的訊息";
 
 //ThingSpeak
 Blockly.Msg.CATEGORY_THINGSPEAK = "ThingSpeak";
-Blockly.Msg.THINGS_GET_URL_HELPURL = "ThingSpeak";
+Blockly.Msg.THINGS_GET_URL_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/thingspeak";
 Blockly.Msg.THINGS_GET_URL_TITLE = "傳送資料到ThingSpeak";
 Blockly.Msg.THINGS_KEY = "儲存金鑰";
 Blockly.Msg.THINGS_FIELD1 = "Field1";
@@ -78,7 +78,7 @@ Blockly.Msg.CATEGORY_LIOU_MODULES = "模組";
 
 //MP3 DFRobot Player mini
 Blockly.Msg.CATEGORY_MP3 = "MP3";
-Blockly.Msg.MP3_HELPURL = "MP3";
+Blockly.Msg.MP3_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/mp3播放積木";
 Blockly.Msg.MP3_SET_PINS_TITLE = "設定DFPlayer mini 腳位";
 Blockly.Msg.MP3_TOOLTIP = "MP3";
 Blockly.Msg.MP3_RX_PIN = "RX連接到Pin";
@@ -109,7 +109,7 @@ Blockly.Msg.LJJ_TOOLS_CONVERT_STR_INY = "轉換字串為數字";
 
 //Maqueen
 Blockly.Msg.CATEGORY_MAQUEEN = "麥昆小車";
-Blockly.Msg.MAQUEEN_HELPURL = "Maqueen";
+Blockly.Msg.MAQUEEN_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/麥昆小車積木";
 Blockly.Msg.MAQUEEN_TOOLTIP = "Maqueen";
 Blockly.Msg.MAQUEEN_LIGHT_LEFT = "左前燈";
 Blockly.Msg.MAQUEEN_LIGHT_RIGHT = "右前燈";
@@ -132,8 +132,9 @@ Blockly.Msg.IR_PIN_WARNING = "需先設定紅外線接收器腳位";
 //weather
 Blockly.Msg.CATEGORY_CRAWLER = "網路爬蟲";
 Blockly.Msg.CATEGORY_WEATHER = "天氣資訊";
-Blockly.Msg.WEATHER_HELPURL = "天氣資訊";
+Blockly.Msg.WEATHER_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/天氣查詢積木";
 Blockly.Msg.FETCH_WEATHER_TITLE = "網路擷取天氣資訊";
+Blockly.Msg.WEATHER_WARNING = "必須先設定「網路擷取天氣資訊」積木";
 Blockly.Msg.WEATHER_CITYID = "城市編號";
 Blockly.Msg.WEATHER_KEY = "金鑰";
 Blockly.Msg.WEATHER_TOOLTIP = "天氣資訊";
