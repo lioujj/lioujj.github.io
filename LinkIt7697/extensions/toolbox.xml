@@ -180,6 +180,22 @@
             <block type="weather_getID_TW"></block>
             <block type="weather_getValue"></block>
         </category>
+        <category id="category_aqi" name="Taiwan AQI">
+        	<block type="aqi_fetchAQIInfo"></block>
+        	<block type="aqi_getAQIValue">
+            <value name="SITENAME">
+					    <block type="text">
+						    <field name="TEXT">Site Name</field>
+					    </block>
+				    </value>
+            <value name="ATTRNAME">
+					    <block type="text">
+						    <field name="TEXT">Attribute Name</field>
+					    </block>
+				    </value>
+          </block>
+          <block type="aqi_attrname_list"></block>
+        </category>
 	</category>
 	<category id="category_iot" name="IoT">
 		<category id="category_mqtt" name="MQTT">

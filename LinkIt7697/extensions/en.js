@@ -153,3 +153,12 @@ Blockly.Msg.WEATHER_CITY_WIND_SPEED = "wind speed";
 Blockly.Msg.WEATHER_CITY_WIND_DEG = "wind direction degree";
 Blockly.Msg.WEATHER_CITY_SUNRISE = "sunrise(local time)";
 Blockly.Msg.WEATHER_CITY_SUNSET = "sunset(local time)";
+
+//AQI
+Blockly.Msg.AQI_HELPURL = "AQI";
+Blockly.Msg.FETCH_AQI_TITLE = "Get Air Quality Index(AQI) around Taiwan";
+Blockly.Msg.AQI_TOOLTIP = "AQI";
+Blockly.Msg.AQI_GET_VALUE_TITLE = "Get the AQI information";
+Blockly.Msg.AQI_GET_VALUE_STATION = "station:";
+Blockly.Msg.AQI_GET_VALUE_ATTR = "information:";
+Blockly.Msg.AQI_WARNING = "You have to set \""+ Blockly.Msg.FETCH_AQI_TITLE+"\" first.";

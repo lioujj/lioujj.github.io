@@ -153,3 +153,12 @@ Blockly.Msg.WEATHER_CITY_WIND_SPEED = "風速";
 Blockly.Msg.WEATHER_CITY_WIND_DEG = "風向角度";
 Blockly.Msg.WEATHER_CITY_SUNRISE = "日出時間(當地時間)";
 Blockly.Msg.WEATHER_CITY_SUNSET = "日落時間(當地時間)";
+
+//AQI
+Blockly.Msg.AQI_HELPURL = "AQI";
+Blockly.Msg.FETCH_AQI_TITLE = "網路擷取台灣各地空氣品質資料";
+Blockly.Msg.AQI_TOOLTIP = "AQI";
+Blockly.Msg.AQI_GET_VALUE_TITLE = "取得空氣資訊";
+Blockly.Msg.AQI_GET_VALUE_STATION = "監測站";
+Blockly.Msg.AQI_GET_VALUE_ATTR = "資訊";
+Blockly.Msg.AQI_WARNING = "必須先設定「"+Blockly.Msg.FETCH_AQI_TITLE+"」積木";

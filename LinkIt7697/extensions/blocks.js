@@ -613,8 +613,8 @@ Blockly.Blocks.weather_fetchWeatherInfo={init:function(){
   this.appendValueInput("CITYID").setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg.WEATHER_CITYID);
   this.appendValueInput("KEY")
       .setCheck("String")
-	  .setAlign(Blockly.ALIGN_RIGHT)
-	  .appendField(Blockly.Msg.WEATHER_KEY);
+	    .setAlign(Blockly.ALIGN_RIGHT)
+	    .appendField(Blockly.Msg.WEATHER_KEY);
   this.setInputsInline(!0);
   this.setPreviousStatement(!0);
   this.setNextStatement(!0);
@@ -673,4 +673,57 @@ Blockly.Blocks.weather_getValue={init:function(){
   this.setOutput(!0,"String");
   this.setTooltip(Blockly.Msg.WEATHER_TOOLTIP)},onchange:function(){
       this.workspace&&(Blockly.Blocks.weather.checkBlocks(this)?this.setWarningText(null):this.setWarningText(Blockly.Msg.WEATHER_WARNING))}
+};
+
+//AQI
+Blockly.Blocks.aqi={};
+Blockly.Blocks.aqi.HUE=320;
+Blockly.Blocks.aqi.checkBlocks=function(a){
+	var b=null,
+	    d=a.type;
+		a=a.workspace.getAllBlocks();
+		for(var c=0;c<a.length;c++)
+			if("aqi_getAQIValue"!=a[c].type&&"aqi_getAQIValue"!=a[c].type&&"aqi_attrname_list"!=a[c].type||null!=b||(b=a[c].type!=d?!0:!1),"aqi_fetchAQIInfo"==a[c].type)
+				return!0;
+		return b
+};
+
+Blockly.Blocks.aqi_fetchAQIInfo={init:function(){
+  this.setHelpUrl(Blockly.Msg.AQI_HELPURL);
+  this.setColour(Blockly.Blocks.aqi.HUE);
+  this.appendDummyInput().appendField(Blockly.Msg.FETCH_AQI_TITLE);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.AQI_TOOLTIP)}
+};
+
+Blockly.Blocks.aqi_getAQIValue={init:function(){
+  this.setHelpUrl(Blockly.Msg.AQI_HELPURL);
+  this.setColour(Blockly.Blocks.aqi.HUE);
+  this.appendDummyInput().appendField(Blockly.Msg.AQI_GET_VALUE_TITLE);
+  this.appendValueInput("SITENAME")
+      .setCheck("String")
+      .appendField(Blockly.Msg.AQI_GET_VALUE_STATION);
+  this.appendValueInput("ATTRNAME")
+      .setCheck("String")
+      .appendField(Blockly.Msg.AQI_GET_VALUE_ATTR);
+  this.setInputsInline(!0);
+  this.setOutput(!0,"String");
+  this.setTooltip(Blockly.Msg.AQI_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.aqi.checkBlocks(this)?this.setWarningText(null):this.setWarningText(Blockly.Msg.AQI_WARNING))}
+};
+
+Blockly.Blocks.aqi_attrname_list={init:function(){
+  var AttrName=[["AQI指標","AQI"],["狀態(Status)","Status"],["二氧化硫(SO2)","SO2"],["一氧化碳(CO)","CO"],["臭氧(O3)","O3"],["風速","WindSpeed"],["風向角度","WindDirec"],
+               ["PM10","PM10"],["PM2.5","PM2.5"],["PM10平均值","PM10_AVG"],["PM2.5平均值","PM2.5_AVG"],["發佈時間","PublishTime"],["監測站名","SiteName"]];
+  this.setHelpUrl(Blockly.Msg.AQI_HELPURL);
+  this.setColour(Blockly.Blocks.aqi.HUE);
+  this.appendDummyInput()  
+      .appendField(" ")
+      .appendField(new Blockly.FieldDropdown(AttrName),"ATTRNAME");
+  this.setInputsInline(!0);
+  this.setOutput(!0,"String");
+  this.setTooltip(Blockly.Msg.AQI_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.aqi.checkBlocks(this)?this.setWarningText(null):this.setWarningText(Blockly.Msg.AQI_WARNING))}
 };
