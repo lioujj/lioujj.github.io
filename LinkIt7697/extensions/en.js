@@ -155,7 +155,7 @@ Blockly.Msg.WEATHER_CITY_SUNRISE = "sunrise(local time)";
 Blockly.Msg.WEATHER_CITY_SUNSET = "sunset(local time)";
 
 //AQI
-Blockly.Msg.AQI_HELPURL = "AQI";
+Blockly.Msg.AQI_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/空氣品質積木";
 Blockly.Msg.FETCH_AQI_TITLE = "Get Air Quality Index(AQI) around Taiwan";
 Blockly.Msg.AQI_TOOLTIP = "AQI";
 Blockly.Msg.AQI_GET_VALUE_TITLE = "Get the AQI information";

@@ -155,7 +155,7 @@ Blockly.Msg.WEATHER_CITY_SUNRISE = "日出時間(當地時間)";
 Blockly.Msg.WEATHER_CITY_SUNSET = "日落時間(當地時間)";
 
 //AQI
-Blockly.Msg.AQI_HELPURL = "AQI";
+Blockly.Msg.AQI_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/空氣品質積木";
 Blockly.Msg.FETCH_AQI_TITLE = "網路擷取台灣各地空氣品質資料";
 Blockly.Msg.AQI_TOOLTIP = "AQI";
 Blockly.Msg.AQI_GET_VALUE_TITLE = "取得空氣資訊";
