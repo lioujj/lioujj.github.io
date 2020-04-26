@@ -162,3 +162,11 @@ Blockly.Msg.AQI_GET_VALUE_TITLE = "取得空氣資訊";
 Blockly.Msg.AQI_GET_VALUE_STATION = "監測站";
 Blockly.Msg.AQI_GET_VALUE_ATTR = "資訊";
 Blockly.Msg.AQI_WARNING = "必須先設定「"+Blockly.Msg.FETCH_AQI_TITLE+"」積木";
+
+//KSB045
+Blockly.Msg.KSB045_HELPURL= "KSB045";
+Blockly.Msg.KSB045_TOOLTIP = "KSB045";
+Blockly.Msg.KSB045_XY = "取得搖桿值";
+Blockly.Msg.KSB045_AXIS_END = "軸";
+Blockly.Msg.KSB045_MID_XY = "取得搖桿置中值";
+Blockly.Msg.KSB045_VIBRATION = "設定KSB045振動馬達";

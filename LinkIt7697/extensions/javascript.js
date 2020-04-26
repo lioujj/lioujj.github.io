@@ -210,6 +210,77 @@ Blockly.Arduino.tools_convert_str_int=function(){
 };
 
 
+//KSB045
+Blockly.Arduino.ksb045={};
+Blockly.Arduino.ksb045_button=function(){
+  var a=this.getFieldValue("BUTTON"),
+	b=Blockly.Arduino.statementToCode(this,"KSB045_BUTTON_CALL");
+	b=b.replace(/\n  /g,'\n    ');
+  Blockly.Arduino.definitions_.define_ksb045_mid_xy="int midX=0;\nint midY=0;\n";
+  Blockly.Arduino.definitions_.define_ksb045_button='bool checkPinPressed(byte myPin)\n{\n  if (digitalRead(myPin) == 1)\n    return false;\n  else\n    return true;\n}\n';
+  Blockly.Arduino.setups_.setup_ksb045_button='analogReadResolution(10);\n  pinMode(0, INPUT);\n  pinMode(7, INPUT);\n  pinMode(11, INPUT);\n  pinMode(12, INPUT);\n  pinMode(13, INPUT);\n  pinMode(4, INPUT);\n  pinMode(10, OUTPUT);\n  pinMode(17, INPUT);\n  pinMode(16, INPUT);\n  pinMode(15, INPUT);\n  delay(300);\n  midX=analogRead(16);\n  midY=analogRead(15);\n';
+	return"if (checkPinPressed("+a+")){\n  "+b+"    while(checkPinPressed("+a+")){}\n  }\n";
+};
+
+Blockly.Arduino.ksb045_xy=function(){
+  Blockly.Arduino.definitions_.define_ksb045_mid_xy="int midX=0;\nint midY=0;\n";
+  Blockly.Arduino.setups_.setup_ksb045_button='analogReadResolution(10);\n  pinMode(0, INPUT);\n  pinMode(7, INPUT);\n  pinMode(11, INPUT);\n  pinMode(12, INPUT);\n  pinMode(13, INPUT);\n  pinMode(4, INPUT);\n  pinMode(10, OUTPUT);\n  pinMode(17, INPUT);\n  pinMode(16, INPUT);\n  pinMode(15, INPUT);\n  delay(300);\n  midX=analogRead(16);\n  midY=analogRead(15);\n';
+  var a=this.getFieldValue("TYPE"),
+      b=this.getFieldValue("XY"),
+      xyPin=0;
+  if (a=="KSB045"){
+    if (b=="X")
+      xyPin=16;
+    else
+      xyPin=15;
+  } else{
+    if (b=="X")
+      xyPin=15;
+    else
+      xyPin=16;
+  }    
+  return['analogRead('+xyPin+')',Blockly.Arduino.ORDER_ATOMIC];
+}
+
+Blockly.Arduino.ksb045_mid_xy=function(){
+  Blockly.Arduino.definitions_.define_ksb045_mid_xy="int midX=0;\nint midY=0;\n";
+  Blockly.Arduino.setups_.setup_ksb045_button='analogReadResolution(10);\n  pinMode(0, INPUT);\n  pinMode(7, INPUT);\n  pinMode(11, INPUT);\n  pinMode(12, INPUT);\n  pinMode(13, INPUT);\n  pinMode(4, INPUT);\n  pinMode(10, OUTPUT);\n  pinMode(17, INPUT);\n  pinMode(16, INPUT);\n  pinMode(15, INPUT);\n  delay(300);\n  midX=analogRead(16);\n  midY=analogRead(15);\n';
+  var a=this.getFieldValue("TYPE"),
+      b=this.getFieldValue("XY");
+  if (a=="KSB045"){
+    if (b=="X")
+      return['midX',Blockly.Arduino.ORDER_ATOMIC];
+    else
+      return['midY',Blockly.Arduino.ORDER_ATOMIC];
+  } else{
+    if (b=="X")
+      return['midY',Blockly.Arduino.ORDER_ATOMIC];
+    else
+      return['midX',Blockly.Arduino.ORDER_ATOMIC];
+  }
+}
+
+Blockly.Arduino.ksb045_vibration=function(){
+  Blockly.Arduino.definitions_.define_ksb045_mid_xy="int midX=0;\nint midY=0;\n";
+  Blockly.Arduino.setups_.setup_ksb045_button='analogReadResolution(10);\n  pinMode(0, INPUT);\n  pinMode(7, INPUT);\n  pinMode(11, INPUT);\n  pinMode(12, INPUT);\n  pinMode(13, INPUT);\n  pinMode(4, INPUT);\n  pinMode(10, OUTPUT);\n  pinMode(17, INPUT);\n  pinMode(16, INPUT);\n  pinMode(15, INPUT);\n  delay(300);\n  midX=analogRead(16);\n  midY=analogRead(15);\n';
+  var a=this.getFieldValue("STAT");
+  return'digitalWrite(10,'+a+');\n';
+}
+
+Blockly.Arduino.ksb045_tone=function(){
+  var a=this.getFieldValue("FREQ");
+  return"tone("+14+", "+a+");\n"
+};
+Blockly.Arduino.ksb045_no_tone=function(){
+    return"noTone(14);\n"
+};
+
+Blockly.Arduino.ksb045_custom_tone=function(){
+  var a=Blockly.Arduino.valueToCode(this,"FREQ",Blockly.Arduino.ORDER_ATOMIC)||0,
+      b=Blockly.Arduino.valueToCode(this,"DURATION",Blockly.Arduino.ORDER_ATOMIC)||0;
+  return"tone(14, "+a+", "+b+");\n"
+};
+
 //Maqueen
 Blockly.Arduino.maqueen={};
 Blockly.Arduino.maqueen_head_light=function(){

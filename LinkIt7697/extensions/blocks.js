@@ -257,6 +257,107 @@ Blockly.Blocks.tools_convert_str_int={init:function(){
   this.setTooltip(Blockly.Msg.LJJ_TOOLS_TOOLTIP)}
 };
 
+
+//KSB045
+Blockly.Blocks.ksb045={};
+Blockly.Blocks.ksb045.HUE1=287;
+Blockly.Blocks.ksb045_button={init:function(){
+  this.setHelpUrl(Blockly.Msg.KSB045_HELPURL);
+  this.setColour(Blockly.Blocks.ksb045.HUE1);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LIOU_ROBOT_WHEN+Blockly.Msg.LIOU_ROBOT_BUTTON)
+      .appendField(new Blockly.FieldDropdown([["A","0"],["B","7"],["C","11"],["D","12"],["E","13"],["F","4"],["Stick SW","17"]]),"BUTTON");
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LIOU_ROBOT_BUTTON_CHECK);
+  this.setInputsInline(!0);
+  this.appendStatementInput("KSB045_BUTTON_CALL");
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.KSB045_TOOLTIP)}
+};
+
+Blockly.Blocks.ksb045_xy={init:function(){
+  this.setHelpUrl(Blockly.Msg.KSB045_HELPURL);
+  this.setColour(Blockly.Blocks.ksb045.HUE1);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.KSB045_XY)
+      .appendField(new Blockly.FieldDropdown([["KSB045","KSB045"],["WaveSahre","WAVESHARE"]]),"TYPE")
+      .appendField(new Blockly.FieldDropdown([["X","X"],["Y","Y"]]),"XY");
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.KSB045_AXIS_END);
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Number");
+  this.setTooltip(Blockly.Msg.KSB045_TOOLTIP)}
+};
+
+Blockly.Blocks.ksb045_mid_xy={init:function(){
+  this.setHelpUrl(Blockly.Msg.KSB045_HELPURL);
+  this.setColour(Blockly.Blocks.ksb045.HUE1);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.KSB045_MID_XY)
+      .appendField(new Blockly.FieldDropdown([["KSB045","KSB045"],["WaveSahre","WAVESHARE"]]),"TYPE")
+      .appendField(new Blockly.FieldDropdown([["X","X"],["Y","Y"]]),"XY");
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.KSB045_AXIS_END);
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Number");
+  this.setTooltip(Blockly.Msg.KSB045_TOOLTIP)}
+};
+
+Blockly.Blocks.ksb045_vibration={init:function(){
+  this.setHelpUrl(Blockly.Msg.KSB045_HELPURL);
+  this.setColour(Blockly.Blocks.ksb045.HUE1);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.KSB045_VIBRATION)
+      .appendField(new Blockly.FieldDropdown([["ON","1"],["OFF","0"]]),"STAT");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.KSB045_TOOLTIP)}
+};
+
+Blockly.Blocks.ksb045_tone={init:function(){
+    this.setHelpUrl(Blockly.Msg.KSB045_TOOLTIP);
+    this.setColour(Blockly.Blocks.ksb045.HUE1);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.MAQUEEN_TONE_PRETEXT);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.INOUT_TONE_APPENDTEXT_FREQ)
+        .appendField(new Blockly.FieldDropdown(profile["default"].tone),"FREQ");
+    this.setInputsInline(!0);
+    this.setPreviousStatement(!0);
+    this.setNextStatement(!0);
+    this.setTooltip(Blockly.Msg.INOUT_TONE_TOOLTIP)}
+};
+
+Blockly.Blocks.ksb045_no_tone={init:function(){
+    this.setHelpUrl(Blockly.Msg.KSB045_TOOLTIP);
+    this.setColour(Blockly.Blocks.ksb045.HUE1);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.MAQUEEN_NO_TONE_PRETEXT);
+    this.setInputsInline(!0);
+    this.setPreviousStatement(!0);
+    this.setNextStatement(!0);
+    this.setTooltip(Blockly.Msg.INOUT_TONE_TOOLTIP)}
+};
+
+Blockly.Blocks.ksb045_custom_tone={init:function(){
+    this.setHelpUrl(Blockly.Msg.KSB045_TOOLTIP);
+    this.setColour(Blockly.Blocks.ksb045.HUE1);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.MAQUEEN_TONE_PRETEXT);
+    this.appendValueInput("FREQ")
+        .setCheck("Number")
+    this.appendValueInput("DURATION").setCheck("Number")
+        .appendField(Blockly.Msg.INOUT_TONE_APPENDTEXT_DURATION);
+    this.setInputsInline(!0);
+    this.setPreviousStatement(!0);
+    this.setNextStatement(!0);
+    this.setTooltip(Blockly.Msg.INOUT_TONE_TOOLTIP)}
+};
+
+
+
 //Maqueen
 Blockly.Blocks.maqueen={};
 Blockly.Blocks.maqueen.HUE1=80;
