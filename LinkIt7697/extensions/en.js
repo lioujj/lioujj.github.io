@@ -164,7 +164,7 @@ Blockly.Msg.AQI_GET_VALUE_ATTR = "information:";
 Blockly.Msg.AQI_WARNING = "You have to set \""+ Blockly.Msg.FETCH_AQI_TITLE+"\" first.";
 
 //KSB045
-Blockly.Msg.KSB045_HELPURL= "KSB045";
+Blockly.Msg.KSB045_HELPURL= "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/搖桿積木";
 Blockly.Msg.KSB045_TOOLTIP = "KSB045";
 Blockly.Msg.KSB045_XY = "joystick value of ";
 Blockly.Msg.KSB045_AXIS_END = "axis";

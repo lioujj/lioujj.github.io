@@ -164,7 +164,7 @@ Blockly.Msg.AQI_GET_VALUE_ATTR = "資訊";
 Blockly.Msg.AQI_WARNING = "必須先設定「"+Blockly.Msg.FETCH_AQI_TITLE+"」積木";
 
 //KSB045
-Blockly.Msg.KSB045_HELPURL= "KSB045";
+Blockly.Msg.KSB045_HELPURL= "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/搖桿積木";
 Blockly.Msg.KSB045_TOOLTIP = "KSB045";
 Blockly.Msg.KSB045_XY = "取得搖桿值";
 Blockly.Msg.KSB045_AXIS_END = "軸";
