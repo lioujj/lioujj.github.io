@@ -783,3 +783,18 @@ Blockly.Arduino.ldm_movePattern=function(){
 Blockly.Arduino.ldm_showAll=function(){
   return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String("AT2f=()").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
 };
+
+//BME280
+Blockly.Arduino.bme280={};
+Blockly.Arduino.bme280_addr=function(){
+  var a=this.getFieldValue("ADDRESS");
+  Blockly.Arduino.definitions_.define_bme280="#include <Adafruit_BME280.h>\n#define SEALEVELPRESSURE_HPA (1013.25)\nAdafruit_BME280 bme;\nbool bmeStatus=false;";
+  Blockly.Arduino.setups_["bme280_addr_"]="bmeStatus = bme.begin("+a+");\n";
+  return''
+};
+
+Blockly.Arduino.getBme280_value=function(){
+  var a=this.getFieldValue("VALUE_TYPE");
+  a='(bmeStatus?'+a+':0)';
+  return[a,Blockly.Arduino.ORDER_ATOMIC];
+};

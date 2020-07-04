@@ -266,3 +266,11 @@ Blockly.Msg.LDM6432_LOAD_PATTERN_NOW = "是否立即顯示";
 Blockly.Msg.LDM6432_MOVE_PATTERN = "移動自訂圖案1個像素";
 Blockly.Msg.LDM6432_MOVE_PATTERN_TYPE=[['向上','AT32='],['向下','AT33='],['向左','AT34='],['向右','AT35=']];
 Blockly.Msg.LDM6432_SHOW_ALL = "將未顯示的圖案全部顯示";
+
+//BME280
+Blockly.Msg.BME280_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/bme280";
+Blockly.Msg.BME280_ADDR_TITLE = "設定BME280 I2C位址";
+Blockly.Msg.BME280_TOOLTIP = "BME280";
+Blockly.Msg.BME280_GET_TITLE = "BME280感測值";
+Blockly.Msg.BME280_VALUE_TYPE=[['溫度(C)','bme.readTemperature()'],['濕度(%)','bme.readHumidity()'],['氣壓(hPa)','(bme.readPressure() / 100.0F)'],['高度(m)','bme.readAltitude(SEALEVELPRESSURE_HPA)']];
+Blockly.Msg.BME280_WARNING = "你必須在初始化時先設定BME280的I2C位址";

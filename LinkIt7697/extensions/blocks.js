@@ -1407,3 +1407,41 @@ Blockly.Blocks.ldm_showAll={init:function(){
   this.setNextStatement(!0);
   this.setTooltip(Blockly.Msg.LDM6432_TOOLTIP)}
 };
+
+//BME280
+Blockly.Blocks.bme280={};
+Blockly.Blocks.bme280.HUE = "300";
+Blockly.Blocks.bme280.checkBlocks=function(a){
+	var b=null,
+	    d=a.type;
+		a=a.workspace.getAllBlocks();
+		for(var c=0;c<a.length;c++)
+			if("getBme280_value"!=a[c].type||null!=b||(b=a[c].type!=d?!0:!1),"bme280_addr"==a[c].type)
+				return!0;
+		return b
+};
+Blockly.Blocks.bme280_addr={init:function(){
+  this.setHelpUrl(Blockly.Msg.BME280_HELPURL);
+  this.setColour(Blockly.Blocks.bme280.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.BME280_ADDR_TITLE);
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown([["0x76","0x76"],["0x77","0x77"]]),"ADDRESS");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.BME280_TOOLTIP)},onchange:function(){}
+};
+
+Blockly.Blocks.getBme280_value={init:function(){
+  this.setHelpUrl(Blockly.Msg.BME280_HELPURL);
+  this.setColour(Blockly.Blocks.bme280.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.BME280_GET_TITLE);
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.BME280_VALUE_TYPE),"VALUE_TYPE");
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Number");
+  this.setTooltip(Blockly.Msg.BME280_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.bme280.checkBlocks(this)?this.setWarningText(null):this.setWarningText(Blockly.Msg.BME280_WARNING))}
+};

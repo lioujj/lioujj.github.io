@@ -267,3 +267,11 @@ Blockly.Msg.LDM6432_LOAD_PATTERN_NOW = "display now";
 Blockly.Msg.LDM6432_MOVE_PATTERN = "move user pattern 1 pixel";
 Blockly.Msg.LDM6432_MOVE_PATTERN_TYPE=[['upward','AT32='],['downward','AT33='],['leftward','AT34='],['rightward','AT35=']];
 Blockly.Msg.LDM6432_SHOW_ALL = "Display the multi patterns in the same time";
+
+//BME280
+Blockly.Msg.BME280_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/bme280";
+Blockly.Msg.BME280_ADDR_TITLE = "set BME280 I2C address";
+Blockly.Msg.BME280_TOOLTIP = "BME280";
+Blockly.Msg.BME280_GET_TITLE = "get value of BME280:";
+Blockly.Msg.BME280_VALUE_TYPE=[['temperature(C)','bme.readTemperature()'],['humidity(%)','bme.readHumidity()'],['pressure(hPa)','(bme.readPressure() / 100.0F)'],['altitude(m)','bme.readAltitude(SEALEVELPRESSURE_HPA)']];
+Blockly.Msg.BME280_WARNING = "You have to setup BME280 I2C address first.";
