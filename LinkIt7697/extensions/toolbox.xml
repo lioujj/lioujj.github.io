@@ -336,6 +336,58 @@
     </category>
   </category>
   <category id="category_ljj_modules" name="Modules">
+		<category id="category_mtk7697bit" name="7697:bit">
+            <block type="mtk7697bit_button"></block>
+            <block type="mtk7697bit_pinMap"></block>
+            <block type="oled_display_setting"></block>
+            <block type="oled_display_clear"></block>
+            <block type="oled_display_set_font"></block>
+            <block type="oled_display_draw_commands">
+                <statement name="DRAW_CMD">
+                    <block type="oled_display_draw_text">
+                        <value name="START_X">
+                            <block type="math_number">
+                                <field name="NUM">0</field>
+                            </block>
+                        </value>
+                        <value name="START_Y">
+                            <block type="math_number">
+                                <field name="NUM">0</field>
+                            </block>
+                        </value>
+                        <value name="CONTENT">
+                            <block type="text">
+                                <field name="TEXT">HELLO</field>
+                            </block>
+                        </value>
+                        <next>
+                            <block type="oled_display_draw_line">
+                                <value name="START_X">
+                                    <block type="math_number">
+                                        <field name="NUM">0</field>
+                                    </block>
+                                </value>
+                                <value name="START_Y">
+                                    <block type="math_number">
+                                        <field name="NUM">11</field>
+                                    </block>
+                                </value>
+                                <value name="END_X">
+                                    <block type="math_number">
+                                        <field name="NUM">30</field>
+                                    </block>
+                                </value>
+                                <value name="END_Y">
+                                    <block type="math_number">
+                                        <field name="NUM">11</field>
+                                    </block>
+                                </value>
+                            </block>
+                        </next>
+                    </block>
+                </statement>
+            </block>
+        </category>
 		<category id="category_mp3" name="MP3">
 			<block type="mp3_set_pins">
 				<value name="RX_PIN">

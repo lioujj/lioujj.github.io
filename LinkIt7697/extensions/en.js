@@ -275,3 +275,8 @@ Blockly.Msg.BME280_TOOLTIP = "BME280";
 Blockly.Msg.BME280_GET_TITLE = "get value of BME280:";
 Blockly.Msg.BME280_VALUE_TYPE=[['temperature(C)','bme.readTemperature()'],['humidity(%)','bme.readHumidity()'],['pressure(hPa)','(bme.readPressure() / 100.0F)'],['altitude(m)','bme.readAltitude(SEALEVELPRESSURE_HPA)']];
 Blockly.Msg.BME280_WARNING = "You have to setup BME280 I2C address first.";
+
+//7697bit
+Blockly.Msg.MTK7697BIT_HELPURL = "7697:bit breakout";
+Blockly.Msg.MTK7697BIT_TOOLTIP = "7697:bit breakout";
+Blockly.Msg.MTK7697BIT_PINMAP_TITLE = "micro:bit pin:";

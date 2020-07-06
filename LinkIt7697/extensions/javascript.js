@@ -798,3 +798,20 @@ Blockly.Arduino.getBme280_value=function(){
   a='(bmeStatus?'+a+':0)';
   return[a,Blockly.Arduino.ORDER_ATOMIC];
 };
+
+//MTK7697:bit
+Blockly.Arduino.mtk7697bit={};
+Blockly.Arduino.mtk7697bit_button=function(){
+    var a=this.getFieldValue("AB_BUTTON"),
+	    b=Blockly.Arduino.statementToCode(this,"MSG_BUTTON_CALL");
+	b=b.replace(/\n/g,'\n  ');
+    Blockly.Arduino.definitions_.define_m_button="char myBtnStatus;\nbool buttonPressed(char btnName)\n{\n  byte A_Pin=0;\n  byte B_Pin=7;\n  if (btnName=='A'){\n    if (digitalRead(A_Pin) == 1)\n      return false;\n    else\n      return true;\n  }\n  else if (btnName=='B'){\n    if (digitalRead(B_Pin) == 1)\n      return false;\n    else\n      return true;\n  } else {\n    if ((digitalRead(A_Pin) == 1) && (digitalRead(B_Pin) == 1))\n      return false;\n    else\n      return true;\n  }\n}\n"
+    Blockly.Arduino.definitions_.define_m_getBtnStatus="char getBtnStatus(){\n  char buttonStatus=' ';\n  int checkButtonDelay=200;\n  if (buttonPressed('A')){\n    delay(checkButtonDelay);\n    if (buttonPressed('A')){\n      buttonStatus='A';\n      if (buttonPressed('B'))\n        buttonStatus='C';\n    }\n  } else if (buttonPressed('B')){\n      delay(checkButtonDelay);\n      if (buttonPressed('B')){\n        buttonStatus='B';\n        if (buttonPressed('A'))\n          buttonStatus='C';\n      }\n  }\n  return buttonStatus;\n}\n";
+    Blockly.Arduino.setups_.setup_button='pinMode(0, INPUT);\n  pinMode(7, INPUT);\n';
+	return"if (myBtnStatus=='"+a+"'){\n"+b+"  while(buttonPressed('"+a+"')){}\n}\n"
+};
+
+Blockly.Arduino.mtk7697bit_pinMap=function(){
+  var a=this.getFieldValue("MTK_7697_PIN");
+  return[a,Blockly.Arduino.ORDER_ATOMIC];
+};

@@ -1445,3 +1445,33 @@ Blockly.Blocks.getBme280_value={init:function(){
   this.setTooltip(Blockly.Msg.BME280_TOOLTIP)},onchange:function(){
       this.workspace&&(Blockly.Blocks.bme280.checkBlocks(this)?this.setWarningText(null):this.setWarningText(Blockly.Msg.BME280_WARNING))}
 };
+
+//MTK7697:bit
+Blockly.Blocks.mtk7697bit={};
+Blockly.Blocks.mtk7697bit.HUE=80;
+Blockly.Blocks.mtk7697bit_button={init:function(){
+  this.setHelpUrl(Blockly.Msg.MTK7697BIT_HELPURL);
+  this.setColour(Blockly.Blocks.mtk7697bit.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LIOU_ROBOT_WHEN+Blockly.Msg.LIOU_ROBOT_BUTTON)
+      .appendField(new Blockly.FieldDropdown([["A","A"],["B","B"],["A+B","C"]]),"AB_BUTTON");
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LIOU_ROBOT_BUTTON_CHECK);
+  this.setInputsInline(!0);
+  this.appendStatementInput("MSG_BUTTON_CALL");
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.MTK7697BIT_TOOLTIP)}
+};
+
+Blockly.Blocks.mtk7697bit_pinMap={init:function(){
+  this.setHelpUrl(Blockly.Msg.MTK7697BIT_HELPURL);
+  this.setColour(Blockly.Blocks.mtk7697bit.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.MTK7697BIT_PINMAP_TITLE);
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown([["P0","14"],["P1","15"],["P2","16"],["P3","2"],["P4","6"],["P5","0"],["P6","3"],["P8","17"],["P9","5"],["P10","1"],["P11","7"],["P12","4"],["P13","13"],["P14","12"],["P15","11"],["P16","10"],["P19","8"],["P20","9"]]),"MTK_7697_PIN");
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Number");
+  this.setTooltip(Blockly.Msg.MTK7697BIT_TOOLTIP)}
+};

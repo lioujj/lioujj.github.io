@@ -274,3 +274,8 @@ Blockly.Msg.BME280_TOOLTIP = "BME280";
 Blockly.Msg.BME280_GET_TITLE = "BME280感測值";
 Blockly.Msg.BME280_VALUE_TYPE=[['溫度(C)','bme.readTemperature()'],['濕度(%)','bme.readHumidity()'],['氣壓(hPa)','(bme.readPressure() / 100.0F)'],['高度(m)','bme.readAltitude(SEALEVELPRESSURE_HPA)']];
 Blockly.Msg.BME280_WARNING = "你必須在初始化時先設定BME280的I2C位址";
+
+//7697bit
+Blockly.Msg.MTK7697BIT_HELPURL = "7697:bit breakout";
+Blockly.Msg.MTK7697BIT_TOOLTIP = "7697:bit breakout";
+Blockly.Msg.MTK7697BIT_PINMAP_TITLE = "micro:bit 腳位";
