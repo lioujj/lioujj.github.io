@@ -393,7 +393,19 @@
 				<value name="RX_PIN">
 					<block type="math_number">
 						<field name="NUM">2</field>
-				</block>
+                    </block>
+				</value>
+			</block>
+			<block type="mp3_set_pins1">
+				<value name="RX_PIN">
+					<block type="math_number">
+						<field name="NUM">2</field>
+                    </block>
+				</value>
+				<value name="TX_PIN">
+					<block type="math_number">
+						<field name="NUM">0</field>
+                    </block>
 				</value>
 			</block>
 			<block type="mp3_playfolder">
@@ -428,6 +440,13 @@
 		</category>
     <category id="category_ir" name="InfraRed">
 			<block type="ir_receiver_pin"></block>
+			<block type="ir_receiver_pin1">
+				<value name="PIN">
+					<block type="math_number">
+						<field name="NUM">0</field>
+                    </block>
+				</value>
+			</block>
 			<block type="ir_event"></block>
             <block type="ir_received_type"></block>
             <block type="ir_received_code"></block>

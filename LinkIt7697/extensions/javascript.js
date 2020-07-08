@@ -154,6 +154,17 @@ Blockly.Arduino.mp3_set_pins=function(){
 	return''
 };
 
+Blockly.Arduino.mp3_set_pins1=function(){
+	var a=Blockly.Arduino.valueToCode(this,"RX_PIN",Blockly.Arduino.ORDER_ATOMIC)||"2",
+	    b=Blockly.Arduino.valueToCode(this,"TX_PIN",Blockly.Arduino.ORDER_ATOMIC)||"0";
+	Blockly.Arduino.definitions_.define_softwareserial="#include <SoftwareSerial.h>\n";
+    Blockly.Arduino.definitions_.define_mp3_include='#include <DFRobotDFPlayerMini.h>\n';
+    Blockly.Arduino.definitions_["mp3_serial"]='SoftwareSerial mySoftwareSerial('+a+', '+b+');';
+	Blockly.Arduino.definitions_["mp3_dfplayer"]='DFRobotDFPlayerMini myDFPlayer;';
+	Blockly.Arduino.setups_["setup_mp3_"]="mySoftwareSerial.begin(9600);\n  myDFPlayer.begin(mySoftwareSerial);\n";
+	return''
+};
+
 Blockly.Arduino.mp3_playfolder=function(){
 	var a=Blockly.Arduino.valueToCode(this,"FOLDER",Blockly.Arduino.ORDER_ATOMIC)||"1",
 	    b=Blockly.Arduino.valueToCode(this,"MP3_INDEX",Blockly.Arduino.ORDER_ATOMIC)||"1";
@@ -449,6 +460,17 @@ Blockly.Arduino.ir_receiver_pin=function(){
   Blockly.Arduino.setups_["irremote_"]||(Blockly.Arduino.setups_["irremote_"]="irrecv.enableIRIn();\n");
   return''
 };
+
+Blockly.Arduino.ir_receiver_pin1=function(){
+  var a=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  Blockly.Arduino.definitions_.define_irremote="#include <IRremote.h>";
+  Blockly.Arduino.definitions_.define_irremote_init="IRrecv irrecv("+a+");";
+  Blockly.Arduino.definitions_.define_irremote_decode="decode_results results;";
+  Blockly.Arduino.definitions_.define_irremote_ir_type='String ir_type(int tip)\n{\n  if (tip == 1) {\n    return "RC5";\n  } else if (tip == 2){\n    return "RC6";\n  } else if (tip == 3){\n    return "NEC";\n  } else {\n    return "Sony";\n  }\n}\n';
+  Blockly.Arduino.setups_["irremote_"]||(Blockly.Arduino.setups_["irremote_"]="irrecv.enableIRIn();\n");
+  return''
+};
+
 
 Blockly.Arduino.ir_event=function(){
   var a=this.getFieldValue("IR_EVENT");
