@@ -1506,3 +1506,62 @@ Blockly.Blocks.mtk7697bit_pinMap={init:function(){
   this.setOutput(!0,"Number");
   this.setTooltip(Blockly.Msg.MTK7697BIT_TOOLTIP)}
 };
+
+Blockly.Blocks.oled_display_clear_buffer={
+  init:function(){
+    this.setHelpUrl(Blockly.Msg.OLED_DISPLAY_HELPURL);
+    this.setColour(Blockly.Blocks.oled_display.HUE);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.OLED_DISPLAY_CLEAR_BUFFER)
+    this.setPreviousStatement(!0);
+    this.setNextStatement(!0);
+    this.setTooltip(Blockly.Msg.OLED_DISPLAY_TOOLTIP)}
+};
+
+Blockly.Blocks.oled_display_send_buffer={
+  init:function(){
+    this.setHelpUrl(Blockly.Msg.OLED_DISPLAY_HELPURL);
+    this.setColour(Blockly.Blocks.oled_display.HUE);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.OLED_DISPLAY_SEND_BUFFER)
+    this.setPreviousStatement(!0);
+    this.setNextStatement(!0);
+    this.setTooltip(Blockly.Msg.OLED_DISPLAY_TOOLTIP)}
+};
+
+//airbox
+Blockly.Blocks.airbox={};
+Blockly.Blocks.airbox.HUE=180;
+/*
+Blockly.Blocks.airbox.checkBlocks=function(a){
+	var b=null,
+	    d=a.type;
+		a=a.workspace.getAllBlocks();
+		for(var c=0;c<a.length;c++)
+			if("weather_getID"!=a[c].type&&"weather_getID_TW"!=a[c].type&&"weather_getValue"!=a[c].type||null!=b||(b=a[c].type!=d?!0:!1),"weather_fetchWeatherInfo"==a[c].type)
+				return!0;
+		return b
+};
+*/
+
+Blockly.Blocks.airbox_fetchData={init:function(){
+  this.setHelpUrl(Blockly.Msg.AIRBOX_HELPURL);
+  this.setColour(Blockly.Blocks.airbox.HUE);
+  this.appendDummyInput().appendField(Blockly.Msg.FETCH_AIRBOX_TITLE);
+  this.appendValueInput("DEVICEID").setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg.AIRBOX_DEVICEID);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.AIRBOX_TOOLTIP)}
+};
+
+Blockly.Blocks.airbox_getValue={init:function(){
+  this.setHelpUrl(Blockly.Msg.AIRBOX_HELPURL);
+  this.setColour(Blockly.Blocks.airbox.HUE);
+  this.appendDummyInput().appendField(Blockly.Msg.AIRBOX_GET_VALUE);
+  this.appendDummyInput()  
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.AIRBOX_VALUE_DROPDOWN),"VALUE_NAME");
+  this.setInputsInline(!0);
+  this.setOutput(!0,"String");
+  this.setTooltip(Blockly.Msg.AIRBOX_TOOLTIP)}
+};

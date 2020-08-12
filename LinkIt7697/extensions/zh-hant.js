@@ -276,6 +276,27 @@ Blockly.Msg.BME280_VALUE_TYPE=[['溫度(C)','bme.readTemperature()'],['濕度(%)
 Blockly.Msg.BME280_WARNING = "你必須在初始化時先設定BME280的I2C位址";
 
 //7697bit
-Blockly.Msg.MTK7697BIT_HELPURL = "7697:bit breakout";
+Blockly.Msg.MTK7697BIT_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/7697bit";
 Blockly.Msg.MTK7697BIT_TOOLTIP = "7697:bit breakout";
 Blockly.Msg.MTK7697BIT_PINMAP_TITLE = "micro:bit 腳位";
+Blockly.Msg.OLED_DISPLAY_CLEAR_BUFFER = "清除OLED已顯示之緩衝區";
+Blockly.Msg.OLED_DISPLAY_SEND_BUFFER = "傳送緩衝區資料到OLED";
+
+//AIRBOX
+Blockly.Msg.CATEGORY_AIRBOX = "AIRBOX";
+Blockly.Msg.AIRBOX_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/airbox空氣盒子";
+Blockly.Msg.FETCH_AIRBOX_TITLE= "網路取得空氣盒子即時偵測資料";
+Blockly.Msg.AIRBOX_DEVICEID = "裝置編號";
+Blockly.Msg.AIRBOX_TOOLTIP = "AirBox";
+Blockly.Msg.AIRBOX_GET_VALUE = "取得空氣盒子資料";
+Blockly.Msg.AIRBOX_VALUE_DROPDOWN=[['PM2.5濃度','docAirbox["feeds"][0]["AirBox"]["s_d0"].as<float>()'],
+                                   ['PM10濃度','docAirbox["feeds"][0]["AirBox"]["s_d1"].as<float>()'],
+                                   ['PM1濃度','docAirbox["feeds"][0]["AirBox"]["s_d2"].as<float>()'],
+                                   ['緯度','docAirbox["feeds"][0]["AirBox"]["gps_lat"].as<float>()'],
+                                   ['經度','docAirbox["feeds"][0]["AirBox"]["gps_lon"].as<float>()'],
+                                   ['溫度','docAirbox["feeds"][0]["AirBox"]["s_t0"].as<float>()'],
+                                   ['濕度','docAirbox["feeds"][0]["AirBox"]["s_h0"].as<float>()'],
+                                   ['偵測時間(標準時間)','docAirbox["feeds"][0]["AirBox"]["timestamp"].as<char*>()'],
+                                   ['所在位置','docAirbox["feeds"][0]["AirBox"]["area"].as<char*>()'],
+                                   ['單位名稱','docAirbox["feeds"][0]["AirBox"]["name"].as<char*>()'],
+                                   ['裝置編號','docAirbox[\"device_id\"].as<char*>()']];

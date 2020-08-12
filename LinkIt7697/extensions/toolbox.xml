@@ -387,6 +387,25 @@
                     </block>
                 </statement>
             </block>
+            <block type="oled_display_draw_text">
+              <value name="START_X">
+                <block type="math_number">
+                  <field name="NUM">0</field>
+                </block>
+              </value>
+              <value name="START_Y">
+                <block type="math_number">
+                  <field name="NUM">0</field>
+                </block>
+              </value>
+              <value name="CONTENT">
+                <block type="text">
+                  <field name="TEXT">HELLO</field>
+                </block>
+              </value>
+            </block>
+            <block type="oled_display_clear_buffer"></block>
+            <block type="oled_display_send_buffer"></block>
         </category>
 		<category id="category_mp3" name="MP3">
 			<block type="mp3_set_pins">
@@ -618,6 +637,19 @@
             </block>
             <block type="aqi_attrname_list"></block>
         </category>
+
+    	<category id="category_airbox" name="Airbox">
+			  <block type="airbox_fetchData">
+				  <value name="DEVICEID">
+					  <block type="text">
+						  <field name="TEXT">Airbox Device ID</field>
+					  </block>
+				  </value>
+        </block>
+        <block type="airbox_getValue"></block>
+      </category>
+
+
 	</category>
 	<category id="category_iot" name="IoT">
 		<category id="category_mqtt" name="MQTT">

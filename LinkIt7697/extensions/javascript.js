@@ -489,7 +489,7 @@ Blockly.Arduino.ir_received_code=function(){
 Blockly.Arduino.weather={};
 Blockly.Arduino.weather_fetchWeatherInfo=function(){
 	Blockly.Arduino.definitions_.define_linkit_wifi_include="#include <LWiFi.h>";
-  Blockly.Arduino.definitions_.define_json_include="#include <ArduinoJson.h>";
+  Blockly.Arduino.definitions_.define_json_include="#define ARDUINOJSON_DECODE_UNICODE 1\n#include <ArduinoJson.h>";
   Blockly.Arduino.definitions_.define_ctimes_include="#include <ctime>";
   Blockly.Arduino.definitions_.define_json_invoke="const size_t capacity = JSON_ARRAY_SIZE(1) + JSON_OBJECT_SIZE(1) + 2*JSON_OBJECT_SIZE(2) + JSON_OBJECT_SIZE(4) + JSON_OBJECT_SIZE(5) + JSON_OBJECT_SIZE(6) + JSON_OBJECT_SIZE(13) + 280;\nDynamicJsonDocument doc(capacity);";
 	Blockly.Arduino.definitions_.define_fetch_weather_invoke='void fetchWeatherInfo(char* cityID, char* myKey)\n{\n  static WiFiClient client;\n  client.setTimeout(10000);\n  if (!client.connect("api.openweathermap.org", 80)) {\n    return;\n  }\n  const String url = String() + "/data/2.5/weather?id="+cityID+"&appid="+myKey;\n  client.println("GET " + url + " HTTP/1.1");\n  client.println(F("Host: api.openweathermap.org"));\n  client.println(F("Accept: */*"));\n  client.println(F("Connection: close"));\n  if (client.println() == 0) {\n    return;\n  }\n  char status[32] = {0};\n  client.readBytesUntil(\'\\r\', status, sizeof(status));\n  if (strcmp(status, "HTTP/1.1 200 OK") != 0) {\n    return;\n  }\n  char endOfHeaders[] = "\\r\\n\\r\\n";\n  if (!client.find(endOfHeaders)) {\n    return;\n  }\n  DeserializationError error = deserializeJson(doc, client);\n  if (error) {\n    return;\n  }\n  client.stop();\n}\n';
@@ -518,7 +518,7 @@ Blockly.Arduino.weather_getValue=function(){
 Blockly.Arduino.aqi={};
 Blockly.Arduino.aqi_fetchAQIInfo=function(){
 	Blockly.Arduino.definitions_.define_linkit_wifi_include="#include <LWiFi.h>";
-  Blockly.Arduino.definitions_.define_json_include="#include <ArduinoJson.h>";
+  Blockly.Arduino.definitions_.define_json_include="#define ARDUINOJSON_DECODE_UNICODE 1\n#include <ArduinoJson.h>";
   Blockly.Arduino.definitions_.define_json_aqi_invoke="const size_t capacity_AQI = JSON_ARRAY_SIZE(83) + 83*JSON_OBJECT_SIZE(24) + 25480;\nDynamicJsonDocument doc_aqi(capacity_AQI);";
 	Blockly.Arduino.definitions_.define_fetch_aqi_invoke='void fetchAQIInfo()\n{\n  static WiFiClient client;\n  client.setTimeout(10000);\n  if (!client.connect("opendata2.epa.gov.tw", 80)) {\n    return;\n  }\n  const String url = String() + "/AQI.json";\n  client.println("GET " + url + " HTTP/1.1");\n  client.println(F("Host: opendata2.epa.gov.tw"));\n  client.println(F("Accept: */*"));\n  client.println(F("Connection: close"));\n  if (client.println() == 0) {\n    return;\n  }\n  char status[32] = {0};\n  client.readBytesUntil(\'\\r\', status, sizeof(status));\n  if (strcmp(status, "HTTP/1.1 200 OK") != 0) {\n    return;\n  }\n  char endOfHeaders[] = "\\r\\n\\r\\n";\n  if (!client.find(endOfHeaders)) {\n    return;\n  }\n  DeserializationError error = deserializeJson(doc_aqi, client);\n  if (error) {\n    return;\n  }\n  client.stop();\n}\n';
 	Blockly.Arduino.definitions_.define_get_aqi_invoke='String getAQIValue(String mySitename,String myAttr)\n{\n  String myStr="";\n  for(int i=0;i<doc_aqi.size();i++){\n    if (doc_aqi[i]["SiteName"].as<String>()==mySitename){\n       myStr=String(doc_aqi[i][myAttr].as<char*>());\n       break;\n    }\n  }\n  return myStr;\n}\n';
@@ -539,8 +539,8 @@ Blockly.Arduino.aqi_attrname_list=function(){
 //LDM6432
 Blockly.Arduino.ldm6432={};
 Blockly.Arduino.LDM_Check_prefix="if (ended){\n  ended=((!waitForE)||pubCtrl);\n";
-Blockly.Arduino.LDM_Check_postfix="  while(!ended){myClient.loop();}\n  ended=true;\n  if((!waitForE)||pubCtrl)\n    delay(200);\n}\n";
-Blockly.Arduino.LDM_Check_postfix2="  while(!ended){myClient.loop();}\n  ended=true;\n  delay(500);\n}\n";
+Blockly.Arduino.LDM_Check_postfix="  while(!ended){myClient.loop();}\n  ended=true;\n  if((!waitForE)||pubCtrl)\n    delay(250);\n}\n";
+Blockly.Arduino.LDM_Check_postfix2="  while(!ended){myClient.loop();}\n  ended=true;\n  delay(800);\n}\n";
 Blockly.Arduino.ldm_mqtt_topic=function(){
   var a=Blockly.Arduino.valueToCode(this,"TOPIC",Blockly.Arduino.ORDER_ATOMIC)||"";
   Blockly.Arduino.definitions_.define_ldm6432_topic='String ldmTopic="";\nString echoTopic="";\nString bitmapTopic="";\n';
@@ -835,5 +835,31 @@ Blockly.Arduino.mtk7697bit_button=function(){
 
 Blockly.Arduino.mtk7697bit_pinMap=function(){
   var a=this.getFieldValue("MTK_7697_PIN");
+  return[a,Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.oled_display_clear_buffer=function(){
+  return'u8g2.clearBuffer();\n'
+};
+
+Blockly.Arduino.oled_display_send_buffer=function(){
+  return'u8g2.sendBuffer();\n'
+};
+
+//airbox
+Blockly.Arduino.airbox={};
+Blockly.Arduino.airbox_fetchData=function(){
+	Blockly.Arduino.definitions_.define_linkit_wifi_include="#include <LWiFi.h>";
+  Blockly.Arduino.definitions_.define_json_include="#define ARDUINOJSON_DECODE_UNICODE 1\n#include <ArduinoJson.h>";
+  Blockly.Arduino.definitions_.define_ctimes_include="#include <ctime>";
+  Blockly.Arduino.definitions_.define_airbox_json_invoke="const size_t capacity_airbox = JSON_ARRAY_SIZE(1) + JSON_OBJECT_SIZE(1) + JSON_OBJECT_SIZE(5) + JSON_OBJECT_SIZE(25) + 500;\nDynamicJsonDocument docAirbox(capacity_airbox);";
+	Blockly.Arduino.definitions_.define_fetch_airbox_invoke='void fetchAirboxInfo(char* myID){\n  static TLSClient client;\n  if (!client.connect("pm25.lass-net.org", 443)) {\n    return;\n  }\n  const String url = String() + "/data/last.php?device_id="+myID;\n  client.println("GET " + url + " HTTP/1.1");\n  client.println("Host: pm25.lass-net.org");\n  client.println("Accept: */*");\n  client.println("Connection: close");\n  client.println();\n  client.println();\n  while (client.connected()) {\n    String line = client.readStringUntil(\'\\n\');\n    if (line.startsWith("{\\"device_id\\"")) {\n      DeserializationError error = deserializeJson(docAirbox, line);\n      if (error) {\n        client.stop();\n        return;\n      }\n      break;\n    }\n  }\n  client.stop();\n}\n';
+  //Blockly.Arduino.definitions_.define_weather_ctime='String convMyTime(long myTimeStamp)\n{\n  static char time_text[]="YYYY-MM-DDTHH:MM:SS";\n  const time_t myTime = myTimeStamp;\n  strftime(time_text, sizeof(time_text), "%Y-%m-%dT%H:%M:%S", gmtime(&myTime));\n  return String((const char*)time_text);\n}\n';
+  var a=Blockly.Arduino.valueToCode(this,"DEVICEID",Blockly.Arduino.ORDER_ATOMIC)||"";
+	return'fetchAirboxInfo('+a+');\n'
+};
+
+Blockly.Arduino.airbox_getValue=function(){
+  var a=this.getFieldValue("VALUE_NAME");
   return[a,Blockly.Arduino.ORDER_ATOMIC];
 };

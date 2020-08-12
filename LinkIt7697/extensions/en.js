@@ -277,6 +277,28 @@ Blockly.Msg.BME280_VALUE_TYPE=[['temperature(C)','bme.readTemperature()'],['humi
 Blockly.Msg.BME280_WARNING = "You have to setup BME280 I2C address first.";
 
 //7697bit
-Blockly.Msg.MTK7697BIT_HELPURL = "7697:bit breakout";
+Blockly.Msg.MTK7697BIT_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/7697bit";
 Blockly.Msg.MTK7697BIT_TOOLTIP = "7697:bit breakout";
 Blockly.Msg.MTK7697BIT_PINMAP_TITLE = "micro:bit pin:";
+Blockly.Msg.OLED_DISPLAY_CLEAR_BUFFER = "Clear OLED displayed buffer";
+Blockly.Msg.OLED_DISPLAY_SEND_BUFFER = "Send buffer to OLED";
+
+//AIRBOX
+Blockly.Msg.CATEGORY_AIRBOX = "AIRBOX";
+Blockly.Msg.AIRBOX_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/airbox空氣盒子";
+Blockly.Msg.FETCH_AIRBOX_TITLE= "Fetch airbox data from web";
+Blockly.Msg.AIRBOX_DEVICEID = "Device ID";
+Blockly.Msg.AIRBOX_TOOLTIP = "AirBox";
+Blockly.Msg.AIRBOX_GET_VALUE = "Get data from AirBox:";
+Blockly.Msg.AIRBOX_VALUE_DROPDOWN=[['PM2.5','docAirbox["feeds"][0]["AirBox"]["s_d0"].as<float>()'],
+                                   ['PM10','docAirbox["feeds"][0]["AirBox"]["s_d1"].as<float>()'],
+                                   ['PM1','docAirbox["feeds"][0]["AirBox"]["s_d2"].as<float>()'],
+                                   ['Latitude','docAirbox["feeds"][0]["AirBox"]["gps_lat"].as<float>()'],
+                                   ['Longitude','docAirbox["feeds"][0]["AirBox"]["gps_lon"].as<float>()'],
+                                   ['Temperature','docAirbox["feeds"][0]["AirBox"]["s_t0"].as<float>()'],
+                                   ['Humidity','docAirbox["feeds"][0]["AirBox"]["s_h0"].as<float>()'],
+                                   ['Data TimeStamp','docAirbox["feeds"][0]["AirBox"]["timestamp"].as<char*>()'],
+                                   ['AirBox location','docAirbox["feeds"][0]["AirBox"]["area"].as<char*>()'],
+                                   ['AirBox name','docAirbox["feeds"][0]["AirBox"]["name"].as<char*>()'],
+                                   ['Device ID','docAirbox[\"device_id\"].as<char*>()']                                   
+                                  ];
