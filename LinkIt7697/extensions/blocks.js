@@ -1509,7 +1509,7 @@ Blockly.Blocks.mtk7697bit_pinMap={init:function(){
 
 Blockly.Blocks.oled_display_setting_new={
   init:function(){
-    this.setHelpUrl(Blockly.Msg.OLED_DISPLAY_HELPURL);
+    this.setHelpUrl(Blockly.Msg.OLED_DISPLAY_HELPURL_NEW);
     this.setColour(Blockly.Blocks.oled_display.HUE);
     this.appendDummyInput()
         .appendField(Blockly.Msg.INITIALIZES_SETUP_APPENDTEXT)
@@ -1521,7 +1521,7 @@ Blockly.Blocks.oled_display_setting_new={
 
 Blockly.Blocks.oled_display_show_xbm={
   init:function(){
-    this.setHelpUrl(Blockly.Msg.OLED_DISPLAY_HELPURL);
+    this.setHelpUrl(Blockly.Msg.OLED_DISPLAY_HELPURL_NEW);
     this.setColour(Blockly.Blocks.oled_display.HUE);
     this.appendDummyInput().appendField(Blockly.Msg.OLED_DISPLAY_TITLE);
     this.appendValueInput("XBM").appendField(Blockly.Msg.OLED_DISPLAY_SHOW_XBM);
@@ -1533,7 +1533,7 @@ Blockly.Blocks.oled_display_show_xbm={
 
 Blockly.Blocks.oled_display_set_overwrite={
   init:function(){
-    this.setHelpUrl(Blockly.Msg.OLED_DISPLAY_HELPURL);
+    this.setHelpUrl(Blockly.Msg.OLED_DISPLAY_HELPURL_NEW);
     this.setColour(Blockly.Blocks.oled_display.HUE);
     this.appendDummyInput()
         .appendField(Blockly.Msg.OLED_DISPLAY_TITLE)
@@ -1547,7 +1547,7 @@ Blockly.Blocks.oled_display_set_overwrite={
 
 Blockly.Blocks.oled_display_set_color={
   init:function(){
-    this.setHelpUrl(Blockly.Msg.OLED_DISPLAY_HELPURL);
+    this.setHelpUrl(Blockly.Msg.OLED_DISPLAY_HELPURL_NEW);
     this.setColour(Blockly.Blocks.oled_display.HUE);
     this.appendDummyInput()
         .appendField(Blockly.Msg.OLED_DISPLAY_TITLE)
@@ -1561,7 +1561,7 @@ Blockly.Blocks.oled_display_set_color={
 
 Blockly.Blocks.oled_display_clear_buffer={
   init:function(){
-    this.setHelpUrl(Blockly.Msg.OLED_DISPLAY_HELPURL);
+    this.setHelpUrl(Blockly.Msg.OLED_DISPLAY_HELPURL_NEW);
     this.setColour(Blockly.Blocks.oled_display.HUE);
     this.appendDummyInput()
         .appendField(Blockly.Msg.OLED_DISPLAY_TITLE)
@@ -1573,7 +1573,7 @@ Blockly.Blocks.oled_display_clear_buffer={
 
 Blockly.Blocks.oled_display_send_buffer={
   init:function(){
-    this.setHelpUrl(Blockly.Msg.OLED_DISPLAY_HELPURL);
+    this.setHelpUrl(Blockly.Msg.OLED_DISPLAY_HELPURL_NEW);
     this.setColour(Blockly.Blocks.oled_display.HUE);
     this.appendDummyInput()
         .appendField(Blockly.Msg.OLED_DISPLAY_TITLE)
@@ -1585,7 +1585,7 @@ Blockly.Blocks.oled_display_send_buffer={
 
 Blockly.Blocks.oled_display_draw_box={
   init:function(){
-    this.setHelpUrl(Blockly.Msg.OLED_DISPLAY_HELPURL);
+    this.setHelpUrl(Blockly.Msg.OLED_DISPLAY_HELPURL_NEW);
     this.setColour(Blockly.Blocks.oled_display.HUE);
     this.appendDummyInput()
         .appendField(Blockly.Msg.OLED_DISPLAY_TITLE)
@@ -1612,7 +1612,7 @@ Blockly.Blocks.oled_display_draw_box={
 
 Blockly.Blocks.oled_display_draw_frame={
   init:function(){
-    this.setHelpUrl(Blockly.Msg.OLED_DISPLAY_HELPURL);
+    this.setHelpUrl(Blockly.Msg.OLED_DISPLAY_HELPURL_NEW);
     this.setColour(Blockly.Blocks.oled_display.HUE);
     this.appendDummyInput()
         .appendField(Blockly.Msg.OLED_DISPLAY_TITLE)
