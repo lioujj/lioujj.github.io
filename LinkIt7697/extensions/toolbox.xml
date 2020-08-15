@@ -336,13 +336,22 @@
     </category>
   </category>
   <category id="category_ljj_modules" name="Modules">
-		<category id="category_mtk7697bit" name="7697:bit">
-            <block type="mtk7697bit_button"></block>
-            <block type="mtk7697bit_pinMap"></block>
-            <block type="oled_display_setting"></block>
-            <block type="oled_display_clear"></block>
-            <block type="oled_display_set_font"></block>
-            <block type="oled_display_draw_commands">
+    <category id="category_ljj_oled" name="OLED 128*64">
+      <block type="oled_display_setting_new"></block>
+      <block type="oled_display_clear"></block>
+      <block type="oled_display_set_font"></block>
+      <block type="oled_display_set_color"></block>
+      <block type="oled_display_set_overwrite"></block>
+      <block type="oled_display_clear_buffer"></block>
+      <block type="oled_display_send_buffer"></block>
+      <block type="oled_display_show_xbm">
+        <value name="XBM">
+          <block type="text">
+            <field name="TEXT">XBM String</field>
+          </block>
+        </value>
+      </block>
+      <block type="oled_display_draw_commands">
                 <statement name="DRAW_CMD">
                     <block type="oled_display_draw_text">
                         <value name="START_X">
@@ -386,8 +395,8 @@
                         </next>
                     </block>
                 </statement>
-            </block>
-            <block type="oled_display_draw_text">
+      </block>
+      <block type="oled_display_draw_text">
               <value name="START_X">
                 <block type="math_number">
                   <field name="NUM">0</field>
@@ -403,16 +412,118 @@
                   <field name="TEXT">HELLO</field>
                 </block>
               </value>
-            </block>
-            <block type="oled_display_clear_buffer"></block>
-            <block type="oled_display_send_buffer"></block>
-        </category>
+      </block>
+      <block type="oled_display_draw_line">
+            <value name="START_X">
+                <block type="math_number">
+                    <field name="NUM">0</field>
+                </block>
+            </value>
+            <value name="START_Y">
+                <block type="math_number">
+                    <field name="NUM">0</field>
+                </block>
+            </value>
+            <value name="END_X">
+                <block type="math_number">
+                    <field name="NUM">40</field>
+                </block>
+            </value>
+            <value name="END_Y">
+                <block type="math_number">
+                    <field name="NUM">40</field>
+                </block>
+            </value>
+      </block>
+      <block type="oled_display_draw_box">
+            <value name="START_X">
+                <block type="math_number">
+                    <field name="NUM">0</field>
+                </block>
+            </value>
+            <value name="START_Y">
+                <block type="math_number">
+                    <field name="NUM">0</field>
+                </block>
+            </value>
+            <value name="END_X">
+                <block type="math_number">
+                    <field name="NUM">40</field>
+                </block>
+            </value>
+            <value name="END_Y">
+                <block type="math_number">
+                    <field name="NUM">40</field>
+                </block>
+            </value>
+      </block>
+      <block type="oled_display_draw_frame">
+            <value name="START_X">
+                <block type="math_number">
+                    <field name="NUM">0</field>
+                </block>
+            </value>
+            <value name="START_Y">
+                <block type="math_number">
+                    <field name="NUM">0</field>
+                </block>
+            </value>
+            <value name="END_X">
+                <block type="math_number">
+                    <field name="NUM">40</field>
+                </block>
+            </value>
+            <value name="END_Y">
+                <block type="math_number">
+                    <field name="NUM">40</field>
+                </block>
+            </value>
+      </block>
+      <block type="oled_display_draw_disc">
+            <value name="CENTER_X">
+                <block type="math_number">
+                    <field name="NUM">20</field>
+                </block>
+            </value>
+            <value name="CENTER_Y">
+                <block type="math_number">
+                    <field name="NUM">20</field>
+                </block>
+            </value>
+            <value name="RADIUS">
+                <block type="math_number">
+                    <field name="NUM">15</field>
+                </block>
+            </value>
+      </block>
+      <block type="oled_display_draw_circle">
+            <value name="CENTER_X">
+                <block type="math_number">
+                    <field name="NUM">20</field>
+                </block>
+            </value>
+            <value name="CENTER_Y">
+                <block type="math_number">
+                    <field name="NUM">20</field>
+                </block>
+            </value>
+            <value name="RADIUS">
+                <block type="math_number">
+                    <field name="NUM">15</field>
+                </block>
+            </value>
+      </block>
+    </category>
+		<category id="category_mtk7697bit" name="7697:bit">
+            <block type="mtk7697bit_button"></block>
+            <block type="mtk7697bit_pinMap"></block>
+    </category>
 		<category id="category_mp3" name="MP3">
 			<block type="mp3_set_pins">
 				<value name="RX_PIN">
 					<block type="math_number">
 						<field name="NUM">2</field>
-                    </block>
+          </block>
 				</value>
 			</block>
 			<block type="mp3_set_pins1">

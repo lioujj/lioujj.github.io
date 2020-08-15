@@ -279,8 +279,17 @@ Blockly.Msg.BME280_WARNING = "你必須在初始化時先設定BME280的I2C位�
 Blockly.Msg.MTK7697BIT_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/7697bit";
 Blockly.Msg.MTK7697BIT_TOOLTIP = "7697:bit breakout";
 Blockly.Msg.MTK7697BIT_PINMAP_TITLE = "micro:bit 腳位";
+
+//OLED
+Blockly.Msg.OLED_DISPLAY_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/oled動態更換自訂圖案";
+Blockly.Msg.OLED_DISPLAY_SHOW_XBM = "從XBM字串顯示自訂圖案";
 Blockly.Msg.OLED_DISPLAY_CLEAR_BUFFER = "清除OLED已顯示之緩衝區";
-Blockly.Msg.OLED_DISPLAY_SEND_BUFFER = "傳送緩衝區資料到OLED";
+Blockly.Msg.OLED_DISPLAY_SEND_BUFFER = "傳送緩衝區資料到OLED顯示";
+Blockly.Msg.OLED_DISPLAY_SET_OVERWRITE = "設定文字背景黑色是否透明";
+Blockly.Msg.OLED_DISPLAY_SET_COLOR = "設定文字及繪圖顏色：";
+Blockly.Msg.OLED_DISPLAY_TOOLTIP = "用 u8g2 函式庫來驅動 I2C 介面的 128×64 點陣 OLED 顯示器";
+Blockly.Msg.OLED_DISPLAY_DRAW_BOX_END_NEW = "寬度、高度：";
+Blockly.Msg.OLED_DISPLAY_DRAW_FRAME_END_NEW = "寬度、高度：";
 
 //AIRBOX
 Blockly.Msg.CATEGORY_AIRBOX = "AIRBOX";

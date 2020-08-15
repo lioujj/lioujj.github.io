@@ -280,8 +280,18 @@ Blockly.Msg.BME280_WARNING = "You have to setup BME280 I2C address first.";
 Blockly.Msg.MTK7697BIT_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/7697bit";
 Blockly.Msg.MTK7697BIT_TOOLTIP = "7697:bit breakout";
 Blockly.Msg.MTK7697BIT_PINMAP_TITLE = "micro:bit pin:";
+
+//OLED
+Blockly.Msg.OLED_DISPLAY_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/oled動態更換自訂圖案";
+Blockly.Msg.OLED_DISPLAY_SHOW_XBM = "Show the custom bitmap on OLED from the String" ;
 Blockly.Msg.OLED_DISPLAY_CLEAR_BUFFER = "Clear OLED displayed buffer";
 Blockly.Msg.OLED_DISPLAY_SEND_BUFFER = "Send buffer to OLED";
+Blockly.Msg.OLED_DISPLAY_SET_OVERWRITE = "Set font background transparent";
+Blockly.Msg.OLED_DISPLAY_SET_COLOR = "Set font and draw color:";
+Blockly.Msg.OLED_DISPLAY_TOOLTIP = "An OLED monochrome 128×64dot matrix display module";
+Blockly.Msg.OLED_DISPLAY_DRAW_BOX_END_NEW = "(width, height):";
+Blockly.Msg.OLED_DISPLAY_DRAW_FRAME_END_NEW = "(width, height):";
+
 
 //AIRBOX
 Blockly.Msg.CATEGORY_AIRBOX = "AIRBOX";
