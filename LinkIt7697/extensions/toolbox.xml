@@ -713,6 +713,45 @@
 				</value>
 			</block>
 		</category>
+    <category id="category_probbie" name="Probbie">
+      <block type="probbie_init"></block>
+      <block type="probbie_move"></block>
+			<block type="probbie_eyes1"></block>
+			<block type="probbie_eyes2">
+				<value name="R">
+					<block type="math_number">
+						<field name="NUM">0</field>
+					</block>
+				</value>
+				<value name="G">
+					<block type="math_number">
+						<field name="NUM">0</field>
+					</block>
+				</value>
+				<value name="B">
+					<block type="math_number">
+						<field name="NUM">255</field>
+					</block>
+				</value>
+			</block>
+      <block type="probbie_detect"></block>
+      <block type="probbie_obstacle"></block>
+      <block type="probbie_read_ir"></block>
+      <block type="probbie_tone"></block>
+      <block type="probbie_no_tone"></block>
+      <block type="probbie_custom_tone">
+        <value name="FREQ">
+          <block type="math_number">
+            <field name="NUM">255</field>
+          </block>
+        </value>
+        <value name="DURATION">
+          <block type="math_number">
+            <field name="NUM">300</field>
+          </block>
+        </value>
+      </block>
+    </category>
 	</category>
     <category id="category_crawler" name="Web Crawler">
     	<category id="category_weather" name="World Weather">
@@ -759,8 +798,6 @@
         </block>
         <block type="airbox_getValue"></block>
       </category>
-
-
 	</category>
 	<category id="category_iot" name="IoT">
 		<category id="category_mqtt" name="MQTT">

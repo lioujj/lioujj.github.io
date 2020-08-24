@@ -312,3 +312,19 @@ Blockly.Msg.AIRBOX_VALUE_DROPDOWN=[['PM2.5','docAirbox["feeds"][0]["AirBox"]["s_
                                    ['AirBox name','docAirbox["feeds"][0]["AirBox"]["name"].as<char*>()'],
                                    ['Device ID','docAirbox[\"device_id\"].as<char*>()']                                   
                                   ];
+
+//Probbie
+Blockly.Msg.PROBBIE_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/寶比機器人積木";
+Blockly.Msg.PROBBIE_TITLE = "Probbie";
+Blockly.Msg.PROBBIE_INIT = "initialize";
+Blockly.Msg.PROBBIE_TOOLTIP = "Probbie";
+Blockly.Msg.PROBBIE_7697="7697 for Probbie";
+Blockly.Msg.PROBBIE_POCKETCARD="PocketCard for Probbie2";
+Blockly.Msg.PROBBIE_LEFT_EYE = "left eye";
+Blockly.Msg.PROBBIE_RIGHT_EYE = "right eye";
+Blockly.Msg.PROBBIE_ALL_EYES = "both eyes";
+Blockly.Msg.PROBBIE_COLOR = "color:";
+Blockly.Msg.PROBBIE_DETECT = "detect obstacle by IR";
+Blockly.Msg.PROBBIE_OBSTACLE = "obstacle";
+Blockly.Msg.PROBBIE_OBSTACLE_TYPE=[["is none","ProximityValue==0"],["is on left side","ProximityValue==1"],["is on right side","ProximityValue==2"],["are on both side","ProximityValue==3"]];
+Blockly.Msg.PROBBIE_READ_IR_VALUE = "read IR value:";

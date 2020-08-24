@@ -1673,3 +1673,149 @@ Blockly.Blocks.airbox_getValue={init:function(){
   this.setOutput(!0,"String");
   this.setTooltip(Blockly.Msg.AIRBOX_TOOLTIP)}
 };
+
+//Probbie
+Blockly.Blocks.probbie={};
+Blockly.Blocks.probbie.HUE1=300;
+Blockly.Blocks.probbie_init={init:function(){
+  this.setHelpUrl(Blockly.Msg.PROBBIE_HELPURL);
+  this.setColour(Blockly.Blocks.probbie.HUE1);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.PROBBIE_TITLE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.PROBBIE_INIT)
+      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.PROBBIE_7697,"Probbie"],[Blockly.Msg.PROBBIE_POCKETCARD,"Tobbie"]]),"PROBBIE_TYPE");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.PROBBIE_TOOLTIP)}
+};
+
+Blockly.Blocks.probbie_move={init:function(){
+  this.setHelpUrl(Blockly.Msg.PROBBIE_HELPURL);
+  this.setColour(Blockly.Blocks.probbie.HUE1);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.PROBBIE_TITLE)
+      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.LIOU_ROBOT_FORWARD,"Probbie_Forward();"],[Blockly.Msg.LIOU_ROBOT_BACKWARD,"Probbie_Backward();"],[Blockly.Msg.LIOU_ROBOT_LEFT,"Probbie_TurnLeft();"],[Blockly.Msg.LIOU_ROBOT_RIGHT,"Probbie_TurnRight();"],[Blockly.Msg.LIOU_ROBOT_STOP,"Probbie_Stop();"]]),"MOVE_TYPE");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.PROBBIE_TOOLTIP)}
+};
+
+Blockly.Blocks.probbie_eyes1={init:function(){
+  this.setHelpUrl(Blockly.Msg.PROBBIE_HELPURL);
+  this.setColour(Blockly.Blocks.probbie.HUE1);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.PROBBIE_TITLE)
+      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.PROBBIE_LEFT_EYE,"1"],[Blockly.Msg.PROBBIE_RIGHT_EYE,"0"],[Blockly.Msg.PROBBIE_ALL_EYES,"2"]]),"EYES_TYPE");
+  this.appendDummyInput()
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField(Blockly.Msg.PROBBIE_COLOR)
+      .appendField(new Blockly.FieldColour("#0000ff"),"RGB");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.PROBBIE_TOOLTIP)}
+};
+
+Blockly.Blocks.probbie_eyes2={init:function(){
+  this.setHelpUrl(Blockly.Msg.PROBBIE_HELPURL);
+  this.setColour(Blockly.Blocks.probbie.HUE1);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.PROBBIE_TITLE)
+      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.PROBBIE_LEFT_EYE,"1"],[Blockly.Msg.PROBBIE_RIGHT_EYE,"0"],[Blockly.Msg.PROBBIE_ALL_EYES,"2"]]),"EYES_TYPE")
+      .appendField(Blockly.Msg.PROBBIE_COLOR);
+  this.appendValueInput("R")
+      .setCheck("Number")
+      .appendField("R");
+  this.appendValueInput("G")
+      .setCheck("Number")
+      .appendField("G");
+  this.appendValueInput("B")
+      .setCheck("Number")
+      .appendField("B");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.PROBBIE_TOOLTIP)}
+};
+
+Blockly.Blocks.probbie_detect={init:function(){
+  this.setHelpUrl(Blockly.Msg.PROBBIE_HELPURL);
+  this.setColour(Blockly.Blocks.probbie.HUE1);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.PROBBIE_TITLE)
+      .appendField(Blockly.Msg.PROBBIE_DETECT);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.PROBBIE_TOOLTIP)}
+};
+
+Blockly.Blocks.probbie_obstacle={init:function(){
+  this.setHelpUrl(Blockly.Msg.PROBBIE_HELPURL);
+  this.setColour(Blockly.Blocks.probbie.HUE1);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.PROBBIE_TITLE)
+      .appendField(Blockly.Msg.PROBBIE_OBSTACLE)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.PROBBIE_OBSTACLE_TYPE),"OBSTACLE_TYPE");
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Boolean");
+  this.setTooltip(Blockly.Msg.PROBBIE_TOOLTIP)}
+};
+
+Blockly.Blocks.probbie_read_ir={init:function(){
+  this.setHelpUrl(Blockly.Msg.PROBBIE_HELPURL);
+  this.setColour(Blockly.Blocks.probbie.HUE1);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.PROBBIE_TITLE)
+      .appendField(Blockly.Msg.PROBBIE_READ_IR_VALUE)
+      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.LIOU_ROBOT_LEFT_SIDE,"irLeftDistance"],[Blockly.Msg.LIOU_ROBOT_RIGHT_SIDE,"irRightDistance"]]),"IR_VALUE")
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Number");
+  this.setTooltip(Blockly.Msg.PROBBIE_TOOLTIP)}
+};
+
+Blockly.Blocks.probbie_tone={init:function(){
+    this.setHelpUrl(Blockly.Msg.PROBBIE_HELPURL);
+    this.setColour(Blockly.Blocks.probbie.HUE1);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.PROBBIE_TITLE)
+        .appendField(Blockly.Msg.MAQUEEN_TONE_PRETEXT);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.INOUT_TONE_APPENDTEXT_FREQ)
+        .appendField(new Blockly.FieldDropdown(profile["default"].tone),"FREQ");
+    this.setInputsInline(!0);
+    this.setPreviousStatement(!0);
+    this.setNextStatement(!0);
+    this.setTooltip(Blockly.Msg.PROBBIE_TOOLTIP)}
+};
+
+Blockly.Blocks.probbie_no_tone={init:function(){
+    this.setHelpUrl(Blockly.Msg.PROBBIE_HELPURL);
+    this.setColour(Blockly.Blocks.probbie.HUE1);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.PROBBIE_TITLE)
+        .appendField(Blockly.Msg.MAQUEEN_NO_TONE_PRETEXT);
+    this.setInputsInline(!0);
+    this.setPreviousStatement(!0);
+    this.setNextStatement(!0);
+    this.setTooltip(Blockly.Msg.PROBBIE_TOOLTIP)}
+};
+
+Blockly.Blocks.probbie_custom_tone={init:function(){
+    this.setHelpUrl(Blockly.Msg.PROBBIE_HELPURL);
+    this.setColour(Blockly.Blocks.probbie.HUE1);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.PROBBIE_TITLE)
+        .appendField(Blockly.Msg.MAQUEEN_TONE_PRETEXT);
+    this.appendValueInput("FREQ")
+        .setCheck("Number")
+    this.appendValueInput("DURATION").setCheck("Number")
+        .appendField(Blockly.Msg.INOUT_TONE_APPENDTEXT_DURATION);
+    this.setInputsInline(!0);
+    this.setPreviousStatement(!0);
+    this.setNextStatement(!0);
+    this.setTooltip(Blockly.Msg.PROBBIE_TOOLTIP)}
+};

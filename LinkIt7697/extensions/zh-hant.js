@@ -309,3 +309,19 @@ Blockly.Msg.AIRBOX_VALUE_DROPDOWN=[['PM2.5濃度','docAirbox["feeds"][0]["AirBox
                                    ['所在位置','docAirbox["feeds"][0]["AirBox"]["area"].as<char*>()'],
                                    ['單位名稱','docAirbox["feeds"][0]["AirBox"]["name"].as<char*>()'],
                                    ['裝置編號','docAirbox[\"device_id\"].as<char*>()']];
+
+//Probbie
+Blockly.Msg.PROBBIE_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/寶比機器人積木";
+Blockly.Msg.PROBBIE_TITLE = "寶比";
+Blockly.Msg.PROBBIE_INIT = "初始化";
+Blockly.Msg.PROBBIE_TOOLTIP = "寶比";
+Blockly.Msg.PROBBIE_7697="寶比1 7697晶片";
+Blockly.Msg.PROBBIE_POCKETCARD="寶比2 PocketCard ESP32晶片";
+Blockly.Msg.PROBBIE_LEFT_EYE = "左眼";
+Blockly.Msg.PROBBIE_RIGHT_EYE = "右眼";
+Blockly.Msg.PROBBIE_ALL_EYES = "雙眼";
+Blockly.Msg.PROBBIE_COLOR = "顏色";
+Blockly.Msg.PROBBIE_DETECT = "紅外線偵測前方障礙";
+Blockly.Msg.PROBBIE_OBSTACLE = "前方障礙物";
+Blockly.Msg.PROBBIE_OBSTACLE_TYPE=[["沒有","ProximityValue==0"],["在左側","ProximityValue==1"],["在右側","ProximityValue==2"],["左右兩側都有","ProximityValue==3"]];
+Blockly.Msg.PROBBIE_READ_IR_VALUE = "讀取紅外線測距值";

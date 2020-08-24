@@ -888,3 +888,98 @@ Blockly.Arduino.airbox_getValue=function(){
   var a=this.getFieldValue("VALUE_NAME");
   return[a,Blockly.Arduino.ORDER_ATOMIC];
 };
+
+//Probbie
+Blockly.Arduino.probbie={};
+Blockly.Arduino.probbie_init=function(){
+  var a=this.getFieldValue("PROBBIE_TYPE");
+  if (a=="Probbie"){
+    Blockly.Arduino.probbie_type="Probbie";
+    Blockly.Arduino.definitions_.define_include_neopixel="#include <Adafruit_NeoPixel.h>\n";
+    Blockly.Arduino.definitions_.define_probbie_variable1="#define TurnMotor_A   13\n#define TurnMotor_B   10\n#define LegMotor_A    12\n#define LegMotor_B    17\n#define NeoPixelPin    5\n#define NeoPixelnum    2\nAdafruit_NeoPixel pixels = Adafruit_NeoPixel(NeoPixelnum, NeoPixelPin, NEO_GRB + NEO_KHZ800);\n#define irEmitterPin    11\n#define irRightPin      14\n#define irLeftPin       15\n#define irRightDivide   5\n#define irLeftDivide    4\n#define BuzzerPin     7\n";
+  }  
+  else{
+    Blockly.Arduino.probbie_type="Tobbie";
+    Blockly.Arduino.definitions_.define_include_neopixel="#include <Tone32.h>\n";
+    Blockly.Arduino.definitions_.define_probbie_variable1="#define TurnMotor_A   23\n#define TurnMotor_B   5\n#define LegMotor_A    18\n#define LegMotor_B    19\n#define NeoPixelPin    5\n#define NeoPixelnum    27\n#define irEmitterPin    15\n#define irRightPin      33\n#define irLeftPin       32\n#define irRightDivide   5\n#define irLeftDivide    4\n#define BuzzerPin     26\n";
+  }
+  Blockly.Arduino.definitions_.define_probbie_variable2="int Tone_counter = 0;\nint AutoDemo_OnOff = 0;\nint irRightAmbient;\nint irLeftAmbient;\nint irRightObstacle;\nint irLeftObstacle;\nint irRightDistance;\nint irLeftDistance;\nint irRightValue[10];\nint irLeftValue[10];\nint ProximityValue = 0;\nint ProximityLmaxValue = 0;\nint ProximityRmaxValue = 0;\nint ProximityLeftValue = 0;\nint ProximityRightValue = 0;\n";
+  if (a=="Probbie"){  
+    Blockly.Arduino.definitions_.define_probbie_function="void Probbie_Stop()\n{\n  digitalWrite(LegMotor_A, LOW);\n  digitalWrite(LegMotor_B, LOW);\n  digitalWrite(TurnMotor_A, LOW);\n  digitalWrite(TurnMotor_B, LOW);\n}\nvoid Probbie_Forward()\n{\n  Probbie_Stop();\n  digitalWrite(LegMotor_A, HIGH);\n  digitalWrite(LegMotor_B, LOW);\n}\nvoid Probbie_Backward()\n{\n  Probbie_Stop();\n  digitalWrite(LegMotor_A, LOW);\n  digitalWrite(LegMotor_B, HIGH);\n}\nvoid Probbie_TurnLeft()\n{\n  Probbie_Stop();\n  digitalWrite(TurnMotor_A, HIGH);\n  digitalWrite(TurnMotor_B, LOW);\n}\nvoid Probbie_TurnRight()\n{\n  Probbie_Stop();\n  digitalWrite(TurnMotor_A, LOW);\n  digitalWrite(TurnMotor_B, HIGH);\n}\nvoid Beep(int note, int duration)\n{\n  tone(BuzzerPin, note, duration);\n  if (Tone_counter % 2 == 0)\n  {\n    delay(duration);\n  }\n  else\n  {\n    delay(duration);\n  }\n  noTone(BuzzerPin);\n  pinMode(BuzzerPin, OUTPUT);\n}\nvoid Probbie_StartUp()\n{\n  pinMode(BuzzerPin, OUTPUT);\n  pinMode(LegMotor_A, OUTPUT);\n  pinMode(LegMotor_B, OUTPUT);\n  pinMode(TurnMotor_A, OUTPUT);\n  pinMode(TurnMotor_B, OUTPUT);\n  Probbie_Stop();\n  pinMode(irLeftPin, INPUT);\n  pinMode(irRightPin, INPUT);\n  pinMode(irEmitterPin, OUTPUT);\n  pixels.begin();\n  pixels.show();\n  pixels.setBrightness(255);\n  for(int i=0;i<NeoPixelnum;i++)\n    pixels.setPixelColor(i,pixels.Color(0,0,255));     \n  pixels.show();\n  Beep(698, 200);\n}\nvoid Read_IR_Distance(int times)\n{\n  irLeftDistance=0;\n  irRightDistance=0;\n  for (int x = 0; x < times; x++)\n  {\n    digitalWrite(irEmitterPin, LOW);\n    delay(1);\n    irLeftAmbient = analogRead(irLeftPin);\n    irRightAmbient = analogRead(irRightPin);\n    digitalWrite(irEmitterPin, HIGH);\n    delay(1);\n    irLeftObstacle = analogRead(irLeftPin);\n    irRightObstacle = analogRead(irRightPin);\n    irLeftValue[x] = irLeftObstacle - irLeftAmbient;\n    irRightValue[x] = irRightObstacle - irRightAmbient;\n  }\n  digitalWrite(irEmitterPin, LOW);\n  for (int x = 0; x < times; x++)\n  {\n    irLeftDistance += irLeftValue[x];\n    irRightDistance += irRightValue[x];\n  }\n  irLeftDistance = irLeftDistance / times;\n  irRightDistance = irRightDistance / times;\n  ProximityLeftValue = irLeftDistance;\n  ProximityRightValue = irRightDistance;\n  ProximityLmaxValue = irLeftDistance * irLeftDivide;\n  ProximityRmaxValue = irRightDistance * irRightDivide;\n  ProximityValue = 0;\n  if (irLeftDistance > 256)\n    ProximityValue = ProximityValue + 1;\n  if (irRightDistance > 256)\n    ProximityValue = ProximityValue + 2;\n}\n";
+	}else{
+    Blockly.Arduino.definitions_.define_probbie_function="void Probbie_Stop()\n{\n  digitalWrite(LegMotor_A, LOW);\n  digitalWrite(LegMotor_B, LOW);\n  digitalWrite(TurnMotor_A, LOW);\n  digitalWrite(TurnMotor_B, LOW);\n}\nvoid Probbie_Forward()\n{\n  Probbie_Stop();\n  digitalWrite(LegMotor_A, HIGH);\n  digitalWrite(LegMotor_B, LOW);\n}\nvoid Probbie_Backward()\n{\n  Probbie_Stop();\n  digitalWrite(LegMotor_A, LOW);\n  digitalWrite(LegMotor_B, HIGH);\n}\nvoid Probbie_TurnLeft()\n{\n  Probbie_Stop();\n  digitalWrite(TurnMotor_A, HIGH);\n  digitalWrite(TurnMotor_B, LOW);\n}\nvoid Probbie_TurnRight()\n{\n  Probbie_Stop();\n  digitalWrite(TurnMotor_A, LOW);\n  digitalWrite(TurnMotor_B, HIGH);\n}\nvoid Probbie_StartUp()\n{\n  pinMode(BuzzerPin, OUTPUT);\n  pinMode(LegMotor_A, OUTPUT);\n  pinMode(LegMotor_B, OUTPUT);\n  pinMode(TurnMotor_A, OUTPUT);\n  pinMode(TurnMotor_B, OUTPUT);\n  Probbie_Stop();\n  pinMode(irLeftPin, INPUT);\n  pinMode(irRightPin, INPUT);\n  pinMode(irEmitterPin, OUTPUT);\n  tone(BuzzerPin, 698 , 200, 0);\n}\nvoid Read_IR_Distance(int times)\n{\n  irLeftDistance=0;\n  irRightDistance=0;\n  for (int x = 0; x < times; x++)\n  {\n    digitalWrite(irEmitterPin, LOW);\n    delay(1);\n    irLeftAmbient = analogRead(irLeftPin);\n    irRightAmbient = analogRead(irRightPin);\n    digitalWrite(irEmitterPin, HIGH);\n    delay(1);\n    irLeftObstacle = analogRead(irLeftPin);\n    irRightObstacle = analogRead(irRightPin);\n    irLeftValue[x] = irLeftObstacle - irLeftAmbient;\n    irRightValue[x] = irRightObstacle - irRightAmbient;\n  }\n  digitalWrite(irEmitterPin, LOW);\n  for (int x = 0; x < times; x++)\n  {\n    irLeftDistance += irLeftValue[x];\n    irRightDistance += irRightValue[x];\n  }\n  irLeftDistance = irLeftDistance / times;\n  irRightDistance = irRightDistance / times;\n  ProximityLeftValue = irLeftDistance;\n  ProximityRightValue = irRightDistance;\n  ProximityLmaxValue = irLeftDistance * irLeftDivide;\n  ProximityRmaxValue = irRightDistance * irRightDivide;\n  ProximityValue = 0;\n  if (irLeftDistance > 256)\n    ProximityValue = ProximityValue + 1;\n  if (irRightDistance > 256)\n    ProximityValue = ProximityValue + 2;\n}\n";
+  }
+  //Blockly.Arduino.setups_.setup_probbie="Probbie_StartUp();\n";
+  return'Probbie_StartUp();\n'
+}
+Blockly.Arduino.probbie_move=function(){
+  var a=this.getFieldValue("MOVE_TYPE");
+  return a+'\n';
+}
+
+Blockly.Arduino.probbie_eyes1=function(){
+  if (Blockly.Arduino.probbie_type=="Probbie")
+  {
+    var a=this.getFieldValue("EYES_TYPE");
+        b=this.getFieldValue("RGB");
+    if (a=="2")
+      return"pixels.setPixelColor(0,pixels.Color("+hexToR(b)+","+hexToG(b)+","+hexToB(b)+"));\npixels.show();\npixels.setPixelColor(1,pixels.Color("+hexToR(b)+","+hexToG(b)+","+hexToB(b)+"));\npixels.show();\n"
+    else
+      return"pixels.setPixelColor("+a+",pixels.Color("+hexToR(b)+","+hexToG(b)+","+hexToB(b)+"));\npixels.show();\n"
+  }
+  else
+    return'';
+};
+
+Blockly.Arduino.probbie_eyes2=function(){
+  if (Blockly.Arduino.probbie_type=="Probbie")
+  {
+    var a=this.getFieldValue("EYES_TYPE");
+        r=Blockly.Arduino.valueToCode(this,"R",Blockly.Arduino.ORDER_ATOMIC)||"0",
+        g=Blockly.Arduino.valueToCode(this,"G",Blockly.Arduino.ORDER_ATOMIC)||"0",
+        b=Blockly.Arduino.valueToCode(this,"B",Blockly.Arduino.ORDER_ATOMIC)||"255";
+    if (a=="2")
+      return"pixels.setPixelColor(0,pixels.Color("+r+","+g+","+b+"));\npixels.show();\npixels.setPixelColor(1,pixels.Color("+r+","+g+","+b+"));\npixels.show();\n"
+    else
+      return"pixels.setPixelColor("+a+",pixels.Color("+r+","+g+","+b+"));\npixels.show();\n"
+  }
+  else
+    return'';  
+};
+
+Blockly.Arduino.probbie_detect=function(){
+  return"Read_IR_Distance(5);\n"
+};
+
+Blockly.Arduino.probbie_obstacle=function(){
+  var a=this.getFieldValue("OBSTACLE_TYPE");
+  return[a,Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.probbie_read_ir=function(){
+  var a=this.getFieldValue("IR_VALUE");
+  return[a,Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.probbie_tone=function(){
+  var a=this.getFieldValue("FREQ");
+  if (Blockly.Arduino.probbie_type=="Probbie")
+    return"tone(BuzzerPin, "+a+");\n";
+  else
+    return"tone(BuzzerPin, "+a+", 0, 0);\n";
+};
+Blockly.Arduino.probbie_no_tone=function(){
+  if (Blockly.Arduino.probbie_type=="Probbie")
+    return"noTone(BuzzerPin);\n";
+  else
+    return"noTone(BuzzerPin,0);\n";
+};
+
+Blockly.Arduino.probbie_custom_tone=function(){
+  var a=Blockly.Arduino.valueToCode(this,"FREQ",Blockly.Arduino.ORDER_ATOMIC)||0,
+      b=Blockly.Arduino.valueToCode(this,"DURATION",Blockly.Arduino.ORDER_ATOMIC)||0;
+  if (Blockly.Arduino.probbie_type=="Probbie")
+    return"Beep("+a+", "+b+");\n"
+  else
+    return"tone(BuzzerPin, "+a+", "+b+", 0);\n";
+};
