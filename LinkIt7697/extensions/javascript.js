@@ -999,7 +999,7 @@ Blockly.Arduino.broadcast_udp_init=function(){
   Blockly.Arduino.definitions_.define_broadcast_my_check_header="void myCheckUDP(){\n";
   Blockly.Arduino.definitions_.define_broadcast_my_check_body="";
   Blockly.Arduino.definitions_.define_broadcast_my_check_footer="}\n";
-  Blockly.Arduino.definitions_.define_broadcast_check="void checkBroadcastUDP(){\n  int packetSize = Udp.parsePacket();\n  if (packetSize) {\n    int len = Udp.read(packetBuffer, UDP_BUFFER_SIZE);\n    if (len > 0) {\n      packetBuffer[len] = 0;\n    }\n    myCheckUDP();\n  }\n}\n";
+  Blockly.Arduino.definitions_.define_broadcast_check="void checkBroadcastUDP(){\n  int packetSize = Udp.parsePacket();\n  if (packetSize) {\n    int len = Udp.read(packetBuffer, UDP_BUFFER_SIZE);\n    if (len > 0) {\n      packetBuffer[len] = 0;\n      myCheckUDP();\n    }\n  }\n}\n";
   //return'';
   return"Udp.begin(UDP_LISTEN_PORT);\n"
 };
@@ -1018,7 +1018,7 @@ Blockly.Arduino.broadcast_udp_received_event=function(){
 };
 
 Blockly.Arduino.broadcast_udp_received_msg=function(){
-  return["packetBuffer",Blockly.Arduino.ORDER_ATOMIC];
+  return["String(packetBuffer)",Blockly.Arduino.ORDER_ATOMIC];
 };
 
 Blockly.Arduino.broadcast_udp_reset=function(){
