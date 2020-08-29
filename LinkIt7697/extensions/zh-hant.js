@@ -309,6 +309,7 @@ Blockly.Msg.AIRBOX_VALUE_DROPDOWN=[['PM2.5濃度','docAirbox["feeds"][0]["AirBox
                                    ['所在位置','docAirbox["feeds"][0]["AirBox"]["area"].as<char*>()'],
                                    ['單位名稱','docAirbox["feeds"][0]["AirBox"]["name"].as<char*>()'],
                                    ['裝置編號','docAirbox[\"device_id\"].as<char*>()']];
+Blockly.Msg.AIRBOX_WARNING = "必須先設定「"+Blockly.Msg.FETCH_AIRBOX_TITLE+"」積木";
 
 //Probbie
 Blockly.Msg.PROBBIE_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/寶比機器人積木";
@@ -325,3 +326,16 @@ Blockly.Msg.PROBBIE_DETECT = "紅外線偵測前方障礙";
 Blockly.Msg.PROBBIE_OBSTACLE = "前方障礙物";
 Blockly.Msg.PROBBIE_OBSTACLE_TYPE=[["沒有","ProximityValue==0"],["在左側","ProximityValue==1"],["在右側","ProximityValue==2"],["左右兩側都有","ProximityValue==3"]];
 Blockly.Msg.PROBBIE_READ_IR_VALUE = "讀取紅外線測距值";
+Blockly.Msg.PROBBIE_WARNING = "必須先設定「"+Blockly.Msg.PROBBIE_TITLE+Blockly.Msg.PROBBIE_INIT+"」積木！";
+Blockly.Msg.PROBBIE_OBSTACLE_WARNING= "必須先設定「"+Blockly.Msg.PROBBIE_DETECT+"」積木！";
+
+//Broadcast UDP
+Blockly.Msg.BROADCAST_UDP_HELPURL= "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/udp廣播積木";
+Blockly.Msg.BROADCAST_UDP_TITLE = "UDP廣播";
+Blockly.Msg.BROADCAST_UDP_INIT = "初始化廣播埠";
+Blockly.Msg.BROADCAST_UDP_TOOLTIP= "Broadcast UDP";
+Blockly.Msg.BROADCAST_UDP_SEND = "廣播訊息";
+Blockly.Msg.BROADCAST_UDP_RECEIVED_EVENT = "當接收到訊息時";
+Blockly.Msg.BROADCAST_UDP_RECEIVED_MSG = "接收到的訊息";
+Blockly.Msg.BROADCAST_UDP_RESET = "重設廣播埠";
+Blockly.Msg.BROADCAST_UDP_WARNING = "你必須先設定「"+Blockly.Msg.BROADCAST_UDP_INIT+"」積木！";

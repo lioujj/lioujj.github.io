@@ -312,6 +312,7 @@ Blockly.Msg.AIRBOX_VALUE_DROPDOWN=[['PM2.5','docAirbox["feeds"][0]["AirBox"]["s_
                                    ['AirBox name','docAirbox["feeds"][0]["AirBox"]["name"].as<char*>()'],
                                    ['Device ID','docAirbox[\"device_id\"].as<char*>()']                                   
                                   ];
+Blockly.Msg.AIRBOX_WARNING = "You have to Fetch airbox data from web first.";
 
 //Probbie
 Blockly.Msg.PROBBIE_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/寶比機器人積木";
@@ -328,3 +329,16 @@ Blockly.Msg.PROBBIE_DETECT = "detect obstacle by IR";
 Blockly.Msg.PROBBIE_OBSTACLE = "obstacle";
 Blockly.Msg.PROBBIE_OBSTACLE_TYPE=[["is none","ProximityValue==0"],["is on left side","ProximityValue==1"],["is on right side","ProximityValue==2"],["are on both side","ProximityValue==3"]];
 Blockly.Msg.PROBBIE_READ_IR_VALUE = "read IR value:";
+Blockly.Msg.PROBBIE_WARNING = "You have to initialize your Probbie first.";
+Blockly.Msg.PROBBIE_OBSTACLE_WARNING= 'You have to set "detect obstacle by IR" first.';
+
+//Broadcast UDP
+Blockly.Msg.BROADCAST_UDP_HELPURL= "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/udp廣播積木";
+Blockly.Msg.BROADCAST_UDP_TITLE = "UDP Broadcast";
+Blockly.Msg.BROADCAST_UDP_INIT = "init port:";
+Blockly.Msg.BROADCAST_UDP_TOOLTIP= "Broadcast UDP";
+Blockly.Msg.BROADCAST_UDP_SEND = "broadcast message:";
+Blockly.Msg.BROADCAST_UDP_RECEIVED_EVENT = "on received broadcast message";
+Blockly.Msg.BROADCAST_UDP_RECEIVED_MSG = "received message";
+Blockly.Msg.BROADCAST_UDP_RESET = "reset broadcast port:";
+Blockly.Msg.BROADCAST_UDP_WARNING = "You have to init your broadcast port first.";

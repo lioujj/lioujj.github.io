@@ -900,5 +900,30 @@
 					</value>
 				</block>
 		</category>
+    <category id="category_broadcast_udp" name="Broadcast">
+      <block type="broadcast_udp_init">
+        <value name="PORT">
+          <block type="math_number">
+            <field name="NUM">7697</field>
+          </block>
+        </value>
+      </block>
+      <block type="broadcast_udp_send">
+        <value name="MESSAGE">
+          <block type="text">
+            <field name="TEXT">write your message here to send</field>
+          </block>
+        </value>
+      </block>
+      <block type="broadcast_udp_received_event"></block>
+      <block type="broadcast_udp_received_msg"></block>
+      <block type="broadcast_udp_reset">
+        <value name="PORT">
+          <block type="math_number">
+            <field name="NUM">7698</field>
+          </block>
+        </value>
+      </block>
+    </category>
 	</category>
 </category>
