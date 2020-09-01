@@ -254,7 +254,7 @@ Blockly.Arduino.ksb045_xy=function(){
       xyPin=15;
     else
       xyPin=16;
-  }    
+  }
   return['analogRead('+xyPin+')',Blockly.Arduino.ORDER_ATOMIC];
 }
 

@@ -1,6 +1,16 @@
 //mqtt
 Blockly.Blocks.mqtt={};
 Blockly.Blocks.mqtt.HUE=Blockly.Blocks.procedures.HUE;
+Blockly.Blocks.mqtt.checkBlocks=function(a){
+	var b=null,
+	    d=a.type;
+		a=a.workspace.getAllBlocks();
+		for(var c=0;c<a.length;c++)
+			if("mqtt_event"!=a[c].type&&"subscribe_mqtt"!=a[c].type&&"publish_mqtt"!=a[c].type&&"mqtt_received_topic"!=a[c].type&&"mqtt_received_msg"!=a[c].type||null!=b||(b=a[c].type!=d?!0:!1),"connect_mqtt"==a[c].type)
+				return!0;
+		return b
+};
+
 Blockly.Blocks.connect_mqtt={init:function(){
   this.setHelpUrl(Blockly.Msg.MOTT_HELPURL);
   this.setColour(Blockly.Blocks.mqtt.HUE);
@@ -18,7 +28,7 @@ Blockly.Blocks.connect_mqtt={init:function(){
       .setCheck("String").setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg.MQTT_PASSWORD);
   this.setPreviousStatement(!0,null);
   this.setNextStatement(!0,null);
-  this.setTooltip(Blockly.Msg.MQTT_TOOLTIP)}
+  this.setTooltip(Blockly.Msg.MQTT_TOOLTIP)},onchange:function(){}
 };
 
 Blockly.Blocks.subscribe_mqtt={init:function(){
@@ -30,7 +40,8 @@ Blockly.Blocks.subscribe_mqtt={init:function(){
   this.setInputsInline(!0);
   this.setPreviousStatement(!0,null);
   this.setNextStatement(!0,null);
-  this.setTooltip(Blockly.Msg.MQTT_TOOLTIP)}
+  this.setTooltip(Blockly.Msg.MQTT_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.mqtt.checkBlocks(this)?this.setWarningText(null):this.setWarningText(Blockly.Msg.MQTT_WARNING))}
 };
 Blockly.Blocks.publish_mqtt={init:function(){
   this.setHelpUrl(Blockly.Msg.MOTT_HELPURL);
@@ -44,7 +55,8 @@ Blockly.Blocks.publish_mqtt={init:function(){
   this.setInputsInline(!0);
   this.setPreviousStatement(!0,null);
   this.setNextStatement(!0,null);
-  this.setTooltip(Blockly.Msg.MQTT_TOOLTIP)}
+  this.setTooltip(Blockly.Msg.MQTT_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.mqtt.checkBlocks(this)?this.setWarningText(null):this.setWarningText(Blockly.Msg.MQTT_WARNING))}
 };
 Blockly.Blocks.mqtt_received_topic={init:function(){
   this.setHelpUrl(Blockly.Msg.MOTT_HELPURL);
@@ -53,7 +65,8 @@ Blockly.Blocks.mqtt_received_topic={init:function(){
       .appendField(Blockly.Msg.MQTT_RECEIVED_TOPIC);
   this.setInputsInline(!0);
   this.setOutput(!0,"String")
-  this.setTooltip(Blockly.Msg.MQTT_TOOLTIP)}
+  this.setTooltip(Blockly.Msg.MQTT_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.mqtt.checkBlocks(this)?this.setWarningText(null):this.setWarningText(Blockly.Msg.MQTT_WARNING))}
 };
 Blockly.Blocks.mqtt_received_msg={init:function(){
   this.setHelpUrl(Blockly.Msg.MOTT_HELPURL);
@@ -62,7 +75,8 @@ Blockly.Blocks.mqtt_received_msg={init:function(){
       .appendField(Blockly.Msg.MQTT_RECEIVED_MSG);
   this.setInputsInline(!0);
   this.setOutput(!0,"String")
-  this.setTooltip(Blockly.Msg.MQTT_TOOLTIP)}
+  this.setTooltip(Blockly.Msg.MQTT_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.mqtt.checkBlocks(this)?this.setWarningText(null):this.setWarningText(Blockly.Msg.MQTT_WARNING))}
 };
 Blockly.Blocks.mqtt_event={init:function(){
   this.setHelpUrl(Blockly.Msg.MOTT_HELPURL);
@@ -71,7 +85,8 @@ Blockly.Blocks.mqtt_event={init:function(){
       .appendField(Blockly.Msg.MQTT_EVENT);
   this.setInputsInline(!0);
   this.appendStatementInput("MSG_TOPIC_EQAL");
-  this.setTooltip(Blockly.Msg.MQTT_TOOLTIP)}
+  this.setTooltip(Blockly.Msg.MQTT_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.mqtt.checkBlocks(this)?this.setWarningText(null):this.setWarningText(Blockly.Msg.MQTT_WARNING))}
 };
 
 //ThingSpeak
