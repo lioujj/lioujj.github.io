@@ -7,6 +7,11 @@ Blockly.Arduino.finish=function(a){
 		myStr="  myClient.loop();\n";
 	if (Blockly.Arduino.definitions_.define_broadcast_include=="#include <WiFiUdp.h>")
 		myStr=myStr+"  checkBroadcastUDP();\n";
+	if (Blockly.Arduino.webserver.webserver_exist=="yes"){
+    Blockly.Arduino.webserver.webserver_header=Blockly.Arduino.webserver.webserver_header.replace("#title#",Blockly.Arduino.webserver.webserver_myTitle);
+    Blockly.Arduino.webserver.webserver_header=Blockly.Arduino.webserver.webserver_header.replace("#color#",Blockly.Arduino.webserver.webserver_myColor);
+		myStr=myStr+"  checkWebClient();\n";
+  }
 	a="  "+a.replace(/\n/g,"\n");
 	a=a.replace(/\n\s+$/,"\n");
 	a="void loop() \n{\n"+myStr+a+"\n}";
@@ -28,8 +33,22 @@ Blockly.Arduino.finish=function(a){
 		b=b.join("\n")+"\n\n"+c.join("\n")+"\n\nvoid setup() \n{\n  "+d.join("\n  ")+"\n}\n\n";
 	b=b.replace(/\n\n+/g,"\n\n").replace(/\n*$/,"\n\n\n")+a;
 	Blockly.Arduino.mqtt_exist="no";
-	b="/*\n * Generated using BlocklyDuino:\n *\n * https://github.com/MediaTek-Labs/BlocklyDuino-for-LinkIt\n *\n * Date: "+e.toUTCString()+"\n */\n\n"+b
-	return b
+	b="/*\n * Generated using BlocklyDuino:\n *\n * https://github.com/MediaTek-Labs/BlocklyDuino-for-LinkIt\n *\n * Date: "+e.toUTCString()+"\n */\n\n"+"/*\n\n * 部份程式碼由吉哥積木產生\n * https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697\n\n*/\n\n"+b
+  if (Blockly.Arduino.webserver.webserver_exist=="yes"){
+    b=b+Blockly.Arduino.webserver.webserver_header+Blockly.Arduino.webserver.webserver_body+Blockly.Arduino.webserver.webserver_footer;
+    Blockly.Arduino.webserver.webserver_exist="no";
+  }
+
+  if (Blockly.Arduino.broadcast_udp.broadcast_exist=="yes"){
+	  for(e in Blockly.Arduino.broadcast_udp.defineFunction){
+		  b=b+Blockly.Arduino.broadcast_udp.defineFunction[e];
+	  }
+    //b=b+Blockly.Arduino.webserver.webserver_header+Blockly.Arduino.webserver.webserver_body+Blockly.Arduino.webserver.webserver_footer;
+    Blockly.Arduino.broadcast_udp.broadcast_exist="no";
+  }
+
+
+  return b
 };
 
 
@@ -992,15 +1011,16 @@ Blockly.Arduino.probbie_custom_tone=function(){
 //Broadcast UDP
 Blockly.Arduino.broadcast_udp={};
 Blockly.Arduino.broadcast_udp_init=function(){
+  Blockly.Arduino.broadcast_udp.broadcast_exist="yes";
 	var a=Blockly.Arduino.valueToCode(this,"PORT",Blockly.Arduino.ORDER_ATOMIC)||"0";
   Blockly.Arduino.definitions_.define_broadcast_include="#include <WiFiUdp.h>";
   Blockly.Arduino.definitions_.define_broadcast_port="const int UDP_BUFFER_SIZE=255;\nuint16_t UDP_LISTEN_PORT="+a+";\nWiFiUDP Udp;\n//IPAddress broadcastIP;\nchar packetBuffer[UDP_BUFFER_SIZE];\n";
-	Blockly.Arduino.definitions_.define_broadcast_send="void sendBroadcastUDP(const char* myMessage){\n  IPAddress broadcastIP(WiFi.localIP()[0],WiFi.localIP()[1],WiFi.localIP()[2],255);\n  Udp.beginPacket(broadcastIP,UDP_LISTEN_PORT);\n  Udp.write(myMessage);\n  Udp.endPacket();\n}\n";
-  Blockly.Arduino.definitions_.define_broadcast_my_check_header="void myCheckUDP(){\n";
-  Blockly.Arduino.definitions_.define_broadcast_my_check_body="";
-  Blockly.Arduino.definitions_.define_broadcast_my_check_footer="}\n";
-  Blockly.Arduino.definitions_.define_broadcast_check="void checkBroadcastUDP(){\n  int packetSize = Udp.parsePacket();\n  if (packetSize) {\n    int len = Udp.read(packetBuffer, UDP_BUFFER_SIZE);\n    if (len > 0) {\n      packetBuffer[len] = 0;\n      myCheckUDP();\n    }\n  }\n}\n";
-  //return'';
+  Blockly.Arduino.broadcast_udp.defineFunction={};
+	Blockly.Arduino.broadcast_udp.defineFunction.broadcast_send="\nvoid sendBroadcastUDP(const char* myMessage){\n  IPAddress broadcastIP(WiFi.localIP()[0],WiFi.localIP()[1],WiFi.localIP()[2],255);\n  Udp.beginPacket(broadcastIP,UDP_LISTEN_PORT);\n  Udp.write(myMessage);\n  Udp.endPacket();\n}\n";
+  Blockly.Arduino.broadcast_udp.defineFunction.broadcast_my_check_header="\nvoid myCheckUDP(){\n";
+  Blockly.Arduino.broadcast_udp.defineFunction.broadcast_my_check_body="";
+  Blockly.Arduino.broadcast_udp.defineFunction.broadcast_my_check_footer="}\n";
+  Blockly.Arduino.broadcast_udp.defineFunction.broadcast_check="\nvoid checkBroadcastUDP(){\n  int packetSize = Udp.parsePacket();\n  if (packetSize) {\n    int len = Udp.read(packetBuffer, UDP_BUFFER_SIZE);\n    if (len > 0) {\n      packetBuffer[len] = 0;\n      myCheckUDP();\n    }\n  }\n}\n";
   return"Udp.begin(UDP_LISTEN_PORT);\n"
 };
 
@@ -1010,10 +1030,7 @@ Blockly.Arduino.broadcast_udp_send=function(){
 };
 
 Blockly.Arduino.broadcast_udp_received_event=function(){
-	//var a=Blockly.Arduino.valueToCode(this,"TOPIC",Blockly.Arduino.ORDER_ATOMIC)||"",b=Blockly.Arduino.valueToCode(this,"MESSAGE",Blockly.Arduino.ORDER_ATOMIC)||"",
-  //      a=a.replace(/"/g,""),
-  //      b=b.replace(/"/g,"");
-	Blockly.Arduino.definitions_.define_broadcast_my_check_body=Blockly.Arduino.statementToCode(this,"MSG_UDP");
+	Blockly.Arduino.broadcast_udp.defineFunction.broadcast_my_check_body=Blockly.Arduino.statementToCode(this,"MSG_UDP");
 	return''
 };
 
@@ -1024,4 +1041,156 @@ Blockly.Arduino.broadcast_udp_received_msg=function(){
 Blockly.Arduino.broadcast_udp_reset=function(){
 	var a=Blockly.Arduino.valueToCode(this,"PORT",Blockly.Arduino.ORDER_ATOMIC)||"0";
   return"Udp.stop();\nUDP_LISTEN_PORT="+a+";\nUdp.begin(UDP_LISTEN_PORT);\n"
+};
+
+//Web Server
+Blockly.Arduino.webserver={};
+Blockly.Arduino.webserver_init=function(){
+	var a=Blockly.Arduino.valueToCode(this,"PORT",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=Blockly.Arduino.valueToCode(this,"SECS",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  Blockly.Arduino.webserver.webserver_refresh="";
+  if (b!="0")
+    Blockly.Arduino.webserver.webserver_refresh="          WebClient.println(\"Refresh: "+b+"\");\n";
+  Blockly.Arduino.webserver.webserver_myTitle="";
+  Blockly.Arduino.webserver.webserver_myColor="";
+  Blockly.Arduino.definitions_.define_webserver_port="WiFiServer WebServer("+a+");\n";
+  Blockly.Arduino.definitions_.define_webserver_pwm="";
+  Blockly.Arduino.definitions_.define_webserver_servo="";
+  Blockly.Arduino.setups_["webserver_"]="";
+  Blockly.Arduino.definitions_.define_webserver_param="String webPara=\"\";\nString tempPara=\"\";";
+  return'WebServer.begin();\n';
+};
+
+Blockly.Arduino.webserver_title=function(){
+	var a=Blockly.Arduino.valueToCode(this,"TITLE",Blockly.Arduino.ORDER_ATOMIC)||"";
+  Blockly.Arduino.webserver_myColor=" bgcolor='"+this.getFieldValue("RGB")+"'";
+  Blockly.Arduino.webserver_myTitle=a.replace(/\"/g, "");
+  return'';
+};
+
+Blockly.Arduino.webserver_paragraph_begin=function(){
+  var a=this.getFieldValue("ALIGN"),
+      b=this.getFieldValue("SIZE"),
+      c=this.getFieldValue("RGB"),
+      d=Blockly.Arduino.statementToCode(this,"PARAGRAPH");
+      d=d.replace(/  /g,"        ");
+      d=d.replace(/                /g,"          ");
+  var tempHead="        WebClient.println(\"<p align="+a+"><font size='"+b+"' color='"+c+"'>\");\n"+d+"        WebClient.println(\"</font></p>\");\n";
+  return tempHead;
+};
+
+Blockly.Arduino.webserver_text=function(){
+  var a=Blockly.Arduino.valueToCode(this,"CONTENT",Blockly.Arduino.ORDER_ATOMIC)||"",
+      b=this.getFieldValue("BOLD");
+  if (b=="Yes")
+    a="WebClient.println(\"<b>\"+String("+a+")+\"</b>\");\n";
+  else
+    a="WebClient.println(String("+a+"));\n";
+  return a;
+};
+
+Blockly.Arduino.webserver_paragraph_break=function(){
+  var tempHead="WebClient.println(\"<br>\");\n";
+  return tempHead;
+};
+
+
+Blockly.Arduino.webserver_prepare_body=function(){
+  Blockly.Arduino.webserver.webserver_exist="yes";
+  Blockly.Arduino.webserver.webserver_header="\n\nvoid checkWebClient(){\n  WiFiClient WebClient = WebServer.available();\n  if (WebClient) {\n    webPara=\"\";\n    boolean currentLineIsBlank = true;\n    while (WebClient.connected()) {\n      if (WebClient.available()) {\n        char c = WebClient.read();\n        if (c == '\\n' && currentLineIsBlank) {\n          WebClient.println(\"HTTP/1.1 200 OK\");\n          WebClient.println(\"Content-Type: text/html\");\n          WebClient.println(\"Connection: close\");\n"+Blockly.Arduino.webserver.webserver_refresh+"          WebClient.println();\n          WebClient.println(\"<!DOCTYPE HTML>\");\n          WebClient.println(\"<html><head><meta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=utf-8\\\"><title>#title#</title></head><body#color#>\");";
+  Blockly.Arduino.webserver.webserver_body=Blockly.Arduino.statementToCode(this,"WEBSERVER_BODY");
+  Blockly.Arduino.webserver.webserver_footer="          WebClient.println(\"</body></html>\");\n          break;\n        }\n        if (c == '\\n') {\n          currentLineIsBlank = true;\n        } else if (c != '\\r') {\n          webPara=webPara+c;\n         currentLineIsBlank = false;\n        }\n      }\n    }\n    delay(1);\n    WebClient.stop();\n  }\n}";
+  return '';
+};
+
+Blockly.Arduino.webserver_custom=function(){
+  var a=Blockly.Arduino.valueToCode(this,"CONTENT",Blockly.Arduino.ORDER_ATOMIC)||"";
+  a=a.replace(/\"/g, "'");
+  a=a.replace("'","");
+  a=a.replace(/'$/,"");
+  a="WebClient.println(\""+a+"\");\n";
+  return a;
+};
+
+Blockly.Arduino.webserver_digital=function(){
+  var a=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=this.getFieldValue("BTN_TYPE");
+  var btn_1="String(\"<input type='button' value=HIGH onclick=\\\"location.href='/digital/\")+"+a+"+String(\"/HIGH';return true;\\\"\")+(digitalRead("+a+")==1?\" disabled\":\"\")+\">\"";
+      btn_0="String(\"<input type='button' value=LOW onclick=\\\"location.href='/digital/\")+"+a+"+String(\"/LOW';return true;\\\"\")+(digitalRead("+a+")==0?\" disabled\":\"\")+\">\"";
+  if (b=="1"){
+    btn_0=btn_0.replace("value=LOW","value=OFF");
+    btn_1=btn_1.replace("value=HIGH","value=ON");
+  } else if (b=="2"){
+    btn_0=btn_0.replace("value=LOW","value=關");
+    btn_1=btn_1.replace("value=HIGH","value=開");
+  }
+  var tempHead="if (webPara.indexOf(String(\"GET /digital/\")+"+a+"+String(\"/HIGH\")) >= 0){\n  pinMode("+a+",OUTPUT);\n  digitalWrite("+a+",HIGH);\n}\n";
+  tempHead=tempHead+"if (webPara.indexOf(String(\"GET /digital/\")+"+a+"+String(\"/LOW\")) >= 0){\n  pinMode("+a+",OUTPUT);\n  digitalWrite("+a+",LOW);\n}\n";
+  tempHead=tempHead+"WebClient.println("+btn_1+"+\"&nbsp;&nbsp;\"+"+ btn_0+");\n";
+  return tempHead;
+};
+
+Blockly.Arduino.webserver_pwm=function(){
+  var a=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=this.getFieldValue("BTN_TYPE");
+  Blockly.Arduino.definitions_.define_webserver_pwm+=("int pwm_"+a+"=0;\n");
+  var slider="String(\"<input type='range' width='1000' step='1' min='0' max='255' value='\")+pwm_"+a+"+String(\"' id='myRange_"+a+"' onchange=\\\"document.getElementById('myLabel_"+a+"').innerHTML=this.value;\\\"><label id='myLabel_"+a+"'>\")+pwm_"+a+"+String(\"</label>\")";
+  var btn="String(\"<input type='button' value='#value#' onclick=\\\"location.href='/pwm/"+a+"/'+document.getElementById('myRange_"+a+"').value;return true;\\\">\")";
+  btn=btn.replace("#value#",b);
+  var tempHead="if (webPara.indexOf(String(\"GET /pwm/\")+"+a+"+String(\"/\")) >= 0){\n  tempPara=webPara.substring(webPara.indexOf(\"GET /\"));\n  tempPara.replace(\"GET /pwm/\",\"\");\n  pwm_"+a+"=String(tempPara.substring(tempPara.indexOf(\"/\")+1)).toInt();\n  analogWrite(String(tempPara.substring(0,tempPara.indexOf(\"/\"))).toInt(),String(tempPara.substring(tempPara.indexOf(\"/\")+1)).toInt());\n}\n";
+  tempHead=tempHead+"WebClient.println("+slider+"+"+ btn+");\n";
+  return tempHead;
+};
+
+Blockly.Arduino.webserver_servo=function(){
+  var a=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=this.getFieldValue("BTN_TYPE");
+  Blockly.Arduino.definitions_.define_webserver_servo+=("#include <Servo.h>\nint servo_"+a+"=0;\nServo myServo_"+a+";\n");
+  Blockly.Arduino.setups_["webserver_"]+="myServo_"+a+".attach("+a+");\n";
+  Blockly.Arduino.setups_["webserver_"]=Blockly.Arduino.setups_["webserver_"].replace(/[\n]/g, "\n ");
+  var slider="String(\"<input type='range' width='1000' step='1' min='0' max='180' value='\")+servo_"+a+"+String(\"' id='myServo_"+a+"' onchange=\\\"document.getElementById('myLabel_"+a+"').innerHTML=this.value;\\\"><label id='myLabel_"+a+"'>\")+servo_"+a+"+String(\"</label>\")";
+  var btn="String(\"<input type='button' value='#value#' onclick=\\\"location.href='/servo/"+a+"/'+document.getElementById('myServo_"+a+"').value;return true;\\\">\")";
+  btn=btn.replace("#value#",b);
+  var tempHead="if (webPara.indexOf(String(\"GET /servo/\")+"+a+"+String(\"/\")) >= 0){\n  tempPara=webPara.substring(webPara.indexOf(\"GET /\"));\n  tempPara.replace(\"GET /servo/\",\"\");\n  servo_"+a+"=String(tempPara.substring(tempPara.indexOf(\"/\")+1)).toInt();\n  myServo_"+a+".write(String(tempPara.substring(tempPara.indexOf(\"/\")+1)).toInt());\n}\n";
+  tempHead=tempHead+"WebClient.println("+slider+"+"+ btn+");\n";
+  return tempHead;
+};
+
+Blockly.Arduino.webserver_custom_controller=function(){
+  var a=Blockly.Arduino.valueToCode(this,"HREF",Blockly.Arduino.ORDER_ATOMIC)||"",
+      b=Blockly.Arduino.valueToCode(this,"CONTENT",Blockly.Arduino.ORDER_ATOMIC)||"",
+      c=this.getFieldValue("CONTROLLER_TYPE");
+  a=a.replace(/\"/g, "");
+  b=b.replace(/\"/g, "");
+  if (a.charAt(0)!="/")
+    a="/"+a;
+  var myCustom="";
+  if (c=="text")
+    myCustom="<a href='#href#'>#content#</a>";
+  else if (c=="button")
+    myCustom="<input type='button' value='#content#' onclick='location.href=\\\"#href#\\\";return true;'>";
+  myCustom=myCustom.replace("#href#",a);
+  myCustom=myCustom.replace("#content#",b);
+  myCustom="WebClient.println(String(\""+myCustom+"\"));\n";
+  return myCustom;
+};
+
+Blockly.Arduino.webserver_event=function(){
+  var a=Blockly.Arduino.valueToCode(this,"CONTENT",Blockly.Arduino.ORDER_ATOMIC)||"",
+      b=Blockly.Arduino.statementToCode(this,"EVENT_BODY");
+  a=a.replace(/\"/g, "");
+  if (a.charAt(0)!="/")
+  a="/"+a;
+  b=b.replace(/  /g,"        ");
+  b=b.replace(/                /g,"          ");
+  var tempHead="if (webPara.indexOf(\"GET \"+String(\""+a+"\")) >= 0){\n"+b+"}\n";
+  return tempHead;
+};
+
+Blockly.Arduino.webserver_talk=function(){
+  var a=Blockly.Arduino.valueToCode(this,"CONTENT",Blockly.Arduino.ORDER_ATOMIC)||"";
+  a=a.replace(/\"/g, "");
+  var b="https://google-translate-proxy.herokuapp.com/api/tts?query="+a+"&language=zh-tw";
+  a="WebClient.println(\"<iframe width=0 height=0 frameborder=0 src='"+b+"' allow='autoplay'></iframe>\");\n";
+  return a;
 };

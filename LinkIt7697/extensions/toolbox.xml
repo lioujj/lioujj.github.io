@@ -925,5 +925,100 @@
         </value>
       </block>
     </category>
+    <category id="category_webserver" name="Web Server">
+      <block type="webserver_init">
+        <value name="PORT">
+          <block type="math_number">
+            <field name="NUM">80</field>
+          </block>
+        </value>
+        <value name="SECS">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
+      <block type="webserver_title">
+        <value name="TITLE">
+          <block type="text">
+            <field name="TEXT"></field>
+          </block>
+        </value>
+      </block>
+      <block type="webserver_prepare_body"></block>
+      <block type="webserver_paragraph_begin">
+        <statement name="PARAGRAPH">
+          <block type="webserver_text">
+            <value name="CONTENT">
+              <block type="text">
+                <field name="TEXT"></field>
+              </block>
+            </value>
+          </block>
+        </statement>
+      </block>
+      <block type="webserver_text">
+        <value name="CONTENT">
+          <block type="text">
+            <field name="TEXT"></field>
+          </block>
+        </value>
+      </block>
+      <block type="webserver_paragraph_break"></block>
+      <block type="webserver_custom">
+        <value name="CONTENT">
+          <block type="text">
+            <field name="TEXT"></field>
+          </block>
+        </value>
+      </block>
+      <block type="webserver_digital">
+        <value name="PIN">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
+      <block type="webserver_pwm">
+        <value name="PIN">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
+      <block type="webserver_servo">
+        <value name="PIN">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
+      <block type="webserver_custom_controller">
+        <value name="HREF">
+          <block type="text">
+            <field name="TEXT"></field>
+          </block>
+        </value>
+        <value name="CONTENT">
+          <block type="text">
+            <field name="TEXT"></field>
+          </block>
+        </value>
+      </block>
+      <block type="webserver_event">
+        <value name="CONTENT">
+          <block type="text">
+            <field name="TEXT"></field>
+          </block>
+        </value>
+      </block>
+      <block type="webserver_talk">
+        <value name="CONTENT">
+          <block type="text">
+            <field name="TEXT"></field>
+          </block>
+        </value>
+      </block>
+    </category>
 	</category>
 </category>
