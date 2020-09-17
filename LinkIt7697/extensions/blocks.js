@@ -78,6 +78,7 @@ Blockly.Blocks.mqtt_received_msg={init:function(){
   this.setTooltip(Blockly.Msg.MQTT_TOOLTIP)},onchange:function(){
       this.workspace&&(Blockly.Blocks.mqtt.checkBlocks(this)?this.setWarningText(null):this.setWarningText(Blockly.Msg.MQTT_WARNING))}
 };
+
 Blockly.Blocks.mqtt_event={init:function(){
   this.setHelpUrl(Blockly.Msg.MOTT_HELPURL);
   this.setColour(Blockly.Blocks.mqtt.HUE);
@@ -85,6 +86,18 @@ Blockly.Blocks.mqtt_event={init:function(){
       .appendField(Blockly.Msg.MQTT_EVENT);
   this.setInputsInline(!0);
   this.appendStatementInput("MSG_TOPIC_EQAL");
+  this.setTooltip(Blockly.Msg.MQTT_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.mqtt.checkBlocks(this)?this.setWarningText(null):this.setWarningText(Blockly.Msg.MQTT_WARNING))}
+};
+
+Blockly.Blocks.mqtt_reconnect={init:function(){
+  this.setHelpUrl(Blockly.Msg.MOTT_HELPURL);
+  this.setColour(Blockly.Blocks.mqtt.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.MQTT_RECONNECT);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
   this.setTooltip(Blockly.Msg.MQTT_TOOLTIP)},onchange:function(){
       this.workspace&&(Blockly.Blocks.mqtt.checkBlocks(this)?this.setWarningText(null):this.setWarningText(Blockly.Msg.MQTT_WARNING))}
 };

@@ -105,6 +105,10 @@ Blockly.Arduino.mqtt_event=function(){
 	return''
 };
 
+Blockly.Arduino.mqtt_reconnect=function(){
+	return"connectMQTT();\n"
+};
+
 //thingspeak
 Blockly.Arduino.thingspeak={};
 Blockly.Arduino.things_get_url=function(){
