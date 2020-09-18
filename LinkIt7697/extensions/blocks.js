@@ -90,6 +90,17 @@ Blockly.Blocks.mqtt_event={init:function(){
       this.workspace&&(Blockly.Blocks.mqtt.checkBlocks(this)?this.setWarningText(null):this.setWarningText(Blockly.Msg.MQTT_WARNING))}
 };
 
+Blockly.Blocks.mqtt_connected={init:function(){
+  this.setHelpUrl(Blockly.Msg.MOTT_HELPURL);
+  this.setColour(Blockly.Blocks.mqtt.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.MQTT_CONNECTED);
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Boolean");
+  this.setTooltip(Blockly.Msg.MQTT_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.mqtt.checkBlocks(this)?this.setWarningText(null):this.setWarningText(Blockly.Msg.MQTT_WARNING))}
+};
+
 Blockly.Blocks.mqtt_reconnect={init:function(){
   this.setHelpUrl(Blockly.Msg.MOTT_HELPURL);
   this.setColour(Blockly.Blocks.mqtt.HUE);

@@ -848,6 +848,7 @@
 				</value>
 			</block>
 			<block type="mqtt_event"></block>
+      <block type="mqtt_connected"></block>
       <block type="mqtt_reconnect"></block>
 			<block type="mqtt_received_topic"></block>
 			<block type="mqtt_received_msg"></block>

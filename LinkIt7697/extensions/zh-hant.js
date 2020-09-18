@@ -59,6 +59,7 @@ Blockly.Msg.MQTT_RECEIVED_TOPIC = "接收到訊息的TOPIC名稱";
 Blockly.Msg.MQTT_RECEIVED_MSG = "接收到的訊息";
 Blockly.Msg.MQTT_WARNING = "必須先設定「"+Blockly.Msg.SET_MQTT_UNTIL_READY_TITLE+"」積木！";
 Blockly.Msg.MQTT_RECONNECT = "MQTT重新連線";
+Blockly.Msg.MQTT_CONNECTED = "MQTT是否已連線？";
 
 //ThingSpeak
 Blockly.Msg.CATEGORY_THINGSPEAK = "ThingSpeak";

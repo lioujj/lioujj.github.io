@@ -60,6 +60,7 @@ Blockly.Msg.MQTT_RECEIVED_MSG = "received message";
 Blockly.Msg.LIOU_ROBOT_IR_RECEIVED = "When button of IR remote controller is pressed";
 Blockly.Msg.MQTT_WARNING = 'You have to setup "'+Blockly.Msg.SET_MQTT_UNTIL_READY_TITLE+'" block at first.';
 Blockly.Msg.MQTT_RECONNECT = "MQTT reconnect";
+Blockly.Msg.MQTT_CONNECTED = "MQTT connected?";
 
 //ThingSpeak
 Blockly.Msg.CATEGORY_THINGSPEAK = "ThingSpeak";

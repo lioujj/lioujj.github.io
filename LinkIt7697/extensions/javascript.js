@@ -105,6 +105,10 @@ Blockly.Arduino.mqtt_event=function(){
 	return''
 };
 
+Blockly.Arduino.mqtt_connected=function(){
+  return['myClient.connected()',Blockly.Arduino.ORDER_ATOMIC];
+};
+
 Blockly.Arduino.mqtt_reconnect=function(){
 	return"connectMQTT();\n"
 };
@@ -1103,7 +1107,7 @@ Blockly.Arduino.webserver_paragraph_break=function(){
 
 Blockly.Arduino.webserver_prepare_body=function(){
   Blockly.Arduino.webserver.webserver_exist="yes";
-  Blockly.Arduino.webserver.webserver_header="\n\nvoid checkWebClient(){\n  WiFiClient WebClient = WebServer.available();\n  if (WebClient) {\n    webPara=\"\";\n    boolean currentLineIsBlank = true;\n    while (WebClient.connected()) {\n      if (WebClient.available()) {\n        char c = WebClient.read();\n        if (c == '\\n' && currentLineIsBlank) {\n          WebClient.println(\"HTTP/1.1 200 OK\");\n          WebClient.println(\"Content-Type: text/html\");\n          WebClient.println(\"Connection: close\");\n"+Blockly.Arduino.webserver.webserver_refresh+"          WebClient.println();\n          WebClient.println(\"<!DOCTYPE HTML>\");\n          WebClient.println(\"<html><head><meta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=utf-8\\\"><title>#title#</title></head><body#color#>\");";
+  Blockly.Arduino.webserver.webserver_header="\n\nvoid checkWebClient(){\n  WiFiClient WebClient = WebServer.available();\n  if (WebClient) {\n    webPara=\"\";\n    boolean currentLineIsBlank = true;\n    while (WebClient.connected()) {\n      if (WebClient.available()) {\n        char c = WebClient.read();\n        if (c == '\\n' && currentLineIsBlank) {\n          WebClient.println(\"HTTP/1.1 200 OK\");\n          WebClient.println(\"Content-Type: text/html\");\n          WebClient.println(\"Connection: close\");\n"+Blockly.Arduino.webserver.webserver_refresh+"          WebClient.println();\n          WebClient.println(\"<!DOCTYPE HTML>\");\n          WebClient.println(\"<html><head><meta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=utf-8\\\"><title>#title#</title></head><body#color#>\");\n";
   Blockly.Arduino.webserver.webserver_body=Blockly.Arduino.statementToCode(this,"WEBSERVER_BODY");
   Blockly.Arduino.webserver.webserver_footer="          WebClient.println(\"</body></html>\");\n          break;\n        }\n        if (c == '\\n') {\n          currentLineIsBlank = true;\n        } else if (c != '\\r') {\n          webPara=webPara+c;\n         currentLineIsBlank = false;\n        }\n      }\n    }\n    delay(1);\n    WebClient.stop();\n  }\n}";
   return '';
@@ -1166,30 +1170,46 @@ Blockly.Arduino.webserver_custom_controller=function(){
   var a=Blockly.Arduino.valueToCode(this,"HREF",Blockly.Arduino.ORDER_ATOMIC)||"",
       b=Blockly.Arduino.valueToCode(this,"CONTENT",Blockly.Arduino.ORDER_ATOMIC)||"",
       c=this.getFieldValue("CONTROLLER_TYPE");
-  a=a.replace(/\"/g, "");
-  b=b.replace(/\"/g, "");
-  if (a.charAt(0)!="/")
-    a="/"+a;
+  //a=a.replace(/\"/g, "\"");
+  //b=b.replace(/\"/g, "\"");
+  if (a.charAt(0)=="\""){
+    if (a.charAt(1)!="/")
+      a=a.replace("\"","\"/");
+    a="String("+a+")";
+  }
+  else
+  {
+    a="String(\"/\")+"+a;
+  }
+  //a="String("+a+")";
+  b="String("+b+")";
   var myCustom="";
   if (c=="text")
-    myCustom="<a href='#href#'>#content#</a>";
+    myCustom="String(\"\")+String(\"<a href='\")+#href#+String(\"'>\")+#content#+String(\"</a>\")";
   else if (c=="button")
-    myCustom="<input type='button' value='#content#' onclick='location.href=\\\"#href#\\\";return true;'>";
+    myCustom="String(\"<input type='button' value='\")+#content#+String(\"' onclick='location.href=\\\"\")+#href#+String(\"\\\";return true;'>\")";
+    //myCustom="String(\"\")+\"<input type='button' value='\"+#content#+\"' onclick='location.href=\\\"\"+#href#+\"\\\";return true;'>\"";
   myCustom=myCustom.replace("#href#",a);
   myCustom=myCustom.replace("#content#",b);
-  myCustom="WebClient.println(String(\""+myCustom+"\"));\n";
+  myCustom="WebClient.println("+myCustom+");\n";
   return myCustom;
 };
 
 Blockly.Arduino.webserver_event=function(){
   var a=Blockly.Arduino.valueToCode(this,"CONTENT",Blockly.Arduino.ORDER_ATOMIC)||"",
       b=Blockly.Arduino.statementToCode(this,"EVENT_BODY");
-  a=a.replace(/\"/g, "");
-  if (a.charAt(0)!="/")
-  a="/"+a;
+  if (a.charAt(0)=="\""){
+    if (a.charAt(1)!="/")
+      a=a.replace("\"","\"/");
+    a="String("+a+")";
+  }
+  else
+  {
+    a="String(\"/\")+"+a;
+  }
   b=b.replace(/  /g,"        ");
   b=b.replace(/                /g,"          ");
-  var tempHead="if (webPara.indexOf(\"GET \"+String(\""+a+"\")) >= 0){\n"+b+"}\n";
+  var tempHead="if (webPara.indexOf(String(\"\")+\"GET \"+"+a+") >= 0){\n"+b+"}\n";
   return tempHead;
 };
 
