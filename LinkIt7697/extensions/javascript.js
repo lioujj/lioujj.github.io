@@ -1110,6 +1110,12 @@ Blockly.Arduino.webserver_prepare_body=function(){
   Blockly.Arduino.webserver.webserver_header="\n\nvoid checkWebClient(){\n  WiFiClient WebClient = WebServer.available();\n  if (WebClient) {\n    webPara=\"\";\n    boolean currentLineIsBlank = true;\n    while (WebClient.connected()) {\n      if (WebClient.available()) {\n        char c = WebClient.read();\n        if (c == '\\n' && currentLineIsBlank) {\n          WebClient.println(\"HTTP/1.1 200 OK\");\n          WebClient.println(\"Content-Type: text/html\");\n          WebClient.println(\"Connection: close\");\n"+Blockly.Arduino.webserver.webserver_refresh+"          WebClient.println();\n          WebClient.println(\"<!DOCTYPE HTML>\");\n          WebClient.println(\"<html><head><meta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=utf-8\\\"><title>#title#</title></head><body#color#>\");\n";
   Blockly.Arduino.webserver.webserver_body=Blockly.Arduino.statementToCode(this,"WEBSERVER_BODY");
   Blockly.Arduino.webserver.webserver_footer="          WebClient.println(\"</body></html>\");\n          break;\n        }\n        if (c == '\\n') {\n          currentLineIsBlank = true;\n        } else if (c != '\\r') {\n          webPara=webPara+c;\n         currentLineIsBlank = false;\n        }\n      }\n    }\n    delay(1);\n    WebClient.stop();\n  }\n}";
+
+
+  Blockly.Arduino.webserver.webserver_header=Blockly.Arduino.webserver.webserver_header.replace("#color#",Blockly.Arduino.webserver_myColor);
+  Blockly.Arduino.webserver.webserver_header=Blockly.Arduino.webserver.webserver_header.replace("#title#",Blockly.Arduino.webserver_myTitle);
+
+
   return '';
 };
 
@@ -1215,8 +1221,8 @@ Blockly.Arduino.webserver_event=function(){
 
 Blockly.Arduino.webserver_talk=function(){
   var a=Blockly.Arduino.valueToCode(this,"CONTENT",Blockly.Arduino.ORDER_ATOMIC)||"";
-  a=a.replace(/\"/g, "");
-  var b="https://google-translate-proxy.herokuapp.com/api/tts?query="+a+"&language=zh-tw";
-  a="WebClient.println(\"<iframe width=0 height=0 frameborder=0 src='"+b+"' allow='autoplay'></iframe>\");\n";
+  //a=a.replace(/\"/g, "");
+  var b="String(\"https://google-translate-proxy.herokuapp.com/api/tts?query=\")+"+a+"+String(\"&language=zh-tw\")";
+  a="WebClient.println(String(\"<iframe width=0 height=0 frameborder=0 src='\")+"+b+"+\"' allow='autoplay'></iframe>\");\n";
   return a;
 };
