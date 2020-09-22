@@ -1,0 +1,26 @@
+<xml>
+<category><name>Liou</name><replace>吉哥積木</replace></category>
+<category><name>Tools</name><replace>工具</replace></category>
+<category><name>Lumex</name><replace>Lumex</replace></category>
+<category><name>LDM6432MQTT</name><replace>LDM6432燈板MQTT</replace></category>
+<category><name>Modules</name><replace>模組</replace></category>
+<category><name>OLED128*64</name><replace>OLED 128*64</replace></category>
+<category><name>7697:bit</name><replace>7697:bit</replace></category>
+<category><name>MP3</name><replace>MP3播放模組</replace></category>
+<category><name>InfraRed</name><replace>紅外線</replace></category>
+<category><name>GamePad</name><replace>遊戲手把</replace></category>
+<category><name>BME280I2C</name><replace>BME280 I2C</replace></category>
+<category><name>Robot</name><replace>機器人</replace></category>
+<category><name>Maqueen</name><replace>麥昆小車</replace></category>
+<category><name>JetMole</name><replace>鑽地鼴鼠</replace></category>
+<category><name>Probbie</name><replace>寶比</replace></category>
+<category><name>WebCrawler</name><replace>網路爬蟲</replace></category>
+<category><name>WorldWeather</name><replace>世界天氣</replace></category>
+<category><name>TaiwanAQI</name><replace>台灣空氣品質AQI</replace></category>
+<category><name>Airbox</name><replace>空氣盒子</replace></category>
+<category><name>IoT</name><replace>物聯網</replace></category>
+<category><name>MQTT</name><replace>MQTT</replace></category>
+<category><name>ThingSpeak</name><replace>ThingSpeak</replace></category>
+<category><name>Broadcast</name><replace>網路廣播</replace></category>
+<category><name>WebServer</name><replace>網頁伺服器</replace></category>
+</xml>
