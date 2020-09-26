@@ -726,6 +726,23 @@ Blockly.Blocks.ir_event={init:function(){
       this.workspace&&(Blockly.Blocks.ir.checkSetPin(this)?this.setWarningText(null):this.setWarningText(Blockly.Msg.IR_PIN_WARNING))}
 };
 
+Blockly.Blocks.ir_remote_received={init:function(){
+  var KSRobot_IR=[["A","ffa25d"],["B","ff629d"],["C","ffe21d"],["D","ff22dd"],["▲","ff02fd"],["E","ffc23d"],["◄","ffe01f"],["⚙","ffa857"],["►","ff906f"],
+                  ["0","ff6897"],["▼","ff9867"],["F","ffb04f"],["1","ff30cf"],["2","ff18e7"],["3","ff7a85"],["4","ff10ef"],["5","ff38c7"],["6","ff5aa5"],
+                  ["7","ff42bd"],["8","ff4ab5"],["9","ff52ad"]];
+  this.setHelpUrl(Blockly.Msg.IR_HELPURL);
+  this.setColour(Blockly.Blocks.ir.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LIOU_ROBOT_IR_RECEIVED1+Blockly.Msg.IR_REMOTE)
+	    .appendField(new Blockly.FieldDropdown(KSRobot_IR),"IR_SIGNAL");
+  this.setInputsInline(!0);
+  this.appendStatementInput("IR_RECEIVED");
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.IR_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.ir.checkSetPin(this)?this.setWarningText(null):this.setWarningText(Blockly.Msg.IR_PIN_WARNING))}
+};
+
 Blockly.Blocks.ir_received_type={init:function(){
   this.setHelpUrl(Blockly.Msg.IR_HELPURL);
   this.setColour(Blockly.Blocks.ir.HUE);
@@ -1709,7 +1726,7 @@ Blockly.Blocks.airbox_getValue={init:function(){
   this.setInputsInline(!0);
   this.setOutput(!0,"String");
   this.setTooltip(Blockly.Msg.AIRBOX_TOOLTIP)},onchange:function(){
-      this.workspace&&(Blockly.Blocks.broadcast_udp.checkBlocks(this)?this.setWarningText(null):this.setWarningText(Blockly.Msg.AIRBOX_WARNING))}
+      this.workspace&&(Blockly.Blocks.airbox.checkBlocks(this)?this.setWarningText(null):this.setWarningText(Blockly.Msg.AIRBOX_WARNING))}
 };
 
 //Probbie
@@ -2218,3 +2235,33 @@ Blockly.Blocks.webserver_talk={init:function(){
   this.setTooltip(Blockly.Msg.WEBSERVER_TOOLTIP)},onchange:function(){
       this.workspace&&(Blockly.Blocks.webserver.checkBlocks_body(this)?this.setWarningText(null):this.setWarningText(Blockly.Msg.WEBSERVER_BODY_WARNING))}
 };
+
+Blockly.Blocks.linkit_wifi_wait_until_ready={init:function(){
+  this.setHelpUrl(Blockly.Msg.LINKIT_SET_WIFI_HELPURL);
+  this.setColour(Blockly.Blocks.linkit.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LINKIT_SET_WIFI_UNTIL_READY_TITLE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LINKIT_SET_WIFI_UNTIL_READY_TYPE)
+      .appendField(new Blockly.FieldDropdown([["7697","7697"],["ESP32","ESP32"],["NodeMCU(ESP8266)","ESP8266"]]),"BOARD_TYPE");
+  this.appendValueInput("SSID").setCheck("String").setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg.LINKIT_SET_WIFI_SSID);
+  this.appendValueInput("PASSWORD").setCheck("String").setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg.LINKIT_SET_WIFI_PASSWORD);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LINKIT_SET_WIFI_TOOLTIP)}
+};
+
+Blockly.Blocks.lcd_i2c_setting={init:function(){
+  this.setHelpUrl(Blockly.Msg.LCD_I2C_HELPURL);
+  this.setColour(Blockly.Blocks.lcd_i2c.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.INITIALIZES_SETUP_APPENDTEXT)
+      .appendField(Blockly.Msg.LCD_I2C_TITLE)
+      .appendField(new Blockly.FieldDropdown([["1602","1602"],["2004","2004"]]),"LCD_DIM")
+      .appendField(Blockly.Msg.SIGNAL_PIN)
+      .appendField(new Blockly.FieldDropdown([["I2C","PIN"]]),"PIN")
+      .appendField(Blockly.Msg.LCD_I2C_I2C_ADDRESS)
+      .appendField(new Blockly.FieldDropdown([["0x27","0x27"],["0x3F","0x3F"],["0x20","0x20"]]),"I2C_ADDRESS");
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LCD_I2C_TOOLTIP)}};

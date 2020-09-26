@@ -131,6 +131,7 @@ Blockly.Msg.IR_TOOLTIP = "InfraRed";
 Blockly.Msg.IR_RECEIVE_PIN_TITLE = "Set IR receiver pin:";
 Blockly.Msg.IR_PIN_WARNING = "You have to set IR receiver pin first.";
 Blockly.Msg.IR_SENDER_PIN_TITLE = "Set IR sender pin:";
+Blockly.Msg.IR_REMOTE = "MakeBlock & KSRobot";
 
 //weather
 Blockly.Msg.CATEGORY_CRAWLER = "Web Crawler";
@@ -381,3 +382,4 @@ Blockly.Msg.WEBSERVER_EVENT_TITLE = "when location contains the string:";
 Blockly.Msg.WEBSERVER_SERVO = "set servo angle, pin:";
 Blockly.Msg.WEBSERVER_CUSTOM_CONTROLLER="set custom controller";
 Blockly.Msg.WEBSERVER_BODY_WARNING="You have to set \""+Blockly.Msg.WEBSERVER_PREPARE_BODY+"\" block first.";
+Blockly.Msg.LINKIT_SET_WIFI_UNTIL_READY_TYPE= "board:";

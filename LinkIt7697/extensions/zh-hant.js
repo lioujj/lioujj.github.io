@@ -130,6 +130,7 @@ Blockly.Msg.IR_TOOLTIP = "紅外線";
 Blockly.Msg.IR_RECEIVE_PIN_TITLE = "設定紅外線接收器腳位";
 Blockly.Msg.IR_SENDER_PIN_TITLE = "設定紅外線發送器腳位";
 Blockly.Msg.IR_PIN_WARNING = "需先設定紅外線接收器腳位";
+Blockly.Msg.IR_REMOTE = "MakeBlock & KSRobot";
 
 
 //weather
@@ -378,3 +379,4 @@ Blockly.Msg.WEBSERVER_EVENT_TITLE = "當接收到自訂控制元件訊息";
 Blockly.Msg.WEBSERVER_SERVO = "設定伺服馬達轉動，腳位：";
 Blockly.Msg.WEBSERVER_CUSTOM_CONTROLLER="設定自訂控制元件";
 Blockly.Msg.WEBSERVER_BODY_WARNING="必須先設定「"+Blockly.Msg.WEBSERVER_PREPARE_BODY+"」積木！";
+Blockly.Msg.LINKIT_SET_WIFI_UNTIL_READY_TYPE= "板子名稱";
