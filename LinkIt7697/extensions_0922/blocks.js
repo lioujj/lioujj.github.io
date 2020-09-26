@@ -2243,10 +2243,25 @@ Blockly.Blocks.linkit_wifi_wait_until_ready={init:function(){
       .appendField(Blockly.Msg.LINKIT_SET_WIFI_UNTIL_READY_TITLE);
   this.appendDummyInput()
       .appendField(Blockly.Msg.LINKIT_SET_WIFI_UNTIL_READY_TYPE)
-      .appendField(new Blockly.FieldDropdown([["7697","7697"],["ESP32","ESP32"]]),"BOARD_TYPE");
+      .appendField(new Blockly.FieldDropdown([["7697","7697"],["ESP32","ESP32"],["NodeMCU(ESP8266)","ESP8266"]]),"BOARD_TYPE");
   this.appendValueInput("SSID").setCheck("String").setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg.LINKIT_SET_WIFI_SSID);
   this.appendValueInput("PASSWORD").setCheck("String").setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg.LINKIT_SET_WIFI_PASSWORD);
   this.setPreviousStatement(!0);
   this.setNextStatement(!0);
   this.setTooltip(Blockly.Msg.LINKIT_SET_WIFI_TOOLTIP)}
 };
+
+Blockly.Blocks.lcd_i2c_setting={init:function(){
+  this.setHelpUrl(Blockly.Msg.LCD_I2C_HELPURL);
+  this.setColour(Blockly.Blocks.lcd_i2c.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.INITIALIZES_SETUP_APPENDTEXT)
+      .appendField(Blockly.Msg.LCD_I2C_TITLE)
+      .appendField(new Blockly.FieldDropdown([["1602","1602"],["2004","2004"]]),"LCD_DIM")
+      .appendField(Blockly.Msg.SIGNAL_PIN)
+      .appendField(new Blockly.FieldDropdown([["I2C","PIN"]]),"PIN")
+      .appendField(Blockly.Msg.LCD_I2C_I2C_ADDRESS)
+      .appendField(new Blockly.FieldDropdown([["0x27","0x27"],["0x3F","0x3F"],["0x20","0x20"]]),"I2C_ADDRESS");
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LCD_I2C_TOOLTIP)}};
