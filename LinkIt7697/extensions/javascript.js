@@ -1251,7 +1251,7 @@ Blockly.Arduino.linkit_wifi_wait_until_ready=function(){
   if (Blockly.Arduino.my_board_type=="7697")
     return"while (WiFi.begin(_lwifi_ssid, _lwifi_pass) != WL_CONNECTED) { delay(1000); }\n"
   else if (Blockly.Arduino.my_board_type=="ESP32")
-    return"while (WiFi.begin(_lwifi_ssid, _lwifi_pass) != WL_CONNECTED) { delay(1000); }\ndelay(1000);\n"
+    return"WiFi.begin(_lwifi_ssid, _lwifi_pass);\nwhile (WiFi.status() != WL_CONNECTED) { delay(500); }\ndelay(300);\n"
   else if (Blockly.Arduino.my_board_type=="ESP8266")
-    return"WiFi.begin(_lwifi_ssid, _lwifi_pass);\nwhile (WiFi.status() != WL_CONNECTED) { delay(500); }\ndelay(1000);\n"
+    return"WiFi.begin(_lwifi_ssid, _lwifi_pass);\nwhile (WiFi.status() != WL_CONNECTED) { delay(500); }\ndelay(300);\n"
 };
