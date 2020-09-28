@@ -166,6 +166,7 @@ Blockly.Msg.AQI_GET_VALUE_TITLE = "Get the AQI information";
 Blockly.Msg.AQI_GET_VALUE_STATION = "station:";
 Blockly.Msg.AQI_GET_VALUE_ATTR = "information:";
 Blockly.Msg.AQI_WARNING = "You have to set \""+ Blockly.Msg.FETCH_AQI_TITLE+"\" first.";
+Blockly.Msg.AQI_WARNING2 = "You have to set \"ESP8266 "+ Blockly.Msg.FETCH_AQI_TITLE+"\" first.";
 
 //KSB045
 Blockly.Msg.KSB045_HELPURL= "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/搖桿積木";
@@ -383,3 +384,8 @@ Blockly.Msg.WEBSERVER_SERVO = "set servo angle, pin:";
 Blockly.Msg.WEBSERVER_CUSTOM_CONTROLLER="set custom controller";
 Blockly.Msg.WEBSERVER_BODY_WARNING="You have to set \""+Blockly.Msg.WEBSERVER_PREPARE_BODY+"\" block first.";
 Blockly.Msg.LINKIT_SET_WIFI_UNTIL_READY_TYPE= "board:";
+
+//Custom_block
+Blockly.Msg.CUSTOM_BLOCK_TITLE = "Custom Block";
+Blockly.Msg.CUSTOM_BLOCK_INCLUDE = "include file:";
+Blockly.Msg.CUSTOM_BLOCK_CODE = "Your code:";

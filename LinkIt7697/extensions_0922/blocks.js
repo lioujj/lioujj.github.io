@@ -303,7 +303,7 @@ Blockly.Blocks.mp3_random={init:function(){
 //TOOLS
 Blockly.Blocks.ljj_tools={};
 Blockly.Blocks.ljj_tools.HUE=180;
-Blockly.Blocks.tools_convert_str_int={init:function(){
+Blockly.Blocks.convert_str_int={init:function(){
   this.setHelpUrl(Blockly.Msg.TOOLS_HELPURL);
   this.setColour(Blockly.Blocks.math.HUE);
   this.appendDummyInput().appendField(Blockly.Msg.LJJ_TOOLS_CONVERT_STR_INY);
@@ -866,12 +866,23 @@ Blockly.Blocks.weather_getValue={init:function(){
 //AQI
 Blockly.Blocks.aqi={};
 Blockly.Blocks.aqi.HUE=320;
+Blockly.Blocks.aqi.HUE2=30;
 Blockly.Blocks.aqi.checkBlocks=function(a){
 	var b=null,
 	    d=a.type;
 		a=a.workspace.getAllBlocks();
 		for(var c=0;c<a.length;c++)
-			if("aqi_getAQIValue"!=a[c].type&&"aqi_getAQIValue"!=a[c].type&&"aqi_attrname_list"!=a[c].type||null!=b||(b=a[c].type!=d?!0:!1),"aqi_fetchAQIInfo"==a[c].type)
+			if("aqi_getAQIValue"!=a[c].type&&"aqi_getAQIValue"!=a[c].type||null!=b||(b=a[c].type!=d?!0:!1),"aqi_fetchAQIInfo"==a[c].type)
+				return!0;
+		return b
+};
+
+Blockly.Blocks.aqi.checkBlocks2=function(a){
+	var b=null,
+	    d=a.type;
+		a=a.workspace.getAllBlocks();
+		for(var c=0;c<a.length;c++)
+			if("ESP8266_aqi_getAQIValue"!=a[c].type||null!=b||(b=a[c].type!=d?!0:!1),"ESP8266_aqi_fetchAQIInfo"==a[c].type)
 				return!0;
 		return b
 };
@@ -902,6 +913,33 @@ Blockly.Blocks.aqi_getAQIValue={init:function(){
       this.workspace&&(Blockly.Blocks.aqi.checkBlocks(this)?this.setWarningText(null):this.setWarningText(Blockly.Msg.AQI_WARNING))}
 };
 
+Blockly.Blocks.ESP8266_aqi_fetchAQIInfo={init:function(){
+  this.setHelpUrl(Blockly.Msg.AQI_HELPURL);
+  this.setColour(Blockly.Blocks.aqi.HUE2);
+  this.appendDummyInput().appendField("ESP8266 "+Blockly.Msg.FETCH_AQI_TITLE);
+  this.appendValueInput("SITENAME")
+      .setCheck("String")
+      .appendField(Blockly.Msg.AQI_GET_VALUE_STATION);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.AQI_TOOLTIP)}
+};
+
+Blockly.Blocks.ESP8266_aqi_getAQIValue={init:function(){
+  this.setHelpUrl(Blockly.Msg.AQI_HELPURL);
+  this.setColour(Blockly.Blocks.aqi.HUE2);
+  this.appendDummyInput().appendField("ESP8266 "+Blockly.Msg.AQI_GET_VALUE_TITLE);
+  this.appendValueInput("ATTRNAME")
+      .setCheck("String")
+      .appendField(Blockly.Msg.AQI_GET_VALUE_ATTR);
+  this.setInputsInline(!0);
+  this.setOutput(!0,"String");
+  this.setTooltip(Blockly.Msg.AQI_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.aqi.checkBlocks2(this)?this.setWarningText(null):this.setWarningText(Blockly.Msg.AQI_WARNING2))}
+};
+
+
 Blockly.Blocks.aqi_attrname_list={init:function(){
   var AttrName=[["AQI指標","AQI"],["狀態(Status)","Status"],["二氧化硫(SO2)","SO2"],["一氧化碳(CO)","CO"],["臭氧(O3)","O3"],["風速","WindSpeed"],["風向角度","WindDirec"],
                ["PM10","PM10"],["PM2.5","PM2.5"],["PM10平均值","PM10_AVG"],["PM2.5平均值","PM2.5_AVG"],["發佈時間","PublishTime"],["監測站名","SiteName"]];
@@ -912,8 +950,7 @@ Blockly.Blocks.aqi_attrname_list={init:function(){
       .appendField(new Blockly.FieldDropdown(AttrName),"ATTRNAME");
   this.setInputsInline(!0);
   this.setOutput(!0,"String");
-  this.setTooltip(Blockly.Msg.AQI_TOOLTIP)},onchange:function(){
-      this.workspace&&(Blockly.Blocks.aqi.checkBlocks(this)?this.setWarningText(null):this.setWarningText(Blockly.Msg.AQI_WARNING))}
+  this.setTooltip(Blockly.Msg.AQI_TOOLTIP)}
 };
 
 //LDM6432
@@ -2265,3 +2302,34 @@ Blockly.Blocks.lcd_i2c_setting={init:function(){
   this.setPreviousStatement(!0);
   this.setNextStatement(!0);
   this.setTooltip(Blockly.Msg.LCD_I2C_TOOLTIP)}};
+
+//Custom_blocks
+Blockly.Blocks.custom_block={};
+Blockly.Blocks.custom_block.HUE=30;
+Blockly.Blocks.custom_include={init:function(){
+  this.setHelpUrl("");
+  this.setColour(Blockly.Blocks.custom_block.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.CUSTOM_BLOCK_TITLE);
+  this.appendValueInput("FILE")
+      .setCheck("String")
+      .appendField(Blockly.Msg.CUSTOM_BLOCK_INCLUDE);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip("")}
+};
+
+Blockly.Blocks.custom_code={init:function(){
+  this.setHelpUrl("");
+  this.setColour(Blockly.Blocks.custom_block.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.CUSTOM_BLOCK_TITLE);
+  this.appendValueInput("CODE")
+      .setCheck("String")
+      .appendField(Blockly.Msg.CUSTOM_BLOCK_CODE);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip("")}
+};
