@@ -166,6 +166,7 @@ Blockly.Msg.AQI_GET_VALUE_TITLE = "取得空氣資訊";
 Blockly.Msg.AQI_GET_VALUE_STATION = "監測站";
 Blockly.Msg.AQI_GET_VALUE_ATTR = "資訊";
 Blockly.Msg.AQI_WARNING = "必須先設定「"+Blockly.Msg.FETCH_AQI_TITLE+"」積木";
+Blockly.Msg.AQI_WARNING2 = "必須先設定「ESP8266 "+Blockly.Msg.FETCH_AQI_TITLE+"」積木";
 
 //KSB045
 Blockly.Msg.KSB045_HELPURL= "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/搖桿積木";
@@ -380,3 +381,8 @@ Blockly.Msg.WEBSERVER_SERVO = "設定伺服馬達轉動，腳位：";
 Blockly.Msg.WEBSERVER_CUSTOM_CONTROLLER="設定自訂控制元件";
 Blockly.Msg.WEBSERVER_BODY_WARNING="必須先設定「"+Blockly.Msg.WEBSERVER_PREPARE_BODY+"」積木！";
 Blockly.Msg.LINKIT_SET_WIFI_UNTIL_READY_TYPE= "板子名稱";
+
+//Custom_block
+Blockly.Msg.CUSTOM_BLOCK_TITLE = "客製化積木";
+Blockly.Msg.CUSTOM_BLOCK_INCLUDE = "include檔名";
+Blockly.Msg.CUSTOM_BLOCK_CODE = "程式碼";

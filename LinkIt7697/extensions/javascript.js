@@ -247,7 +247,7 @@ Blockly.Arduino.mp3_random=function(){
 
 //ljj_tools
 Blockly.Arduino.ljj_tools={};
-Blockly.Arduino.tools_convert_str_int=function(){
+Blockly.Arduino.convert_str_int=function(){
 	var a=Blockly.Arduino.valueToCode(this,"MY_VAR",Blockly.Arduino.ORDER_ATOMIC)||"";
 	return['String('+a+').toInt()',Blockly.Arduino.ORDER_ATOMIC]
 };
@@ -553,7 +553,6 @@ Blockly.Arduino.weather_getValue=function(){
 //Taiwan AQI
 Blockly.Arduino.aqi={};
 Blockly.Arduino.aqi_fetchAQIInfo=function(){
-	//Blockly.Arduino.definitions_.define_linkit_wifi_include="#include <LWiFi.h>";
   Blockly.Arduino.definitions_.define_json_include="#define ARDUINOJSON_DECODE_UNICODE 1\n#include <ArduinoJson.h>";
   Blockly.Arduino.definitions_.define_json_aqi_invoke="const size_t capacity_AQI = JSON_ARRAY_SIZE(83) + 83*JSON_OBJECT_SIZE(24) + 25480;\nDynamicJsonDocument doc_aqi(capacity_AQI);";
 	Blockly.Arduino.definitions_.define_fetch_aqi_invoke='void fetchAQIInfo()\n{\n  static WiFiClient client;\n  client.setTimeout(10000);\n  if (!client.connect("opendata2.epa.gov.tw", 80)) {\n    return;\n  }\n  const String url = String() + "/AQI.json";\n  client.println("GET " + url + " HTTP/1.1");\n  client.println(F("Host: opendata2.epa.gov.tw"));\n  client.println(F("Accept: */*"));\n  client.println(F("Connection: close"));\n  if (client.println() == 0) {\n    return;\n  }\n  char status[32] = {0};\n  client.readBytesUntil(\'\\r\', status, sizeof(status));\n  if (strcmp(status, "HTTP/1.1 200 OK") != 0) {\n    return;\n  }\n  char endOfHeaders[] = "\\r\\n\\r\\n";\n  if (!client.find(endOfHeaders)) {\n    return;\n  }\n  DeserializationError error = deserializeJson(doc_aqi, client);\n  if (error) {\n    return;\n  }\n  client.stop();\n}\n';
@@ -561,10 +560,26 @@ Blockly.Arduino.aqi_fetchAQIInfo=function(){
   return'fetchAQIInfo();\n'
 };
 
+Blockly.Arduino.ESP8266_aqi_fetchAQIInfo=function(){
+  var a=Blockly.Arduino.valueToCode(this,"SITENAME",Blockly.Arduino.ORDER_ATOMIC)||"";
+  Blockly.Arduino.definitions_.define_json_include="#define ARDUINOJSON_DECODE_UNICODE 1\n#include <ArduinoJson.h>";
+  Blockly.Arduino.definitions_.define_json_aqi_invoke="const size_t capacity_AQI = JSON_OBJECT_SIZE(24) + 310;\nDynamicJsonDocument doc_aqi(capacity_AQI);";
+	//Blockly.Arduino.definitions_.define_fetch_aqi_invoke='void fetchAQIInfo()\n{\n  static WiFiClient client;\n  client.setTimeout(10000);\n  if (!client.connect("opendata2.epa.gov.tw", 80)) {\n    return;\n  }\n  const String url = String() + "/AQI.json";\n  client.println("GET " + url + " HTTP/1.1");\n  client.println(F("Host: opendata2.epa.gov.tw"));\n  client.println(F("Accept: */*"));\n  client.println(F("Connection: close"));\n  if (client.println() == 0) {\n    return;\n  }\n  char status[32] = {0};\n  client.readBytesUntil(\'\\r\', status, sizeof(status));\n  if (strcmp(status, "HTTP/1.1 200 OK") != 0) {\n    return;\n  }\n  char endOfHeaders[] = "\\r\\n\\r\\n";\n  if (!client.find(endOfHeaders)) {\n    return;\n  }\n  DeserializationError error = deserializeJson(doc_aqi, client);\n  if (error) {\n    return;\n  }\n  client.stop();\n}\n';
+	Blockly.Arduino.definitions_.define_fetch_aqi_invoke='void esp8266FetchAQIInfo(String mySiteName)\n{\n  String line;\n  static WiFiClient client;\n  client.setTimeout(10000);\n  if (!client.connect("opendata2.epa.gov.tw", 80)) {\n    return;\n  }\n  const String url = String() + "/AQI.json";\n  client.println("GET " + url + " HTTP/1.1");\n  client.println(F("Host: opendata2.epa.gov.tw"));\n  client.println(F("Accept: */*"));\n  client.println(F("Connection: close"));\n  if (client.println() == 0) {\n    return;\n  }\n  char status[32] = {0};\n  client.readBytesUntil(\'\\r\', status, sizeof(status));\n  if (strcmp(status, "HTTP/1.1 200 OK") != 0) {\n    return;\n  }\n  char endOfHeaders[] = "\\r\\n\\r\\n";\n  if (!client.find(endOfHeaders)) {\n    return;\n  }\n  while(client.connected()){\n    line=client.readStringUntil(\'{\');\n    line.replace("[","");\n    if (line!="" & line.indexOf(mySiteName)>0){\n      line="{"+line;\n      line.replace("]","");\n      line.replace("},","}");\n      DeserializationError error = deserializeJson(doc_aqi, line);\n      if (error) {\n        return;\n      }\n      break;\n    }\n  }\n  client.stop();\n}\n';
+  //Blockly.Arduino.definitions_.define_get_aqi_invoke='String getAQIValue(String mySitename,String myAttr)\n{\n  String myStr="";\n  for(int i=0;i<doc_aqi.size();i++){\n    if (doc_aqi[i]["SiteName"].as<String>()==mySitename){\n       myStr=String(doc_aqi[i][myAttr].as<char*>());\n       break;\n    }\n  }\n  return myStr;\n}\n';
+  Blockly.Arduino.definitions_.define_get_aqi_invoke='String esp8266GetAQIValue(String myAttr)\n{\n  String myStr="";\n  myStr=String(doc_aqi[myAttr].as<char*>());\n  return myStr;\n}\n';
+  return'esp8266FetchAQIInfo('+a+');\n'
+};
+
 Blockly.Arduino.aqi_getAQIValue=function(){
   var a=Blockly.Arduino.valueToCode(this,"SITENAME",Blockly.Arduino.ORDER_ATOMIC)||"",
       b=Blockly.Arduino.valueToCode(this,"ATTRNAME",Blockly.Arduino.ORDER_ATOMIC)||"";
   return['getAQIValue('+a+','+b+')',Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.ESP8266_aqi_getAQIValue=function(){
+  var a=Blockly.Arduino.valueToCode(this,"ATTRNAME",Blockly.Arduino.ORDER_ATOMIC)||"";
+  return['esp8266GetAQIValue('+a+')',Blockly.Arduino.ORDER_ATOMIC];
 };
 
 Blockly.Arduino.aqi_attrname_list=function(){
@@ -910,14 +925,18 @@ Blockly.Arduino.oled_display_set_color=function(){
 //airbox
 Blockly.Arduino.airbox={};
 Blockly.Arduino.airbox_fetchData=function(){
-	//Blockly.Arduino.definitions_.define_linkit_wifi_include="#include <LWiFi.h>";
   Blockly.Arduino.definitions_.define_json_include="#define ARDUINOJSON_DECODE_UNICODE 1\n#include <ArduinoJson.h>";
   Blockly.Arduino.definitions_.define_ctimes_include="#include <ctime>";
+  if (Blockly.Arduino.my_board_type=="ESP8266")
+    Blockly.Arduino.definitions_.define_json_esp8266_fingerprint="const char fingerPrint[] PROGMEM=\"9cc81261af3f9f6ab36d9167a5ef5796094e7656\";";
   Blockly.Arduino.definitions_.define_airbox_json_invoke="const size_t capacity_airbox = JSON_ARRAY_SIZE(1) + JSON_OBJECT_SIZE(1) + JSON_OBJECT_SIZE(5) + JSON_OBJECT_SIZE(25) + 500;\nDynamicJsonDocument docAirbox(capacity_airbox);";
 	Blockly.Arduino.definitions_.define_fetch_airbox_invoke='void fetchAirboxInfo(String myID){\n  static TLSClient client;\n  if (!client.connect("pm25.lass-net.org", 443)) {\n    return;\n  }\n  const String url = String() + "/data/last.php?device_id="+myID;\n  client.println("GET " + url + " HTTP/1.1");\n  client.println("Host: pm25.lass-net.org");\n  client.println("Accept: */*");\n  client.println("Connection: close");\n  client.println();\n  client.println();\n  while (client.connected()) {\n    String line = client.readStringUntil(\'\\n\');\n    if (line.startsWith("{\\"device_id\\"")) {\n      DeserializationError error = deserializeJson(docAirbox, line);\n      if (error) {\n        client.stop();\n        return;\n      }\n      break;\n    }\n  }\n  client.stop();\n}\n';
   if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
     Blockly.Arduino.definitions_.define_secure_include="#include <WiFiClientSecure.h>";
     Blockly.Arduino.definitions_.define_fetch_airbox_invoke=Blockly.Arduino.definitions_.define_fetch_airbox_invoke.replace("TLSClient","WiFiClientSecure");
+    if (Blockly.Arduino.my_board_type=="ESP8266"){
+      Blockly.Arduino.definitions_.define_fetch_airbox_invoke=Blockly.Arduino.definitions_.define_fetch_airbox_invoke.replace(" client;\n"," client;\n  client.setFingerprint(fingerPrint);\n");
+    }  
   }
   var a=Blockly.Arduino.valueToCode(this,"DEVICEID",Blockly.Arduino.ORDER_ATOMIC)||"";
 	return'fetchAirboxInfo(String('+a+').c_str());\n'
@@ -1254,4 +1273,21 @@ Blockly.Arduino.linkit_wifi_wait_until_ready=function(){
     return"WiFi.begin(_lwifi_ssid, _lwifi_pass);\nwhile (WiFi.status() != WL_CONNECTED) { delay(500); }\ndelay(300);\n"
   else if (Blockly.Arduino.my_board_type=="ESP8266")
     return"WiFi.begin(_lwifi_ssid, _lwifi_pass);\nwhile (WiFi.status() != WL_CONNECTED) { delay(500); }\ndelay(300);\n"
+};
+
+//Custom_blocks
+Blockly.Arduino.custom_include=function(){
+  var a=Blockly.Arduino.valueToCode(this,"FILE",Blockly.Arduino.ORDER_ATOMIC)||"";
+  if (Blockly.Arduino.definitions_.define_custom_include==null)
+    Blockly.Arduino.definitions_.define_custom_include="#include "+a;
+  else
+    Blockly.Arduino.definitions_.define_custom_include=Blockly.Arduino.definitions_.define_custom_include+"\n#include \""+a;
+  return'';
+};
+
+Blockly.Arduino.custom_code=function(){
+  var a=Blockly.Arduino.valueToCode(this,"CODE",Blockly.Arduino.ORDER_ATOMIC)||"";
+  a=a.replace("\"","");
+  a=a.replace(/\"*$/, "");
+  return a+"\n";
 };

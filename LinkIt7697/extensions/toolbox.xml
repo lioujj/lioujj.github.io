@@ -254,8 +254,22 @@
             <field name="TEXT">Attribute Name</field>
           </block>
         </value>
-        </block>
-        <block type="aqi_attrname_list"></block>
+      </block>
+      <block type="aqi_attrname_list"></block>
+      <block type="ESP8266_aqi_fetchAQIInfo">
+        <value name="SITENAME">
+          <block type="text">
+            <field name="TEXT">Site Name</field>
+          </block>
+        </value>
+      </block>
+      <block type="ESP8266_aqi_getAQIValue">
+        <value name="ATTRNAME">
+          <block type="text">
+            <field name="TEXT">Attribute Name</field>
+          </block>
+        </value>
+      </block>
     </category>
     <category id="category_airbox" name="Airbox">
       <block type="airbox_fetchData">
@@ -1015,12 +1029,30 @@
     </category>
   </category>
 	<category id="category_ljj_tools" name="Tools">
-		<block type="tools_convert_str_int">
-			<value name="MY_VAR">
-				<block type="text">
-					<field name="TEXT"></field>
-				</block>
-			</value>
-		</block>
+	  <category id="category_string_tools" name="String_tool">
+		  <block type="convert_str_int">
+			  <value name="MY_VAR">
+				  <block type="text">
+					  <field name="TEXT"></field>
+				  </block>
+			  </value>
+		  </block>
+    </category>
+	  <category id="category_custom_block" name="Custom_block">
+		  <block type="custom_include">
+			  <value name="FILE">
+				  <block type="text">
+					  <field name="TEXT"></field>
+				  </block>
+			  </value>
+		  </block>
+		  <block type="custom_code">
+			  <value name="CODE">
+				  <block type="text">
+					  <field name="TEXT"></field>
+				  </block>
+			  </value>
+		  </block>
+    </category>
 	</category>
 </category>
