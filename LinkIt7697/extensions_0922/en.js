@@ -389,3 +389,18 @@ Blockly.Msg.LINKIT_SET_WIFI_UNTIL_READY_TYPE= "board:";
 Blockly.Msg.CUSTOM_BLOCK_TITLE = "Custom Block";
 Blockly.Msg.CUSTOM_BLOCK_INCLUDE = "include file:";
 Blockly.Msg.CUSTOM_BLOCK_CODE = "Your code:";
+
+//BOARDS
+Blockly.Msg.BOARDS_TITLE = "Board";
+Blockly.Msg.BOARDS_SETUP = "Setup your board:";
+Blockly.Msg.BOARDS_TOOLTIP = "Setup your board";
+Blockly.Msg.BOARDS_DIGITAL = "Digital pin";
+Blockly.Msg.BOARDS_ANALOG = "Analog pin";
+
+//ESP32_Board尤哲哲
+Blockly.Msg.ESP32_BOARD_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/esp32教學輔助板";
+Blockly.Msg.ESP32_BOARD_TITLE = "ESP32 Expansion board";
+Blockly.Msg.ESP32_BOARD_TOOLTIP = "";
+Blockly.Msg.ESP32_BOARD_RGB= [["indicator light 0","0"],["indicator light 1","1"],["indicator light 2","2"],["indicator light 3","3"],["indicator light 4","4"],["red light","5"],["green light","6"],["blue light","7"]];
+Blockly.Msg.ESP32_BOARD_RGB_CUSTOM = "light number:";
+Blockly.Msg.ESP32_BOARD_RGB_STATUS = "Status";

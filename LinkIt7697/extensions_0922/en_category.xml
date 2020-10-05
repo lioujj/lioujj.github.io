@@ -25,4 +25,7 @@
 <category><name>ThingSpeak</name><replace>ThingSpeak</replace></category>
 <category><name>Broadcast</name><replace>Broadcast</replace></category>
 <category><name>WebServer</name><replace>Web Server</replace></category>
+<category><name>Boards</name><replace>Boards</replace></category>
+<category><name>ESP32</name><replace>ESP32</replace></category>
+<category><name>Boards_Tool</name><replace>Setup</replace></category>
 </xml>

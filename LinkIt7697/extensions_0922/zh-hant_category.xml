@@ -25,4 +25,9 @@
 <category><name>ThingSpeak</name><replace>ThingSpeak</replace></category>
 <category><name>Broadcast</name><replace>網路廣播</replace></category>
 <category><name>WebServer</name><replace>網頁伺服器</replace></category>
+<category><name>Boards</name><replace>開發板</replace></category>
+<category><name>ESP32</name><replace>ESP32</replace></category>
+<category><name>Boards_Tool</name><replace>設定</replace></category>
+<category><name>YuBoard</name><replace>ESP32教學輔助板</replace></category>
+<category><name>PocketCard</name><replace>Pocket Card</replace></category>
 </xml>
