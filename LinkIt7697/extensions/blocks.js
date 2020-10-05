@@ -2001,7 +2001,7 @@ Blockly.Blocks.broadcast_udp_received_msg={init:function(){
       .appendField(Blockly.Msg.BROADCAST_UDP_TITLE)
       .appendField(Blockly.Msg.BROADCAST_UDP_RECEIVED_MSG);
   this.setInputsInline(!0);
-  this.setOutput(!0,"String")
+  this.setOutput(!0,"String");
   this.setTooltip(Blockly.Msg.BROADCAST_UDP_TOOLTIP)},onchange:function(){
       this.workspace&&(Blockly.Blocks.broadcast_udp.checkBlocks(this)?this.setWarningText(null):this.setWarningText(Blockly.Msg.BROADCAST_UDP_WARNING))}
 };
@@ -2272,21 +2272,8 @@ Blockly.Blocks.webserver_talk={init:function(){
   this.setTooltip(Blockly.Msg.WEBSERVER_TOOLTIP)},onchange:function(){
       this.workspace&&(Blockly.Blocks.webserver.checkBlocks_body(this)?this.setWarningText(null):this.setWarningText(Blockly.Msg.WEBSERVER_BODY_WARNING))}
 };
+//WIFI
 
-Blockly.Blocks.linkit_wifi_wait_until_ready={init:function(){
-  this.setHelpUrl(Blockly.Msg.LINKIT_SET_WIFI_HELPURL);
-  this.setColour(Blockly.Blocks.linkit.HUE);
-  this.appendDummyInput()
-      .appendField(Blockly.Msg.LINKIT_SET_WIFI_UNTIL_READY_TITLE);
-  this.appendDummyInput()
-      .appendField(Blockly.Msg.LINKIT_SET_WIFI_UNTIL_READY_TYPE)
-      .appendField(new Blockly.FieldDropdown([["7697","7697"],["ESP32","ESP32"],["NodeMCU(ESP8266)","ESP8266"]]),"BOARD_TYPE");
-  this.appendValueInput("SSID").setCheck("String").setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg.LINKIT_SET_WIFI_SSID);
-  this.appendValueInput("PASSWORD").setCheck("String").setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg.LINKIT_SET_WIFI_PASSWORD);
-  this.setPreviousStatement(!0);
-  this.setNextStatement(!0);
-  this.setTooltip(Blockly.Msg.LINKIT_SET_WIFI_TOOLTIP)}
-};
 
 Blockly.Blocks.lcd_i2c_setting={init:function(){
   this.setHelpUrl(Blockly.Msg.LCD_I2C_HELPURL);
@@ -2332,4 +2319,150 @@ Blockly.Blocks.custom_code={init:function(){
   this.setPreviousStatement(!0,null);
   this.setNextStatement(!0,null);
   this.setTooltip("")}
+};
+
+//Boards
+Blockly.Blocks.boards={};
+Blockly.Blocks.boards.HUE=30;
+Blockly.Blocks.board_setup={init:function(){
+  this.setHelpUrl("");
+  this.setColour(Blockly.Blocks.boards.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.BOARDS_TITLE)
+      .appendField(Blockly.Msg.BOARDS_SETUP)
+      .appendField(new Blockly.FieldDropdown([["7697","7697"],["Arduino","Arduino"],["ESP32","ESP32"],["ESP8266","ESP8266"]]),"BOARD_TYPE");
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.BOARDS_TOOLTIP)}
+};
+
+Blockly.Blocks.board_7697_digital={init:function(){
+  this.setHelpUrl("");
+  this.setColour(Blockly.Blocks.math.HUE);
+  this.appendDummyInput()
+      .appendField("7697 "+Blockly.Msg.BOARDS_DIGITAL)
+      .appendField(new Blockly.FieldDropdown([["0 - UART","0"],["1 - UART","1"],["2","2"],["3","3"],["4","4"],["5","5"],["6","6"],["7","7"],["8 - I2C","8"],["9 - I2C","9"],["10 - SPI","10"],["11 - SPI","11"],["12 - SPI","12"],["13 - SPI","13"],["14","14"],["15","15"],["16","16"],["17","17"]]),"MY_PIN");
+  this.setOutput(!0,"Number")
+  this.setTooltip(Blockly.Msg.BOARDS_TOOLTIP)}
+};
+
+Blockly.Blocks.board_7697_analog={init:function(){
+  this.setHelpUrl("");
+  this.setColour(Blockly.Blocks.math.HUE);
+  this.appendDummyInput()
+      .appendField("7697 "+Blockly.Msg.BOARDS_ANALOG)
+      .appendField(new Blockly.FieldDropdown([["A0","A0"],["A1","A1"],["A2","A2"],["A3","A3"]]),"MY_PIN");
+  this.setOutput(!0,"Number")
+  this.setTooltip(Blockly.Msg.BOARDS_TOOLTIP)}
+};
+
+Blockly.Blocks.board_arduino_digital={init:function(){
+  this.setHelpUrl("");
+  this.setColour(Blockly.Blocks.math.HUE);
+  this.appendDummyInput()
+      .appendField("Arduino "+Blockly.Msg.BOARDS_DIGITAL)
+      .appendField(new Blockly.FieldDropdown([["0 - UART","0"],["1 - UART","1"],["2","2"],["3","3"],["4","4"],["5","5"],["6","6"],["7","7"],["8","8"],["9","9"],["10 - SPI","10"],["11 - SPI","11"],["12 - SPI","12"],["13 - SPI","13"],["14","14"],["15","15"],["16","16"],["17","17"],["18 - I2C","18"],["19 - I2C","19"]]),"MY_PIN");
+  this.setOutput(!0,"Number")
+  this.setTooltip(Blockly.Msg.BOARDS_TOOLTIP)}
+};
+
+Blockly.Blocks.board_arduino_analog={init:function(){
+  this.setHelpUrl("");
+  this.setColour(Blockly.Blocks.math.HUE);
+  this.appendDummyInput()
+      .appendField("Arduino "+Blockly.Msg.BOARDS_ANALOG)
+      .appendField(new Blockly.FieldDropdown([["A0","A0"],["A1","A1"],["A2","A2"],["A3","A3"],["A4","A4"],["A5","A5"]]),"MY_PIN");
+  this.setOutput(!0,"Number")
+  this.setTooltip(Blockly.Msg.BOARDS_TOOLTIP)}
+};
+
+Blockly.Blocks.board_esp32_digital={init:function(){
+  this.setHelpUrl("");
+  this.setColour(Blockly.Blocks.math.HUE);
+  this.appendDummyInput()
+      .appendField("ESP32 "+Blockly.Msg.BOARDS_DIGITAL)
+      .appendField(new Blockly.FieldDropdown([["0","0"],["1","1"],["2","2"],["3","3"],["4","4"],["5","5"],["6","6"],["7","7"],["8","8"],["9","9"],["10","10"],["11","11"],["12","12"],["13","13"],["14","14"],["15","15"],["16","16"],["17","17"],["18","18"],["19","19"],["21","21"],["22","22"],["23","23"],["25","25"],["26","26"],["27","27"],["32","32"],["33","33"],["34","34"],["35","35"],["36","36"],["39","39"]]),"MY_PIN");
+  this.setOutput(!0,"Number")
+  this.setTooltip(Blockly.Msg.BOARDS_TOOLTIP)}
+};
+
+Blockly.Blocks.board_esp32_analog={init:function(){
+  this.setHelpUrl("");
+  this.setColour(Blockly.Blocks.math.HUE);
+  this.appendDummyInput()
+      .appendField("ESP32 "+Blockly.Msg.BOARDS_ANALOG)
+      .appendField(new Blockly.FieldDropdown([["A0","A0"],["A3","A3"],["A4","A4"],["A5","A5"],["A6","A6"],["A7","A7"]]),"MY_PIN");
+  this.setOutput(!0,"Number")
+  this.setTooltip(Blockly.Msg.BOARDS_TOOLTIP)}
+};
+
+
+Blockly.Blocks.board_esp8266_digital={init:function(){
+  this.setHelpUrl("");
+  this.setColour(Blockly.Blocks.math.HUE);
+  this.appendDummyInput()
+      .appendField("ESP8266 "+Blockly.Msg.BOARDS_DIGITAL)
+      .appendField(new Blockly.FieldDropdown([["D0","16"],["D1","5"],["D2","4"],["D3","0"],["D4","2"],["D5","14"],["D6","12"],["D7","13"],["D8","15"]]),"MY_PIN");
+  this.setOutput(!0,"Number")
+  this.setTooltip(Blockly.Msg.BOARDS_TOOLTIP)}
+};
+
+Blockly.Blocks.board_esp8266_analog={init:function(){
+  this.setHelpUrl("");
+  this.setColour(Blockly.Blocks.math.HUE);
+  this.appendDummyInput()
+      .appendField("ESP8266 "+Blockly.Msg.BOARDS_ANALOG)
+      .appendField(new Blockly.FieldDropdown([["A0","A0"]]),"MY_PIN");
+  this.setOutput(!0,"Number")
+  this.setTooltip(Blockly.Msg.BOARDS_TOOLTIP)}
+};
+
+//尤哲哲ESP32_board
+Blockly.Blocks.esp32_board={};
+Blockly.Blocks.esp32_board.HUE=110;
+Blockly.Blocks.esp32_board_usb={init:function(){
+  this.setHelpUrl(Blockly.Msg.ESP32_BOARD_HELPURL);
+  this.setColour(Blockly.Blocks.esp32_board.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.ESP32_BOARD_TITLE)
+      .appendField(new Blockly.FieldDropdown([["USB1","1"],["USB2","3"]]),"USB_PORT")
+  this.appendValueInput("ON_OFF")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.ESP32_BOARD_RGB_STATUS);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.ESP32_BOARD_TOOLTIP)}
+};
+
+Blockly.Blocks.esp32_board_rgb={init:function(){
+  this.setHelpUrl(Blockly.Msg.ESP32_BOARD_HELPURL);
+  this.setColour(Blockly.Blocks.esp32_board.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.ESP32_BOARD_TITLE)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.ESP32_BOARD_RGB),"RGB")
+  this.appendValueInput("ON_OFF")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.ESP32_BOARD_RGB_STATUS);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.ESP32_BOARD_TOOLTIP)}
+};
+
+Blockly.Blocks.esp32_board_rgb_custom={init:function(){
+  this.setHelpUrl(Blockly.Msg.ESP32_BOARD_HELPURL);
+  this.setColour(Blockly.Blocks.esp32_board.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.ESP32_BOARD_TITLE);
+  this.appendValueInput("RGB")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.ESP32_BOARD_RGB_CUSTOM);
+  this.appendValueInput("ON_OFF")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.ESP32_BOARD_RGB_STATUS);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.ESP32_BOARD_TOOLTIP)}
 };

@@ -1253,11 +1253,12 @@ Blockly.Arduino.webserver_talk=function(){
   return a;
 };
 
+//wifi
 Blockly.Arduino.linkit_wifi_wait_until_ready=function(){
   var a=Blockly.Arduino.valueToCode(this,"SSID",Blockly.Arduino.ORDER_ATOMIC)||"",
-  b=Blockly.Arduino.valueToCode(this,"PASSWORD",Blockly.Arduino.ORDER_ATOMIC)||"",
-  c=this.getFieldValue("BOARD_TYPE");
-  Blockly.Arduino.my_board_type=c;
+  b=Blockly.Arduino.valueToCode(this,"PASSWORD",Blockly.Arduino.ORDER_ATOMIC)||"";
+  //c=this.getFieldValue("BOARD_TYPE");
+  //Blockly.Arduino.my_board_type=c;
   a=a.replace(/"/g,"");b=b.replace(/"/g,"");
   if (Blockly.Arduino.my_board_type=="7697")
     Blockly.Arduino.definitions_.define_linkit_wifi_include="#include <LWiFi.h>";
@@ -1291,3 +1292,72 @@ Blockly.Arduino.custom_code=function(){
   a=a.replace(/\"*$/, "");
   return a+"\n";
 };
+
+//Boards
+Blockly.Arduino.board_setup=function(){
+  var a=this.getFieldValue("BOARD_TYPE");
+  Blockly.Arduino.my_board_type=a;
+  return'';
+};
+
+Blockly.Arduino.board_7697_digital=function(){
+  return[this.getFieldValue("MY_PIN"),Blockly.Arduino.ORDER_ATOMIC];
+}
+
+Blockly.Arduino.board_arduino_digital=function(){
+  return[this.getFieldValue("MY_PIN"),Blockly.Arduino.ORDER_ATOMIC];
+}
+
+Blockly.Arduino.board_esp32_digital=function(){
+  return[this.getFieldValue("MY_PIN"),Blockly.Arduino.ORDER_ATOMIC];
+}
+
+Blockly.Arduino.board_esp8266_digital=function(){
+  return[this.getFieldValue("MY_PIN"),Blockly.Arduino.ORDER_ATOMIC];
+}
+
+Blockly.Arduino.board_7697_analog=function(){
+  return[this.getFieldValue("MY_PIN"),Blockly.Arduino.ORDER_ATOMIC];
+}
+
+Blockly.Arduino.board_arduino_analog=function(){
+  return[this.getFieldValue("MY_PIN"),Blockly.Arduino.ORDER_ATOMIC];
+}
+
+Blockly.Arduino.board_esp32_analog=function(){
+  return[this.getFieldValue("MY_PIN"),Blockly.Arduino.ORDER_ATOMIC];
+}
+
+Blockly.Arduino.board_esp8266_analog=function(){
+  return[this.getFieldValue("MY_PIN"),Blockly.Arduino.ORDER_ATOMIC];
+}
+
+//尤哲哲ESP32_board
+Blockly.Arduino.esp32_board={};
+Blockly.Arduino.esp32_board_usb=function(){
+  var a=this.getFieldValue("USB_PORT"),
+      b=Blockly.Arduino.valueToCode(this,"ON_OFF",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  if (a=="1")
+     Blockly.Arduino.setups_["setup_esp32_expansion_usb_1"]="pinMode(1,OUTPUT);"
+  else if(a=="3")
+     Blockly.Arduino.setups_["setup_esp32_expansion_usb_2"]="pinMode(3,OUTPUT);"
+  return'digitalWrite('+a+','+b+');\n'
+}
+
+Blockly.Arduino.esp32_board_rgb=function(){
+  var a=this.getFieldValue("RGB"),
+      b=Blockly.Arduino.valueToCode(this,"ON_OFF",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  Blockly.Arduino.definitions_.define_wire="#include <Wire.h>";
+  Blockly.Arduino.definitions_.define_esp32_i2c_read='byte myRead=0;\nbyte myLEDs[]={1,2,4,8,16,32,64,128};\nbyte allLEDs=255;\nbyte ledAddr=0x20;\n\nvoid lightOn(byte myLED,byte LED_on){\n  byte myTempByte=0;\n  Wire.requestFrom((int)ledAddr, 1);\n  myRead=Wire.read();\n  Wire.beginTransmission((int)ledAddr);\n  if (LED_on==1)\n    myTempByte=(myRead & ~myLEDs[myLED]);\n  else if (LED_on==0)\n    myTempByte=(myRead | myLEDs[myLED]);\n  Wire.write(myTempByte);\n  Wire.endTransmission();\n}\n';
+  Blockly.Arduino.setups_.setup_wire_lib="Wire.begin(26,27);";
+  return'lightOn('+a+','+b+');\n';
+}
+
+Blockly.Arduino.esp32_board_rgb_custom=function(){
+  var a=Blockly.Arduino.valueToCode(this,"RGB",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=Blockly.Arduino.valueToCode(this,"ON_OFF",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  Blockly.Arduino.definitions_.define_wire="#include <Wire.h>";
+  Blockly.Arduino.definitions_.define_esp32_i2c_read='byte myRead=0;\nbyte myLEDs[]={1,2,4,8,16,32,64,128};\nbyte allLEDs=255;\nbyte ledAddr=0x20;\n\nvoid lightOn(byte myLED,byte LED_on){\n  byte myTempByte=0;\n  Wire.requestFrom((int)ledAddr, 1);\n  myRead=Wire.read();\n  Wire.beginTransmission((int)ledAddr);\n  if (LED_on==1)\n    myTempByte=(myRead & ~myLEDs[myLED]);\n  else if (LED_on==0)\n    myTempByte=(myRead | myLEDs[myLED]);\n  Wire.write(myTempByte);\n  Wire.endTransmission();\n}\n';
+  Blockly.Arduino.setups_.setup_wire_lib="Wire.begin(26,27);";
+  return'lightOn('+a+','+b+');\n';
+}

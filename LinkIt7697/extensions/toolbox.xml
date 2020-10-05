@@ -1,4 +1,49 @@
 <category id="category_ljj" name="Liou">
+  <category id="category_boards" name="Boards">
+    <category id="category_boards_tool" name="Boards_Tool">
+		  <block type="board_setup"></block>
+      <block type="board_7697_digital"></block>
+      <block type="board_7697_analog"></block>
+      <block type="board_arduino_digital"></block>
+      <block type="board_arduino_analog"></block>
+      <block type="board_esp32_digital"></block>
+      <block type="board_esp32_analog"></block>
+      <block type="board_esp8266_digital"></block>
+      <block type="board_esp8266_analog"></block>
+    </category>
+    <category id="category_esp32" name="ESP32">
+      <category id="category_yu" name="YuBoard">
+        <block type="esp32_board_usb">
+          <value name="ON_OFF">
+            <block type="inout_highlow">
+              <field name="BOOL">HIGH</field>
+            </block>
+          </value>
+        </block>
+        <block type="esp32_board_rgb">
+          <value name="ON_OFF">
+            <block type="inout_highlow">
+              <field name="BOOL">HIGH</field>
+            </block>
+          </value>
+        </block>
+        <block type="esp32_board_rgb_custom">
+				  <value name="RGB">
+					  <block type="math_number">
+						  <field name="NUM">0</field>
+					  </block>
+				  </value>
+          <value name="ON_OFF">
+            <block type="inout_highlow">
+              <field name="BOOL">HIGH</field>
+            </block>
+          </value>
+        </block>
+      </category>
+      <category id="category_pocketcard" name="PocketCard">
+      </category>
+    </category>
+  </category>
 	<category id="category_iot" name="IoT">
 		<category id="category_mqtt" name="MQTT">
 			<block type="connect_mqtt">
