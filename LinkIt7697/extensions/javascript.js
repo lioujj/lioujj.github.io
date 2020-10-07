@@ -1260,6 +1260,8 @@ Blockly.Arduino.linkit_wifi_wait_until_ready=function(){
   //c=this.getFieldValue("BOARD_TYPE");
   //Blockly.Arduino.my_board_type=c;
   a=a.replace(/"/g,"");b=b.replace(/"/g,"");
+  if (Blockly.Arduino.my_board_type==null)
+    Blockly.Arduino.my_board_type="7697";
   if (Blockly.Arduino.my_board_type=="7697")
     Blockly.Arduino.definitions_.define_linkit_wifi_include="#include <LWiFi.h>";
   else if (Blockly.Arduino.my_board_type=="ESP32")
@@ -1294,6 +1296,16 @@ Blockly.Arduino.custom_code=function(){
 };
 
 //Boards
+
+Blockly.Arduino.board_initializes_setup=function(){
+  var a=Blockly.Arduino.statementToCode(this,"CONTENT");
+  b=this.getFieldValue("BOARD_TYPE");
+  Blockly.Arduino.my_board_type=b;
+  a=a.replace(/(^\s+)|(\s+$)/g,"");
+  Blockly.Arduino.setups_.manual_add=a;
+  return""
+};
+
 Blockly.Arduino.board_setup=function(){
   var a=this.getFieldValue("BOARD_TYPE");
   Blockly.Arduino.my_board_type=a;
@@ -1360,4 +1372,54 @@ Blockly.Arduino.esp32_board_rgb_custom=function(){
   Blockly.Arduino.definitions_.define_esp32_i2c_read='byte myRead=0;\nbyte myLEDs[]={1,2,4,8,16,32,64,128};\nbyte allLEDs=255;\nbyte ledAddr=0x20;\n\nvoid lightOn(byte myLED,byte LED_on){\n  byte myTempByte=0;\n  Wire.requestFrom((int)ledAddr, 1);\n  myRead=Wire.read();\n  Wire.beginTransmission((int)ledAddr);\n  if (LED_on==1)\n    myTempByte=(myRead & ~myLEDs[myLED]);\n  else if (LED_on==0)\n    myTempByte=(myRead | myLEDs[myLED]);\n  Wire.write(myTempByte);\n  Wire.endTransmission();\n}\n';
   Blockly.Arduino.setups_.setup_wire_lib="Wire.begin(26,27);";
   return'lightOn('+a+','+b+');\n';
+}
+
+Blockly.Arduino.esp32_analog={};
+Blockly.Arduino.esp32_analog_write=function(){
+  var a=Blockly.Arduino.valueToCode(this,"PIN_ANALOGWRITE",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=Blockly.Arduino.valueToCode(this,"NUM",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      c=Blockly.Arduino.valueToCode(this,"CHANNEL",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    Blockly.Arduino.setups_["ledc_channel_"+c]||(Blockly.Arduino.setups_["ledc_channel_"+c]="ledcSetup("+c+", 5000, 8);");
+    Blockly.Arduino.setups_["ledc_"+a]||(Blockly.Arduino.setups_["ledc_"+a]="ledcAttachPin("+a+","+c+");");
+    return"ledcWrite("+c+", "+b+");\n";
+  }
+  else
+    return'';
+}
+
+Blockly.Arduino.esp32_tone=function(){
+  var a=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=this.getFieldValue("FREQ"),
+      c=Blockly.Arduino.valueToCode(this,"CHANNEL",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    Blockly.Arduino.definitions_.define_tone="#include <Tone32.h>";
+    return"tone("+a+","+b+",0,"+c+");\n"
+  }
+  else
+    return'';
+}
+
+Blockly.Arduino.esp32_no_tone=function(){
+  var a=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=Blockly.Arduino.valueToCode(this,"CHANNEL",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    Blockly.Arduino.definitions_.define_tone="#include <Tone32.h>";
+    return"noTone("+a+","+b+");\n"
+  }
+  else
+    return'';
+}
+
+Blockly.Arduino.esp32_custom_tone=function(){
+  var a=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=Blockly.Arduino.valueToCode(this,"FREQ",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      c=Blockly.Arduino.valueToCode(this,"DURATION",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      d=Blockly.Arduino.valueToCode(this,"CHANNEL",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    Blockly.Arduino.definitions_.define_tone="#include <Tone32.h>";
+    return"tone("+a+","+b+","+c+","+d+");\n"
+  }
+  else
+    return'';
 }
