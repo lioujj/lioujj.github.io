@@ -28,4 +28,7 @@
 <category><name>Boards</name><replace>Boards</replace></category>
 <category><name>ESP32</name><replace>ESP32</replace></category>
 <category><name>Boards_Tool</name><replace>Setup</replace></category>
+<category><name>YuBoard</name><replace>ESP32 Board</replace></category>
+<category><name>PocketCard</name><replace>Pocket Card</replace></category>
+<category><name>AnalogWrite</name><replace>AnalogWrite Tone</replace></category>
 </xml>

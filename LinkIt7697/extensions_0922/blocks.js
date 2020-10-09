@@ -2272,8 +2272,6 @@ Blockly.Blocks.webserver_talk={init:function(){
   this.setTooltip(Blockly.Msg.WEBSERVER_TOOLTIP)},onchange:function(){
       this.workspace&&(Blockly.Blocks.webserver.checkBlocks_body(this)?this.setWarningText(null):this.setWarningText(Blockly.Msg.WEBSERVER_BODY_WARNING))}
 };
-//WIFI
-
 
 Blockly.Blocks.lcd_i2c_setting={init:function(){
   this.setHelpUrl(Blockly.Msg.LCD_I2C_HELPURL);
@@ -2289,6 +2287,89 @@ Blockly.Blocks.lcd_i2c_setting={init:function(){
   this.setPreviousStatement(!0);
   this.setNextStatement(!0);
   this.setTooltip(Blockly.Msg.LCD_I2C_TOOLTIP)}};
+
+Blockly.Blocks.servo_write_pin={init:function(){
+  this.setHelpUrl(Blockly.Msg.SERVO_WRITE_HELPURL);
+  this.setColour(Blockly.Blocks.servo.HUE);
+  this.appendValueInput("PIN")
+      .appendField(Blockly.Msg.SERVO_WRITE_TEXT1)
+      .appendField(Blockly.Msg.SERVO_WRITE_TEXT2);
+  this.appendValueInput("ANGLE")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.SERVO_ANGLE_TEXT1);
+  this.appendDummyInput().appendField(Blockly.Msg.SERVO_ANGLE_TEXT2);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.SERVO_WRITE_TOOLTIP)}
+};
+
+Blockly.Blocks.neopixel.checkBlocks=function(a){
+  var b=null,
+  d=a.type;
+  a=a.workspace.getAllBlocks();
+  for(var c=0;c<a.length;c++)
+    if("neopixel_setpixelcolor"!=a[c].type&&"neopixel_custom_setpixelcolor"!=a[c].type&&"neopixel_show"!=a[c].type&&"neopixel_setpixelcolor2"!=a[c].type||null!=b||(b=a[c].type!=d?!0:!1),"neopixel_begin"==a[c].type||"neopixel_begin2"==a[c].type)
+      return!0;
+  return b
+};
+Blockly.Blocks.neopixel_begin2={
+  init:function(){
+    this.setHelpUrl(Blockly.Msg.NEOPIXEL_BEGIN_HELPURL);
+    this.setColour(Blockly.Blocks.neopixel.HUE);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.INITIALIZES_SETUP_APPENDTEXT)
+        .appendField(Blockly.Msg.NEOPIXEL_TITLE)
+        .appendField(Blockly.Msg.NEOPIXEL_BEGIN_NUM)
+        .appendField(new Blockly.FieldTextInput("16"),"NUM");
+    this.appendValueInput("PIN")
+        .setCheck("Number")
+        .appendField(Blockly.Msg.NEOPIXEL_BEGIN_PIN);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.NEOPIXEL_BEGIN_BRIGHTNESS)
+        .appendField(new Blockly.FieldTextInput("30"),"BRIGHTNESS");
+    this.setInputsInline(!0);
+    this.setPreviousStatement(!0);
+    this.setNextStatement(!0);
+    this.setTooltip(Blockly.Msg.NEOPIXEL_BEGIN_TOOLTIP)}
+};
+
+Blockly.Blocks.dht_read_pin={init:function(){
+  this.setHelpUrl(Blockly.Msg.DHT_HELPURL);
+  this.setColour(Blockly.Blocks.dht.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.DHT_TITLE)
+      .appendField(new Blockly.FieldDropdown(profile["default"].dht),"SENSOR");
+  this.appendValueInput("PIN")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.NEOPIXEL_BEGIN_PIN);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.MESUREMENT_TYPE)
+      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.HUMIDITY_PERCENT,"h"],[Blockly.Msg.TEMPERATURE_CELCIUS,"C"]]),"TYPE");
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Number");
+  this.setTooltip(Blockly.Msg.DHT_TOOLTIP)}
+};
+
+Blockly.Blocks.ultrasonic_read_pin={init:function(){
+  this.setHelpUrl(Blockly.Msg.ULTRASONIC_SETTING_HELPURL);
+  this.setColour(Blockly.Blocks.ultrasonic.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.ULTRASONIC_SETTING_TITLE)
+      .appendField(new Blockly.FieldDropdown([["HC-SR04P","DUMMY"]]),"SENSOR");
+  this.appendValueInput("TRIG")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.ULTRASONIC_SETTING_TRIG);
+  this.appendValueInput("ECHO")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.ULTRASONIC_SETTING_ECHO);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.MESUREMENT_TYPE)
+      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.GROVE_ULTRASONIC_RANGER_UNIT_CM,"CM"],[Blockly.Msg.GROVE_ULTRASONIC_RANGER_UNIT_INCH,"INCH"]]),"MEASUREMENT");
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Number");
+  this.setTooltip(Blockly.Msg.ULTRASONIC_SETTING_TOOLTIP)}
+};
 
 //Custom_blocks
 Blockly.Blocks.custom_block={};
@@ -2324,16 +2405,48 @@ Blockly.Blocks.custom_code={init:function(){
 //Boards
 Blockly.Blocks.boards={};
 Blockly.Blocks.boards.HUE=30;
+Blockly.Blocks.board_initializes_setup={init:function(){
+  this.setHelpUrl(Blockly.Msg.INITIALIZES_SETUP_HELPURL);
+  this.setColour(Blockly.Blocks.initializes.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.BOARDS_TITLE)
+      .appendField(new Blockly.FieldDropdown([["7697","7697"],["Arduino","Arduino"],["ESP32","ESP32"],["ESP8266","ESP8266"]]),"BOARD_TYPE")
+      .appendField(Blockly.Msg.INITIALIZES_SETUP_APPENDTEXT);
+  this.appendStatementInput("CONTENT");
+  this.setInputsInline(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.INITIALIZES_SETUP_TOOLTIP)}
+};
+
 Blockly.Blocks.board_setup={init:function(){
   this.setHelpUrl("");
-  this.setColour(Blockly.Blocks.boards.HUE);
+  this.setColour(Blockly.Blocks.initializes.HUE);
   this.appendDummyInput()
       .appendField(Blockly.Msg.BOARDS_TITLE)
       .appendField(Blockly.Msg.BOARDS_SETUP)
       .appendField(new Blockly.FieldDropdown([["7697","7697"],["Arduino","Arduino"],["ESP32","ESP32"],["ESP8266","ESP8266"]]),"BOARD_TYPE");
-  this.setPreviousStatement(!0);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
   this.setNextStatement(!0);
   this.setTooltip(Blockly.Msg.BOARDS_TOOLTIP)}
+};
+
+Blockly.Blocks.board_i2c_reset={init:function(){
+  this.setHelpUrl(Blockly.Msg.ESP32_BOARD_HELPURL);
+  this.setColour(Blockly.Blocks.initializes.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.BOARDS_TITLE)
+      .appendField(Blockly.Msg.BOARDS_I2C_RESET);
+  this.appendValueInput("SDA")
+      .setCheck("Number")
+      .appendField("SDA");
+  this.appendValueInput("SCL")
+      .setCheck("Number")
+      .appendField("SCL");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.ESP32_BOARD_TOOLTIP)}
 };
 
 Blockly.Blocks.board_7697_digital={init:function(){
@@ -2465,4 +2578,143 @@ Blockly.Blocks.esp32_board_rgb_custom={init:function(){
   this.setPreviousStatement(!0);
   this.setNextStatement(!0);
   this.setTooltip(Blockly.Msg.ESP32_BOARD_TOOLTIP)}
+};
+
+Blockly.Blocks.esp32_board_i2c_reset={init:function(){
+  this.setHelpUrl(Blockly.Msg.ESP32_BOARD_HELPURL);
+  this.setColour(Blockly.Blocks.esp32_board.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.ESP32_BOARD_TITLE)
+      .appendField(Blockly.Msg.ESP32_BOARD_I2C_RESET)
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.ESP32_BOARD_TOOLTIP)}
+};
+
+//ESP32_analogWrite
+Blockly.Blocks.esp32_analog={};
+Blockly.Blocks.esp32_analog_write={init:function(){
+  this.setHelpUrl(Blockly.Msg.ESP32_ANALOG_WRITE_HELPURL);
+  this.setColour(Blockly.Blocks.inout.HUE);
+  this.appendValueInput("PIN_ANALOGWRITE")
+      .setCheck("Number")
+      .appendField("ESP32 "+Blockly.Msg.INOUT_ANALOG_WRITE_APPENDTEXT_PIN);
+  this.appendValueInput("NUM")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.INOUT_ANALOG_WRITE_APPENDTEXT_VALUE);
+  this.appendValueInput("CHANNEL")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.ESP32_ANALOG_WRITE_CHANNEL);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.ESP32_ANALOG_WRITE_TOOLTIP)}
+};
+
+Blockly.Blocks.esp32_tone={init:function(){
+    this.setHelpUrl(Blockly.Msg.INOUT_TONE_HELPURL);
+    this.setColour(Blockly.Blocks.inout.HUE);
+    this.appendValueInput("PIN")
+        .setCheck("Number")
+        .appendField("ESP32 "+Blockly.Msg.INOUT_TONE_APPENDTEXT_PIN);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.INOUT_TONE_APPENDTEXT_FREQ)
+        .appendField(new Blockly.FieldDropdown(profile["default"].tone),"FREQ");
+    this.appendValueInput("CHANNEL")
+        .setCheck("Number")
+        .appendField(Blockly.Msg.ESP32_ANALOG_WRITE_CHANNEL);
+    this.setInputsInline(!0);
+    this.setPreviousStatement(!0);
+    this.setNextStatement(!0);
+    this.setTooltip(Blockly.Msg.INOUT_TONE_TOOLTIP)}
+};
+
+Blockly.Blocks.esp32_no_tone={
+  init:function(){
+    this.setHelpUrl(Blockly.Msg.INOUT_TONE_HELPURL);
+    this.setColour(Blockly.Blocks.inout.HUE);
+    this.appendValueInput("PIN")
+        .setCheck("Number")
+        .appendField("ESP32 "+Blockly.Msg.INOUT_NO_TONE_APPENDTEXT_PIN);
+    this.appendValueInput("CHANNEL")
+        .setCheck("Number")
+        .appendField(Blockly.Msg.ESP32_ANALOG_WRITE_CHANNEL);
+    this.setInputsInline(!0);
+    this.setPreviousStatement(!0);
+    this.setNextStatement(!0);
+    this.setTooltip(Blockly.Msg.INOUT_TONE_TOOLTIP)}
+};
+
+Blockly.Blocks.esp32_custom_tone={init:function(){
+    this.setHelpUrl(Blockly.Msg.INOUT_TONE_HELPURL);
+    this.setColour(Blockly.Blocks.inout.HUE);
+    this.appendValueInput("PIN")
+        .setCheck("Number")
+        .appendField("ESP32 "+Blockly.Msg.INOUT_TONE_APPENDTEXT_PIN);
+    this.appendValueInput("FREQ")
+        .setCheck("Number")
+        .appendField(Blockly.Msg.INOUT_TONE_APPENDTEXT_FREQ);
+    this.appendValueInput("DURATION")
+        .setCheck("Number")
+        .appendField(Blockly.Msg.INOUT_TONE_APPENDTEXT_DURATION);
+    this.appendValueInput("CHANNEL")
+        .setCheck("Number")
+        .appendField(Blockly.Msg.ESP32_ANALOG_WRITE_CHANNEL);
+    this.setInputsInline(!0);
+    this.setPreviousStatement(!0);
+    this.setNextStatement(!0);
+    this.setTooltip(Blockly.Msg.INOUT_TONE_TOOLTIP)}
+};
+
+//PocketCard
+Blockly.Blocks.pocketcard={};
+Blockly.Blocks.pocketcard.HUE=120;
+Blockly.Blocks.pocketcard_button={init:function(){
+  this.setHelpUrl(Blockly.Msg.POCKETCARD_HELPURL);
+  this.setColour(Blockly.Blocks.pocketcard.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LIOU_ROBOT_WHEN+" PocketCard "+Blockly.Msg.LIOU_ROBOT_BUTTON)
+      .appendField(new Blockly.FieldDropdown([["A","A"],["B","B"],["A+B","C"]]),"AB_BUTTON");
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LIOU_ROBOT_BUTTON_CHECK);
+  this.setInputsInline(!0);
+  this.appendStatementInput("MSG_BUTTON_CALL");
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.POCKETCARD_TOOLTIP)}
+};
+
+Blockly.Blocks.pocketcard_pinMap={init:function(){
+  this.setHelpUrl(Blockly.Msg.POCKETCARD_HELPURL);
+  this.setColour(Blockly.Blocks.pocketcard.HUE);
+  this.appendDummyInput()
+      .appendField("PocketCard "+Blockly.Msg.MTK7697BIT_PINMAP_TITLE);
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown([["P0","26"],["P1","33"],["P2","32"],["P3","35"],["P4","4"],["P5","14"],["P6","16"],["P7","17"],["P8","27"],["P9","13"],["P10","2"],["P11","25"],["P12","15"],["P13","18"],["P14","19"],["P15","23"],["P16","5"],["P17",""],["P19","22"],["P20","21"]]),"POCKETCARD_PIN");
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Number");
+  this.setTooltip(Blockly.Msg.POCKETCARD_TOOLTIP)}
+};
+
+Blockly.Blocks.pocketcard_light_sensor={init:function(){
+  this.setHelpUrl(Blockly.Msg.POCKETCARD_HELPURL);
+  this.setColour(Blockly.Blocks.pocketcard.HUE);
+  this.appendDummyInput()
+      .appendField("PocketCard "+Blockly.Msg.POCKETCARD_LIGHT_SENSOR);
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown([["A","39"],["B","36"]]),"POCKETCARD_PIN");
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Number");
+  this.setTooltip(Blockly.Msg.POCKETCARD_TOOLTIP)}
+};
+
+Blockly.Blocks.pocketcard_temperature_sensor={init:function(){
+  this.setHelpUrl(Blockly.Msg.POCKETCARD_HELPURL);
+  this.setColour(Blockly.Blocks.pocketcard.HUE);
+  this.appendDummyInput()
+      .appendField("PocketCard "+Blockly.Msg.POCKETCARD_TEMPERATURE_SENSOR);
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Number");
+  this.setTooltip(Blockly.Msg.POCKETCARD_TOOLTIP)}
 };

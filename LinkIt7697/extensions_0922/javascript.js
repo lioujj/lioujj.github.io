@@ -1280,6 +1280,61 @@ Blockly.Arduino.linkit_wifi_wait_until_ready=function(){
     return'';
 };
 
+Blockly.Arduino.servo_write_pin=function(){
+  var a=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
+  b=Blockly.Arduino.valueToCode(this,"ANGLE",Blockly.Arduino.ORDER_ATOMIC)||"90";
+  Blockly.Arduino.definitions_.define_servo="#include <Servo.h>";
+  Blockly.Arduino.definitions_["define_class_servo_"+a]="Servo __myservo"+a+";";
+  Blockly.Arduino.setups_["servo_"+a]||(Blockly.Arduino.setups_["servo_"+a]="__myservo"+a+".attach("+a+");");
+  return"__myservo"+a+".write("+b+");\n"
+};
+
+Blockly.Arduino.neopixel_begin2=function(){
+  var a=this.getFieldValue("NUM"),
+      b=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      c=this.getFieldValue("BRIGHTNESS");
+  Blockly.Arduino.definitions_.define_include_neopixel="#include <Adafruit_NeoPixel.h>\n";
+  Blockly.Arduino.definitions_.define_neopixel="Adafruit_NeoPixel pixels = Adafruit_NeoPixel("+a+","+b+",NEO_GRB + NEO_KHZ800);\n";
+  Blockly.Arduino.setups_.setup_neopixel_begin="pixels.begin();\n  pixels.show();\n";
+  Blockly.Arduino.setups_.setup_neopixel_brightness="pixels.setBrightness("+c+");\n  pixels.show();\n";
+  return""
+};
+
+Blockly.Arduino.dht_read_pin=function(){
+  var a=this.getFieldValue("SENSOR"),
+  b=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
+  c=this.getFieldValue("TYPE"),
+  d=a.toLowerCase()+"_p"+b;
+  Blockly.Arduino.definitions_.define_dht_include="#include <DHT.h>";
+  Blockly.Arduino.definitions_["define_dht_"+d]="DHT "+d+"("+b+", "+a+");";
+  Blockly.Arduino.setups_["setup_dht_"+b+"_"+a]=d+".begin();";
+  a="";
+  switch(c){
+    case "h":
+      a+=d+".readHumidity()";
+      break;
+    case "C":
+      a+=d+".readTemperature()";
+      break;
+    case "F":
+      a+=d+".readTemperature(true)"
+  }
+  return[a,Blockly.Arduino.ORDER_ATOMIC]
+};
+
+Blockly.Arduino.ultrasonic_read_pin=function(){
+  var a=Blockly.Arduino.valueToCode(this,"TRIG",Blockly.Arduino.ORDER_ATOMIC)||"0",
+  b=Blockly.Arduino.valueToCode(this,"ECHO",Blockly.Arduino.ORDER_ATOMIC)||"0",
+  c=this.getFieldValue("MEASUREMENT"),
+  d="ultrasonic_"+a+"_"+b;
+  Blockly.Arduino.definitions_.define_ultrasonic_include="#include <Ultrasonic.h>\n";
+  Blockly.Arduino.definitions_["define_ultrasonic_inst_"+d]="Ultrasonic "+d+"("+a+", "+b+");\n";
+  return["CM"==c?d+".convert("+d+".timing(), Ultrasonic::CM)":d+".convert("+d+".timing(), Ultrasonic::IN)",Blockly.Arduino.ORDER_ATOMIC]
+};
+  
+
+
+
 //Custom_blocks
 Blockly.Arduino.custom_include=function(){
   var a=Blockly.Arduino.valueToCode(this,"FILE",Blockly.Arduino.ORDER_ATOMIC)||"";
@@ -1313,6 +1368,14 @@ Blockly.Arduino.board_setup=function(){
   Blockly.Arduino.my_board_type=a;
   return'';
 };
+
+Blockly.Arduino.board_i2c_reset=function(){
+  var a=Blockly.Arduino.valueToCode(this,"SDA",Blockly.Arduino.ORDER_ATOMIC)||"0",
+  b=Blockly.Arduino.valueToCode(this,"SCL",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  Blockly.Arduino.definitions_.define_wire="#include <Wire.h>";
+  Blockly.Arduino.setups_.setup_wire_lib="Wire.begin("+a+","+b+");";
+  return'';
+}
 
 Blockly.Arduino.board_7697_digital=function(){
   return[this.getFieldValue("MY_PIN"),Blockly.Arduino.ORDER_ATOMIC];
@@ -1376,6 +1439,12 @@ Blockly.Arduino.esp32_board_rgb_custom=function(){
   return'lightOn('+a+','+b+');\n';
 }
 
+Blockly.Arduino.esp32_board_i2c_reset=function(){
+  Blockly.Arduino.definitions_.define_wire="#include <Wire.h>";
+  Blockly.Arduino.setups_.setup_wire_lib="Wire.begin(26,27);";
+  return'';
+}
+
 Blockly.Arduino.esp32_analog={};
 Blockly.Arduino.esp32_analog_write=function(){
   var a=Blockly.Arduino.valueToCode(this,"PIN_ANALOGWRITE",Blockly.Arduino.ORDER_ATOMIC)||"0",
@@ -1425,3 +1494,31 @@ Blockly.Arduino.esp32_custom_tone=function(){
   else
     return'';
 }
+
+//PocketCard
+Blockly.Arduino.pocketcard={};
+Blockly.Arduino.pocketcard_button=function(){
+    var a=this.getFieldValue("AB_BUTTON"),
+	    b=Blockly.Arduino.statementToCode(this,"MSG_BUTTON_CALL");
+	  b=b.replace(/\n/g,'\n  ');
+    Blockly.Arduino.definitions_.define_m_button="char myBtnStatus;\nbool buttonPressed(char btnName)\n{\n  byte A_Pin=14;\n  byte B_Pin=25;\n  if (btnName=='A'){\n    if (digitalRead(A_Pin) == 1)\n      return false;\n    else\n      return true;\n  }\n  else if (btnName=='B'){\n    if (digitalRead(B_Pin) == 1)\n      return false;\n    else\n      return true;\n  } else {\n    if ((digitalRead(A_Pin) == 1) && (digitalRead(B_Pin) == 1))\n      return false;\n    else\n      return true;\n  }\n}\n"
+    Blockly.Arduino.definitions_.define_m_getBtnStatus="char getBtnStatus(){\n  char buttonStatus=' ';\n  int checkButtonDelay=200;\n  if (buttonPressed('A')){\n    delay(checkButtonDelay);\n    if (buttonPressed('A')){\n      buttonStatus='A';\n      if (buttonPressed('B'))\n        buttonStatus='C';\n    }\n  } else if (buttonPressed('B')){\n      delay(checkButtonDelay);\n      if (buttonPressed('B')){\n        buttonStatus='B';\n        if (buttonPressed('A'))\n          buttonStatus='C';\n      }\n  }\n  return buttonStatus;\n}\n";
+    Blockly.Arduino.setups_.setup_button='pinMode(14, INPUT);\n  pinMode(25, INPUT);\n';
+	  return"if (myBtnStatus=='"+a+"'){\n"+b+"  while(buttonPressed('"+a+"')){}\n}\n"
+};
+
+Blockly.Arduino.pocketcard_pinMap=function(){
+  var a=this.getFieldValue("POCKETCARD_PIN");
+  return[a,Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.pocketcard_light_sensor=function(){
+  var a=this.getFieldValue("POCKETCARD_PIN");
+  return["analogRead("+a+")",Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.pocketcard_temperature_sensor=function(){
+  Blockly.Arduino.definitions_.define_ntc="#include <thermistor.h>";
+  Blockly.Arduino.definitions_.define_ntc_claim="THERMISTOR thermistor(34,10000,3950,10000);";
+  return["(thermistor.read()/10.0)",Blockly.Arduino.ORDER_ATOMIC];
+};

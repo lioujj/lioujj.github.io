@@ -30,4 +30,5 @@
 <category><name>Boards_Tool</name><replace>設定</replace></category>
 <category><name>YuBoard</name><replace>ESP32教學輔助板</replace></category>
 <category><name>PocketCard</name><replace>Pocket Card</replace></category>
+<category><name>AnalogWrite</name><replace>類比寫入及音調</replace></category>
 </xml>

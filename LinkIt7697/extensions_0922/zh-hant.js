@@ -393,6 +393,7 @@ Blockly.Msg.BOARDS_SETUP = "設定開發板";
 Blockly.Msg.BOARDS_TOOLTIP = "設定開發板";
 Blockly.Msg.BOARDS_DIGITAL = "數位腳位";
 Blockly.Msg.BOARDS_ANALOG = "類比腳位";
+Blockly.Msg.BOARDS_I2C_RESET = "重設I2C腳位";
 
 //ESP32_Board尤哲哲
 Blockly.Msg.ESP32_BOARD_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/esp32教學輔助板";
@@ -401,3 +402,15 @@ Blockly.Msg.ESP32_BOARD_TOOLTIP = "";
 Blockly.Msg.ESP32_BOARD_RGB= [["指示燈0","0"],["指示燈1","1"],["指示燈2","2"],["指示燈3","3"],["指示燈4","4"],["紅燈","5"],["綠燈","6"],["藍燈","7"]];
 Blockly.Msg.ESP32_BOARD_RGB_CUSTOM = "LED燈號";
 Blockly.Msg.ESP32_BOARD_RGB_STATUS = "狀態";
+Blockly.Msg.ESP32_BOARD_I2C_RESET = "重設 I2C 腳位 SDA:26 SCL:27";
+
+//ESP32_analogWrite
+Blockly.Msg.ESP32_ANALOG_WRITE_HELPURL = "";
+Blockly.Msg.ESP32_ANALOG_WRITE_TOOLTIP = "";
+Blockly.Msg.ESP32_ANALOG_WRITE_CHANNEL = "通道(0~15)";
+
+//POCKETCARD
+Blockly.Msg.POCKETCARD_HELPURL = "";
+Blockly.Msg.POCKETCARD_TOOLTIP = "PocketCard";
+Blockly.Msg.POCKETCARD_LIGHT_SENSOR = "光線感應值";
+Blockly.Msg.POCKETCARD_TEMPERATURE_SENSOR = "溫度感應值";
