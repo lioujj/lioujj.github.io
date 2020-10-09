@@ -1,7 +1,20 @@
 <category id="category_ljj" name="Liou">
   <category id="category_boards" name="Boards">
     <category id="category_boards_tool" name="Boards_Tool">
+      <block type="board_initializes_setup"></block>
 		  <block type="board_setup"></block>
+      <block type="board_i2c_reset">
+        <value name="SDA">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="SCL">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
       <block type="board_7697_digital"></block>
       <block type="board_7697_analog"></block>
       <block type="board_arduino_digital"></block>
@@ -13,6 +26,71 @@
     </category>
   </category>
   <category id="category_esp32" name="ESP32">
+    <category id="category_esp32_analogwrite" name="AnalogWrite">
+      <block type="esp32_analog_write">
+        <value name="PIN_ANALOGWRITE">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="NUM">
+            <block type="math_number">
+                <field name="NUM">0</field>
+            </block>
+        </value>
+        <value name="CHANNEL">
+            <block type="math_number">
+                <field name="NUM">0</field>
+            </block>
+        </value>
+      </block>
+      <block type="esp32_tone">
+        <value name="PIN">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="CHANNEL">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
+      <block type="esp32_no_tone">
+        <value name="PIN">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="CHANNEL">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
+      <block type="esp32_custom_tone">
+        <value name="PIN">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="FREQ">
+          <block type="math_number">
+            <field name="NUM">255</field>
+          </block>
+        </value>
+        <value name="DURATION">
+          <block type="math_number">
+            <field name="NUM">300</field>
+          </block>
+        </value>
+        <value name="CHANNEL">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
+    </category>
     <category id="category_yu" name="YuBoard">
       <block type="esp32_board_usb">
         <value name="ON_OFF">
@@ -40,11 +118,15 @@
           </block>
         </value>
       </block>
+      <block type="esp32_board_i2c_reset"></block>
     </category>
     <category id="category_pocketcard" name="PocketCard">
+      <block type="pocketcard_button"></block>
+      <block type="pocketcard_pinMap"></block>
+      <block type="pocketcard_light_sensor"></block>
+      <block type="pocketcard_temperature_sensor"></block>
     </category>
   </category>
-
 	<category id="category_iot" name="IoT">
 		<category id="category_mqtt" name="MQTT">
 			<block type="connect_mqtt">
@@ -655,8 +737,8 @@
       </block>
     </category>
 		<category id="category_mtk7697bit" name="7697:bit">
-            <block type="mtk7697bit_button"></block>
-            <block type="mtk7697bit_pinMap"></block>
+      <block type="mtk7697bit_button"></block>
+      <block type="mtk7697bit_pinMap"></block>
     </category>
 		<category id="category_mp3" name="MP3">
 			<block type="mp3_set_pins">

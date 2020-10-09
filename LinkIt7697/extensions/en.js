@@ -396,6 +396,7 @@ Blockly.Msg.BOARDS_SETUP = "Setup your board:";
 Blockly.Msg.BOARDS_TOOLTIP = "Setup your board";
 Blockly.Msg.BOARDS_DIGITAL = "Digital pin";
 Blockly.Msg.BOARDS_ANALOG = "Analog pin";
+Blockly.Msg.BOARDS_I2C_RESET = "Reset I2C pin";
 
 //ESP32_Board尤哲哲
 Blockly.Msg.ESP32_BOARD_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/esp32教學輔助板";
@@ -404,3 +405,16 @@ Blockly.Msg.ESP32_BOARD_TOOLTIP = "";
 Blockly.Msg.ESP32_BOARD_RGB= [["indicator light 0","0"],["indicator light 1","1"],["indicator light 2","2"],["indicator light 3","3"],["indicator light 4","4"],["red light","5"],["green light","6"],["blue light","7"]];
 Blockly.Msg.ESP32_BOARD_RGB_CUSTOM = "light number:";
 Blockly.Msg.ESP32_BOARD_RGB_STATUS = "Status";
+Blockly.Msg.ESP32_BOARD_I2C_RESET = "Reset I2C pin SDA:26 SCL:27";
+
+//ESP32_analogWrite
+Blockly.Msg.ESP32_ANALOG_WRITE_HELPURL = "";
+Blockly.Msg.ESP32_ANALOG_WRITE_TOOLTIP = "";
+Blockly.Msg.ESP32_ANALOG_WRITE_CHANNEL = "Channel(0~15)";
+
+//POCKETCARD
+Blockly.Msg.POCKETCARD_HELPURL = "";
+Blockly.Msg.POCKETCARD_TOOLTIP = "PocketCard";
+Blockly.Msg.POCKETCARD_LIGHT_SENSOR = "Light sensor value";
+Blockly.Msg.POCKETCARD_TEMPERATURE_SENSOR = "Temperature value";
+
