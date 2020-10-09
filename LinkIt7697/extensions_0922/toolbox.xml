@@ -120,12 +120,14 @@
       </block>
       <block type="esp32_board_i2c_reset"></block>
     </category>
+<!--
     <category id="category_pocketcard" name="PocketCard">
       <block type="pocketcard_button"></block>
       <block type="pocketcard_pinMap"></block>
       <block type="pocketcard_light_sensor"></block>
       <block type="pocketcard_temperature_sensor"></block>
     </category>
+-->
   </category>
 	<category id="category_iot" name="IoT">
 		<category id="category_mqtt" name="MQTT">
