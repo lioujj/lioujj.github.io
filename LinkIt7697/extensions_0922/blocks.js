@@ -2406,7 +2406,7 @@ Blockly.Blocks.custom_code={init:function(){
 Blockly.Blocks.boards={};
 Blockly.Blocks.boards.HUE=30;
 Blockly.Blocks.board_initializes_setup={init:function(){
-  this.setHelpUrl(Blockly.Msg.INITIALIZES_SETUP_HELPURL);
+  this.setHelpUrl(Blockly.Msg.BOARDS_HELPURL);
   this.setColour(Blockly.Blocks.initializes.HUE);
   this.appendDummyInput()
       .appendField(Blockly.Msg.BOARDS_TITLE)
@@ -2415,11 +2415,11 @@ Blockly.Blocks.board_initializes_setup={init:function(){
   this.appendStatementInput("CONTENT");
   this.setInputsInline(!0);
   this.setNextStatement(!0);
-  this.setTooltip(Blockly.Msg.INITIALIZES_SETUP_TOOLTIP)}
+  this.setTooltip(Blockly.Msg.BOARDS_TOOLTIP)}
 };
 
 Blockly.Blocks.board_setup={init:function(){
-  this.setHelpUrl("");
+  this.setHelpUrl(Blockly.Msg.BOARDS_HELPURL);
   this.setColour(Blockly.Blocks.initializes.HUE);
   this.appendDummyInput()
       .appendField(Blockly.Msg.BOARDS_TITLE)
@@ -2432,7 +2432,7 @@ Blockly.Blocks.board_setup={init:function(){
 };
 
 Blockly.Blocks.board_i2c_reset={init:function(){
-  this.setHelpUrl(Blockly.Msg.ESP32_BOARD_HELPURL);
+  this.setHelpUrl(Blockly.Msg.BOARDS_HELPURL);
   this.setColour(Blockly.Blocks.initializes.HUE);
   this.appendDummyInput()
       .appendField(Blockly.Msg.BOARDS_TITLE)
@@ -2450,7 +2450,7 @@ Blockly.Blocks.board_i2c_reset={init:function(){
 };
 
 Blockly.Blocks.board_7697_digital={init:function(){
-  this.setHelpUrl("");
+  this.setHelpUrl(Blockly.Msg.BOARDS_HELPURL);
   this.setColour(Blockly.Blocks.math.HUE);
   this.appendDummyInput()
       .appendField("7697 "+Blockly.Msg.BOARDS_DIGITAL)
@@ -2460,7 +2460,7 @@ Blockly.Blocks.board_7697_digital={init:function(){
 };
 
 Blockly.Blocks.board_7697_analog={init:function(){
-  this.setHelpUrl("");
+  this.setHelpUrl(Blockly.Msg.BOARDS_HELPURL);
   this.setColour(Blockly.Blocks.math.HUE);
   this.appendDummyInput()
       .appendField("7697 "+Blockly.Msg.BOARDS_ANALOG)
@@ -2470,7 +2470,7 @@ Blockly.Blocks.board_7697_analog={init:function(){
 };
 
 Blockly.Blocks.board_arduino_digital={init:function(){
-  this.setHelpUrl("");
+  this.setHelpUrl(Blockly.Msg.BOARDS_HELPURL);
   this.setColour(Blockly.Blocks.math.HUE);
   this.appendDummyInput()
       .appendField("Arduino "+Blockly.Msg.BOARDS_DIGITAL)
@@ -2480,7 +2480,7 @@ Blockly.Blocks.board_arduino_digital={init:function(){
 };
 
 Blockly.Blocks.board_arduino_analog={init:function(){
-  this.setHelpUrl("");
+  this.setHelpUrl(Blockly.Msg.BOARDS_HELPURL);
   this.setColour(Blockly.Blocks.math.HUE);
   this.appendDummyInput()
       .appendField("Arduino "+Blockly.Msg.BOARDS_ANALOG)
@@ -2490,7 +2490,7 @@ Blockly.Blocks.board_arduino_analog={init:function(){
 };
 
 Blockly.Blocks.board_esp32_digital={init:function(){
-  this.setHelpUrl("");
+  this.setHelpUrl(Blockly.Msg.BOARDS_HELPURL);
   this.setColour(Blockly.Blocks.math.HUE);
   this.appendDummyInput()
       .appendField("ESP32 "+Blockly.Msg.BOARDS_DIGITAL)
@@ -2500,7 +2500,7 @@ Blockly.Blocks.board_esp32_digital={init:function(){
 };
 
 Blockly.Blocks.board_esp32_analog={init:function(){
-  this.setHelpUrl("");
+  this.setHelpUrl(Blockly.Msg.BOARDS_HELPURL);
   this.setColour(Blockly.Blocks.math.HUE);
   this.appendDummyInput()
       .appendField("ESP32 "+Blockly.Msg.BOARDS_ANALOG)
@@ -2511,7 +2511,7 @@ Blockly.Blocks.board_esp32_analog={init:function(){
 
 
 Blockly.Blocks.board_esp8266_digital={init:function(){
-  this.setHelpUrl("");
+  this.setHelpUrl(Blockly.Msg.BOARDS_HELPURL);
   this.setColour(Blockly.Blocks.math.HUE);
   this.appendDummyInput()
       .appendField("ESP8266 "+Blockly.Msg.BOARDS_DIGITAL)
@@ -2521,7 +2521,7 @@ Blockly.Blocks.board_esp8266_digital={init:function(){
 };
 
 Blockly.Blocks.board_esp8266_analog={init:function(){
-  this.setHelpUrl("");
+  this.setHelpUrl(Blockly.Msg.BOARDS_HELPURL);
   this.setColour(Blockly.Blocks.math.HUE);
   this.appendDummyInput()
       .appendField("ESP8266 "+Blockly.Msg.BOARDS_ANALOG)

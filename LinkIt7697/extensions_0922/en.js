@@ -397,6 +397,7 @@ Blockly.Msg.BOARDS_TOOLTIP = "Setup your board";
 Blockly.Msg.BOARDS_DIGITAL = "Digital pin";
 Blockly.Msg.BOARDS_ANALOG = "Analog pin";
 Blockly.Msg.BOARDS_I2C_RESET = "Reset I2C pin";
+Blockly.Msg.BOARDS_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/開發板設定積木";
 
 //ESP32_Board尤哲哲
 Blockly.Msg.ESP32_BOARD_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/esp32教學輔助板";
