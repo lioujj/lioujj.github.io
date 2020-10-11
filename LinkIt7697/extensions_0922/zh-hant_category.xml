@@ -31,4 +31,5 @@
 <category><name>YuBoard</name><replace>ESP32教學輔助板</replace></category>
 <category><name>PocketCard</name><replace>Pocket Card</replace></category>
 <category><name>AnalogWrite</name><replace>類比寫入及音調</replace></category>
+<category><name>MPU9250_I2C</name><replace>MPU9250 9軸動作感應</replace></category>
 </xml>
