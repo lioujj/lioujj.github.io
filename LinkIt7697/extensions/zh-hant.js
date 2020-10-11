@@ -108,7 +108,8 @@ Blockly.Msg.MP3_RANDOM = "隨機播放歌曲";
 Blockly.Msg.CATEGORY_LJJ_TOOLS = "工具程式";
 Blockly.Msg.TOOLS_HELPURL = "TOOLS";
 Blockly.Msg.LJJ_TOOLS_TOOLTIP = "TOOLS";
-Blockly.Msg.LJJ_TOOLS_CONVERT_STR_INY = "轉換字串為數字";
+Blockly.Msg.LJJ_TOOLS_CONVERT_STR_INT = "轉換字串為數字";
+Blockly.Msg.LJJ_TOOLS_CONVERT_STR_FLOAT= "轉換字串為浮點數";
 
 //Maqueen
 Blockly.Msg.CATEGORY_MAQUEEN = "麥昆小車";
@@ -400,18 +401,43 @@ Blockly.Msg.BOARDS_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit
 Blockly.Msg.ESP32_BOARD_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/esp32教學輔助板";
 Blockly.Msg.ESP32_BOARD_TITLE = "ESP32教學輔助板";
 Blockly.Msg.ESP32_BOARD_TOOLTIP = "";
-Blockly.Msg.ESP32_BOARD_RGB= [["指示燈0","0"],["指示燈1","1"],["指示燈2","2"],["指示燈3","3"],["指示燈4","4"],["紅燈","5"],["綠燈","6"],["藍燈","7"]];
+Blockly.Msg.ESP32_BOARD_RGB= [["指示燈0","0"],["指示燈1","1"],["指示燈2","2"],["指示燈3","3"],["指示燈4","4"],["紅燈","7"],["綠燈","6"],["藍燈","5"]];
 Blockly.Msg.ESP32_BOARD_RGB_CUSTOM = "LED燈號";
 Blockly.Msg.ESP32_BOARD_RGB_STATUS = "狀態";
 Blockly.Msg.ESP32_BOARD_I2C_RESET = "重設 I2C 腳位 SDA:26 SCL:27";
 
 //ESP32_analogWrite
-Blockly.Msg.ESP32_ANALOG_WRITE_HELPURL = "";
 Blockly.Msg.ESP32_ANALOG_WRITE_TOOLTIP = "";
 Blockly.Msg.ESP32_ANALOG_WRITE_CHANNEL = "通道(0~15)";
+Blockly.Msg.ESP32_ANALOG_WRITE_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/開發板設定積木";
 
 //POCKETCARD
 Blockly.Msg.POCKETCARD_HELPURL = "";
 Blockly.Msg.POCKETCARD_TOOLTIP = "PocketCard";
 Blockly.Msg.POCKETCARD_LIGHT_SENSOR = "光線感應值";
 Blockly.Msg.POCKETCARD_TEMPERATURE_SENSOR = "溫度感應值";
+
+//MPU9250
+Blockly.Msg.MPU9250_HELPURL= "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/mpu9250九軸感應器";
+Blockly.Msg.MPU9250_TITLE = "MPU9250";
+Blockly.Msg.MPU9250_ACCEL_BEGIN = "啟動加速度感應器，感應範圍";
+Blockly.Msg.MPU9250_TOOLTIP= "";
+Blockly.Msg.MPU9250_ACCEL_FETCH = "更新加速度感測資料";
+Blockly.Msg.MPU9250_3AXIS_TYPE = [["加速度","accelUpdate()"],["陀螺儀","gyroUpdate()"],["磁力","magUpdate()"]];
+Blockly.Msg.MPU9250_ACCEL_WARNING = "必須先設定「啟動加速度感應器」積木";
+Blockly.Msg.MPU9250_ACCEL_3AXIS = "加速度感測值";
+Blockly.Msg.MPU925_3AXIS_POST_FIX="軸";
+Blockly.Msg.MPU9250_ACCEL_3AXIS_WARNING = "必須先設定「"+Blockly.Msg.MPU9250_ACCEL_FETCH+"」積木";
+Blockly.Msg.MPU9250_MAG_BEGIN = "啟動磁力感應器";
+Blockly.Msg.MPU9250_MAG_FETCH = "更新磁力感測資料";
+Blockly.Msg.MPU9250_MAG_WARNING = "必須先設定「"+Blockly.Msg.MPU9250_MAG_BEGIN+"」積木";
+Blockly.Msg.MPU9250_MAG_3AXIS = "磁力感測值";
+Blockly.Msg.MPU9250_MAG_3AXIS_WARNING = "必須先設定「"+Blockly.Msg.MPU9250_MAG_FETCH+"」積木";
+Blockly.Msg.MPU9250_GYRO_BEGIN = "啟動陀螺儀，感應範圍(角速度)";
+Blockly.Msg.MPU9250_GYRO_FETCH = "更新陀螺儀感測資料";
+Blockly.Msg.MPU9250_GYRO_WARNING = "必須先設定「啟動陀螺儀」積木";
+Blockly.Msg.MPU9250_GYRO_3AXIS = "陀螺儀感測值";
+Blockly.Msg.MPU9250_GYRO_3AXIS_WARNING = "必須先設定「"+Blockly.Msg.MPU9250_GYRO_FETCH+"」積木";
+Blockly.Msg.MPU925_3AXIS_POST_FIX_UNIT = "角速度(DPS)";
+Blockly.Msg.MPU9250_ACCEL_PITCH_ROLL = "旋轉角度";
+Blockly.Msg.MPU9250_PITCH_ROLL=[["俯仰(Pitch)","pitch"],["翻滾(Roll)","roll"]];

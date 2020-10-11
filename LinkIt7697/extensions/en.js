@@ -109,7 +109,8 @@ Blockly.Msg.MP3_RANDOM = "Play MP3 randomly";
 Blockly.Msg.CATEGORY_LJJ_TOOLS = "Tools";
 Blockly.Msg.TOOLS_HELPURL = "TOOLS";
 Blockly.Msg.LJJ_TOOLS_TOOLTIP = "TOOLS";
-Blockly.Msg.LJJ_TOOLS_CONVERT_STR_INY = "Convert String to Int";
+Blockly.Msg.LJJ_TOOLS_CONVERT_STR_INT = "Convert String to Int";
+Blockly.Msg.LJJ_TOOLS_CONVERT_STR_FLOAT = "Convert String to Float";
 
 //Maqueen
 Blockly.Msg.CATEGORY_MAQUEEN = "Maqueen";
@@ -403,15 +404,15 @@ Blockly.Msg.BOARDS_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit
 Blockly.Msg.ESP32_BOARD_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/esp32教學輔助板";
 Blockly.Msg.ESP32_BOARD_TITLE = "ESP32 Expansion board";
 Blockly.Msg.ESP32_BOARD_TOOLTIP = "";
-Blockly.Msg.ESP32_BOARD_RGB= [["indicator light 0","0"],["indicator light 1","1"],["indicator light 2","2"],["indicator light 3","3"],["indicator light 4","4"],["red light","5"],["green light","6"],["blue light","7"]];
+Blockly.Msg.ESP32_BOARD_RGB= [["indicator light 0","0"],["indicator light 1","1"],["indicator light 2","2"],["indicator light 3","3"],["indicator light 4","4"],["red light","7"],["green light","6"],["blue light","5"]];
 Blockly.Msg.ESP32_BOARD_RGB_CUSTOM = "light number:";
 Blockly.Msg.ESP32_BOARD_RGB_STATUS = "Status";
 Blockly.Msg.ESP32_BOARD_I2C_RESET = "Reset I2C pin SDA:26 SCL:27";
 
 //ESP32_analogWrite
-Blockly.Msg.ESP32_ANALOG_WRITE_HELPURL = "";
 Blockly.Msg.ESP32_ANALOG_WRITE_TOOLTIP = "";
 Blockly.Msg.ESP32_ANALOG_WRITE_CHANNEL = "Channel(0~15)";
+Blockly.Msg.ESP32_ANALOG_WRITE_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/開發板設定積木";
 
 //POCKETCARD
 Blockly.Msg.POCKETCARD_HELPURL = "";
@@ -419,3 +420,26 @@ Blockly.Msg.POCKETCARD_TOOLTIP = "PocketCard";
 Blockly.Msg.POCKETCARD_LIGHT_SENSOR = "Light sensor value";
 Blockly.Msg.POCKETCARD_TEMPERATURE_SENSOR = "Temperature value";
 
+//MPU9250
+Blockly.Msg.MPU9250_HELPURL= "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/mpu9250九軸感應器";
+Blockly.Msg.MPU9250_TITLE = "MPU9250";
+Blockly.Msg.MPU9250_ACCEL_BEGIN = "Begin accelerometer, scale range:";
+Blockly.Msg.MPU9250_TOOLTIP= "";
+Blockly.Msg.MPU9250_ACCEL_FETCH = "Update the data of accelerometer";
+Blockly.Msg.MPU9250_ACCEL_WARNING = "You have to set \"Begin accelerometer\" block first.";
+Blockly.Msg.MPU9250_ACCEL_3AXIS = "Accelerometer data";
+Blockly.Msg.MPU925_3AXIS_POST_FIX="axis";
+Blockly.Msg.MPU9250_ACCEL_3AXIS_WARNING = "You have to set \""+Blockly.Msg.MPU9250_ACCEL_FETCH+"\" block first.";
+Blockly.Msg.MPU9250_MAG_BEGIN = "Begin Magnetometer";
+Blockly.Msg.MPU9250_MAG_FETCH = "Update the data of Magnetometer";
+Blockly.Msg.MPU9250_MAG_WARNING = "You have to set \""+Blockly.Msg.MPU9250_MAG_BEGIN+"\" block first.";
+Blockly.Msg.MPU9250_MAG_3AXIS = "Magnetometer data";
+Blockly.Msg.MPU9250_MAG_3AXIS_WARNING = "You have to set \""+Blockly.Msg.MPU9250_MAG_FETCH+"\" block first.";
+Blockly.Msg.MPU9250_GYRO_BEGIN = "Begin Gyroscope, scale range:";
+Blockly.Msg.MPU9250_GYRO_FETCH = "Update the data of Gyroscope";
+Blockly.Msg.MPU9250_GYRO_WARNING = "You have to set \"Begin Gyroscope\" block first.";
+Blockly.Msg.MPU9250_GYRO_3AXIS = "Gyroscope data";
+Blockly.Msg.MPU9250_GYRO_3AXIS_WARNING = "You have to set \""+Blockly.Msg.MPU9250_GYRO_FETCH+"\" block first.";
+Blockly.Msg.MPU925_3AXIS_POST_FIX_UNIT = "DPS";
+Blockly.Msg.MPU9250_ACCEL_PITCH_ROLL = "Rotation angle";
+Blockly.Msg.MPU9250_PITCH_ROLL=[["Pitch","pitch"],["Roll","roll"]];

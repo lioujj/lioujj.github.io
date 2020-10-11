@@ -830,6 +830,18 @@
 			<block type="bme280_addr"></block>
       <block type="getBme280_value"></block>
     </category>
+    <category id="category_mpu9250" name="MPU9250_I2C">
+			<block type="mpu9250_accel_begin"></block>
+      <block type="mpu9250_accel_fetch"></block>
+      <block type="mpu9250_accel_3axis"></block>
+      <block type="mpu9250_accel_pitch_roll"></block>
+			<block type="mpu9250_mag_begin"></block>
+      <block type="mpu9250_mag_fetch"></block>
+      <block type="mpu9250_mag_3axis"></block>
+			<block type="mpu9250_gyro_begin"></block>
+      <block type="mpu9250_gyro_fetch"></block>
+      <block type="mpu9250_gyro_3axis"></block>
+    </category>
   </category>
   <category id="category_lumex" name="Lumex">
     <category id="category_ldm6432" name="LDM6432MQTT">
@@ -1161,6 +1173,13 @@
 	<category id="category_ljj_tools" name="Tools">
 	  <category id="category_string_tools" name="String_tool">
 		  <block type="convert_str_int">
+			  <value name="MY_VAR">
+				  <block type="text">
+					  <field name="TEXT"></field>
+				  </block>
+			  </value>
+		  </block>
+		  <block type="convert_str_float">
 			  <value name="MY_VAR">
 				  <block type="text">
 					  <field name="TEXT"></field>

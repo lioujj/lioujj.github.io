@@ -252,6 +252,10 @@ Blockly.Arduino.convert_str_int=function(){
 	return['String('+a+').toInt()',Blockly.Arduino.ORDER_ATOMIC]
 };
 
+Blockly.Arduino.convert_str_float=function(){
+	var a=Blockly.Arduino.valueToCode(this,"MY_VAR",Blockly.Arduino.ORDER_ATOMIC)||"";
+	return['String('+a+').toFloat()',Blockly.Arduino.ORDER_ATOMIC]
+};
 
 //KSB045
 Blockly.Arduino.ksb045={};
@@ -1434,7 +1438,7 @@ Blockly.Arduino.esp32_board_rgb_custom=function(){
   var a=Blockly.Arduino.valueToCode(this,"RGB",Blockly.Arduino.ORDER_ATOMIC)||"0",
       b=Blockly.Arduino.valueToCode(this,"ON_OFF",Blockly.Arduino.ORDER_ATOMIC)||"0";
   Blockly.Arduino.definitions_.define_wire="#include <Wire.h>";
-  Blockly.Arduino.definitions_.define_esp32_i2c_read='byte myRead=0;\nbyte myLEDs[]={1,2,4,8,16,32,64,128};\nbyte allLEDs=255;\nbyte ledAddr=0x20;\n\nvoid lightOn(byte myLED,byte LED_on){\n  byte myTempByte=0;\n  Wire.requestFrom((int)ledAddr, 1);\n  myRead=Wire.read();\n  Wire.beginTransmission((int)ledAddr);\n  if (LED_on==1)\n    myTempByte=(myRead & ~myLEDs[myLED]);\n  else if (LED_on==0)\n    myTempByte=(myRead | myLEDs[myLED]);\n  Wire.write(myTempByte);\n  Wire.endTransmission();\n}\n';
+  Blockly.Arduino.definitions_.define_esp32_i2c_read='byte myRead=0;\nbyte myLEDs[]={16,8,4,2,1,128,64,32};\nbyte allLEDs=255;\nbyte ledAddr=0x20;\n\nvoid lightOn(byte myLED,byte LED_on){\n  byte myTempByte=0;\n  Wire.requestFrom((int)ledAddr, 1);\n  myRead=Wire.read();\n  Wire.beginTransmission((int)ledAddr);\n  if (LED_on==1)\n    myTempByte=(myRead & ~myLEDs[myLED]);\n  else if (LED_on==0)\n    myTempByte=(myRead | myLEDs[myLED]);\n  Wire.write(myTempByte);\n  Wire.endTransmission();\n}\n';
   Blockly.Arduino.setups_.setup_wire_lib="Wire.begin(26,27);";
   return'lightOn('+a+','+b+');\n';
 }
@@ -1521,4 +1525,59 @@ Blockly.Arduino.pocketcard_temperature_sensor=function(){
   Blockly.Arduino.definitions_.define_ntc="#include <thermistor.h>";
   Blockly.Arduino.definitions_.define_ntc_claim="THERMISTOR thermistor(34,10000,3950,10000);";
   return["(thermistor.read()/10.0)",Blockly.Arduino.ORDER_ATOMIC];
+};
+
+//MPU9250
+Blockly.Arduino.mpu9250={};
+Blockly.Arduino.mpu9250_accel_begin=function(){
+  var a=this.getFieldValue("ACCEL_MODE");
+  Blockly.Arduino.definitions_.define_mpu9250="#include <MPU9250_asukiaaa.h>\nMPU9250_asukiaaa myMPU9250;\ndouble pitch,roll,yaw;";
+  Blockly.Arduino.definitions_.define_mpu9250_pitch_roll="void calcMPU9250angle(){\n   pitch = atan2 (myMPU9250.accelY() ,( sqrt ((myMPU9250.accelX() * myMPU9250.accelX()) + (myMPU9250.accelZ() * myMPU9250.accelZ()))))*57.3;\n   roll = atan2(myMPU9250.accelX() ,( sqrt((myMPU9250.accelY() * myMPU9250.accelY()) + (myMPU9250.accelZ() * myMPU9250.accelZ()))))*57.3;\n}\n";
+  Blockly.Arduino.setups_.setup_mpu9250_accel='myMPU9250.beginAccel('+a+');';
+	return""
+};
+
+Blockly.Arduino.mpu9250_accel_fetch=function(){
+	return"myMPU9250.accelUpdate();\ncalcMPU9250angle();\n"
+};
+
+Blockly.Arduino.mpu9250_accel_3axis=function(){
+  var a=this.getFieldValue("3AXIS_MODE");
+  return["myMPU9250."+a,Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.mpu9250_accel_pitch_roll=function(){
+  var a=this.getFieldValue("PITCH_ROLL");
+  return[a,Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.mpu9250_mag_begin=function(){
+  Blockly.Arduino.definitions_.define_mpu9250="#include <MPU9250_asukiaaa.h>\nMPU9250_asukiaaa myMPU9250;";
+  Blockly.Arduino.setups_.setup_mpu9250_mag='myMPU9250.beginMag();';
+	return""
+};
+
+Blockly.Arduino.mpu9250_mag_fetch=function(){
+	return"myMPU9250.magUpdate();\n"
+};
+
+Blockly.Arduino.mpu9250_mag_3axis=function(){
+  var a=this.getFieldValue("3AXIS_MODE");
+  return["myMPU9250."+a,Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.mpu9250_gyro_begin=function(){
+  var a=this.getFieldValue("GYRO_MODE");
+  Blockly.Arduino.definitions_.define_mpu9250="#include <MPU9250_asukiaaa.h>\nMPU9250_asukiaaa myMPU9250;";
+  Blockly.Arduino.setups_.setup_mpu9250_gyro='myMPU9250.beginGyro('+a+');';
+	return""
+};
+
+Blockly.Arduino.mpu9250_gyro_fetch=function(){
+	return"myMPU9250.gyroUpdate();\n"
+};
+
+Blockly.Arduino.mpu9250_gyro_3axis=function(){
+  var a=this.getFieldValue("3AXIS_MODE");
+  return["myMPU9250."+a,Blockly.Arduino.ORDER_ATOMIC];
 };
