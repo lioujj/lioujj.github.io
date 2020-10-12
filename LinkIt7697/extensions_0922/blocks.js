@@ -2426,7 +2426,8 @@ Blockly.Blocks.board_initializes_setup={init:function(){
   this.appendStatementInput("CONTENT");
   this.setInputsInline(!0);
   this.setNextStatement(!0);
-  this.setTooltip(Blockly.Msg.BOARDS_TOOLTIP)}
+  this.setTooltip(Blockly.Msg.BOARDS_TOOLTIP)},onchange:function(){
+      Blockly.Arduino.my_board_type=this.getFieldValue("BOARD_TYPE");}
 };
 
 Blockly.Blocks.board_setup={init:function(){
@@ -2439,7 +2440,8 @@ Blockly.Blocks.board_setup={init:function(){
   this.setInputsInline(!0);
   this.setPreviousStatement(!0,null);
   this.setNextStatement(!0);
-  this.setTooltip(Blockly.Msg.BOARDS_TOOLTIP)}
+  this.setTooltip(Blockly.Msg.BOARDS_TOOLTIP)},onchange:function(){
+      Blockly.Arduino.my_board_type=this.getFieldValue("BOARD_TYPE");}
 };
 
 Blockly.Blocks.board_i2c_reset={init:function(){

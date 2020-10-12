@@ -5,8 +5,11 @@ Blockly.Arduino.finish=function(a){
 	var myStr="";
 	if (Blockly.Arduino.definitions_.define_mqtt_include=="#include <PubSubClient.h>")
 		myStr="  myClient.loop();\n";
-	if (Blockly.Arduino.definitions_.define_broadcast_include=="#include <WiFiUdp.h>")
-		myStr=myStr+"  checkBroadcastUDP();\n";
+	if (Blockly.Arduino.definitions_.define_broadcast_include=="#include <WiFiUdp.h>"){
+    delete Blockly.Arduino.definitions_.define_udp;
+    if (Blockly.Arduino.broadcast_udp.defineFunction.broadcast_my_check_body!="")
+		   myStr=myStr+"  checkBroadcastUDP();\n";
+  }
 	if (Blockly.Arduino.webserver.webserver_exist=="yes"){
     Blockly.Arduino.webserver.webserver_header=Blockly.Arduino.webserver.webserver_header.replace("#title#",Blockly.Arduino.webserver.webserver_myTitle);
     Blockly.Arduino.webserver.webserver_header=Blockly.Arduino.webserver.webserver_header.replace("#color#",Blockly.Arduino.webserver.webserver_myColor);
@@ -1052,9 +1055,9 @@ Blockly.Arduino.broadcast_udp_init=function(){
   Blockly.Arduino.broadcast_udp.broadcast_exist="yes";
 	var a=Blockly.Arduino.valueToCode(this,"PORT",Blockly.Arduino.ORDER_ATOMIC)||"0";
   Blockly.Arduino.definitions_.define_broadcast_include="#include <WiFiUdp.h>";
+  delete Blockly.Arduino.definitions_.define_udp;
   Blockly.Arduino.definitions_.define_broadcast_port="const int UDP_BUFFER_SIZE=255;\nuint16_t UDP_LISTEN_PORT="+a+";\nWiFiUDP Udp;\n//IPAddress broadcastIP;\nchar packetBuffer[UDP_BUFFER_SIZE];\n";
-  Blockly.Arduino.definitions_.define_broadcast_send="void sendBroadcastUDP(const char* myMessage){\n  IPAddress broadcastIP(WiFi.localIP()[0],WiFi.localIP()[1],WiFi.localIP()[2],255);\n  Udp.beginPacket(broadcastIP,UDP_LISTEN_PORT);\n  Udp.write(myMessage);\n  Udp.endPacket();\n}\n";
-
+  Blockly.Arduino.definitions_.define_broadcast_send="void sendBroadcastUDP(const char* myMessage){\n  IPAddress broadcastIP(WiFi.localIP()[0],WiFi.localIP()[1],WiFi.localIP()[2],255);\n  Udp.beginPacket(broadcastIP,UDP_LISTEN_PORT);\n  for (int myi = 0; myi < strlen(myMessage); myi++)\n  {\n    Udp.write(myMessage[myi]);\n  }\n  Udp.endPacket();\n}\n";
   Blockly.Arduino.broadcast_udp.defineFunction={};
 	//Blockly.Arduino.broadcast_udp.defineFunction.broadcast_send="\nvoid sendBroadcastUDP(const char* myMessage){\n  IPAddress broadcastIP(WiFi.localIP()[0],WiFi.localIP()[1],WiFi.localIP()[2],255);\n  Udp.beginPacket(broadcastIP,UDP_LISTEN_PORT);\n  Udp.write(myMessage);\n  Udp.endPacket();\n}\n";
   Blockly.Arduino.broadcast_udp.defineFunction.broadcast_my_check_header="\nvoid myCheckUDP(){\n";
