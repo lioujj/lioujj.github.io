@@ -1182,6 +1182,10 @@ Blockly.Arduino.webserver_digital=function(){
 Blockly.Arduino.webserver_pwm=function(){
   var a=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
       b=this.getFieldValue("BTN_TYPE");
+  if (Blockly.Arduino.my_board_type=="ESP32")
+      Blockly.Arduino.definitions_.define_esp32_pwm_include="#include <analogWrite.h>";
+  else
+    delete Blockly.Arduino.definitions_.define_esp32_pwm_include;
   Blockly.Arduino.definitions_.define_webserver_pwm+=("int pwm_"+a+"=0;\n");
   var slider="String(\"<input type='range' width='1000' step='1' min='0' max='255' value='\")+pwm_"+a+"+String(\"' id='myRange_"+a+"' onchange=\\\"document.getElementById('myLabel_"+a+"').innerHTML=this.value;\\\"><label id='myLabel_"+a+"'>\")+pwm_"+a+"+String(\"</label>\")";
   var btn="String(\"<input type='button' value='#value#' onclick=\\\"location.href='/pwm/"+a+"/'+document.getElementById('myRange_"+a+"').value;return true;\\\">\")";
@@ -1194,7 +1198,8 @@ Blockly.Arduino.webserver_pwm=function(){
 Blockly.Arduino.webserver_servo=function(){
   var a=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
       b=this.getFieldValue("BTN_TYPE");
-  Blockly.Arduino.definitions_.define_webserver_servo+=("#include <Servo.h>\nint servo_"+a+"=0;\nServo myServo_"+a+";\n");
+  Blockly.Arduino.definitions_.define_servo="#include <Servo.h>";
+  Blockly.Arduino.definitions_.define_webserver_servo+=("int servo_"+a+"=0;\nServo myServo_"+a+";\n");
   Blockly.Arduino.setups_["webserver_"]+="myServo_"+a+".attach("+a+");\n";
   Blockly.Arduino.setups_["webserver_"]=Blockly.Arduino.setups_["webserver_"].replace(/[\n]/g, "\n ");
   var slider="String(\"<input type='range' width='1000' step='1' min='0' max='180' value='\")+servo_"+a+"+String(\"' id='myServo_"+a+"' onchange=\\\"document.getElementById('myLabel_"+a+"').innerHTML=this.value;\\\"><label id='myLabel_"+a+"'>\")+servo_"+a+"+String(\"</label>\")";
