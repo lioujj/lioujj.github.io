@@ -412,7 +412,7 @@ Blockly.Msg.ESP32_ANALOG_WRITE_CHANNEL = "通道(0~15)";
 Blockly.Msg.ESP32_ANALOG_WRITE_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/開發板設定積木";
 
 //POCKETCARD
-Blockly.Msg.POCKETCARD_HELPURL = "";
+Blockly.Msg.POCKETCARD_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/pocketcard";
 Blockly.Msg.POCKETCARD_TOOLTIP = "PocketCard";
 Blockly.Msg.POCKETCARD_LIGHT_SENSOR = "光線感應值";
 Blockly.Msg.POCKETCARD_TEMPERATURE_SENSOR = "溫度感應值";
