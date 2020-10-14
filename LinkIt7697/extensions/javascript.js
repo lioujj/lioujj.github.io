@@ -1078,7 +1078,7 @@ Blockly.Arduino.broadcast_udp_received_event=function(){
 };
 
 Blockly.Arduino.broadcast_udp_received_msg=function(){
-  return["String(packetBuffer)",Blockly.Arduino.ORDER_ATOMIC];
+  return["String(broadcastBuffer)",Blockly.Arduino.ORDER_ATOMIC];
 };
 
 Blockly.Arduino.broadcast_udp_reset=function(){
