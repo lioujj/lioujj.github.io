@@ -106,68 +106,6 @@ function buildBlocks(xmlValue) {
   };
   window.addEventListener('resize', onresize, false);
 
-//----------------------------------------------------
-
-//var preHTTP="https://lioujj.github.io/LinkIt7697/extensions_0922/"
-var preHTTP="extensions_0922/";
-var blocks_path = preHTTP+"blocks.js";   //載入自訂積木定義檔	
-var javascript_path = preHTTP+"javascript.js";   //載入自訂積木轉出程式碼檔	
-var toolbox_path = preHTTP+"toolbox.xml";  //載入自訂積木目錄檔	
-var en_path = preHTTP+"en.js";  //載入積木文字英文語系設定檔	
-var en_category_path = preHTTP+"en_category.xml";  //載入積木目錄文字英文語系設定檔
-var zhhant_path = preHTTP+"zh-hant.js";  //載入積木文字繁體語系設定檔(預設繁體語系)
-var zhhant_category_path = preHTTP+"zh-hant_category.xml";  //載入積木目錄文字繁體語系設定檔(預設繁體語系)
-var insertAfterCategoryName = "category_linkit_ble_ibeacon";  //可將自訂積木插入在指定目錄後
-
-initial(blocks_path, javascript_path, toolbox_path, insertAfterCategoryName);
-
-function initial(blocks_path, javascript_path, toolbox_path) {
-	addScript(blocks_path);
-	addScript(javascript_path);
-	var xml = $.ajax({url: toolbox_path, async: false}).responseXML;
-
-	var len = new DOMParser().parseFromString(xmlValue,"text/xml").firstChild.childNodes.length;
-	var xmlNewValue='<xml id="toolbox">';
-	if (len>0) {
-		for (var i=0;i<len;i++){
-			var node = new XMLSerializer().serializeToString(new DOMParser().parseFromString(xmlValue,"text/xml").firstChild.childNodes[i]);
-			xmlNewValue+=node;
-			if (node.indexOf(insertAfterCategoryName)!=-1)
-				xmlNewValue+='<sep></sep>'+new XMLSerializer().serializeToString(xml.firstChild);
-		}
-	}
-	xmlNewValue+='</xml>';
-	xmlValue = xmlNewValue;
-	
-	if ((document.getElementById('select-lang-en').checked)) {
-		addScript(en_path);
-		var xml = $.ajax({url: en_category_path, async: false}).responseXML.firstChild;
-	} else {
-		addScript(zhhant_path);
-		var xml = $.ajax({url: zhhant_category_path, async: false}).responseXML.firstChild;
-	}
-	xml = new DOMParser().parseFromString(new XMLSerializer().serializeToString(xml).replace(/\n/g, "").replace(/\r/g, "").replace(/\t/g, ""),"text/xml").firstChild;
-	
-	for (var i=0;i<xml.childNodes.length;i++) {
-		if (xml.childNodes[i].nodeName.toLowerCase()=="category") {
-			var ini = xml.childNodes[i].childNodes[0].firstChild.nodeValue;
-			var rep = xml.childNodes[i].childNodes[1].firstChild.nodeValue;
-			xmlValue = xmlValue.replace('name="'+ini+'"','name="'+rep+'"');	
-		}
-	}
-}
-
-function addScript(url) {
-	var s = document.createElement("script");
-	s.type = "text/javascript";
-	s.src = url;
-	$("body").append(s);
-}
-//-------------------------
-
-
-
-
   Blockly.inject(document.getElementById('content_blocks'),{
     grid:
     {spacing: 25,
@@ -238,7 +176,7 @@ function versionCompare(v1, v2, options) {
 
 function init() {
   var loadIds;
-var base = "category_logic,category_loops,category_array,category_math,category_text,category_variables,category_functions,category_sep,category_initializes,category_digital,category_analog,category_serial,category_others,category_time,category_interrupts,category_servo,category_sep,category_linkit_wifi,category_linkit_mcs,category_linkit_lremote,category_linkit_ble,category_linkit_ble_ibeacon,category_sep,category_mooncar,category_ez_start_kit,category_sep,category_sensor,category_display,category_transceiver,category_sep,category_grove,category_sep,category_external";
+var base = "category_logic,category_loops,category_array,category_math,category_text,category_variables,category_functions,category_sep,category_initializes,category_digital,category_analog,category_serial,category_others,category_time,category_interrupts,category_servo,category_sep,category_linkit_wifi,category_linkit_mcs,category_linkit_lremote,category_linkit_ble,category_linkit_ble_ibeacon,category_sep,category_sensor,category_display,category_transceiver,category_sep,category_grove,category_sep,category_external";
 
   try {
     var manifestData = chrome.runtime.getManifest();
@@ -412,8 +350,8 @@ function setCharacter(){
     });
   } catch (err) {
     console.log(err)
-  }
-
+  } 
+  
 }
 
 function export_xml(){
