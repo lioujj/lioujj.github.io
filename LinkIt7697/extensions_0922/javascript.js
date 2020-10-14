@@ -510,6 +510,44 @@ Blockly.Arduino.ir_receiver_pin1=function(){
   return''
 };
 
+Blockly.Arduino.ir_send=function(){
+  var a=this.getFieldValue("IR_TYPE"),
+      b=Blockly.Arduino.valueToCode(this,"CODE",Blockly.Arduino.ORDER_ATOMIC)||"";
+  b=b.toLowerCase();
+  b=b.replace(/\"/g,'');
+  Blockly.Arduino.definitions_.define_irremote="#include <IRremote.h>";
+  Blockly.Arduino.definitions_.define_irremote_init="IRsend irsend;";
+  if (a == "NEC") {
+    return"irsend.sendNEC(0x"+b+", 32);\n"
+  } else if (a == "SONY"){
+    return"irsend.sendSony(0x"+b+", 12);\n"
+  } else if (a == "RC5") {
+    return"irsend.sendRC5(0x"+b+", 12);\n"
+  } else {
+    return"irsend.sendRC6(0x"+b+", 20);\n"
+  }
+};
+
+Blockly.Arduino.ir_send2=function(){
+  var a=Blockly.Arduino.valueToCode(this,"IR_TYPE",Blockly.Arduino.ORDER_ATOMIC)||"",
+      b=Blockly.Arduino.valueToCode(this,"CODE",Blockly.Arduino.ORDER_ATOMIC)||"";
+  b=b.toLowerCase();
+  b=b.replace(/\"/g,'');
+  a=a.replace(/\"/g,'');
+  a=a.toUpperCase();
+  Blockly.Arduino.definitions_.define_irremote="#include <IRremote.h>";
+  Blockly.Arduino.definitions_.define_irremote_init="IRsend irsend;";
+  if (a == "NEC") {
+    return"irsend.sendNEC(0x"+b+", 32);\n"
+  } else if (a == "SONY"){
+    return"irsend.sendSony(0x"+b+", 12);\n"
+  } else if (a == "RC5") {
+    return"irsend.sendRC5(0x"+b+", 12);\n"
+  } else {
+    return"irsend.sendRC6(0x"+b+", 20);\n"
+  }
+};
+
 
 Blockly.Arduino.ir_event=function(){
   var a=this.getFieldValue("IR_EVENT");

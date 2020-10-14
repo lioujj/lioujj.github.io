@@ -693,7 +693,7 @@ Blockly.Blocks.ir.checkSetPin=function(a){
 	    d=a.type;
 		a=a.workspace.getAllBlocks();
 		for(var c=0;c<a.length;c++)
-			if("ir_event"!=a[c].type||null!=b||(b=a[c].type!=d?!0:!1),"ir_receiver_pin"==a[c].type)
+			if("ir_event"!=a[c].type||null!=b||(b=a[c].type!=d?!0:!1),("ir_receiver_pin"==a[c].type)||("ir_receiver_pin1"==a[c].type))
 				return!0;
 		return b
 };
@@ -721,6 +721,38 @@ Blockly.Blocks.ir_receiver_pin1={init:function(){
   this.setInputsInline(!0);
   this.setPreviousStatement(!0);
   this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.IR_TOOLTIP)}
+};
+
+Blockly.Blocks.ir_send={init:function(){
+  this.setHelpUrl(Blockly.Msg.IR_HELPURL);
+  this.setColour(Blockly.Blocks.ir.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.IR_REMOTE_TYPE)
+      .appendField(new Blockly.FieldDropdown([["NEC","NEC"],["SONY","SONY"],["RC5","RC5"],["RC6","RC6"]]),"IR_TYPE");
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.IR_REMOTE_SEND);
+  this.appendValueInput("CODE")
+      .setCheck("String");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.IR_TOOLTIP)}
+};
+
+Blockly.Blocks.ir_send2={init:function(){
+  this.setHelpUrl(Blockly.Msg.IR_HELPURL);
+  this.setColour(Blockly.Blocks.ir.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.IR_REMOTE_TYPE);
+  this.appendValueInput("IR_TYPE")
+      .setCheck("String")
+  this.appendValueInput("CODE")
+      .setCheck("String")
+      .appendField(Blockly.Msg.IR_REMOTE_SEND);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
   this.setTooltip(Blockly.Msg.IR_TOOLTIP)}
 };
 

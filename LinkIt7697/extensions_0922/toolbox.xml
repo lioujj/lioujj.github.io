@@ -845,6 +845,25 @@
                     </block>
 				</value>
 			</block>
+			<block type="ir_send">
+				<value name="CODE">
+					<block type="text">
+						<field name="TEXT"></field>
+          </block>
+				</value>
+			</block>
+			<block type="ir_send2">
+				<value name="IR_TYPE">
+					<block type="text">
+						<field name="TEXT"></field>
+          </block>
+				</value>
+				<value name="CODE">
+					<block type="text">
+						<field name="TEXT"></field>
+          </block>
+				</value>
+			</block>
 			<block type="ir_event"></block>
       <block type="ir_remote_received"></block>
       <block type="ir_received_type"></block>
