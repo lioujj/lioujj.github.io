@@ -1,0 +1,35 @@
+<xml>
+<category><name>Liou</name><replace>Liou's Blocks</replace></category>
+<category><name>Tools</name><replace>Tools</replace></category>
+<category><name>String_tool</name><replace>String tools</replace></category>
+<category><name>Custom_block</name><replace>Custom blocks</replace></category>
+<category><name>Lumex</name><replace>Lumex</replace></category>
+<category><name>LDM6432MQTT</name><replace>LDM6432 MQTT</replace></category>
+<category><name>Modules</name><replace>Modules</replace></category>
+<category><name>OLED128*64</name><replace>OLED 128*64</replace></category>
+<category><name>7697:bit</name><replace>7697:bit</replace></category>
+<category><name>MP3</name><replace>MP3 Player</replace></category>
+<category><name>InfraRed</name><replace>InfraRed</replace></category>
+<category><name>GamePad</name><replace>GamePad</replace></category>
+<category><name>BME280I2C</name><replace>BME280 I2C</replace></category>
+<category><name>Robot</name><replace>Robot</replace></category>
+<category><name>Maqueen</name><replace>Maqueen</replace></category>
+<category><name>JetMole</name><replace>Jet Mole</replace></category>
+<category><name>Probbie</name><replace>Probbie</replace></category>
+<category><name>WebCrawler</name><replace>Web Crawler</replace></category>
+<category><name>WorldWeather</name><replace>World Weather</replace></category>
+<category><name>TaiwanAQI</name><replace>Taiwan AQI</replace></category>
+<category><name>Airbox</name><replace>Airbox</replace></category>
+<category><name>IoT</name><replace>IoT</replace></category>
+<category><name>MQTT</name><replace>MQTT</replace></category>
+<category><name>ThingSpeak</name><replace>ThingSpeak</replace></category>
+<category><name>Broadcast</name><replace>Broadcast</replace></category>
+<category><name>WebServer</name><replace>Web Server</replace></category>
+<category><name>Boards</name><replace>Boards</replace></category>
+<category><name>ESP32</name><replace>ESP32</replace></category>
+<category><name>Boards_Tool</name><replace>Setup</replace></category>
+<category><name>YuBoard</name><replace>ESP32 Board</replace></category>
+<category><name>PocketCard</name><replace>Pocket Card</replace></category>
+<category><name>AnalogWrite</name><replace>AnalogWrite Tone</replace></category>
+<category><name>MPU9250_I2C</name><replace>MPU9250 9-axis</replace></category>
+</xml>

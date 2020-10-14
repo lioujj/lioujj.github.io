@@ -1,0 +1,279 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background-color: #fff;
+  font-family: "Microsoft JhengHei", sans-serif;
+  font-size: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+/* Tabs */
+#tabRow>td {
+  border: 1px solid #ccc;
+  vertical-align: middle;
+}
+
+td.tabon {
+  border-bottom-color: #ddd !important;
+  background-color: #ddd;
+  padding: 5px 10px;
+}
+
+td.taboff {
+  cursor: pointer;
+  padding: 5px 10px;
+}
+
+td.taboff:hover {
+  background-color: #eee;
+}
+
+td.tabmin {
+  border-top-style: none !important;
+  border-left-style: none !important;
+  border-right-style: none !important;
+}
+
+td.tabmax {
+  border-top-style: none !important;
+  border-left-style: none !important;
+  border-right-style: none !important;
+  width: 99%;
+  text-align: right;
+}
+
+td#content_area{
+  height: 99%;
+}
+
+table {
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+table#main{
+  height: calc(100vh - 84px); /* 64px (top bar) + 20px (bottom bar) */
+  width: 100%;
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+
+table#tab{
+  width: 100%
+}
+
+tr#tabRow{
+  height: 1em;
+}
+
+td {
+  padding: 0;
+  vertical-align: top;
+}
+
+.content {
+  visibility: hidden;
+  margin: 0;
+  padding: 1ex;
+  position: absolute;
+  direction: ltr;
+}
+
+pre.content {
+  overflow: scroll;
+}
+
+#content_blocks {
+  padding: 0;
+}
+
+.blocklySvg {
+  border-top: none !important;
+}
+
+input.blocklyhtmlinput {
+  background-color: white;
+  height: initial;
+}
+
+#content_xml {
+  background-color: #324432;
+  color: #eee8d5;
+  resize: none;
+  outline: none;
+  border: none;
+  font-family: monospace;
+  overflow: scroll;
+}
+
+#content_arduino {
+  resize: none;
+  outline: none;
+  border: none;
+  font-family: monospace;
+  overflow: scroll;
+  background-color: #324432;
+  color: #eee8d5;
+  font-size: 12px;
+  line-height: 12px;
+  word-break: break-all;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+#content_area {
+  height: 99%;
+}
+
+#fakeload {
+  margin-right: 5px;
+}
+
+.modal{
+  z-index: 999;
+}
+
+.dropdown-content{
+  min-width: 300px;
+}
+
+.info {
+  font-family: monospace;
+  white-space: nowrap;
+  position: absolute;
+  bottom: 0;
+  background: #49801f;
+  padding: 2px;
+  height: 20px;
+  left: 0;
+  right: 0;
+  color: #eee8d5;
+}
+
+.info label {
+  font-weight: bold;
+}
+
+.dialog2 input {
+  border: 0;
+  padding: 10px;
+  font-size: 100%;
+  font-family: "Microsoft JhengHei", sans-serif;
+  color: #aaa;
+  border: solid 1px #ccc;
+  margin: 0 0 20px;
+  width: 300px;
+}
+
+.dialog2 button{
+  background: -moz-linear-gradient(top,#586e75 0%,#657b83);
+  background: -webkit-gradient(linear, left top, left bottom, from(#586e75), to(#657b83));
+  border: 1px solid #DDD;
+  color:#FFF;
+}
+
+a.hide-link{
+  color:#49801f;
+}
+
+nav .brand-logo{
+  margin-left: 20px;
+}
+
+td.tabon,
+.blocklyToolboxDiv {
+  background-color: rgba(82, 183, 86, 0.5) !important;
+}
+
+@media screen and (max-width: 768px) {
+  nav .brand-logo{
+    left: 0%;
+    -webkit-transform: translateX(0%);
+    -moz-transform: translateX(0%);
+    -ms-transform: translateX(0%);
+    -o-transform: translateX(0%);
+    font-size : 20px;
+  }
+  nav ul a{
+    padding:0 5px;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  nav .brand-logo{
+    left: 0%;
+    -webkit-transform: translateX(0%);
+    -moz-transform: translateX(0%);
+    -ms-transform: translateX(0%);
+    -o-transform: translateX(0%);
+  }
+}
+
+.preloader-wrapper.tiny {
+  width: 24px;
+  height: 24px;
+}
+
+.board-selector-wrapper {
+  width: 400px;
+}
+
+#terminal-wrapper {
+  position: absolute;
+  right: 25px; /* 15px + 10px */
+  top: 10px;
+  margin: 0;
+  border: none;
+}
+
+#terminal-header {
+  background-color: rgba(0,0,0,0.5);
+  color: white;
+  border: none;
+}
+#terminal-header:hover, #terminal-header.active {
+  background-color: rgba(0,0,0,0.75);
+}
+
+#terminal-body {
+  width: calc((100vw - 125px) * 0.4);
+  min-width: 160px;
+  background-color: rgba(0,0,0,0.625);
+  color: white;
+  border: none;
+  height: calc(100vh - 270px);
+  overflow: auto;
+  padding: 10px;
+  word-break: break-all;
+  font-family: monospace;
+}
+
+.msg-success {
+  color: #80FF80;
+}
+.msg-warning {
+  color: #FFFF80;
+}
+.msg-error {
+  color: #FF8080;
+}
+
+@keyframes msg-blink-anim {
+  0%   {color: yellow; transform: scale(1.0);}
+  50%  {color: rgb(243,154,30);transform: scale(1.5);}
+  100% {color: yellow;transform: scale(1.0);}
+}
+
+.blinking-text {
+  animation-name: msg-blink-anim;
+  animation-duration: 2s;
+  animation-delay: 0s;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite
+}
