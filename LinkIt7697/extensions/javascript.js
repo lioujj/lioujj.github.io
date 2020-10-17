@@ -513,38 +513,40 @@ Blockly.Arduino.ir_receiver_pin1=function(){
 Blockly.Arduino.ir_send=function(){
   var a=this.getFieldValue("IR_TYPE"),
       b=Blockly.Arduino.valueToCode(this,"CODE",Blockly.Arduino.ORDER_ATOMIC)||"";
-  b=b.toLowerCase();
-  b=b.replace(/\"/g,'');
+  //b=b.toLowerCase();
+  //b=b.replace(/\"/g,'');
   Blockly.Arduino.definitions_.define_irremote="#include <IRremote.h>";
   Blockly.Arduino.definitions_.define_irremote_init="IRsend irsend;";
+  Blockly.Arduino.definitions_.define_ir_type="int x2i(const char *s)\n{\n  int x = 0;\n  for(;;) {\n    char c = *s;\n    if (c >= '0' && c <= '9') {\n      x *= 16;\n      x += c - '0';\n    }  else if (c >= 'a' && c <= 'f') {\n      x *= 16;\n      x += (c - 'a') + 10;\n    }\n    else break;\n    s++;\n  }\n  return x;\n}";
   if (a == "NEC") {
-    return"irsend.sendNEC(0x"+b+", 32);\n"
+    return"irsend.sendNEC(x2i(String("+b+").c_str()), 32);\n"
   } else if (a == "SONY"){
-    return"irsend.sendSony(0x"+b+", 12);\n"
+    return"irsend.sendSony(x2i(String("+b+").c_str()), 12);\n"
   } else if (a == "RC5") {
-    return"irsend.sendRC5(0x"+b+", 12);\n"
+    return"irsend.sendRC5(x2i(String("+b+").c_str()), 12);\n"
   } else {
-    return"irsend.sendRC6(0x"+b+", 20);\n"
+    return"irsend.sendRC6(x2i(String("+b+").c_str()), 20);\n"
   }
 };
 
 Blockly.Arduino.ir_send2=function(){
   var a=Blockly.Arduino.valueToCode(this,"IR_TYPE",Blockly.Arduino.ORDER_ATOMIC)||"",
       b=Blockly.Arduino.valueToCode(this,"CODE",Blockly.Arduino.ORDER_ATOMIC)||"";
-  b=b.toLowerCase();
-  b=b.replace(/\"/g,'');
+  //b=b.toLowerCase();
+  //b=b.replace(/\"/g,'');
   a=a.replace(/\"/g,'');
   a=a.toUpperCase();
   Blockly.Arduino.definitions_.define_irremote="#include <IRremote.h>";
   Blockly.Arduino.definitions_.define_irremote_init="IRsend irsend;";
+  Blockly.Arduino.definitions_.define_ir_type="int x2i(const char *s)\n{\n  int x = 0;\n  for(;;) {\n    char c = *s;\n    if (c >= '0' && c <= '9') {\n      x *= 16;\n      x += c - '0';\n    }  else if (c >= 'a' && c <= 'f') {\n      x *= 16;\n      x += (c - 'a') + 10;\n    }\n    else break;\n    s++;\n  }\n  return x;\n}";
   if (a == "NEC") {
-    return"irsend.sendNEC(0x"+b+", 32);\n"
+    return"irsend.sendNEC(x2i(String("+b+").c_str()), 32);\n"
   } else if (a == "SONY"){
-    return"irsend.sendSony(0x"+b+", 12);\n"
+    return"irsend.sendSony(x2i(String("+b+").c_str()), 12);\n"
   } else if (a == "RC5") {
-    return"irsend.sendRC5(0x"+b+", 12);\n"
+    return"irsend.sendRC5(x2i(String("+b+").c_str()), 12);\n"
   } else {
-    return"irsend.sendRC6(0x"+b+", 20);\n"
+    return"irsend.sendRC6(x2i(String("+b+").c_str()), 20);\n"
   }
 };
 
@@ -946,7 +948,7 @@ Blockly.Arduino.oled_display_show_xbm=function(){
     var a=Blockly.Arduino.valueToCode(this,"XBM",Blockly.Arduino.ORDER_ATOMIC)||"";
     Blockly.Arduino.definitions_.define_xbm_include="#include \"StringSplitter.h\"";
 	  Blockly.Arduino.definitions_.define_showXBM="void showXBM(String myXBM,unsigned char *myBitMap){\n    myXBM.replace(\" \",\"\");\n    myXBM.replace(\"\\r\",\"\");\n    myXBM.replace(\"\\n\",\"\");\n    StringSplitter *splitter = new StringSplitter(myXBM, ',', 1024);\n    for(int i = 0; i < 1024; i++){\n      myBitMap[i]= 0;\n    }\n    for(int i = 0; i < splitter->getItemCount(); i++){\n      splitter->getItemAtIndex(i)=\"0x\"+splitter->getItemAtIndex(i);\n      myBitMap[i]= strtol(splitter->getItemAtIndex(i).c_str(), 0, 16);       \n    }\n    delete splitter;\n}\n";
-    return'unsigned char xBitMap[1024];\nshowXBM('+a+',xBitMap);\nu8g2.clearBuffer();\nu8g2.drawXBMP(0, 0, 128, 64, xBitMap);\ndelete xBitMap;\n';
+    return'unsigned char xBitMap[1024];\nshowXBM('+a+',xBitMap);\nu8g2.clearBuffer();\nu8g2.drawXBMP(0, 0, 128, 64, xBitMap);\n';
 };
 
 Blockly.Arduino.oled_display_clear_buffer=function(){
