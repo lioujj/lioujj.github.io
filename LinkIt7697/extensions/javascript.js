@@ -492,31 +492,54 @@ Blockly.Arduino.maqueen_ir_received_code=function(){
 //ir
 Blockly.Arduino.ir_receiver_pin=function(){
   var a=this.getFieldValue("PIN");
-  Blockly.Arduino.definitions_.define_irremote="#include <IRremote.h>";
+  if (Blockly.Arduino.my_board_type=="ESP8266"){
+    Blockly.Arduino.definitions_.define_irremote="#include <IRremoteESP8266.h>";
+    Blockly.Arduino.definitions_.define_irreceive="#include <IRrecv.h>\n#include <IRutils.h>";
+  } else { 
+    Blockly.Arduino.definitions_.define_irremote="#include <IRremote.h>";
+    delete Blockly.Arduino.definitions_.define_irreceive;
+  }
   Blockly.Arduino.definitions_.define_irremote_init="IRrecv irrecv("+a+");";
-  Blockly.Arduino.definitions_.define_irremote_decode="decode_results results;";
-  Blockly.Arduino.definitions_.define_irremote_ir_type='String ir_type(int tip)\n{\n  if (tip == 1) {\n    return "RC5";\n  } else if (tip == 2){\n    return "RC6";\n  } else if (tip == 3){\n    return "NEC";\n  } else {\n    return "Sony";\n  }\n}\n';
+  Blockly.Arduino.definitions_.define_irremote_decode="decode_results results;\nString myCodeType;\nString myIRcode;";
+  Blockly.Arduino.definitions_.define_irremote_ir_type='String ir_type(int tip)\n{\n  if (tip == 1){\n    return "RC5";\n  } else if (tip == 2){\n    return "RC6";\n  } else if (tip == 3){\n    return "NEC";\n  } else if (tip == 4){\n    return "SONY";\n  } else if (tip == 5){\n    return "PANASONIC";\n  } else if (tip == 6){\n    return "JVC";\n  } else if (tip == 7){\n    return "SAMSUNG";\n  } else if (tip == 10){\n    return "LG";\n  } else if (tip == 14){\n    return "SHARP";\n  } else if (tip == 17){\n    return "LEGO_PF";\n  } else {\n    return "UNKNOWN";\n  }\n}\n';
   Blockly.Arduino.setups_["irremote_"]||(Blockly.Arduino.setups_["irremote_"]="irrecv.enableIRIn();\n");
   return''
 };
 
 Blockly.Arduino.ir_receiver_pin1=function(){
   var a=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"0";
-  Blockly.Arduino.definitions_.define_irremote="#include <IRremote.h>";
+  if (Blockly.Arduino.my_board_type=="ESP8266"){
+    Blockly.Arduino.definitions_.define_irremote="#include <IRremoteESP8266.h>";
+    Blockly.Arduino.definitions_.define_irreceive="#include <IRrecv.h>\n#include <IRutils.h>";
+  } else { 
+    Blockly.Arduino.definitions_.define_irremote="#include <IRremote.h>";
+    delete Blockly.Arduino.definitions_.define_irreceive;
+  }
   Blockly.Arduino.definitions_.define_irremote_init="IRrecv irrecv("+a+");";
-  Blockly.Arduino.definitions_.define_irremote_decode="decode_results results;";
-  Blockly.Arduino.definitions_.define_irremote_ir_type='String ir_type(int tip)\n{\n  if (tip == 1) {\n    return "RC5";\n  } else if (tip == 2){\n    return "RC6";\n  } else if (tip == 3){\n    return "NEC";\n  } else {\n    return "Sony";\n  }\n}\n';
+  Blockly.Arduino.definitions_.define_irremote_decode="decode_results results;\nString myCodeType;\nString myIRcode;";
+  Blockly.Arduino.definitions_.define_irremote_ir_type='String ir_type(int tip)\n{\n  if (tip == 1){\n    return "RC5";\n  } else if (tip == 2){\n    return "RC6";\n  } else if (tip == 3){\n    return "NEC";\n  } else if (tip == 4){\n    return "SONY";\n  } else if (tip == 5){\n    return "PANASONIC";\n  } else if (tip == 6){\n    return "JVC";\n  } else if (tip == 7){\n    return "SAMSUNG";\n  } else if (tip == 10){\n    return "LG";\n  } else if (tip == 14){\n    return "SHARP";\n  } else if (tip == 17){\n    return "LEGO_PF";\n  } else {\n    return "UNKNOWN";\n  }\n}\n';
   Blockly.Arduino.setups_["irremote_"]||(Blockly.Arduino.setups_["irremote_"]="irrecv.enableIRIn();\n");
   return''
+};
+
+Blockly.Arduino.ir_sender_8266_pin=function(){
+  var a=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"";
+  Blockly.Arduino.definitions_.define_irremote="#include <IRremoteESP8266.h>";
+  Blockly.Arduino.definitions_.define_irsend_esp8266="#include <IRsend.h>";
+  Blockly.Arduino.definitions_.define_irremote_init="IRsend irsend("+a+");";
+  Blockly.Arduino.setups_.setup_esp8266_ir_send="irsend.begin();\n";
+  return'';
 };
 
 Blockly.Arduino.ir_send=function(){
   var a=this.getFieldValue("IR_TYPE"),
       b=Blockly.Arduino.valueToCode(this,"CODE",Blockly.Arduino.ORDER_ATOMIC)||"";
-  //b=b.toLowerCase();
-  //b=b.replace(/\"/g,'');
-  Blockly.Arduino.definitions_.define_irremote="#include <IRremote.h>";
-  Blockly.Arduino.definitions_.define_irremote_init="IRsend irsend;";
+  if (Blockly.Arduino.my_board_type!="ESP8266"){
+    Blockly.Arduino.definitions_.define_irremote="#include <IRremote.h>";
+    Blockly.Arduino.definitions_.define_irremote_init="IRsend irsend;";
+    delete Blockly.Arduino.setups_.setup_esp8266_ir_send;
+    delete Blockly.Arduino.definitions_.define_irsend_esp8266;
+  }
   Blockly.Arduino.definitions_.define_ir_type="int x2i(const char *s)\n{\n  int x = 0;\n  for(;;) {\n    char c = *s;\n    if (c >= '0' && c <= '9') {\n      x *= 16;\n      x += c - '0';\n    }  else if (c >= 'a' && c <= 'f') {\n      x *= 16;\n      x += (c - 'a') + 10;\n    }\n    else break;\n    s++;\n  }\n  return x;\n}";
   if (a == "NEC") {
     return"irsend.sendNEC(x2i(String("+b+").c_str()), 32);\n"
@@ -524,20 +547,32 @@ Blockly.Arduino.ir_send=function(){
     return"irsend.sendSony(x2i(String("+b+").c_str()), 12);\n"
   } else if (a == "RC5") {
     return"irsend.sendRC5(x2i(String("+b+").c_str()), 12);\n"
-  } else {
+  } else if (a == "RC6") {
     return"irsend.sendRC6(x2i(String("+b+").c_str()), 20);\n"
+  } else if (a == "JVC") {
+    return"irsend.sendJVC(x2i(String("+b+").c_str()),16, false);\n"
+  } else if (a == "SAMSUNG") {
+    return"irsend.sendSAMSUNG(x2i(String("+b+").c_str()), 32);\n"
+  } else if (a == "LG") {
+    return"irsend.sendLG(x2i(String("+b+").c_str()), 32);\n"
+  } else if (a == "LEGO_PF") {
+    return"irsend.sendLegoPowerFunctions(x2i(String("+b+").c_str()), true);\n"
+  } else {
+    return'';
   }
 };
 
 Blockly.Arduino.ir_send2=function(){
   var a=Blockly.Arduino.valueToCode(this,"IR_TYPE",Blockly.Arduino.ORDER_ATOMIC)||"",
       b=Blockly.Arduino.valueToCode(this,"CODE",Blockly.Arduino.ORDER_ATOMIC)||"";
-  //b=b.toLowerCase();
-  //b=b.replace(/\"/g,'');
   a=a.replace(/\"/g,'');
   a=a.toUpperCase();
-  Blockly.Arduino.definitions_.define_irremote="#include <IRremote.h>";
-  Blockly.Arduino.definitions_.define_irremote_init="IRsend irsend;";
+  if (Blockly.Arduino.my_board_type!="ESP8266"){
+    Blockly.Arduino.definitions_.define_irremote="#include <IRremote.h>";
+    Blockly.Arduino.definitions_.define_irremote_init="IRsend irsend;";
+    delete Blockly.Arduino.setups_.setup_esp8266_ir_send;
+    delete Blockly.Arduino.definitions_.define_irsend_esp8266;
+  }
   Blockly.Arduino.definitions_.define_ir_type="int x2i(const char *s)\n{\n  int x = 0;\n  for(;;) {\n    char c = *s;\n    if (c >= '0' && c <= '9') {\n      x *= 16;\n      x += c - '0';\n    }  else if (c >= 'a' && c <= 'f') {\n      x *= 16;\n      x += (c - 'a') + 10;\n    }\n    else break;\n    s++;\n  }\n  return x;\n}";
   if (a == "NEC") {
     return"irsend.sendNEC(x2i(String("+b+").c_str()), 32);\n"
@@ -545,27 +580,43 @@ Blockly.Arduino.ir_send2=function(){
     return"irsend.sendSony(x2i(String("+b+").c_str()), 12);\n"
   } else if (a == "RC5") {
     return"irsend.sendRC5(x2i(String("+b+").c_str()), 12);\n"
-  } else {
+  } else if (a == "RC6") {
     return"irsend.sendRC6(x2i(String("+b+").c_str()), 20);\n"
+  } else if (a == "JVC") {
+    return"irsend.sendJVC(x2i(String("+b+").c_str()),16, false);\n"
+  } else if (a == "SAMSUNG") {
+    return"irsend.sendSAMSUNG(x2i(String("+b+").c_str()), 32);\n"
+  } else if (a == "LG") {
+    return"irsend.sendLG(x2i(String("+b+").c_str()), 32);\n"
+  } else if (a == "LEGO_PF") {
+    return"irsend.sendLegoPowerFunctions(x2i(String("+b+").c_str()), true);\n"
+  } else {
+    return'';
   }
 };
 
 
 Blockly.Arduino.ir_event=function(){
-  var a=this.getFieldValue("IR_EVENT");
-  return'  if (irrecv.decode(&results)) {\n'+Blockly.Arduino.statementToCode(this,"IR_EVENT")+'  irrecv.resume();\n}\n'
+  var a=Blockly.Arduino.statementToCode(this,"IR_EVENT");
+  a="  "+a.replace(/\n/g,'\n  ');
+  if (Blockly.Arduino.my_board_type=="ESP8266"){
+    return'if (irrecv.decode(&results)) {\n  if (results.decode_type>0){\n    myCodeType=ir_type(results.decode_type);\n    myIRcode=resultToHexidecimal(&results);\n    myIRcode.replace("0x","");\n    myIRcode.toLowerCase();\n'+a+'}\n  irrecv.resume();\n}\n'
+  }
+  else
+    return'if (irrecv.decode(&results)) {\n  if (results.decode_type>0){\n    myCodeType=ir_type(results.decode_type);\n    myIRcode=String(results.value, HEX);\n'+a+'}\n  irrecv.resume();\n}\n'
 };
 
 Blockly.Arduino.ir_remote_received=function(){
   var a=this.getFieldValue("IR_SIGNAL");
-  return'if (ir_type(results.decode_type) == "NEC" && String(results.value, HEX) == "'+a+'") {\n'+Blockly.Arduino.statementToCode(this,"IR_RECEIVED")+'}\n';
+  b=Blockly.Arduino.statementToCode(this,"IR_RECEIVED");
+  return'if ((myCodeType == "NEC") && (myIRcode == "'+a+'")) {\n'+b+'}\n';
 };
 Blockly.Arduino.ir_received_type=function(){
-  return["ir_type(results.decode_type)",Blockly.Arduino.ORDER_ATOMIC];
+  return["myCodeType",Blockly.Arduino.ORDER_ATOMIC];
 };
 
 Blockly.Arduino.ir_received_code=function(){
-  return["String(results.value, HEX)",Blockly.Arduino.ORDER_ATOMIC];
+  return["myIRcode",Blockly.Arduino.ORDER_ATOMIC];
 };
 
 //weather
