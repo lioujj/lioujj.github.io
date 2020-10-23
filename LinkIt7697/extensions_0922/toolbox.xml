@@ -842,6 +842,13 @@
 				<value name="PIN">
 					<block type="math_number">
 						<field name="NUM">0</field>
+          </block>
+				</value>
+			</block>
+			<block type="ir_sender_8266_pin">
+				<value name="PIN">
+					<block type="math_number">
+						<field name="NUM">0</field>
                     </block>
 				</value>
 			</block>

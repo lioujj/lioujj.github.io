@@ -124,7 +124,7 @@ Blockly.Msg.MAQUEEN_NO_TONE_PRETEXT = "停止播放音調";
 
 //IR
 Blockly.Msg.CATEGORY_IR = "紅外線";
-Blockly.Msg.IR_HELPURL = "紅外線";
+Blockly.Msg.IR_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/紅外線發射與接收";
 Blockly.Msg.IR_RECEIVED_TYPE = "接收到的紅外線編碼類型";
 Blockly.Msg.IR_RECEIVED_CODE = "接收到的紅外線編碼";
 Blockly.Msg.IR_TOOLTIP = "紅外線";
@@ -132,7 +132,9 @@ Blockly.Msg.IR_RECEIVE_PIN_TITLE = "設定紅外線接收器腳位";
 Blockly.Msg.IR_SENDER_PIN_TITLE = "設定紅外線發送器腳位";
 Blockly.Msg.IR_PIN_WARNING = "需先設定紅外線接收器腳位";
 Blockly.Msg.IR_REMOTE = "MakeBlock & KSRobot";
-
+Blockly.Msg.IR_SENDER_8266_PIN_TITLE = "設定 ESP8266 紅外線發射器腳位";
+Blockly.Msg.IR_ESP8266_WARNING = "這個積木只適用在ESP8266上，開發板請設定為ESP8266";
+Blockly.Msg.IR_ESP8266_BOARD_WARNING = "如果開發板設為ESP8266，必須先「"+Blockly.Msg.IR_SENDER_8266_PIN_TITLE +"」積木";
 
 //weather
 Blockly.Msg.CATEGORY_CRAWLER = "網路爬蟲";
