@@ -455,6 +455,16 @@
       </block>
       <block type="airbox_getValue"></block>
      </category>
+     <category id="category_stock" name="TW_Stock">
+      <block type="stock_fetchData">
+        <value name="STOCKID">
+          <block type="text">
+            <field name="TEXT">Stock ID</field>
+          </block>
+        </value>
+      </block>
+      <block type="stock_getValue"></block>
+     </category>
 	</category>
 	<category id="category_liou_robot" name="Robot">
 		<category id="category_maqueen" name="Maqueen">

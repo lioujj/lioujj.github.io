@@ -323,6 +323,29 @@ Blockly.Msg.AIRBOX_VALUE_DROPDOWN=[['PM2.5','docAirbox["feeds"][0]["AirBox"]["s_
                                   ];
 Blockly.Msg.AIRBOX_WARNING = "You have to Fetch airbox data from web first.";
 
+//TW Stock
+Blockly.Msg.STOCK_HELPURL= "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/股票即時資訊積木";
+Blockly.Msg.FETCH_STOCK_TITLE = "Fetch realtime stock information from web";
+Blockly.Msg.STOCK_STOCKID = "Stock ID";
+Blockly.Msg.STOCK_TOOLTIP = "Taiwan Stock";
+Blockly.Msg.STOCK_GET_VALUE = "Get stock data";
+Blockly.Msg.STOCK_VALUE_DROPDOWN=[['Stock ID','docStock["msgArray"][0]["c"].as<char*>()'],
+                                   ['name','docStock["msgArray"][0]["n"].as<char*>()'],
+                                   ['Full name','docStock["msgArray"][0]["nf"].as<char*>()'],
+                                   ['Opening Price','docStock["msgArray"][0]["o"].as<char*>()'],
+                                   ['Closing Price','docStock["msgArray"][0]["y"].as<char*>()'],
+                                   ['Day High','docStock["msgArray"][0]["h"].as<char*>()'],
+                                   ['Day Low','docStock["msgArray"][0]["l"].as<char*>()'],
+                                   ['Volume','docStock["msgArray"][0]["tv"].as<String>()'],
+                                   ['Total Volume','docStock["msgArray"][0]["v"].as<char*>()'],
+                                   ['Strike price','docStock["msgArray"][0]["z"].as<String>()'],
+                                   ['date','docStock["msgArray"][0]["d"].as<char*>()'],
+                                   ['time','docStock["msgArray"][0]["t"].as<char*>()']
+                                  ];
+Blockly.Msg.STOCK_WARNING = "You have to fetch stock realtime information from web first.";
+
+
+
 //Probbie
 Blockly.Msg.PROBBIE_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/寶比機器人積木";
 Blockly.Msg.PROBBIE_TITLE = "Probbie";
