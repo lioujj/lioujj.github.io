@@ -319,6 +319,27 @@ Blockly.Msg.AIRBOX_VALUE_DROPDOWN=[['PM2.5濃度','docAirbox["feeds"][0]["AirBox
                                    ['裝置編號','docAirbox[\"device_id\"].as<char*>()']];
 Blockly.Msg.AIRBOX_WARNING = "必須先設定「"+Blockly.Msg.FETCH_AIRBOX_TITLE+"」積木";
 
+//TW Stock
+Blockly.Msg.STOCK_HELPURL= "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/股票即時資訊積木";
+Blockly.Msg.FETCH_STOCK_TITLE = "網路取得即時股票資訊";
+Blockly.Msg.STOCK_STOCKID = "股票編號";
+Blockly.Msg.STOCK_TOOLTIP = "Taiwan Stock";
+Blockly.Msg.STOCK_GET_VALUE = "取得股票資料";
+Blockly.Msg.STOCK_VALUE_DROPDOWN=[['股票編號','docStock["msgArray"][0]["c"].as<char*>()'],
+                                   ['公司簡稱','docStock["msgArray"][0]["n"].as<char*>()'],
+                                   ['公司全名','docStock["msgArray"][0]["nf"].as<char*>()'],
+                                   ['開盤價','docStock["msgArray"][0]["o"].as<char*>()'],
+                                   ['昨日收盤價','docStock["msgArray"][0]["y"].as<char*>()'],
+                                   ['最高價','docStock["msgArray"][0]["h"].as<char*>()'],
+                                   ['最低價','docStock["msgArray"][0]["l"].as<char*>()'],
+                                   ['成交量','docStock["msgArray"][0]["tv"].as<String>()'],
+                                   ['累積成交量','docStock["msgArray"][0]["v"].as<char*>()'],
+                                   ['成交價','docStock["msgArray"][0]["z"].as<String>()'],
+                                   ['日期','docStock["msgArray"][0]["d"].as<char*>()'],
+                                   ['時間','docStock["msgArray"][0]["t"].as<char*>()']
+                                  ];
+Blockly.Msg.STOCK_WARNING = "必須先設定「"+Blockly.Msg.FETCH_STOCK_TITLE+"」積木";
+
 //Probbie
 Blockly.Msg.PROBBIE_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/寶比機器人積木";
 Blockly.Msg.PROBBIE_TITLE = "寶比";

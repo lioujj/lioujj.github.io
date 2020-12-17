@@ -1849,6 +1849,44 @@ Blockly.Blocks.airbox_getValue={init:function(){
       this.workspace&&(Blockly.Blocks.airbox.checkBlocks(this)?this.setWarningText(null):this.setWarningText(Blockly.Msg.AIRBOX_WARNING))}
 };
 
+
+//TW Stock
+Blockly.Blocks.stock={};
+Blockly.Blocks.stock.HUE=180;
+Blockly.Blocks.stock.checkBlocks=function(a,slave,master){
+	var b=null,
+	    d=a.type;
+		a=a.workspace.getAllBlocks();
+		for(var c=0;c<a.length;c++)
+			if(slave!=a[c].type||null!=b||(b=a[c].type!=d?!0:!1),master==a[c].type){
+			  return!0;
+      }
+		return b
+};
+
+Blockly.Blocks.stock_fetchData={init:function(){
+  this.setHelpUrl(Blockly.Msg.STOCK_HELPURL);
+  this.setColour(Blockly.Blocks.stock.HUE);
+  this.appendDummyInput().appendField(Blockly.Msg.FETCH_STOCK_TITLE);
+  this.appendValueInput("STOCKID").setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg.STOCK_STOCKID);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.STOCK_TOOLTIP)},onchange:function(){}
+};
+
+Blockly.Blocks.stock_getValue={init:function(){
+  this.setHelpUrl(Blockly.Msg.STOCK_HELPURL);
+  this.setColour(Blockly.Blocks.stock.HUE);
+  this.appendDummyInput().appendField(Blockly.Msg.STOCK_GET_VALUE);
+  this.appendDummyInput()  
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.STOCK_VALUE_DROPDOWN),"VALUE_NAME");
+  this.setInputsInline(!0);
+  this.setOutput(!0,"String");
+  this.setTooltip(Blockly.Msg.STOCK_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.stock.checkBlocks(this,"stock_getValue","stock_fetchData")?this.setWarningText(null):this.setWarningText(Blockly.Msg.STOCK_WARNING))}
+};
+
 //Probbie
 Blockly.Blocks.probbie={};
 Blockly.Blocks.probbie.HUE1=300;

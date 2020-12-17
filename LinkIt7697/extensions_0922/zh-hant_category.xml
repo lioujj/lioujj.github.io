@@ -20,6 +20,7 @@
 <category><name>WorldWeather</name><replace>世界天氣</replace></category>
 <category><name>TaiwanAQI</name><replace>台灣空氣品質AQI</replace></category>
 <category><name>Airbox</name><replace>空氣盒子</replace></category>
+<category><name>TW_Stock</name><replace>台灣上市股票</replace></category>
 <category><name>IoT</name><replace>物聯網</replace></category>
 <category><name>MQTT</name><replace>MQTT</replace></category>
 <category><name>ThingSpeak</name><replace>ThingSpeak</replace></category>
