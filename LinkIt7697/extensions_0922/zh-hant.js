@@ -464,3 +464,13 @@ Blockly.Msg.MPU9250_GYRO_3AXIS_WARNING = "必須先設定「"+Blockly.Msg.MPU925
 Blockly.Msg.MPU925_3AXIS_POST_FIX_UNIT = "角速度(DPS)";
 Blockly.Msg.MPU9250_ACCEL_PITCH_ROLL = "旋轉角度";
 Blockly.Msg.MPU9250_PITCH_ROLL=[["俯仰(Pitch)","pitch"],["翻滾(Roll)","roll"]];
+
+//GoogleSheets
+Blockly.Msg.GOOGLESHEETS_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/google試算表積木";
+Blockly.Msg.GOOGLESHEETS_TOOLTIP = "Google Sheets";
+Blockly.Msg.GOOGLESHEETS_DATA_TITLE_CREATEWITH = "串接儲存資料";
+Blockly.Msg.GOOGLESHEETS_TITLE = "Google試算表";
+Blockly.Msg.GOOGLESHEETS_SEND_DATA = "傳送資料到Google";
+Blockly.Msg.GOOGLESHEETS_SHEETID = "試算表ID";
+Blockly.Msg.GOOGLESHEETS_SHEETTAG = "工作表名稱";
+Blockly.Msg.GOOGLESHEETS_DATA = "傳送的資料";

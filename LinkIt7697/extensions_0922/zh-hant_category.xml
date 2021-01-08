@@ -33,4 +33,5 @@
 <category><name>PocketCard</name><replace>Pocket Card</replace></category>
 <category><name>AnalogWrite</name><replace>類比寫入及音調</replace></category>
 <category><name>MPU9250_I2C</name><replace>MPU9250 9軸動作感應</replace></category>
+<category><name>GoogleSheets</name><replace>Google試算表</replace></category>
 </xml>
