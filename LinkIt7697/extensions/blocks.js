@@ -2979,3 +2979,84 @@ Blockly.Blocks.mpu9250_gyro_3axis={init:function(){
   this.setTooltip(Blockly.Msg.MPU9250_TOOLTIP)},onchange:function(){
       this.workspace&&(Blockly.Blocks.mpu9250.checkBlocks(this,"mpu9250_gyro_3axis","mpu9250_gyro_fetch")?this.setWarningText(null):this.setWarningText(Blockly.Msg.MPU9250_GYRO_3AXIS_WARNING))}
 };
+
+//GoogleSheets
+Blockly.Blocks.googlesheets={};
+Blockly.Blocks.googlesheets.HUE=275;
+
+Blockly.Blocks.sendToGoogle={init:function(){
+  this.setHelpUrl(Blockly.Msg.GOOGLESHEETS_HELPURL);
+  this.setColour(Blockly.Blocks.googlesheets.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.GOOGLESHEETS_TITLE+" "+Blockly.Msg.GOOGLESHEETS_SEND_DATA);
+  this.appendValueInput("sheetId")
+      .setCheck("String")
+      .appendField(Blockly.Msg.GOOGLESHEETS_SHEETID);
+  this.appendValueInput("sheetTag")
+      .setCheck("String")
+      .appendField(Blockly.Msg.GOOGLESHEETS_SHEETTAG);
+  this.appendValueInput("data")
+      .setCheck("String")
+      .appendField(Blockly.Msg.GOOGLESHEETS_DATA);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.GOOGLESHEETS_TOOLTIP)}
+};
+
+Blockly.Blocks.data_join={init:function(){
+  this.setHelpUrl(Blockly.Msg.GOOGLESHEETS_HELPURL);
+  this.setColour(Blockly.Blocks.googlesheets.HUE);
+  this.itemCount_=2;
+  this.updateShape_();
+  this.setOutput(!0,"String");
+  this.setMutator(new Blockly.Mutator(["text_create_join_item"]));
+  this.setTooltip(Blockly.Msg.GOOGLESHEETS_TOOLTIP)
+},mutationToDom:function(){
+  var a=document.createElement("mutation");
+  a.setAttribute("items",this.itemCount_);
+  return a
+},domToMutation:function(a){
+  this.itemCount_=parseInt(a.getAttribute("items"),10);
+  this.updateShape_()
+},decompose:function(a){
+  var b=Blockly.Block.obtain(a,"text_create_join_container");
+  b.initSvg();
+  for(var d=b.getInput("STACK").connection,c=0;c<this.itemCount_;c++){
+    var e=Blockly.Block.obtain(a,"text_create_join_item");
+    e.initSvg();
+    d.connect(e.previousConnection);
+    d=e.nextConnection
+  }
+  return b
+},compose:function(a){
+  a=a.getInputTargetBlock("STACK");
+  for(var b=[],d=0;a;)
+    b[d]=a.valueConnection_,
+    a=a.nextConnection&&a.nextConnection.targetBlock(),
+    d++;
+  this.itemCount_=d;
+  this.updateShape_();
+  for(d=0;d<this.itemCount_;d++)
+    b[d]&&this.getInput("ADD"+d).connection.connect(b[d])
+},saveConnections:function(a){
+  a=a.getInputTargetBlock("STACK");
+  for(var b=0;a;){
+    var d=this.getInput("ADD"+b);
+    a.valueConnection_=d&&d.connection.targetConnection;
+    b++;
+    a=a.nextConnection&&a.nextConnection.targetBlock()
+  }
+},updateShape_:function(){
+  if(this.getInput("EMPTY"))
+    this.removeInput("EMPTY");
+  else
+    for(var a=0;this.getInput("ADD"+a);)
+      this.removeInput("ADD"+a),a++;
+    if(0==this.itemCount_)
+      this.appendDummyInput("EMPTY").appendField(new Blockly.FieldImage(Blockly.pathToMedia+"quote0.png",12,12,'"')).appendField(new Blockly.FieldImage(Blockly.pathToMedia+"quote1.png",12,12,'"'));
+    else
+      for(a=0;a<this.itemCount_;a++){
+        var b=this.appendValueInput("ADD"+a);
+        0==a&&b.appendField(Blockly.Msg.GOOGLESHEETS_TITLE+" "+Blockly.Msg.GOOGLESHEETS_DATA_TITLE_CREATEWITH)
+      }
+}};

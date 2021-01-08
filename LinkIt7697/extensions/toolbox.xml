@@ -276,6 +276,25 @@
 					</value>
 				</block>
 		</category>
+		<category id="category_googlesheets" name="GoogleSheets">
+      <block type="sendToGoogle">
+				<value name="sheetId">
+					<block type="text">
+						<field name="TEXT">Enter your SheetID</field>
+					</block>
+				</value>
+				<value name="sheetTag">
+					<block type="text">
+						<field name="TEXT">Enter your WorkSheet Name</field>
+					</block>
+				</value>
+        <value name="data">
+          <block type="data_join">
+            <mutation items="2"></mutation>
+          </block>
+        </value>
+      </block>
+    </category>
     <category id="category_broadcast_udp" name="Broadcast">
       <block type="broadcast_udp_init">
         <value name="PORT">

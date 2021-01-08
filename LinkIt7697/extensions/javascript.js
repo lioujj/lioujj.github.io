@@ -1049,15 +1049,15 @@ Blockly.Arduino.airbox_getValue=function(){
 Blockly.Arduino.stock={};
 Blockly.Arduino.stock_fetchData=function(){
   Blockly.Arduino.definitions_.define_json_include="#define ARDUINOJSON_DECODE_UNICODE 1\n#include <ArduinoJson.h>";
-  if (Blockly.Arduino.my_board_type=="ESP8266")
-    Blockly.Arduino.definitions_.define_json_esp8266_stock_fingerprint="const char stockFingerPrint[] PROGMEM=\"0ddb07fcad53ec3e1713f4a5897fc4a4561675ac\";";
+  //if (Blockly.Arduino.my_board_type=="ESP8266")
+  //  Blockly.Arduino.definitions_.define_json_esp8266_stock_fingerprint="const char stockFingerPrint[] PROGMEM=\"0ddb07fcad53ec3e1713f4a5897fc4a4561675ac\";";
   Blockly.Arduino.definitions_.define_stock_json_invoke="const size_t capacity_stock = JSON_ARRAY_SIZE(1) + 2*JSON_OBJECT_SIZE(8) + JSON_OBJECT_SIZE(36) + 680;\nDynamicJsonDocument docStock(capacity_stock);";
 	Blockly.Arduino.definitions_.define_fetch_stock_invoke='void fetchStockInfo(String myID){\n  static TLSClient stockClient;\n  if (!stockClient.connect("mis.twse.com.tw", 443)) {\n    return;\n  }\n  const String url = String() + "/stock/api/getStockInfo.jsp?ex_ch=tse_"+myID+".tw";\n  stockClient.println("GET " + url + " HTTP/1.1");\n  stockClient.println("Host: mis.twse.com.tw");\n  stockClient.println("Accept: */*");\n  stockClient.println("Connection: close");\n  stockClient.println();\n  stockClient.println();\n  while (stockClient.connected()) {\n    String line = stockClient.readStringUntil(\'\\n\');\n    if (line.startsWith("{\\"msgArray")) {\n      line.replace(".0000",".00");\n      DeserializationError error = deserializeJson(docStock, line);\n      break;\n    }\n  }\n  stockClient.stop();\n}\n';
   if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
     Blockly.Arduino.definitions_.define_secure_include="#include <WiFiClientSecure.h>";
     Blockly.Arduino.definitions_.define_fetch_stock_invoke=Blockly.Arduino.definitions_.define_fetch_stock_invoke.replace("TLSClient","WiFiClientSecure");
     if (Blockly.Arduino.my_board_type=="ESP8266"){
-      Blockly.Arduino.definitions_.define_fetch_stock_invoke=Blockly.Arduino.definitions_.define_fetch_stock_invoke.replace(" stockClient;\n"," stockClient;\n  stockClient.setFingerprint(stockFingerPrint);\n");
+      Blockly.Arduino.definitions_.define_fetch_stock_invoke=Blockly.Arduino.definitions_.define_fetch_stock_invoke.replace(" stockClient;\n"," stockClient;\n  stockClient.setInsecure();\n");
     }  
   }
   var a=Blockly.Arduino.valueToCode(this,"STOCKID",Blockly.Arduino.ORDER_ATOMIC)||"";
@@ -1703,4 +1703,35 @@ Blockly.Arduino.mpu9250_gyro_fetch=function(){
 Blockly.Arduino.mpu9250_gyro_3axis=function(){
   var a=this.getFieldValue("3AXIS_MODE");
   return["myMPU9250."+a,Blockly.Arduino.ORDER_ATOMIC];
+};
+
+//GoogleSheets
+Blockly.Arduino.googlesheets={};
+Blockly.Arduino.data_join=function(){
+  for(var a="String()",b=0;b<this.itemCount_;b++){
+    var c=Blockly.Arduino.valueToCode(this,"ADD"+b,Blockly.Arduino.ORDER_COMMA);
+    if(b<(this.itemCount_-1))
+      c&&(a+=" + "+c+" + \",\"")
+    else
+      c&&(a+=" + "+c)
+  }
+  return[a,Blockly.Arduino.ORDER_ATOMIC]
+};
+
+Blockly.Arduino.sendToGoogle=function(){
+  //if (Blockly.Arduino.my_board_type=="ESP8266")
+  //  Blockly.Arduino.definitions_.define_json_esp8266_stock_fingerprint="const char sheetFingerPrint[] PROGMEM=\"e48943d96a40d534b9337ee5eda976d2201d2ebf\";";
+  Blockly.Arduino.definitions_.define_urlencode_invoke="String URLEncode(const char* msg)\n{\n  const char *hex = \"0123456789abcdef\";\n  String encodedMsg = \"\";\n  while (*msg!='\\0'){\n      if( ('a' <= *msg && *msg <= 'z')\n              || ('A' <= *msg && *msg <= 'Z')\n              || ('0' <= *msg && *msg <= '9') ) {\n          encodedMsg += *msg;\n      } else {\n          encodedMsg += '%';\n          encodedMsg += hex[*msg >> 4];\n          encodedMsg += hex[*msg & 15];\n      }\n      msg++;\n  }\n  return encodedMsg;\n}\n";
+  Blockly.Arduino.definitions_.define_send_sheet_invoke='void  sendToGoogleSheets(const String& sheetId,const String& sheetTag,const String& data)\n{\n  static TLSClient sheetClient;\n  const char* host="script.google.com";\n  const char* asId="AKfycbzfXQOf8AfMy73a3KTaipR4q5R2nR4yGEBns-1NkNj1pObSi6m-";\n  if (sheetClient.connect(host, 443)) {\n      const String url = String() +"https://"+host+"/macros/s/"+asId+"/exec?type=insert&sheetId="+sheetId+"&sheetTag="+sheetTag+"&data="+data;\n      sheetClient.println("GET " + url + " HTTP/1.1");\n      sheetClient.println(String()+"Host: "+host);\n      sheetClient.println("Accept: */*");\n      sheetClient.println("Connection: close");\n      sheetClient.println();\n      sheetClient.println();\n      sheetClient.stop();\n  }\n}\n';
+  if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
+    Blockly.Arduino.definitions_.define_secure_include="#include <WiFiClientSecure.h>";
+    Blockly.Arduino.definitions_.define_send_sheet_invoke=Blockly.Arduino.definitions_.define_send_sheet_invoke.replace("TLSClient","WiFiClientSecure");
+    if (Blockly.Arduino.my_board_type=="ESP8266"){
+      Blockly.Arduino.definitions_.define_send_sheet_invoke=Blockly.Arduino.definitions_.define_send_sheet_invoke.replace(" sheetClient;\n"," sheetClient;\n  sheetClient.setInsecure();\n");
+    }  
+  }
+  var a=Blockly.Arduino.valueToCode(this,"sheetId",Blockly.Arduino.ORDER_ATOMIC)||"",
+      b=Blockly.Arduino.valueToCode(this,"sheetTag",Blockly.Arduino.ORDER_ATOMIC)||"",
+      c=Blockly.Arduino.valueToCode(this,"data",Blockly.Arduino.ORDER_ATOMIC)||"";
+  return'sendToGoogleSheets('+a+',URLEncode('+b+'),URLEncode(('+c+').c_str()));'
 };

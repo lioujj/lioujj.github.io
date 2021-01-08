@@ -469,3 +469,13 @@ Blockly.Msg.MPU9250_GYRO_3AXIS_WARNING = "You have to set \""+Blockly.Msg.MPU925
 Blockly.Msg.MPU925_3AXIS_POST_FIX_UNIT = "DPS";
 Blockly.Msg.MPU9250_ACCEL_PITCH_ROLL = "Rotation angle";
 Blockly.Msg.MPU9250_PITCH_ROLL=[["Pitch","pitch"],["Roll","roll"]];
+
+//GoogleSheets
+Blockly.Msg.GOOGLESHEETS_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/google試算表積木";
+Blockly.Msg.GOOGLESHEETS_TOOLTIP = "Google Sheets";
+Blockly.Msg.GOOGLESHEETS_DATA_TITLE_CREATEWITH = "create data with";
+Blockly.Msg.GOOGLESHEETS_TITLE = "GoogleSheets";
+Blockly.Msg.GOOGLESHEETS_SHEETID = "Sheet ID";
+Blockly.Msg.GOOGLESHEETS_SHEETTAG = "Sheet Tag";
+Blockly.Msg.GOOGLESHEETS_SEND_DATA = "send data to Google";
+Blockly.Msg.GOOGLESHEETS_DATA = "Data";
