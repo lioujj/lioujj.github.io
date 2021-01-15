@@ -277,22 +277,57 @@
 				</block>
 		</category>
 		<category id="category_googlesheets" name="GoogleSheets">
-      <block type="sendToGoogle">
+      <block type="setupSheets">
 				<value name="sheetId">
 					<block type="text">
 						<field name="TEXT">Enter your SheetID</field>
 					</block>
 				</value>
+      </block>
+      <block type="setupForm">
 				<value name="sheetTag">
 					<block type="text">
 						<field name="TEXT">Enter your WorkSheet Name</field>
 					</block>
 				</value>
+      </block>
+      <block type="sendToGoogle">
         <value name="data">
           <block type="data_join">
             <mutation items="2"></mutation>
           </block>
         </value>
+      </block>
+      <block type="fetchFromSheet">
+				<value name="beginCell">
+					<block type="text">
+						<field name="TEXT"></field>
+					</block>
+				</value>
+				<value name="endCell">
+					<block type="text">
+						<field name="TEXT"></field>
+					</block>
+				</value>
+      </block>
+      <block type="getCellValue">
+				<value name="cell">
+					<block type="text">
+						<field name="TEXT"></field>
+					</block>
+				</value>
+      </block>
+      <block type="updateCellValue">
+				<value name="cell">
+					<block type="text">
+						<field name="TEXT"></field>
+					</block>
+				</value>
+				<value name="data">
+					<block type="text">
+						<field name="TEXT"></field>
+					</block>
+				</value>
       </block>
     </category>
     <category id="category_broadcast_udp" name="Broadcast">
