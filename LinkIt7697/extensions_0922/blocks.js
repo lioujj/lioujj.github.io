@@ -2983,24 +2983,111 @@ Blockly.Blocks.mpu9250_gyro_3axis={init:function(){
 //GoogleSheets
 Blockly.Blocks.googlesheets={};
 Blockly.Blocks.googlesheets.HUE=275;
+Blockly.Blocks.googlesheets.checkBlocks=function(a,slave,master){
+	var b=null,
+	    d=a.type;
+		a=a.workspace.getAllBlocks();
+		for(var c=0;c<a.length;c++)
+			if(slave!=a[c].type||null!=b||(b=a[c].type!=d?!0:!1),master==a[c].type){
+			  return!0;
+      }
+		return b
+};
+Blockly.Blocks.setupSheets={init:function(){
+  this.setHelpUrl(Blockly.Msg.GOOGLESHEETS_HELPURL);
+  this.setColour(Blockly.Blocks.googlesheets.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.GOOGLESHEETS_TITLE+" "+Blockly.Msg.GOOGLESHEETS_SETUP_TITLE);
+  this.appendValueInput("sheetId")
+      .setCheck("String")
+      .appendField(Blockly.Msg.GOOGLESHEETS_SHEETID);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.GOOGLESHEETS_TOOLTIP)}
+};
+
+Blockly.Blocks.setupForm={init:function(){
+  this.setHelpUrl(Blockly.Msg.GOOGLESHEETS_HELPURL);
+  this.setColour(Blockly.Blocks.googlesheets.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.GOOGLESHEETS_TITLE+" "+Blockly.Msg.GOOGLESHEETS_SETUP_TITLE);
+  this.appendValueInput("sheetTag")
+      .setCheck("String")
+      .appendField(Blockly.Msg.GOOGLESHEETS_SHEETTAG);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.GOOGLESHEETS_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.stock.checkBlocks(this,"setupForm","setupSheets")?this.setWarningText(null):this.setWarningText(Blockly.Msg.GOOGLESHEETS_SETUP_SHEET_WARNIG))}
+};
+
+Blockly.Blocks.fetchFromSheet={init:function(){
+  this.setHelpUrl(Blockly.Msg.GOOGLESHEETS_HELPURL);
+  this.setColour(Blockly.Blocks.googlesheets.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.GOOGLESHEETS_TITLE+" "+Blockly.Msg.GOOGLESHEETS_FETCH_FROM_SHEET);
+  this.appendValueInput("beginCell")
+      .setCheck("String")
+      .appendField(Blockly.Msg.GOOGLESHEETS_BEGIN);
+  this.appendValueInput("endCell")
+      .setCheck("String")
+      .appendField(Blockly.Msg.GOOGLESHEETS_END);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.GOOGLESHEETS_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.stock.checkBlocks(this,"fetchFromSheet","setupForm")?this.setWarningText(null):this.setWarningText(Blockly.Msg.GOOGLESHEETS_SETUP_FORM_WARNIG))}
+};
 
 Blockly.Blocks.sendToGoogle={init:function(){
   this.setHelpUrl(Blockly.Msg.GOOGLESHEETS_HELPURL);
   this.setColour(Blockly.Blocks.googlesheets.HUE);
   this.appendDummyInput()
-      .appendField(Blockly.Msg.GOOGLESHEETS_TITLE+" "+Blockly.Msg.GOOGLESHEETS_SEND_DATA);
-  this.appendValueInput("sheetId")
-      .setCheck("String")
-      .appendField(Blockly.Msg.GOOGLESHEETS_SHEETID);
-  this.appendValueInput("sheetTag")
-      .setCheck("String")
-      .appendField(Blockly.Msg.GOOGLESHEETS_SHEETTAG);
+      .appendField(Blockly.Msg.GOOGLESHEETS_TITLE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.GOOGLESHEETS_DATEINCLUDE)
+      .appendField(new Blockly.FieldDropdown([["Yes","1"],["No","0"]]),"dateInclude");
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.GOOGLESHEETS_SEND_DATA);
   this.appendValueInput("data")
-      .setCheck("String")
-      .appendField(Blockly.Msg.GOOGLESHEETS_DATA);
+      .setCheck("String");
   this.setPreviousStatement(!0,null);
   this.setNextStatement(!0,null);
-  this.setTooltip(Blockly.Msg.GOOGLESHEETS_TOOLTIP)}
+  this.setTooltip(Blockly.Msg.GOOGLESHEETS_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.stock.checkBlocks(this,"sendToGoogle","setupForm")?this.setWarningText(null):this.setWarningText(Blockly.Msg.GOOGLESHEETS_SETUP_FORM_WARNIG))}
+};
+
+Blockly.Blocks.getCellValue={init:function(){
+  this.setHelpUrl(Blockly.Msg.GOOGLESHEETS_HELPURL);
+  this.setColour(Blockly.Blocks.googlesheets.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.GOOGLESHEETS_TITLE);
+  this.appendValueInput("cell")
+      .setCheck("String")
+      .appendField(Blockly.Msg.GOOGLESHEETS_GET_CELL_VALUE);
+  this.setInputsInline(!0);
+  this.setOutput(!0,"String");
+  this.setTooltip(Blockly.Msg.GOOGLESHEETS_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.stock.checkBlocks(this,"getCellValue","fetchFromSheet")?this.setWarningText(null):this.setWarningText(Blockly.Msg.GOOGLESHEETS_FETCH_DATA_WARNIG))}
+};
+
+Blockly.Blocks.updateCellValue={init:function(){
+  this.setHelpUrl(Blockly.Msg.GOOGLESHEETS_HELPURL);
+  this.setColour(Blockly.Blocks.googlesheets.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.GOOGLESHEETS_TITLE);
+  this.appendValueInput("cell")
+      .setCheck("String")
+      .appendField(Blockly.Msg.GOOGLESHEETS_UPDATE_TITLE);
+  this.appendValueInput("data")
+      .setCheck("String")
+      .appendField(Blockly.Msg.GOOGLESHEETS_UPDATE_DATA_TITLE);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.GOOGLESHEETS_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.stock.checkBlocks(this,"updateCellValue","setupForm")?this.setWarningText(null):this.setWarningText(Blockly.Msg.GOOGLESHEETS_SETUP_FORM_WARNIG))}
 };
 
 Blockly.Blocks.data_join={init:function(){
