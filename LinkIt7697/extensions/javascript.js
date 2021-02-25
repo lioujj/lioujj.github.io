@@ -992,7 +992,7 @@ Blockly.Arduino.oled_display_setting_new=function(){
   Blockly.Arduino.definitions_.define_wire='#include "Wire.h"';
   Blockly.Arduino.definitions_.define_u8g2_oled_include='#include "U8g2lib.h"';
   Blockly.Arduino.definitions_.define_u8g2_oled_declare="U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE);";
-  Blockly.Arduino.setups_.setup_define_u8g2_oled="u8g2.begin();\n  u8g2.setFont(u8g2_font_6x10_tf);\n  u8g2.setFontRefHeightExtendedText();\n  u8g2.setDrawColor(1);\n  u8g2.setFontPosTop();\n  u8g2.setFontDirection(0);\n";return""
+  Blockly.Arduino.setups_.setup_define_u8g2_oled="u8g2.begin();\n  u8g2.enableUTF8Print();\n  u8g2.setFont(u8g2_font_6x10_tf);\n  u8g2.setFontRefHeightExtendedText();\n  u8g2.setDrawColor(1);\n  u8g2.setFontPosTop();\n  u8g2.setFontDirection(0);\n";return""
 }
 
 Blockly.Arduino.oled_display_show_xbm=function(){
@@ -1001,6 +1001,18 @@ Blockly.Arduino.oled_display_show_xbm=function(){
 	  Blockly.Arduino.definitions_.define_showXBM="void showXBM(String myXBM,unsigned char *myBitMap){\n    myXBM.replace(\" \",\"\");\n    myXBM.replace(\"\\r\",\"\");\n    myXBM.replace(\"\\n\",\"\");\n    StringSplitter *splitter = new StringSplitter(myXBM, ',', 1024);\n    for(int i = 0; i < 1024; i++){\n      myBitMap[i]= 0;\n    }\n    for(int i = 0; i < splitter->getItemCount(); i++){\n      splitter->getItemAtIndex(i)=\"0x\"+splitter->getItemAtIndex(i);\n      myBitMap[i]= strtol(splitter->getItemAtIndex(i).c_str(), 0, 16);       \n    }\n    delete splitter;\n}\n";
     return'unsigned char xBitMap[1024];\nshowXBM('+a+',xBitMap);\nu8g2.clearBuffer();\nu8g2.drawXBMP(0, 0, 128, 64, xBitMap);\n';
 };
+
+Blockly.Arduino.oled_display_set_chinese_font=function(){
+  return'u8g2.setFont(u8g2_font_unifont_t_chinese1);\n'
+};
+
+Blockly.Arduino.oled_display_draw_text=function(){
+  var a=Blockly.Arduino.valueToCode(this,"START_X",Blockly.Arduino.ORDER_NONE)||"0",
+  b=Blockly.Arduino.valueToCode(this,"START_Y",Blockly.Arduino.ORDER_NONE)||"0",
+  c=Blockly.Arduino.valueToCode(this,"CONTENT",Blockly.Arduino.ORDER_NONE)||'""';
+  return"u8g2.setCursor("+a+", "+b+");\nu8g2.print(String("+c+").c_str());\n"
+};
+
 
 Blockly.Arduino.oled_display_clear_buffer=function(){
   return'u8g2.clearBuffer();\n'
@@ -1012,12 +1024,12 @@ Blockly.Arduino.oled_display_send_buffer=function(){
 
 Blockly.Arduino.oled_display_set_overwrite=function(){
   var a=this.getFieldValue("OVERWRITE_MODE");
-  return a;
+  return a+"\n";
 };
 
 Blockly.Arduino.oled_display_set_color=function(){
   var a=this.getFieldValue("DRAW_COLOR");
-  return a;
+  return a+"\n";
 };
 
 //airbox

@@ -298,6 +298,9 @@ Blockly.Msg.OLED_DISPLAY_SET_COLOR = "設定文字及繪圖顏色：";
 Blockly.Msg.OLED_DISPLAY_TOOLTIP = "用 u8g2 函式庫來驅動 I2C 介面的 128×64 點陣 OLED 顯示器";
 Blockly.Msg.OLED_DISPLAY_DRAW_BOX_END_NEW = "寬度、高度：";
 Blockly.Msg.OLED_DISPLAY_DRAW_FRAME_END_NEW = "寬度、高度：";
+Blockly.Msg.OLED_DISPLAY_CHINESE_FONT = "設定使用中文字型";
+Blockly.Msg.OLED_DISPLAY_SET_ENG_FONT ="設定使用英文字型";
+Blockly.Msg.OLED_DISPLAY_HELPURL=Blockly.Msg.OLED_DISPLAY_HELPURL_NEW;
 
 //AIRBOX
 Blockly.Msg.CATEGORY_AIRBOX = "AIRBOX";
