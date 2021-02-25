@@ -1688,8 +1688,32 @@ Blockly.Blocks.oled_display_setting_new={
     this.setHelpUrl(Blockly.Msg.OLED_DISPLAY_HELPURL_NEW);
     this.setColour(Blockly.Blocks.oled_display.HUE);
     this.appendDummyInput()
-        .appendField(Blockly.Msg.INITIALIZES_SETUP_APPENDTEXT)
+        .appendField(Blockly.Msg.OLED_DISPLAY_TITLE +"  "+Blockly.Msg.INITIALIZES_SETUP_APPENDTEXT)
+    this.setPreviousStatement(!0);
+    this.setNextStatement(!0);
+    this.setTooltip(Blockly.Msg.OLED_DISPLAY_TOOLTIP)}
+};
+
+Blockly.Blocks.oled_display_set_font={
+  init:function(){
+    this.setHelpUrl(Blockly.Msg.OLED_DISPLAY_HELPURL_NEW);
+    this.setColour(Blockly.Blocks.oled_display.HUE);
+    this.appendDummyInput()
         .appendField(Blockly.Msg.OLED_DISPLAY_TITLE)
+        .appendField(Blockly.Msg.OLED_DISPLAY_SET_ENG_FONT)
+        .appendField(new Blockly.FieldDropdown([[Blockly.Msg.OLED_DISPLAY_SET_FONT_SMALL,"u8g2_font_6x10_mf"],
+                                                [Blockly.Msg.OLED_DISPLAY_SET_FONT_LARGE,"u8g2_font_8x13_mf"]
+                                              ]),"FONT");
+    this.setPreviousStatement(!0);
+    this.setNextStatement(!0);
+    this.setTooltip(Blockly.Msg.OLED_DISPLAY_TOOLTIP)}
+};
+
+Blockly.Blocks.oled_display_set_chinese_font={
+  init:function(){
+    this.setHelpUrl(Blockly.Msg.OLED_DISPLAY_HELPURL_NEW);
+    this.setColour(Blockly.Blocks.oled_display.HUE);
+    this.appendDummyInput().appendField(Blockly.Msg.OLED_DISPLAY_TITLE+"  "+Blockly.Msg.OLED_DISPLAY_CHINESE_FONT);
     this.setPreviousStatement(!0);
     this.setNextStatement(!0);
     this.setTooltip(Blockly.Msg.OLED_DISPLAY_TOOLTIP)}
@@ -1714,7 +1738,7 @@ Blockly.Blocks.oled_display_set_overwrite={
     this.appendDummyInput()
         .appendField(Blockly.Msg.OLED_DISPLAY_TITLE)
         .appendField(Blockly.Msg.OLED_DISPLAY_SET_OVERWRITE)
-        .appendField(new Blockly.FieldDropdown([["Yes","u8g2.setFontMode(1);\n"],["No","u8g2.setFontMode(0);\n"]]),"OVERWRITE_MODE");
+        .appendField(new Blockly.FieldDropdown([["Yes","u8g2.setFontMode(1);"],["No","u8g2.setFontMode(0);"]]),"OVERWRITE_MODE");
     this.setInputsInline(!0);
     this.setPreviousStatement(!0);
     this.setNextStatement(!0);
@@ -1728,7 +1752,7 @@ Blockly.Blocks.oled_display_set_color={
     this.appendDummyInput()
         .appendField(Blockly.Msg.OLED_DISPLAY_TITLE)
         .appendField(Blockly.Msg.OLED_DISPLAY_SET_COLOR)
-        .appendField(new Blockly.FieldDropdown([["White","u8g2.setDrawColor(1);\n"],["Black","u8g2.setDrawColor(0);\n"]]),"DRAW_COLOR");
+        .appendField(new Blockly.FieldDropdown([["White","u8g2.setDrawColor(1);"],["Black","u8g2.setDrawColor(0);"]]),"DRAW_COLOR");
     this.setInputsInline(!0);
     this.setPreviousStatement(!0);
     this.setNextStatement(!0);

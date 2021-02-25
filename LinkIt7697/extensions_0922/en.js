@@ -300,6 +300,9 @@ Blockly.Msg.OLED_DISPLAY_SET_COLOR = "Set font and draw color:";
 Blockly.Msg.OLED_DISPLAY_TOOLTIP = "An OLED monochrome 128×64dot matrix display module";
 Blockly.Msg.OLED_DISPLAY_DRAW_BOX_END_NEW = "(width, height):";
 Blockly.Msg.OLED_DISPLAY_DRAW_FRAME_END_NEW = "(width, height):";
+Blockly.Msg.OLED_DISPLAY_CHINESE_FONT = "set apply Chinese font";
+Blockly.Msg.OLED_DISPLAY_SET_ENG_FONT ="set English font";
+Blockly.Msg.OLED_DISPLAY_HELPURL=Blockly.Msg.OLED_DISPLAY_HELPURL_NEW;
 
 
 //AIRBOX
