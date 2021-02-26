@@ -289,7 +289,8 @@ Blockly.Msg.MTK7697BIT_TOOLTIP = "7697:bit breakout";
 Blockly.Msg.MTK7697BIT_PINMAP_TITLE = "micro:bit 腳位";
 
 //OLED
-Blockly.Msg.OLED_DISPLAY_HELPURL_NEW = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/oled動態更換自訂圖案";
+Blockly.Msg.OLED_DISPLAY_HELPURL_NEW = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/oled顯示中文";
+Blockly.Msg.OLED_DISPLAY_HELPURL_IMAGE = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/oled動態更換自訂圖案";
 Blockly.Msg.OLED_DISPLAY_SHOW_XBM = "從XBM字串顯示自訂圖案";
 Blockly.Msg.OLED_DISPLAY_CLEAR_BUFFER = "清除OLED已顯示之緩衝區";
 Blockly.Msg.OLED_DISPLAY_SEND_BUFFER = "傳送緩衝區資料到OLED顯示";

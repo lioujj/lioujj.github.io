@@ -291,7 +291,8 @@ Blockly.Msg.MTK7697BIT_TOOLTIP = "7697:bit breakout";
 Blockly.Msg.MTK7697BIT_PINMAP_TITLE = "micro:bit pin:";
 
 //OLED
-Blockly.Msg.OLED_DISPLAY_HELPURL_NEW = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/oled動態更換自訂圖案";
+Blockly.Msg.OLED_DISPLAY_HELPURL_NEW = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/oled顯示中文";
+Blockly.Msg.OLED_DISPLAY_HELPURL_IMAGE = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/oled動態更換自訂圖案";
 Blockly.Msg.OLED_DISPLAY_SHOW_XBM = "Show the custom bitmap on OLED from the String" ;
 Blockly.Msg.OLED_DISPLAY_CLEAR_BUFFER = "Clear OLED displayed buffer";
 Blockly.Msg.OLED_DISPLAY_SEND_BUFFER = "Send buffer to OLED";

@@ -1721,7 +1721,7 @@ Blockly.Blocks.oled_display_set_chinese_font={
 
 Blockly.Blocks.oled_display_show_xbm={
   init:function(){
-    this.setHelpUrl(Blockly.Msg.OLED_DISPLAY_HELPURL_NEW);
+    this.setHelpUrl(Blockly.Msg.OLED_DISPLAY_HELPURL_IMAGE);
     this.setColour(Blockly.Blocks.oled_display.HUE);
     this.appendDummyInput().appendField(Blockly.Msg.OLED_DISPLAY_TITLE);
     this.appendValueInput("XBM").appendField(Blockly.Msg.OLED_DISPLAY_SHOW_XBM);
