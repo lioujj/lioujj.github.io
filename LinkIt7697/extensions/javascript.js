@@ -1387,7 +1387,8 @@ Blockly.Arduino.webserver_event=function(){
 Blockly.Arduino.webserver_talk=function(){
   var a=Blockly.Arduino.valueToCode(this,"CONTENT",Blockly.Arduino.ORDER_ATOMIC)||"";
   //a=a.replace(/\"/g, "");
-  var b="String(\"https://google-translate-proxy.herokuapp.com/api/tts?query=\")+"+a+"+String(\"&language=zh-tw\")";
+  //var b="String(\"https://google-translate-proxy.herokuapp.com/api/tts?query=\")+"+a+"+String(\"&language=zh-tw\")";
+  var b="String(\"http://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&q=\")+"+a+"+String(\"&tl=zh-TW\")";
   a="WebClient.println(String(\"<iframe width=0 height=0 frameborder=0 src='\")+"+b+"+\"' allow='autoplay'></iframe>\");\n";
   return a;
 };
@@ -1604,7 +1605,8 @@ Blockly.Arduino.esp32_tone=function(){
       c=Blockly.Arduino.valueToCode(this,"CHANNEL",Blockly.Arduino.ORDER_ATOMIC)||"0";
   if (Blockly.Arduino.my_board_type=="ESP32"){
     Blockly.Arduino.definitions_.define_tone="#include <Tone32.h>";
-    return"tone("+a+","+b+",0,"+c+");\n"
+    Blockly.Arduino.setups_["esp32_tone1"]="tone("+a+","+b+",0,"+c+");\n  delay(1);\n  noTone("+a+","+c+");\n";
+    return"\nnoTone("+a+","+c+");\ntone("+a+","+b+",0,"+c+");\n"
   }
   else
     return'';
