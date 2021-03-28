@@ -751,6 +751,7 @@
                 </block>
               </value>
       </block>
+      <block type="oled_display_clock"></block>
       <block type="oled_display_draw_line">
             <value name="START_X">
                 <block type="math_number">
@@ -851,7 +852,6 @@
                 </block>
             </value>
       </block>
-      <block type="oled_display_clock"></block>
     </category>
 		<category id="category_mtk7697bit" name="7697:bit">
       <block type="mtk7697bit_button"></block>
