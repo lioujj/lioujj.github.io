@@ -91,6 +91,11 @@
         </value>
       </block>
     </category>
+    <category id="category_esp32_ntp" name="ESP32_NTP">
+       <block type="set_ntp_time"></block>
+       <block type="get_RTC_str"></block>
+       <block type="get_RTC_field"></block>
+    </category>
     <category id="category_yu" name="YuBoard">
       <block type="esp32_board_usb">
         <value name="ON_OFF">
@@ -846,6 +851,7 @@
                 </block>
             </value>
       </block>
+      <block type="oled_display_clock"></block>
     </category>
 		<category id="category_mtk7697bit" name="7697:bit">
       <block type="mtk7697bit_button"></block>
