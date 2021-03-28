@@ -304,6 +304,7 @@ Blockly.Msg.OLED_DISPLAY_DRAW_FRAME_END_NEW = "(width, height):";
 Blockly.Msg.OLED_DISPLAY_CHINESE_FONT = "set apply Chinese font";
 Blockly.Msg.OLED_DISPLAY_SET_ENG_FONT ="set English font";
 Blockly.Msg.OLED_DISPLAY_HELPURL=Blockly.Msg.OLED_DISPLAY_HELPURL_NEW;
+Blockly.Msg.OLED_DISPLAY_CLOCK = "get time from RTC to draw clock";
 
 
 //AIRBOX
@@ -494,3 +495,13 @@ Blockly.Msg.GOOGLESHEETS_UPDATE_DATA_TITLE = "value:";
 Blockly.Msg.GOOGLESHEETS_SETUP_SHEET_WARNIG = "You have to "+Blockly.Msg.GOOGLESHEETS_SETUP_TITLE+" "+Blockly.Msg.GOOGLESHEETS_SHEETID+" first.";
 Blockly.Msg.GOOGLESHEETS_SETUP_FORM_WARNIG = "You have to "+Blockly.Msg.GOOGLESHEETS_SETUP_TITLE+" "+Blockly.Msg.GOOGLESHEETS_SHEETTAG+" first.";
 Blockly.Msg.GOOGLESHEETS_FETCH_DATA_WARNIG = 'You have to '+Blockly.Msg.GOOGLESHEETS_SETUP_TITLE+' "'+Blockly.Msg.GOOGLESHEETS_FETCH_FROM_SHEET+'" first.';
+
+//ESP32 NTP
+Blockly.Msg.ESP32NTP_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/rtc及網路校時";
+Blockly.Msg.ESP32NTP_TOOLTIP = "NTP Time";
+Blockly.Msg.ESP32NTP_TITLE = "ESP32 RTC";
+Blockly.Msg.ESP32NTP_SETUP_TITLE = "setup time from NTP";
+Blockly.Msg.ESP32NTP_TIMEZONE = "TimeZone";
+Blockly.Msg.ESP32NTP_GET_RTC_STR = "get time string from RTC";
+Blockly.Msg.ESP32NTP_GET_RTC_FIELD = "get number from RTC";
+Blockly.Msg.ESP32NTP_RTC_FIELD_TYPE= [["year","0"],["month","1"],["day","2"],["hour","3"],["minute","4"],["second","5"]];

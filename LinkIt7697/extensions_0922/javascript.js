@@ -1032,6 +1032,17 @@ Blockly.Arduino.oled_display_set_color=function(){
   return a+"\n";
 };
 
+Blockly.Arduino.oled_display_clock=function(){
+  if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
+    Blockly.Arduino.definitions_.define_ESP_time_include="#include <time.h>";
+    Blockly.Arduino.definitions_.define_getDataFromRTC_invoke="int get_data_from_RTC(byte dataType) {\n  int myResult=0;\n  time_t t = time(NULL);\n  struct tm *t_st;\n  t_st = localtime(&t);\n  switch(dataType){\n    case 0:\n      myResult=(1900 + t_st->tm_year);\n      break;\n    case 1:\n      myResult=( 1 + t_st->tm_mon);\n      break;\n    case 2:\n      myResult=t_st->tm_mday;\n      break;\n    case 3:\n      myResult=t_st->tm_hour;\n      break;\n    case 4:\n      myResult=t_st->tm_min;\n      break;\n    case 5:\n      myResult=t_st->tm_sec;\n      break;\n  }\n  return myResult;\n}\n";
+    Blockly.Arduino.definitions_.define_runClock_invoke='const float pi = 3.14159267 ;\nconst int clock_center_x=64;\nconst int clock_center_y=32;\nint x_old;\nint y_old;\nint x_new;\nint y_new;\n\nvoid draw_second(int second){\n   y_old= (24*cos(pi-(2*pi)/60*second))+clock_center_y;\n   x_old =(24*sin(pi-(2*pi)/60*second))+clock_center_x;\n   u8g2.drawCircle(x_old, y_old, 2); \n}\n\nvoid draw_hour(int hour, int minute){\n   y_old= (18*cos(pi-(2*pi)/12*hour-(2*PI)/720*minute))+clock_center_y;\n   x_old =(18*sin(pi-(2*pi)/12*hour-(2*PI)/720*minute))+clock_center_x;\n   y_new=(18*cos(pi-(2*pi)/12*hour-(2*PI)/720*minute))+clock_center_y+1;\n   x_new=(18*sin(pi-(2*pi)/12*hour-(2*PI)/720*minute))+clock_center_x+1;\n   u8g2.drawLine(clock_center_x,clock_center_y,x_old,y_old);\n   u8g2.drawLine(clock_center_x+1,clock_center_y+1,x_new,y_new);\n}\n\nvoid draw_minute(int minute){\n   y_old= (24*cos(pi-(2*pi)/60*minute))+clock_center_y;\n   x_old =(24*sin(pi-(2*pi)/60*minute))+clock_center_x;\n   u8g2.drawLine(clock_center_x,clock_center_y,x_old,y_old);\n}\n\nvoid draw_clock_face(void){\n  u8g2.drawDisc(clock_center_x, clock_center_y,3);\n  for (int i=0;i<12;i++){\n     y_old= (32*cos(pi-(2*pi)/12*i))+clock_center_y;\n     x_old =(32*sin(pi-(2*pi)/12*i))+clock_center_x;\n     y_new= (28*cos(pi-(2*pi)/12*i))+clock_center_y;\n     x_new =(28*sin(pi-(2*pi)/12*i))+clock_center_x;\n     u8g2.drawLine(x_new,y_new,x_old,y_old);\n  }\n  u8g2.setCursor(clock_center_x-3,0);\n  u8g2.setFont(u8g2_font_6x10_tf);\n  u8g2.println("12");\n}\n\nvoid runClock(){\n  draw_clock_face();\n  draw_second(get_data_from_RTC(5));\n  draw_minute(get_data_from_RTC(4));\n  draw_hour(get_data_from_RTC(3),get_data_from_RTC(4));\n}\n'
+  }else if (Blockly.Arduino.my_board_type=="7697"){
+    Blockly.Arduino.definitions_.define_runClock_invoke='const float pi = 3.14159267 ;\nconst int clock_center_x=64;\nconst int clock_center_y=32;\nint x_old;\nint y_old;\nint x_new;\nint y_new;\n\nvoid draw_second(int second){\n   y_old= (24*cos(pi-(2*pi)/60*second))+clock_center_y;\n   x_old =(24*sin(pi-(2*pi)/60*second))+clock_center_x;\n   u8g2.drawCircle(x_old, y_old, 2); \n}\n\nvoid draw_hour(int hour, int minute){\n   y_old= (18*cos(pi-(2*pi)/12*hour-(2*PI)/720*minute))+clock_center_y;\n   x_old =(18*sin(pi-(2*pi)/12*hour-(2*PI)/720*minute))+clock_center_x;\n   y_new=(18*cos(pi-(2*pi)/12*hour-(2*PI)/720*minute))+clock_center_y+1;\n   x_new=(18*sin(pi-(2*pi)/12*hour-(2*PI)/720*minute))+clock_center_x+1;\n   u8g2.drawLine(clock_center_x,clock_center_y,x_old,y_old);\n   u8g2.drawLine(clock_center_x+1,clock_center_y+1,x_new,y_new);\n}\n\nvoid draw_minute(int minute){\n   y_old= (24*cos(pi-(2*pi)/60*minute))+clock_center_y;\n   x_old =(24*sin(pi-(2*pi)/60*minute))+clock_center_x;\n   u8g2.drawLine(clock_center_x,clock_center_y,x_old,y_old);\n}\n\nvoid draw_clock_face(void){\n  u8g2.drawDisc(clock_center_x, clock_center_y,3);\n  for (int i=0;i<12;i++){\n     y_old= (32*cos(pi-(2*pi)/12*i))+clock_center_y;\n     x_old =(32*sin(pi-(2*pi)/12*i))+clock_center_x;\n     y_new= (28*cos(pi-(2*pi)/12*i))+clock_center_y;\n     x_new =(28*sin(pi-(2*pi)/12*i))+clock_center_x;\n     u8g2.drawLine(x_new,y_new,x_old,y_old);\n  }\n  u8g2.setCursor(clock_center_x-3,0);\n  u8g2.setFont(u8g2_font_6x10_tf);\n  u8g2.println("12");\n}\n\nvoid runClock(){\n  draw_clock_face();\n  LRTC.get();\n  draw_second(LRTC.second());\n  draw_minute(LRTC.minute());\n  draw_hour(LRTC.hour(),LRTC.minute());\n}\n'
+  }
+  return'runClock();\n';
+};
+
 //airbox
 Blockly.Arduino.airbox={};
 Blockly.Arduino.airbox_fetchData=function(){
@@ -1795,4 +1806,38 @@ Blockly.Arduino.updateCellValue=function(){
   }
   var c=Blockly.Arduino.valueToCode(this,"data",Blockly.Arduino.ORDER_ATOMIC)||"";
   return'updateCellValue('+a+',URLEncode('+b+'));\n'
+};
+
+//ESP32 NTP
+Blockly.Arduino.esp32_ntp={};
+Blockly.Arduino.set_ntp_time=function(){
+  var a=this.getFieldValue("TZ");
+  if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
+    Blockly.Arduino.definitions_.define_ESP_time_include="#include <time.h>";
+    Blockly.Arduino.definitions_.define_getDataFromRTC_invoke="int get_data_from_RTC(byte dataType) {\n  int myResult=0;\n  time_t t = time(NULL);\n  struct tm *t_st;\n  t_st = localtime(&t);\n  switch(dataType){\n    case 0:\n      myResult=(1900 + t_st->tm_year);\n      break;\n    case 1:\n      myResult=( 1 + t_st->tm_mon);\n      break;\n    case 2:\n      myResult=t_st->tm_mday;\n      break;\n    case 3:\n      myResult=t_st->tm_hour;\n      break;\n    case 4:\n      myResult=t_st->tm_min;\n      break;\n    case 5:\n      myResult=t_st->tm_sec;\n      break;\n  }\n  return myResult;\n}\n";
+    return'configTime('+a+'*3600, 0, "time.stdtime.gov.tw","time.nist.gov");\nwhile(get_data_from_RTC(0)<2000){delay(500);}\n'
+  }else{
+    return''
+  }
+};
+
+Blockly.Arduino.get_RTC_str=function(){
+  if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
+    Blockly.Arduino.definitions_.define_ESP_time_include="#include <time.h>";
+    Blockly.Arduino.definitions_.define_getStrFromRTC_invoke='String get_time_from_RTC() {\n  time_t t = time(NULL);\n  struct tm *t_st;\n  t_st = localtime(&t);\n  static char buffer[] = "YYYY-MM-DDTHH:MM:SS+08";\n  sprintf(buffer, "%04d-%02d-%02dT%02d:%02d:%02d",\n    1900 + t_st->tm_year,\n    1 + t_st->tm_mon,\n    t_st->tm_mday,\n    t_st->tm_hour,\n    t_st->tm_min,\n    t_st->tm_sec);\n  return String(buffer);\n}\n';
+    return['get_time_from_RTC()',Blockly.Arduino.ORDER_ATOMIC]
+  }else{
+    return['',Blockly.Arduino.ORDER_ATOMIC]
+  }
+};
+
+Blockly.Arduino.get_RTC_field=function(){
+  var a=this.getFieldValue("FIELDTYPE");
+  if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
+    Blockly.Arduino.definitions_.define_ESP_time_include="#include <time.h>";
+    Blockly.Arduino.definitions_.define_getDataFromRTC_invoke="int get_data_from_RTC(byte dataType) {\n  int myResult=0;\n  time_t t = time(NULL);\n  struct tm *t_st;\n  t_st = localtime(&t);\n  switch(dataType){\n    case 0:\n      myResult=(1900 + t_st->tm_year);\n      break;\n    case 1:\n      myResult=( 1 + t_st->tm_mon);\n      break;\n    case 2:\n      myResult=t_st->tm_mday;\n      break;\n    case 3:\n      myResult=t_st->tm_hour;\n      break;\n    case 4:\n      myResult=t_st->tm_min;\n      break;\n    case 5:\n      myResult=t_st->tm_sec;\n      break;\n  }\n  return myResult;\n}\n";
+    return['get_data_from_RTC('+a+')',Blockly.Arduino.ORDER_ATOMIC]
+  }else{
+    return['0',Blockly.Arduino.ORDER_ATOMIC]
+  }
 };

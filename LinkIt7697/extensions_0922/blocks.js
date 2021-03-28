@@ -1837,6 +1837,19 @@ Blockly.Blocks.oled_display_draw_frame={
     this.setTooltip(Blockly.Msg.OLED_DISPLAY_TOOLTIP)}
 };
 
+Blockly.Blocks.oled_display_clock={
+  init:function(){
+    this.setHelpUrl(Blockly.Msg.ESP32NTP_HELPURL);
+    this.setColour(Blockly.Blocks.oled_display.HUE);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.OLED_DISPLAY_TITLE)
+        .appendField(Blockly.Msg.OLED_DISPLAY_CLOCK);
+    this.setInputsInline(!0);
+    this.setPreviousStatement(!0);
+    this.setNextStatement(!0);
+    this.setTooltip(Blockly.Msg.OLED_DISPLAY_TOOLTIP)}
+};
+
 //airbox
 Blockly.Blocks.airbox={};
 Blockly.Blocks.airbox.HUE=180;
@@ -3171,3 +3184,42 @@ Blockly.Blocks.data_join={init:function(){
         0==a&&b.appendField(Blockly.Msg.GOOGLESHEETS_TITLE+" "+Blockly.Msg.GOOGLESHEETS_DATA_TITLE_CREATEWITH)
       }
 }};
+
+//NTP_time
+Blockly.Blocks.esp32_ntp={};
+Blockly.Blocks.esp32_ntp.HUE=275;
+Blockly.Blocks.set_ntp_time={init:function(){
+  this.setHelpUrl(Blockly.Msg.ESP32NTP_HELPURL);
+  this.setColour(Blockly.Blocks.esp32_ntp.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.ESP32NTP_TITLE+"  "+Blockly.Msg.ESP32NTP_SETUP_TITLE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.ESP32NTP_TIMEZONE)
+      .appendField(new Blockly.FieldDropdown([["UTC+8","8"],["UTC+0","0"],["UTC+1","1"],["UTC+2","2"],["UTC+3","3"],["UTC+4","4"],["UTC+5","5"],["UTC+6","6"],["UTC+7","7"],["UTC+9","9"],["UTC+10","10"],["UTC+11","11"],["UTC+12","12"]
+                                              ,["UTC-1","-1"],["UTC-2","-2"],["UTC-3","-3"],["UTC-4","-4"],["UTC-5","-5"],["UTC-6","-6"],["UTC-7","-7"],["UTC-8","-8"],["UTC-9","-9"],["UTC-10","-10"],["UTC-11","-11"]]),"TZ");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.ESP32NTP_TOOLTIP)}
+};
+
+Blockly.Blocks.get_RTC_str={init:function(){
+  this.setHelpUrl(Blockly.Msg.ESP32NTP_HELPURL);
+  this.setColour(Blockly.Blocks.esp32_ntp.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.ESP32NTP_TITLE+"  "+Blockly.Msg.ESP32NTP_GET_RTC_STR);
+  this.setInputsInline(!0);
+  this.setOutput(!0,"String");
+  this.setTooltip(Blockly.Msg.ESP32NTP_TOOLTIP)}
+};
+
+Blockly.Blocks.get_RTC_field={init:function(){
+  this.setHelpUrl(Blockly.Msg.ESP32NTP_HELPURL);
+  this.setColour(Blockly.Blocks.esp32_ntp.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.ESP32NTP_TITLE+"  "+Blockly.Msg.ESP32NTP_GET_RTC_FIELD)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.ESP32NTP_RTC_FIELD_TYPE),"FIELDTYPE");
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Number");
+  this.setTooltip(Blockly.Msg.ESP32NTP_TOOLTIP)}
+};
