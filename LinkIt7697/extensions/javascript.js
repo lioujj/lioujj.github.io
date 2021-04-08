@@ -1827,10 +1827,12 @@ Blockly.Arduino.set_ntp_time=function(){
 };
 
 Blockly.Arduino.get_RTC_str=function(){
+  var a=this.getFieldValue("TIMEFORMAT");
   if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
     Blockly.Arduino.definitions_.define_ESP_time_include="#include <time.h>";
-    Blockly.Arduino.definitions_.define_getStrFromRTC_invoke='String get_time_from_RTC() {\n  time_t t = time(NULL);\n  struct tm *t_st;\n  t_st = localtime(&t);\n  static char buffer[] = "YYYY-MM-DDTHH:MM:SS+08";\n  sprintf(buffer, "%04d-%02d-%02dT%02d:%02d:%02d",\n    1900 + t_st->tm_year,\n    1 + t_st->tm_mon,\n    t_st->tm_mday,\n    t_st->tm_hour,\n    t_st->tm_min,\n    t_st->tm_sec);\n  return String(buffer);\n}\n';
-    return['get_time_from_RTC()',Blockly.Arduino.ORDER_ATOMIC]
+    Blockly.Arduino.definitions_.define_getStrFromRTC_invoke='String get_time_from_RTC(byte myStrType) {\n  time_t t = time(NULL);\n  struct tm *t_st;\n  t_st = localtime(&t);\n  static char buffer[] = "YYYY-MM-DDTHH:MM:SS+08";\n  switch(myStrType){\n    case 0:\n      sprintf(buffer, "%04d-%02d-%02dT%02d:%02d:%02d",\n        1900 + t_st->tm_year,\n        1 + t_st->tm_mon,\n        t_st->tm_mday,\n        t_st->tm_hour,\n        t_st->tm_min,\n        t_st->tm_sec);\n      break;\n    case 1:\n      sprintf(buffer, "%04d-%02d-%02d",\n        1900 + t_st->tm_year,\n        1 + t_st->tm_mon,\n        t_st->tm_mday);\n      break;\n    case 2:\n      sprintf(buffer, "%02d:%02d:%02d",\n        t_st->tm_hour,\n        t_st->tm_min,\n        t_st->tm_sec);\n      break;\n  }\n  return String(buffer);\n}\n';
+    //Blockly.Arduino.definitions_.define_getStrFromRTC_invoke='String get_time_from_RTC() {\n  time_t t = time(NULL);\n  struct tm *t_st;\n  t_st = localtime(&t);\n  static char buffer[] = "YYYY-MM-DDTHH:MM:SS+08";\n  sprintf(buffer, "%04d-%02d-%02dT%02d:%02d:%02d",\n    1900 + t_st->tm_year,\n    1 + t_st->tm_mon,\n    t_st->tm_mday,\n    t_st->tm_hour,\n    t_st->tm_min,\n    t_st->tm_sec);\n  return String(buffer);\n}\n';
+    return['get_time_from_RTC('+a+')',Blockly.Arduino.ORDER_ATOMIC]
   }else{
     return['',Blockly.Arduino.ORDER_ATOMIC]
   }
