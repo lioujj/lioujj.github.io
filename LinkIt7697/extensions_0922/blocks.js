@@ -3207,7 +3207,10 @@ Blockly.Blocks.get_RTC_str={init:function(){
   this.setHelpUrl(Blockly.Msg.ESP32NTP_HELPURL);
   this.setColour(Blockly.Blocks.esp32_ntp.HUE);
   this.appendDummyInput()
-      .appendField(Blockly.Msg.ESP32NTP_TITLE+"  "+Blockly.Msg.ESP32NTP_GET_RTC_STR);
+      .appendField(Blockly.Msg.ESP32NTP_TITLE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.ESP32NTP_GET_RTC_STR)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.ESP32NTP_TIME_FORMAT),"TIMEFORMAT");
   this.setInputsInline(!0);
   this.setOutput(!0,"String");
   this.setTooltip(Blockly.Msg.ESP32NTP_TOOLTIP)}
