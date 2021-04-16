@@ -506,3 +506,14 @@ Blockly.Msg.ESP32NTP_GET_RTC_STR = "get string from RTC";
 Blockly.Msg.ESP32NTP_GET_RTC_FIELD = "get number from RTC";
 Blockly.Msg.ESP32NTP_RTC_FIELD_TYPE= [["year","0"],["month","1"],["day","2"],["hour","3"],["minute","4"],["second","5"]];
 Blockly.Msg.ESP32NTP_TIME_FORMAT = [["DateTime","0"],["Date","1"],["Time","2"]];
+
+//Line Notify
+Blockly.Msg.LINENOTIFY_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/line通知積木";
+Blockly.Msg.LINENOTIFY_TITLE = "LineNotify";
+Blockly.Msg.LINENOTIFY_TOOLTIP = "LineNotify";
+Blockly.Msg.LINENOTIFY_SETUP_TOKEN = "set Token";
+Blockly.Msg.LINENOTIFY_SEND_MSG = "send Line message";
+Blockly.Msg.LINENOTIFY_PACKAGEID = "PackageID";
+Blockly.Msg.LINENOTIFY_STICKERID = "StickerID";
+Blockly.Msg.LINENOTIFY_SET_TOKEN_WARNIG = "You have to "+Blockly.Msg.LINENOTIFY_SETUP_TOKEN+" first.";
+Blockly.Msg.LINENOTIFY_LINE_BREAK = "line feed";

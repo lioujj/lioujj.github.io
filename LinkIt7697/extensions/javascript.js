@@ -1429,7 +1429,7 @@ Blockly.Arduino.linkit_wifi_wait_until_ready=function(){
   if (Blockly.Arduino.my_board_type=="7697")
     return"while (WiFi.begin(_lwifi_ssid, _lwifi_pass) != WL_CONNECTED) { delay(1000); }\n";
   else if (Blockly.Arduino.my_board_type=="ESP32")
-    return"WiFi.begin(_lwifi_ssid, _lwifi_pass);\nwhile (WiFi.status() != WL_CONNECTED) { delay(500); }\ndelay(300);\n";
+    return"WiFi.disconnect();\nWiFi.softAPdisconnect(true);\nWiFi.mode(WIFI_STA);\nWiFi.begin(_lwifi_ssid, _lwifi_pass);\nwhile (WiFi.status() != WL_CONNECTED) { delay(500); }\ndelay(300);\n";
   else if (Blockly.Arduino.my_board_type=="ESP8266")
     return"WiFi.begin(_lwifi_ssid, _lwifi_pass);\nwhile (WiFi.status() != WL_CONNECTED) { delay(500); }\ndelay(300);\n";
   else
@@ -1848,3 +1848,43 @@ Blockly.Arduino.get_RTC_field=function(){
     return['0',Blockly.Arduino.ORDER_ATOMIC]
   }
 };
+
+//Line Notify
+Blockly.Arduino.line_notify={};
+Blockly.Arduino.setLineToken=function(){
+  var a=Blockly.Arduino.valueToCode(this,"TOKEN",Blockly.Arduino.ORDER_ATOMIC)||"";
+  Blockly.Arduino.definitions_.define_line_token='String lineToken="";\n';
+  return'lineToken='+a+';\n';
+};
+
+Blockly.Arduino.sendLineMsg=function(){
+  var a=Blockly.Arduino.valueToCode(this,"CONTENT",Blockly.Arduino.ORDER_ATOMIC)||"";
+  Blockly.Arduino.definitions_.define_send_line_notify_invoke='void sendLineMsg(String myMsg) {\n  static TLSClient line_client;\n  myMsg.replace("%","%25");\n  myMsg.replace("&","%26");\n  myMsg.replace("§","&");\n  myMsg.replace("\\\\n","\\n");\n  if (line_client.connect("notify-api.line.me", 443)) {\n    line_client.println("POST /api/notify HTTP/1.1");\n    line_client.println("Connection: close");\n    line_client.println("Host: notify-api.line.me");\n    line_client.println("Authorization: Bearer " + lineToken);\n    line_client.println("Content-Type: application/x-www-form-urlencoded");\n    line_client.println("Content-Length: " + String(myMsg.length()));\n    line_client.println();\n    line_client.println(myMsg);\n    line_client.println();\n    line_client.stop();\n  }\n  else {\n    Serial.println("Line Notify failed");\n  }\n}\n';
+  if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
+    Blockly.Arduino.definitions_.define_secure_include="#include <WiFiClientSecure.h>";
+    Blockly.Arduino.definitions_.define_send_line_notify_invoke=Blockly.Arduino.definitions_.define_send_line_notify_invoke.replace("TLSClient","WiFiClientSecure");
+    if (Blockly.Arduino.my_board_type=="ESP8266"){
+      Blockly.Arduino.definitions_.define_send_line_notify_invoke=Blockly.Arduino.definitions_.define_send_line_notify_invoke.replace(" line_client;\n"," line_client;\n  line_client.setInsecure();\n");
+    }  
+  }
+  return'sendLineMsg(String("message=\\n")+'+a+');\n';
+};
+
+Blockly.Arduino.sendSticker=function(){
+  var a=Blockly.Arduino.valueToCode(this,"CONTENT",Blockly.Arduino.ORDER_ATOMIC)||"",
+  b=Blockly.Arduino.valueToCode(this,"PACKAGEID",Blockly.Arduino.ORDER_ATOMIC)||"",
+  c=Blockly.Arduino.valueToCode(this,"STICKERID",Blockly.Arduino.ORDER_ATOMIC)||"";
+  Blockly.Arduino.definitions_.define_send_line_notify_invoke='void sendLineMsg(String myMsg) {\n  static TLSClient line_client;\n  myMsg.replace("%","%25");\n  myMsg.replace("&","%26");\n  myMsg.replace("§","&");\n  myMsg.replace("\\\\n","\\n");\n  if (line_client.connect("notify-api.line.me", 443)) {\n    line_client.println("POST /api/notify HTTP/1.1");\n    line_client.println("Connection: close");\n    line_client.println("Host: notify-api.line.me");\n    line_client.println("Authorization: Bearer " + lineToken);\n    line_client.println("Content-Type: application/x-www-form-urlencoded");\n    line_client.println("Content-Length: " + String(myMsg.length()));\n    line_client.println();\n    line_client.println(myMsg);\n    line_client.println();\n    line_client.stop();\n  }\n  else {\n    Serial.println("Line Notify failed");\n  }\n}\n';
+  if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
+    Blockly.Arduino.definitions_.define_secure_include="#include <WiFiClientSecure.h>";
+    Blockly.Arduino.definitions_.define_send_line_notify_invoke=Blockly.Arduino.definitions_.define_send_line_notify_invoke.replace("TLSClient","WiFiClientSecure");
+    if (Blockly.Arduino.my_board_type=="ESP8266"){
+      Blockly.Arduino.definitions_.define_send_line_notify_invoke=Blockly.Arduino.definitions_.define_send_line_notify_invoke.replace(" line_client;\n"," line_client;\n  line_client.setInsecure();\n");
+    }  
+  }
+  return'sendLineMsg(String("message=\\n")+'+a+'+"§stickerPackageId="+'+b+'+"§stickerId="+'+c+');\n';
+};
+
+Blockly.Arduino.breakLine=function(){
+  return['"\\n"',Blockly.Arduino.ORDER_ATOMIC]
+}

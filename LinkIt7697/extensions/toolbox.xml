@@ -455,8 +455,42 @@
         </value>
       </block>
     </category>
+    <category id="category_line_notify" name="LineNotify">
+      <block type="setLineToken">
+        <value name="TOKEN">
+          <block type="text">
+            <field name="TEXT"></field>
+          </block>
+        </value>
+      </block>
+      <block type="sendLineMsg">
+        <value name="CONTENT">
+          <block type="text">
+            <field name="TEXT"></field>
+          </block>
+        </value>
+      </block>
+      <block type="sendSticker">
+        <value name="CONTENT">
+          <block type="text">
+            <field name="TEXT"></field>
+          </block>
+        </value>
+        <value name="PACKAGEID">
+          <block type="math_number">
+            <field name="NUM">1</field>
+          </block>
+        </value>
+        <value name="STICKERID">
+          <block type="math_number">
+            <field name="NUM">1</field>
+          </block>
+        </value>
+      </block>
+      <block type="breakLine"></block>
+    </category>
 	</category>
-   <category id="category_crawler" name="WebCrawler">
+  <category id="category_crawler" name="WebCrawler">
     <category id="category_weather" name="WorldWeather">
       <block type="weather_fetchWeatherInfo">
         <value name="CITYID">
