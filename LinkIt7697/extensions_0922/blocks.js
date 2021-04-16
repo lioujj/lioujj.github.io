@@ -3226,3 +3226,76 @@ Blockly.Blocks.get_RTC_field={init:function(){
   this.setOutput(!0,"Number");
   this.setTooltip(Blockly.Msg.ESP32NTP_TOOLTIP)}
 };
+
+//Line Notify
+Blockly.Blocks.line_notify={};
+Blockly.Blocks.line_notify.HUE=120;
+Blockly.Blocks.line_notify.checkBlocks=function(a,slave,master){
+	var b=null,
+	    d=a.type;
+		a=a.workspace.getAllBlocks();
+		for(var c=0;c<a.length;c++)
+			if(slave!=a[c].type||null!=b||(b=a[c].type!=d?!0:!1),master==a[c].type){
+			  return!0;
+      }
+		return b
+};
+Blockly.Blocks.setLineToken={init:function(){
+  this.setHelpUrl(Blockly.Msg.LINENOTIFY_HELPURL);
+  this.setColour(Blockly.Blocks.line_notify.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LINENOTIFY_TITLE);
+  this.appendValueInput("TOKEN")
+      .setCheck("String")
+      .appendField(Blockly.Msg.LINENOTIFY_SETUP_TOKEN);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.LINENOTIFY_TOOLTIP)}
+};
+
+Blockly.Blocks.sendLineMsg={init:function(){
+  this.setHelpUrl(Blockly.Msg.LINENOTIFY_HELPURL);
+  this.setColour(Blockly.Blocks.line_notify.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LINENOTIFY_TITLE);
+  this.appendValueInput("CONTENT")
+      .setCheck("String")
+      .appendField(Blockly.Msg.LINENOTIFY_SEND_MSG);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.LINENOTIFY_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.line_notify.checkBlocks(this,"sendLineMsg","setLineToken")?this.setWarningText(null):this.setWarningText(Blockly.Msg.LINENOTIFY_SET_TOKEN_WARNIG))}
+};
+
+Blockly.Blocks.sendSticker={init:function(){
+  this.setHelpUrl(Blockly.Msg.LINENOTIFY_HELPURL);
+  this.setColour(Blockly.Blocks.line_notify.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LINENOTIFY_TITLE);
+  this.appendValueInput("CONTENT")
+      .setCheck("String")
+      .appendField(Blockly.Msg.LINENOTIFY_SEND_MSG);
+  this.appendValueInput("PACKAGEID")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LINENOTIFY_PACKAGEID);
+  this.appendValueInput("STICKERID")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LINENOTIFY_STICKERID);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.LINENOTIFY_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.line_notify.checkBlocks(this,"sendSticker","setLineToken")?this.setWarningText(null):this.setWarningText(Blockly.Msg.LINENOTIFY_SET_TOKEN_WARNIG))}
+};
+
+Blockly.Blocks.breakLine={init:function(){
+  this.setHelpUrl(Blockly.Msg.LINENOTIFY_HELPURL);
+  this.setColour(Blockly.Blocks.line_notify.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LINENOTIFY_LINE_BREAK);
+  this.setInputsInline(!0);
+  this.setOutput(!0,"String");
+  this.setTooltip(Blockly.Msg.LINENOTIFY_TOOLTIP)}
+};

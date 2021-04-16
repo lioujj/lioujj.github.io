@@ -35,4 +35,5 @@
 <category><name>MPU9250_I2C</name><replace>MPU9250 9軸動作感應</replace></category>
 <category><name>GoogleSheets</name><replace>Google試算表</replace></category>
 <category><name>ESP32_NTP</name><replace>RTC網路校時</replace></category>
+<category><name>LineNotify</name><replace>Line通知</replace></category>
 </xml>
