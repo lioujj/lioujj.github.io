@@ -1705,7 +1705,7 @@ Blockly.Arduino.mpu9250_accel_pitch_roll=function(){
 };
 
 Blockly.Arduino.mpu9250_mag_begin=function(){
-  Blockly.Arduino.definitions_.define_mpu9250="#include <MPU9250_asukiaaa.h>\nMPU9250_asukiaaa myMPU9250;";
+  Blockly.Arduino.definitions_.define_mpu9250="#include <MPU9250_asukiaaa.h>\nMPU9250_asukiaaa myMPU9250;\ndouble pitch,roll,yaw;";
   Blockly.Arduino.setups_.setup_mpu9250_mag='myMPU9250.beginMag();';
 	return""
 };
@@ -1721,7 +1721,7 @@ Blockly.Arduino.mpu9250_mag_3axis=function(){
 
 Blockly.Arduino.mpu9250_gyro_begin=function(){
   var a=this.getFieldValue("GYRO_MODE");
-  Blockly.Arduino.definitions_.define_mpu9250="#include <MPU9250_asukiaaa.h>\nMPU9250_asukiaaa myMPU9250;";
+  Blockly.Arduino.definitions_.define_mpu9250="#include <MPU9250_asukiaaa.h>\nMPU9250_asukiaaa myMPU9250;\ndouble pitch,roll,yaw;";
   Blockly.Arduino.setups_.setup_mpu9250_gyro='myMPU9250.beginGyro('+a+');';
 	return""
 };
