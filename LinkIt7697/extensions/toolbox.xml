@@ -177,6 +177,208 @@
         </value>
       </block>
     </category>
+    <category id="category_ttgo" name="TTGO">
+      <category id="category_ttgo_button" name="TTGO_BUTTON">
+        <block type="ttgo_button"></block>
+      </category>
+      <category id="category_ttgo_tft" name="TTGO_TFT">
+        <block type="ttgo_tft_init"></block>
+        <block type="ttgo_tft_rotation"></block>
+        <block type="ttgo_tft_fill">
+          <value name="COLOR">
+            <block type="ttgo_getFromColorPicker"></block>
+          </value>
+        </block>
+        <block type="ttgo_tft_set_color">
+          <value name="COLOR">
+            <block type="ttgo_getFromColorPicker"></block>
+          </value>
+        </block>
+        <block type="ttgo_getRGBcolor">
+          <value name="RED">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="GREEN">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="BLUE">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+        </block>
+        <block type="ttgo_getFromColorPicker"></block>
+        <block type="ttgo_tft_draw_chinese_text">
+          <value name="START_X">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="START_Y">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="CONTENT">
+            <block type="text">
+              <field name="TEXT">繪製中文</field>
+            </block>
+          </value>
+        </block>
+        <block type="ttgo_tft_set_eng_font">
+          <value name="SIZE">
+            <block type="math_number">
+              <field name="NUM">1</field>
+            </block>
+          </value>
+        </block>
+        <block type="ttgo_tft_set_eng_font_num">
+          <value name="FONT">
+            <block type="math_number">
+              <field name="NUM">1</field>
+            </block>
+          </value>
+        </block>
+        <block type="ttgo_tft_draw_eng_text">
+          <value name="START_X">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="START_Y">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="CONTENT">
+            <block type="text">
+              <field name="TEXT">HELLO</field>
+            </block>
+          </value>
+        </block>
+        <block type="ttgo_set_font">
+          <value name="FONT">
+            <block type="text">
+              <field name="TEXT">Font name</field>
+            </block>
+          </value>
+        </block>
+        <block type="ttgo_tft_draw_symbol">
+          <value name="START_X">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="START_Y">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="SYMBOL_NUM">
+            <block type="math_number">
+              <field name="NUM">1</field>
+            </block>
+          </value>
+        </block>
+        <block type="ttgo_tft_draw_line">
+          <value name="START_X">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="START_Y">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="END_X">
+            <block type="math_number">
+              <field name="NUM">40</field>
+            </block>
+          </value>
+          <value name="END_Y">
+            <block type="math_number">
+              <field name="NUM">40</field>
+            </block>
+          </value>
+        </block>
+        <block type="ttgo_tft_draw_box">
+          <value name="START_X">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="START_Y">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="END_X">
+            <block type="math_number">
+              <field name="NUM">40</field>
+            </block>
+          </value>
+          <value name="END_Y">
+            <block type="math_number">
+              <field name="NUM">40</field>
+            </block>
+          </value>
+        </block>
+        <block type="ttgo_tft_draw_circle">
+          <value name="X">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="Y">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="RADIUS">
+            <block type="math_number">
+              <field name="NUM">40</field>
+            </block>
+          </value>
+        </block>
+        <block type="ttgo_tft_draw_triangle">
+          <value name="X1">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="Y1">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="X2">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="Y2">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="X3">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="Y3">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+        </block>
+      </category>
+    </category>
   </category>
 	<category id="category_iot" name="IoT">
 		<category id="category_mqtt" name="MQTT">
@@ -786,6 +988,30 @@
               </value>
       </block>
       <block type="oled_display_clock"></block>
+      <block type="oled_display_set_glyph_font">
+        <value name="FONT">
+          <block type="text">
+            <field name="TEXT">Font name</field>
+          </block>
+        </value>
+      </block>
+      <block type="oled_display_draw_symbol">
+        <value name="START_X">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="START_Y">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="SYMBOL_NUM">
+          <block type="math_number">
+            <field name="NUM">1</field>
+          </block>
+        </value>
+      </block>
       <block type="oled_display_draw_line">
             <value name="START_X">
                 <block type="math_number">

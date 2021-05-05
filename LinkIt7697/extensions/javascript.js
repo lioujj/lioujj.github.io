@@ -182,8 +182,8 @@ Blockly.Arduino.mp3_set_pins=function(){
 	var a=Blockly.Arduino.valueToCode(this,"RX_PIN",Blockly.Arduino.ORDER_ATOMIC)||"2",
 	    b=this.getFieldValue("TX_PIN");
 	Blockly.Arduino.definitions_.define_softwareserial="#include <SoftwareSerial.h>\n";
-    Blockly.Arduino.definitions_.define_mp3_include='#include <DFRobotDFPlayerMini.h>\n';
-    Blockly.Arduino.definitions_["mp3_serial"]='SoftwareSerial mySoftwareSerial('+a+', '+b+');';
+  Blockly.Arduino.definitions_.define_mp3_include='#include <DFRobotDFPlayerMini.h>\n';
+  Blockly.Arduino.definitions_["mp3_serial"]='SoftwareSerial mySoftwareSerial('+a+', '+b+');';
 	Blockly.Arduino.definitions_["mp3_dfplayer"]='DFRobotDFPlayerMini myDFPlayer;';
 	Blockly.Arduino.setups_["setup_mp3_"]="mySoftwareSerial.begin(9600);\n  myDFPlayer.begin(mySoftwareSerial);\n";
 	return''
@@ -626,7 +626,7 @@ Blockly.Arduino.weather_fetchWeatherInfo=function(){
   Blockly.Arduino.definitions_.define_json_include="#define ARDUINOJSON_DECODE_UNICODE 1\n#include <ArduinoJson.h>";
   Blockly.Arduino.definitions_.define_ctimes_include="#include <ctime>";
   Blockly.Arduino.definitions_.define_json_invoke="const size_t capacity = JSON_ARRAY_SIZE(1) + JSON_OBJECT_SIZE(1) + 2*JSON_OBJECT_SIZE(2) + JSON_OBJECT_SIZE(4) + JSON_OBJECT_SIZE(5) + JSON_OBJECT_SIZE(6) + JSON_OBJECT_SIZE(13) + 280;\nDynamicJsonDocument doc(capacity);";
-	Blockly.Arduino.definitions_.define_fetch_weather_invoke='void fetchWeatherInfo(char* cityID, char* myKey)\n{\n  static WiFiClient client;\n  client.setTimeout(10000);\n  if (!client.connect("api.openweathermap.org", 80)) {\n    return;\n  }\n  const String url = String() + "/data/2.5/weather?id="+cityID+"&appid="+myKey;\n  client.println("GET " + url + " HTTP/1.1");\n  client.println(F("Host: api.openweathermap.org"));\n  client.println(F("Accept: */*"));\n  client.println(F("Connection: close"));\n  if (client.println() == 0) {\n    return;\n  }\n  char status[32] = {0};\n  client.readBytesUntil(\'\\r\', status, sizeof(status));\n  if (strcmp(status, "HTTP/1.1 200 OK") != 0) {\n    return;\n  }\n  char endOfHeaders[] = "\\r\\n\\r\\n";\n  if (!client.find(endOfHeaders)) {\n    return;\n  }\n  DeserializationError error = deserializeJson(doc, client);\n  if (error) {\n    return;\n  }\n  client.stop();\n}\n';
+	Blockly.Arduino.definitions_.define_fetch_weather_invoke='void fetchWeatherInfo(String cityID, char* myKey)\n{\n  static WiFiClient client;\n  client.setTimeout(10000);\n  if (!client.connect("api.openweathermap.org", 80)) {\n    return;\n  }\n  const String url = String() + "/data/2.5/weather?id="+cityID+"&appid="+myKey;\n  client.println("GET " + url + " HTTP/1.1");\n  client.println(F("Host: api.openweathermap.org"));\n  client.println(F("Accept: */*"));\n  client.println(F("Connection: close"));\n  if (client.println() == 0) {\n    return;\n  }\n  char status[32] = {0};\n  client.readBytesUntil(\'\\r\', status, sizeof(status));\n  if (strcmp(status, "HTTP/1.1 200 OK") != 0) {\n    return;\n  }\n  char endOfHeaders[] = "\\r\\n\\r\\n";\n  if (!client.find(endOfHeaders)) {\n    return;\n  }\n  DeserializationError error = deserializeJson(doc, client);\n  if (error) {\n    return;\n  }\n  client.stop();\n}\n';
   Blockly.Arduino.definitions_.define_weather_ctime='String convMyTime(long myTimeStamp)\n{\n  static char time_text[]="YYYY-MM-DDTHH:MM:SS";\n  const time_t myTime = myTimeStamp;\n  strftime(time_text, sizeof(time_text), "%Y-%m-%dT%H:%M:%S", gmtime(&myTime));\n  return String((const char*)time_text);\n}\n';
   var a=Blockly.Arduino.valueToCode(this,"CITYID",Blockly.Arduino.ORDER_ATOMIC)||"0",
 	b=Blockly.Arduino.valueToCode(this,"KEY",Blockly.Arduino.ORDER_ATOMIC)||"";
@@ -1041,6 +1041,25 @@ Blockly.Arduino.oled_display_clock=function(){
     Blockly.Arduino.definitions_.define_runClock_invoke='const float pi = 3.14159267 ;\nconst int clock_center_x=64;\nconst int clock_center_y=32;\nint x_old;\nint y_old;\nint x_new;\nint y_new;\n\nvoid draw_second(int second){\n   y_old= (24*cos(pi-(2*pi)/60*second))+clock_center_y;\n   x_old =(24*sin(pi-(2*pi)/60*second))+clock_center_x;\n   u8g2.drawCircle(x_old, y_old, 2); \n}\n\nvoid draw_hour(int hour, int minute){\n   y_old= (18*cos(pi-(2*pi)/12*hour-(2*PI)/720*minute))+clock_center_y;\n   x_old =(18*sin(pi-(2*pi)/12*hour-(2*PI)/720*minute))+clock_center_x;\n   y_new=(18*cos(pi-(2*pi)/12*hour-(2*PI)/720*minute))+clock_center_y+1;\n   x_new=(18*sin(pi-(2*pi)/12*hour-(2*PI)/720*minute))+clock_center_x+1;\n   u8g2.drawLine(clock_center_x,clock_center_y,x_old,y_old);\n   u8g2.drawLine(clock_center_x+1,clock_center_y+1,x_new,y_new);\n}\n\nvoid draw_minute(int minute){\n   y_old= (24*cos(pi-(2*pi)/60*minute))+clock_center_y;\n   x_old =(24*sin(pi-(2*pi)/60*minute))+clock_center_x;\n   u8g2.drawLine(clock_center_x,clock_center_y,x_old,y_old);\n}\n\nvoid draw_clock_face(void){\n  u8g2.drawDisc(clock_center_x, clock_center_y,3);\n  for (int i=0;i<12;i++){\n     y_old= (32*cos(pi-(2*pi)/12*i))+clock_center_y;\n     x_old =(32*sin(pi-(2*pi)/12*i))+clock_center_x;\n     y_new= (28*cos(pi-(2*pi)/12*i))+clock_center_y;\n     x_new =(28*sin(pi-(2*pi)/12*i))+clock_center_x;\n     u8g2.drawLine(x_new,y_new,x_old,y_old);\n  }\n  u8g2.setCursor(clock_center_x-3,0);\n  u8g2.setFont(u8g2_font_6x10_tf);\n  u8g2.println("12");\n}\n\nvoid runClock(){\n  draw_clock_face();\n  LRTC.get();\n  draw_second(LRTC.second());\n  draw_minute(LRTC.minute());\n  draw_hour(LRTC.hour(),LRTC.minute());\n}\n'
   }
   return'runClock();\n';
+};
+
+Blockly.Arduino.oled_display_set_glyph_font=function(){
+  var a=Blockly.Arduino.valueToCode(this,"FONT",Blockly.Arduino.ORDER_NONE)||"";
+  a=a.replace(/\"/g,"");
+  if (!a.startsWith('u8g2_font_')){
+    a='u8g2_font_'+a;
+  }
+  if (!a.endsWith('_t')){
+    a=a+'_t';
+  }
+  return"u8g2.setFont("+a+");\n";
+};
+
+Blockly.Arduino.oled_display_draw_symbol=function(){
+  var a=Blockly.Arduino.valueToCode(this,"START_X",Blockly.Arduino.ORDER_NONE)||"0",
+  b=Blockly.Arduino.valueToCode(this,"START_Y",Blockly.Arduino.ORDER_NONE)||"0",
+  c=Blockly.Arduino.valueToCode(this,"SYMBOL_NUM",Blockly.Arduino.ORDER_NONE)||"0";
+  return'u8g2.drawGlyph('+a+','+b+','+c+');\n';
 };
 
 //airbox
@@ -1657,10 +1676,9 @@ Blockly.Arduino.pocketcard={};
 Blockly.Arduino.pocketcard_button=function(){
     var a=this.getFieldValue("AB_BUTTON"),
 	    b=Blockly.Arduino.statementToCode(this,"MSG_BUTTON_CALL");
-	  b=b.replace(/\n/g,'\n  ');
-    Blockly.Arduino.definitions_.define_m_button="char myBtnStatus;\nbool buttonPressed(char btnName)\n{\n  byte A_Pin=14;\n  byte B_Pin=25;\n  if (btnName=='A'){\n    if (digitalRead(A_Pin) == 1)\n      return false;\n    else\n      return true;\n  }\n  else if (btnName=='B'){\n    if (digitalRead(B_Pin) == 1)\n      return false;\n    else\n      return true;\n  } else {\n    if ((digitalRead(A_Pin) == 1) && (digitalRead(B_Pin) == 1))\n      return false;\n    else\n      return true;\n  }\n}\n"
+    Blockly.Arduino.definitions_.define_m_button="byte A_Pin=14;\nbyte B_Pin=25;\nchar myBtnStatus;\nbool buttonPressed(char btnName)\n{\n  if (btnName=='A'){\n    if (digitalRead(A_Pin) == 1)\n      return false;\n    else\n      return true;\n  }\n  else if (btnName=='B'){\n    if (digitalRead(B_Pin) == 1)\n      return false;\n    else\n      return true;\n  } else {\n    if ((digitalRead(A_Pin) == 1) && (digitalRead(B_Pin) == 1))\n      return false;\n    else\n      return true;\n  }\n}\n"
     Blockly.Arduino.definitions_.define_m_getBtnStatus="char getBtnStatus(){\n  char buttonStatus=' ';\n  int checkButtonDelay=200;\n  if (buttonPressed('A')){\n    delay(checkButtonDelay);\n    if (buttonPressed('A')){\n      buttonStatus='A';\n      if (buttonPressed('B'))\n        buttonStatus='C';\n    }\n  } else if (buttonPressed('B')){\n      delay(checkButtonDelay);\n      if (buttonPressed('B')){\n        buttonStatus='B';\n        if (buttonPressed('A'))\n          buttonStatus='C';\n      }\n  }\n  return buttonStatus;\n}\n";
-    Blockly.Arduino.setups_.setup_button='pinMode(14, INPUT);\n  pinMode(25, INPUT);\n';
+    Blockly.Arduino.setups_.setup_button='pinMode(A_Pin, INPUT);\n  pinMode(B_Pin, INPUT);\n';
 	  return"if (myBtnStatus=='"+a+"'){\n"+b+"  while(buttonPressed('"+a+"')){}\n}\n"
 };
 
@@ -1888,3 +1906,174 @@ Blockly.Arduino.sendSticker=function(){
 Blockly.Arduino.breakLine=function(){
   return['"\\n"',Blockly.Arduino.ORDER_ATOMIC]
 }
+
+//TTGO TFT
+Blockly.Arduino.ttgo_tft={};
+Blockly.Arduino.ttgo_tft_init=function(){
+  Blockly.Arduino.definitions_.define_spi="#include <SPI.h>";
+  Blockly.Arduino.definitions_.define_ttgo_tft="#include <TFT_eSPI.h>\n#include <U8g2_for_TFT_eSPI.h>";
+  Blockly.Arduino.definitions_.define_ttgo_tft_init_invoke="TFT_eSPI tft = TFT_eSPI();\nU8g2_for_TFT_eSPI u8g2;\nuint32_t tft_color=TFT_WHITE;\n";
+  Blockly.Arduino.setups_.ttgo_tft='tft.begin();\n  tft.fillScreen(TFT_BLACK);\n  u8g2.begin(tft);\n  tft.setTextColor(tft_color);\n  u8g2.setForegroundColor(tft_color);\n  u8g2.setFontMode(1);';
+  return'';
+};
+
+Blockly.Arduino.ttgo_tft_rotation=function(){
+  var a=this.getFieldValue("ROTATION");
+  return'tft.setRotation('+a+');\n';
+};
+
+Blockly.Arduino.ttgo_tft_fill=function(){
+  var a=Blockly.Arduino.valueToCode(this,"COLOR",Blockly.Arduino.ORDER_ATOMIC)||"";
+	a=a.replace(/\"/g,"");
+  return 'tft.fillScreen('+a+');\n';
+};
+
+Blockly.Arduino.ttgo_tft_set_color=function(){
+  var a=Blockly.Arduino.valueToCode(this,"COLOR",Blockly.Arduino.ORDER_ATOMIC)||"";
+  a=a.replace(/\"/g,"");
+  return 'tft_color='+a+';\ntft.setTextColor(tft_color);\nu8g2.setForegroundColor(tft_color);\n';
+};
+
+Blockly.Arduino.ttgo_tft_draw_chinese_text=function(){
+  var a=Blockly.Arduino.valueToCode(this,"START_X",Blockly.Arduino.ORDER_NONE)||"0",
+  b=Blockly.Arduino.valueToCode(this,"START_Y",Blockly.Arduino.ORDER_NONE)||"0",
+  c=Blockly.Arduino.valueToCode(this,"CONTENT",Blockly.Arduino.ORDER_NONE)||"";
+  return"u8g2.setFont(u8g2_font_unifont_t_chinese1);\nu8g2.setFontMode(1);\nu8g2.setCursor("+a+", "+(parseInt(b)+15)+");\nu8g2.print(String("+c+").c_str());\n"
+};
+
+Blockly.Arduino.ttgo_tft_set_eng_font=function(){
+  var a=Blockly.Arduino.valueToCode(this,"SIZE",Blockly.Arduino.ORDER_NONE)||"0";
+  return 'tft.setTextSize('+a+');\n';
+};
+
+Blockly.Arduino.ttgo_tft_set_eng_font_num=function(){
+  var a=Blockly.Arduino.valueToCode(this,"FONT",Blockly.Arduino.ORDER_NONE)||"0";
+  return 'tft.setTextFont('+a+');\n';
+};
+
+Blockly.Arduino.ttgo_tft_print_eng_text=function(){
+  var a=Blockly.Arduino.valueToCode(this,"START_X",Blockly.Arduino.ORDER_NONE)||"0",
+  b=Blockly.Arduino.valueToCode(this,"START_Y",Blockly.Arduino.ORDER_NONE)||"0",
+  c=Blockly.Arduino.valueToCode(this,"CONTENT",Blockly.Arduino.ORDER_NONE)||"";
+  return"tft.setCursor("+a+", "+b+");\ntft.printf(String("+c+").c_str());\n"
+};
+Blockly.Arduino.ttgo_tft_draw_eng_text=function(){
+  var a=Blockly.Arduino.valueToCode(this,"START_X",Blockly.Arduino.ORDER_NONE)||"0",
+  b=Blockly.Arduino.valueToCode(this,"START_Y",Blockly.Arduino.ORDER_NONE)||"0",
+  c=Blockly.Arduino.valueToCode(this,"CONTENT",Blockly.Arduino.ORDER_NONE)||"";
+  return'tft.drawString(String('+c+').c_str(),'+a+','+b+');\n';
+};
+
+Blockly.Arduino.ttgo_button=function(){
+    var a=this.getFieldValue("AB_BUTTON"),
+	    b=Blockly.Arduino.statementToCode(this,"TTGO_BUTTON_CALL");
+    Blockly.Arduino.definitions_.define_m_button="byte A_Pin=0;\nbyte B_Pin=35;\nchar myBtnStatus;\nbool buttonPressed(char btnName)\n{\n  if (btnName=='A'){\n    if (digitalRead(A_Pin) == 1)\n      return false;\n    else\n      return true;\n  }\n  else if (btnName=='B'){\n    if (digitalRead(B_Pin) == 1)\n      return false;\n    else\n      return true;\n  } else {\n    if ((digitalRead(A_Pin) == 1) && (digitalRead(B_Pin) == 1))\n      return false;\n    else\n      return true;\n  }\n}\n"
+    Blockly.Arduino.definitions_.define_m_getBtnStatus="char getBtnStatus(){\n  char buttonStatus=' ';\n  int checkButtonDelay=200;\n  if (buttonPressed('A')){\n    delay(checkButtonDelay);\n    if (buttonPressed('A')){\n      buttonStatus='A';\n      if (buttonPressed('B'))\n        buttonStatus='C';\n    }\n  } else if (buttonPressed('B')){\n      delay(checkButtonDelay);\n      if (buttonPressed('B')){\n        buttonStatus='B';\n        if (buttonPressed('A'))\n          buttonStatus='C';\n      }\n  }\n  return buttonStatus;\n}\n";
+    Blockly.Arduino.setups_.setup_button='pinMode(A_Pin, INPUT);\n  pinMode(B_Pin, INPUT);\n';
+	  return"if (myBtnStatus=='"+a+"'){\n"+b+"  while(buttonPressed('"+a+"')){}\n}\n"
+};
+
+Blockly.Arduino.ttgo_set_font=function(){
+  var a=Blockly.Arduino.valueToCode(this,"FONT",Blockly.Arduino.ORDER_NONE)||"";
+  a=a.replace(/\"/g,"");
+  if (!a.startsWith('u8g2_font_')){
+    a='u8g2_font_'+a;
+  }
+  if (!a.endsWith('_t')){
+    a=a+'_t';
+  }
+  return"u8g2.setFont("+a+");\nu8g2.setFontMode(1);\n";
+};
+
+Blockly.Arduino.ttgo_tft_draw_symbol=function(){
+  var a=Blockly.Arduino.valueToCode(this,"START_X",Blockly.Arduino.ORDER_NONE)||"0",
+  b=Blockly.Arduino.valueToCode(this,"START_Y",Blockly.Arduino.ORDER_NONE)||"0",
+  c=Blockly.Arduino.valueToCode(this,"SYMBOL_NUM",Blockly.Arduino.ORDER_NONE)||"0";
+  return'u8g2.drawGlyph('+a+','+b+','+c+');\n';
+};
+
+Blockly.Arduino.ttgo_tft_draw_line=function(){
+  var a=Blockly.Arduino.valueToCode(this,"START_X",Blockly.Arduino.ORDER_NONE)||"0",
+      b=Blockly.Arduino.valueToCode(this,"START_Y",Blockly.Arduino.ORDER_NONE)||"0",
+      c=Blockly.Arduino.valueToCode(this,"END_X",Blockly.Arduino.ORDER_NONE)||"0",
+      d=Blockly.Arduino.valueToCode(this,"END_Y",Blockly.Arduino.ORDER_NONE)||"0";
+  return"tft.drawLine("+a+", "+b+", "+c+", "+d+", tft_color);\n"
+};
+
+Blockly.Arduino.ttgo_tft_draw_box=function(){
+  var a=Blockly.Arduino.valueToCode(this,"START_X",Blockly.Arduino.ORDER_NONE)||"0",
+      b=Blockly.Arduino.valueToCode(this,"START_Y",Blockly.Arduino.ORDER_NONE)||"0",
+      c=Blockly.Arduino.valueToCode(this,"END_X",Blockly.Arduino.ORDER_NONE)||"0",
+      d=Blockly.Arduino.valueToCode(this,"END_Y",Blockly.Arduino.ORDER_NONE)||"0",
+      e=this.getFieldValue("FILLED_TYPE");
+  if (e=="1"){
+    return"tft.fillRect("+a+", "+b+", "+c+", "+d+", tft_color);\n";
+  } else{
+    return"tft.drawRect("+a+", "+b+", "+c+", "+d+", tft_color);\n";
+  }
+};
+
+Blockly.Arduino.ttgo_tft_draw_circle=function(){
+  var a=Blockly.Arduino.valueToCode(this,"X",Blockly.Arduino.ORDER_NONE)||"0",
+      b=Blockly.Arduino.valueToCode(this,"Y",Blockly.Arduino.ORDER_NONE)||"0",
+      c=Blockly.Arduino.valueToCode(this,"RADIUS",Blockly.Arduino.ORDER_NONE)||"0",
+      e=this.getFieldValue("FILLED_TYPE");
+  if (e=="1"){
+    return"tft.fillCircle("+a+", "+b+", "+c+", tft_color);\n";
+  } else{
+    return"tft.drawCircle("+a+", "+b+", "+c+", tft_color);\n";
+  }
+};
+
+Blockly.Arduino.ttgo_tft_draw_triangle=function(){
+  var a=Blockly.Arduino.valueToCode(this,"X1",Blockly.Arduino.ORDER_NONE)||"0",
+      b=Blockly.Arduino.valueToCode(this,"Y1",Blockly.Arduino.ORDER_NONE)||"0",
+      c=Blockly.Arduino.valueToCode(this,"X2",Blockly.Arduino.ORDER_NONE)||"0",
+      d=Blockly.Arduino.valueToCode(this,"Y2",Blockly.Arduino.ORDER_NONE)||"0",
+      e=Blockly.Arduino.valueToCode(this,"X3",Blockly.Arduino.ORDER_NONE)||"0",
+      f=Blockly.Arduino.valueToCode(this,"Y3",Blockly.Arduino.ORDER_NONE)||"0",
+      g=this.getFieldValue("FILLED_TYPE");
+  if (g=="1"){
+    return"tft.fillTriangle("+a+", "+b+", "+c+", "+d+", "+e+", "+f+", tft_color);\n";
+  } else{
+    return"tft.drawTriangle("+a+", "+b+", "+c+", "+d+", "+e+", "+f+", tft_color);\n";
+  }
+};
+
+Blockly.Arduino.ttgo_getRGBcolor=function(){
+  var a=Blockly.Arduino.valueToCode(this,"RED",Blockly.Arduino.ORDER_NONE)||"0",
+      b=Blockly.Arduino.valueToCode(this,"GREEN",Blockly.Arduino.ORDER_NONE)||"0",
+      c=Blockly.Arduino.valueToCode(this,"BLUE",Blockly.Arduino.ORDER_NONE)||"0";
+  if (parseInt(a)>255)
+    a="255";
+  else if(parseInt(a)<0)
+    a="0";
+  if (parseInt(b)>255)
+    b="255";
+  else if(parseInt(b)<0)
+    b="0";
+  if (parseInt(c)>255)
+    c="255";
+  else if(parseInt(c)<0)
+    c="0";
+  return['tft.color565('+a+','+b+','+c+')',Blockly.Arduino.ORDER_ATOMIC]
+};
+
+Blockly.Arduino.ttgo_getFromColorPicker=function(){
+  var a=this.getFieldValue("RGB");
+  return['tft.color565('+hexToR(a)+','+hexToG(a)+','+hexToB(a)+')',Blockly.Arduino.ORDER_ATOMIC]
+};
+
+
+/*
+Blockly.Arduino.ttgo_tft_draw_clock=function(){
+  if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
+    Blockly.Arduino.definitions_.define_ESP_time_include="#include <time.h>";
+    Blockly.Arduino.definitions_.define_getDataFromRTC_invoke="int get_data_from_RTC(byte dataType) {\n  int myResult=0;\n  time_t t = time(NULL);\n  struct tm *t_st;\n  t_st = localtime(&t);\n  switch(dataType){\n    case 0:\n      myResult=(1900 + t_st->tm_year);\n      break;\n    case 1:\n      myResult=( 1 + t_st->tm_mon);\n      break;\n    case 2:\n      myResult=t_st->tm_mday;\n      break;\n    case 3:\n      myResult=t_st->tm_hour;\n      break;\n    case 4:\n      myResult=t_st->tm_min;\n      break;\n    case 5:\n      myResult=t_st->tm_sec;\n      break;\n  }\n  return myResult;\n}\n";
+    Blockly.Arduino.definitions_.define_runClock_invoke='const float pi = 3.14159267 ;\nconst int clock_center_x=64;\nconst int clock_center_y=32;\nint x_old;\nint y_old;\nint x_new;\nint y_new;\n\nvoid draw_second(int second){\n   y_old= (24*cos(pi-(2*pi)/60*second))+clock_center_y;\n   x_old =(24*sin(pi-(2*pi)/60*second))+clock_center_x;\n   u8g2.drawCircle(x_old, y_old, 2); \n}\n\nvoid draw_hour(int hour, int minute){\n   y_old= (18*cos(pi-(2*pi)/12*hour-(2*PI)/720*minute))+clock_center_y;\n   x_old =(18*sin(pi-(2*pi)/12*hour-(2*PI)/720*minute))+clock_center_x;\n   y_new=(18*cos(pi-(2*pi)/12*hour-(2*PI)/720*minute))+clock_center_y+1;\n   x_new=(18*sin(pi-(2*pi)/12*hour-(2*PI)/720*minute))+clock_center_x+1;\n   u8g2.drawLine(clock_center_x,clock_center_y,x_old,y_old);\n   u8g2.drawLine(clock_center_x+1,clock_center_y+1,x_new,y_new);\n}\n\nvoid draw_minute(int minute){\n   y_old= (24*cos(pi-(2*pi)/60*minute))+clock_center_y;\n   x_old =(24*sin(pi-(2*pi)/60*minute))+clock_center_x;\n   u8g2.drawLine(clock_center_x,clock_center_y,x_old,y_old);\n}\n\nvoid draw_clock_face(void){\n  u8g2.drawDisc(clock_center_x, clock_center_y,3);\n  for (int i=0;i<12;i++){\n     y_old= (32*cos(pi-(2*pi)/12*i))+clock_center_y;\n     x_old =(32*sin(pi-(2*pi)/12*i))+clock_center_x;\n     y_new= (28*cos(pi-(2*pi)/12*i))+clock_center_y;\n     x_new =(28*sin(pi-(2*pi)/12*i))+clock_center_x;\n     u8g2.drawLine(x_new,y_new,x_old,y_old);\n  }\n  u8g2.setCursor(clock_center_x-3,0);\n  u8g2.setFont(u8g2_font_6x10_tf);\n  u8g2.println("12");\n}\n\nvoid runClock(){\n  draw_clock_face();\n  draw_second(get_data_from_RTC(5));\n  draw_minute(get_data_from_RTC(4));\n  draw_hour(get_data_from_RTC(3),get_data_from_RTC(4));\n}\n'
+  }else if (Blockly.Arduino.my_board_type=="7697"){
+    Blockly.Arduino.definitions_.define_runClock_invoke='const float pi = 3.14159267 ;\nconst int clock_center_x=64;\nconst int clock_center_y=32;\nint x_old;\nint y_old;\nint x_new;\nint y_new;\n\nvoid draw_second(int second){\n   y_old= (24*cos(pi-(2*pi)/60*second))+clock_center_y;\n   x_old =(24*sin(pi-(2*pi)/60*second))+clock_center_x;\n   u8g2.drawCircle(x_old, y_old, 2); \n}\n\nvoid draw_hour(int hour, int minute){\n   y_old= (18*cos(pi-(2*pi)/12*hour-(2*PI)/720*minute))+clock_center_y;\n   x_old =(18*sin(pi-(2*pi)/12*hour-(2*PI)/720*minute))+clock_center_x;\n   y_new=(18*cos(pi-(2*pi)/12*hour-(2*PI)/720*minute))+clock_center_y+1;\n   x_new=(18*sin(pi-(2*pi)/12*hour-(2*PI)/720*minute))+clock_center_x+1;\n   u8g2.drawLine(clock_center_x,clock_center_y,x_old,y_old);\n   u8g2.drawLine(clock_center_x+1,clock_center_y+1,x_new,y_new);\n}\n\nvoid draw_minute(int minute){\n   y_old= (24*cos(pi-(2*pi)/60*minute))+clock_center_y;\n   x_old =(24*sin(pi-(2*pi)/60*minute))+clock_center_x;\n   u8g2.drawLine(clock_center_x,clock_center_y,x_old,y_old);\n}\n\nvoid draw_clock_face(void){\n  u8g2.drawDisc(clock_center_x, clock_center_y,3);\n  for (int i=0;i<12;i++){\n     y_old= (32*cos(pi-(2*pi)/12*i))+clock_center_y;\n     x_old =(32*sin(pi-(2*pi)/12*i))+clock_center_x;\n     y_new= (28*cos(pi-(2*pi)/12*i))+clock_center_y;\n     x_new =(28*sin(pi-(2*pi)/12*i))+clock_center_x;\n     u8g2.drawLine(x_new,y_new,x_old,y_old);\n  }\n  u8g2.setCursor(clock_center_x-3,0);\n  u8g2.setFont(u8g2_font_6x10_tf);\n  u8g2.println("12");\n}\n\nvoid runClock(){\n  draw_clock_face();\n  LRTC.get();\n  draw_second(LRTC.second());\n  draw_minute(LRTC.minute());\n  draw_hour(LRTC.hour(),LRTC.minute());\n}\n'
+  }
+  return'runClock();\n';
+};
+*/

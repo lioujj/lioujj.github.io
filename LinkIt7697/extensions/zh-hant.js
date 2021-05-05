@@ -512,3 +512,27 @@ Blockly.Msg.LINENOTIFY_PACKAGEID = "貼圖包編號";
 Blockly.Msg.LINENOTIFY_STICKERID = "貼圖編號";
 Blockly.Msg.LINENOTIFY_SET_TOKEN_WARNIG = "必須先設定「"+Blockly.Msg.LINENOTIFY_SETUP_TOKEN+"」積木";
 Blockly.Msg.LINENOTIFY_LINE_BREAK = "換行";
+
+//TTGO TFT
+Blockly.Msg.TTGO_TFT_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/t-display";
+Blockly.Msg.TTGO_TFT_TITLE = "TTGO彩色TFT";
+Blockly.Msg.TTGO_TFT_INIT = "初始化";
+Blockly.Msg.TTGO_TFT_TOOLTIP = "TTGO TFT";
+Blockly.Msg.TTGO_TFT_ROTATION=[["縱向","0"],["橫向","1"]];
+Blockly.Msg.TTGO_TFT_FILL_COLOR = "填滿顏色";
+Blockly.Msg.TTGO_TFT_INIT_WARNIG = "必須先設定「"+Blockly.Msg.TTGO_TFT_TITLE+Blockly.Msg.TTGO_TFT_INIT+"」積木";
+Blockly.Msg.TTGO_TFT_DRAW_CHINESE_TEXT ="顯示中文字";
+Blockly.Msg.TTGO_TFT_DRAW_ENG_FONT_SIZE = "設定英數字型大小(1~7)";
+Blockly.Msg.TTGO_TFT_PRINT_ENG_TEXT = "顯示英數字";
+Blockly.Msg.TTGO_TFT_DRAW_ENG_TEXT = "繪製英數字";
+Blockly.Msg.TTGO_TFT_DRAW_ENG_FONT_NUMBER = "設定英數字型編號(1~8)";
+Blockly.Msg.TTGO_SET_FONT_NAME = "設定使用圖形字型";
+Blockly.Msg.TTGO_TFT_DRAW_SYMBOL = "繪製圖形";
+Blockly.Msg.TTGO_TFT_DRAW_SYMBOL_NUMBER = "圖形編號";
+Blockly.Msg.TTGO_TFT_SET_ROTATION = "設定螢幕方向";
+Blockly.Msg.TTGO_DRAW_BOX = "繪製長方形";
+Blockly.Msg.TTGO_DRAW_TRIANGLE = "繪製三角形";
+Blockly.Msg.TTGO_TFT_COLOR_HOUR = "時針顏色";
+Blockly.Msg.TTGO_TFT_COLOR_MIN = "分針顏色";
+Blockly.Msg.TTGO_TFT_COLOR_SEC = "秒針顏色";
+Blockly.Msg.TTGO_TFT_COLOR_SCALE = "刻度顏色";
