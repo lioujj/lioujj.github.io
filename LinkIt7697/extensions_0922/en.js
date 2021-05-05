@@ -517,3 +517,27 @@ Blockly.Msg.LINENOTIFY_PACKAGEID = "PackageID";
 Blockly.Msg.LINENOTIFY_STICKERID = "StickerID";
 Blockly.Msg.LINENOTIFY_SET_TOKEN_WARNIG = "You have to "+Blockly.Msg.LINENOTIFY_SETUP_TOKEN+" first.";
 Blockly.Msg.LINENOTIFY_LINE_BREAK = "line feed";
+
+//TTGO TFT
+Blockly.Msg.TTGO_TFT_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/t-display";
+Blockly.Msg.TTGO_TFT_TITLE = "TTGO_TFT";
+Blockly.Msg.TTGO_TFT_INIT = "initial";
+Blockly.Msg.TTGO_TFT_TOOLTIP = "TTGO TFT";
+Blockly.Msg.TTGO_TFT_ROTATION=[["Portrait","0"],["Landscape","1"]];
+Blockly.Msg.TTGO_TFT_FILL_COLOR = "fill color";
+Blockly.Msg.TTGO_TFT_INIT_WARNIG = "You have to "+Blockly.Msg.TTGO_TFT_INIT+" "+Blockly.Msg.TTGO_TFT_TITLE+" first.";
+Blockly.Msg.TTGO_TFT_DRAW_CHINESE_TEXT ="show Chinese text";
+Blockly.Msg.TTGO_TFT_DRAW_ENG_FONT_SIZE = "set English font size(1~7)";
+Blockly.Msg.TTGO_TFT_PRINT_ENG_TEXT = "show English text";
+Blockly.Msg.TTGO_TFT_DRAW_ENG_TEXT = "draw English text";
+Blockly.Msg.TTGO_TFT_DRAW_ENG_FONT_NUMBER = "set specific font number(1~8)";
+Blockly.Msg.TTGO_SET_FONT_NAME = "set symbol font name";
+Blockly.Msg.TTGO_TFT_DRAW_SYMBOL = "draw glyph";
+Blockly.Msg.TTGO_TFT_DRAW_SYMBOL_NUMBER = "glyph number";
+Blockly.Msg.TTGO_TFT_SET_ROTATION = "set TFT rotation";
+Blockly.Msg.TTGO_DRAW_BOX = "draw box";
+Blockly.Msg.TTGO_DRAW_TRIANGLE = "draw triangle";
+Blockly.Msg.TTGO_TFT_COLOR_HOUR = "hour hand color";
+Blockly.Msg.TTGO_TFT_COLOR_MIN = "minute hand color";
+Blockly.Msg.TTGO_TFT_COLOR_SEC = "second hand color";
+Blockly.Msg.TTGO_TFT_COLOR_SCALE = "scale color";

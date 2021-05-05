@@ -36,4 +36,7 @@
 <category><name>GoogleSheets</name><replace>Google試算表</replace></category>
 <category><name>ESP32_NTP</name><replace>RTC網路校時</replace></category>
 <category><name>LineNotify</name><replace>Line通知</replace></category>
+<category><name>TTGO</name><replace>TTGO</replace></category>
+<category><name>TTGO_TFT</name><replace>TTGO彩色螢幕</replace></category>
+<category><name>TTGO_BUTTON</name><replace>TTGO按鈕</replace></category>
 </xml>

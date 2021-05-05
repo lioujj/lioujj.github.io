@@ -36,4 +36,7 @@
 <category><name>GoogleSheets</name><replace>Google Sheets</replace></category>
 <category><name>ESP32_NTP</name><replace>NTP Time</replace></category>
 <category><name>LineNotify</name><replace>Line Notify</replace></category>
+<category><name>TTGO</name><replace>TTGO</replace></category>
+<category><name>TTGO_TFT</name><replace>TTGO TFT</replace></category>
+<category><name>TTGO_BUTTON</name><replace>TTGO BUTTON</replace></category>
 </xml>
