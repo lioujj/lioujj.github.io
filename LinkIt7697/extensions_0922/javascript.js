@@ -1912,7 +1912,7 @@ Blockly.Arduino.ttgo_tft={};
 Blockly.Arduino.ttgo_tft_init=function(){
   Blockly.Arduino.definitions_.define_spi="#include <SPI.h>";
   Blockly.Arduino.definitions_.define_ttgo_tft="#include <TFT_eSPI.h>\n#include <U8g2_for_TFT_eSPI.h>";
-  Blockly.Arduino.definitions_.define_ttgo_tft_init_invoke="TFT_eSPI tft = TFT_eSPI();\nU8g2_for_TFT_eSPI u8g2;\nuint32_t tft_color=TFT_WHITE;\n";
+  Blockly.Arduino.definitions_.define_ttgo_tft_init_invoke="TFT_eSPI tft = TFT_eSPI();\nU8g2_for_TFT_eSPI u8g2;\nuint32_t tft_color=TFT_WHITE;\nbyte tftTextSize=1;\nbyte tftTextFont=1;\n";
   Blockly.Arduino.setups_.ttgo_tft='tft.begin();\n  tft.fillScreen(TFT_BLACK);\n  u8g2.begin(tft);\n  tft.setTextColor(tft_color);\n  u8g2.setForegroundColor(tft_color);\n  u8g2.setFontMode(1);';
   return'';
 };
@@ -1943,12 +1943,12 @@ Blockly.Arduino.ttgo_tft_draw_chinese_text=function(){
 
 Blockly.Arduino.ttgo_tft_set_eng_font=function(){
   var a=Blockly.Arduino.valueToCode(this,"SIZE",Blockly.Arduino.ORDER_NONE)||"0";
-  return 'tft.setTextSize('+a+');\n';
+  return 'tftTextSize='+a+';\ntft.setTextSize(tftTextSize);\n';
 };
 
 Blockly.Arduino.ttgo_tft_set_eng_font_num=function(){
   var a=Blockly.Arduino.valueToCode(this,"FONT",Blockly.Arduino.ORDER_NONE)||"0";
-  return 'tft.setTextFont('+a+');\n';
+  return 'tftTextFont='+a+';\ntft.setTextFont(tftTextFont);\n';
 };
 
 Blockly.Arduino.ttgo_tft_print_eng_text=function(){
@@ -2064,16 +2064,47 @@ Blockly.Arduino.ttgo_getFromColorPicker=function(){
   return['tft.color565('+hexToR(a)+','+hexToG(a)+','+hexToB(a)+')',Blockly.Arduino.ORDER_ATOMIC]
 };
 
-
-/*
-Blockly.Arduino.ttgo_tft_draw_clock=function(){
-  if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
-    Blockly.Arduino.definitions_.define_ESP_time_include="#include <time.h>";
-    Blockly.Arduino.definitions_.define_getDataFromRTC_invoke="int get_data_from_RTC(byte dataType) {\n  int myResult=0;\n  time_t t = time(NULL);\n  struct tm *t_st;\n  t_st = localtime(&t);\n  switch(dataType){\n    case 0:\n      myResult=(1900 + t_st->tm_year);\n      break;\n    case 1:\n      myResult=( 1 + t_st->tm_mon);\n      break;\n    case 2:\n      myResult=t_st->tm_mday;\n      break;\n    case 3:\n      myResult=t_st->tm_hour;\n      break;\n    case 4:\n      myResult=t_st->tm_min;\n      break;\n    case 5:\n      myResult=t_st->tm_sec;\n      break;\n  }\n  return myResult;\n}\n";
-    Blockly.Arduino.definitions_.define_runClock_invoke='const float pi = 3.14159267 ;\nconst int clock_center_x=64;\nconst int clock_center_y=32;\nint x_old;\nint y_old;\nint x_new;\nint y_new;\n\nvoid draw_second(int second){\n   y_old= (24*cos(pi-(2*pi)/60*second))+clock_center_y;\n   x_old =(24*sin(pi-(2*pi)/60*second))+clock_center_x;\n   u8g2.drawCircle(x_old, y_old, 2); \n}\n\nvoid draw_hour(int hour, int minute){\n   y_old= (18*cos(pi-(2*pi)/12*hour-(2*PI)/720*minute))+clock_center_y;\n   x_old =(18*sin(pi-(2*pi)/12*hour-(2*PI)/720*minute))+clock_center_x;\n   y_new=(18*cos(pi-(2*pi)/12*hour-(2*PI)/720*minute))+clock_center_y+1;\n   x_new=(18*sin(pi-(2*pi)/12*hour-(2*PI)/720*minute))+clock_center_x+1;\n   u8g2.drawLine(clock_center_x,clock_center_y,x_old,y_old);\n   u8g2.drawLine(clock_center_x+1,clock_center_y+1,x_new,y_new);\n}\n\nvoid draw_minute(int minute){\n   y_old= (24*cos(pi-(2*pi)/60*minute))+clock_center_y;\n   x_old =(24*sin(pi-(2*pi)/60*minute))+clock_center_x;\n   u8g2.drawLine(clock_center_x,clock_center_y,x_old,y_old);\n}\n\nvoid draw_clock_face(void){\n  u8g2.drawDisc(clock_center_x, clock_center_y,3);\n  for (int i=0;i<12;i++){\n     y_old= (32*cos(pi-(2*pi)/12*i))+clock_center_y;\n     x_old =(32*sin(pi-(2*pi)/12*i))+clock_center_x;\n     y_new= (28*cos(pi-(2*pi)/12*i))+clock_center_y;\n     x_new =(28*sin(pi-(2*pi)/12*i))+clock_center_x;\n     u8g2.drawLine(x_new,y_new,x_old,y_old);\n  }\n  u8g2.setCursor(clock_center_x-3,0);\n  u8g2.setFont(u8g2_font_6x10_tf);\n  u8g2.println("12");\n}\n\nvoid runClock(){\n  draw_clock_face();\n  draw_second(get_data_from_RTC(5));\n  draw_minute(get_data_from_RTC(4));\n  draw_hour(get_data_from_RTC(3),get_data_from_RTC(4));\n}\n'
-  }else if (Blockly.Arduino.my_board_type=="7697"){
-    Blockly.Arduino.definitions_.define_runClock_invoke='const float pi = 3.14159267 ;\nconst int clock_center_x=64;\nconst int clock_center_y=32;\nint x_old;\nint y_old;\nint x_new;\nint y_new;\n\nvoid draw_second(int second){\n   y_old= (24*cos(pi-(2*pi)/60*second))+clock_center_y;\n   x_old =(24*sin(pi-(2*pi)/60*second))+clock_center_x;\n   u8g2.drawCircle(x_old, y_old, 2); \n}\n\nvoid draw_hour(int hour, int minute){\n   y_old= (18*cos(pi-(2*pi)/12*hour-(2*PI)/720*minute))+clock_center_y;\n   x_old =(18*sin(pi-(2*pi)/12*hour-(2*PI)/720*minute))+clock_center_x;\n   y_new=(18*cos(pi-(2*pi)/12*hour-(2*PI)/720*minute))+clock_center_y+1;\n   x_new=(18*sin(pi-(2*pi)/12*hour-(2*PI)/720*minute))+clock_center_x+1;\n   u8g2.drawLine(clock_center_x,clock_center_y,x_old,y_old);\n   u8g2.drawLine(clock_center_x+1,clock_center_y+1,x_new,y_new);\n}\n\nvoid draw_minute(int minute){\n   y_old= (24*cos(pi-(2*pi)/60*minute))+clock_center_y;\n   x_old =(24*sin(pi-(2*pi)/60*minute))+clock_center_x;\n   u8g2.drawLine(clock_center_x,clock_center_y,x_old,y_old);\n}\n\nvoid draw_clock_face(void){\n  u8g2.drawDisc(clock_center_x, clock_center_y,3);\n  for (int i=0;i<12;i++){\n     y_old= (32*cos(pi-(2*pi)/12*i))+clock_center_y;\n     x_old =(32*sin(pi-(2*pi)/12*i))+clock_center_x;\n     y_new= (28*cos(pi-(2*pi)/12*i))+clock_center_y;\n     x_new =(28*sin(pi-(2*pi)/12*i))+clock_center_x;\n     u8g2.drawLine(x_new,y_new,x_old,y_old);\n  }\n  u8g2.setCursor(clock_center_x-3,0);\n  u8g2.setFont(u8g2_font_6x10_tf);\n  u8g2.println("12");\n}\n\nvoid runClock(){\n  draw_clock_face();\n  LRTC.get();\n  draw_second(LRTC.second());\n  draw_minute(LRTC.minute());\n  draw_hour(LRTC.hour(),LRTC.minute());\n}\n'
-  }
-  return'runClock();\n';
+Blockly.Arduino.ttgo_tft_set_clock=function(){
+  var a=Blockly.Arduino.valueToCode(this,"COLOR_HOUR",Blockly.Arduino.ORDER_ATOMIC)||"",
+      b=Blockly.Arduino.valueToCode(this,"COLOR_MINUTE",Blockly.Arduino.ORDER_ATOMIC)||"",
+      c=Blockly.Arduino.valueToCode(this,"COLOR_SECOND",Blockly.Arduino.ORDER_ATOMIC)||"",
+      d=Blockly.Arduino.valueToCode(this,"COLOR_SCALE",Blockly.Arduino.ORDER_ATOMIC)||"";
+	a=a.replace(/\"/g,"");
+	b=b.replace(/\"/g,"");
+  c=c.replace(/\"/g,"");
+  d=d.replace(/\"/g,"");
+  Blockly.Arduino.definitions_.define_ESP_time_include="#include <time.h>";
+  Blockly.Arduino.definitions_.define_ttgo_clock_invoke='const float pi = 3.14159267 ;\nint clock_center_x=64;\nint clock_center_y=32;\nint x_old;\nint y_old;\nint x_new;\nint y_new;\nuint32_t clock_hour=TFT_BLUE;\nuint32_t clock_minute=TFT_YELLOW;\nuint32_t clock_second=TFT_GREEN;\nuint32_t clock_scale=TFT_RED;\nint radius;\n\nvoid draw_second(int second){\n   y_old= ((radius-16)*cos(pi-(2*pi)/60*second))+clock_center_y;\n   x_old =((radius-16)*sin(pi-(2*pi)/60*second))+clock_center_x;\n   tft.drawCircle(x_old, y_old, 4,clock_second);\n}\n\nvoid draw_hour(int hour, int minute){\n   y_old= ((radius-28)*cos(pi-(2*pi)/12*hour-(2*PI)/720*minute))+clock_center_y;\n   x_old =((radius-28)*sin(pi-(2*pi)/12*hour-(2*PI)/720*minute))+clock_center_x;\n   y_new=((radius-28)*cos(pi-(2*pi)/12*hour-(2*PI)/720*minute))+clock_center_y+1;\n   x_new=((radius-28)*sin(pi-(2*pi)/12*hour-(2*PI)/720*minute))+clock_center_x+1;\n   tft.drawLine(clock_center_x,clock_center_y,x_old,y_old,clock_hour);\n   tft.drawLine(clock_center_x+1,clock_center_y+1,x_new,y_new,clock_hour);\n}\n\nvoid draw_minute(int minute){\n   y_old =((radius-16)*cos(pi-(2*pi)/60*minute))+clock_center_y;\n   x_old =((radius-16)*sin(pi-(2*pi)/60*minute))+clock_center_x;\n   y_new =((radius-16)*cos(pi-(2*pi)/60*minute))+clock_center_y+1;\n   x_new =((radius-16)*sin(pi-(2*pi)/60*minute))+clock_center_x+1;\n   tft.drawLine(clock_center_x,clock_center_y,x_old,y_old,clock_minute);\n   tft.drawLine(clock_center_x+1,clock_center_y+1,x_old,y_old,clock_minute);\n}\n\nvoid draw_clock_face(void){\n  tft.drawCircle(clock_center_x, clock_center_y,6,clock_scale);\n  tft.drawCircle(clock_center_x, clock_center_y,5,clock_scale);\n  for (int i=0;i<12;i++){\n     y_old= (radius*cos(pi-(2*pi)/12*i))+clock_center_y;\n     x_old =(radius*sin(pi-(2*pi)/12*i))+clock_center_x;\n     y_new= ((radius-8)*cos(pi-(2*pi)/12*i))+clock_center_y;\n     x_new =((radius-8)*sin(pi-(2*pi)/12*i))+clock_center_x;\n     if (i==0){\n       tft.setTextSize(1);\n       tft.setTextFont(2);\n       tft.setTextColor(clock_scale);\n       tft.drawString("12",x_old-5,y_old-3);\n       tft.setTextColor(tft_color);\n       tft.setTextSize(tftTextSize);\n       tft.setTextFont(tftTextFont);\n     } else {\n       tft.drawLine(x_new,y_new,x_old,y_old,clock_scale);\n       tft.drawLine(x_new+1,y_new+1,x_old+1,y_old+1,clock_scale);\n     }\n  }\n}\n\nvoid tftClockSetColors(uint32_t color1,uint32_t color2,uint32_t color3,uint32_t color4){\n  clock_hour=color1;\n  clock_minute=color2;\n  clock_second=color3;\n  clock_scale=color4;\n}\n\nvoid checkClockCenter(byte myPos){\n  if (tft.width()==tft.height()){\n    clock_center_x=tft.width()/2;\n    clock_center_y=clock_center_x;\n    radius=clock_center_x;\n  }else if (tft.width()>tft.height()){\n    clock_center_y=tft.height()/2;\n    radius=clock_center_y;\n    switch(myPos){\n      case 0:\n        clock_center_x=radius;\n        break;\n      case 1:\n        clock_center_x=tft.width()/2;\n        break;\n      case 2:\n        clock_center_x=tft.width()-radius;\n        break;\n    }\n  } else {\n    clock_center_x=tft.width()/2;\n    radius=clock_center_x;\n    switch(myPos){\n      case 0:\n        clock_center_y=radius;\n        break;\n      case 1:\n        clock_center_y=tft.height()/2;\n        break;\n      case 2:\n        clock_center_y=tft.height()-radius;\n        break;\n    }\n  }\n}\n\nvoid runClock(byte clockPos){\n  checkClockCenter(clockPos);\n  tft.fillCircle(clock_center_x, clock_center_y, radius-8, TFT_BLACK);\n  draw_clock_face();\n  draw_second(get_data_from_RTC(5));\n  draw_minute(get_data_from_RTC(4));\n  draw_hour(get_data_from_RTC(3),get_data_from_RTC(4));\n}\n';
+  return'tftClockSetColors('+a+','+b+','+c+','+d+');\n';
 };
-*/
+
+Blockly.Arduino.ttgo_tft_draw_clock=function(){
+  var a=this.getFieldValue("CLOCK_POS");
+  Blockly.Arduino.definitions_.define_ESP_time_include="#include <time.h>";
+  Blockly.Arduino.definitions_.define_ttgo_clock_invoke='const float pi = 3.14159267 ;\nint clock_center_x=64;\nint clock_center_y=32;\nint x_old;\nint y_old;\nint x_new;\nint y_new;\nuint32_t clock_hour=TFT_BLUE;\nuint32_t clock_minute=TFT_YELLOW;\nuint32_t clock_second=TFT_GREEN;\nuint32_t clock_scale=TFT_RED;\nint radius;\n\nvoid draw_second(int second){\n   y_old= ((radius-16)*cos(pi-(2*pi)/60*second))+clock_center_y;\n   x_old =((radius-16)*sin(pi-(2*pi)/60*second))+clock_center_x;\n   tft.drawCircle(x_old, y_old, 4,clock_second);\n}\n\nvoid draw_hour(int hour, int minute){\n   y_old= ((radius-28)*cos(pi-(2*pi)/12*hour-(2*PI)/720*minute))+clock_center_y;\n   x_old =((radius-28)*sin(pi-(2*pi)/12*hour-(2*PI)/720*minute))+clock_center_x;\n   y_new=((radius-28)*cos(pi-(2*pi)/12*hour-(2*PI)/720*minute))+clock_center_y+1;\n   x_new=((radius-28)*sin(pi-(2*pi)/12*hour-(2*PI)/720*minute))+clock_center_x+1;\n   tft.drawLine(clock_center_x,clock_center_y,x_old,y_old,clock_hour);\n   tft.drawLine(clock_center_x+1,clock_center_y+1,x_new,y_new,clock_hour);\n}\n\nvoid draw_minute(int minute){\n   y_old =((radius-16)*cos(pi-(2*pi)/60*minute))+clock_center_y;\n   x_old =((radius-16)*sin(pi-(2*pi)/60*minute))+clock_center_x;\n   y_new =((radius-16)*cos(pi-(2*pi)/60*minute))+clock_center_y+1;\n   x_new =((radius-16)*sin(pi-(2*pi)/60*minute))+clock_center_x+1;\n   tft.drawLine(clock_center_x,clock_center_y,x_old,y_old,clock_minute);\n   tft.drawLine(clock_center_x+1,clock_center_y+1,x_old,y_old,clock_minute);\n}\n\nvoid draw_clock_face(void){\n  tft.drawCircle(clock_center_x, clock_center_y,6,clock_scale);\n  tft.drawCircle(clock_center_x, clock_center_y,5,clock_scale);\n  for (int i=0;i<12;i++){\n     y_old= (radius*cos(pi-(2*pi)/12*i))+clock_center_y;\n     x_old =(radius*sin(pi-(2*pi)/12*i))+clock_center_x;\n     y_new= ((radius-8)*cos(pi-(2*pi)/12*i))+clock_center_y;\n     x_new =((radius-8)*sin(pi-(2*pi)/12*i))+clock_center_x;\n     if (i==0){\n       tft.setTextSize(1);\n       tft.setTextFont(2);\n       tft.setTextColor(clock_scale);\n       tft.drawString("12",x_old-5,y_old-3);\n       tft.setTextColor(tft_color);\n       tft.setTextSize(tftTextSize);\n       tft.setTextFont(tftTextFont);\n     } else {\n       tft.drawLine(x_new,y_new,x_old,y_old,clock_scale);\n       tft.drawLine(x_new+1,y_new+1,x_old+1,y_old+1,clock_scale);\n     }\n  }\n}\n\nvoid tftClockSetColors(uint32_t color1,uint32_t color2,uint32_t color3,uint32_t color4){\n  clock_hour=color1;\n  clock_minute=color2;\n  clock_second=color3;\n  clock_scale=color4;\n}\n\nvoid checkClockCenter(byte myPos){\n  if (tft.width()==tft.height()){\n    clock_center_x=tft.width()/2;\n    clock_center_y=clock_center_x;\n    radius=clock_center_x;\n  }else if (tft.width()>tft.height()){\n    clock_center_y=tft.height()/2;\n    radius=clock_center_y;\n    switch(myPos){\n      case 0:\n        clock_center_x=radius;\n        break;\n      case 1:\n        clock_center_x=tft.width()/2;\n        break;\n      case 2:\n        clock_center_x=tft.width()-radius;\n        break;\n    }\n  } else {\n    clock_center_x=tft.width()/2;\n    radius=clock_center_x;\n    switch(myPos){\n      case 0:\n        clock_center_y=radius;\n        break;\n      case 1:\n        clock_center_y=tft.height()/2;\n        break;\n      case 2:\n        clock_center_y=tft.height()-radius;\n        break;\n    }\n  }\n}\n\nvoid runClock(byte clockPos){\n  checkClockCenter(clockPos);\n  tft.fillCircle(clock_center_x, clock_center_y, radius-8, TFT_BLACK);\n  draw_clock_face();\n  draw_second(get_data_from_RTC(5));\n  draw_minute(get_data_from_RTC(4));\n  draw_hour(get_data_from_RTC(3),get_data_from_RTC(4));\n}\n';
+  return'runClock('+a+');\n';
+};
+
+
+
+Blockly.Arduino.s20={};
+Blockly.Arduino.s20_led=function(){
+  var a=Blockly.Arduino.valueToCode(this,"ON_OFF",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  Blockly.Arduino.setups_["setup_s20_led_13"]="pinMode(13,OUTPUT);"
+  return'digitalWrite(13,'+a+');\n'
+}
+Blockly.Arduino.s20_relay=function(){
+  var a=Blockly.Arduino.valueToCode(this,"ON_OFF",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  Blockly.Arduino.setups_["setup_s20_relay_12"]="pinMode(12,OUTPUT);"
+  return'digitalWrite(12,'+a+');\n'
+}
+
+Blockly.Arduino.s20_button=function(){
+    var a=Blockly.Arduino.statementToCode(this,"MSG_BUTTON_CALL");
+    Blockly.Arduino.setups_["setup_s20_button_0"]="pinMode(0,INPUT);"
+	  return"if (digitalRead(0)==1){\n"+a+"  while(digitalRead(0)==1){}\n}\n"
+};
+
+Blockly.Arduino.s20_button_bool=function(){
+	  return['(digitalRead(0)==1)',Blockly.Arduino.ORDER_ATOMIC]
+};

@@ -212,6 +212,21 @@
           </value>
         </block>
         <block type="ttgo_getFromColorPicker"></block>
+        <block type="ttgo_tft_set_clock">
+          <value name="COLOR_HOUR">
+            <block type="ttgo_getFromColorPicker"></block>
+          </value>
+          <value name="COLOR_MINUTE">
+            <block type="ttgo_getFromColorPicker"></block>
+          </value>
+          <value name="COLOR_SECOND">
+            <block type="ttgo_getFromColorPicker"></block>
+          </value>
+          <value name="COLOR_SCALE">
+            <block type="ttgo_getFromColorPicker"></block>
+          </value>
+        </block>
+        <block type="ttgo_tft_draw_clock"></block>
         <block type="ttgo_tft_draw_chinese_text">
           <value name="START_X">
             <block type="math_number">
@@ -380,6 +395,28 @@
       </category>
     </category>
   </category>
+<!--
+  <category id="category_esp8266" name="ESP8266">
+		<category id="category_s20" name="S20">
+			<block type="s20_led">
+        <value name="ON_OFF">
+          <block type="inout_highlow">
+            <field name="BOOL">HIGH</field>
+          </block>
+        </value>
+      </block>
+			<block type="s20_relay">
+        <value name="ON_OFF">
+          <block type="inout_highlow">
+            <field name="BOOL">HIGH</field>
+          </block>
+        </value>
+      </block>
+      <block type="s20_button"></block>
+      <block type="s20_button_bool"></block>
+    </category>
+  </category>
+-->
 	<category id="category_iot" name="IoT">
 		<category id="category_mqtt" name="MQTT">
 			<block type="connect_mqtt">
