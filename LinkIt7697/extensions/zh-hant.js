@@ -532,7 +532,18 @@ Blockly.Msg.TTGO_TFT_DRAW_SYMBOL_NUMBER = "圖形編號";
 Blockly.Msg.TTGO_TFT_SET_ROTATION = "設定螢幕方向";
 Blockly.Msg.TTGO_DRAW_BOX = "繪製長方形";
 Blockly.Msg.TTGO_DRAW_TRIANGLE = "繪製三角形";
-Blockly.Msg.TTGO_TFT_COLOR_HOUR = "時針顏色";
-Blockly.Msg.TTGO_TFT_COLOR_MIN = "分針顏色";
-Blockly.Msg.TTGO_TFT_COLOR_SEC = "秒針顏色";
-Blockly.Msg.TTGO_TFT_COLOR_SCALE = "刻度顏色";
+Blockly.Msg.TTGO_TFT_COLOR_HOUR = "時針";
+Blockly.Msg.TTGO_TFT_COLOR_MIN = "分針";
+Blockly.Msg.TTGO_TFT_COLOR_SEC = "秒針";
+Blockly.Msg.TTGO_TFT_COLOR_SCALE = "刻度";
+Blockly.Msg.TTGO_TFT_SET_CLOCK = "設定時鐘顏色";
+Blockly.Msg.TTGO_TFT_CLOCK_POSITION_TITLE = "時鐘位置";
+Blockly.Msg.TTGO_TFT_CLOCK_POSITION=[["中間","1"],["上(左)邊","0"],["下(右)邊","2"]];
+
+//S20
+Blockly.Msg.S20_HELPURL = "";
+Blockly.Msg.S20_TOOLTIP = "S20";
+Blockly.Msg.S20_TITLE = "S20智慧插座";
+Blockly.Msg.S20_LED = "LED數位寫入";
+Blockly.Msg.S20_RELAY = "插座寫入";
+Blockly.Msg.S20_PRESSED = "按鈕是否按下？";

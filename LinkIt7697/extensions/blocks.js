@@ -3711,20 +3711,19 @@ Blockly.Blocks.ttgo_getFromColorPicker={init:function(){
   this.setTooltip(Blockly.Msg.TTGO_TFT_TOOLTIP)}
 };
 
-/*
-Blockly.Blocks.ttgo_tft_draw_clock={init:function(){
+Blockly.Blocks.ttgo_tft_set_clock={init:function(){
   this.setHelpUrl(Blockly.Msg.TTGO_TFT_HELPURL);
   this.setColour(Blockly.Blocks.ttgo_tft.HUE);
   this.appendDummyInput()
       .appendField(Blockly.Msg.TTGO_TFT_TITLE)
-      .appendField(Blockly.Msg.OLED_DISPLAY_CLOCK);
-  this.appendValueInput("COLOR1")
+      .appendField(Blockly.Msg.TTGO_TFT_SET_CLOCK);
+  this.appendValueInput("COLOR_HOUR")
       .setCheck("String")
       .appendField(Blockly.Msg.TTGO_TFT_COLOR_HOUR);
-  this.appendValueInput("COLOR2")
+  this.appendValueInput("COLOR_MINUTE")
       .setCheck("String")
       .appendField(Blockly.Msg.TTGO_TFT_COLOR_MIN);
-  this.appendValueInput("COLOR3")
+  this.appendValueInput("COLOR_SECOND")
       .setCheck("String")
       .appendField(Blockly.Msg.TTGO_TFT_COLOR_SEC);
   this.appendValueInput("COLOR_SCALE")
@@ -3734,6 +3733,79 @@ Blockly.Blocks.ttgo_tft_draw_clock={init:function(){
   this.setPreviousStatement(!0);
   this.setNextStatement(!0);
   this.setTooltip(Blockly.Msg.TTGO_TFT_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.ttgo_tft.checkBlocks(this,"ttgo_tft_set_clock","ttgo_tft_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.TTGO_TFT_INIT_WARNIG))}
+};
+
+Blockly.Blocks.ttgo_tft_draw_clock={init:function(){
+  this.setHelpUrl(Blockly.Msg.TTGO_TFT_HELPURL);
+  this.setColour(Blockly.Blocks.ttgo_tft.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.TTGO_TFT_TITLE)
+      .appendField(Blockly.Msg.OLED_DISPLAY_CLOCK);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.TTGO_TFT_CLOCK_POSITION_TITLE)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.TTGO_TFT_CLOCK_POSITION),"CLOCK_POS");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.TTGO_TFT_TOOLTIP)},onchange:function(){
       this.workspace&&(Blockly.Blocks.ttgo_tft.checkBlocks(this,"ttgo_tft_draw_clock","ttgo_tft_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.TTGO_TFT_INIT_WARNIG))}
 };
-*/
+
+
+//S20
+Blockly.Blocks.s20={};
+Blockly.Blocks.s20.HUE=120;
+Blockly.Blocks.s20_led={init:function(){
+  this.setHelpUrl(Blockly.Msg.S20_HELPURL);
+  this.setColour(Blockly.Blocks.s20.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.S20_TITLE)
+  this.appendValueInput("ON_OFF")
+      .setCheck("Boolean")
+      .appendField(Blockly.Msg.S20_LED);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.S20_TOOLTIP)}
+};
+
+Blockly.Blocks.s20_relay={init:function(){
+  this.setHelpUrl(Blockly.Msg.S20_HELPURL);
+  this.setColour(Blockly.Blocks.s20.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.S20_TITLE);
+  this.appendValueInput("ON_OFF")
+      .setCheck("Boolean")
+      .appendField(Blockly.Msg.S20_RELAY);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.S20_TOOLTIP)}
+};
+
+Blockly.Blocks.s20_button={init:function(){
+  this.setHelpUrl(Blockly.Msg.S20_HELPURL);
+  this.setColour(Blockly.Blocks.s20.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.S20_TITLE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LIOU_ROBOT_WHEN+Blockly.Msg.LIOU_ROBOT_BUTTON+Blockly.Msg.LIOU_ROBOT_BUTTON_CHECK);
+  this.setInputsInline(!0);
+  this.appendStatementInput("MSG_BUTTON_CALL");
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.S20_TOOLTIP)}
+};
+
+Blockly.Blocks.s20_button_bool={init:function(){
+  this.setHelpUrl(Blockly.Msg.S20_HELPURL);
+  this.setColour(Blockly.Blocks.s20.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.S20_TITLE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.S20_PRESSED);
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Boolean");
+  this.setTooltip(Blockly.Msg.S20_TOOLTIP)}
+};

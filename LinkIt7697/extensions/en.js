@@ -537,7 +537,18 @@ Blockly.Msg.TTGO_TFT_DRAW_SYMBOL_NUMBER = "glyph number";
 Blockly.Msg.TTGO_TFT_SET_ROTATION = "set TFT rotation";
 Blockly.Msg.TTGO_DRAW_BOX = "draw box";
 Blockly.Msg.TTGO_DRAW_TRIANGLE = "draw triangle";
-Blockly.Msg.TTGO_TFT_COLOR_HOUR = "hour hand color";
-Blockly.Msg.TTGO_TFT_COLOR_MIN = "minute hand color";
-Blockly.Msg.TTGO_TFT_COLOR_SEC = "second hand color";
-Blockly.Msg.TTGO_TFT_COLOR_SCALE = "scale color";
+Blockly.Msg.TTGO_TFT_COLOR_HOUR = "hour hand";
+Blockly.Msg.TTGO_TFT_COLOR_MIN = "minute hand";
+Blockly.Msg.TTGO_TFT_COLOR_SEC = "second hand";
+Blockly.Msg.TTGO_TFT_COLOR_SCALE = "scale";
+Blockly.Msg.TTGO_TFT_SET_CLOCK = "set clock color";
+Blockly.Msg.TTGO_TFT_CLOCK_POSITION_TITLE = "position:";
+Blockly.Msg.TTGO_TFT_CLOCK_POSITION=[["middle","1"],["top(left)","0"],["bottom(right)","2"]];
+
+//S20
+Blockly.Msg.S20_HELPURL = "";
+Blockly.Msg.S20_TOOLTIP = "S20";
+Blockly.Msg.S20_TITLE = "Sonoff S20";
+Blockly.Msg.S20_LED = "LED digitalWrite";
+Blockly.Msg.S20_RELAY = "relay digitalWrite";
+Blockly.Msg.S20_PRESSED = "button pressed?";
