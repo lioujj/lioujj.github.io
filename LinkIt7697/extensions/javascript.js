@@ -2090,21 +2090,27 @@ Blockly.Arduino.ttgo_tft_draw_clock=function(){
 Blockly.Arduino.s20={};
 Blockly.Arduino.s20_led=function(){
   var a=Blockly.Arduino.valueToCode(this,"ON_OFF",Blockly.Arduino.ORDER_ATOMIC)||"0";
-  Blockly.Arduino.setups_["setup_s20_led_13"]="pinMode(13,OUTPUT);"
+  Blockly.Arduino.setups_["setup_s20_led_13"]="pinMode(13,OUTPUT);\n  digitalWrite(13,HIGH);"
+  a="(!("+a+"))";
   return'digitalWrite(13,'+a+');\n'
 }
 Blockly.Arduino.s20_relay=function(){
   var a=Blockly.Arduino.valueToCode(this,"ON_OFF",Blockly.Arduino.ORDER_ATOMIC)||"0";
-  Blockly.Arduino.setups_["setup_s20_relay_12"]="pinMode(12,OUTPUT);"
+  Blockly.Arduino.setups_["setup_s20_relay_12"]="pinMode(12,OUTPUT);";
   return'digitalWrite(12,'+a+');\n'
 }
 
 Blockly.Arduino.s20_button=function(){
-    var a=Blockly.Arduino.statementToCode(this,"MSG_BUTTON_CALL");
-    Blockly.Arduino.setups_["setup_s20_button_0"]="pinMode(0,INPUT);"
-	  return"if (digitalRead(0)==1){\n"+a+"  while(digitalRead(0)==1){}\n}\n"
+  var a=Blockly.Arduino.statementToCode(this,"MSG_BUTTON_CALL");
+  Blockly.Arduino.setups_["setup_s20_button_0"]="pinMode(0,INPUT);"
+	return"if (!digitalRead(0)){\n"+a+"  while(!digitalRead(0)){}\n}\n"
 };
 
 Blockly.Arduino.s20_button_bool=function(){
-	  return['(digitalRead(0)==1)',Blockly.Arduino.ORDER_ATOMIC]
+  Blockly.Arduino.setups_["setup_s20_button_0"]="pinMode(0,INPUT);"
+	return['(!digitalRead(0))',Blockly.Arduino.ORDER_ATOMIC]
+};
+
+Blockly.Arduino.s20_relay_bool=function(){
+	  return['digitalRead(12)',Blockly.Arduino.ORDER_ATOMIC]
 };

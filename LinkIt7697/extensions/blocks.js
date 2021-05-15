@@ -3755,7 +3755,7 @@ Blockly.Blocks.ttgo_tft_draw_clock={init:function(){
 
 //S20
 Blockly.Blocks.s20={};
-Blockly.Blocks.s20.HUE=120;
+Blockly.Blocks.s20.HUE=198;
 Blockly.Blocks.s20_led={init:function(){
   this.setHelpUrl(Blockly.Msg.S20_HELPURL);
   this.setColour(Blockly.Blocks.s20.HUE);
@@ -3790,7 +3790,7 @@ Blockly.Blocks.s20_button={init:function(){
   this.appendDummyInput()
       .appendField(Blockly.Msg.S20_TITLE);
   this.appendDummyInput()
-      .appendField(Blockly.Msg.LIOU_ROBOT_WHEN+Blockly.Msg.LIOU_ROBOT_BUTTON+Blockly.Msg.LIOU_ROBOT_BUTTON_CHECK);
+      .appendField(Blockly.Msg.LIOU_ROBOT_WHEN+Blockly.Msg.LIOU_ROBOT_BUTTON+"(P0) "+Blockly.Msg.LIOU_ROBOT_BUTTON_CHECK);
   this.setInputsInline(!0);
   this.appendStatementInput("MSG_BUTTON_CALL");
   this.setPreviousStatement(!0);
@@ -3805,6 +3805,18 @@ Blockly.Blocks.s20_button_bool={init:function(){
       .appendField(Blockly.Msg.S20_TITLE);
   this.appendDummyInput()
       .appendField(Blockly.Msg.S20_PRESSED);
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Boolean");
+  this.setTooltip(Blockly.Msg.S20_TOOLTIP)}
+};
+
+Blockly.Blocks.s20_relay_bool={init:function(){
+  this.setHelpUrl(Blockly.Msg.S20_HELPURL);
+  this.setColour(Blockly.Blocks.s20.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.S20_TITLE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.S20_RELAY_OPENED);
   this.setInputsInline(!0);
   this.setOutput(!0,"Boolean");
   this.setTooltip(Blockly.Msg.S20_TOOLTIP)}

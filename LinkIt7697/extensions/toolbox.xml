@@ -395,7 +395,6 @@
       </category>
     </category>
   </category>
-<!--
   <category id="category_esp8266" name="ESP8266">
 		<category id="category_s20" name="S20">
 			<block type="s20_led">
@@ -414,9 +413,9 @@
       </block>
       <block type="s20_button"></block>
       <block type="s20_button_bool"></block>
+      <block type="s20_relay_bool"></block>
     </category>
   </category>
--->
 	<category id="category_iot" name="IoT">
 		<category id="category_mqtt" name="MQTT">
 			<block type="connect_mqtt">

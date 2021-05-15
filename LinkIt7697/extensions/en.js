@@ -546,9 +546,10 @@ Blockly.Msg.TTGO_TFT_CLOCK_POSITION_TITLE = "position:";
 Blockly.Msg.TTGO_TFT_CLOCK_POSITION=[["middle","1"],["top(left)","0"],["bottom(right)","2"]];
 
 //S20
-Blockly.Msg.S20_HELPURL = "";
+Blockly.Msg.S20_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/S20智慧插座積木";
 Blockly.Msg.S20_TOOLTIP = "S20";
 Blockly.Msg.S20_TITLE = "Sonoff S20";
-Blockly.Msg.S20_LED = "LED digitalWrite";
-Blockly.Msg.S20_RELAY = "relay digitalWrite";
-Blockly.Msg.S20_PRESSED = "button pressed?";
+Blockly.Msg.S20_LED = "LED(P13) digitalWrite";
+Blockly.Msg.S20_RELAY = "relay(P12) digitalWrite";
+Blockly.Msg.S20_PRESSED = "button(P0) pressed?";
+Blockly.Msg.S20_RELAY_OPENED = "relay(P12) is ON?";

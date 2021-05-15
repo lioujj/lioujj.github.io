@@ -541,9 +541,10 @@ Blockly.Msg.TTGO_TFT_CLOCK_POSITION_TITLE = "時鐘位置";
 Blockly.Msg.TTGO_TFT_CLOCK_POSITION=[["中間","1"],["上(左)邊","0"],["下(右)邊","2"]];
 
 //S20
-Blockly.Msg.S20_HELPURL = "";
+Blockly.Msg.S20_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/S20智慧插座積木";
 Blockly.Msg.S20_TOOLTIP = "S20";
 Blockly.Msg.S20_TITLE = "S20智慧插座";
-Blockly.Msg.S20_LED = "LED數位寫入";
-Blockly.Msg.S20_RELAY = "插座寫入";
-Blockly.Msg.S20_PRESSED = "按鈕是否按下？";
+Blockly.Msg.S20_LED = "LED(P13)數位寫入";
+Blockly.Msg.S20_RELAY = "插座(P12)供電";
+Blockly.Msg.S20_PRESSED = "按鈕(P0)是否按下？";
+Blockly.Msg.S20_RELAY_OPENED = "插座(P12)是否已供電？";
