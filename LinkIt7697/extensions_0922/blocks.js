@@ -3821,3 +3821,226 @@ Blockly.Blocks.s20_relay_bool={init:function(){
   this.setOutput(!0,"Boolean");
   this.setTooltip(Blockly.Msg.S20_TOOLTIP)}
 };
+
+//I2S DAC
+Blockly.Blocks.dac={};
+Blockly.Blocks.dac.HUE=Blockly.Blocks.times.HUE;
+Blockly.Blocks.dac.HUE1=288;
+Blockly.Blocks.dac.HUE2=166;
+Blockly.Blocks.dac.HUE3=222;
+Blockly.Blocks.dac.checkBlocks=function(a,slave,master){
+	var b=null,
+	    d=a.type;
+		a=a.workspace.getAllBlocks();
+		for(var c=0;c<a.length;c++)
+			if(slave!=a[c].type||null!=b||(b=a[c].type!=d?!0:!1),master==a[c].type){
+			  return!0;
+      }
+		return b
+};
+
+Blockly.Blocks.dac_init={init:function(){
+  this.setHelpUrl(Blockly.Msg.DAC_HELPURL);
+  this.setColour(Blockly.Blocks.dac.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.DAC_TITLE)
+      .appendField(Blockly.Msg.DAC_INIT);
+  this.appendValueInput("LRC_PIN")
+      .setCheck("Number")
+      .appendField("LRC "+Blockly.Msg.LIOU_ROBOT_PIN);
+  this.appendValueInput("BCLK_PIN")
+      .setCheck("Number")
+      .appendField("BCLK "+Blockly.Msg.LIOU_ROBOT_PIN);
+  this.appendValueInput("DATA_PIN")
+      .setCheck("Number")
+      .appendField("DATA "+Blockly.Msg.LIOU_ROBOT_PIN);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.DAC_TOOLTIP)}
+};
+
+Blockly.Blocks.dac_loop={init:function(){
+  this.setHelpUrl(Blockly.Msg.DAC_HELPURL);
+  this.setColour(Blockly.Blocks.dac.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.DAC_TITLE)
+      .appendField(Blockly.Msg.DAC_LOOP);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.DAC_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"dac_loop","dac_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.DAC_INIT_WARNIG))}
+};
+
+Blockly.Blocks.dac_stop={init:function(){
+  this.setHelpUrl(Blockly.Msg.DAC_HELPURL);
+  this.setColour(Blockly.Blocks.dac.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.DAC_TITLE)
+      .appendField(Blockly.Msg.DAC_STOP);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.DAC_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"dac_stop","dac_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.DAC_INIT_WARNIG))}
+};
+
+Blockly.Blocks.dac_set_gain={init:function(){
+  this.setHelpUrl(Blockly.Msg.DAC_HELPURL);
+  this.setColour(Blockly.Blocks.dac.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.DAC_TITLE);
+  this.appendValueInput("GAIN")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.DAC_GAIN);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.DAC_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"dac_set_gain","dac_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.DAC_INIT_WARNIG))}
+};
+
+Blockly.Blocks.dac_tts={init:function(){
+  this.setHelpUrl(Blockly.Msg.DAC_HELPURL);
+  this.setColour(Blockly.Blocks.dac.HUE1);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.DAC_TITLE)
+  this.appendValueInput("CONTENT")
+      .setCheck("String")
+      .appendField(Blockly.Msg.DAC_TTS_TITLE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.DAC_TTS_LANGUAGE)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.DAC_TTS_LANGUAGES),"L_CODE");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.DAC_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"dac_tts","dac_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.DAC_INIT_WARNIG))}
+};
+
+Blockly.Blocks.dac_tts_file={init:function(){
+  this.setHelpUrl(Blockly.Msg.DAC_HELPURL);
+  this.setColour(Blockly.Blocks.dac.HUE1);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.DAC_TITLE)
+  this.appendValueInput("CONTENT")
+      .setCheck("String")
+      .appendField(Blockly.Msg.DAC_TTS_FILE_TITLE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.DAC_TTS_LANGUAGE)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.DAC_TTS_LANGUAGES),"L_CODE");
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.DAC_TTS_SAVE_TO)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.DAC_FILE_SOURCE),"F_SOURCE");
+  this.appendValueInput("FILENAME")
+      .setCheck("String")
+      .appendField(Blockly.Msg.DAC_FILE_NAME);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.DAC_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"dac_tts_file","dac_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.DAC_INIT_WARNIG))}
+};
+
+Blockly.Blocks.dac_radio={init:function(){
+  this.setHelpUrl(Blockly.Msg.DAC_HELPURL);
+  this.setColour(Blockly.Blocks.dac.HUE3);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.DAC_TITLE);
+  this.appendValueInput("CONTENT")
+      .setCheck("String")
+      .appendField(Blockly.Msg.DAC_RADIO_TITLE+" URL");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.DAC_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"dac_radio","dac_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.DAC_INIT_WARNIG))}
+};
+
+Blockly.Blocks.dac_tts_end={init:function(){
+  this.setHelpUrl(Blockly.Msg.DAC_HELPURL);
+  this.setColour(Blockly.Blocks.dac.HUE1);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.DAC_TITLE)
+      .appendField(Blockly.Msg.DAC_TTS_END);
+  this.setInputsInline(!0);
+  this.appendStatementInput("TTS_END_CALL");
+  this.setTooltip(Blockly.Msg.DAC_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"dac_tts_end","dac_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.DAC_INIT_WARNIG))}
+};
+
+Blockly.Blocks.dac_tts_ends_with={init:function(){
+  this.setHelpUrl(Blockly.Msg.DAC_HELPURL);
+  this.setColour(Blockly.Blocks.dac.HUE1);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.DAC_TITLE);
+  this.appendValueInput("CONTENT")
+      .setCheck("String")
+      .appendField(Blockly.Msg.DAC_TTS_ENDS_WITH);
+  this.appendStatementInput("TTS_ENDS_WITH_CALL");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.DAC_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"dac_tts_ends_with","dac_tts_end")?this.setWarningText(null):this.setWarningText(Blockly.Msg.DAC_TTS_ENDS_WITH_WARNIG))}
+};
+
+Blockly.Blocks.dac_is_running={init:function(){
+  this.setHelpUrl(Blockly.Msg.DAC_HELPURL);
+  this.setColour(Blockly.Blocks.dac.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.DAC_TITLE)
+      .appendField(Blockly.Msg.DAC_IS_RUNNING);
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Boolean");
+  this.setTooltip(Blockly.Msg.DAC_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"dac_is_running","dac_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.DAC_INIT_WARNIG))}
+};
+
+Blockly.Blocks.dac_file={init:function(){
+  this.setHelpUrl(Blockly.Msg.DAC_HELPURL);
+  this.setColour(Blockly.Blocks.dac.HUE2);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.DAC_TITLE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.DAC_FILE_SOURCE_TITLE)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.DAC_FILE_SOURCE),"F_SOURCE");
+  this.appendValueInput("CONTENT")
+      .setCheck("String")
+      .appendField(Blockly.Msg.DAC_FILE_NAME);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.DAC_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"dac_file","dac_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.DAC_INIT_WARNIG))}
+};
+
+
+Blockly.Blocks.dac_mp3_end={init:function(){
+  this.setHelpUrl(Blockly.Msg.DAC_HELPURL);
+  this.setColour(Blockly.Blocks.dac.HUE2);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.DAC_TITLE)
+      .appendField(Blockly.Msg.DAC_MP3_END);
+  this.setInputsInline(!0);
+  this.appendStatementInput("MP3_END_CALL");
+  this.setTooltip(Blockly.Msg.DAC_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"dac_mp3_end","dac_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.DAC_INIT_WARNIG))}
+};
+
+Blockly.Blocks.dac_mp3_ends_with={init:function(){
+  this.setHelpUrl(Blockly.Msg.DAC_HELPURL);
+  this.setColour(Blockly.Blocks.dac.HUE2);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.DAC_TITLE);
+  this.appendValueInput("CONTENT")
+      .setCheck("String")
+      .appendField(Blockly.Msg.DAC_MP3_ENDS_WITH);
+  this.appendStatementInput("MP3_ENDS_WITH_CALL");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.DAC_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"dac_mp3_ends_with","dac_mp3_end")?this.setWarningText(null):this.setWarningText(Blockly.Msg.DAC_MP3_ENDS_WITH_WARNIG))}
+};

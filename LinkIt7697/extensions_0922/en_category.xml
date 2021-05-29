@@ -40,4 +40,5 @@
 <category><name>TTGO_TFT</name><replace>TTGO TFT</replace></category>
 <category><name>TTGO_BUTTON</name><replace>TTGO BUTTON</replace></category>
 <category><name>S20</name><replace>S20 Smart Socket</replace></category>
+<category><name>I2SDAC</name><replace>I2S DAC</replace></category>
 </xml>
