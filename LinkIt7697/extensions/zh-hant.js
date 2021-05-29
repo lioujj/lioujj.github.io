@@ -22,6 +22,7 @@ Blockly.Msg.LIOU_ROBOT_IR_EVENT = "當接收到紅外線訊號時";
 Blockly.Msg.LIOU_ROBOT_IR_WARNING = "需要放置在「"+Blockly.Msg.LIOU_ROBOT_IR_EVENT+"」積木裡面";
 Blockly.Msg.LIOU_ROBOT_IR_RECEIVED2_TYPE = "如果接收到的紅外線訊號類型為：";
 Blockly.Msg.LIOU_ROBOT_IR_RECEIVED2_MSG = "訊號編碼為：";
+Blockly.Msg.LIOU_ROBOT_PIN = "腳位";
 
 //jetmole
 Blockly.Msg.CATEGORY_JETMOLE = "噴射鼴鼠";
@@ -548,3 +549,29 @@ Blockly.Msg.S20_LED = "LED(P13)數位寫入";
 Blockly.Msg.S20_RELAY = "插座(P12)供電";
 Blockly.Msg.S20_PRESSED = "按鈕(P0)是否按下？";
 Blockly.Msg.S20_RELAY_OPENED = "插座(P12)是否已供電？";
+
+//I2S DAC
+Blockly.Msg.DAC_HELPURL = "";
+Blockly.Msg.DAC_TITLE = "I2S音訊模組"
+Blockly.Msg.DAC_INIT = "初始化";
+Blockly.Msg.DAC_TOOLTIP = "I2S DAC";
+Blockly.Msg.DAC_LOOP = "維持運作";
+Blockly.Msg.DAC_INIT_WARNIG =  "必須先設定「"+Blockly.Msg.DAC_TITLE+Blockly.Msg.DAC_INIT+"」積木";
+Blockly.Msg.DAC_TTS_TITLE = "Google語音唸出文字(TTS)";
+Blockly.Msg.DAC_TTS_LANGUAGE = "語音";
+Blockly.Msg.DAC_TTS_LANGUAGES = [["台灣","zh-TW"],["美式英語","en-US"],["英文","en-GB"],["日本","ja-JP"],["韓國","ko-KR"],["法國","fr-FR"],["德國","de-DE"],["泰國","th"],["越南","vi"]];
+Blockly.Msg.DAC_RADIO_TITLE = "播放網路電台聲音";
+Blockly.Msg.DAC_TTS_END = "當語音TTS播放結束";
+Blockly.Msg.DAC_TTS_ENDS_WITH ="如果TTS語音內容為";
+Blockly.Msg.DAC_TTS_ENDS_WITH_WARNIG = "必須將這個積木放進「"+Blockly.Msg.DAC_TTS_END+"」積木內";
+Blockly.Msg.DAC_IS_RUNNING = "正在播放中？";
+Blockly.Msg.DAC_FILE_SOURCE_TITLE = "播放MP3檔案從";
+Blockly.Msg.DAC_FILE_SOURCE = [["SD記憶卡","1"],["SPIFFS","2"]];
+Blockly.Msg.DAC_FILE_NAME = "檔名(包含路徑)";
+Blockly.Msg.DAC_MP3_END = "當MP3檔案播放結束";
+Blockly.Msg.DAC_MP3_ENDS_WITH = "如果MP3檔名是(包含路徑)";
+Blockly.Msg.DAC_MP3_ENDS_WITH_WARNIG =  "必須將這個積木放進「"+Blockly.Msg.DAC_MP3_END+"」積木內";
+Blockly.Msg.DAC_TTS_FILE_TITLE = "儲存Google TTS語音MP3檔案";
+Blockly.Msg.DAC_TTS_SAVE_TO = "到";
+Blockly.Msg.DAC_STOP = "停止播放所有音訊";
+Blockly.Msg.DAC_GAIN = "設定音量增益(0.0~4.0)";

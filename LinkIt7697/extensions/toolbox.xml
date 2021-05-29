@@ -394,6 +394,85 @@
         </block>
       </category>
     </category>
+    <category id="category_esp32_modules" name="Modules">
+      <category id="category_i2sdac" name="I2SDAC">
+        <block type="dac_init">
+          <value name="LRC_PIN">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="BCLK_PIN">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="DATA_PIN">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+        </block>
+        <block type="dac_stop"></block>
+        <block type="dac_set_gain">
+          <value name="GAIN">
+            <block type="math_number">
+              <field name="NUM">1.0</field>
+            </block>
+          </value>
+        </block>
+        <block type="dac_is_running"></block>
+        <block type="dac_radio">
+          <value name="CONTENT">
+            <block type="text">
+              <field name="TEXT"></field>
+            </block>
+          </value>
+        </block>
+        <block type="dac_tts">
+          <value name="CONTENT">
+            <block type="text">
+              <field name="TEXT">說出語音內容</field>
+            </block>
+          </value>
+        </block>
+        <block type="dac_tts_file">
+          <value name="CONTENT">
+            <block type="text">
+              <field name="TEXT">語音內容</field>
+            </block>
+          </value>
+          <value name="FILENAME">
+            <block type="text">
+              <field name="TEXT"></field>
+            </block>
+          </value>
+        </block>
+        <block type="dac_tts_end"></block>
+        <block type="dac_tts_ends_with">
+          <value name="CONTENT">
+            <block type="text">
+              <field name="TEXT"></field>
+            </block>
+          </value>
+        </block>
+        <block type="dac_file">
+          <value name="CONTENT">
+            <block type="text">
+              <field name="TEXT"></field>
+            </block>
+          </value>
+        </block>
+        <block type="dac_mp3_end"></block>
+        <block type="dac_mp3_ends_with">
+          <value name="CONTENT">
+            <block type="text">
+              <field name="TEXT"></field>
+            </block>
+          </value>
+        </block>       
+       </category>
+    </category>
   </category>
   <category id="category_esp8266" name="ESP8266">
 		<category id="category_s20" name="S20">

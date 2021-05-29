@@ -10,6 +10,9 @@ Blockly.Arduino.finish=function(a){
     if (Blockly.Arduino.broadcast_udp.defineFunction.broadcast_my_check_body!="")
 		   myStr=myStr+"  checkBroadcastUDP();\n";
   }
+  if (  Blockly.Arduino.dac.ESP8266Audio=='yes' && Blockly.Arduino.definitions_.define_SPIFFS_include=='#include "SPIFFS.h"'){
+		myStr=myStr+'  checkDACrunning();\n  checkTTS();\n  checkMP3();\n';
+  }
 	if (Blockly.Arduino.webserver.webserver_exist=="yes"){
     Blockly.Arduino.webserver.webserver_header=Blockly.Arduino.webserver.webserver_header.replace("#title#",Blockly.Arduino.webserver.webserver_myTitle);
     Blockly.Arduino.webserver.webserver_header=Blockly.Arduino.webserver.webserver_header.replace("#color#",Blockly.Arduino.webserver.webserver_myColor);
@@ -49,8 +52,6 @@ Blockly.Arduino.finish=function(a){
     //b=b+Blockly.Arduino.webserver.webserver_header+Blockly.Arduino.webserver.webserver_body+Blockly.Arduino.webserver.webserver_footer;
     Blockly.Arduino.broadcast_udp.broadcast_exist="no";
   }
-
-
   return b
 };
 
@@ -2086,7 +2087,7 @@ Blockly.Arduino.ttgo_tft_draw_clock=function(){
 };
 
 
-
+//s20
 Blockly.Arduino.s20={};
 Blockly.Arduino.s20_led=function(){
   var a=Blockly.Arduino.valueToCode(this,"ON_OFF",Blockly.Arduino.ORDER_ATOMIC)||"0";
@@ -2114,3 +2115,102 @@ Blockly.Arduino.s20_button_bool=function(){
 Blockly.Arduino.s20_relay_bool=function(){
 	  return['digitalRead(12)',Blockly.Arduino.ORDER_ATOMIC]
 };
+
+//I2S DAC
+Blockly.Arduino.dac={};
+Blockly.Arduino.dac_init=function(){
+  var a=Blockly.Arduino.valueToCode(this,"BCLK_PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=Blockly.Arduino.valueToCode(this,"LRC_PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      c=Blockly.Arduino.valueToCode(this,"DATA_PIN",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  Blockly.Arduino.definitions_.define_SPIFFS_include='#include "SPIFFS.h"';
+  Blockly.Arduino.definitions_.define_HTTPCLIENT_include='#include <HTTPClient.h>';
+  Blockly.Arduino.definitions_.define_ESP8266Audio_include='#include "AudioFileSourceSPIFFS.h"\n#include "AudioFileSourceSD.h"\n#include "AudioFileSourceICYStream.h"\n#include "AudioFileSourceBuffer.h"\n#include "AudioOutputI2S.h"\n#include "AudioGeneratorMP3.h"\n';
+  Blockly.Arduino.definitions_.define_ESP8266Audio_variable_invoke='AudioFileSourceSD *i2sSdFile;\nAudioFileSourceSPIFFS *i2sSPIFFSfile;\nAudioGeneratorMP3 *i2sMp3;\nAudioFileSourceICYStream *i2sFile;\nAudioFileSourceBuffer *i2sBuff;\nAudioOutputI2S *i2sOut;\nString dacPlayType;\nString mp3FileName;\nString ttsContent;\nfloat gainValue=1.0;\nbool ttsDone=true;\nbool mp3Done=true;\n';
+  Blockly.Arduino.definitions_.define_ESP8266Audio_function_invoke_checkRunning='bool checkDACrunning()\n{\n  bool isRunning=false;\n  if (i2sMp3->isRunning()) {\n    isRunning=true;\n    if (!i2sMp3->loop()){\n      i2sMp3->stop();\n      mp3Done=true;\n      ttsDone=true;\n      isRunning=false;\n    }\n  }else{\n    isRunning=false;\n  }\n  return isRunning;\n}\n';
+  Blockly.Arduino.definitions_.define_ESP8266Audio_function_invoke_TTS='void getVoiceFromGoogle(String myTalk,String tl)\n{\n  ttsDone=false;\n  mp3Done=true;\n  dacPlayType="TTS";\n  ttsContent=myTalk;\n  myTalk="http://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl="+tl+"&q="+myTalk;\n  saveTTStoFile(myTalk,"/TTS/tts.mp3",2);\n  getVoiceFromFile("/TTS/tts.mp3",2);\n}\n';
+  Blockly.Arduino.definitions_.define_ESP8266Audio_function_invoke_saveTTStoFile='void saveTTStoFile(String myLink,String fileName,byte sdType)\n{\n  Serial.println("filename:"+fileName);\n  File myTTSFile;\n  if(fileName.indexOf("/")!=0)\n    fileName="/"+fileName;\n  if (sdType==1){\n    if(!SD.begin()){\n      return;\n    }\n    String path=fileName.substring(1,fileName.lastIndexOf("/"));\n    String mySubStr="/";\n    while(path.indexOf("/")>-1){\n      mySubStr+=path.substring(0,path.indexOf("/"));\n      if( !SD.exists( mySubStr.c_str()))\n        SD.mkdir(mySubStr.c_str());\n      mySubStr+="/";\n      path= path.substring(path.indexOf("/")+1);\n    }\n    if (path!=""){\n      mySubStr+=path;\n      if( !SD.exists( mySubStr.c_str()))\n        SD.mkdir(mySubStr.c_str());\n    }\n    myTTSFile = SD.open(fileName, "w");\n    if (!myTTSFile) {\n      return;\n    }\n  } else if (sdType==2){\n    if(!SPIFFS.begin(true)){\n      return;\n    }\n    myTTSFile = SPIFFS.open(fileName, "w");\n    if (!myTTSFile) {\n      return;\n    }\n  }\n  HTTPClient http;\n  http.begin(myLink);\n  int httpCode = http.GET();\n  if (httpCode == HTTP_CODE_OK) {\n      http.writeToStream(&myTTSFile);\n  }\n  myTTSFile.close();\n  http.end();\n}\n';
+  Blockly.Arduino.definitions_.define_ESP8266Audio_function_invoke_radio='void playRadioStation(String myStationURL)\n{\n  mp3Done=true;\n  ttsDone=true;\n  dacPlayType="radio";\n  i2sFile = new AudioFileSourceICYStream(myStationURL.c_str());\n  i2sBuff = new AudioFileSourceBuffer(i2sFile, 2048);\n  i2sMp3->begin(i2sBuff, i2sOut);\n}\n';
+  Blockly.Arduino.definitions_.define_ESP8266Audio_function_invoke_file='void getVoiceFromFile(String myFileName,byte sdType)\n{\n  ttsDone=true;\n  mp3Done=false;\n  dacPlayType="MP3";\n  if(myFileName.indexOf("/")!=0)\n    myFileName="/"+myFileName;\n  if (sdType==1){\n    SD.begin();\n    i2sSdFile = new AudioFileSourceSD(String(myFileName).c_str());\n    i2sBuff = new AudioFileSourceBuffer(i2sSdFile, 2048);\n    mp3FileName=myFileName;\n  }\n  else {\n    if (myFileName=="/TTS/tts.mp3"){\n      ttsDone=false;\n      mp3Done=true;\n      dacPlayType="TTS";\n    } else {\n      mp3FileName=myFileName;\n    }\n    SPIFFS.begin();\n    i2sSPIFFSfile=new AudioFileSourceSPIFFS(String(myFileName).c_str());\n    i2sBuff = new AudioFileSourceBuffer(i2sSPIFFSfile, 2048);\n  }\n  i2sMp3->begin(i2sBuff, i2sOut);\n}\n';
+  Blockly.Arduino.definitions_.define_DAC_checkTTS_invoke='void checkTTS(){\n}\n';
+  Blockly.Arduino.definitions_.define_DAC_checkMP3_invoke='void checkMP3(){\n}\n';
+  Blockly.Arduino.definitions_.define_DAC_stop_invoke='void dacStop()\n{\n  mp3Done=true;\n  ttsDone=true;\n  dacPlayType="";\n  mp3FileName="";\n  ttsContent="";\n  if (i2sMp3->isRunning()) {\n    i2sMp3->stop();\n    i2sBuff->close();\n  }\n}\n';
+  Blockly.Arduino.dac.ESP8266Audio="yes";
+  return'i2sMp3 = new AudioGeneratorMP3();\ni2sOut = new AudioOutputI2S();\ni2sOut->SetPinout('+a+','+b+','+c+');\ni2sOut->SetGain(gainValue);\n';
+}
+
+Blockly.Arduino.dac_loop=function(){
+  return'checkDACrunning();\ncheckTTS();\ncheckMP3();\n';
+}
+
+Blockly.Arduino.dac_stop=function(){
+  return'dacStop();\n';
+}
+
+Blockly.Arduino.dac_set_gain=function(){
+  var a=Blockly.Arduino.valueToCode(this,"GAIN",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  return'gainValue='+a+';\ni2sOut->SetGain(gainValue);\n';
+}
+
+
+Blockly.Arduino.dac_tts=function(){
+  var a=Blockly.Arduino.valueToCode(this,"CONTENT",Blockly.Arduino.ORDER_ATOMIC)||"",
+      b=this.getFieldValue("L_CODE");
+  a=a.replace(/ /g,"%20");
+  return'getVoiceFromGoogle('+a+',"'+b+'");\n';
+}
+
+Blockly.Arduino.dac_tts_file=function(){
+  var a=Blockly.Arduino.valueToCode(this,"CONTENT",Blockly.Arduino.ORDER_ATOMIC)||"",
+      b=this.getFieldValue("L_CODE"),
+      c=Blockly.Arduino.valueToCode(this,"FILENAME",Blockly.Arduino.ORDER_ATOMIC)||"",
+      d=this.getFieldValue("F_SOURCE");
+  a=a.replace(/\"/g,"");
+  a=a.replace(/ /g,"%20");
+  var myLink='http://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl='+b+'&q='+a;
+  return'saveTTStoFile("'+myLink+'",'+c+','+d+');\n';
+}
+
+Blockly.Arduino.dac_radio=function(){
+  var a=Blockly.Arduino.valueToCode(this,"CONTENT",Blockly.Arduino.ORDER_ATOMIC)||"";
+  if (a.startsWith('"https://')){
+    a=a.replace('https://','http://');
+  }
+  if (!a.startsWith('"http://')){
+    a='"http://'+a.replace('"','');
+  }
+  return'playRadioStation('+a+');\n';
+}
+
+Blockly.Arduino.dac_tts_end=function(){
+  var a=Blockly.Arduino.statementToCode(this,"TTS_END_CALL");
+  Blockly.Arduino.definitions_.define_DAC_checkTTS_invoke='void checkTTS(){\n'+a+'}\n';
+  return'';
+}
+
+Blockly.Arduino.dac_tts_ends_with=function(){
+  var a=Blockly.Arduino.statementToCode(this,"TTS_ENDS_WITH_CALL"),
+      b=Blockly.Arduino.valueToCode(this,"CONTENT",Blockly.Arduino.ORDER_ATOMIC)||"";
+  return 'if (ttsDone && dacPlayType=="TTS" && ttsContent==('+b+')){\n'+a+'}\n';
+}
+
+Blockly.Arduino.dac_is_running=function(){
+  return['checkDACrunning()',Blockly.Arduino.ORDER_ATOMIC]
+}
+
+Blockly.Arduino.dac_file=function(){
+  var a=Blockly.Arduino.valueToCode(this,"CONTENT",Blockly.Arduino.ORDER_ATOMIC)||"",
+      b=this.getFieldValue("F_SOURCE");
+  return'getVoiceFromFile('+a+','+b+');\n';
+}
+
+Blockly.Arduino.dac_mp3_end=function(){
+  var a=Blockly.Arduino.statementToCode(this,"MP3_END_CALL");
+  Blockly.Arduino.definitions_.define_DAC_checkMP3_invoke='void checkMP3(){\n'+a+'}\n';
+  return'';
+}
+
+Blockly.Arduino.dac_mp3_ends_with=function(){
+  var a=Blockly.Arduino.statementToCode(this,"MP3_ENDS_WITH_CALL"),
+      b=Blockly.Arduino.valueToCode(this,"CONTENT",Blockly.Arduino.ORDER_ATOMIC)||"";
+  return 'if (mp3Done && dacPlayType=="MP3" && mp3FileName==('+b+')){\n'+a+'}\n';
+}

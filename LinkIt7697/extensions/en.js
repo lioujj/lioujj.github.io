@@ -22,6 +22,7 @@ Blockly.Msg.LIOU_ROBOT_IR_EVENT = "When receive IR signal";
 Blockly.Msg.LIOU_ROBOT_IR_WARNING = "Need to Begin Block.";
 Blockly.Msg.LIOU_ROBOT_IR_RECEIVED2_TYPE = "If receive the IR code type:";
 Blockly.Msg.LIOU_ROBOT_IR_RECEIVED2_MSG = "code:";
+Blockly.Msg.LIOU_ROBOT_PIN = "pin";
 
 //jetmole
 Blockly.Msg.CATEGORY_JETMOLE = "Jet Mole";
@@ -553,3 +554,29 @@ Blockly.Msg.S20_LED = "LED(P13) digitalWrite";
 Blockly.Msg.S20_RELAY = "relay(P12) digitalWrite";
 Blockly.Msg.S20_PRESSED = "button(P0) pressed?";
 Blockly.Msg.S20_RELAY_OPENED = "relay(P12) is ON?";
+
+//I2S DAC
+Blockly.Msg.DAC_HELPURL = "";
+Blockly.Msg.DAC_TITLE = "I2S DAC"
+Blockly.Msg.DAC_INIT = "initial";
+Blockly.Msg.DAC_TOOLTIP = "I2S DAC";
+Blockly.Msg.DAC_LOOP = "keep the DAC working";
+Blockly.Msg.DAC_INIT_WARNIG =  "You have to "+Blockly.Msg.DAC_INIT+" "+Blockly.Msg.DAC_TITLE+" first.";
+Blockly.Msg.DAC_TTS_TITLE = "Google text to speech(TTS)";
+Blockly.Msg.DAC_TTS_LANGUAGE = "language";
+Blockly.Msg.DAC_TTS_LANGUAGES = [["Taiwan","zh-TW"],["US","en-US"],["UK","en-GB"],["Japan","ja-JP"],["Korea","ko-KR"],["Frence","fr-FR"],["German","de-DE"],["Thailand","th"],["Vietnum","vi"]];
+Blockly.Msg.DAC_RADIO_TITLE = "listen to the internet radio";
+Blockly.Msg.DAC_TTS_END = "when TTS ends";
+Blockly.Msg.DAC_TTS_ENDS_WITH ="if TTS content equals";
+Blockly.Msg.DAC_TTS_ENDS_WITH_WARNIG = "You have to put the block into \""+Blockly.Msg.DAC_TTS_END+"\" block.";
+Blockly.Msg.DAC_IS_RUNNING = "is runnig?";
+Blockly.Msg.DAC_FILE_SOURCE_TITLE = "play MP3 file from";
+Blockly.Msg.DAC_FILE_SOURCE = [["SD card","1"],["SPIFFS","2"]];
+Blockly.Msg.DAC_FILE_NAME = "file name(include path)";
+Blockly.Msg.DAC_MP3_END = "when MP3 ends";
+Blockly.Msg.DAC_MP3_ENDS_WITH = "if MP3 file name is";
+Blockly.Msg.DAC_MP3_ENDS_WITH_WARNIG =  "You have to put the block into \""+Blockly.Msg.DAC_MP3_END+"\" block.";
+Blockly.Msg.DAC_TTS_FILE_TITLE = "save Google TTS MP3 file";
+Blockly.Msg.DAC_TTS_SAVE_TO = "to";
+Blockly.Msg.DAC_STOP = "stop any audio";
+Blockly.Msg.DAC_GAIN = "set volume gain(0.0~4.0)";
