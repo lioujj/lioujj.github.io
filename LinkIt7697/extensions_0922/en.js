@@ -556,7 +556,7 @@ Blockly.Msg.S20_PRESSED = "button(P0) pressed?";
 Blockly.Msg.S20_RELAY_OPENED = "relay(P12) is ON?";
 
 //I2S DAC
-Blockly.Msg.DAC_HELPURL = "";
+Blockly.Msg.DAC_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/i2s數位音頻轉換積木";
 Blockly.Msg.DAC_TITLE = "I2S DAC"
 Blockly.Msg.DAC_INIT = "initial";
 Blockly.Msg.DAC_TOOLTIP = "I2S DAC";

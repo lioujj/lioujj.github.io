@@ -551,7 +551,7 @@ Blockly.Msg.S20_PRESSED = "按鈕(P0)是否按下？";
 Blockly.Msg.S20_RELAY_OPENED = "插座(P12)是否已供電？";
 
 //I2S DAC
-Blockly.Msg.DAC_HELPURL = "";
+Blockly.Msg.DAC_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/i2s數位音頻轉換積木";
 Blockly.Msg.DAC_TITLE = "I2S音訊模組"
 Blockly.Msg.DAC_INIT = "初始化";
 Blockly.Msg.DAC_TOOLTIP = "I2S DAC";
