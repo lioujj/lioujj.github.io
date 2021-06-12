@@ -449,9 +449,9 @@ Blockly.Msg.ESP32_ANALOG_WRITE_HELPURL = "https://sites.google.com/jes.mlc.edu.t
 //ESP32_BuiltIn sensor
 Blockly.Msg.BUILTIN_HELPURL = "";
 Blockly.Msg.BUILTIN_TITLE = "ESP32_Builtin";
-Blockly.Msg.BUILTIN_HALL_READ = "Hall sensor";
+Blockly.Msg.BUILTIN_HALL_READ = "read value of Hall sensor";
 Blockly.Msg.BUILTIN_TOOLTIP = "";
-Blockly.Msg.BUILTIN_TOUCH_READ = "touch sensor";
+Blockly.Msg.BUILTIN_TOUCH_READ = "read value of touch sensor";
 
 
 //POCKETCARD
