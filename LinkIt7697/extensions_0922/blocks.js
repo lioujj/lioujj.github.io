@@ -2885,7 +2885,7 @@ Blockly.Blocks.esp32_touch_read={init:function(){
       .appendField(Blockly.Msg.BUILTIN_TOUCH_READ);
   this.appendDummyInput()
       .appendField("Pin")
-      .appendField(new Blockly.FieldDropdown([["0","0"],["2","2"],["4","4"],["12","12"],["13","13"],["14","14"],["15","15"],["27","27"],["32","32"],["33","33"]]),"TOUCH_PIN")
+      .appendField(new Blockly.FieldDropdown([["2","2"],["4","4"],["12","12"],["13","13"],["14","14"],["15","15"],["27","27"],["32","32"],["33","33"]]),"TOUCH_PIN")
   this.setInputsInline(!0);
   this.setOutput(!0,"Number");
   this.setTooltip(Blockly.Msg.BUILTIN_TOOLTIP)}
