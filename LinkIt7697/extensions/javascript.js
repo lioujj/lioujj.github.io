@@ -1673,6 +1673,17 @@ Blockly.Arduino.esp32_custom_tone=function(){
     return'';
 }
 
+//ESP32 builtin sensor
+Blockly.Arduino.esp32_esp32_builtin={};
+Blockly.Arduino.esp32_hall_read=function(){
+  return["hallRead()",Blockly.Arduino.ORDER_ATOMIC];
+}
+
+Blockly.Arduino.esp32_touch_read=function(){
+  var a=this.getFieldValue("TOUCH_PIN");
+  return['touchRead('+a+')',Blockly.Arduino.ORDER_ATOMIC];
+}
+
 //PocketCard
 Blockly.Arduino.pocketcard={};
 Blockly.Arduino.pocketcard_button=function(){

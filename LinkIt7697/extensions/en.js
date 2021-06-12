@@ -446,6 +446,14 @@ Blockly.Msg.ESP32_ANALOG_WRITE_TOOLTIP = "";
 Blockly.Msg.ESP32_ANALOG_WRITE_CHANNEL = "Channel(0~15)";
 Blockly.Msg.ESP32_ANALOG_WRITE_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/開發板設定積木";
 
+//ESP32_BuiltIn sensor
+Blockly.Msg.BUILTIN_HELPURL = "";
+Blockly.Msg.BUILTIN_TITLE = "ESP32_Builtin";
+Blockly.Msg.BUILTIN_HALL_READ = "Hall sensor";
+Blockly.Msg.BUILTIN_TOOLTIP = "";
+Blockly.Msg.BUILTIN_TOUCH_READ = "touch sensor";
+
+
 //POCKETCARD
 Blockly.Msg.POCKETCARD_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/pocketcard";
 Blockly.Msg.POCKETCARD_TOOLTIP = "PocketCard";
