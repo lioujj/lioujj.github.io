@@ -2915,6 +2915,36 @@ Blockly.Blocks.pocketcard_temperature_sensor={init:function(){
   this.setTooltip(Blockly.Msg.POCKETCARD_TOOLTIP)}
 };
 
+Blockly.Blocks.pocketcard_pixels_brightness={init:function(){
+  this.setHelpUrl(Blockly.Msg.POCKETCARD_HELPURL);
+  this.setColour(Blockly.Blocks.pocketcard.HUE);
+  this.appendDummyInput()
+      .appendField("PocketCard "+Blockly.Msg.POCKETCARD_PIXELS_BRIGHTNESS+"(0~255)");
+  this.appendValueInput("BRIGHTNESS")
+      .setCheck("Number");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.POCKETCARD_TOOLTIP)}
+};
+
+Blockly.Blocks.pocketcard_rgb_color={init:function(){
+  this.setHelpUrl(Blockly.Msg.POCKETCARD_HELPURL);
+  this.setColour(Blockly.Blocks.pocketcard.HUE);
+  this.appendDummyInput()
+      .appendField("PocketCard");
+  this.appendValueInput("COLOR")
+      .setCheck("String")
+      .appendField(Blockly.Msg.POCKETCARD_PIXELS_COLOR);
+  this.appendValueInput("BRIGHTNESS")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.POCKETCARD_PIXELS_BRIGHTNESS+"(0~255)");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.POCKETCARD_TOOLTIP)}
+};
+
 //MPU9250
 Blockly.Blocks.mpu9250={};
 Blockly.Blocks.mpu9250.HUE=120;
