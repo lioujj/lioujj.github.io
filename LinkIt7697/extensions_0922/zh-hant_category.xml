@@ -42,4 +42,5 @@
 <category><name>TTGO_BUTTON</name><replace>TTGO按鈕</replace></category>
 <category><name>S20</name><replace>S20智慧插座</replace></category>
 <category><name>I2SDAC</name><replace>I2S音訊模組DAC</replace></category>
+<category><name>ESP32_BUILTIN</name><replace>ESP32內建感測器</replace></category>
 </xml>

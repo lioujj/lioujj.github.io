@@ -2863,6 +2863,35 @@ Blockly.Blocks.esp32_custom_tone={init:function(){
     this.setTooltip(Blockly.Msg.INOUT_TONE_TOOLTIP)}
 };
 
+//ESP32_BUILTIN SENSOR
+Blockly.Blocks.builtin={};
+Blockly.Blocks.builtin.HUE=180;
+Blockly.Blocks.esp32_hall_read={init:function(){
+  this.setHelpUrl(Blockly.Msg.BUILTIN_HELPURL);
+  this.setColour(Blockly.Blocks.builtin.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.BUILTIN_TITLE)
+      .appendField(Blockly.Msg.BUILTIN_HALL_READ);
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Number");
+  this.setTooltip(Blockly.Msg.BUILTIN_TOOLTIP)}
+};
+
+Blockly.Blocks.esp32_touch_read={init:function(){
+  this.setHelpUrl(Blockly.Msg.BUILTIN_HELPURL);
+  this.setColour(Blockly.Blocks.builtin.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.BUILTIN_TITLE)
+      .appendField(Blockly.Msg.BUILTIN_TOUCH_READ);
+  this.appendDummyInput()
+      .appendField("Pin")
+      .appendField(new Blockly.FieldDropdown([["0","0"],["2","2"],["4","4"],["12","12"],["13","13"],["14","14"],["15","15"],["27","27"],["32","32"],["33","33"]]),"TOUCH_PIN")
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Number");
+  this.setTooltip(Blockly.Msg.BUILTIN_TOOLTIP)}
+};
+
+
 //PocketCard
 Blockly.Blocks.pocketcard={};
 Blockly.Blocks.pocketcard.HUE=120;

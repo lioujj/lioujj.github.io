@@ -91,6 +91,10 @@
         </value>
       </block>
     </category>
+    <category id="category_esp32_builtin" name="ESP32_BUILTIN">
+      <block type="esp32_hall_read"></block>
+      <block type="esp32_touch_read"></block>
+    </category>
     <category id="category_esp32_ntp" name="ESP32_NTP">
        <block type="set_ntp_time"></block>
        <block type="get_RTC_str"></block>
