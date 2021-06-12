@@ -451,6 +451,8 @@ Blockly.Msg.POCKETCARD_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/es
 Blockly.Msg.POCKETCARD_TOOLTIP = "PocketCard";
 Blockly.Msg.POCKETCARD_LIGHT_SENSOR = "Light sensor value";
 Blockly.Msg.POCKETCARD_TEMPERATURE_SENSOR = "Temperature value";
+Blockly.Msg.POCKETCARD_PIXELS_BRIGHTNESS = "brightness";
+Blockly.Msg.POCKETCARD_PIXELS_COLOR = "built-in RGB color";
 
 //MPU9250
 Blockly.Msg.MPU9250_HELPURL= "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/mpu9250九軸感應器";

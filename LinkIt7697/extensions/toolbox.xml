@@ -130,6 +130,34 @@
       <block type="pocketcard_pinMap"></block>
       <block type="pocketcard_light_sensor"></block>
       <block type="pocketcard_temperature_sensor"></block>
+      <block type="pocketcard_rgb_color">
+        <value name="BRIGHTNESS">
+          <block type="math_number">
+            <field name="NUM">30</field>
+          </block>
+        </value>
+        <value name="COLOR">
+          <block type="ttgo_getFromColorPicker"></block>
+        </value>
+      </block>
+      <block type="ttgo_getRGBcolor">
+        <value name="RED">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="GREEN">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="BLUE">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
+      <block type="ttgo_getFromColorPicker"></block>
       <block type="esp32_tone">
         <value name="PIN">
           <block type="math_number">

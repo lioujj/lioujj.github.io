@@ -1642,7 +1642,7 @@ Blockly.Arduino.esp32_tone=function(){
   if (Blockly.Arduino.my_board_type=="ESP32"){
     Blockly.Arduino.definitions_.define_tone="#include <Tone32.h>";
     Blockly.Arduino.setups_["esp32_tone1"]="tone("+a+","+b+",0,"+c+");\n  delay(1);\n  noTone("+a+","+c+");\n";
-    return"\nnoTone("+a+","+c+");\ntone("+a+","+b+",0,"+c+");\n"
+    return"tone("+a+","+b+",0,"+c+");\n"
   }
   else
     return'';
@@ -1666,6 +1666,7 @@ Blockly.Arduino.esp32_custom_tone=function(){
       d=Blockly.Arduino.valueToCode(this,"CHANNEL",Blockly.Arduino.ORDER_ATOMIC)||"0";
   if (Blockly.Arduino.my_board_type=="ESP32"){
     Blockly.Arduino.definitions_.define_tone="#include <Tone32.h>";
+    Blockly.Arduino.setups_["esp32_tone1"]="tone("+a+","+b+",0,"+d+");\n  delay(1);\n  noTone("+a+","+d+");\n";
     return"tone("+a+","+b+","+c+","+d+");\n"
   }
   else
@@ -1698,6 +1699,26 @@ Blockly.Arduino.pocketcard_temperature_sensor=function(){
   Blockly.Arduino.definitions_.define_ntc_claim="THERMISTOR thermistor(34,10000,3950,10000);";
   return["(thermistor.read()/10.0)",Blockly.Arduino.ORDER_ATOMIC];
 };
+
+Blockly.Arduino.pocketcard_pixels_brightness=function(){
+  var a=Blockly.Arduino.valueToCode(this,"BRIGHTNESS",Blockly.Arduino.ORDER_ATOMIC)||"0";
+	Blockly.Arduino.definitions_.define_include_neopixel="#include <Adafruit_NeoPixel.h>\n";
+	Blockly.Arduino.definitions_.define_pocket_neopixel="Adafruit_NeoPixel pocketCardPixels = Adafruit_NeoPixel(1,12,NEO_RGB + NEO_KHZ800);\n";
+  Blockly.Arduino.setups_.setup_pocket_neopixel="pocketCardPixels.begin();\n";  
+  return'pocketCardPixels.setBrightness('+a+');\npocketCardPixels.show();\n';
+};
+
+Blockly.Arduino.pocketcard_rgb_color=function(){
+  var a=Blockly.Arduino.valueToCode(this,"COLOR",Blockly.Arduino.ORDER_ATOMIC)||"",
+      b=Blockly.Arduino.valueToCode(this,"BRIGHTNESS",Blockly.Arduino.ORDER_ATOMIC)||"0";
+	a=a.replace(/\"/g,"");
+  a=a.replace("tft.color565","pocketCardPixels.Color");
+	Blockly.Arduino.definitions_.define_include_neopixel="#include <Adafruit_NeoPixel.h>\n";
+	Blockly.Arduino.definitions_.define_pocket_neopixel="Adafruit_NeoPixel pocketCardPixels = Adafruit_NeoPixel(1,12,NEO_RGB + NEO_KHZ800);\n";
+  Blockly.Arduino.setups_.setup_pocket_neopixel="pocketCardPixels.begin();\n"; 
+  return 'pocketCardPixels.setBrightness('+b+');\npocketCardPixels.setPixelColor(0,'+a+');\npocketCardPixels.show();\n';
+};
+
 
 //MPU9250
 Blockly.Arduino.mpu9250={};
