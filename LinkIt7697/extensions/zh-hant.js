@@ -442,9 +442,9 @@ Blockly.Msg.ESP32_ANALOG_WRITE_HELPURL = "https://sites.google.com/jes.mlc.edu.t
 
 //ESP32_BuiltIn sensor
 Blockly.Msg.BUILTIN_HELPURL = "";
-Blockly.Msg.BUILTIN_TITLE = "讀取ESP32內建感測器";
-Blockly.Msg.BUILTIN_HALL_READ = "霍爾感測器";
-Blockly.Msg.BUILTIN_TOUCH_READ = "觸碰感測器";
+Blockly.Msg.BUILTIN_TITLE = "ESP32內建感測器";
+Blockly.Msg.BUILTIN_HALL_READ = "讀取霍爾感測器值";
+Blockly.Msg.BUILTIN_TOUCH_READ = "讀取觸碰感測器值";
 Blockly.Msg.BUILTIN_TOOLTIP = "";
 
 //POCKETCARD
