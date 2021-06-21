@@ -584,3 +584,26 @@ Blockly.Msg.DAC_TTS_FILE_TITLE = "儲存Google TTS語音MP3檔案";
 Blockly.Msg.DAC_TTS_SAVE_TO = "到";
 Blockly.Msg.DAC_STOP = "停止播放所有音訊";
 Blockly.Msg.DAC_GAIN = "設定音量增益(0.0~4.0)";
+
+//SD_Card
+Blockly.Msg.SD_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/sd記憶卡積木";
+Blockly.Msg.SD_TOOLTIP = "";
+Blockly.Msg.SD_TITLE = "SD記憶卡";
+Blockly.Msg.SD_INIT = "初始化";
+Blockly.Msg.SD_EXISTS = "SD卡啟動成功？";
+Blockly.Msg.SD_INIT_WARNIG = "必須先設定「"+Blockly.Msg.SD_TITLE+Blockly.Msg.SD_INIT+"」積木";
+Blockly.Msg.SD_MKDIR = "建立資料夾";
+Blockly.Msg.SD_RMDIR = "刪除資料夾";
+Blockly.Msg.SD_VARIABLE = "宣告檔案物件變數名稱";
+Blockly.Msg.SD_FILE_VARIABLE = "檔案物件";
+Blockly.Msg.SD_FILE_OPEN = "開啟檔案(包含路徑)";
+Blockly.Msg.SD_FILE_INIT_WARNIG = "必須先設定「"+Blockly.Msg.SD_VARIABLE+"」積木";
+Blockly.Msg.SD_FILE_OPEN_MODE_TITLE = "模式";
+Blockly.Msg.SD_FILE_OPEN_MODE =[["唯讀","O_RDONLY | O_CREAT"],["覆寫","O_TRUNC | O_WRITE | O_CREAT"],["新增","O_WRITE | O_CREAT | O_AT_END"]];
+Blockly.Msg.SD_FILE_EXISTS = "檔案成功開啟？";
+Blockly.Msg.SD_FILE_CLOSE = "關閉檔案";
+Blockly.Msg.SD_FILE_PRINT_CONTENT = "內容";
+Blockly.Msg.SD_FILE_PRINT_MODE = [["寫入一行文字",".println"],["寫入文字",".print"]];
+Blockly.Msg.SD_FILE_AVAILABLE = "尚未讀取到檔尾？";
+Blockly.Msg.SD_FILE_READ_UNTIL_CHAR = "讀取文字直到單一字元";
+Blockly.Msg.SD_FILE_READ_LINE = "讀取一行文字";

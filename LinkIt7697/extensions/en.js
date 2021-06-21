@@ -590,3 +590,26 @@ Blockly.Msg.DAC_TTS_FILE_TITLE = "save Google TTS MP3 file";
 Blockly.Msg.DAC_TTS_SAVE_TO = "to";
 Blockly.Msg.DAC_STOP = "stop any audio";
 Blockly.Msg.DAC_GAIN = "set volume gain(0.0~4.0)";
+
+//SD_Card
+Blockly.Msg.SD_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/sd記憶卡積木";
+Blockly.Msg.SD_TOOLTIP = "";
+Blockly.Msg.SD_TITLE = "SD_Card";
+Blockly.Msg.SD_INIT = "initial";
+Blockly.Msg.SD_EXISTS = "SD exists?";
+Blockly.Msg.SD_INIT_WARNIG = "You have to "+Blockly.Msg.SD_INIT+" "+Blockly.Msg.SD_TITLE+" first.";
+Blockly.Msg.SD_MKDIR = "create directory";
+Blockly.Msg.SD_RMDIR = "remove directory";
+Blockly.Msg.SD_VARIABLE = "declaire a File Object variable name";
+Blockly.Msg.SD_FILE_VARIABLE = "File Object";
+Blockly.Msg.SD_FILE_OPEN = "open file name(include path)";
+Blockly.Msg.SD_FILE_INIT_WARNIG = "You have to "+Blockly.Msg.SD_VARIABLE+" first.";
+Blockly.Msg.SD_FILE_OPEN_MODE_TITLE = "open mode";
+Blockly.Msg.SD_FILE_OPEN_MODE =[["read only","O_RDONLY"],["over write","O_TRUNC | O_WRITE | O_CREAT"],["append","O_WRITE | O_CREAT | O_AT_END"]];
+Blockly.Msg.SD_FILE_EXISTS = "is file opened successfully?";
+Blockly.Msg.SD_FILE_CLOSE = "file close";
+Blockly.Msg.SD_FILE_PRINT_CONTENT = "text";
+Blockly.Msg.SD_FILE_PRINT_MODE = [["print line",".println"],["print",".print"]];
+Blockly.Msg.SD_FILE_AVAILABLE = "available?";
+Blockly.Msg.SD_FILE_READ_UNTIL_CHAR = "read string until char";
+Blockly.Msg.SD_FILE_READ_LINE = "read a line of string";

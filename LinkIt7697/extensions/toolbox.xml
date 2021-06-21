@@ -1390,6 +1390,95 @@
       <block type="mpu9250_gyro_fetch"></block>
       <block type="mpu9250_gyro_3axis"></block>
     </category>
+    <category id="category_sd" name="SD_CARD">
+      <block type="sd_init"></block>
+      <block type="sd_exists"></block>
+      <block type="sd_mkdir">
+				<value name="DIR">
+					<block type="text">
+						<field name="TEXT"></field>
+          </block>
+				</value>
+      </block>
+      <block type="sd_rmdir">
+				<value name="DIR">
+					<block type="text">
+						<field name="TEXT"></field>
+          </block>
+				</value>
+      </block>
+      <block type="sd_file_init">
+				<value name="VARIABLE_NAME">
+					<block type="text">
+						<field name="TEXT">myFile</field>
+          </block>
+				</value>
+      </block>
+      <block type="sd_file_open">
+				<value name="VARIABLE_NAME">
+					<block type="text">
+						<field name="TEXT">myFile</field>
+          </block>
+				</value>
+				<value name="FILE_NAME">
+					<block type="text">
+						<field name="TEXT"></field>
+          </block>
+				</value>
+      </block>
+      <block type="sd_file_exists">
+				<value name="VARIABLE_NAME">
+					<block type="text">
+						<field name="TEXT">myFile</field>
+          </block>
+				</value>
+      </block>
+      <block type="sd_file_println">
+				<value name="VARIABLE_NAME">
+					<block type="text">
+						<field name="TEXT">myFile</field>
+          </block>
+				</value>
+				<value name="CONTENT">
+					<block type="text">
+						<field name="TEXT"></field>
+          </block>
+				</value>
+      </block>
+      <block type="sd_file_available">
+				<value name="VARIABLE_NAME">
+					<block type="text">
+						<field name="TEXT">myFile</field>
+          </block>
+				</value>
+      </block>
+      <block type="sd_file_readuntil_char">
+				<value name="VARIABLE_NAME">
+					<block type="text">
+						<field name="TEXT">myFile</field>
+          </block>
+				</value>
+				<value name="CHAR">
+					<block type="text">
+						<field name="TEXT"></field>
+          </block>
+				</value>
+      </block>
+      <block type="sd_file_read_line">
+				<value name="VARIABLE_NAME">
+					<block type="text">
+						<field name="TEXT">myFile</field>
+          </block>
+				</value>
+      </block>
+      <block type="sd_file_close">
+				<value name="VARIABLE_NAME">
+					<block type="text">
+						<field name="TEXT">myFile</field>
+          </block>
+				</value>
+      </block>
+    </category>
   </category>
   <category id="category_lumex" name="Lumex">
     <category id="category_ldm6432" name="LDM6432MQTT">
