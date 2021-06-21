@@ -2256,3 +2256,94 @@ Blockly.Arduino.dac_mp3_ends_with=function(){
       b=Blockly.Arduino.valueToCode(this,"CONTENT",Blockly.Arduino.ORDER_ATOMIC)||"";
   return 'if (mp3FileName==('+b+')){\n'+a+'}\n';
 }
+
+//SD_Card
+Blockly.Arduino.sd={};
+Blockly.Arduino.sd_init=function(){
+  //Blockly.Arduino.definitions_.define_SD_mkdir_invoke='void ESP32_mkdir(String path){\n  if(path.indexOf("/")!=0)\n    path="/"+path;\n  String mySubStr="/";\n  while(path.indexOf("/")>-1){\n    mySubStr+=path.substring(0,path.indexOf("/"));\n    if( !SD.exists( mySubStr.c_str()))\n      SD.mkdir(mySubStr.c_str());\n    mySubStr+="/";\n    path= path.substring(path.indexOf("/")+1);\n  }\n  if (path!=""){\n    mySubStr+=path;\n    if( !SD.exists( mySubStr.c_str()))\n      SD.mkdir(mySubStr.c_str());\n  }\n}\n';
+  Blockly.Arduino.definitions_.define_SDFAT_include='#include "SdFat.h"';
+  Blockly.Arduino.definitions_.define_SDFAT_variable_invoke='SdFat mySD;\nbool SD_exists=false;\n';
+  if (Blockly.Arduino.my_board_type=="7697"){
+    return'SD_exists=mySD.begin();\n';
+  } else {
+    return'SD_exists=mySD.begin(SS, SD_SCK_MHZ(10));\n';
+  }
+}
+
+Blockly.Arduino.sd_exists=function(){
+  return['SD_exists',Blockly.Arduino.ORDER_ATOMIC];
+}
+
+Blockly.Arduino.sd_mkdir=function(){
+  var a=Blockly.Arduino.valueToCode(this,"DIR",Blockly.Arduino.ORDER_ATOMIC)||"";
+  if (!a.startsWith('"/')){
+    a='"/'+a.replace('"','');
+  }
+  return'mySD.mkdir('+a+');\n';
+}
+
+Blockly.Arduino.sd_rmdir=function(){
+  var a=Blockly.Arduino.valueToCode(this,"DIR",Blockly.Arduino.ORDER_ATOMIC)||"";
+  if (!a.startsWith('"/')){
+    a='"/'+a.replace('"','');
+  }
+  return'mySD.rmdir('+a+');\n';
+}
+
+Blockly.Arduino.sd_file_init=function(){
+  var a=Blockly.Arduino.valueToCode(this,"VARIABLE_NAME",Blockly.Arduino.ORDER_ATOMIC)||"";
+  a=a.replace(/\"/g,"");
+  Blockly.Arduino.definitions_.define_SDFAT_variable_invoke+=('File '+a+';\n');
+  return'';
+}
+
+Blockly.Arduino.sd_file_open=function(){
+  var a=Blockly.Arduino.valueToCode(this,"VARIABLE_NAME",Blockly.Arduino.ORDER_ATOMIC)||"",
+      b=Blockly.Arduino.valueToCode(this,"FILE_NAME",Blockly.Arduino.ORDER_ATOMIC)||"",
+      c=this.getFieldValue("MODE");
+  a=a.replace(/\"/g,"");
+  return a+'.open(String('+b+').c_str(),'+c+');\n';
+}
+
+Blockly.Arduino.sd_file_exists=function(){
+  var a=Blockly.Arduino.valueToCode(this,"VARIABLE_NAME",Blockly.Arduino.ORDER_ATOMIC)||"";
+  a=a.replace(/\"/g,"");
+  return[a,Blockly.Arduino.ORDER_ATOMIC];
+}
+
+Blockly.Arduino.sd_file_close=function(){
+  var a=Blockly.Arduino.valueToCode(this,"VARIABLE_NAME",Blockly.Arduino.ORDER_ATOMIC)||"";
+  a=a.replace(/\"/g,"");
+  return a+'.close();\n';
+}
+
+Blockly.Arduino.sd_file_println=function(){
+  var a=Blockly.Arduino.valueToCode(this,"VARIABLE_NAME",Blockly.Arduino.ORDER_ATOMIC)||"",
+      b=Blockly.Arduino.valueToCode(this,"CONTENT",Blockly.Arduino.ORDER_ATOMIC)||"",
+      c=this.getFieldValue("MODE");
+  a=a.replace(/\"/g,"");
+  return a+c+'(String('+b+').c_str());\n';
+}
+
+Blockly.Arduino.sd_file_available=function(){
+  var a=Blockly.Arduino.valueToCode(this,"VARIABLE_NAME",Blockly.Arduino.ORDER_ATOMIC)||"";
+  a=a.replace(/\"/g,"");
+  return[a+'.available()',Blockly.Arduino.ORDER_ATOMIC];
+}
+
+Blockly.Arduino.sd_file_readuntil_char=function(){
+  var a=Blockly.Arduino.valueToCode(this,"VARIABLE_NAME",Blockly.Arduino.ORDER_ATOMIC)||"",
+      b=Blockly.Arduino.valueToCode(this,"CHAR",Blockly.Arduino.ORDER_ATOMIC)||"";
+  a=a.replace(/\"/g,"");
+  b=b.replace(/\"/g,"");
+  b=b.replace("\\\\","\\");
+  Blockly.Arduino.definitions_.define_sd_file_read_until_invoke="String readStringUntil(File *filePtr,char myChar){\n  String myTempStr=\"\";\n  char nowRead;\n  if (filePtr->available()){\n    nowRead=filePtr->read();\n    while(nowRead!=myChar){\n      if (myChar!='\\n'){\n        if(nowRead!='\\n'){\n          myTempStr+=nowRead;\n        } else{\n          break;\n        }\n      } else {\n        myTempStr+=nowRead;\n      }\n      if (filePtr->available())\n        nowRead=filePtr->read();\n      else\n        break;\n    }\n  }\n  return myTempStr;\n}\n";
+  return["readStringUntil(&"+a+",'"+b+"').c_str()",Blockly.Arduino.ORDER_ATOMIC];
+}
+
+Blockly.Arduino.sd_file_read_line=function(){
+  var a=Blockly.Arduino.valueToCode(this,"VARIABLE_NAME",Blockly.Arduino.ORDER_ATOMIC)||"";
+  a=a.replace(/\"/g,"");
+  Blockly.Arduino.definitions_.define_sd_file_read_until_invoke="String readStringUntil(File *filePtr,char myChar){\n  String myTempStr=\"\";\n  char nowRead;\n  if (filePtr->available()){\n    nowRead=filePtr->read();\n    while(nowRead!=myChar){\n      if (myChar!='\\n'){\n        if(nowRead!='\\n'){\n          myTempStr+=nowRead;\n        } else{\n          break;\n        }\n      } else {\n        myTempStr+=nowRead;\n      }\n      if (filePtr->available())\n        nowRead=filePtr->read();\n      else\n        break;\n    }\n  }\n  return myTempStr;\n}\n";
+  return["readStringUntil(&"+a+",'\\n').c_str()",Blockly.Arduino.ORDER_ATOMIC];
+}

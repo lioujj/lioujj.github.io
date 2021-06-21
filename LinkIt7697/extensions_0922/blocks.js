@@ -4103,3 +4103,210 @@ Blockly.Blocks.dac_mp3_ends_with={init:function(){
   this.setTooltip(Blockly.Msg.DAC_TOOLTIP)},onchange:function(){
       this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"dac_mp3_ends_with","dac_mp3_end")?this.setWarningText(null):this.setWarningText(Blockly.Msg.DAC_MP3_ENDS_WITH_WARNIG))}
 };
+
+//SD_Card
+Blockly.Blocks.sd={};
+Blockly.Blocks.sd.HUE=Blockly.Blocks.times.HUE;
+Blockly.Blocks.sd.HUE_FILE=288;
+Blockly.Blocks.sd.checkBlocks=function(a,slave,master){
+	var b=null,
+	    d=a.type;
+		a=a.workspace.getAllBlocks();
+		for(var c=0;c<a.length;c++)
+			if(slave!=a[c].type||null!=b||(b=a[c].type!=d?!0:!1),master==a[c].type){
+			  return!0;
+      }
+		return b
+};
+
+Blockly.Blocks.sd_init={init:function(){
+  this.setHelpUrl(Blockly.Msg.SD_HELPURL);
+  this.setColour(Blockly.Blocks.sd.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.SD_TITLE)
+      .appendField(Blockly.Msg.SD_INIT);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.SD_TOOLTIP)}
+};
+
+Blockly.Blocks.sd_exists={init:function(){
+  this.setHelpUrl(Blockly.Msg.SD_HELPURL);
+  this.setColour(Blockly.Blocks.sd.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.SD_TITLE)
+      .appendField(Blockly.Msg.SD_EXISTS);
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Boolean");
+  this.setTooltip(Blockly.Msg.SD_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"sd_exists","sd_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SD_INIT_WARNIG))}
+};
+
+Blockly.Blocks.sd_mkdir={init:function(){
+  this.setHelpUrl(Blockly.Msg.SD_HELPURL);
+  this.setColour(Blockly.Blocks.sd.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.SD_TITLE);
+  this.appendValueInput("DIR")
+      .setCheck("String")
+      .appendField(Blockly.Msg.SD_MKDIR);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.SD_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"sd_mkdir","sd_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SD_INIT_WARNIG))}
+};
+
+Blockly.Blocks.sd_rmdir={init:function(){
+  this.setHelpUrl(Blockly.Msg.SD_HELPURL);
+  this.setColour(Blockly.Blocks.sd.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.SD_TITLE);
+  this.appendValueInput("DIR")
+      .setCheck("String")
+      .appendField(Blockly.Msg.SD_RMDIR);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.SD_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"sd_rmdir","sd_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SD_INIT_WARNIG))}
+};
+
+Blockly.Blocks.sd_file_init={init:function(){
+  this.setHelpUrl(Blockly.Msg.SD_HELPURL);
+  this.setColour(Blockly.Blocks.sd.HUE_FILE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.SD_TITLE);
+  this.appendValueInput("VARIABLE_NAME")
+      .setCheck("String")
+      .appendField(Blockly.Msg.SD_VARIABLE);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.SD_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"sd_file_init","sd_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SD_INIT_WARNIG))}
+};
+
+Blockly.Blocks.sd_file_open={init:function(){
+  this.setHelpUrl(Blockly.Msg.SD_HELPURL);
+  this.setColour(Blockly.Blocks.sd.HUE_FILE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.SD_TITLE);
+  this.appendValueInput("VARIABLE_NAME")
+      .setCheck("String")
+      .appendField(Blockly.Msg.SD_FILE_VARIABLE);
+  this.appendValueInput("FILE_NAME")
+      .setCheck("String")
+      .appendField(Blockly.Msg.SD_FILE_OPEN);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.SD_FILE_OPEN_MODE_TITLE)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.SD_FILE_OPEN_MODE),"MODE");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.SD_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"sd_file_open","sd_file_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SD_FILE_INIT_WARNIG))}
+};
+
+Blockly.Blocks.sd_file_exists={init:function(){
+  this.setHelpUrl(Blockly.Msg.SD_HELPURL);
+  this.setColour(Blockly.Blocks.sd.HUE_FILE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.SD_TITLE);
+  this.appendValueInput("VARIABLE_NAME")
+      .setCheck("String")
+      .appendField(Blockly.Msg.SD_FILE_VARIABLE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.SD_FILE_EXISTS);
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Boolean");
+  this.setTooltip(Blockly.Msg.SD_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"sd_file_exists","sd_file_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SD_FILE_INIT_WARNIG))}
+};
+
+Blockly.Blocks.sd_file_close={init:function(){
+  this.setHelpUrl(Blockly.Msg.SD_HELPURL);
+  this.setColour(Blockly.Blocks.sd.HUE_FILE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.SD_TITLE);
+  this.appendValueInput("VARIABLE_NAME")
+      .setCheck("String")
+      .appendField(Blockly.Msg.SD_FILE_VARIABLE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.SD_FILE_CLOSE);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.SD_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"sd_file_close","sd_file_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SD_FILE_INIT_WARNIG))}
+};
+
+Blockly.Blocks.sd_file_println={init:function(){
+  this.setHelpUrl(Blockly.Msg.SD_HELPURL);
+  this.setColour(Blockly.Blocks.sd.HUE_FILE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.SD_TITLE);
+  this.appendValueInput("VARIABLE_NAME")
+      .setCheck("String")
+      .appendField(Blockly.Msg.SD_FILE_VARIABLE);
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.SD_FILE_PRINT_MODE),"MODE");
+  this.appendValueInput("CONTENT")
+      .setCheck("String")
+      .appendField(Blockly.Msg.SD_FILE_PRINT_CONTENT);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.SD_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"sd_file_println","sd_file_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SD_FILE_INIT_WARNIG))}
+};
+
+Blockly.Blocks.sd_file_available={init:function(){
+  this.setHelpUrl(Blockly.Msg.SD_HELPURL);
+  this.setColour(Blockly.Blocks.sd.HUE_FILE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.SD_TITLE);
+  this.appendValueInput("VARIABLE_NAME")
+      .setCheck("String")
+      .appendField(Blockly.Msg.SD_FILE_VARIABLE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.SD_FILE_AVAILABLE);
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Boolean");
+  this.setTooltip(Blockly.Msg.SD_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"sd_file_available","sd_file_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SD_FILE_INIT_WARNIG))}
+};
+
+Blockly.Blocks.sd_file_readuntil_char={init:function(){
+  this.setHelpUrl(Blockly.Msg.SD_HELPURL);
+  this.setColour(Blockly.Blocks.sd.HUE_FILE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.SD_TITLE);
+  this.appendValueInput("VARIABLE_NAME")
+      .setCheck("String")
+      .appendField(Blockly.Msg.SD_FILE_VARIABLE);
+  this.appendValueInput("CHAR")
+      .setCheck("String")
+      .appendField(Blockly.Msg.SD_FILE_READ_UNTIL_CHAR);
+  this.setInputsInline(!0);
+  this.setOutput(!0,"String");
+  this.setTooltip(Blockly.Msg.SD_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"sd_file_readuntil_char","sd_file_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SD_FILE_INIT_WARNIG))}
+};
+
+Blockly.Blocks.sd_file_read_line={init:function(){
+  this.setHelpUrl(Blockly.Msg.SD_HELPURL);
+  this.setColour(Blockly.Blocks.sd.HUE_FILE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.SD_TITLE);
+  this.appendValueInput("VARIABLE_NAME")
+      .setCheck("String")
+      .appendField(Blockly.Msg.SD_FILE_VARIABLE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.SD_FILE_READ_LINE);
+  this.setInputsInline(!0);
+  this.setOutput(!0,"String");
+  this.setTooltip(Blockly.Msg.SD_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"sd_file_read_line","sd_file_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SD_FILE_INIT_WARNIG))}
+};
