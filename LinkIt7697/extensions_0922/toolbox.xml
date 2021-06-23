@@ -1390,6 +1390,14 @@
       <block type="mpu9250_gyro_fetch"></block>
       <block type="mpu9250_gyro_3axis"></block>
     </category>
+    <category id="category_msa301" name="MSA301_I2C">
+			<block type="msa301_accel_begin"></block>
+      <block type="msa301_accel_fetch"></block>
+      <block type="msa301_accel_3axis"></block>
+      <block type="msa301_tap_setup"></block>
+      <block type="msa301_tap_begin"></block>
+      <block type="msa301_tap_count"></block>
+    </category>
     <category id="category_sd" name="SD_CARD">
       <block type="sd_init"></block>
       <block type="sd_exists"></block>

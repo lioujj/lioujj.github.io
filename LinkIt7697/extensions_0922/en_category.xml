@@ -33,6 +33,7 @@
 <category><name>PocketCard</name><replace>Pocket Card</replace></category>
 <category><name>AnalogWrite</name><replace>AnalogWrite Tone</replace></category>
 <category><name>MPU9250_I2C</name><replace>MPU9250 9-axis</replace></category>
+<category><name>MSA301_I2C</name><replace>MSA301 3-axis</replace></category>
 <category><name>GoogleSheets</name><replace>Google Sheets</replace></category>
 <category><name>ESP32_NTP</name><replace>NTP Time</replace></category>
 <category><name>LineNotify</name><replace>Line Notify</replace></category>

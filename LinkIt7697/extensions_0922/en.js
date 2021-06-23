@@ -469,7 +469,7 @@ Blockly.Msg.MPU9250_ACCEL_BEGIN = "Begin accelerometer, scale range:";
 Blockly.Msg.MPU9250_TOOLTIP= "";
 Blockly.Msg.MPU9250_ACCEL_FETCH = "Update the data of accelerometer";
 Blockly.Msg.MPU9250_ACCEL_WARNING = "You have to set \"Begin accelerometer\" block first.";
-Blockly.Msg.MPU9250_ACCEL_3AXIS = "Accelerometer data";
+Blockly.Msg.MPU9250_ACCEL_3AXIS = "Accelerometer G value";
 Blockly.Msg.MPU925_3AXIS_POST_FIX="axis";
 Blockly.Msg.MPU9250_ACCEL_3AXIS_WARNING = "You have to set \""+Blockly.Msg.MPU9250_ACCEL_FETCH+"\" block first.";
 Blockly.Msg.MPU9250_MAG_BEGIN = "Begin Magnetometer";
@@ -485,6 +485,23 @@ Blockly.Msg.MPU9250_GYRO_3AXIS_WARNING = "You have to set \""+Blockly.Msg.MPU925
 Blockly.Msg.MPU925_3AXIS_POST_FIX_UNIT = "DPS";
 Blockly.Msg.MPU9250_ACCEL_PITCH_ROLL = "Rotation angle";
 Blockly.Msg.MPU9250_PITCH_ROLL=[["Pitch","pitch"],["Roll","roll"]];
+
+//MSA301
+Blockly.Msg.MSA301_HELPURL= "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/msa301三軸感應器積木";
+Blockly.Msg.MSA301_TITLE = "MSA301";
+Blockly.Msg.MSA301_ACCEL_BEGIN = "Begin accelerometer, scale range:";
+Blockly.Msg.MSA301_TOOLTIP= "";
+Blockly.Msg.MSA301_ACCEL_FETCH = "Update the data of accelerometer";
+Blockly.Msg.MSA301_ACCEL_WARNING = "You have to set \""+Blockly.Msg.MSA301_ACCEL_FETCH+"\" block first.";
+Blockly.Msg.MSA301_ACCEL_3AXIS = "Accelerometer value(m/s^2)";
+Blockly.Msg.MSA301_3AXIS_POST_FIX = "axis";
+Blockly.Msg.MSA301_ACCEL_3AXIS_WARNING = "You have to set \""+Blockly.Msg.MSA301_ACCEL_FETCH+"\" block first.";
+Blockly.Msg.MSA301_TAP_SETUP = "setup tap detection";
+Blockly.Msg.MSA301_TAP_MODE=[["is single tapped?","(1<<5)"],["is double tapped?","(1<<4)"]];
+Blockly.Msg.MSA301_TAP_WARNING = "You have to set \""+Blockly.Msg.MSA301_TAP_SETUP+"\" block first.";
+Blockly.Msg.MSA301_TAP_BEGIN = "is tapped";
+Blockly.Msg.MSA301_TAP_BEGIN_WARNING = "You have to set \""+Blockly.Msg.LIOU_ROBOT_WHEN +" "+Blockly.Msg.MSA301_TITLE+" "+Blockly.Msg.MSA301_TAP_BEGIN+"\" block first.";
+
 
 //GoogleSheets
 Blockly.Msg.GOOGLESHEETS_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/google試算表積木";

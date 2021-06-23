@@ -459,11 +459,11 @@ Blockly.Msg.POCKETCARD_PIXELS_COLOR = "板載RGB顏色";
 Blockly.Msg.MPU9250_HELPURL= "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/mpu9250九軸感應器";
 Blockly.Msg.MPU9250_TITLE = "MPU9250";
 Blockly.Msg.MPU9250_ACCEL_BEGIN = "啟動加速度感應器，感應範圍";
-Blockly.Msg.MPU9250_TOOLTIP= "";
+Blockly.Msg.MPU9250_TOOLTIP= "MPU9250";
 Blockly.Msg.MPU9250_ACCEL_FETCH = "更新加速度感測資料";
 Blockly.Msg.MPU9250_3AXIS_TYPE = [["加速度","accelUpdate()"],["陀螺儀","gyroUpdate()"],["磁力","magUpdate()"]];
 Blockly.Msg.MPU9250_ACCEL_WARNING = "必須先設定「啟動加速度感應器」積木";
-Blockly.Msg.MPU9250_ACCEL_3AXIS = "加速度感測值";
+Blockly.Msg.MPU9250_ACCEL_3AXIS = "加速度感測G值";
 Blockly.Msg.MPU925_3AXIS_POST_FIX="軸";
 Blockly.Msg.MPU9250_ACCEL_3AXIS_WARNING = "必須先設定「"+Blockly.Msg.MPU9250_ACCEL_FETCH+"」積木";
 Blockly.Msg.MPU9250_MAG_BEGIN = "啟動磁力感應器";
@@ -479,6 +479,22 @@ Blockly.Msg.MPU9250_GYRO_3AXIS_WARNING = "必須先設定「"+Blockly.Msg.MPU925
 Blockly.Msg.MPU925_3AXIS_POST_FIX_UNIT = "角速度(DPS)";
 Blockly.Msg.MPU9250_ACCEL_PITCH_ROLL = "旋轉角度";
 Blockly.Msg.MPU9250_PITCH_ROLL=[["俯仰(Pitch)","pitch"],["翻滾(Roll)","roll"]];
+
+//MSA301
+Blockly.Msg.MSA301_HELPURL= "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/msa301三軸感應器積木";
+Blockly.Msg.MSA301_TITLE = "MSA301";
+Blockly.Msg.MSA301_ACCEL_BEGIN = "啟動加速度感應器，感應範圍";
+Blockly.Msg.MSA301_TOOLTIP= "MSA301";
+Blockly.Msg.MSA301_ACCEL_FETCH = "更新加速度感測資料";
+Blockly.Msg.MSA301_ACCEL_WARNING = "必須先設定「啟動加速度感應器」積木";
+Blockly.Msg.MSA301_ACCEL_3AXIS = "加速度感測值(m/s^2)";
+Blockly.Msg.MSA301_3AXIS_POST_FIX = "軸";
+Blockly.Msg.MSA301_ACCEL_3AXIS_WARNING = "必須先設定「"+Blockly.Msg.MSA301_ACCEL_FETCH+"」積木";
+Blockly.Msg.MSA301_TAP_SETUP = "啟動輕敲偵測";
+Blockly.Msg.MSA301_TAP_MODE=[["被輕敲1下","(1<<5)"],["被輕敲2下","(1<<4)"]];
+Blockly.Msg.MSA301_TAP_WARNING = "必須先設定「"+Blockly.Msg.MSA301_TAP_SETUP+"」積木";
+Blockly.Msg.MSA301_TAP_BEGIN = "被輕敲";
+Blockly.Msg.MSA301_TAP_BEGIN_WARNING = "必須先設定「"+Blockly.Msg.LIOU_ROBOT_WHEN +Blockly.Msg.MSA301_TITLE+Blockly.Msg.MSA301_TAP_BEGIN+"」積木";
 
 //GoogleSheets
 Blockly.Msg.GOOGLESHEETS_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/google試算表積木";

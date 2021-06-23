@@ -3112,6 +3112,97 @@ Blockly.Blocks.mpu9250_gyro_3axis={init:function(){
       this.workspace&&(Blockly.Blocks.mpu9250.checkBlocks(this,"mpu9250_gyro_3axis","mpu9250_gyro_fetch")?this.setWarningText(null):this.setWarningText(Blockly.Msg.MPU9250_GYRO_3AXIS_WARNING))}
 };
 
+
+//MSA301
+Blockly.Blocks.msa301={};
+Blockly.Blocks.msa301.HUE=200;
+Blockly.Blocks.msa301.checkBlocks=function(a,slave,master){
+	var b=null,
+	    d=a.type;
+		a=a.workspace.getAllBlocks();
+		for(var c=0;c<a.length;c++)
+			if(slave!=a[c].type||null!=b||(b=a[c].type!=d?!0:!1),master==a[c].type){
+			  return!0;
+      }
+		return b
+};
+
+Blockly.Blocks.msa301_accel_begin={init:function(){
+  this.setHelpUrl(Blockly.Msg.MSA301_HELPURL);
+  this.setColour(Blockly.Blocks.msa301.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.MSA301_TITLE+" "+Blockly.Msg.MSA301_ACCEL_BEGIN)
+      .appendField(new Blockly.FieldDropdown([["2G","MSA301_RANGE_2_G"],["4G","MSA301_RANGE_4_G"],["8G","MSA301_RANGE_8_G"],["16G","MSA301_RANGE_16_G"]]),"ACCEL_MODE");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.MSA301_TOOLTIP)}
+};
+
+Blockly.Blocks.msa301_accel_fetch={init:function(){
+  this.setHelpUrl(Blockly.Msg.MSA301_HELPURL);
+  this.setColour(Blockly.Blocks.msa301.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.MSA301_TITLE+" "+Blockly.Msg.MSA301_ACCEL_FETCH)
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.MSA301_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.msa301.checkBlocks(this,"msa301_accel_fetch","msa301_accel_begin")?this.setWarningText(null):this.setWarningText(Blockly.Msg.MSA301_ACCEL_WARNING))}
+};
+
+Blockly.Blocks.msa301_accel_3axis={init:function(){
+  this.setHelpUrl(Blockly.Msg.MSA301_HELPURL);
+  this.setColour(Blockly.Blocks.msa301.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.MSA301_TITLE+" "+Blockly.Msg.MSA301_ACCEL_3AXIS)
+      .appendField(new Blockly.FieldDropdown([["X","x"],["Y","y"],["Z","z"]]),"3AXIS_MODE")
+      .appendField(Blockly.Msg.MSA301_3AXIS_POST_FIX);
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Number");
+  this.setTooltip(Blockly.Msg.MSA301_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.msa301.checkBlocks(this,"msa301_accel_3axis","msa301_accel_fetch")?this.setWarningText(null):this.setWarningText(Blockly.Msg.MSA301_ACCEL_3AXIS_WARNING))}
+};
+
+Blockly.Blocks.msa301_tap_setup={init:function(){
+  this.setHelpUrl(Blockly.Msg.MSA301_HELPURL);
+  this.setColour(Blockly.Blocks.msa301.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.MSA301_TITLE+" "+Blockly.Msg.MSA301_TAP_SETUP);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.MSA301_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.msa301.checkBlocks(this,"msa301_tap_setup","msa301_accel_begin")?this.setWarningText(null):this.setWarningText(Blockly.Msg.MSA301_ACCEL_WARNING))}
+};
+
+Blockly.Blocks.msa301_tap_begin={init:function(){
+  this.setHelpUrl(Blockly.Msg.MSA301_HELPURL);
+  this.setColour(Blockly.Blocks.msa301.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LIOU_ROBOT_WHEN+" MSA301")
+      .appendField(Blockly.Msg.MSA301_TAP_BEGIN);
+  this.setInputsInline(!0);
+  this.appendStatementInput("TAP_CALL");
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.MSA301_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.msa301.checkBlocks(this,"msa301_tap_begin","msa301_tap_setup")?this.setWarningText(null):this.setWarningText(Blockly.Msg.MSA301_TAP_WARNING))}
+};
+
+Blockly.Blocks.msa301_tap_count={init:function(){
+  this.setHelpUrl(Blockly.Msg.MSA301_HELPURL);
+  this.setColour(Blockly.Blocks.msa301.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.MSA301_TITLE)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.MSA301_TAP_MODE),"MODE")
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Boolean");
+  this.setTooltip(Blockly.Msg.MSA301_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.msa301.checkBlocks(this,"msa301_tap_count","msa301_tap_begin")?this.setWarningText(null):this.setWarningText(Blockly.Msg.MSA301_TAP_BEGIN_WARNING))}
+};
+
+
 //GoogleSheets
 Blockly.Blocks.googlesheets={};
 Blockly.Blocks.googlesheets.HUE=275;
