@@ -1786,9 +1786,53 @@ Blockly.Arduino.mpu9250_gyro_3axis=function(){
   return["myMPU9250."+a,Blockly.Arduino.ORDER_ATOMIC];
 };
 
+//MSA301
+Blockly.Arduino.msa301={};
+Blockly.Arduino.msa301_accel_begin=function(){
+  var a=this.getFieldValue("ACCEL_MODE");
+  Blockly.Arduino.definitions_.define_msa301="#include <Adafruit_MSA301.h>\n#include <Adafruit_Sensor.h>\nAdafruit_MSA301 msa;\nsensors_event_t eventAccel;\nuint8_t motionstat;\n";
+  Blockly.Arduino.setups_.setup_msa_accel='msa.begin();\n  msa.setRange('+a+');';
+	return""
+};
+
+Blockly.Arduino.msa301_accel_fetch=function(){
+	return"msa.getEvent(&eventAccel);\n"
+};
+
+Blockly.Arduino.msa301_accel_3axis=function(){
+  var a=this.getFieldValue("3AXIS_MODE");
+  return['eventAccel.acceleration.'+a,Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.msa301_tap_setup=function(){
+  return"msa.setClick(false, false, MSA301_TAPDUR_250_MS, 25);\nmsa.enableInterrupts(true, true);\n";
+};
+
+Blockly.Arduino.msa301_tap_begin=function(){
+  var a=Blockly.Arduino.statementToCode(this,"TAP_CALL");
+  return"motionstat = msa.getMotionInterruptStatus();\nif (motionstat){\n"+a+"}\n";
+};
+
+Blockly.Arduino.msa301_tap_count=function(){
+  var a=this.getFieldValue("MODE");
+  return['motionstat & '+a,Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Blocks.msa301_tap_count={init:function(){
+  this.setHelpUrl(Blockly.Msg.MSA301_HELPURL);
+  this.setColour(Blockly.Blocks.msa301.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.MSA301_TITLE)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.MSA301_TAP_MODE),"MODE")
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Boolean");
+  this.setTooltip(Blockly.Msg.MSA301_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.msa301.checkBlocks(this,"msa301_tap_count","msa301_tap_begin")?this.setWarningText(null):this.setWarningText(Blockly.Msg.MSA301_TAP_BEGIN_WARNING))}
+};
+
+
 //GoogleSheets
 Blockly.Arduino.googlesheets={};
-
 Blockly.Arduino.data_join=function(){
   for(var a="String()",b=0;b<this.itemCount_;b++){
     var c=Blockly.Arduino.valueToCode(this,"ADD"+b,Blockly.Arduino.ORDER_COMMA);
