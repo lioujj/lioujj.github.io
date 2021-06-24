@@ -2366,7 +2366,7 @@ Blockly.Arduino.sd_file_println=function(){
       b=Blockly.Arduino.valueToCode(this,"CONTENT",Blockly.Arduino.ORDER_ATOMIC)||"",
       c=this.getFieldValue("MODE");
   a=a.replace(/\"/g,"");
-  return a+c+'(String('+b+').c_str());\n';
+  return a+c+'(String('+b+').c_str());\n'+a+'.flush();\n';
 }
 
 Blockly.Arduino.sd_file_available=function(){
