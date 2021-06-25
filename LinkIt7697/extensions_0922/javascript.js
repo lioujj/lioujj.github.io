@@ -2344,9 +2344,14 @@ Blockly.Arduino.sd_file_init=function(){
 Blockly.Arduino.sd_file_open=function(){
   var a=Blockly.Arduino.valueToCode(this,"VARIABLE_NAME",Blockly.Arduino.ORDER_ATOMIC)||"",
       b=Blockly.Arduino.valueToCode(this,"FILE_NAME",Blockly.Arduino.ORDER_ATOMIC)||"",
-      c=this.getFieldValue("MODE");
+      c=this.getFieldValue("MODE"),
+      returnStr='';
   a=a.replace(/\"/g,"");
-  return a+'.open(String('+b+').c_str(),'+c+');\n';
+  returnStr=a+'.open(String('+b+').c_str(),'+c+');\n';
+  if (c.indexOf("O_TRUNC")>-1){
+    returnStr+=('if ('+a+'){\n  '+a+'.write(0xEF);\n  '+a+'.write(0xBB);\n  '+a+'.write(0xBF);\n  '+a+'.flush();\n}\n');
+  }
+  return returnStr;
 }
 
 Blockly.Arduino.sd_file_exists=function(){
