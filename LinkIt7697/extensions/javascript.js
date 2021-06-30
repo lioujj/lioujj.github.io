@@ -1727,7 +1727,7 @@ Blockly.Arduino.pocketcard_rgb_color=function(){
 	Blockly.Arduino.definitions_.define_include_neopixel="#include <Adafruit_NeoPixel.h>\n";
 	Blockly.Arduino.definitions_.define_pocket_neopixel="Adafruit_NeoPixel pocketCardPixels = Adafruit_NeoPixel(1,12,NEO_RGB + NEO_KHZ800);\n";
   Blockly.Arduino.setups_.setup_pocket_neopixel="pocketCardPixels.begin();\n"; 
-  return 'pocketCardPixels.setBrightness('+b+');\npocketCardPixels.setPixelColor(0,'+a+');\npocketCardPixels.show();\n';
+  return 'pocketCardPixels.setBrightness('+b+');\npocketCardPixels.show();\npocketCardPixels.setPixelColor(0,'+a+');\npocketCardPixels.show();\n';
 };
 
 
