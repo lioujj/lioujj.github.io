@@ -2866,6 +2866,16 @@ Blockly.Blocks.esp32_custom_tone={init:function(){
 //ESP32_BUILTIN SENSOR
 Blockly.Blocks.builtin={};
 Blockly.Blocks.builtin.HUE=180;
+Blockly.Blocks.builtin.checkBlocks=function(a,slave,master){
+	var b=null,
+	    d=a.type;
+		a=a.workspace.getAllBlocks();
+		for(var c=0;c<a.length;c++)
+			if(slave!=a[c].type||null!=b||(b=a[c].type!=d?!0:!1),master==a[c].type){
+			  return!0;
+      }
+		return b
+};
 Blockly.Blocks.esp32_hall_read={init:function(){
   this.setHelpUrl(Blockly.Msg.BUILTIN_HELPURL);
   this.setColour(Blockly.Blocks.builtin.HUE);
@@ -2891,6 +2901,74 @@ Blockly.Blocks.esp32_touch_read={init:function(){
   this.setTooltip(Blockly.Msg.BUILTIN_TOOLTIP)}
 };
 
+Blockly.Blocks.esp32_core_run={init:function(){
+  this.setHelpUrl(Blockly.Msg.BUILTIN_HELPURL);
+  this.setColour(Blockly.Blocks.builtin.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.CORE_TITLE)
+      .appendField(Blockly.Msg.CORE_RUN);
+  this.appendValueInput("TASK_NAME")
+      .setCheck("String")
+      .appendField(Blockly.Msg.CORE_TASK_NAME);
+  this.appendValueInput("STACK")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.CORE_STACK);
+  this.appendValueInput("PRIORITY")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.CORE_PRIORITY);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.CORE_INDEX)
+      .appendField(new Blockly.FieldDropdown([["0","0"],["1","1"]]),"CORE");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.BUILTIN_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"esp32_core_run","esp32_core_task")?this.setWarningText(null):this.setWarningText(Blockly.Msg.CORE_WARNIG))}
+};
+
+Blockly.Blocks.esp32_core_task={init:function(){
+  this.setHelpUrl(Blockly.Msg.BUILTIN_HELPURL);
+  this.setColour(Blockly.Blocks.builtin.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.CORE_TITLE)
+      .appendField(Blockly.Msg.CORE_SETUP);
+  this.appendValueInput("TASK_NAME")
+      .setCheck("String")
+      .appendField(Blockly.Msg.CORE_TASK_NAME);
+  this.appendStatementInput("SETUP");
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.CORE_LOOP);
+  this.appendStatementInput("LOOP");
+  this.setInputsInline(!0);
+  this.setTooltip(Blockly.Msg.BUILTIN_TOOLTIP)}
+};
+
+Blockly.Blocks.esp32_core_stop={init:function(){
+  this.setHelpUrl(Blockly.Msg.BUILTIN_HELPURL);
+  this.setColour(Blockly.Blocks.builtin.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.CORE_TITLE)
+      .appendField(Blockly.Msg.CORE_STOP);
+  this.appendValueInput("TASK_NAME")
+      .setCheck("String")
+      .appendField(Blockly.Msg.CORE_TASK_NAME);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setInputsInline(!0);
+  this.setTooltip(Blockly.Msg.BUILTIN_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"esp32_core_stop","esp32_core_task")?this.setWarningText(null):this.setWarningText(Blockly.Msg.CORE_WARNIG))}
+};
+
+Blockly.Blocks.esp32_core_num={init:function(){
+  this.setHelpUrl(Blockly.Msg.BUILTIN_HELPURL);
+  this.setColour(Blockly.Blocks.builtin.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.CORE_TITLE)
+      .appendField(Blockly.Msg.CORE_NUM);
+  this.setOutput(!0,"Number");
+  this.setInputsInline(!0);
+  this.setTooltip(Blockly.Msg.BUILTIN_TOOLTIP)}
+};
 
 //PocketCard
 Blockly.Blocks.pocketcard={};

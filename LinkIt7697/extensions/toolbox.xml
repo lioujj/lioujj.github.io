@@ -94,6 +94,38 @@
     <category id="category_esp32_builtin" name="ESP32_BUILTIN">
       <block type="esp32_hall_read"></block>
       <block type="esp32_touch_read"></block>
+      <block type="esp32_core_task">
+        <value name="TASK_NAME">
+          <block type="text">
+            <field name="TEXT">Task0</field>
+          </block>
+        </value>
+      </block>
+      <block type="esp32_core_run">
+        <value name="TASK_NAME">
+          <block type="text">
+            <field name="TEXT">Task0</field>
+          </block>
+        </value>
+		    <value name="STACK">
+			    <block type="math_number">
+				    <field name="NUM">10000</field>
+			    </block>
+		    </value>
+		    <value name="PRIORITY">
+			    <block type="math_number">
+				    <field name="NUM">1</field>
+			    </block>
+		    </value>
+      </block>
+      <block type="esp32_core_stop">
+        <value name="TASK_NAME">
+          <block type="text">
+            <field name="TEXT">Task0</field>
+          </block>
+        </value>
+      </block>
+      <block type="esp32_core_num"></block>
     </category>
     <category id="category_esp32_ntp" name="ESP32_NTP">
        <block type="set_ntp_time"></block>
