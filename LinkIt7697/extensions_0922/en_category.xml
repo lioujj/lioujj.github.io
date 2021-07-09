@@ -42,6 +42,6 @@
 <category><name>TTGO_BUTTON</name><replace>TTGO BUTTON</replace></category>
 <category><name>S20</name><replace>S20 Smart Socket</replace></category>
 <category><name>I2SDAC</name><replace>I2S DAC</replace></category>
-<category><name>ESP32_BUILTIN</name><replace>BuiltIn Sensor</replace></category>
+<category><name>ESP32_BUILTIN</name><replace>Dual-Core and BuiltIn Sensor</replace></category>
 <category><name>SD_CARD</name><replace>SD Card</replace></category>
 </xml>

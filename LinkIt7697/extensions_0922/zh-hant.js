@@ -441,11 +441,22 @@ Blockly.Msg.ESP32_ANALOG_WRITE_CHANNEL = "通道(0~15)";
 Blockly.Msg.ESP32_ANALOG_WRITE_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/開發板設定積木";
 
 //ESP32_BuiltIn sensor
-Blockly.Msg.BUILTIN_HELPURL = "";
+Blockly.Msg.BUILTIN_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/雙核心及內建感測器積木";
 Blockly.Msg.BUILTIN_TITLE = "ESP32內建感測器";
 Blockly.Msg.BUILTIN_HALL_READ = "讀取霍爾感測器值";
 Blockly.Msg.BUILTIN_TOUCH_READ = "讀取觸碰感測器值";
 Blockly.Msg.BUILTIN_TOOLTIP = "";
+Blockly.Msg.CORE_TITLE = "ESP32雙核心";
+Blockly.Msg.CORE_TASK_NAME = "任務名稱";
+Blockly.Msg.CORE_INDEX = "執行於核心";
+Blockly.Msg.CORE_SETUP = "初始化";
+Blockly.Msg.CORE_LOOP = "重複執行";
+Blockly.Msg.CORE_RUN = "執行";
+Blockly.Msg.CORE_STACK = "堆疊大小";
+Blockly.Msg.CORE_PRIORITY = "優先權";
+Blockly.Msg.CORE_STOP = "停止任務";
+Blockly.Msg.CORE_WARNIG ="必須先設定"+Blockly.Msg.CORE_TITLE+"任務內容";
+Blockly.Msg.CORE_NUM = "取得執行中的核心編號";
 
 //POCKETCARD
 Blockly.Msg.POCKETCARD_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/pocketcard";

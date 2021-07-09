@@ -447,12 +447,22 @@ Blockly.Msg.ESP32_ANALOG_WRITE_CHANNEL = "Channel(0~15)";
 Blockly.Msg.ESP32_ANALOG_WRITE_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/開發板設定積木";
 
 //ESP32_BuiltIn sensor
-Blockly.Msg.BUILTIN_HELPURL = "";
+Blockly.Msg.BUILTIN_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/雙核心及內建感測器積木";
 Blockly.Msg.BUILTIN_TITLE = "ESP32_Builtin";
 Blockly.Msg.BUILTIN_HALL_READ = "read value of Hall sensor";
 Blockly.Msg.BUILTIN_TOOLTIP = "";
 Blockly.Msg.BUILTIN_TOUCH_READ = "read value of touch sensor";
-
+Blockly.Msg.CORE_TITLE = "ESP32 Dual-Core";
+Blockly.Msg.CORE_TASK_NAME = "Task name";
+Blockly.Msg.CORE_INDEX = "run in core";
+Blockly.Msg.CORE_SETUP = "setup";
+Blockly.Msg.CORE_LOOP = "loop";
+Blockly.Msg.CORE_RUN = "run";
+Blockly.Msg.CORE_STACK = "stack size";
+Blockly.Msg.CORE_PRIORITY = "priority";
+Blockly.Msg.CORE_STOP = "stop task";
+Blockly.Msg.CORE_WARNIG ="You have to set \""+Blockly.Msg.CORE_TITLE+" function\" block first.";
+Blockly.Msg.CORE_NUM = "get core ID";
 
 //POCKETCARD
 Blockly.Msg.POCKETCARD_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/pocketcard";

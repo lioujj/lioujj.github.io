@@ -1684,6 +1684,40 @@ Blockly.Arduino.esp32_touch_read=function(){
   return['touchRead('+a+')',Blockly.Arduino.ORDER_ATOMIC];
 }
 
+
+Blockly.Arduino.esp32_core_task=function(){
+  var a=Blockly.Arduino.valueToCode(this,"TASK_NAME",Blockly.Arduino.ORDER_ATOMIC)||"",
+      b=Blockly.Arduino.statementToCode(this,"SETUP"),
+      c=Blockly.Arduino.statementToCode(this,"LOOP");
+  a=a.replace(/\"/g,"");
+  if (Blockly.Arduino.definitions_.define_dual_core_declaire!=undefined)
+    Blockly.Arduino.definitions_.define_dual_core_declaire=Blockly.Arduino.definitions_.define_dual_core_declaire+'TaskHandle_t '+a+';\n';
+  else
+    Blockly.Arduino.definitions_.define_dual_core_declaire='TaskHandle_t '+a+';\n';
+  c='  '+c.replace(/\n  /g,"\n    ");
+  Blockly.Arduino.definitions_["define_dual_core_"+a]='void '+a+'_code( void * pvParameters ){\n'+b+'  while(true){\n'+c+'  }\n}\n';
+  return'';
+}
+
+Blockly.Arduino.esp32_core_run=function(){
+  var a=Blockly.Arduino.valueToCode(this,"TASK_NAME",Blockly.Arduino.ORDER_ATOMIC)||"",
+      b=Blockly.Arduino.valueToCode(this,"STACK",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      c=Blockly.Arduino.valueToCode(this,"PRIORITY",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      d=this.getFieldValue("CORE");
+  a=a.replace(/\"/g,"");
+  return'xTaskCreatePinnedToCore('+a+'_code,"'+a+'",'+b+',NULL,'+c+',&'+a+','+d+');\n';
+}
+
+Blockly.Arduino.esp32_core_stop=function(){
+  var a=Blockly.Arduino.valueToCode(this,"TASK_NAME",Blockly.Arduino.ORDER_ATOMIC)||"";
+  a=a.replace(/\"/g,"");
+  return'vTaskDelete('+a+');\n';
+}
+
+Blockly.Arduino.esp32_core_num=function(){
+  return["xPortGetCoreID()",Blockly.Arduino.ORDER_ATOMIC];
+}
+
 //PocketCard
 Blockly.Arduino.pocketcard={};
 Blockly.Arduino.pocketcard_button=function(){
