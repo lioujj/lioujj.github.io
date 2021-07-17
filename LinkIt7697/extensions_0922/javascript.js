@@ -1690,12 +1690,14 @@ Blockly.Arduino.esp32_core_task=function(){
       b=Blockly.Arduino.statementToCode(this,"SETUP"),
       c=Blockly.Arduino.statementToCode(this,"LOOP");
   a=a.replace(/\"/g,"");
-  if (Blockly.Arduino.definitions_.define_dual_core_declaire!=undefined)
-    Blockly.Arduino.definitions_.define_dual_core_declaire=Blockly.Arduino.definitions_.define_dual_core_declaire+'TaskHandle_t '+a+';\n';
+  if (Blockly.Arduino.definitions_.define_dual_core_declaire!=undefined){
+    if (Blockly.Arduino.definitions_.define_dual_core_declaire.indexOf(a)<0)
+      Blockly.Arduino.definitions_.define_dual_core_declaire=Blockly.Arduino.definitions_.define_dual_core_declaire+'TaskHandle_t '+a+';\n';
+  }
   else
     Blockly.Arduino.definitions_.define_dual_core_declaire='TaskHandle_t '+a+';\n';
   c='  '+c.replace(/\n  /g,"\n    ");
-  Blockly.Arduino.definitions_["define_dual_core_"+a]='void '+a+'_code( void * pvParameters ){\n'+b+'  while(true){\n'+c+'  }\n}\n';
+  Blockly.Arduino.definitions_["define_dual_core_"+a]='void '+a+'_code( void * pvParameters )\n{\n'+b+'  while(true){\n'+c+'  }\n}\n';
   return'';
 }
 
@@ -2244,12 +2246,12 @@ Blockly.Arduino.dac_init=function(){
 */
   Blockly.Arduino.definitions_.define_SPIFFS_include='#include "SPIFFS.h"';
   Blockly.Arduino.definitions_.define_HTTPCLIENT_include='#include <HTTPClient.h>';
-  Blockly.Arduino.definitions_.define_ESP8266Audio_include='#include "AudioFileSourceSPIFFS.h"\n#include "AudioFileSourceSD.h"\n#include "AudioFileSourceICYStream.h"\n#include "AudioFileSourceBuffer.h"\n#include "AudioOutputI2S.h"\n#include "AudioGeneratorMP3.h"\n';
-  Blockly.Arduino.definitions_.define_ESP8266Audio_variable_invoke='AudioFileSourceSD *i2sSdFile;\nAudioFileSourceSPIFFS *i2sSPIFFSfile;\nAudioGeneratorMP3 *i2sMp3;\nAudioFileSourceICYStream *i2sFile;\nAudioFileSourceBuffer *i2sBuff;\nAudioOutputI2S *i2sOut;\nString dacPlayType;\nString mp3FileName;\nString ttsContent;\nfloat gainValue=1.0;\nbool ttsDone=true;\nbool mp3Done=true;\n';
+  Blockly.Arduino.definitions_.define_ESP8266Audio_include='#include "AudioFileSourceSPIFFS.h"\n#include "AudioFileSourceSD.h"\n#include "AudioFileSourceHTTPStream.h"\n#include "AudioFileSourceBuffer.h"\n#include "AudioOutputI2S.h"\n#include "AudioGeneratorMP3.h"\n';
+  Blockly.Arduino.definitions_.define_ESP8266Audio_variable_invoke='AudioFileSourceSD *i2sSdFile;\nAudioFileSourceSPIFFS *i2sSPIFFSfile;\nAudioGeneratorMP3 *i2sMp3;\nAudioFileSourceHTTPStream *i2sFile;\nAudioFileSourceBuffer *i2sBuff;\nAudioOutputI2S *i2sOut;\nString dacPlayType;\nString mp3FileName;\nString ttsContent;\nfloat gainValue=1.0;\nbool ttsDone=true;\nbool mp3Done=true;\n';
   Blockly.Arduino.definitions_.define_ESP8266Audio_function_invoke_checkRunning='bool checkDACrunning()\n{\n  bool isRunning=false;\n  if (i2sMp3->isRunning()) {\n    isRunning=true;\n    if (!i2sMp3->loop()){\n      i2sMp3->stop();\n      mp3Done=true;\n      ttsDone=true;\n      isRunning=false;\n    }\n  }else{\n    isRunning=false;\n  }\n  return isRunning;\n}\n';
   Blockly.Arduino.definitions_.define_ESP8266Audio_function_invoke_TTS='void getVoiceFromGoogle(String myTalk,String tl)\n{\n  ttsDone=false;\n  mp3Done=true;\n  dacPlayType="TTS";\n  ttsContent=myTalk;\n  myTalk="http://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl="+tl+"&q="+myTalk;\n  saveTTStoFile(myTalk,"/TTS/tts.mp3",2);\n  getVoiceFromFile("/TTS/tts.mp3",2);\n}\n';
   Blockly.Arduino.definitions_.define_ESP8266Audio_function_invoke_saveTTStoFile='void saveTTStoFile(String myLink,String fileName,byte sdType)\n{\n  myLink.replace(" ","%20");\n  Serial.println("filename:"+fileName);\n  File myTTSFile;\n  if(fileName.indexOf("/")!=0)\n    fileName="/"+fileName;\n  if (sdType==1){\n    if(!SD.begin()){\n      return;\n    }\n    String path=fileName.substring(1,fileName.lastIndexOf("/"));\n    String mySubStr="/";\n    while(path.indexOf("/")>-1){\n      mySubStr+=path.substring(0,path.indexOf("/"));\n      if( !SD.exists( mySubStr.c_str()))\n        SD.mkdir(mySubStr.c_str());\n      mySubStr+="/";\n      path= path.substring(path.indexOf("/")+1);\n    }\n    if (path!=""){\n      mySubStr+=path;\n      if( !SD.exists( mySubStr.c_str()))\n        SD.mkdir(mySubStr.c_str());\n    }\n    myTTSFile = SD.open(fileName, "w");\n    if (!myTTSFile) {\n      return;\n    }\n  } else if (sdType==2){\n    if(!SPIFFS.begin(true)){\n      return;\n    }\n    myTTSFile = SPIFFS.open(fileName, "w");\n    if (!myTTSFile) {\n      return;\n    }\n  }\n  HTTPClient http;\n  http.begin(myLink);\n  int httpCode = http.GET();\n  if (httpCode == HTTP_CODE_OK) {\n      http.writeToStream(&myTTSFile);\n  }\n  myTTSFile.close();\n  http.end();\n}\n';
-  Blockly.Arduino.definitions_.define_ESP8266Audio_function_invoke_radio='void playRadioStation(String myStationURL)\n{\n  mp3Done=true;\n  ttsDone=true;\n  dacPlayType="radio";\n  i2sFile = new AudioFileSourceICYStream(myStationURL.c_str());\n  i2sBuff = new AudioFileSourceBuffer(i2sFile, 2048);\n  i2sMp3->begin(i2sBuff, i2sOut);\n}\n';
+  Blockly.Arduino.definitions_.define_ESP8266Audio_function_invoke_radio='void playRadioStation(String myStationURL)\n{\n  mp3Done=true;\n  ttsDone=true;\n  dacPlayType="radio";\n  i2sFile = new AudioFileSourceHTTPStream(myStationURL.c_str());\n  i2sBuff = new AudioFileSourceBuffer(i2sFile, 2048);\n  i2sMp3->begin(i2sBuff, i2sOut);\n}\n';
   Blockly.Arduino.definitions_.define_ESP8266Audio_function_invoke_file='void getVoiceFromFile(String myFileName,byte sdType)\n{\n  ttsDone=true;\n  mp3Done=false;\n  dacPlayType="MP3";\n  if(myFileName.indexOf("/")!=0)\n    myFileName="/"+myFileName;\n  if (sdType==1){\n    SD.begin();\n    i2sSdFile = new AudioFileSourceSD(String(myFileName).c_str());\n    i2sBuff = new AudioFileSourceBuffer(i2sSdFile, 2048);\n    mp3FileName=myFileName;\n  }\n  else {\n    if (myFileName=="/TTS/tts.mp3"){\n      ttsDone=false;\n      mp3Done=true;\n      dacPlayType="TTS";\n    } else {\n      mp3FileName=myFileName;\n    }\n    SPIFFS.begin();\n    i2sSPIFFSfile=new AudioFileSourceSPIFFS(String(myFileName).c_str());\n    i2sBuff = new AudioFileSourceBuffer(i2sSPIFFSfile, 2048);\n  }\n  i2sMp3->begin(i2sBuff, i2sOut);\n}\n';
   Blockly.Arduino.definitions_.define_DAC_checkTTS_invoke='void checkTTS(){\n}\n';
   Blockly.Arduino.definitions_.define_DAC_checkMP3_invoke='void checkMP3(){\n}\n';
@@ -2429,4 +2431,79 @@ Blockly.Arduino.sd_file_read_line=function(){
   a=a.replace(/\"/g,"");
   Blockly.Arduino.definitions_.define_sd_file_read_until_invoke="String readStringUntil(File *filePtr,char myChar){\n  String myTempStr=\"\";\n  char nowRead;\n  if (filePtr->available()){\n    nowRead=filePtr->read();\n    while(nowRead!=myChar){\n      if (myChar!='\\n'){\n        if(nowRead!='\\n'){\n          myTempStr+=nowRead;\n        } else{\n          break;\n        }\n      } else {\n        myTempStr+=nowRead;\n      }\n      if (filePtr->available())\n        nowRead=filePtr->read();\n      else\n        break;\n    }\n  }\n  return myTempStr;\n}\n";
   return["readStringUntil(&"+a+",'\\n').c_str()",Blockly.Arduino.ORDER_ATOMIC];
+}
+
+//esp32_irq
+Blockly.Arduino.esp32_irq={};
+
+Blockly.Arduino.esp32_irq_timer_task=function(){
+  var a=Blockly.Arduino.valueToCode(this,"F_NAME",Blockly.Arduino.ORDER_ATOMIC)||"",
+      b=Blockly.Arduino.statementToCode(this,"STATEMENT");
+  a=a.replace(/\"/g,"");
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    if (Blockly.Arduino.definitions_.define_esp32_timer_mux_declaire!=undefined)
+      Blockly.Arduino.definitions_.define_esp32_timer_mux_declaire=Blockly.Arduino.definitions_.define_esp32_timer_mux_declaire+'portMUX_TYPE '+a+'Mux = portMUX_INITIALIZER_UNLOCKED;\n';
+    else
+      Blockly.Arduino.definitions_.define_esp32_timer_mux_declaire='portMUX_TYPE '+a+'Mux = portMUX_INITIALIZER_UNLOCKED;\n';
+    Blockly.Arduino.definitions_["define_timer_function_"+a]='void IRAM_ATTR '+a+'()\n{\n  portENTER_CRITICAL(&'+a+'Mux);\n'+b+'  portEXIT_CRITICAL(&'+a+'Mux);\n}\n';
+  }
+  return'';
+}
+
+Blockly.Arduino.esp32_irq_timer_run=function(){
+  var a=Blockly.Arduino.valueToCode(this,"F_NAME",Blockly.Arduino.ORDER_ATOMIC)||"",
+      b=this.getFieldValue("TIMER"),
+      c=Blockly.Arduino.valueToCode(this,"DURATION",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      d=this.getFieldValue("UNIT");
+      e=parseInt(c)*parseInt(d);
+  a=a.replace(/\"/g,"");
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    if (Blockly.Arduino.definitions_.define_esp32_timer_declaire!=undefined){
+      if (Blockly.Arduino.definitions_.define_esp32_timer_declaire.indexOf("timer"+b)<0)
+        Blockly.Arduino.definitions_.define_esp32_timer_declaire=Blockly.Arduino.definitions_.define_esp32_timer_declaire+'hw_timer_t * timer'+b+';\n';
+    } else {
+      Blockly.Arduino.definitions_.define_esp32_timer_declaire='hw_timer_t * timer'+b+';\n';
+    }
+    return'timer'+b+'=timerBegin('+b+',80,true);\ntimerAttachInterrupt(timer'+b+', &'+a+', true);\ntimerAlarmWrite(timer'+b+', '+e+', true);\ntimerAlarmEnable(timer'+b+');\n';
+  } else 
+    return'';
+}
+
+Blockly.Arduino.esp32_irq_timer_delete=function(){
+  var a=this.getFieldValue("TIMER");
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    return'if (timer'+a+'!=NULL){\n  timerAlarmDisable(timer'+a+');\n  timerDetachInterrupt(timer'+a+');\n  timerEnd(timer'+a+');\n  timer'+a+'=NULL;\n}\n';
+  } else 
+    return'';
+}
+
+Blockly.Arduino.esp32_irq_pin_task=function(){
+  var a=Blockly.Arduino.valueToCode(this,"F_NAME",Blockly.Arduino.ORDER_ATOMIC)||"",
+      b=Blockly.Arduino.statementToCode(this,"STATEMENT");
+  a=a.replace(/\"/g,"");
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    Blockly.Arduino.definitions_["define_pin_function_"+a]='void IRAM_ATTR '+a+'()\n{\n'+b+'}\n';
+  }
+  return'';
+}
+
+Blockly.Arduino.esp32_irq_pin_run=function(){
+  var a=Blockly.Arduino.valueToCode(this,"F_NAME",Blockly.Arduino.ORDER_ATOMIC)||"",
+      b=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      c=this.getFieldValue("MODE");
+  a=a.replace(/\"/g,"");
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    return'pinMode('+b+', INPUT);\nattachInterrupt('+b+','+a+','+c+');\n';
+  } else {
+    return'';
+  }
+}
+
+Blockly.Arduino.esp32_irq_pin_delete=function(){
+  var a=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    return'detachInterrupt('+a+');\n';
+  } else {
+    return'';
+  }
 }

@@ -640,3 +640,22 @@ Blockly.Msg.SD_FILE_PRINT_MODE = [["print line",".println"],["print",".print"]];
 Blockly.Msg.SD_FILE_AVAILABLE = "available?";
 Blockly.Msg.SD_FILE_READ_UNTIL_CHAR = "read string until char";
 Blockly.Msg.SD_FILE_READ_LINE = "read a line of string";
+
+//ESP32_IRQ
+Blockly.Msg.ESP32_IRQ_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/中斷處理";
+Blockly.Msg.ESP32_IRQ_TIMER_TITLE = "ESP32 Timer interrupts";
+Blockly.Msg.ESP32_IRQ_FUNCTION = "function";
+Blockly.Msg.ESP32_IRQ_FUNCTION_NAME = "name";
+Blockly.Msg.ESP32_IRQ_TOOLTIP = "Interrupts";
+Blockly.Msg.ESP32_IRQ_RUN = "run";
+Blockly.Msg.ESP32_IRQ_RUN_ON_TIMER = "on Timer";
+Blockly.Msg.ESP32_IRQ_TIMER_DURATION= "every";
+Blockly.Msg.ESP32_IRQ_TIMER_UNIT = [["millisecond","1000"],["microseconds","1"]];
+Blockly.Msg.ESP32_IRQ_DELETE = "delete timer task";
+Blockly.Msg.ESP32_IRQ_TIMER_WARNIG = "You have to set \""+Blockly.Msg.ESP32_IRQ_TIMER_TITLE+" "+Blockly.Msg.ESP32_IRQ_FUNCTION+"\" first.";
+Blockly.Msg.ESP32_IRQ_TIMER_DELETE_WARNIG = "You have to set \""+Blockly.Msg.ESP32_IRQ_TIMER_TITLE+" "+Blockly.Msg.ESP32_IRQ_RUN+" "+Blockly.Msg.ESP32_IRQ_RUN_ON_TIMER+"\" first.";
+Blockly.Msg.ESP32_IRQ_PIN_TITLE = "ESP32 Pin Interrupts";
+Blockly.Msg.ESP32_IRQ_PIN_MODE = [["is falling","FALLING"],["is rising","RISING"],["is changing","CHANGE"],["is low","LOW"],["is high","HIGH"]];
+Blockly.Msg.ESP32_IRQ_PIN_WARNIG = "You have to set \""+Blockly.Msg.ESP32_IRQ_PIN_TITLE+" "+Blockly.Msg.ESP32_IRQ_FUNCTION+"\" first.";
+Blockly.Msg.ESP32_IRQ_PIN_DELETE = "detach interrupt";
+Blockly.Msg.ESP32_IRQ_PIN_DELETE_WARNIG = "You have to set \""+Blockly.Msg.ESP32_IRQ_PIN_TITLE+" "+Blockly.Msg.ESP32_IRQ_RUN+"\" first.";
