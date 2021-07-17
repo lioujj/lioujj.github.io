@@ -132,6 +132,54 @@
        <block type="get_RTC_str"></block>
        <block type="get_RTC_field"></block>
     </category>
+    <category id="category_esp32_irq" name="ESP32_IRQ">
+      <block type="esp32_irq_timer_task">
+        <value name="F_NAME">
+          <block type="text">
+            <field name="TEXT">onTimer0</field>
+          </block>
+        </value>
+      </block>
+      <block type="esp32_irq_timer_run">
+        <value name="F_NAME">
+          <block type="text">
+            <field name="TEXT">onTimer0</field>
+          </block>
+        </value>
+        <value name="DURATION">
+          <block type="math_number">
+            <field name="NUM">1000</field>
+          </block>
+        </value>
+      </block>
+      <block type="esp32_irq_timer_delete"></block>
+      <block type="esp32_irq_pin_task">
+        <value name="F_NAME">
+          <block type="text">
+            <field name="TEXT">pinTask</field>
+          </block>
+        </value>
+      </block>
+      <block type="esp32_irq_pin_run">
+        <value name="PIN">
+          <block type="math_number">
+            <field name="NUM">1</field>
+          </block>
+        </value>
+        <value name="F_NAME">
+          <block type="text">
+            <field name="TEXT">pinTask</field>
+          </block>
+        </value>
+      </block>
+      <block type="esp32_irq_pin_delete">
+        <value name="PIN">
+          <block type="math_number">
+            <field name="NUM">1</field>
+          </block>
+        </value>
+      </block>
+    </category>
     <category id="category_yu" name="YuBoard">
       <block type="esp32_board_usb">
         <value name="ON_OFF">

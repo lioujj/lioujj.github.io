@@ -634,3 +634,22 @@ Blockly.Msg.SD_FILE_PRINT_MODE = [["寫入一行文字",".println"],["寫入文�
 Blockly.Msg.SD_FILE_AVAILABLE = "尚未讀取到檔尾？";
 Blockly.Msg.SD_FILE_READ_UNTIL_CHAR = "讀取文字直到單一字元";
 Blockly.Msg.SD_FILE_READ_LINE = "讀取一行文字";
+
+//ESP32_IRQ
+Blockly.Msg.ESP32_IRQ_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/中斷處理";
+Blockly.Msg.ESP32_IRQ_TIMER_TITLE = "ESP32計時器中斷";
+Blockly.Msg.ESP32_IRQ_FUNCTION = "函式";
+Blockly.Msg.ESP32_IRQ_FUNCTION_NAME = "名稱";
+Blockly.Msg.ESP32_IRQ_TOOLTIP = "Interrupts";
+Blockly.Msg.ESP32_IRQ_RUN = "執行";
+Blockly.Msg.ESP32_IRQ_RUN_ON_TIMER = "在計時器";
+Blockly.Msg.ESP32_IRQ_TIMER_DURATION= "每";
+Blockly.Msg.ESP32_IRQ_TIMER_UNIT = [["毫秒","1000"],["微秒","1"]];
+Blockly.Msg.ESP32_IRQ_DELETE = "停止計時器中斷";
+Blockly.Msg.ESP32_IRQ_TIMER_WARNIG = "必須先設定「"+Blockly.Msg.ESP32_IRQ_TIMER_TITLE+" "+Blockly.Msg.ESP32_IRQ_FUNCTION+"」積木";
+Blockly.Msg.ESP32_IRQ_TIMER_DELETE_WARNIG = "必須先設定"+Blockly.Msg.ESP32_IRQ_TIMER_TITLE+" "+Blockly.Msg.ESP32_IRQ_RUN+" "+Blockly.Msg.ESP32_IRQ_RUN_ON_TIMER+"」積木";
+Blockly.Msg.ESP32_IRQ_PIN_TITLE = "ESP32腳位中斷";
+Blockly.Msg.ESP32_IRQ_PIN_MODE = [["電位下降","FALLING"],["電位上升","RISING"],["電位改變","CHANGE"],["低電位","LOW"],["高電位","HIGH"]];
+Blockly.Msg.ESP32_IRQ_PIN_WARNIG = "必須先設定「"+Blockly.Msg.ESP32_IRQ_PIN_TITLE+" "+Blockly.Msg.ESP32_IRQ_FUNCTION+"」積木";
+Blockly.Msg.ESP32_IRQ_PIN_DELETE = "停止腳位中斷";
+Blockly.Msg.ESP32_IRQ_PIN_DELETE_WARNIG = "必須先設定「"+Blockly.Msg.ESP32_IRQ_PIN_TITLE+" "+Blockly.Msg.ESP32_IRQ_RUN+"」積木";

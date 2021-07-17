@@ -4479,3 +4479,123 @@ Blockly.Blocks.sd_file_read_line={init:function(){
   this.setTooltip(Blockly.Msg.SD_TOOLTIP)},onchange:function(){
       this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"sd_file_read_line","sd_file_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SD_FILE_INIT_WARNIG))}
 };
+
+//ESP32_IRQ
+Blockly.Blocks.esp32_irq={};
+Blockly.Blocks.esp32_irq.HUE=274;
+Blockly.Blocks.esp32_irq.HUE2=91;
+Blockly.Blocks.esp32_irq.checkBlocks=function(a,slave,master){
+	var b=null,
+	    d=a.type;
+		a=a.workspace.getAllBlocks();
+		for(var c=0;c<a.length;c++)
+			if(slave!=a[c].type||null!=b||(b=a[c].type!=d?!0:!1),master==a[c].type){
+			  return!0;
+      }
+		return b
+};
+
+Blockly.Blocks.esp32_irq_timer_task={init:function(){
+  this.setHelpUrl(Blockly.Msg.ESP32_IRQ_HELPURL);
+  this.setColour(Blockly.Blocks.esp32_irq.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.ESP32_IRQ_TIMER_TITLE)
+      .appendField(Blockly.Msg.ESP32_IRQ_FUNCTION);
+  this.appendValueInput("F_NAME")
+      .setCheck("String")
+      .appendField(Blockly.Msg.ESP32_IRQ_FUNCTION_NAME);
+  this.appendStatementInput("STATEMENT");
+  this.setInputsInline(!0);
+  this.setTooltip(Blockly.Msg.ESP32_IRQ_TOOLTIP)}
+};
+
+Blockly.Blocks.esp32_irq_timer_run={init:function(){
+  this.setHelpUrl(Blockly.Msg.ESP32_IRQ_HELPURL);
+  this.setColour(Blockly.Blocks.esp32_irq.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.ESP32_IRQ_TIMER_TITLE)
+      .appendField(Blockly.Msg.ESP32_IRQ_RUN);
+  this.appendValueInput("F_NAME")
+      .setCheck("String")
+      .appendField(Blockly.Msg.ESP32_IRQ_FUNCTION+" "+Blockly.Msg.ESP32_IRQ_FUNCTION_NAME);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.ESP32_IRQ_RUN_ON_TIMER)
+      .appendField(new Blockly.FieldDropdown([["0","0"],["1","1"],["2","2"],["3","3"]]),"TIMER");
+  this.appendValueInput("DURATION")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.ESP32_IRQ_TIMER_DURATION);
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.ESP32_IRQ_TIMER_UNIT),"UNIT");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.ESP32_IRQ_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"esp32_irq_timer_run","esp32_irq_timer_task")?this.setWarningText(null):this.setWarningText(Blockly.Msg.ESP32_IRQ_TIMER_WARNIG))}
+};
+
+Blockly.Blocks.esp32_irq_timer_delete={init:function(){
+  this.setHelpUrl(Blockly.Msg.ESP32_IRQ_HELPURL);
+  this.setColour(Blockly.Blocks.esp32_irq.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.ESP32_IRQ_TIMER_TITLE)
+      .appendField(Blockly.Msg.ESP32_IRQ_DELETE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.ESP32_IRQ_RUN_ON_TIMER)
+      .appendField(new Blockly.FieldDropdown([["0","0"],["1","1"],["2","2"],["3","3"]]),"TIMER");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.ESP32_IRQ_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"esp32_irq_timer_delete","esp32_irq_timer_run")?this.setWarningText(null):this.setWarningText(Blockly.Msg.ESP32_IRQ_TIMER_DELETE_WARNIG))}
+};
+
+Blockly.Blocks.esp32_irq_pin_task={init:function(){
+  this.setHelpUrl(Blockly.Msg.ESP32_IRQ_HELPURL);
+  this.setColour(Blockly.Blocks.esp32_irq.HUE2);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.ESP32_IRQ_PIN_TITLE)
+      .appendField(Blockly.Msg.ESP32_IRQ_FUNCTION);
+  this.appendValueInput("F_NAME")
+      .setCheck("String")
+      .appendField(Blockly.Msg.ESP32_IRQ_FUNCTION_NAME);
+  this.appendStatementInput("STATEMENT");
+  this.setInputsInline(!0);
+  this.setTooltip(Blockly.Msg.ESP32_IRQ_TOOLTIP)}
+};
+
+Blockly.Blocks.esp32_irq_pin_run={init:function(){
+  this.setHelpUrl(Blockly.Msg.ESP32_IRQ_HELPURL);
+  this.setColour(Blockly.Blocks.esp32_irq.HUE2);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.ESP32_IRQ_PIN_TITLE)
+      .appendField(Blockly.Msg.LIOU_ROBOT_WHEN)
+      .appendField("Pin");
+  this.appendValueInput("PIN")
+      .setCheck("Number");
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.ESP32_IRQ_PIN_MODE),"MODE");
+  this.appendValueInput("F_NAME")
+      .setCheck("String")
+      .appendField(Blockly.Msg.ESP32_IRQ_RUN +" "+Blockly.Msg.ESP32_IRQ_FUNCTION+" "+Blockly.Msg.ESP32_IRQ_FUNCTION_NAME);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.ESP32_IRQ_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"esp32_irq_pin_run","esp32_irq_pin_task")?this.setWarningText(null):this.setWarningText(Blockly.Msg.ESP32_IRQ_PIN_WARNIG))}
+};
+
+Blockly.Blocks.esp32_irq_pin_delete={init:function(){
+  this.setHelpUrl(Blockly.Msg.ESP32_IRQ_HELPURL);
+  this.setColour(Blockly.Blocks.esp32_irq.HUE2);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.ESP32_IRQ_PIN_TITLE)
+      .appendField(Blockly.Msg.ESP32_IRQ_PIN_DELETE)
+      .appendField("Pin");
+  this.appendValueInput("PIN")
+      .setCheck("Number");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.ESP32_IRQ_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"esp32_irq_pin_delete","esp32_irq_pin_run")?this.setWarningText(null):this.setWarningText(Blockly.Msg.ESP32_IRQ_PIN_DELETE_WARNIG))}
+};
