@@ -659,3 +659,14 @@ Blockly.Msg.ESP32_IRQ_PIN_MODE = [["is falling","FALLING"],["is rising","RISING"
 Blockly.Msg.ESP32_IRQ_PIN_WARNIG = "You have to set \""+Blockly.Msg.ESP32_IRQ_PIN_TITLE+" "+Blockly.Msg.ESP32_IRQ_FUNCTION+"\" first.";
 Blockly.Msg.ESP32_IRQ_PIN_DELETE = "detach interrupt";
 Blockly.Msg.ESP32_IRQ_PIN_DELETE_WARNIG = "You have to set \""+Blockly.Msg.ESP32_IRQ_PIN_TITLE+" "+Blockly.Msg.ESP32_IRQ_RUN+"\" first.";
+
+//L9110
+Blockly.Msg.L9110_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/l9110馬達驅動板";
+Blockly.Msg.L9110_TITLE = "L9110 motor board";
+Blockly.Msg.L9110_INIT = "init";
+Blockly.Msg.L9110_TOOLTIP = "L9110";
+Blockly.Msg.L9110_MOTOR = "motor";
+Blockly.Msg.L9110_MOTOR_LIST = [["M1","m1"],["M2","m2"],["both","both"]];
+Blockly.Msg.L9110_ROTATE = "rotate";
+Blockly.Msg.L9110_DIRECTION = [["clockWise","1"],["counterClockWise","2"]];
+Blockly.Msg.L9110_WARNING = "You have to set \""+Blockly.Msg.L9110_TITLE+" "+Blockly.Msg.L9110_INIT+"\" first.";

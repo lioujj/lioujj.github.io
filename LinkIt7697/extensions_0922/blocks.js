@@ -4599,3 +4599,79 @@ Blockly.Blocks.esp32_irq_pin_delete={init:function(){
   this.setTooltip(Blockly.Msg.ESP32_IRQ_TOOLTIP)},onchange:function(){
       this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"esp32_irq_pin_delete","esp32_irq_pin_run")?this.setWarningText(null):this.setWarningText(Blockly.Msg.ESP32_IRQ_PIN_DELETE_WARNIG))}
 };
+
+//L9110
+Blockly.Blocks.l9110={};
+Blockly.Blocks.l9110.HUE=340;
+Blockly.Blocks.l9110.checkBlocks=function(a,slave,master){
+	var b=null,
+	    d=a.type;
+		a=a.workspace.getAllBlocks();
+		for(var c=0;c<a.length;c++)
+			if(slave!=a[c].type||null!=b||(b=a[c].type!=d?!0:!1),master==a[c].type){
+			  return!0;
+      }
+		return b
+};
+
+Blockly.Blocks.l9110_init={init:function(){
+  this.setHelpUrl(Blockly.Msg.L9110_HELPURL);
+  this.setColour(Blockly.Blocks.l9110.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.L9110_TITLE)
+      .appendField(Blockly.Msg.L9110_INIT);
+  this.appendValueInput("M1A")
+      .setCheck("Number")
+      .appendField("M1A Pin");
+  this.appendValueInput("M1B")
+      .setCheck("Number")
+      .appendField("M1B Pin");
+  this.appendValueInput("M2A")
+      .setCheck("Number")
+      .appendField("M2A Pin");
+  this.appendValueInput("M2B")
+      .setCheck("Number")
+      .appendField("M2B Pin");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.L9110_TOOLTIP)}
+};
+
+Blockly.Blocks.l9110_run={init:function(){
+  this.setHelpUrl(Blockly.Msg.L9110_HELPURL);
+  this.setColour(Blockly.Blocks.l9110.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.L9110_TITLE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.L9110_MOTOR)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.L9110_MOTOR_LIST),"MOTOR");
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.L9110_ROTATE)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.L9110_DIRECTION),"DIR");
+  this.appendValueInput("SPEED")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LIOU_ROBOT_MOVE_SPEED);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.L9110_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"l9110_run","l9110_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.L9110_WARNING))}
+};
+
+Blockly.Blocks.l9110_stop={init:function(){
+  this.setHelpUrl(Blockly.Msg.L9110_HELPURL);
+  this.setColour(Blockly.Blocks.l9110.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.L9110_TITLE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.L9110_MOTOR)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.L9110_MOTOR_LIST),"MOTOR");
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LIOU_ROBOT_STOP);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.L9110_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"l9110_stop","l9110_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.L9110_WARNING))}
+};

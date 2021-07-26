@@ -653,3 +653,14 @@ Blockly.Msg.ESP32_IRQ_PIN_MODE = [["電位下降","FALLING"],["電位上升","RI
 Blockly.Msg.ESP32_IRQ_PIN_WARNIG = "必須先設定「"+Blockly.Msg.ESP32_IRQ_PIN_TITLE+" "+Blockly.Msg.ESP32_IRQ_FUNCTION+"」積木";
 Blockly.Msg.ESP32_IRQ_PIN_DELETE = "停止腳位中斷";
 Blockly.Msg.ESP32_IRQ_PIN_DELETE_WARNIG = "必須先設定「"+Blockly.Msg.ESP32_IRQ_PIN_TITLE+" "+Blockly.Msg.ESP32_IRQ_RUN+"」積木";
+
+//L9110
+Blockly.Msg.L9110_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/l9110馬達驅動板";
+Blockly.Msg.L9110_TITLE = "L9110馬達驅動板";
+Blockly.Msg.L9110_INIT = "初始化";
+Blockly.Msg.L9110_TOOLTIP = "L9110";
+Blockly.Msg.L9110_MOTOR = "馬達";
+Blockly.Msg.L9110_MOTOR_LIST = [["M1","m1"],["M2","m2"],["全部","both"]];
+Blockly.Msg.L9110_ROTATE = "轉動";
+Blockly.Msg.L9110_DIRECTION = [["正轉","1"],["反轉","2"]];
+Blockly.Msg.L9110_WARNING = "必須先設定「"+Blockly.Msg.L9110_TITLE+" "+Blockly.Msg.L9110_INIT+"」積木";
