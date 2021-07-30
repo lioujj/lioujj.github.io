@@ -1751,10 +1751,20 @@ Blockly.Arduino.pocketcard_temperature_sensor=function(){
   return["(thermistor.read()/10.0)",Blockly.Arduino.ORDER_ATOMIC];
 };
 
+Blockly.Arduino.pocketcard_rgb_type=function(){
+  var a=this.getFieldValue("PIXEL_FORMAT");
+  Blockly.Arduino.pocketcard.rgb_format=a;
+	Blockly.Arduino.definitions_.define_include_neopixel="#include <Adafruit_NeoPixel.h>\n";
+	Blockly.Arduino.definitions_.define_pocket_neopixel='Adafruit_NeoPixel pocketCardPixels = Adafruit_NeoPixel(1,12,NEO_'+a+' + NEO_KHZ800);\n';
+  Blockly.Arduino.setups_.setup_pocket_neopixel="pocketCardPixels.begin();\n";
+  return'';  
+};
+
 Blockly.Arduino.pocketcard_pixels_brightness=function(){
   var a=Blockly.Arduino.valueToCode(this,"BRIGHTNESS",Blockly.Arduino.ORDER_ATOMIC)||"0";
 	Blockly.Arduino.definitions_.define_include_neopixel="#include <Adafruit_NeoPixel.h>\n";
-	Blockly.Arduino.definitions_.define_pocket_neopixel="Adafruit_NeoPixel pocketCardPixels = Adafruit_NeoPixel(1,12,NEO_RGB + NEO_KHZ800);\n";
+  if (Blockly.Arduino.definitions_.define_pocket_neopixel==undefined)
+    Blockly.Arduino.definitions_.define_pocket_neopixel='Adafruit_NeoPixel pocketCardPixels = Adafruit_NeoPixel(1,12,NEO_RGB + NEO_KHZ800);\n';
   Blockly.Arduino.setups_.setup_pocket_neopixel="pocketCardPixels.begin();\n";  
   return'pocketCardPixels.setBrightness('+a+');\npocketCardPixels.show();\n';
 };
@@ -1765,7 +1775,8 @@ Blockly.Arduino.pocketcard_rgb_color=function(){
 	//a=a.replace(/\"/g,"");
   a=a.replace("tft.color565","pocketCardPixels.Color");
 	Blockly.Arduino.definitions_.define_include_neopixel="#include <Adafruit_NeoPixel.h>\n";
-	Blockly.Arduino.definitions_.define_pocket_neopixel="Adafruit_NeoPixel pocketCardPixels = Adafruit_NeoPixel(1,12,NEO_RGB + NEO_KHZ800);\n";
+  if (Blockly.Arduino.definitions_.define_pocket_neopixel==undefined)
+    Blockly.Arduino.definitions_.define_pocket_neopixel='Adafruit_NeoPixel pocketCardPixels = Adafruit_NeoPixel(1,12,NEO_RGB + NEO_KHZ800);\n';
   Blockly.Arduino.setups_.setup_pocket_neopixel="pocketCardPixels.begin();\n"; 
   return 'pocketCardPixels.setBrightness('+b+');\npocketCardPixels.show();\npocketCardPixels.setPixelColor(0,'+a+');\npocketCardPixels.show();\n';
 };
@@ -1830,18 +1841,24 @@ Blockly.Arduino.mpu9250_gyro_3axis=function(){
 Blockly.Arduino.msa301={};
 Blockly.Arduino.msa301_accel_begin=function(){
   var a=this.getFieldValue("ACCEL_MODE");
-  Blockly.Arduino.definitions_.define_msa301="#include <Adafruit_MSA301.h>\n#include <Adafruit_Sensor.h>\nAdafruit_MSA301 msa;\nsensors_event_t eventAccel;\nuint8_t motionstat;\n";
+  Blockly.Arduino.definitions_.define_msa301="#include <Adafruit_MSA301.h>\n#include <Adafruit_Sensor.h>\nAdafruit_MSA301 msa;\nsensors_event_t eventAccel;\nuint8_t motionstat;\ndouble pitch,roll,yaw;\n";
+  Blockly.Arduino.definitions_.define_msa301_pitch_roll='void calcMSA301angle(){\n   pitch = atan2 (eventAccel.acceleration.y ,( sqrt ((eventAccel.acceleration.x * eventAccel.acceleration.y) + (eventAccel.acceleration.z * eventAccel.acceleration.z))))*(-57.3);\n   roll = atan2(eventAccel.acceleration.x ,( sqrt((eventAccel.acceleration.y * eventAccel.acceleration.y) + (eventAccel.acceleration.z * eventAccel.acceleration.z))))*(-57.3);\n   if (pitch!=pitch)\n   {\n      if (eventAccel.acceleration.y>5)\n        pitch=-90;\n      else if (eventAccel.acceleration.y<-5)\n        pitch=90;\n   }\n}\n';
   Blockly.Arduino.setups_.setup_msa_accel='msa.begin();\n  msa.setRange('+a+');';
 	return""
 };
 
 Blockly.Arduino.msa301_accel_fetch=function(){
-	return"msa.getEvent(&eventAccel);\n"
+	return"msa.getEvent(&eventAccel);\ncalcMSA301angle();\n";
 };
 
 Blockly.Arduino.msa301_accel_3axis=function(){
   var a=this.getFieldValue("3AXIS_MODE");
   return['eventAccel.acceleration.'+a,Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.msa301_accel_pitch_roll=function(){
+  var a=this.getFieldValue("PITCH_ROLL");
+  return[a,Blockly.Arduino.ORDER_ATOMIC];
 };
 
 Blockly.Arduino.msa301_tap_setup=function(){

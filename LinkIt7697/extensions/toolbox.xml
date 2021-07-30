@@ -214,6 +214,7 @@
       <block type="pocketcard_pinMap"></block>
       <block type="pocketcard_light_sensor"></block>
       <block type="pocketcard_temperature_sensor"></block>
+      <block type="pocketcard_rgb_type"></block>
       <block type="pocketcard_rgb_color">
         <value name="BRIGHTNESS">
           <block type="math_number">
@@ -1474,6 +1475,7 @@
 			<block type="msa301_accel_begin"></block>
       <block type="msa301_accel_fetch"></block>
       <block type="msa301_accel_3axis"></block>
+      <block type="msa301_accel_pitch_roll"></block>
       <block type="msa301_tap_setup"></block>
       <block type="msa301_tap_begin"></block>
       <block type="msa301_tap_count"></block>
