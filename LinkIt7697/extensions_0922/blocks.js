@@ -3035,6 +3035,19 @@ Blockly.Blocks.pocketcard_pixels_brightness={init:function(){
   this.setTooltip(Blockly.Msg.POCKETCARD_TOOLTIP)}
 };
 
+Blockly.Blocks.pocketcard_rgb_type={init:function(){
+  this.setHelpUrl(Blockly.Msg.POCKETCARD_HELPURL);
+  this.setColour(Blockly.Blocks.pocketcard.HUE);
+  this.appendDummyInput()
+      .appendField("PocketCard "+Blockly.Msg.POCKETCARD_PIXEL_FORMAT);
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown([["RGB","RGB"],["GRB","GRB"]]),"PIXEL_FORMAT");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.POCKETCARD_TOOLTIP)}
+};
+
 Blockly.Blocks.pocketcard_rgb_color={init:function(){
   this.setHelpUrl(Blockly.Msg.POCKETCARD_HELPURL);
   this.setColour(Blockly.Blocks.pocketcard.HUE);
@@ -3240,6 +3253,18 @@ Blockly.Blocks.msa301_accel_3axis={init:function(){
   this.setOutput(!0,"Number");
   this.setTooltip(Blockly.Msg.MSA301_TOOLTIP)},onchange:function(){
       this.workspace&&(Blockly.Blocks.msa301.checkBlocks(this,"msa301_accel_3axis","msa301_accel_fetch")?this.setWarningText(null):this.setWarningText(Blockly.Msg.MSA301_ACCEL_3AXIS_WARNING))}
+};
+
+Blockly.Blocks.msa301_accel_pitch_roll={init:function(){
+  this.setHelpUrl(Blockly.Msg.MSA301_HELPURL);
+  this.setColour(Blockly.Blocks.msa301.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.MSA301_TITLE+" "+Blockly.Msg.MPU9250_ACCEL_PITCH_ROLL)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.MPU9250_PITCH_ROLL),"PITCH_ROLL");
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Number");
+  this.setTooltip(Blockly.Msg.MPU9250_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.msa301.checkBlocks(this,"msa301_accel_pitch_roll","msa301_accel_fetch")?this.setWarningText(null):this.setWarningText(Blockly.Msg.MSA301_ACCEL_3AXIS_WARNING))}
 };
 
 Blockly.Blocks.msa301_tap_setup={init:function(){

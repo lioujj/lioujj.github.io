@@ -470,6 +470,7 @@ Blockly.Msg.POCKETCARD_TOOLTIP = "PocketCard";
 Blockly.Msg.POCKETCARD_LIGHT_SENSOR = "Light sensor value";
 Blockly.Msg.POCKETCARD_TEMPERATURE_SENSOR = "Temperature value";
 Blockly.Msg.POCKETCARD_PIXELS_BRIGHTNESS = "brightness";
+Blockly.Msg.POCKETCARD_PIXEL_FORMAT = "built-in RGB format";
 Blockly.Msg.POCKETCARD_PIXELS_COLOR = "built-in RGB color";
 
 //MPU9250
