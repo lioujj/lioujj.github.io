@@ -1842,7 +1842,7 @@ Blockly.Arduino.msa301={};
 Blockly.Arduino.msa301_accel_begin=function(){
   var a=this.getFieldValue("ACCEL_MODE");
   Blockly.Arduino.definitions_.define_msa301="#include <Adafruit_MSA301.h>\n#include <Adafruit_Sensor.h>\nAdafruit_MSA301 msa;\nsensors_event_t eventAccel;\nuint8_t motionstat;\ndouble pitch,roll,yaw;\n";
-  Blockly.Arduino.definitions_.define_msa301_pitch_roll='void calcMSA301angle(){\n   pitch = atan2 (eventAccel.acceleration.y ,( sqrt ((eventAccel.acceleration.x * eventAccel.acceleration.y) + (eventAccel.acceleration.z * eventAccel.acceleration.z))))*(-57.3);\n   roll = atan2(eventAccel.acceleration.x ,( sqrt((eventAccel.acceleration.y * eventAccel.acceleration.y) + (eventAccel.acceleration.z * eventAccel.acceleration.z))))*(-57.3);\n   if (pitch!=pitch)\n   {\n      if (eventAccel.acceleration.y>5)\n        pitch=-90;\n      else if (eventAccel.acceleration.y<-5)\n        pitch=90;\n   }\n}\n';
+  Blockly.Arduino.definitions_.define_msa301_pitch_roll='void calcMSA301angle(){\n   pitch = atan2 (eventAccel.acceleration.y ,( sqrt ((eventAccel.acceleration.x * eventAccel.acceleration.y) + (eventAccel.acceleration.z * eventAccel.acceleration.z))))*(-57.3);\n   roll = atan2(eventAccel.acceleration.x ,( sqrt((eventAccel.acceleration.y * eventAccel.acceleration.y) + (eventAccel.acceleration.z * eventAccel.acceleration.z))))*(-57.3);\n   if (pitch!=pitch)\n   {\n      if (eventAccel.acceleration.y>0)\n        pitch=-90;\n      else if (eventAccel.acceleration.y<0)\n        pitch=90;\n   }\n}\n';
   Blockly.Arduino.setups_.setup_msa_accel='msa.begin();\n  msa.setRange('+a+');';
 	return""
 };
