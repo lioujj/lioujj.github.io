@@ -263,77 +263,110 @@ Blockly.Arduino.convert_str_float=function(){
 
 //KSB045
 Blockly.Arduino.ksb045={};
+
+Blockly.Arduino.ksb045_init=function(){
+  var a=this.getFieldValue("TYPE");
+  Blockly.Arduino.ksb045.board_type=a;
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    Blockly.Arduino.definitions_.define_tone="#include <Tone32.h>";
+    if (Blockly.Arduino.ksb045.board_type=="KSB045")
+      Blockly.Arduino.definitions_.define_ksb045_pin_map='#define padX 32\n#define padY 33\n#define padSW 27\n#define padA 14\n#define padB 25\n#define padC 23\n#define padD 19\n#define padE 18\n#define padF 15\n#define padBuz 26\n#define padMotor 5\n';
+    else if (Blockly.Arduino.ksb045.board_type=="waveshare")
+      Blockly.Arduino.definitions_.define_ksb045_pin_map='#define padX 33\n#define padY 32\n#define padSW 27\n#define padA 14\n#define padB 25\n#define padC 23\n#define padD 19\n#define padE 18\n#define padF 15\n#define padBuz 26\n#define padMotor 5\n';
+    else if (Blockly.Arduino.ksb045.board_type=="Joystick:bit")
+      Blockly.Arduino.definitions_.define_ksb045_pin_map='#define padX 33\n#define padY 32\n#define padSW 27\n#define padA 14\n#define padB 25\n#define padC 15\n#define padD 18\n#define padE 19\n#define padF 23\n#define padBuz 26\n#define padMotor 5\n';
+    Blockly.Arduino.setups_["esp32_tone1"]="tone(padBuz,255,0,0);\n  delay(1);\n  noTone(padBuz,0);\n";
+  } else if (Blockly.Arduino.my_board_type=="7697"){
+    if (Blockly.Arduino.ksb045.board_type=="KSB045")
+      Blockly.Arduino.definitions_.define_ksb045_pin_map='#define padX 16\n#define padY 15\n#define padSW 17\n#define padA 0\n#define padB 7\n#define padC 11\n#define padD 12\n#define padE 13\n#define padF 4\n#define padBuz 14\n#define padMotor 10\n';
+    else if (Blockly.Arduino.ksb045.board_type=="waveshare") 
+      Blockly.Arduino.definitions_.define_ksb045_pin_map='#define padX 15\n#define padY 16\n#define padSW 17\n#define padA 0\n#define padB 7\n#define padC 11\n#define padD 12\n#define padE 13\n#define padF 4\n#define padBuz 14\n#define padMotor 10\n';
+    else if (Blockly.Arduino.ksb045.board_type=="Joystick:bit")
+      Blockly.Arduino.definitions_.define_ksb045_pin_map='#define padX 15\n#define padY 16\n#define padSW 17\n#define padA 0\n#define padB 7\n#define padC 4\n#define padD 13\n#define padE 12\n#define padF 11\n#define padBuz 14\n#define padMotor 10\n';
+  }
+  Blockly.Arduino.definitions_.define_ksb045_mid_xy="int padMidX=0;\nint padMidY=0;\n";
+  if (Blockly.Arduino.ksb045.board_type=="KSB045"){
+    Blockly.Arduino.definitions_.define_ksb045_button='bool checkPinPressed(byte myPin)\n{\n  if (digitalRead(myPin) == 1)\n    return false;\n  else\n    return true;\n}\n';
+    Blockly.Arduino.setups_.setup_ksb045_button='pinMode(padX, INPUT);\n  pinMode(padY, INPUT);\n  pinMode(padSW, INPUT);\n  pinMode(padA, INPUT);\n  pinMode(padB, INPUT);\n  pinMode(padC, INPUT);\n  pinMode(padD, INPUT);\n  pinMode(padE, INPUT);\n  pinMode(padF, INPUT);\n  pinMode(padMotor, OUTPUT);\n  digitalWrite(padMotor,0);\n  delay(300);\n  padMidX=(4095-analogRead(padX));\n  padMidY=analogRead(padY);\n';
+  } else if (Blockly.Arduino.ksb045.board_type=="Joystick:bit"){
+    Blockly.Arduino.definitions_.define_ksb045_button='bool checkPinPressed(byte myPin)\n{\n  if (digitalRead(myPin) == 1)\n    return false;\n  else\n    return true;\n}\n';
+    Blockly.Arduino.setups_.setup_ksb045_button='pinMode(padX, INPUT);\n  pinMode(padY, INPUT);\n  pinMode(padSW, INPUT);\n  pinMode(padA, INPUT);\n  pinMode(padB, INPUT);\n  pinMode(padC, INPUT_PULLUP);\n  pinMode(padD, INPUT_PULLUP);\n  pinMode(padE, INPUT_PULLUP);\n  pinMode(padF, INPUT_PULLUP);\n  pinMode(padMotor, OUTPUT);\n  digitalWrite(padMotor,1);\n  delay(300);\n  padMidX=(4095-analogRead(padX));\n  padMidY=(4095-analogRead(padY));\n';
+  } else if (Blockly.Arduino.ksb045.board_type=="waveshare"){
+    Blockly.Arduino.definitions_.define_ksb045_button='bool checkPinPressed(byte myPin)\n{\n  if (digitalRead(myPin) == 1)\n    return false;\n  else\n    return true;\n}\n';
+    Blockly.Arduino.setups_.setup_ksb045_button='pinMode(padX, INPUT);\n  pinMode(padY, INPUT);\n  pinMode(padSW, INPUT);\n  pinMode(padA, INPUT);\n  pinMode(padB, INPUT);\n  pinMode(padC, INPUT);\n  pinMode(padD, INPUT);\n  pinMode(padE, INPUT);\n  pinMode(padF, INPUT);\n  pinMode(padMotor, OUTPUT);\n  digitalWrite(padMotor,0);\n  delay(300);\n  padMidX=analogRead(padX);\n  padMidY=analogRead(padY);\n';
+  }
+  return'';
+};
+
+
 Blockly.Arduino.ksb045_button=function(){
   var a=this.getFieldValue("BUTTON"),
-	b=Blockly.Arduino.statementToCode(this,"KSB045_BUTTON_CALL");
-	b=b.replace(/\n  /g,'\n    ');
-  Blockly.Arduino.definitions_.define_ksb045_mid_xy="int midX=0;\nint midY=0;\n";
-  Blockly.Arduino.definitions_.define_ksb045_button='bool checkPinPressed(byte myPin)\n{\n  if (digitalRead(myPin) == 1)\n    return false;\n  else\n    return true;\n}\n';
-  if (Blockly.Arduino.my_board_type=="ESP32"){
-    Blockly.Arduino.setups_.setup_ksb045_button='pinMode(0, INPUT);\n  pinMode(7, INPUT);\n  pinMode(11, INPUT);\n  pinMode(12, INPUT);\n  pinMode(13, INPUT);\n  pinMode(4, INPUT);\n  pinMode(10, OUTPUT);\n  pinMode(17, INPUT);\n  pinMode(16, INPUT);\n  pinMode(15, INPUT);\n  delay(300);\n  midX=analogRead(16);\n  midY=analogRead(15);\n';
-  } else {
-    Blockly.Arduino.setups_.setup_ksb045_button='pinMode(0, INPUT);\n  pinMode(7, INPUT);\n  pinMode(11, INPUT);\n  pinMode(12, INPUT);\n  pinMode(13, INPUT);\n  pinMode(4, INPUT);\n  pinMode(10, OUTPUT);\n  pinMode(17, INPUT);\n  pinMode(16, INPUT);\n  pinMode(15, INPUT);\n  delay(300);\n  midX=analogRead(16);\n  midY=analogRead(15);\n';
-  }
-	return"if (checkPinPressed("+a+")){\n  "+b+"    while(checkPinPressed("+a+")){}\n  }\n";
+	b=Blockly.Arduino.statementToCode(this,"KSB045_BUTTON_CALL"),
+  c=Blockly.Arduino.ksb045.board_type;
+	//b=b.replace(/\n /g,'\n  ');
+  return"if (checkPinPressed(pad"+a+")){\n"+b+"  while(checkPinPressed(pad"+a+")){}\n}\n";
 };
 
 Blockly.Arduino.ksb045_xy=function(){
-  Blockly.Arduino.definitions_.define_ksb045_mid_xy="int midX=0;\nint midY=0;\n";
-  Blockly.Arduino.setups_.setup_ksb045_button='analogReadResolution(10);\n  pinMode(0, INPUT);\n  pinMode(7, INPUT);\n  pinMode(11, INPUT);\n  pinMode(12, INPUT);\n  pinMode(13, INPUT);\n  pinMode(4, INPUT);\n  pinMode(10, OUTPUT);\n  pinMode(17, INPUT);\n  pinMode(16, INPUT);\n  pinMode(15, INPUT);\n  delay(300);\n  midX=analogRead(16);\n  midY=analogRead(15);\n';
-  var a=this.getFieldValue("TYPE"),
+  var a=Blockly.Arduino.ksb045.board_type,
       b=this.getFieldValue("XY"),
-      xyPin=0;
+      xyPin='padX';;
   if (a=="KSB045"){
     if (b=="X")
-      xyPin=16;
+      xyPin='(4095-analogRead(padX))';
     else
-      xyPin=15;
+      xyPin='analogRead(padY)';
+  } else if (a=="Joystick:bit"){
+    xyPin='(4095-analogRead(pad'+b+'))';  
   } else{
-    if (b=="X")
-      xyPin=15;
-    else
-      xyPin=16;
+    xyPin='analogRead(pad'+b+')';
   }
-  return['analogRead('+xyPin+')',Blockly.Arduino.ORDER_ATOMIC];
+  return[xyPin,Blockly.Arduino.ORDER_ATOMIC];
 }
 
 Blockly.Arduino.ksb045_mid_xy=function(){
-  Blockly.Arduino.definitions_.define_ksb045_mid_xy="int midX=0;\nint midY=0;\n";
-  Blockly.Arduino.setups_.setup_ksb045_button='analogReadResolution(10);\n  pinMode(0, INPUT);\n  pinMode(7, INPUT);\n  pinMode(11, INPUT);\n  pinMode(12, INPUT);\n  pinMode(13, INPUT);\n  pinMode(4, INPUT);\n  pinMode(10, OUTPUT);\n  pinMode(17, INPUT);\n  pinMode(16, INPUT);\n  pinMode(15, INPUT);\n  delay(300);\n  midX=analogRead(16);\n  midY=analogRead(15);\n';
-  var a=this.getFieldValue("TYPE"),
+  var a=Blockly.Arduino.ksb045.board_type,
       b=this.getFieldValue("XY");
-  if (a=="KSB045"){
-    if (b=="X")
-      return['midX',Blockly.Arduino.ORDER_ATOMIC];
-    else
-      return['midY',Blockly.Arduino.ORDER_ATOMIC];
-  } else{
-    if (b=="X")
-      return['midY',Blockly.Arduino.ORDER_ATOMIC];
-    else
-      return['midX',Blockly.Arduino.ORDER_ATOMIC];
-  }
+  return['padMid'+b,Blockly.Arduino.ORDER_ATOMIC];
 }
 
 Blockly.Arduino.ksb045_vibration=function(){
-  Blockly.Arduino.definitions_.define_ksb045_mid_xy="int midX=0;\nint midY=0;\n";
-  Blockly.Arduino.setups_.setup_ksb045_button='analogReadResolution(10);\n  pinMode(0, INPUT);\n  pinMode(7, INPUT);\n  pinMode(11, INPUT);\n  pinMode(12, INPUT);\n  pinMode(13, INPUT);\n  pinMode(4, INPUT);\n  pinMode(10, OUTPUT);\n  pinMode(17, INPUT);\n  pinMode(16, INPUT);\n  pinMode(15, INPUT);\n  delay(300);\n  midX=analogRead(16);\n  midY=analogRead(15);\n';
-  var a=this.getFieldValue("STAT");
-  return'digitalWrite(10,'+a+');\n';
+  var a=this.getFieldValue("STAT"),
+      b=Blockly.Arduino.ksb045.board_type;
+  if (b=="Joystick:bit"){
+    if (a=="1"){
+      a="0";
+    } else if (a=="0"){
+      a="1";
+    }
+  }
+  return'digitalWrite(padMotor,'+a+');\n';
 }
 
 Blockly.Arduino.ksb045_tone=function(){
   var a=this.getFieldValue("FREQ");
-  return"tone("+14+", "+a+");\n"
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    return'tone(padBuz,'+a+',0,0);\n';
+  } else {
+    return"tone(padBuz, "+a+");\n"
+  }
 };
 Blockly.Arduino.ksb045_no_tone=function(){
-    return"noTone(14);\n"
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    return'noTone(padBuz,0);\n';
+  } else {
+    return"noTone(padBuz);\n";
+  }
 };
 
 Blockly.Arduino.ksb045_custom_tone=function(){
   var a=Blockly.Arduino.valueToCode(this,"FREQ",Blockly.Arduino.ORDER_ATOMIC)||0,
       b=Blockly.Arduino.valueToCode(this,"DURATION",Blockly.Arduino.ORDER_ATOMIC)||0;
-  return"tone(14, "+a+", "+b+");\n"
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    return'tone(padBuz,'+a+','+b+',0);\n';
+  } else {
+    return"tone(padBuz, "+a+", "+b+");\n"
+  }
 };
 
 //Maqueen

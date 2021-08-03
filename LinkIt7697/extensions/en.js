@@ -176,10 +176,11 @@ Blockly.Msg.AQI_WARNING2 = "You have to set \"ESP8266 "+ Blockly.Msg.FETCH_AQI_T
 //KSB045
 Blockly.Msg.KSB045_HELPURL= "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/搖桿積木";
 Blockly.Msg.KSB045_TOOLTIP = "KSB045";
+Blockly.Msg.KSB045_TITLE = "GamePad";
 Blockly.Msg.KSB045_XY = "joystick value of ";
 Blockly.Msg.KSB045_AXIS_END = "axis";
 Blockly.Msg.KSB045_MID_XY = "joystick center value of";
-Blockly.Msg.KSB045_VIBRATION = "set KSB045 vibration motor";
+Blockly.Msg.KSB045_VIBRATION = "set vibration motor";
 
 //LDM6432
 Blockly.Msg.LDM6432_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/ldm6432-mqtt";

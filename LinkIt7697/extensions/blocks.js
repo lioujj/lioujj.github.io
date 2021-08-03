@@ -329,12 +329,27 @@ Blockly.Blocks.convert_str_float={init:function(){
 //KSB045
 Blockly.Blocks.ksb045={};
 Blockly.Blocks.ksb045.HUE1=287;
+
+Blockly.Blocks.ksb045_init={init:function(){
+  this.setHelpUrl(Blockly.Msg.KSB045_HELPURL);
+  this.setColour(Blockly.Blocks.ksb045.HUE1);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.KSB045_TITLE)
+      .appendField(new Blockly.FieldDropdown([["KSB045","KSB045"],["Joystick:bit","Joystick:bit"],["waveshare","waveshare"]]),"TYPE")
+      .appendField(Blockly.Msg.PROBBIE_INIT);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.KSB045_TOOLTIP)}
+};
+
 Blockly.Blocks.ksb045_button={init:function(){
   this.setHelpUrl(Blockly.Msg.KSB045_HELPURL);
   this.setColour(Blockly.Blocks.ksb045.HUE1);
   this.appendDummyInput()
+      .appendField(Blockly.Msg.KSB045_TITLE)
       .appendField(Blockly.Msg.LIOU_ROBOT_WHEN+Blockly.Msg.LIOU_ROBOT_BUTTON)
-      .appendField(new Blockly.FieldDropdown([["A","0"],["B","7"],["C","11"],["D","12"],["E","13"],["F","4"],["Stick SW","17"]]),"BUTTON");
+      .appendField(new Blockly.FieldDropdown([["A","A"],["B","B"],["C","C"],["D","D"],["E","E"],["F","F"],["Stick SW","SW"]]),"BUTTON");
   this.appendDummyInput()
       .appendField(Blockly.Msg.LIOU_ROBOT_BUTTON_CHECK);
   this.setInputsInline(!0);
@@ -348,8 +363,8 @@ Blockly.Blocks.ksb045_xy={init:function(){
   this.setHelpUrl(Blockly.Msg.KSB045_HELPURL);
   this.setColour(Blockly.Blocks.ksb045.HUE1);
   this.appendDummyInput()
+      .appendField(Blockly.Msg.KSB045_TITLE)
       .appendField(Blockly.Msg.KSB045_XY)
-      .appendField(new Blockly.FieldDropdown([["KSB045","KSB045"],["WaveSahre","WAVESHARE"]]),"TYPE")
       .appendField(new Blockly.FieldDropdown([["X","X"],["Y","Y"]]),"XY");
   this.appendDummyInput()
       .appendField(Blockly.Msg.KSB045_AXIS_END);
@@ -362,8 +377,8 @@ Blockly.Blocks.ksb045_mid_xy={init:function(){
   this.setHelpUrl(Blockly.Msg.KSB045_HELPURL);
   this.setColour(Blockly.Blocks.ksb045.HUE1);
   this.appendDummyInput()
+      .appendField(Blockly.Msg.KSB045_TITLE)
       .appendField(Blockly.Msg.KSB045_MID_XY)
-      .appendField(new Blockly.FieldDropdown([["KSB045","KSB045"],["WaveSahre","WAVESHARE"]]),"TYPE")
       .appendField(new Blockly.FieldDropdown([["X","X"],["Y","Y"]]),"XY");
   this.appendDummyInput()
       .appendField(Blockly.Msg.KSB045_AXIS_END);
@@ -376,6 +391,7 @@ Blockly.Blocks.ksb045_vibration={init:function(){
   this.setHelpUrl(Blockly.Msg.KSB045_HELPURL);
   this.setColour(Blockly.Blocks.ksb045.HUE1);
   this.appendDummyInput()
+      .appendField(Blockly.Msg.KSB045_TITLE)
       .appendField(Blockly.Msg.KSB045_VIBRATION)
       .appendField(new Blockly.FieldDropdown([["ON","1"],["OFF","0"]]),"STAT");
   this.setInputsInline(!0);
@@ -388,6 +404,7 @@ Blockly.Blocks.ksb045_tone={init:function(){
     this.setHelpUrl(Blockly.Msg.KSB045_TOOLTIP);
     this.setColour(Blockly.Blocks.ksb045.HUE1);
     this.appendDummyInput()
+        .appendField(Blockly.Msg.KSB045_TITLE)
         .appendField(Blockly.Msg.MAQUEEN_TONE_PRETEXT);
     this.appendDummyInput()
         .appendField(Blockly.Msg.INOUT_TONE_APPENDTEXT_FREQ)
@@ -402,6 +419,7 @@ Blockly.Blocks.ksb045_no_tone={init:function(){
     this.setHelpUrl(Blockly.Msg.KSB045_TOOLTIP);
     this.setColour(Blockly.Blocks.ksb045.HUE1);
     this.appendDummyInput()
+        .appendField(Blockly.Msg.KSB045_TITLE)
         .appendField(Blockly.Msg.MAQUEEN_NO_TONE_PRETEXT);
     this.setInputsInline(!0);
     this.setPreviousStatement(!0);
@@ -413,6 +431,7 @@ Blockly.Blocks.ksb045_custom_tone={init:function(){
     this.setHelpUrl(Blockly.Msg.KSB045_TOOLTIP);
     this.setColour(Blockly.Blocks.ksb045.HUE1);
     this.appendDummyInput()
+        .appendField(Blockly.Msg.KSB045_TITLE)
         .appendField(Blockly.Msg.MAQUEEN_TONE_PRETEXT);
     this.appendValueInput("FREQ")
         .setCheck("Number")
