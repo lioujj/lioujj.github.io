@@ -1436,6 +1436,7 @@
       <block type="ir_received_code"></block>
     </category>
     <category id="category_ksb045" name="GamePad">
+      <block type="ksb045_init"></block>
       <block type="ksb045_button"></block>
       <block type="ksb045_xy"></block>
       <block type="ksb045_mid_xy"></block>

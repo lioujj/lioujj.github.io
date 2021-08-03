@@ -175,10 +175,11 @@ Blockly.Msg.AQI_WARNING2 = "必須先設定「ESP8266 "+Blockly.Msg.FETCH_AQI_TI
 //KSB045
 Blockly.Msg.KSB045_HELPURL= "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/搖桿積木";
 Blockly.Msg.KSB045_TOOLTIP = "KSB045";
+Blockly.Msg.KSB045_TITLE = "遊戲手把";
 Blockly.Msg.KSB045_XY = "取得搖桿值";
 Blockly.Msg.KSB045_AXIS_END = "軸";
 Blockly.Msg.KSB045_MID_XY = "取得搖桿置中值";
-Blockly.Msg.KSB045_VIBRATION = "設定KSB045振動馬達";
+Blockly.Msg.KSB045_VIBRATION = "設定振動馬達";
 
 //LDM6432
 Blockly.Msg.LDM6432_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/ldm6432-mqtt";
