@@ -401,7 +401,7 @@ Blockly.Blocks.ksb045_vibration={init:function(){
 };
 
 Blockly.Blocks.ksb045_tone={init:function(){
-    this.setHelpUrl(Blockly.Msg.KSB045_TOOLTIP);
+    this.setHelpUrl(Blockly.Msg.KSB045_HELPURL);
     this.setColour(Blockly.Blocks.ksb045.HUE1);
     this.appendDummyInput()
         .appendField(Blockly.Msg.KSB045_TITLE)
@@ -416,7 +416,7 @@ Blockly.Blocks.ksb045_tone={init:function(){
 };
 
 Blockly.Blocks.ksb045_no_tone={init:function(){
-    this.setHelpUrl(Blockly.Msg.KSB045_TOOLTIP);
+    this.setHelpUrl(Blockly.Msg.KSB045_HELPURL);
     this.setColour(Blockly.Blocks.ksb045.HUE1);
     this.appendDummyInput()
         .appendField(Blockly.Msg.KSB045_TITLE)
@@ -428,7 +428,7 @@ Blockly.Blocks.ksb045_no_tone={init:function(){
 };
 
 Blockly.Blocks.ksb045_custom_tone={init:function(){
-    this.setHelpUrl(Blockly.Msg.KSB045_TOOLTIP);
+    this.setHelpUrl(Blockly.Msg.KSB045_HELPURL);
     this.setColour(Blockly.Blocks.ksb045.HUE1);
     this.appendDummyInput()
         .appendField(Blockly.Msg.KSB045_TITLE)
@@ -442,8 +442,6 @@ Blockly.Blocks.ksb045_custom_tone={init:function(){
     this.setNextStatement(!0);
     this.setTooltip(Blockly.Msg.INOUT_TONE_TOOLTIP)}
 };
-
-
 
 //Maqueen
 Blockly.Blocks.maqueen={};
