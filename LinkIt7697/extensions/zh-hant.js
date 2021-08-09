@@ -180,6 +180,7 @@ Blockly.Msg.KSB045_XY = "取得搖桿值";
 Blockly.Msg.KSB045_AXIS_END = "軸";
 Blockly.Msg.KSB045_MID_XY = "取得搖桿置中值";
 Blockly.Msg.KSB045_VIBRATION = "設定振動馬達";
+Blockly.Msg.KSB045_WARNING = "必須先設定「"+Blockly.Msg.KSB045_TITLE+" 初始化」積木";
 
 //LDM6432
 Blockly.Msg.LDM6432_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/ldm6432-mqtt";
@@ -293,6 +294,9 @@ Blockly.Msg.MTK7697BIT_PINMAP_TITLE = "micro:bit 腳位";
 //OLED
 Blockly.Msg.OLED_DISPLAY_HELPURL_NEW = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/oled顯示中文";
 Blockly.Msg.OLED_DISPLAY_HELPURL_IMAGE = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/oled動態更換自訂圖案";
+Blockly.Msg.OLED_DISPLAY_FLIP = "設定螢幕方向";
+Blockly.Msg.OLED_DISPLAY_FONT_DIR = "設定文字方向";
+Blockly.Msg.OLED_DISPLAY_FONT_DIR_LIST = [["由左至右","0"],["由上而下","1"],["由右至左","2"],["由下而上","3"]];
 Blockly.Msg.OLED_DISPLAY_SHOW_XBM = "從XBM字串顯示自訂圖案";
 Blockly.Msg.OLED_DISPLAY_CLEAR_BUFFER = "清除OLED已顯示之緩衝區";
 Blockly.Msg.OLED_DISPLAY_SEND_BUFFER = "傳送緩衝區資料到OLED顯示";
@@ -440,6 +444,7 @@ Blockly.Msg.ESP32_BOARD_I2C_RESET = "重設 I2C 腳位 SDA:26 SCL:27";
 Blockly.Msg.ESP32_ANALOG_WRITE_TOOLTIP = "";
 Blockly.Msg.ESP32_ANALOG_WRITE_CHANNEL = "通道(0~15)";
 Blockly.Msg.ESP32_ANALOG_WRITE_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/開發板設定積木";
+Blockly.Msg.ESP32_ANALOG_WRITE_TITLE= "類比寫入(0~255)";
 
 //ESP32_BuiltIn sensor
 Blockly.Msg.BUILTIN_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/雙核心及內建感測器積木";
@@ -538,7 +543,7 @@ Blockly.Msg.ESP32NTP_SETUP_TITLE = "由NTP伺服器校正時間";
 Blockly.Msg.ESP32NTP_TIMEZONE = "時區";
 Blockly.Msg.ESP32NTP_GET_RTC_STR = "由RTC取得字串";
 Blockly.Msg.ESP32NTP_GET_RTC_FIELD = "由RTC取得數字";
-Blockly.Msg.ESP32NTP_RTC_FIELD_TYPE= [["年","0"],["月","1"],["日","2"],["時","3"],["分","4"],["秒","5"]];
+Blockly.Msg.ESP32NTP_RTC_FIELD_TYPE= [["年","0"],["月","1"],["日","2"],["時","3"],["分","4"],["秒","5"],["星期","6"]];
 Blockly.Msg.ESP32NTP_TIME_FORMAT = [["日期時間","0"],["日期","1"],["時間","2"]];
 
 //Line Notify
@@ -666,3 +671,10 @@ Blockly.Msg.L9110_MOTOR_LIST = [["M1","m1"],["M2","m2"],["全部","both"]];
 Blockly.Msg.L9110_ROTATE = "轉動";
 Blockly.Msg.L9110_DIRECTION = [["正轉","1"],["反轉","2"]];
 Blockly.Msg.L9110_WARNING = "必須先設定「"+Blockly.Msg.L9110_TITLE+" "+Blockly.Msg.L9110_INIT+"」積木";
+
+//EZ Start Plus
+Blockly.Msg.STARTPLUS_HELPURL = "";
+Blockly.Msg.STARTPLUS_TITLE = 'EZ Start Kit+';
+Blockly.Msg.STARTPLUS_TOOLTIP = "EZ Start Kit+";
+Blockly.Msg.STARTPLUS_DHT = "溫濕度感測器";
+Blockly.Msg.STARTPLUS_NEOPIXEL_SET_ALL_COLORS = "設定下次刷新所有燈色";

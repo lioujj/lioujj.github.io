@@ -1140,6 +1140,8 @@
     <category id="category_ljj_oled" name="OLED128*64">
       <block type="oled_display_setting_new"></block>
       <block type="oled_display_clear"></block>
+      <block type="oled_display_flip"></block>
+      <block type="oled_display_font_direction"></block>
       <block type="oled_display_set_font"></block>
       <block type="oled_display_set_chinese_font"></block>
       <block type="oled_display_set_color"></block>
@@ -1602,6 +1604,87 @@
       </block>
       <block type="l9110_stop"></block>
     </category>
+    <category id="category_startPlus" name="StartPlus">
+      <block type="startPlus_button"></block>
+      <block type="startPlus_vr"></block>
+      <block type="startPlus_dht11"></block>
+      <block type="startPlus_relay">
+        <value name="ON_OFF">
+          <block type="inout_highlow">
+            <field name="BOOL">HIGH</field>
+          </block>
+        </value>
+      </block>
+      <block type="startPlus_led">
+        <value name="ON_OFF">
+          <block type="inout_highlow">
+            <field name="BOOL">HIGH</field>
+          </block>
+        </value>
+      </block>
+      <block type="startPlus_led_analog">
+        <value name="NUM">
+            <block type="math_number">
+                <field name="NUM">255</field>
+            </block>
+        </value>
+      </block>
+      <block type="startPlus_tone"></block>
+      <block type="startPlus_no_tone"></block>
+      <block type="startPlus_custom_tone">
+        <value name="FREQ">
+          <block type="math_number">
+            <field name="NUM">255</field>
+          </block>
+        </value>
+        <value name="DURATION">
+          <block type="math_number">
+            <field name="NUM">300</field>
+          </block>
+        </value>
+      </block>
+      <block type="startPlus_neopixel_begin">
+        <value name="BRIGHTNESS">
+          <block type="math_number">
+            <field name="NUM">30</field>
+          </block>
+        </value>
+      </block>
+      <block type="startPlus_neopixel_set_color">
+        <value name="INDEX">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="COLOR">
+          <block type="ttgo_getFromColorPicker"></block>
+        </value>
+      </block>
+      <block type="startPlus_neopixel_set_colors">
+        <value name="COLOR">
+          <block type="ttgo_getFromColorPicker"></block>
+        </value>
+      </block>
+      <block type="startPlus_neopixel_show"></block>
+      <block type="ttgo_getRGBcolor">
+        <value name="RED">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="GREEN">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="BLUE">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
+      <block type="ttgo_getFromColorPicker"></block>
+    </category>    
   </category>
   <category id="category_lumex" name="Lumex">
     <category id="category_ldm6432" name="LDM6432MQTT">

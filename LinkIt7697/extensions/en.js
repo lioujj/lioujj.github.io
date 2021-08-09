@@ -181,6 +181,7 @@ Blockly.Msg.KSB045_XY = "joystick value of ";
 Blockly.Msg.KSB045_AXIS_END = "axis";
 Blockly.Msg.KSB045_MID_XY = "joystick center value of";
 Blockly.Msg.KSB045_VIBRATION = "set vibration motor";
+Blockly.Msg.KSB045_WARNING = "You have to set \""+Blockly.Msg.KSB045_TITLE+" init\" first.";
 
 //LDM6432
 Blockly.Msg.LDM6432_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/ldm6432-mqtt";
@@ -295,6 +296,9 @@ Blockly.Msg.MTK7697BIT_PINMAP_TITLE = "micro:bit pin:";
 //OLED
 Blockly.Msg.OLED_DISPLAY_HELPURL_NEW = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/oled顯示中文";
 Blockly.Msg.OLED_DISPLAY_HELPURL_IMAGE = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/oled動態更換自訂圖案";
+Blockly.Msg.OLED_DISPLAY_FLIP = "set FlipMode";
+Blockly.Msg.OLED_DISPLAY_FONT_DIR = "set font direction";
+Blockly.Msg.OLED_DISPLAY_FONT_DIR_LIST = [["Left to right","0"],["Top to down","1"],["Right to left","2"],["Down to top","3"]];
 Blockly.Msg.OLED_DISPLAY_SHOW_XBM = "Show the custom bitmap on OLED from the String" ;
 Blockly.Msg.OLED_DISPLAY_CLEAR_BUFFER = "Clear OLED displayed buffer";
 Blockly.Msg.OLED_DISPLAY_SEND_BUFFER = "Send buffer to OLED";
@@ -446,6 +450,7 @@ Blockly.Msg.ESP32_BOARD_I2C_RESET = "Reset I2C pin SDA:26 SCL:27";
 Blockly.Msg.ESP32_ANALOG_WRITE_TOOLTIP = "";
 Blockly.Msg.ESP32_ANALOG_WRITE_CHANNEL = "Channel(0~15)";
 Blockly.Msg.ESP32_ANALOG_WRITE_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/開發板設定積木";
+Blockly.Msg.ESP32_ANALOG_WRITE_TITLE= "analogWrite(0~255)";
 
 //ESP32_BuiltIn sensor
 Blockly.Msg.BUILTIN_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/雙核心及內建感測器積木";
@@ -544,7 +549,7 @@ Blockly.Msg.ESP32NTP_SETUP_TITLE = "setup time from NTP";
 Blockly.Msg.ESP32NTP_TIMEZONE = "TimeZone";
 Blockly.Msg.ESP32NTP_GET_RTC_STR = "get string from RTC";
 Blockly.Msg.ESP32NTP_GET_RTC_FIELD = "get number from RTC";
-Blockly.Msg.ESP32NTP_RTC_FIELD_TYPE= [["year","0"],["month","1"],["day","2"],["hour","3"],["minute","4"],["second","5"]];
+Blockly.Msg.ESP32NTP_RTC_FIELD_TYPE= [["year","0"],["month","1"],["day","2"],["hour","3"],["minute","4"],["second","5"],["weekday","6"]];
 Blockly.Msg.ESP32NTP_TIME_FORMAT = [["DateTime","0"],["Date","1"],["Time","2"]];
 
 //Line Notify
@@ -672,3 +677,10 @@ Blockly.Msg.L9110_MOTOR_LIST = [["M1","m1"],["M2","m2"],["both","both"]];
 Blockly.Msg.L9110_ROTATE = "rotate";
 Blockly.Msg.L9110_DIRECTION = [["clockWise","1"],["counterClockWise","2"]];
 Blockly.Msg.L9110_WARNING = "You have to set \""+Blockly.Msg.L9110_TITLE+" "+Blockly.Msg.L9110_INIT+"\" first.";
+
+//EZ Start Plus
+Blockly.Msg.STARTPLUS_HELPURL = "";
+Blockly.Msg.STARTPLUS_TITLE = '\"EZ Start Kit+\"';
+Blockly.Msg.STARTPLUS_TOOLTIP = "EZ Start Kit+";
+Blockly.Msg.STARTPLUS_DHT = "DHT11";
+Blockly.Msg.STARTPLUS_NEOPIXEL_SET_ALL_COLORS = "set all pixels color";
