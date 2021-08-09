@@ -4764,6 +4764,11 @@ Blockly.Blocks.l9110_stop={init:function(){
 //EZ Start Plus
 Blockly.Blocks.startPlus={};
 Blockly.Blocks.startPlus.HUE=340;
+Blockly.Blocks.startPlus.HUE1=30;
+Blockly.Blocks.startPlus.HUE2=236;
+Blockly.Blocks.startPlus.HUE3=97;
+Blockly.Blocks.startPlus.HUE4=157;
+Blockly.Blocks.startPlus.HUE5=290;
 Blockly.Blocks.startPlus_button={init:function(){
   this.setHelpUrl(Blockly.Msg.STARTPLUS_HELPURL);
   this.setColour(Blockly.Blocks.startPlus.HUE);
@@ -4782,7 +4787,7 @@ Blockly.Blocks.startPlus_button={init:function(){
 
 Blockly.Blocks.startPlus_vr={init:function(){
   this.setHelpUrl(Blockly.Msg.STARTPLUS_HELPURL);
-  this.setColour(Blockly.Blocks.startPlus.HUE);
+  this.setColour(Blockly.Blocks.startPlus.HUE1);
   this.appendDummyInput()
       .appendField(Blockly.Msg.STARTPLUS_TITLE)
       .appendField(new Blockly.FieldDropdown([[Blockly.Msg.EZ_VR,"vr"],[Blockly.Msg.EZ_PHR,"phr"]]),"TYPE");
@@ -4793,7 +4798,7 @@ Blockly.Blocks.startPlus_vr={init:function(){
 
 Blockly.Blocks.startPlus_dht11={init:function(){
   this.setHelpUrl(Blockly.Msg.STARTPLUS_HELPURL);
-  this.setColour(Blockly.Blocks.startPlus.HUE);
+  this.setColour(Blockly.Blocks.startPlus.HUE1);
   this.appendDummyInput()
       .appendField(Blockly.Msg.STARTPLUS_TITLE)
       .appendField(Blockly.Msg.STARTPLUS_DHT)
@@ -4805,7 +4810,7 @@ Blockly.Blocks.startPlus_dht11={init:function(){
 
 Blockly.Blocks.startPlus_relay={init:function(){
   this.setHelpUrl(Blockly.Msg.STARTPLUS_HELPURL);
-  this.setColour(Blockly.Blocks.startPlus.HUE);
+  this.setColour(Blockly.Blocks.startPlus.HUE2);
   this.appendDummyInput()
       .appendField(Blockly.Msg.STARTPLUS_TITLE)
       .appendField(Blockly.Msg.EZ_RELAY)
@@ -4819,7 +4824,7 @@ Blockly.Blocks.startPlus_relay={init:function(){
 
 Blockly.Blocks.startPlus_led={init:function(){
   this.setHelpUrl(Blockly.Msg.STARTPLUS_HELPURL);
-  this.setColour(Blockly.Blocks.startPlus.HUE);
+  this.setColour(Blockly.Blocks.startPlus.HUE3);
   this.appendDummyInput()
       .appendField(Blockly.Msg.STARTPLUS_TITLE)
       .appendField(Blockly.Msg.EZ_LED)
@@ -4834,7 +4839,7 @@ Blockly.Blocks.startPlus_led={init:function(){
 
 Blockly.Blocks.startPlus_led_analog={init:function(){
   this.setHelpUrl(Blockly.Msg.STARTPLUS_HELPURL);
-  this.setColour(Blockly.Blocks.startPlus.HUE);
+  this.setColour(Blockly.Blocks.startPlus.HUE3);
   this.appendDummyInput()
       .appendField(Blockly.Msg.STARTPLUS_TITLE)
       .appendField(Blockly.Msg.EZ_LED)
@@ -4850,7 +4855,7 @@ Blockly.Blocks.startPlus_led_analog={init:function(){
 
 Blockly.Blocks.startPlus_tone={init:function(){
   this.setHelpUrl(Blockly.Msg.STARTPLUS_HELPURL);
-  this.setColour(Blockly.Blocks.startPlus.HUE);
+  this.setColour(Blockly.Blocks.startPlus.HUE4);
   this.appendDummyInput()
       .appendField(Blockly.Msg.STARTPLUS_TITLE)
       .appendField(Blockly.Msg.EZ_TONE)
@@ -4864,7 +4869,7 @@ Blockly.Blocks.startPlus_tone={init:function(){
 
 Blockly.Blocks.startPlus_no_tone={init:function(){
   this.setHelpUrl(Blockly.Msg.STARTPLUS_HELPURL);
-  this.setColour(Blockly.Blocks.startPlus.HUE);
+  this.setColour(Blockly.Blocks.startPlus.HUE4);
   this.appendDummyInput()
       .appendField(Blockly.Msg.STARTPLUS_TITLE)
       .appendField(Blockly.Msg.EZ_noTONE)
@@ -4876,7 +4881,7 @@ Blockly.Blocks.startPlus_no_tone={init:function(){
 
 Blockly.Blocks.startPlus_custom_tone={init:function(){
   this.setHelpUrl(Blockly.Msg.STARTPLUS_HELPURL);
-  this.setColour(Blockly.Blocks.startPlus.HUE);
+  this.setColour(Blockly.Blocks.startPlus.HUE4);
   this.appendDummyInput()
       .appendField(Blockly.Msg.STARTPLUS_TITLE)
       .appendField(Blockly.Msg.EZ_TONE);
@@ -4894,7 +4899,7 @@ Blockly.Blocks.startPlus_custom_tone={init:function(){
 
 Blockly.Blocks.startPlus_neopixel_begin={init:function(){
   this.setHelpUrl(Blockly.Msg.STARTPLUS_HELPURL);
-  this.setColour(Blockly.Blocks.startPlus.HUE);
+  this.setColour(Blockly.Blocks.startPlus.HUE5);
   this.appendDummyInput()
       .appendField(Blockly.Msg.STARTPLUS_TITLE)
       .appendField(Blockly.Msg.EZ_NEOPIXEL_BEGIN_BRIGHTNESS)
@@ -4908,7 +4913,7 @@ Blockly.Blocks.startPlus_neopixel_begin={init:function(){
 
 Blockly.Blocks.startPlus_neopixel_set_color={init:function(){
   this.setHelpUrl(Blockly.Msg.STARTPLUS_HELPURL);
-  this.setColour(Blockly.Blocks.startPlus.HUE);
+  this.setColour(Blockly.Blocks.startPlus.HUE5);
   this.appendDummyInput()
       .appendField(Blockly.Msg.STARTPLUS_TITLE);
   this.appendValueInput("INDEX")
@@ -4924,8 +4929,8 @@ Blockly.Blocks.startPlus_neopixel_set_color={init:function(){
 };
 
 Blockly.Blocks.startPlus_neopixel_set_colors={init:function(){
-  this.setHelpUrl(Blockly.Msg.STARTPLUS_HELPURL);
-  this.setColour(Blockly.Blocks.startPlus.HUE);
+  this.setHelpUrl(Blockly.Msg.STARTPLUS_HELPURL5);
+  this.setColour(Blockly.Blocks.startPlus.HUE5);
   this.appendDummyInput()
       .appendField(Blockly.Msg.STARTPLUS_TITLE)
       .appendField(Blockly.Msg.EZ_NEOPIXEL_TITLE)
@@ -4940,7 +4945,7 @@ Blockly.Blocks.startPlus_neopixel_set_colors={init:function(){
 
 Blockly.Blocks.startPlus_neopixel_show={init:function(){
   this.setHelpUrl(Blockly.Msg.STARTPLUS_HELPURL);
-  this.setColour(Blockly.Blocks.startPlus.HUE);
+  this.setColour(Blockly.Blocks.startPlus.HUE5);
   this.appendDummyInput()
       .appendField(Blockly.Msg.STARTPLUS_TITLE)
       .appendField(Blockly.Msg.EZ_NEOPIXEL_TITLE)

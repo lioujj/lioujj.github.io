@@ -2837,7 +2837,7 @@ Blockly.Arduino.startPlus_neopixel_set_colors=function(){
   var a=Blockly.Arduino.valueToCode(this,"COLOR",Blockly.Arduino.ORDER_ATOMIC)||"";
   a=a.replace("tft.color565","plusPixels.Color");
   if ((Blockly.Arduino.my_board_type=="ESP32")||(Blockly.Arduino.my_board_type=="7697")){
-    return"plusPixels.setPixelColor(0,"+a+");\nplusPixels.setPixelColor(1,"+a+");\nplusPixels.setPixelColor(2,"+a+");\n";
+    return"plusPixels.setPixelColor(0,"+a+");\nplusPixels.setPixelColor(1,"+a+");\nplusPixels.setPixelColor(2,"+a+");\nplusPixels.show();\n";
   } else {
     return"";
   }

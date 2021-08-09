@@ -1660,12 +1660,12 @@
           <block type="ttgo_getFromColorPicker"></block>
         </value>
       </block>
+      <block type="startPlus_neopixel_show"></block>
       <block type="startPlus_neopixel_set_colors">
         <value name="COLOR">
           <block type="ttgo_getFromColorPicker"></block>
         </value>
       </block>
-      <block type="startPlus_neopixel_show"></block>
       <block type="ttgo_getRGBcolor">
         <value name="RED">
           <block type="math_number">
