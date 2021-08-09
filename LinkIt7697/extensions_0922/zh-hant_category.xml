@@ -47,4 +47,5 @@
 <category><name>SD_CARD</name><replace>SD記憶卡</replace></category>
 <category><name>ESP32_IRQ</name><replace>中斷處理</replace></category>
 <category><name>L9110</name><replace>L9110馬達驅動</replace></category>
+<category><name>StartPlus</name><replace>EZ Start Kit +</replace></category>
 </xml>

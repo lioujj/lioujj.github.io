@@ -485,8 +485,8 @@ Blockly.Arduino.neopixel_begin_maqueen=function(){
 	Blockly.Arduino.definitions_.define_include_neopixel="#include <Adafruit_NeoPixel.h>\n";
 	Blockly.Arduino.definitions_.define_neopixel="Adafruit_NeoPixel pixels = Adafruit_NeoPixel(4,11,NEO_GRB + NEO_KHZ800);\n";
 	Blockly.Arduino.setups_.setup_neopixel_begin="pixels.begin();\n";
-	Blockly.Arduino.setups_.setup_neopixel_brightness="pixels.setBrightness("+c+");\n";
-    return""
+	Blockly.Arduino.setups_.setup_neopixel_brightness="pixels.setBrightness("+c+");\npixels.show();\n";
+  return""
 };
 
 Blockly.Arduino.maqueen_button=function(){
@@ -1032,6 +1032,16 @@ Blockly.Arduino.oled_display_setting_new=function(){
   Blockly.Arduino.definitions_.define_u8g2_oled_declare="U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE);";
   Blockly.Arduino.setups_.setup_define_u8g2_oled="u8g2.begin();\n  u8g2.enableUTF8Print();\n  u8g2.setFont(u8g2_font_6x10_tf);\n  u8g2.setFontRefHeightExtendedText();\n  u8g2.setDrawColor(1);\n  u8g2.setFontPosTop();\n  u8g2.setFontDirection(0);\n";return""
 }
+
+Blockly.Arduino.oled_display_flip=function(){
+  var a=this.getFieldValue("FLIP_MODE");
+  return'u8g2.setFlipMode('+a+');\n';
+};
+
+Blockly.Arduino.oled_display_font_direction=function(){
+  var a=this.getFieldValue("FONT_DIR");
+  return'u8g2.setFontDirection('+a+');\n';
+};
 
 Blockly.Arduino.oled_display_show_xbm=function(){
     var a=Blockly.Arduino.valueToCode(this,"XBM",Blockly.Arduino.ORDER_ATOMIC)||"";
@@ -1980,7 +1990,7 @@ Blockly.Arduino.fetchFromSheet=function(){
 Blockly.Arduino.getCellValue=function(){
   var a=Blockly.Arduino.valueToCode(this,"cell",Blockly.Arduino.ORDER_ATOMIC)||"";
   //return'docSheet['+a+'].as<char*>()'
-  return['docSheet['+a+'].as<char*>()',Blockly.Arduino.ORDER_ATOMIC]
+  return['docSheet['+a+'].as<String>()',Blockly.Arduino.ORDER_ATOMIC]
 };
 
 Blockly.Arduino.updateCellValue=function(){
@@ -2004,7 +2014,7 @@ Blockly.Arduino.set_ntp_time=function(){
   var a=this.getFieldValue("TZ");
   if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
     Blockly.Arduino.definitions_.define_ESP_time_include="#include <time.h>";
-    Blockly.Arduino.definitions_.define_getDataFromRTC_invoke="int get_data_from_RTC(byte dataType) {\n  int myResult=0;\n  time_t t = time(NULL);\n  struct tm *t_st;\n  t_st = localtime(&t);\n  switch(dataType){\n    case 0:\n      myResult=(1900 + t_st->tm_year);\n      break;\n    case 1:\n      myResult=( 1 + t_st->tm_mon);\n      break;\n    case 2:\n      myResult=t_st->tm_mday;\n      break;\n    case 3:\n      myResult=t_st->tm_hour;\n      break;\n    case 4:\n      myResult=t_st->tm_min;\n      break;\n    case 5:\n      myResult=t_st->tm_sec;\n      break;\n  }\n  return myResult;\n}\n";
+    Blockly.Arduino.definitions_.define_getDataFromRTC_invoke="int get_data_from_RTC(byte dataType) {\n  int myResult=0;\n  time_t t = time(NULL);\n  struct tm *t_st;\n  t_st = localtime(&t);\n  switch(dataType){\n    case 0:\n      myResult=(1900 + t_st->tm_year);\n      break;\n    case 1:\n      myResult=( 1 + t_st->tm_mon);\n      break;\n    case 2:\n      myResult=t_st->tm_mday;\n      break;\n    case 3:\n      myResult=t_st->tm_hour;\n      break;\n    case 4:\n      myResult=t_st->tm_min;\n      break;\n    case 5:\n      myResult=t_st->tm_sec;\n      break;\n    case 6:\n      myResult=t_st->tm_wday;\n      break;\n  }\n  return myResult;\n}\n";
     return'configTime('+a+'*3600, 0, "time.stdtime.gov.tw","time.nist.gov");\nwhile(get_data_from_RTC(0)<2000){delay(500);}\n'
   }else{
     return''
@@ -2027,7 +2037,7 @@ Blockly.Arduino.get_RTC_field=function(){
   var a=this.getFieldValue("FIELDTYPE");
   if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
     Blockly.Arduino.definitions_.define_ESP_time_include="#include <time.h>";
-    Blockly.Arduino.definitions_.define_getDataFromRTC_invoke="int get_data_from_RTC(byte dataType) {\n  int myResult=0;\n  time_t t = time(NULL);\n  struct tm *t_st;\n  t_st = localtime(&t);\n  switch(dataType){\n    case 0:\n      myResult=(1900 + t_st->tm_year);\n      break;\n    case 1:\n      myResult=( 1 + t_st->tm_mon);\n      break;\n    case 2:\n      myResult=t_st->tm_mday;\n      break;\n    case 3:\n      myResult=t_st->tm_hour;\n      break;\n    case 4:\n      myResult=t_st->tm_min;\n      break;\n    case 5:\n      myResult=t_st->tm_sec;\n      break;\n  }\n  return myResult;\n}\n";
+    Blockly.Arduino.definitions_.define_getDataFromRTC_invoke="int get_data_from_RTC(byte dataType) {\n  int myResult=0;\n  time_t t = time(NULL);\n  struct tm *t_st;\n  t_st = localtime(&t);\n  switch(dataType){\n    case 0:\n      myResult=(1900 + t_st->tm_year);\n      break;\n    case 1:\n      myResult=( 1 + t_st->tm_mon);\n      break;\n    case 2:\n      myResult=t_st->tm_mday;\n      break;\n    case 3:\n      myResult=t_st->tm_hour;\n      break;\n    case 4:\n      myResult=t_st->tm_min;\n      break;\n    case 5:\n      myResult=t_st->tm_sec;\n      break;\n    case 6:\n      myResult=t_st->tm_wday;\n      break;\n  }\n  return myResult;\n}\n";
     return['get_data_from_RTC('+a+')',Blockly.Arduino.ORDER_ATOMIC]
   }else{
     return['0',Blockly.Arduino.ORDER_ATOMIC]
@@ -2623,3 +2633,212 @@ Blockly.Arduino.l9110_stop=function(){
   } 
   return returnValue;
 }
+
+//EZ Start+
+Blockly.Arduino.startPlus={};
+Blockly.Arduino.startPlus_button=function(){
+  var a=this.getFieldValue("AB_BUTTON"),
+	  b=Blockly.Arduino.statementToCode(this,"MSG_BUTTON_CALL"),
+    pinStr="";
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    pinStr="byte A_Pin=5;\nbyte B_Pin=36;\n";
+  } else if (Blockly.Arduino.my_board_type=="7697"){
+    pinStr="byte A_Pin=0;\nbyte B_Pin=7;\n";
+  }
+  if ((Blockly.Arduino.my_board_type=="ESP32") || (Blockly.Arduino.my_board_type=="7697")){
+    Blockly.Arduino.definitions_.define_m_button=pinStr+"char myBtnStatus;\nbool buttonPressed(char btnName)\n{\n  if (btnName=='A'){\n    if (digitalRead(A_Pin) == 1)\n      return false;\n    else\n      return true;\n  }\n  else if (btnName=='B'){\n    if (digitalRead(B_Pin) == 1)\n      return false;\n    else\n      return true;\n  } else {\n    if ((digitalRead(A_Pin) == 1) && (digitalRead(B_Pin) == 1))\n      return false;\n    else\n      return true;\n  }\n}\n"
+    Blockly.Arduino.definitions_.define_m_getBtnStatus="char getBtnStatus(){\n  char buttonStatus=' ';\n  int checkButtonDelay=200;\n  if (buttonPressed('A')){\n    delay(checkButtonDelay);\n    if (buttonPressed('A')){\n      buttonStatus='A';\n      if (buttonPressed('B'))\n        buttonStatus='C';\n    }\n  } else if (buttonPressed('B')){\n      delay(checkButtonDelay);\n      if (buttonPressed('B')){\n        buttonStatus='B';\n        if (buttonPressed('A'))\n          buttonStatus='C';\n      }\n  }\n  return buttonStatus;\n}\n";
+    Blockly.Arduino.setups_.setup_button='pinMode(A_Pin, INPUT);\n  pinMode(B_Pin, INPUT);';
+	  return"if (myBtnStatus=='"+a+"'){\n"+b+"  while(buttonPressed('"+a+"')){}\n}\n";
+  } else {
+    return"";
+  }
+};
+
+Blockly.Arduino.startPlus_vr=function(){
+  var a=this.getFieldValue("TYPE"),
+      pin="";
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+     if (a=="vr")
+       pin="34"
+     else if (a=="phr")
+       pin="39";
+     Blockly.Arduino.setups_["setup_"+a+"_"]="pinMode("+pin+", INPUT);";
+     return["analogRead("+pin+")",Blockly.Arduino.ORDER_ATOMIC];
+  } else if (Blockly.Arduino.my_board_type=="7697"){
+     if (a=="vr")
+       pin="16"
+     else if (a=="phr")
+       pin="15";
+     Blockly.Arduino.setups_["setup_"+a+"_"]="pinMode("+pin+", INPUT);";
+     return["analogRead("+pin+")",Blockly.Arduino.ORDER_ATOMIC];
+  } else {
+    return"";
+  }
+};
+
+Blockly.Arduino.startPlus_dht11=function(){
+  var a=this.getFieldValue("DHT"),
+      pin="";
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+     pin="15";
+     Blockly.Arduino.definitions_['define_dht_']="#include <DHT.h>";
+     Blockly.Arduino.definitions_['define_dht_set']="DHT dht11_p"+pin+"("+pin+", DHT11);";
+     Blockly.Arduino.setups_["setup_dht_"]="dht11_p"+pin+".begin();";
+     return["dht11_p"+pin+"."+a+"()",Blockly.Arduino.ORDER_ATOMIC];
+  } else if (Blockly.Arduino.my_board_type=="7697"){
+     pin="10";
+     Blockly.Arduino.definitions_['define_dht_']="#include <DHT.h>";
+     Blockly.Arduino.definitions_['define_dht_set']="DHT dht11_p"+pin+"("+pin+", DHT11);";
+     Blockly.Arduino.setups_["setup_dht_"]="dht11_p"+pin+".begin();";
+     return["dht11_p"+pin+"."+a+"()",Blockly.Arduino.ORDER_ATOMIC];
+  } else {
+    return"";
+  }
+};
+
+Blockly.Arduino.startPlus_relay=function(){
+  var a=Blockly.Arduino.valueToCode(this,"ON_OFF",Blockly.Arduino.ORDER_ATOMIC)||"0";
+      pin="14";
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    pin="25";
+    Blockly.Arduino.setups_["setup_relay_"]="pinMode("+pin+", OUTPUT);";
+    return"digitalWrite("+pin+", "+a+");\n";
+  } else if (Blockly.Arduino.my_board_type=="7697"){
+    pin="5";
+    Blockly.Arduino.setups_["setup_relay_"]="pinMode("+pin+", OUTPUT);";
+    return"digitalWrite("+pin+", "+a+");\n";
+  } else {
+    return"";
+  }
+};
+
+Blockly.Arduino.startPlus_led=function(){
+  var a=Blockly.Arduino.valueToCode(this,"ON_OFF",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=this.getFieldValue("LED");
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    Blockly.Arduino.definitions_.define_start_plus_led_invoke="byte r_pin=16;\nbyte y_pin=12;\nbyte g_pin=13;\n";
+    Blockly.Arduino.setups_["setup_led_"+b+"_"]="pinMode("+b+", OUTPUT);";
+    return"digitalWrite("+b+", "+a+");\n";
+  } else if (Blockly.Arduino.my_board_type=="7697"){
+    Blockly.Arduino.definitions_.define_start_plus_led_invoke="byte r_pin=13;\nbyte y_pin=12;\nbyte g_pin=11;\n";
+    Blockly.Arduino.setups_["setup_led_"+b+"_"]="pinMode("+b+", OUTPUT);";
+    return"digitalWrite("+b+", "+a+");\n";
+  } else {
+    return"";
+  }
+};
+
+Blockly.Arduino.startPlus_led_analog=function(){
+  var a=this.getFieldValue("LED"),
+      b=Blockly.Arduino.valueToCode(this,"NUM",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      r_ch="15",
+      y_ch="14",
+      g_ch="13",
+      d=a;
+      d=d.replace("pin","ch");
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    Blockly.Arduino.definitions_.define_start_plus_led_invoke="byte r_pin=16;\nbyte y_pin=12;\nbyte g_pin=13;\nbyte r_ch=15;\nbyte y_ch=14;\nbyte g_ch=13;\n";
+    Blockly.Arduino.setups_["ledc_channel_"+d]||(Blockly.Arduino.setups_["ledc_channel_"+d]="ledcSetup("+d+", 5000, 8);");
+    Blockly.Arduino.setups_["ledc_"+a]||(Blockly.Arduino.setups_["ledc_"+a]="ledcAttachPin("+a+","+d+");");
+    return"ledcWrite("+d+", "+b+");\n";
+  } else if (Blockly.Arduino.my_board_type=="7697"){
+    Blockly.Arduino.definitions_.define_start_plus_led_invoke="byte r_pin=13;\nbyte y_pin=12;\nbyte g_pin=11;\n";
+    Blockly.Arduino.setups_["setup_led_"+a+"_"]="pinMode("+a+", OUTPUT);";
+    return"analogWrite("+a+", "+b+");\n";
+  }
+  else {
+    return"";
+  }
+};
+
+Blockly.Arduino.startPlus_tone=function(){
+  var a=this.getFieldValue("FREQ");
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    Blockly.Arduino.definitions_.define_tone="#include <Tone32.h>";
+    Blockly.Arduino.definitions_.define_start_plus_tone_invoke="byte buzz_pin=14;\nbyte buzz_ch=0;\n";
+    Blockly.Arduino.setups_["esp32_tone1"]="tone(buzz_pin,262,0,buzz_ch);\n  delay(1);\n  noTone(buzz_pin,buzz_ch);";
+    return"tone(buzz_pin,"+a+",0,buzz_ch);\n";
+  } else if (Blockly.Arduino.my_board_type=="7697"){
+    Blockly.Arduino.definitions_.define_start_plus_tone_invoke="byte buzz_pin=14;";
+    return"tone(buzz_pin, "+a+");\n";
+  }
+  else {
+    return"";
+  }
+};
+
+Blockly.Arduino.startPlus_no_tone=function(){
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    Blockly.Arduino.definitions_.define_tone="#include <Tone32.h>";
+    Blockly.Arduino.definitions_.define_start_plus_tone_invoke="byte buzz_pin=14;\nbyte buzz_ch=0;\n";
+    Blockly.Arduino.setups_["esp32_tone1"]="tone(buzz_pin,262,0,buzz_ch);\n  delay(1);\n  noTone(buzz_pin,buzz_ch);";
+    return"noTone(buzz_pin,buzz_ch);\n";
+  } else if (Blockly.Arduino.my_board_type=="7697"){
+    Blockly.Arduino.definitions_.define_start_plus_tone_invoke="byte buzz_pin=14;\n";
+    return"noTone(buzz_pin);\n";
+  }
+  else {
+    return"";
+  }
+};
+
+Blockly.Arduino.startPlus_custom_tone=function(){
+  var a=Blockly.Arduino.valueToCode(this,"FREQ",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=Blockly.Arduino.valueToCode(this,"DURATION",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    Blockly.Arduino.definitions_.define_tone="#include <Tone32.h>";
+    Blockly.Arduino.definitions_.define_start_plus_tone_invoke="byte buzz_pin=14;\nbyte buzz_ch=0;\n";
+    Blockly.Arduino.setups_["esp32_tone1"]="tone(buzz_pin,262,0,buzz_ch);\n  delay(1);\n  noTone(buzz_pin,buzz_ch);";
+    return"tone(buzz_pin,"+a+","+b+",buzz_ch);\n";
+  } else if (Blockly.Arduino.my_board_type=="7697"){
+    Blockly.Arduino.definitions_.define_start_plus_tone_invoke="byte buzz_pin=14;";
+    return"tone(buzz_pin, "+a+","+b+");\n";
+  }
+  else {
+    return"";
+  }
+};
+
+Blockly.Arduino.startPlus_neopixel_begin=function(){
+  var a=Blockly.Arduino.valueToCode(this,"BRIGHTNESS",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+	  Blockly.Arduino.definitions_.define_include_neopixel="#include <Adafruit_NeoPixel.h>";
+    Blockly.Arduino.definitions_.define_plus_neopixel='Adafruit_NeoPixel plusPixels = Adafruit_NeoPixel(3,26,NEO_GRB + NEO_KHZ800);\n';
+    Blockly.Arduino.setups_.setup_plus_neopixel="plusPixels.begin();\n  plusPixels.setBrightness("+a+");\n  plusPixels.show();\n  plusPixels.setPixelColor(0,plusPixels.Color(0,0,0));\n  plusPixels.setPixelColor(1,plusPixels.Color(0,0,0));\n  plusPixels.setPixelColor(2,plusPixels.Color(0,0,0));\n  plusPixels.show();";
+  } else if (Blockly.Arduino.my_board_type=="7697"){
+	  Blockly.Arduino.definitions_.define_include_neopixel="#include <Adafruit_NeoPixel.h>";
+    Blockly.Arduino.definitions_.define_plus_neopixel='Adafruit_NeoPixel plusPixels = Adafruit_NeoPixel(3,4,NEO_GRB + NEO_KHZ800);\n';
+    Blockly.Arduino.setups_.setup_plus_neopixel="plusPixels.begin();\n  plusPixels.setBrightness("+a+");\n  plusPixels.show();\n  plusPixels.setPixelColor(0,plusPixels.Color(0,0,0));\n  plusPixels.setPixelColor(1,plusPixels.Color(0,0,0));\n  plusPixels.setPixelColor(2,plusPixels.Color(0,0,0));\n  plusPixels.show();"; 
+  }
+  return"";
+};
+
+Blockly.Arduino.startPlus_neopixel_set_color=function(){
+  var a=Blockly.Arduino.valueToCode(this,"INDEX",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=Blockly.Arduino.valueToCode(this,"COLOR",Blockly.Arduino.ORDER_ATOMIC)||"";
+  b=b.replace("tft.color565","plusPixels.Color");
+  if ((Blockly.Arduino.my_board_type=="ESP32")||(Blockly.Arduino.my_board_type=="7697")){
+    return"plusPixels.setPixelColor("+a+","+b+");\n";
+  } else {
+    return"";
+  }
+};
+
+Blockly.Arduino.startPlus_neopixel_show=function(){
+  if ((Blockly.Arduino.my_board_type=="ESP32")||(Blockly.Arduino.my_board_type=="7697")){
+    return"plusPixels.show();\n";
+  } else {
+    return"";
+  }
+};
+
+Blockly.Arduino.startPlus_neopixel_set_colors=function(){
+  var a=Blockly.Arduino.valueToCode(this,"COLOR",Blockly.Arduino.ORDER_ATOMIC)||"";
+  a=a.replace("tft.color565","plusPixels.Color");
+  if ((Blockly.Arduino.my_board_type=="ESP32")||(Blockly.Arduino.my_board_type=="7697")){
+    return"plusPixels.setPixelColor(0,"+a+");\nplusPixels.setPixelColor(1,"+a+");\nplusPixels.setPixelColor(2,"+a+");\n";
+  } else {
+    return"";
+  }
+};
