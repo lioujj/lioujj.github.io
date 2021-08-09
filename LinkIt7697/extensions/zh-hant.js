@@ -677,4 +677,4 @@ Blockly.Msg.STARTPLUS_HELPURL = "";
 Blockly.Msg.STARTPLUS_TITLE = 'EZ Start Kit+';
 Blockly.Msg.STARTPLUS_TOOLTIP = "EZ Start Kit+";
 Blockly.Msg.STARTPLUS_DHT = "溫濕度感測器";
-Blockly.Msg.STARTPLUS_NEOPIXEL_SET_ALL_COLORS = "設定下次刷新所有燈色";
+Blockly.Msg.STARTPLUS_NEOPIXEL_SET_ALL_COLORS = "立刻刷新所有燈色";

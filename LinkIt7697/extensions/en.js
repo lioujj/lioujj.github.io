@@ -680,7 +680,7 @@ Blockly.Msg.L9110_WARNING = "You have to set \""+Blockly.Msg.L9110_TITLE+" "+Blo
 
 //EZ Start Plus
 Blockly.Msg.STARTPLUS_HELPURL = "";
-Blockly.Msg.STARTPLUS_TITLE = '\"EZ Start Kit+\"';
+Blockly.Msg.STARTPLUS_TITLE = 'EZ Start Kit+';
 Blockly.Msg.STARTPLUS_TOOLTIP = "EZ Start Kit+";
 Blockly.Msg.STARTPLUS_DHT = "DHT11";
-Blockly.Msg.STARTPLUS_NEOPIXEL_SET_ALL_COLORS = "set all pixels color";
+Blockly.Msg.STARTPLUS_NEOPIXEL_SET_ALL_COLORS = "show all pixels colors";
