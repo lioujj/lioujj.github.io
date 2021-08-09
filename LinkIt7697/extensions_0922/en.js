@@ -679,7 +679,7 @@ Blockly.Msg.L9110_DIRECTION = [["clockWise","1"],["counterClockWise","2"]];
 Blockly.Msg.L9110_WARNING = "You have to set \""+Blockly.Msg.L9110_TITLE+" "+Blockly.Msg.L9110_INIT+"\" first.";
 
 //EZ Start Plus
-Blockly.Msg.STARTPLUS_HELPURL = "";
+Blockly.Msg.STARTPLUS_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/ez-start-kit-擴展板";
 Blockly.Msg.STARTPLUS_TITLE = 'EZ Start Kit+';
 Blockly.Msg.STARTPLUS_TOOLTIP = "EZ Start Kit+";
 Blockly.Msg.STARTPLUS_DHT = "DHT11";
