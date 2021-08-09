@@ -673,7 +673,7 @@ Blockly.Msg.L9110_DIRECTION = [["正轉","1"],["反轉","2"]];
 Blockly.Msg.L9110_WARNING = "必須先設定「"+Blockly.Msg.L9110_TITLE+" "+Blockly.Msg.L9110_INIT+"」積木";
 
 //EZ Start Plus
-Blockly.Msg.STARTPLUS_HELPURL = "";
+Blockly.Msg.STARTPLUS_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/ez-start-kit-擴展板";
 Blockly.Msg.STARTPLUS_TITLE = 'EZ Start Kit+';
 Blockly.Msg.STARTPLUS_TOOLTIP = "EZ Start Kit+";
 Blockly.Msg.STARTPLUS_DHT = "溫濕度感測器";
