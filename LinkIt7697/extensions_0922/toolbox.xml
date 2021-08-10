@@ -212,6 +212,7 @@
     <category id="category_pocketcard" name="PocketCard">
       <block type="pocketcard_button"></block>
       <block type="pocketcard_pinMap"></block>
+      <block type="pocketcard_pinMap_ez"></block>
       <block type="pocketcard_light_sensor"></block>
       <block type="pocketcard_temperature_sensor"></block>
       <block type="pocketcard_rgb_type"></block>
@@ -1684,6 +1685,11 @@
         </value>
       </block>
       <block type="ttgo_getFromColorPicker"></block>
+      <block type="startPlus_ir_receive"></block>
+			<block type="ir_event"></block>
+      <block type="ir_remote_received"></block>
+      <block type="ir_received_type"></block>
+      <block type="ir_received_code"></block>
     </category>    
   </category>
   <category id="category_lumex" name="Lumex">
