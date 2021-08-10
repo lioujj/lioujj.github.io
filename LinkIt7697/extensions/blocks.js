@@ -727,7 +727,7 @@ Blockly.Blocks.ir.checkSetPin=function(a){
 	    d=a.type;
 		a=a.workspace.getAllBlocks();
 		for(var c=0;c<a.length;c++)
-			if("ir_event"!=a[c].type||null!=b||(b=a[c].type!=d?!0:!1),("ir_receiver_pin"==a[c].type)||("ir_receiver_pin1"==a[c].type))
+			if("ir_event"!=a[c].type||null!=b||(b=a[c].type!=d?!0:!1),("ir_receiver_pin"==a[c].type)||("ir_receiver_pin1"==a[c].type)||("startPlus_ir_receive"==a[c].type))
 				return!0;
 		return b
 };
@@ -3060,6 +3060,19 @@ Blockly.Blocks.pocketcard_pinMap={init:function(){
   this.setTooltip(Blockly.Msg.POCKETCARD_TOOLTIP)}
 };
 
+Blockly.Blocks.pocketcard_pinMap_ez={init:function(){
+  this.setHelpUrl(Blockly.Msg.POCKETCARD_HELPURL);
+  this.setColour(Blockly.Blocks.pocketcard.HUE);
+  this.appendDummyInput()
+      .appendField("PocketCard "+Blockly.Msg.STARTPLUS_TITLE)
+      .appendField(Blockly.Msg.LIOU_ROBOT_PIN);
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown([["IO_0","26"],["IO_1","33"],["IO_2","32"],["IO_3","27"],["IO_4","18"],["IO_5","19"],["IO_6","23"],["IO_7","5"],["IO_8","35"],["IO_9","16"],["IO_10","4"],["IO_11","14"],["IO_12","17"],["IO_13","13"],["IO_14","2"],["IO_15","25"],["IO_16","15"],["IO_17","22"],["IO_18","21"]]),"EZ_PIN");
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Number");
+  this.setTooltip(Blockly.Msg.POCKETCARD_TOOLTIP)}
+};
+
 Blockly.Blocks.pocketcard_light_sensor={init:function(){
   this.setHelpUrl(Blockly.Msg.POCKETCARD_HELPURL);
   this.setColour(Blockly.Blocks.pocketcard.HUE);
@@ -4954,4 +4967,18 @@ Blockly.Blocks.startPlus_neopixel_show={init:function(){
   this.setPreviousStatement(!0);
   this.setNextStatement(!0);
   this.setTooltip(Blockly.Msg.STARTPLUS_TOOLTIP)}
+};
+
+
+
+Blockly.Blocks.startPlus_ir_receive={init:function(){
+  this.setHelpUrl(Blockly.Msg.IR_HELPURL);
+  this.setColour(Blockly.Blocks.ir.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.STARTPLUS_TITLE)
+      .appendField(Blockly.Msg.STARTPLUS_IR_TITLE);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.IR_TOOLTIP)}
 };

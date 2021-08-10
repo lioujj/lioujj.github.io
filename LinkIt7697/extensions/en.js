@@ -684,3 +684,4 @@ Blockly.Msg.STARTPLUS_TITLE = 'EZ Start Kit+';
 Blockly.Msg.STARTPLUS_TOOLTIP = "EZ Start Kit+";
 Blockly.Msg.STARTPLUS_DHT = "DHT11";
 Blockly.Msg.STARTPLUS_NEOPIXEL_SET_ALL_COLORS = "show all pixels colors";
+Blockly.Msg.STARTPLUS_IR_TITLE = "init IR receiver";

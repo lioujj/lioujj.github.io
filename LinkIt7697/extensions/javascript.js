@@ -1783,6 +1783,11 @@ Blockly.Arduino.pocketcard_pinMap=function(){
   return[a,Blockly.Arduino.ORDER_ATOMIC];
 };
 
+Blockly.Arduino.pocketcard_pinMap_ez=function(){
+  var a=this.getFieldValue("EZ_PIN");
+  return[a,Blockly.Arduino.ORDER_ATOMIC];
+};
+
 Blockly.Arduino.pocketcard_light_sensor=function(){
   var a=this.getFieldValue("POCKETCARD_PIN");
   return["analogRead("+a+")",Blockly.Arduino.ORDER_ATOMIC];
@@ -2842,3 +2847,21 @@ Blockly.Arduino.startPlus_neopixel_set_colors=function(){
     return"";
   }
 };
+
+Blockly.Arduino.startPlus_ir_receive=function(){
+  var a="";
+  if ((Blockly.Arduino.my_board_type=="ESP32")||(Blockly.Arduino.my_board_type=="7697")){
+    if (Blockly.Arduino.my_board_type=="ESP32"){
+      a="33";
+    } else if (Blockly.Arduino.my_board_type=="7697"){
+      a="17";
+    }
+    Blockly.Arduino.definitions_.define_irremote="#include <IRremote.h>";
+    Blockly.Arduino.definitions_.define_irremote_init="IRrecv irrecv("+a+");";
+    Blockly.Arduino.definitions_.define_irremote_decode="decode_results results;\nString myCodeType;\nString myIRcode;";
+    Blockly.Arduino.definitions_.define_irremote_ir_type='String ir_type(int tip)\n{\n  if (tip == 1){\n    return "RC5";\n  } else if (tip == 2){\n    return "RC6";\n  } else if (tip == 3){\n    return "NEC";\n  } else if (tip == 4){\n    return "SONY";\n  } else if (tip == 5){\n    return "PANASONIC";\n  } else if (tip == 6){\n    return "JVC";\n  } else if (tip == 7){\n    return "SAMSUNG";\n  } else if (tip == 10){\n    return "LG";\n  } else if (tip == 14){\n    return "SHARP";\n  } else if (tip == 17){\n    return "LEGO_PF";\n  } else {\n    return "UNKNOWN";\n  }\n}\n';
+    Blockly.Arduino.setups_["irremote_"]||(Blockly.Arduino.setups_["irremote_"]="irrecv.enableIRIn();\n");
+  }
+  return''
+};
+
