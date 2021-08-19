@@ -2874,7 +2874,7 @@ Blockly.Arduino.max30105_init=function(){
   Blockly.Arduino.definitions_.define_wire="#include <Wire.h>";
   Blockly.Arduino.definitions_.define_MAX30105_include='#include "MAX30105.h"\n#include "heartRate.h"';
   Blockly.Arduino.definitions_.define_MAX30105_variable_invoke='#define FINGER_ON 7000\n#define MINIMUM_SPO2 90.0\nboolean max3010xReady=false;\ndouble avgRed=0, avgIR=0, ESpO2 = MINIMUM_SPO2;\nconst double FSpO2 = 0.7, frate = 0.95;\nbyte validMin=20, validMax=250;\nMAX30105 max3010xSensor;\n';
-  Blockly.Arduino.setups_.setup_max30105_init='max3010xSensor.begin(Wire, I2C_SPEED_FAST);\n  max3010xReady=max3010xSensor.setup('+a+', 4, 2, 800, 215, 16384);\n  max3010xSensor.enableDIETEMPRDY();\n  max3010xSensor.setPulseAmplitudeRed(0x0A);\n  max3010xSensor.setPulseAmplitudeGreen(0);\n';
+  Blockly.Arduino.setups_.setup_max30105_init='max3010xReady=max3010xSensor.begin(Wire, I2C_SPEED_FAST);\n  max3010xSensor.setup('+a+', 4, 2, 800, 215, 16384);\n  max3010xSensor.enableDIETEMPRDY();\n  max3010xSensor.setPulseAmplitudeRed(0x0A);\n  max3010xSensor.setPulseAmplitudeGreen(0);\n';
   return'';
 };
 
