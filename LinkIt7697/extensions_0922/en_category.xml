@@ -47,4 +47,5 @@
 <category><name>ESP32_IRQ</name><replace>Interrupts</replace></category>
 <category><name>L9110</name><replace>L9110 motor driver</replace></category>
 <category><name>StartPlus</name><replace>EZ Start Kit +</replace></category>
+<category><name>MAX30105</name><replace>MAX30102</replace></category>
 </xml>
