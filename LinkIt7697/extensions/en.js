@@ -297,6 +297,7 @@ Blockly.Msg.MTK7697BIT_PINMAP_TITLE = "micro:bit pin:";
 Blockly.Msg.OLED_DISPLAY_HELPURL_NEW = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/oled顯示中文";
 Blockly.Msg.OLED_DISPLAY_HELPURL_IMAGE = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/oled動態更換自訂圖案";
 Blockly.Msg.OLED_DISPLAY_FLIP = "set FlipMode";
+Blockly.Msg.OLED_DISPLAY_ROTATION = "set rotation";
 Blockly.Msg.OLED_DISPLAY_FONT_DIR = "set font direction";
 Blockly.Msg.OLED_DISPLAY_FONT_DIR_LIST = [["Left to right","0"],["Top to down","1"],["Right to left","2"],["Down to top","3"]];
 Blockly.Msg.OLED_DISPLAY_SHOW_XBM = "Show the custom bitmap on OLED from the String" ;
@@ -685,3 +686,19 @@ Blockly.Msg.STARTPLUS_TOOLTIP = "EZ Start Kit+";
 Blockly.Msg.STARTPLUS_DHT = "DHT11";
 Blockly.Msg.STARTPLUS_NEOPIXEL_SET_ALL_COLORS = "show all pixels colors";
 Blockly.Msg.STARTPLUS_IR_TITLE = "init IR receiver";
+
+//MAX30102
+Blockly.Msg.MAX30105_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/max30102血氧濃度感測積木";
+Blockly.Msg.MAX30105_TITLE = "MAX30102 SPO2";
+Blockly.Msg.MAX30105_TOOLTIP = "MAX30102 SPO2";
+Blockly.Msg.MAX30105_LED = "red LED brightness";
+Blockly.Msg.MAX30105_CHECK = "detected";
+Blockly.Msg.MAX30105_CHECK_LIST = [["finger","IR"],["MAX3010X","READY"],["HearBeat","HB"]];
+Blockly.Msg.MAX30105_WARNING = "You have to set \""+Blockly.Msg.MAX30105_TITLE+" "+Blockly.Msg.PROBBIE_INIT+"\" first.";
+Blockly.Msg.MAX30105_BEATRATE = "HearBeat rate";
+Blockly.Msg.MAX30105_AVG = "times average value";
+Blockly.Msg.MAX30105_SPO2 = "SpO2";
+Blockly.Msg.MAX30105_TEMPERATURE = "temperature";
+Blockly.Msg.MAX30105_TEMP_LIST = [["Celsius","C"],["Fahrenheit","F"]];
+Blockly.Msg.MAX30105_BEAT_RANGE = "set available heartbeat rate range:";
+Blockly.Msg.MAX30105_SPO2_CLEAR = "reset SpO2 detected value";

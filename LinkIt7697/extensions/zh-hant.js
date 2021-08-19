@@ -295,6 +295,7 @@ Blockly.Msg.MTK7697BIT_PINMAP_TITLE = "micro:bit 腳位";
 Blockly.Msg.OLED_DISPLAY_HELPURL_NEW = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/oled顯示中文";
 Blockly.Msg.OLED_DISPLAY_HELPURL_IMAGE = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/oled動態更換自訂圖案";
 Blockly.Msg.OLED_DISPLAY_FLIP = "設定螢幕方向";
+Blockly.Msg.OLED_DISPLAY_ROTATION = "設定螢幕方向";
 Blockly.Msg.OLED_DISPLAY_FONT_DIR = "設定文字方向";
 Blockly.Msg.OLED_DISPLAY_FONT_DIR_LIST = [["由左至右","0"],["由上而下","1"],["由右至左","2"],["由下而上","3"]];
 Blockly.Msg.OLED_DISPLAY_SHOW_XBM = "從XBM字串顯示自訂圖案";
@@ -679,3 +680,19 @@ Blockly.Msg.STARTPLUS_TOOLTIP = "EZ Start Kit+";
 Blockly.Msg.STARTPLUS_DHT = "溫濕度感測器";
 Blockly.Msg.STARTPLUS_NEOPIXEL_SET_ALL_COLORS = "立刻刷新所有燈色";
 Blockly.Msg.STARTPLUS_IR_TITLE = "設定啟用紅外線接收器";
+
+//MAX30102
+Blockly.Msg.MAX30105_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/max30102血氧濃度感測積木";
+Blockly.Msg.MAX30105_TITLE = "MAX30102血氧感測";
+Blockly.Msg.MAX30105_TOOLTIP = "MAX30102 SPO2";
+Blockly.Msg.MAX30105_LED = "紅色LED亮度";
+Blockly.Msg.MAX30105_CHECK = "偵測到";
+Blockly.Msg.MAX30105_CHECK_LIST = [["手指","IR"],["感測器","READY"],["心跳","HB"]];
+Blockly.Msg.MAX30105_WARNING = "必須先設定「"+Blockly.Msg.MAX30105_TITLE+" "+Blockly.Msg.PROBBIE_INIT+"\"」積木";
+Blockly.Msg.MAX30105_BEATRATE = "心率";
+Blockly.Msg.MAX30105_AVG = "次平均值";
+Blockly.Msg.MAX30105_SPO2 = "SpO2血氧飽和度";
+Blockly.Msg.MAX30105_TEMPERATURE = "溫度";
+Blockly.Msg.MAX30105_TEMP_LIST = [["攝氏","C"],["華氏","F"]];
+Blockly.Msg.MAX30105_BEAT_RANGE = "設定合理偵測心率範圍";
+Blockly.Msg.MAX30105_SPO2_CLEAR = "血氧SpO2感測資料重設";

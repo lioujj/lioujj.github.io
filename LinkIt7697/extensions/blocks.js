@@ -1728,14 +1728,14 @@ Blockly.Blocks.oled_display_setting_new={
     this.setTooltip(Blockly.Msg.OLED_DISPLAY_TOOLTIP)}
 };
 
-Blockly.Blocks.oled_display_flip={
+Blockly.Blocks.oled_display_rotation={
   init:function(){
     this.setHelpUrl(Blockly.Msg.OLED_DISPLAY_HELPURL_NEW);
     this.setColour(Blockly.Blocks.oled_display.HUE);
     this.appendDummyInput()
         .appendField(Blockly.Msg.OLED_DISPLAY_TITLE)
-        .appendField(Blockly.Msg.OLED_DISPLAY_FLIP)
-        .appendField(new Blockly.FieldDropdown([["0","0"],["1","1"],["2","2"],["3","3"]]),"FLIP_MODE");
+        .appendField(Blockly.Msg.OLED_DISPLAY_ROTATION)
+        .appendField(new Blockly.FieldDropdown([["0","U8G2_R0"],["1","U8G2_R1"],["2","U8G2_R2"],["3","U8G2_R3"]]),"ROTATION_MODE");
     this.setPreviousStatement(!0);
     this.setNextStatement(!0);
     this.setTooltip(Blockly.Msg.OLED_DISPLAY_TOOLTIP)}
@@ -4969,8 +4969,6 @@ Blockly.Blocks.startPlus_neopixel_show={init:function(){
   this.setTooltip(Blockly.Msg.STARTPLUS_TOOLTIP)}
 };
 
-
-
 Blockly.Blocks.startPlus_ir_receive={init:function(){
   this.setHelpUrl(Blockly.Msg.IR_HELPURL);
   this.setColour(Blockly.Blocks.ir.HUE);
@@ -4981,4 +4979,120 @@ Blockly.Blocks.startPlus_ir_receive={init:function(){
   this.setPreviousStatement(!0);
   this.setNextStatement(!0);
   this.setTooltip(Blockly.Msg.IR_TOOLTIP)}
+};
+
+
+//EZ Start Plus
+Blockly.Blocks.max30105={};
+Blockly.Blocks.max30105.HUE=Blockly.Blocks.startPlus.HUE3;
+Blockly.Blocks.max30105.checkBlocks=function(a,slave,master){
+	var b=null,
+	    d=a.type;
+		a=a.workspace.getAllBlocks();
+		for(var c=0;c<a.length;c++)
+			if(slave!=a[c].type||null!=b||(b=a[c].type!=d?!0:!1),master==a[c].type){
+			  return!0;
+      }
+		return b
+};
+
+Blockly.Blocks.max30105_init={init:function(){
+  this.setHelpUrl(Blockly.Msg.MAX30105_HELPURL);
+  this.setColour(Blockly.Blocks.max30105.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.MAX30105_TITLE)
+      .appendField(Blockly.Msg.PROBBIE_INIT);
+  this.appendValueInput("LED")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.MAX30105_LED+"(0~255)");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.MAX30105_TOOLTIP)}
+};
+
+Blockly.Blocks.max30105_check={init:function(){
+  this.setHelpUrl(Blockly.Msg.MAX30105_HELPURL);
+  this.setColour(Blockly.Blocks.max30105.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.MAX30105_TITLE)
+      .appendField(Blockly.Msg.MAX30105_CHECK)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.MAX30105_CHECK_LIST),"CHECK_TYPE")
+      .appendField("?");
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Boolean");
+  this.setTooltip(Blockly.Msg.MAX30105_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"max30105_check","max30105_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.MAX30105_WARNING))}
+};
+
+Blockly.Blocks.max30105_get_beat_rate={init:function(){
+  this.setHelpUrl(Blockly.Msg.MAX30105_HELPURL);
+  this.setColour(Blockly.Blocks.max30105.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.MAX30105_TITLE)
+      .appendField(Blockly.Msg.MAX30105_BEATRATE);
+  this.appendValueInput("AVG")
+      .setCheck("Number");
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.MAX30105_AVG);
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Number");
+  this.setTooltip(Blockly.Msg.MAX30105_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"max30105_get_beat_rate","max30105_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.MAX30105_WARNING))}
+};
+
+Blockly.Blocks.max30105_get_spo2={init:function(){
+  this.setHelpUrl(Blockly.Msg.MAX30105_HELPURL);
+  this.setColour(Blockly.Blocks.max30105.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.MAX30105_TITLE)
+      .appendField(Blockly.Msg.MAX30105_SPO2);
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Number");
+  this.setTooltip(Blockly.Msg.MAX30105_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"max30105_get_spo2","max30105_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.MAX30105_WARNING))}
+};
+
+Blockly.Blocks.max30105_get_temperature={init:function(){
+  this.setHelpUrl(Blockly.Msg.MAX30105_HELPURL);
+  this.setColour(Blockly.Blocks.max30105.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.MAX30105_TITLE)
+      .appendField(Blockly.Msg.MAX30105_TEMPERATURE)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.MAX30105_TEMP_LIST),"TEMP_TYPE");
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Number");
+  this.setTooltip(Blockly.Msg.MAX30105_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"max30105_get_temperature","max30105_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.MAX30105_WARNING))}
+};
+
+Blockly.Blocks.max30105_set_beat_range={init:function(){
+  this.setHelpUrl(Blockly.Msg.MAX30105_HELPURL);
+  this.setColour(Blockly.Blocks.max30105.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.MAX30105_TITLE)
+      .appendField(Blockly.Msg.MAX30105_BEAT_RANGE);
+  this.appendValueInput("MIN")
+      .setCheck("Number");
+  this.appendValueInput("MAX")
+      .setCheck("Number")
+      .appendField("~");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.MAX30105_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"max30105_set_beat_range","max30105_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.MAX30105_WARNING))}
+};
+
+Blockly.Blocks.max30105_set_spo2_clear={init:function(){
+  this.setHelpUrl(Blockly.Msg.MAX30105_HELPURL);
+  this.setColour(Blockly.Blocks.max30105.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.MAX30105_TITLE)
+      .appendField(Blockly.Msg.MAX30105_SPO2_CLEAR)
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.MAX30105_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"set_spo2_clear","max30105_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.MAX30105_WARNING))}
 };

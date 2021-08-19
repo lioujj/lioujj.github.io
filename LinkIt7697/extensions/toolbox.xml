@@ -1141,7 +1141,7 @@
     <category id="category_ljj_oled" name="OLED128*64">
       <block type="oled_display_setting_new"></block>
       <block type="oled_display_clear"></block>
-      <block type="oled_display_flip"></block>
+      <block type="oled_display_rotation"></block>
       <block type="oled_display_font_direction"></block>
       <block type="oled_display_set_font"></block>
       <block type="oled_display_set_chinese_font"></block>
@@ -1690,7 +1690,39 @@
       <block type="ir_remote_received"></block>
       <block type="ir_received_type"></block>
       <block type="ir_received_code"></block>
-    </category>    
+    </category>
+    <category id="category_max30105" name="MAX30105">
+      <block type="max30105_init">
+        <value name="LED">
+          <block type="math_number">
+            <field name="NUM">127</field>
+          </block>
+        </value>
+      </block>
+      <block type="max30105_check"></block>
+      <block type="max30105_get_beat_rate">
+        <value name="AVG">
+          <block type="math_number">
+            <field name="NUM">1</field>
+          </block>
+        </value>
+      </block>
+      <block type="max30105_get_spo2"></block>
+      <block type="max30105_get_temperature"></block>
+      <block type="max30105_set_beat_range">
+        <value name="MIN">
+          <block type="math_number">
+            <field name="NUM">20</field>
+          </block>
+        </value>
+        <value name="MAX">
+          <block type="math_number">
+            <field name="NUM">250</field>
+          </block>
+        </value>
+      </block>
+      <block type="max30105_set_spo2_clear"></block>
+    </category>
   </category>
   <category id="category_lumex" name="Lumex">
     <category id="category_ldm6432" name="LDM6432MQTT">
