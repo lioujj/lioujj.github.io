@@ -2382,7 +2382,7 @@ Blockly.Arduino.dac_tts_end=function(){
 Blockly.Arduino.dac_tts_ends_with=function(){
   var a=Blockly.Arduino.statementToCode(this,"TTS_ENDS_WITH_CALL"),
       b=Blockly.Arduino.valueToCode(this,"CONTENT",Blockly.Arduino.ORDER_ATOMIC)||"";
-  return 'if (ttsContent==('+b+')){\n'+a+'}\n';
+  return 'if (ttsContent==(URLEncode(String('+b+').c_str()))){\n'+a+'}\n';
 }
 
 Blockly.Arduino.dac_is_running=function(){
