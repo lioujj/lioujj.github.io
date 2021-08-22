@@ -111,6 +111,7 @@ Blockly.Msg.TOOLS_HELPURL = "TOOLS";
 Blockly.Msg.LJJ_TOOLS_TOOLTIP = "TOOLS";
 Blockly.Msg.LJJ_TOOLS_CONVERT_STR_INT = "轉換字串為數字";
 Blockly.Msg.LJJ_TOOLS_CONVERT_STR_FLOAT= "轉換字串為浮點數";
+Blockly.Msg.TOOLS_ARRAY_VALUE = "轉換字串當成陣列值";
 
 //Maqueen
 Blockly.Msg.CATEGORY_MAQUEEN = "麥昆小車";

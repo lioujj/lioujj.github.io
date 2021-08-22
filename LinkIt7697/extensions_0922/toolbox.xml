@@ -1,4 +1,4 @@
-<category id="category_ljj" name="Liou">
+<category id="category_ljj" name="Liou" colour="30">
   <category id="category_boards" name="Boards">
     <category id="category_boards_tool" name="Boards_Tool">
       <block type="board_initializes_setup"></block>
@@ -2061,6 +2061,13 @@
 			  </value>
 		  </block>
 		  <block type="convert_str_float">
+			  <value name="MY_VAR">
+				  <block type="text">
+					  <field name="TEXT"></field>
+				  </block>
+			  </value>
+		  </block>
+		  <block type="create_custom_array">
 			  <value name="MY_VAR">
 				  <block type="text">
 					  <field name="TEXT"></field>

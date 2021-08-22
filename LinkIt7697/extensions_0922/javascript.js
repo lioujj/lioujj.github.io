@@ -261,6 +261,15 @@ Blockly.Arduino.convert_str_float=function(){
 	return['String('+a+').toFloat()',Blockly.Arduino.ORDER_ATOMIC]
 };
 
+Blockly.Arduino.create_custom_array=function(){
+	var a=Blockly.Arduino.valueToCode(this,"MY_VAR",Blockly.Arduino.ORDER_ATOMIC);
+  a='{'+a+'}';
+  a=a.replace('{"','{');
+  a=a.replace('"}','}');
+	return[a,Blockly.Arduino.ORDER_ATOMIC]
+};
+
+
 //KSB045
 Blockly.Arduino.ksb045={};
 
