@@ -1,6 +1,6 @@
 //mqtt
 Blockly.Blocks.mqtt={};
-Blockly.Blocks.mqtt.HUE=Blockly.Blocks.procedures.HUE;
+Blockly.Blocks.mqtt.HUE=290;
 Blockly.Blocks.mqtt.checkBlocks=function(a){
 	var b=null,
 	    d=a.type;
@@ -190,7 +190,7 @@ Blockly.Blocks.mole_move_motor_R={init:function(){
 
 //MP3
 Blockly.Blocks.mp3={};
-Blockly.Blocks.mp3.HUE=Blockly.Blocks.times.HUE;
+Blockly.Blocks.mp3.HUE=90;
 Blockly.Blocks.mp3_set_pins={init:function(){
   this.setHelpUrl(Blockly.Msg.MP3_HELPURL);
   this.setColour(Blockly.Blocks.mp3.HUE);
@@ -325,6 +325,16 @@ Blockly.Blocks.convert_str_float={init:function(){
   this.setTooltip(Blockly.Msg.LJJ_TOOLS_TOOLTIP)}
 };
 
+Blockly.Blocks.create_custom_array={init:function(){
+  this.setHelpUrl(Blockly.Msg.TOOLS_HELPURL);
+  this.setColour(Blockly.Blocks.math.HUE);
+  this.appendDummyInput().appendField(Blockly.Msg.TOOLS_ARRAY_VALUE);
+  this.appendValueInput("MY_VAR")
+      .setCheck("String");
+  this.setInputsInline(!0);
+  this.setOutput(!0, ["Array","Array1","Array2"]);
+  this.setTooltip(Blockly.Msg.LJJ_TOOLS_TOOLTIP)}
+};
 
 //KSB045
 Blockly.Blocks.ksb045={};
@@ -3054,7 +3064,7 @@ Blockly.Blocks.pocketcard_pinMap={init:function(){
   this.appendDummyInput()
       .appendField("PocketCard "+Blockly.Msg.MTK7697BIT_PINMAP_TITLE);
   this.appendDummyInput()
-      .appendField(new Blockly.FieldDropdown([["P0","26"],["P1","33"],["P2","32"],["P3","35"],["P4","4"],["P5","14"],["P6","16"],["P7","17"],["P8","27"],["P9","13"],["P10","2"],["P11","25"],["P12","15"],["P13","18"],["P14","19"],["P15","23"],["P16","5"],["P17",""],["P19","22"],["P20","21"]]),"POCKETCARD_PIN");
+      .appendField(new Blockly.FieldDropdown([["P0","26"],["P1","33"],["P2","32"],["P3","35"],["P4","4"],["P5","14"],["P6","16"],["P7","17"],["P8","27"],["P9","13"],["P10","2"],["P11","25"],["P12","15"],["P13","18"],["P14","19"],["P15","23"],["P16","5"],["P17",""],["P19-SCL","22"],["P20-SDA","21"]]),"POCKETCARD_PIN");
   this.setInputsInline(!0);
   this.setOutput(!0,"Number");
   this.setTooltip(Blockly.Msg.POCKETCARD_TOOLTIP)}
@@ -4150,7 +4160,7 @@ Blockly.Blocks.s20_relay_bool={init:function(){
 
 //I2S DAC
 Blockly.Blocks.dac={};
-Blockly.Blocks.dac.HUE=Blockly.Blocks.times.HUE;
+Blockly.Blocks.dac.HUE=90;
 Blockly.Blocks.dac.HUE1=288;
 Blockly.Blocks.dac.HUE2=166;
 Blockly.Blocks.dac.HUE3=222;
@@ -4373,7 +4383,7 @@ Blockly.Blocks.dac_mp3_ends_with={init:function(){
 
 //SD_Card
 Blockly.Blocks.sd={};
-Blockly.Blocks.sd.HUE=Blockly.Blocks.times.HUE;
+Blockly.Blocks.sd.HUE=90;
 Blockly.Blocks.sd.HUE_FILE=288;
 Blockly.Blocks.sd.checkBlocks=function(a,slave,master){
 	var b=null,
@@ -4984,7 +4994,7 @@ Blockly.Blocks.startPlus_ir_receive={init:function(){
 
 //EZ Start Plus
 Blockly.Blocks.max30105={};
-Blockly.Blocks.max30105.HUE=Blockly.Blocks.startPlus.HUE3;
+Blockly.Blocks.max30105.HUE=97;
 Blockly.Blocks.max30105.checkBlocks=function(a,slave,master){
 	var b=null,
 	    d=a.type;
