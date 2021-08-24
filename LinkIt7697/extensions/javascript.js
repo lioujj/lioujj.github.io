@@ -39,7 +39,7 @@ Blockly.Arduino.finish=function(a){
 		b=b.join("\n")+"\n\n"+c.join("\n")+"\n\nvoid setup() \n{\n  "+d.join("\n  ")+"\n}\n\n";
 	b=b.replace(/\n\n+/g,"\n\n").replace(/\n*$/,"\n\n\n")+a;
 	Blockly.Arduino.mqtt_exist="no";
-	b="/*\n * Generated using BlocklyDuino:\n *\n * https://github.com/MediaTek-Labs/BlocklyDuino-for-LinkIt\n *\n * Date: "+e.toUTCString()+"\n */\n"+"/*\n * 部份程式碼由吉哥積木產生\n * https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697\n*/\n"+b
+	b="/*\n * Generated using BlocklyDuino:\n *\n * https://github.com/MediaTek-Labs/BlocklyDuino-for-LinkIt\n *\n * Date: "+e.toUTCString()+"\n */\n"+"/*  部份程式由吉哥積木產生  */\n/*  https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697  */\n"+b
   if (Blockly.Arduino.webserver.webserver_exist=="yes"){
     b=b+Blockly.Arduino.webserver.webserver_header+Blockly.Arduino.webserver.webserver_body+Blockly.Arduino.webserver.webserver_footer;
     Blockly.Arduino.webserver.webserver_exist="no";
