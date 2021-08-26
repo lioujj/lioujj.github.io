@@ -1960,21 +1960,27 @@ Blockly.Blocks.oled_display_draw_chart={init:function(){
   this.setHelpUrl(Blockly.Msg.OLED_DISPLAY_HELPURL_CHART);
   this.setColour(Blockly.Blocks.oled_display.HUE);
   this.appendDummyInput()
-      .appendField(Blockly.Msg.OLED_DISPLAY_TITLE)
+      .appendField(Blockly.Msg.OLED_DISPLAY_TITLE);
+  this.appendDummyInput()
       .appendField(Blockly.Msg.OLED_DISPLAY_CHART);
   this.appendValueInput("INPUT")
       .setCheck("Number")
+      .setAlign(Blockly.ALIGN_RIGHT)
       .appendField(Blockly.Msg.OLED_DISPLAY_CHART_INPUT);
   this.appendValueInput("MIN")
       .setCheck("Number")
+      .setAlign(Blockly.ALIGN_RIGHT)
       .appendField(Blockly.Msg.OLED_DISPLAY_CHART_MIN);
   this.appendValueInput("MAX")
       .setCheck("Number")
+      .setAlign(Blockly.ALIGN_RIGHT)
       .appendField(Blockly.Msg.OLED_DISPLAY_CHART_MAX);
   this.appendDummyInput()
+      .setAlign(Blockly.ALIGN_RIGHT)
       .appendField(Blockly.Msg.OLED_DISPLAY_CHART_TYPE)
       .appendField(new Blockly.FieldDropdown(Blockly.Msg.OLED_DISPLAY_CHART_TYPE_LIST),"CHART_TYPE");
   this.appendDummyInput()
+      .setAlign(Blockly.ALIGN_RIGHT)
       .appendField(Blockly.Msg.OLED_DISPLAY_CHART_SCROLL)
       .appendField(new Blockly.FieldDropdown(Blockly.Msg.OLED_DISPLAY_CHART_DIR_LIST),"DIR_TYPE");
   this.appendStatementInput("EXTRA")
