@@ -295,6 +295,7 @@ Blockly.Msg.MTK7697BIT_PINMAP_TITLE = "micro:bit 腳位";
 //OLED
 Blockly.Msg.OLED_DISPLAY_HELPURL_NEW = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/oled顯示中文";
 Blockly.Msg.OLED_DISPLAY_HELPURL_IMAGE = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/oled動態更換自訂圖案";
+Blockly.Msg.OLED_DISPLAY_HELPURL_CHART = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/oled顯示圖表";
 Blockly.Msg.OLED_DISPLAY_FLIP = "設定螢幕方向";
 Blockly.Msg.OLED_DISPLAY_ROTATION = "設定螢幕方向";
 Blockly.Msg.OLED_DISPLAY_FONT_DIR = "設定文字方向";
