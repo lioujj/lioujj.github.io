@@ -131,6 +131,38 @@
        <block type="set_ntp_time"></block>
        <block type="get_RTC_str"></block>
        <block type="get_RTC_field"></block>
+       <block type="set_manual_time">
+		    <value name="YEAR">
+			    <block type="math_number">
+				    <field name="NUM">2021</field>
+			    </block>
+		    </value>
+		    <value name="MONTH">
+			    <block type="math_number">
+				    <field name="NUM">1</field>
+			    </block>
+		    </value>
+		    <value name="DAY">
+			    <block type="math_number">
+				    <field name="NUM">1</field>
+			    </block>
+		    </value>
+		    <value name="HOUR">
+			    <block type="math_number">
+				    <field name="NUM">0</field>
+			    </block>
+		    </value>
+		    <value name="MINUTE">
+			    <block type="math_number">
+				    <field name="NUM">0</field>
+			    </block>
+		    </value>
+		    <value name="SECOND">
+			    <block type="math_number">
+				    <field name="NUM">0</field>
+			    </block>
+		    </value>
+       </block>
     </category>
     <category id="category_esp32_irq" name="ESP32_IRQ">
       <block type="esp32_irq_timer_task">
@@ -1243,6 +1275,24 @@
           </block>
         </value>
       </block>
+      <block type="oled_display_draw_chart">
+        <value name="INPUT">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="MIN">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="MAX">
+          <block type="math_number">
+            <field name="NUM">4095</field>
+          </block>
+        </value>
+      </block>
+      <block type="oled_display_clear_chart"></block>
       <block type="oled_display_draw_line">
             <value name="START_X">
                 <block type="math_number">

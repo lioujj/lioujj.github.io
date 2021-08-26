@@ -1956,6 +1956,47 @@ Blockly.Blocks.oled_display_draw_symbol={init:function(){
   this.setTooltip(Blockly.Msg.OLED_DISPLAY_TOOLTIP)}
 };
 
+Blockly.Blocks.oled_display_draw_chart={init:function(){
+  this.setHelpUrl(Blockly.Msg.OLED_DISPLAY_HELPURL_NEW);
+  this.setColour(Blockly.Blocks.oled_display.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.OLED_DISPLAY_TITLE)
+      .appendField(Blockly.Msg.OLED_DISPLAY_CHART);
+  this.appendValueInput("INPUT")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.OLED_DISPLAY_CHART_INPUT);
+  this.appendValueInput("MIN")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.OLED_DISPLAY_CHART_MIN);
+  this.appendValueInput("MAX")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.OLED_DISPLAY_CHART_MAX);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.OLED_DISPLAY_CHART_TYPE)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.OLED_DISPLAY_CHART_TYPE_LIST),"CHART_TYPE");
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.OLED_DISPLAY_CHART_SCROLL)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.OLED_DISPLAY_CHART_DIR_LIST),"DIR_TYPE");
+  this.appendStatementInput("EXTRA")
+      .appendField(Blockly.Msg.OLED_DISPLAY_CHART_EXTRA);
+  this.setInputsInline(0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.OLED_DISPLAY_TOOLTIP)}
+};
+
+Blockly.Blocks.oled_display_clear_chart={init:function(){
+  this.setHelpUrl(Blockly.Msg.OLED_DISPLAY_HELPURL_NEW);
+  this.setColour(Blockly.Blocks.oled_display.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.OLED_DISPLAY_TITLE)
+      .appendField(Blockly.Msg.OLED_DISPLAY_CHART_CLEAR);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.OLED_DISPLAY_TOOLTIP)}
+};
+
 //airbox
 Blockly.Blocks.airbox={};
 Blockly.Blocks.airbox.HUE=180;
@@ -3596,6 +3637,43 @@ Blockly.Blocks.get_RTC_field={init:function(){
       .appendField(new Blockly.FieldDropdown(Blockly.Msg.ESP32NTP_RTC_FIELD_TYPE),"FIELDTYPE");
   this.setInputsInline(!0);
   this.setOutput(!0,"Number");
+  this.setTooltip(Blockly.Msg.ESP32NTP_TOOLTIP)}
+};
+
+Blockly.Blocks.set_manual_time={init:function(){
+  this.setHelpUrl(Blockly.Msg.ESP32NTP_HELPURL);
+  this.setColour(Blockly.Blocks.esp32_ntp.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.ESP32NTP_TITLE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.ESP32NTP_SET_TIME);
+  this.appendValueInput("YEAR")
+      .setCheck("Number")
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField(Blockly.Msg.TIMES_DATETIME_RTC_APPENDTEXT_YEAR);
+  this.appendValueInput("MONTH")
+      .setCheck("Number")
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField(Blockly.Msg.TIMES_DATETIME_RTC_APPENDTEXT_MONTH);
+  this.appendValueInput("DAY")
+      .setCheck("Number")
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField(Blockly.Msg.TIMES_DATETIME_RTC_APPENDTEXT_DAY);
+  this.appendValueInput("HOUR")
+      .setCheck("Number")
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField(Blockly.Msg.TIMES_DATETIME_RTC_APPENDTEXT_HOUR);
+  this.appendValueInput("MINUTE")
+      .setCheck("Number")
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField(Blockly.Msg.TIMES_DATETIME_RTC_APPENDTEXT_MIN);
+  this.appendValueInput("SECOND")
+      .setCheck("Number")
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField(Blockly.Msg.TIMES_DATETIME_RTC_APPENDTEXT_SEC);
+  this.setInputsInline(0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
   this.setTooltip(Blockly.Msg.ESP32NTP_TOOLTIP)}
 };
 

@@ -313,7 +313,16 @@ Blockly.Msg.OLED_DISPLAY_CHINESE_FONT = "set apply Chinese font";
 Blockly.Msg.OLED_DISPLAY_SET_ENG_FONT ="set English font";
 Blockly.Msg.OLED_DISPLAY_HELPURL=Blockly.Msg.OLED_DISPLAY_HELPURL_NEW;
 Blockly.Msg.OLED_DISPLAY_CLOCK = "get time from RTC to draw clock";
-
+Blockly.Msg.OLED_DISPLAY_CHART = "draw chart";
+Blockly.Msg.OLED_DISPLAY_CHART_INPUT = "value";
+Blockly.Msg.OLED_DISPLAY_CHART_MIN = "minimum of value";
+Blockly.Msg.OLED_DISPLAY_CHART_MAX = "maximum of value";
+Blockly.Msg.OLED_DISPLAY_CHART_EXTRA= "extra procedure";
+Blockly.Msg.OLED_DISPLAY_CHART_TYPE = "type";
+Blockly.Msg.OLED_DISPLAY_CHART_TYPE_LIST = [["Line chart","0"],["Bar chart","1"]];
+Blockly.Msg.OLED_DISPLAY_CHART_SCROLL = "scroll from";
+Blockly.Msg.OLED_DISPLAY_CHART_DIR_LIST = [["right to left","0"],["left to right","1"]];
+Blockly.Msg.OLED_DISPLAY_CHART_CLEAR = "clear Statistics of chart";
 
 //AIRBOX
 Blockly.Msg.CATEGORY_AIRBOX = "AIRBOX";
@@ -553,6 +562,7 @@ Blockly.Msg.ESP32NTP_GET_RTC_STR = "get string from RTC";
 Blockly.Msg.ESP32NTP_GET_RTC_FIELD = "get number from RTC";
 Blockly.Msg.ESP32NTP_RTC_FIELD_TYPE= [["year","0"],["month","1"],["day","2"],["hour","3"],["minute","4"],["second","5"],["weekday","6"]];
 Blockly.Msg.ESP32NTP_TIME_FORMAT = [["DateTime","0"],["Date","1"],["Time","2"]];
+Blockly.Msg.ESP32NTP_SET_TIME = "set DateTime to RTC";
 
 //Line Notify
 Blockly.Msg.LINENOTIFY_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/line通知積木";

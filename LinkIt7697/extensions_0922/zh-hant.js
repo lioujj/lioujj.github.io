@@ -311,6 +311,16 @@ Blockly.Msg.OLED_DISPLAY_CHINESE_FONT = "設定使用中文字型";
 Blockly.Msg.OLED_DISPLAY_SET_ENG_FONT ="設定使用英文字型";
 Blockly.Msg.OLED_DISPLAY_HELPURL=Blockly.Msg.OLED_DISPLAY_HELPURL_NEW;
 Blockly.Msg.OLED_DISPLAY_CLOCK = "取得RTC時間繪製時鐘";
+Blockly.Msg.OLED_DISPLAY_CHART = "繪製圖表";
+Blockly.Msg.OLED_DISPLAY_CHART_INPUT = "輸入值";
+Blockly.Msg.OLED_DISPLAY_CHART_MIN = "最小值";
+Blockly.Msg.OLED_DISPLAY_CHART_MAX = "最大值";
+Blockly.Msg.OLED_DISPLAY_CHART_EXTRA= "額外程序";
+Blockly.Msg.OLED_DISPLAY_CHART_TYPE = "圖表型式";
+Blockly.Msg.OLED_DISPLAY_CHART_TYPE_LIST = [["折線圖","0"],["長條圖","1"]];
+Blockly.Msg.OLED_DISPLAY_CHART_SCROLL = "捲動方向";
+Blockly.Msg.OLED_DISPLAY_CHART_DIR_LIST = [["由右到左","0"],["由左到右","1"]];
+Blockly.Msg.OLED_DISPLAY_CHART_CLEAR = "清除圖表統計數據";
 
 //AIRBOX
 Blockly.Msg.CATEGORY_AIRBOX = "AIRBOX";
@@ -547,6 +557,7 @@ Blockly.Msg.ESP32NTP_GET_RTC_STR = "由RTC取得字串";
 Blockly.Msg.ESP32NTP_GET_RTC_FIELD = "由RTC取得數字";
 Blockly.Msg.ESP32NTP_RTC_FIELD_TYPE= [["年","0"],["月","1"],["日","2"],["時","3"],["分","4"],["秒","5"],["星期","6"]];
 Blockly.Msg.ESP32NTP_TIME_FORMAT = [["日期時間","0"],["日期","1"],["時間","2"]];
+Blockly.Msg.ESP32NTP_SET_TIME = "手動設定RTC時間";
 
 //Line Notify
 Blockly.Msg.LINENOTIFY_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/line通知積木";
