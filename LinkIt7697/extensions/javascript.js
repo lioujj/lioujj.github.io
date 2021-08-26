@@ -1120,6 +1120,25 @@ Blockly.Arduino.oled_display_draw_symbol=function(){
   return'u8g2.drawGlyph('+a+','+b+','+c+');\n';
 };
 
+Blockly.Arduino.oled_display_draw_chart=function(){
+  var a=Blockly.Arduino.valueToCode(this,"INPUT",Blockly.Arduino.ORDER_NONE)||"0",
+      b=Blockly.Arduino.valueToCode(this,"MIN",Blockly.Arduino.ORDER_NONE)||"0",
+      c=Blockly.Arduino.valueToCode(this,"MAX",Blockly.Arduino.ORDER_NONE)||"0",
+      d=this.getFieldValue("CHART_TYPE"),
+      e=this.getFieldValue("DIR_TYPE"),
+      f=Blockly.Arduino.statementToCode(this,"EXTRA");
+  f=f.replace("  ","");
+  f=f.replace(/\n  /g,"\n");
+  Blockly.Arduino.definitions_.define_oled_chartNumList_invoke="int chartNumList[]={-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};\n";
+  Blockly.Arduino.definitions_.define_oled_drawChart_invoke='void drawChart(U8G2_SSD1306_128X64_NONAME_F_HW_I2C *myOled,int myNumList[],byte chartType=0,byte dirType=0)\n{\n  byte myWidth=myOled->getWidth(),myHeight=myOled->getHeight();\n  myOled->setDrawColor(0);\n  myOled->drawBox(0, 0, myWidth, myHeight);\n  myOled->setDrawColor(1);\n  for (int i = 0; i < ((chartType==0)?(myWidth-1):myWidth) ; i++) {\n    if ((myNumList[i]) >-1 && (myNumList[i + 1]) >-1) {\n      switch(chartType){\n        case 0:\n          if (dirType==0)\n            myOled->drawLine(i, myNumList[i], i + 1, myNumList[i + 1]);\n          else\n            myOled->drawLine(myWidth-1-i, myNumList[i], myWidth-2 -i, myNumList[i + 1]);\n          break;\n        case 1:\n          if (dirType==0)\n            myOled->drawLine(i, myHeight-1, i, myNumList[i]);\n          else\n            myOled->drawLine(myWidth-1-i, myHeight-1, myWidth-1-i, myNumList[i]);\n          break;\n      }\n    }\n  }\n  for (int i = 0; i < (myWidth-1); i++) {\n    myNumList[i] = (myNumList[i + 1]);\n  }\n}\n';
+  return'chartNumList[u8g2.getWidth()-1] = (map('+a+','+b+','+c+',u8g2.getHeight()-1,0));\ndrawChart(&u8g2,chartNumList,'+d+','+e+');\n'+f+'u8g2.sendBuffer();\n';
+};
+
+Blockly.Arduino.oled_display_clear_chart=function(){
+  Blockly.Arduino.definitions_.define_oled_clearChart_invoke='void clearChart(int myNumList[])\n{\n  for(int i=0;i<128;i++)\n    myNumList[i]=-1;\n}\n';
+  return'clearChart(chartNumList);\n';
+}
+
 //airbox
 Blockly.Arduino.airbox={};
 Blockly.Arduino.airbox_fetchData=function(){
@@ -2056,6 +2075,26 @@ Blockly.Arduino.get_RTC_field=function(){
     return['get_data_from_RTC('+a+')',Blockly.Arduino.ORDER_ATOMIC]
   }else{
     return['0',Blockly.Arduino.ORDER_ATOMIC]
+  }
+};
+
+Blockly.Arduino.set_manual_time=function(){
+  var year=Blockly.Arduino.valueToCode(this,"YEAR",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      month=Blockly.Arduino.valueToCode(this,"MONTH",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      day=Blockly.Arduino.valueToCode(this,"DAY",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      hour=Blockly.Arduino.valueToCode(this,"HOUR",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      minute=Blockly.Arduino.valueToCode(this,"MINUTE",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      second=Blockly.Arduino.valueToCode(this,"SECOND",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  if (parseInt(year)>=1900)
+    year=""+(parseInt(year)-1900);
+  month=""+(parseInt(month)-1);
+  if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
+    Blockly.Arduino.definitions_.define_ESP_time_include="#include <time.h>";
+    Blockly.Arduino.definitions_.define_ESP_time_set_include="#include <sys/time.h>";
+    Blockly.Arduino.definitions_.define_setDataTime_invoke='void setDateTimeRTC(int y,byte m,byte d,byte h,byte min,byte s)\n{\n  time_t today=time(NULL);\n  struct tm myDay={s,min,h,d,m,y};\n  today=mktime(&myDay);\n  struct timeval tv={ .tv_sec = today };\n  struct timezone tz= { .tz_minuteswest = 0 };\n  settimeofday(&tv, &tz);\n  //setenv("TZ","CST-8",1);\n}\n';
+    return'setDateTimeRTC('+year+','+month+','+day+','+hour+','+minute+','+second+');\n';
+  }else{
+    return"";
   }
 };
 
