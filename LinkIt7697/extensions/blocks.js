@@ -1957,7 +1957,7 @@ Blockly.Blocks.oled_display_draw_symbol={init:function(){
 };
 
 Blockly.Blocks.oled_display_draw_chart={init:function(){
-  this.setHelpUrl(Blockly.Msg.OLED_DISPLAY_HELPURL_NEW);
+  this.setHelpUrl(Blockly.Msg.OLED_DISPLAY_HELPURL_CHART);
   this.setColour(Blockly.Blocks.oled_display.HUE);
   this.appendDummyInput()
       .appendField(Blockly.Msg.OLED_DISPLAY_TITLE)
@@ -1986,7 +1986,7 @@ Blockly.Blocks.oled_display_draw_chart={init:function(){
 };
 
 Blockly.Blocks.oled_display_clear_chart={init:function(){
-  this.setHelpUrl(Blockly.Msg.OLED_DISPLAY_HELPURL_NEW);
+  this.setHelpUrl(Blockly.Msg.OLED_DISPLAY_HELPURL_CHART);
   this.setColour(Blockly.Blocks.oled_display.HUE);
   this.appendDummyInput()
       .appendField(Blockly.Msg.OLED_DISPLAY_TITLE)
