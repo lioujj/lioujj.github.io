@@ -1751,6 +1751,19 @@ Blockly.Blocks.oled_display_rotation={
     this.setTooltip(Blockly.Msg.OLED_DISPLAY_TOOLTIP)}
 };
 
+Blockly.Blocks.oled_display_flip={
+  init:function(){
+    this.setHelpUrl(Blockly.Msg.OLED_DISPLAY_HELPURL_NEW);
+    this.setColour(Blockly.Blocks.oled_display.HUE);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.OLED_DISPLAY_TITLE)
+        .appendField(Blockly.Msg.OLED_DISPLAY_FLIP)
+        .appendField(new Blockly.FieldDropdown([["0","0"],["1","1"]]),"FLIP_MODE");
+    this.setPreviousStatement(!0);
+    this.setNextStatement(!0);
+    this.setTooltip(Blockly.Msg.OLED_DISPLAY_TOOLTIP)}
+};
+
 Blockly.Blocks.oled_display_font_direction={
   init:function(){
     this.setHelpUrl(Blockly.Msg.OLED_DISPLAY_HELPURL_NEW);
@@ -2828,7 +2841,7 @@ Blockly.Blocks.board_esp8266_digital={init:function(){
   this.setColour(Blockly.Blocks.math.HUE);
   this.appendDummyInput()
       .appendField("ESP8266 "+Blockly.Msg.BOARDS_DIGITAL)
-      .appendField(new Blockly.FieldDropdown([["D0","16"],["D1","5"],["D2","4"],["D3","0"],["D4","2"],["D5","14"],["D6","12"],["D7","13"],["D8","15"]]),"MY_PIN");
+      .appendField(new Blockly.FieldDropdown([["D0","16"],["D1 -SCL","5"],["D2 - SDA","4"],["D3","0"],["D4","2"],["D5","14"],["D6","12"],["D7","13"],["D8","15"]]),"MY_PIN");
   this.setOutput(!0,"Number")
   this.setTooltip(Blockly.Msg.BOARDS_TOOLTIP)}
 };

@@ -1174,6 +1174,7 @@
       <block type="oled_display_setting_new"></block>
       <block type="oled_display_clear"></block>
       <block type="oled_display_rotation"></block>
+      <block type="oled_display_flip"></block>
       <block type="oled_display_font_direction"></block>
       <block type="oled_display_set_font"></block>
       <block type="oled_display_set_chinese_font"></block>

@@ -1048,6 +1048,11 @@ Blockly.Arduino.oled_display_rotation=function(){
   return'u8g2.setDisplayRotation('+a+');\nclock_center_x=u8g2.getWidth()/2;\nclock_center_y=u8g2.getHeight()/2;\n';
 };
 
+Blockly.Arduino.oled_display_flip=function(){
+  var a=this.getFieldValue("FLIP_MODE");
+  return'u8g2.setFlipMode('+a+');\nclock_center_x=u8g2.getWidth()/2;\nclock_center_y=u8g2.getHeight()/2;\n';
+};
+
 Blockly.Arduino.oled_display_font_direction=function(){
   var a=this.getFieldValue("FONT_DIR");
   return'u8g2.setFontDirection('+a+');\n';
@@ -2091,7 +2096,7 @@ Blockly.Arduino.set_manual_time=function(){
   if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
     Blockly.Arduino.definitions_.define_ESP_time_include="#include <time.h>";
     Blockly.Arduino.definitions_.define_ESP_time_set_include="#include <sys/time.h>";
-    Blockly.Arduino.definitions_.define_setDataTime_invoke='void setDateTimeRTC(int y,byte m,byte d,byte h,byte min,byte s)\n{\n  time_t today=time(NULL);\n  struct tm myDay={s,min,h,d,m,y};\n  today=mktime(&myDay);\n  struct timeval tv={ .tv_sec = today };\n  struct timezone tz= { .tz_minuteswest = 0 };\n  settimeofday(&tv, &tz);\n  //setenv("TZ","CST-8",1);\n}\n';
+    Blockly.Arduino.definitions_.define_setDataTime_invoke='void setDateTimeRTC(int y,byte m,byte d,byte h,byte min,byte s)\n{\n  time_t today=time(NULL);\n  struct tm myDay={s,min,h,d,m,y};\n  today=mktime(&myDay);\n  struct timeval tv={ .tv_sec = today };\n  settimeofday(&tv, NULL);\n  //setenv("TZ","CST-8",1);\n}\n';
     return'setDateTimeRTC('+year+','+month+','+day+','+hour+','+minute+','+second+');\n';
   }else{
     return"";
