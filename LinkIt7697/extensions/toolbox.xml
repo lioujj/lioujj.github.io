@@ -445,6 +445,27 @@
             </block>
           </value>
         </block>
+        <block type="ttgo_tft_draw_chart">
+          <value name="INPUT">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="MIN">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="MAX">
+            <block type="math_number">
+              <field name="NUM">4095</field>
+            </block>
+          </value>
+          <value name="COLOR">
+            <block type="ttgo_getFromColorPicker"></block>
+          </value>
+        </block>
+        <block type="ttgo_tft_clear_chart"></block>
         <block type="ttgo_tft_draw_line">
           <value name="START_X">
             <block type="math_number">
