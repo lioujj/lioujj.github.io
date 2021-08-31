@@ -3995,6 +3995,58 @@ Blockly.Blocks.ttgo_tft_draw_symbol={init:function(){
       this.workspace&&(Blockly.Blocks.ttgo_tft.checkBlocks(this,"ttgo_tft_draw_symbol","ttgo_tft_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.TTGO_TFT_INIT_WARNIG))}
 };
 
+Blockly.Blocks.ttgo_tft_draw_chart={init:function(){
+  this.setHelpUrl(Blockly.Msg.TTGO_TFT_HELPURL);
+  this.setColour(Blockly.Blocks.ttgo_tft.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.TTGO_TFT_TITLE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.OLED_DISPLAY_CHART);
+  this.appendValueInput("INPUT")
+      .setCheck("Number")
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField(Blockly.Msg.OLED_DISPLAY_CHART_INPUT);
+  this.appendValueInput("MIN")
+      .setCheck("Number")
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField(Blockly.Msg.OLED_DISPLAY_CHART_MIN);
+  this.appendValueInput("MAX")
+      .setCheck("Number")
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField(Blockly.Msg.OLED_DISPLAY_CHART_MAX);
+  this.appendDummyInput()
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField(Blockly.Msg.OLED_DISPLAY_CHART_TYPE)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.OLED_DISPLAY_CHART_TYPE_LIST),"CHART_TYPE");
+  this.appendDummyInput()
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField(Blockly.Msg.OLED_DISPLAY_CHART_SCROLL)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.OLED_DISPLAY_CHART_DIR_LIST),"DIR_TYPE");
+  this.appendValueInput("COLOR")
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .setCheck("String")
+      .appendField(Blockly.Msg.PROBBIE_COLOR);
+  this.appendStatementInput("EXTRA")
+      .appendField(Blockly.Msg.OLED_DISPLAY_CHART_EXTRA);
+  this.setInputsInline(0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.TTGO_TFT_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.ttgo_tft.checkBlocks(this,"ttgo_tft_draw_chart","ttgo_tft_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.TTGO_TFT_INIT_WARNIG))}
+};
+
+Blockly.Blocks.ttgo_tft_clear_chart={init:function(){
+  this.setHelpUrl(Blockly.Msg.TTGO_TFT_HELPURL);
+  this.setColour(Blockly.Blocks.ttgo_tft.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.TTGO_TFT_TITLE)
+      .appendField(Blockly.Msg.OLED_DISPLAY_CHART_CLEAR);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.TTGO_TFT_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.ttgo_tft.checkBlocks(this,"ttgo_tft_clear_chart","ttgo_tft_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.TTGO_TFT_INIT_WARNIG))}
+};
 
 Blockly.Blocks.ttgo_tft_draw_line={init:function(){
   this.setHelpUrl(Blockly.Msg.TTGO_TFT_HELPURL);

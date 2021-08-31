@@ -1134,7 +1134,7 @@ Blockly.Arduino.oled_display_draw_chart=function(){
       f=Blockly.Arduino.statementToCode(this,"EXTRA");
   f=f.replace("  ","");
   f=f.replace(/\n  /g,"\n");
-  Blockly.Arduino.definitions_.define_oled_chartNumList_invoke="int chartNumList[]={-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};\n";
+  Blockly.Arduino.definitions_.define_oled_chartNumList_invoke="int chartNumList[128]={-1};\n";
   Blockly.Arduino.definitions_.define_oled_drawChart_invoke='void drawChart(U8G2_SSD1306_128X64_NONAME_F_HW_I2C *myOled,int myNumList[],byte chartType=0,byte dirType=0)\n{\n  byte myWidth=myOled->getWidth(),myHeight=myOled->getHeight();\n  myOled->setDrawColor(0);\n  myOled->drawBox(0, 0, myWidth, myHeight);\n  myOled->setDrawColor(1);\n  for (int i = 0; i < ((chartType==0)?(myWidth-1):myWidth) ; i++) {\n    if ((myNumList[i]) >-1 && (myNumList[i + 1]) >-1) {\n      switch(chartType){\n        case 0:\n          if (dirType==0)\n            myOled->drawLine(i, myNumList[i], i + 1, myNumList[i + 1]);\n          else\n            myOled->drawLine(myWidth-1-i, myNumList[i], myWidth-2 -i, myNumList[i + 1]);\n          break;\n        case 1:\n          if (dirType==0)\n            myOled->drawLine(i, myHeight-1, i, myNumList[i]);\n          else\n            myOled->drawLine(myWidth-1-i, myHeight-1, myWidth-1-i, myNumList[i]);\n          break;\n      }\n    }\n  }\n  for (int i = 0; i < (myWidth-1); i++) {\n    myNumList[i] = (myNumList[i + 1]);\n  }\n}\n';
   return'chartNumList[u8g2.getWidth()-1] = (map('+a+','+b+','+c+',u8g2.getHeight()-1,0));\ndrawChart(&u8g2,chartNumList,'+d+','+e+');\n'+f+'u8g2.sendBuffer();\n';
 };
@@ -2227,6 +2227,31 @@ Blockly.Arduino.ttgo_tft_draw_symbol=function(){
   c=Blockly.Arduino.valueToCode(this,"SYMBOL_NUM",Blockly.Arduino.ORDER_NONE)||"0";
   return'u8g2.drawGlyph('+a+','+b+','+c+');\n';
 };
+
+Blockly.Arduino.ttgo_tft_draw_chart=function(){
+  var a=Blockly.Arduino.valueToCode(this,"INPUT",Blockly.Arduino.ORDER_NONE)||"0",
+      b=Blockly.Arduino.valueToCode(this,"MIN",Blockly.Arduino.ORDER_NONE)||"0",
+      c=Blockly.Arduino.valueToCode(this,"MAX",Blockly.Arduino.ORDER_NONE)||"0",
+      d=this.getFieldValue("CHART_TYPE"),
+      e=this.getFieldValue("DIR_TYPE"),
+      f=Blockly.Arduino.statementToCode(this,"EXTRA"),
+      g=Blockly.Arduino.valueToCode(this,"COLOR",Blockly.Arduino.ORDER_ATOMIC)||"";
+  f=f.replace("  ","");
+  f=f.replace(/\n  /g,"\n");
+  f=f.replace(/tft\./g,"graph.");
+  Blockly.Arduino.definitions_.define_ttgo_tft_init_invoke="TFT_eSPI tft = TFT_eSPI();\nTFT_eSprite graph= TFT_eSprite(&tft);\nU8g2_for_TFT_eSPI u8g2;\nuint32_t tft_color=TFT_WHITE;\nbyte tftTextSize=1;\nbyte tftTextFont=1;\n";
+  Blockly.Arduino.definitions_.define_ttgo_tft_charNumList_invoke="int chartNumList[TFT_HEIGHT]={-1};\n";
+  Blockly.Arduino.definitions_.define_ttgo_tft_drawChart_invoke='void drawTFTchart(int myNumList[],byte chartType=0,byte dirType=0,uint16_t myColor=TFT_YELLOW)\n{\n  byte myWidth=tft.width(),myHeight=tft.height();\n  graph.createSprite(myWidth,  myHeight);\n  graph.fillSprite(TFT_BLACK);\n  for (int i = 0; i < ((chartType==0)?(myWidth-1):myWidth) ; i++) {\n    if ((myNumList[i]) >-1 && (myNumList[i + 1]) >-1) {\n      switch(chartType){\n        case 0:\n          if (dirType==0)\n            graph.drawLine(i, myNumList[i], i + 1, myNumList[i + 1], myColor);\n          else\n            graph.drawLine(myWidth-1-i, myNumList[i], myWidth-2 -i, myNumList[i + 1], myColor);\n          break;\n        case 1:\n          if (dirType==0)\n            graph.drawLine(i, myHeight-1, i, myNumList[i], myColor);\n          else\n            graph.drawLine(myWidth-1-i, myHeight-1, myWidth-1-i, myNumList[i], myColor);\n          break;\n      }\n    }\n  }\n  for (int i = 0; i < (myWidth-1); i++) {\n    myNumList[i] = (myNumList[i + 1]);\n  }\n}\n';
+  if (f!="")
+    return'chartNumList[tft.width()-1] = (map('+a+','+b+','+c+',tft.height()-1,0));\ndrawTFTchart(chartNumList,'+d+','+e+','+g+');\nu8g2.begin(graph);\n'+f+'graph.pushSprite(0, 0);\ngraph.deleteSprite();\nu8g2.begin(tft);\n';
+  else
+    return'chartNumList[tft.width()-1] = (map('+a+','+b+','+c+',tft.height()-1,0));\ndrawTFTchart(chartNumList,'+d+','+e+','+g+');\n'+f+'graph.pushSprite(0, 0);\ngraph.deleteSprite();\n';
+};
+
+Blockly.Arduino.ttgo_tft_clear_chart=function(){
+  Blockly.Arduino.definitions_.define_oled_clearChart_invoke='void clearTFTchart(int myNumList[])\n{\n  for(int i=0;i<TFT_HEIGHT;i++)\n    myNumList[i]=-1;\n}\n';
+  return'clearTFTchart(chartNumList);\n';
+}
 
 Blockly.Arduino.ttgo_tft_draw_line=function(){
   var a=Blockly.Arduino.valueToCode(this,"START_X",Blockly.Arduino.ORDER_NONE)||"0",
