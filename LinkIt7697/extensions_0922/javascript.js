@@ -3003,3 +3003,12 @@ Blockly.Arduino.max30105_set_spo2_clear=function(){
   return 'avgRed = 0;\navgIR = 0;\nESpO2 = MINIMUM_SPO2;\n';
 };
 
+setTimeout(function(){
+	if (Blockly.Blocks.board_initializes_setup)
+		var xmlDoc = Blockly.Xml.textToDom('<xml xmlns="https://developers.google.com/blockly/xml"><block type="board_initializes_setup" id="0" x="100" y="50"><next><block type="initializes_loop" id="1"></block></next></block></xml>');
+	else
+		var xmlDoc = Blockly.Xml.textToDom('<xml xmlns="https://developers.google.com/blockly/xml"><block type="initializes_setup" id="0" x="100" y="50"><next><block type="initializes_loop" id="1"></block></next></block></xml>');
+
+	Blockly.mainWorkspace.clear();					
+	Blockly.Xml.domToWorkspace(xmlDoc, Blockly.mainWorkspace);
+}, 2000);
