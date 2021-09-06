@@ -3011,4 +3011,4 @@ setTimeout(function(){
 
 	Blockly.mainWorkspace.clear();					
 	Blockly.Xml.domToWorkspace(xmlDoc, Blockly.mainWorkspace);
-}, 2000);
+}, 5000);
