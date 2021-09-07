@@ -1135,13 +1135,13 @@ Blockly.Arduino.oled_display_draw_chart=function(){
   f=f.replace("  ","");
   f=f.replace(/\n  /g,"\n");
   Blockly.Arduino.definitions_.define_oled_chartNumList_invoke="int chartNumList[128]={-1};\n";
-  Blockly.Arduino.definitions_.define_oled_drawChart_invoke='void drawChart(U8G2_SSD1306_128X64_NONAME_F_HW_I2C *myOled,int myNumList[],byte chartType=0,byte dirType=0)\n{\n  byte myWidth=myOled->getWidth(),myHeight=myOled->getHeight();\n  myOled->setDrawColor(0);\n  myOled->drawBox(0, 0, myWidth, myHeight);\n  myOled->setDrawColor(1);\n  for (int i = 0; i < ((chartType==0)?(myWidth-1):myWidth) ; i++) {\n    if ((myNumList[i]) >-1 && (myNumList[i + 1]) >-1) {\n      switch(chartType){\n        case 0:\n          if (dirType==0)\n            myOled->drawLine(i, myNumList[i], i + 1, myNumList[i + 1]);\n          else\n            myOled->drawLine(myWidth-1-i, myNumList[i], myWidth-2 -i, myNumList[i + 1]);\n          break;\n        case 1:\n          if (dirType==0)\n            myOled->drawLine(i, myHeight-1, i, myNumList[i]);\n          else\n            myOled->drawLine(myWidth-1-i, myHeight-1, myWidth-1-i, myNumList[i]);\n          break;\n      }\n    }\n  }\n  for (int i = 0; i < (myWidth-1); i++) {\n    myNumList[i] = (myNumList[i + 1]);\n  }\n}\n';
+  Blockly.Arduino.definitions_.define_oled_drawChart_invoke='void drawChart(U8G2_SSD1306_128X64_NONAME_F_HW_I2C *myOled,int myNumList[],byte chartType=0,byte dirType=0)\n{\n  byte myWidth=myOled->getWidth(),myHeight=myOled->getHeight();\n  myOled->setDrawColor(0);\n  myOled->drawBox(0, 0, myWidth, myHeight);\n  myOled->setDrawColor(1);\n  for (int i = 0; i < ((chartType==0)?(myWidth-1):myWidth) ; i++) {\n    if ((myNumList[i]) >-1 && (myNumList[i + 1]) >-1) {\n      switch(chartType){\n        case 0:\n          if (dirType==0)\n            myOled->drawLine(i, myNumList[i], i + 1, myNumList[i + 1]);\n          else\n            myOled->drawLine(myWidth-1-i, myNumList[i], myWidth-2 -i, myNumList[i + 1]);\n          break;\n        case 1:\n          if (dirType==0)\n            myOled->drawLine(i, myHeight-1, i, myNumList[i]);\n          else\n            myOled->drawLine(myWidth-1-i, myHeight-1, myWidth-1-i, myNumList[i]);\n          break;\n      }\n    }\n  }\n  for (int i = 0; i < (myWidth-1); i++) {\n    myNumList[i] = (myNumList[i + 1]);\n  }\n}\nvoid clearChart()\n{\n  for(int i=0;i<(sizeof(chartNumList)/sizeof(chartNumList[0]));i++)\n   chartNumList[i]=-1;\n}\n';
+  Blockly.Arduino.setups_.setup_define_u8g2_oled_chart='clearChart();\n';
   return'chartNumList[u8g2.getWidth()-1] = (map('+a+','+b+','+c+',u8g2.getHeight()-1,0));\ndrawChart(&u8g2,chartNumList,'+d+','+e+');\n'+f+'u8g2.sendBuffer();\n';
 };
 
 Blockly.Arduino.oled_display_clear_chart=function(){
-  Blockly.Arduino.definitions_.define_oled_clearChart_invoke='void clearChart(int myNumList[])\n{\n  for(int i=0;i<128;i++)\n    myNumList[i]=-1;\n}\n';
-  return'clearChart(chartNumList);\n';
+  return'clearChart();\n';
 }
 
 //airbox
@@ -2146,8 +2146,12 @@ Blockly.Arduino.breakLine=function(){
 //TTGO TFT
 Blockly.Arduino.ttgo_tft={};
 Blockly.Arduino.ttgo_tft_init=function(){
+  var a=this.getFieldValue("TFT_TYPE");
   Blockly.Arduino.definitions_.define_spi="#include <SPI.h>";
   Blockly.Arduino.definitions_.define_ttgo_tft="#include <TFT_eSPI.h>\n#include <U8g2_for_TFT_eSPI.h>";
+  if (a!="") {
+    Blockly.Arduino.definitions_.define_ttgo_tft="#define "+a+" 1\n"+Blockly.Arduino.definitions_.define_ttgo_tft;
+  }
   Blockly.Arduino.definitions_.define_ttgo_tft_init_invoke="TFT_eSPI tft = TFT_eSPI();\nU8g2_for_TFT_eSPI u8g2;\nuint32_t tft_color=TFT_WHITE;\nbyte tftTextSize=1;\nbyte tftTextFont=1;\n";
   Blockly.Arduino.setups_.ttgo_tft='tft.begin();\n  tft.fillScreen(TFT_BLACK);\n  u8g2.begin(tft);\n  tft.setTextColor(tft_color);\n  u8g2.setForegroundColor(tft_color);\n  u8g2.setFontMode(1);';
   return'';
@@ -2241,7 +2245,8 @@ Blockly.Arduino.ttgo_tft_draw_chart=function(){
   f=f.replace(/tft\./g,"graph.");
   Blockly.Arduino.definitions_.define_ttgo_tft_init_invoke="TFT_eSPI tft = TFT_eSPI();\nTFT_eSprite graph= TFT_eSprite(&tft);\nU8g2_for_TFT_eSPI u8g2;\nuint32_t tft_color=TFT_WHITE;\nbyte tftTextSize=1;\nbyte tftTextFont=1;\n";
   Blockly.Arduino.definitions_.define_ttgo_tft_charNumList_invoke="int chartNumList[TFT_HEIGHT]={-1};\n";
-  Blockly.Arduino.definitions_.define_ttgo_tft_drawChart_invoke='void drawTFTchart(int myNumList[],byte chartType=0,byte dirType=0,uint16_t myColor=TFT_YELLOW)\n{\n  byte myWidth=tft.width(),myHeight=tft.height();\n  graph.fillSprite(TFT_BLACK);\n  for (int i = 0; i < ((chartType==0)?(myWidth-1):myWidth) ; i++) {\n    if ((myNumList[i]) >-1 && (myNumList[i + 1]) >-1) {\n      switch(chartType){\n        case 0:\n          if (dirType==0)\n            graph.drawLine(i, myNumList[i], i + 1, myNumList[i + 1], myColor);\n          else\n            graph.drawLine(myWidth-1-i, myNumList[i], myWidth-2 -i, myNumList[i + 1], myColor);\n          break;\n        case 1:\n          if (dirType==0)\n            graph.drawLine(i, myHeight-1, i, myNumList[i], myColor);\n          else\n            graph.drawLine(myWidth-1-i, myHeight-1, myWidth-1-i, myNumList[i], myColor);\n          break;\n      }\n    }\n  }\n  for (int i = 0; i < (myWidth-1); i++) {\n    myNumList[i] = (myNumList[i + 1]);\n  }\n}\n';
+  Blockly.Arduino.definitions_.define_ttgo_tft_drawChart_invoke='void drawTFTchart(int myNumList[],byte chartType=0,byte dirType=0,uint16_t myColor=TFT_YELLOW)\n{\n  byte myWidth=tft.width(),myHeight=tft.height();\n  graph.fillSprite(TFT_BLACK);\n  for (int i = 0; i < ((chartType==0)?(myWidth-1):myWidth) ; i++) {\n    if ((myNumList[i]) >-1 && (myNumList[i + 1]) >-1) {\n      switch(chartType){\n        case 0:\n          if (dirType==0)\n            graph.drawLine(i, myNumList[i], i + 1, myNumList[i + 1], myColor);\n          else\n            graph.drawLine(myWidth-1-i, myNumList[i], myWidth-2 -i, myNumList[i + 1], myColor);\n          break;\n        case 1:\n          if (dirType==0)\n            graph.drawLine(i, myHeight-1, i, myNumList[i], myColor);\n          else\n            graph.drawLine(myWidth-1-i, myHeight-1, myWidth-1-i, myNumList[i], myColor);\n          break;\n      }\n    }\n  }\n  for (int i = 0; i < (myWidth-1); i++) {\n    myNumList[i] = (myNumList[i + 1]);\n  }\n}\nvoid clearTFTchart()\n{\n  for(int i=0;i<TFT_HEIGHT;i++)\n    chartNumList[i]=-1;\n}\n';
+  Blockly.Arduino.setups_.ttgo_tft_clear_chart='clearTFTchart();\n';
   if (f!="")
     return'chartNumList[tft.width()-1] = (map('+a+','+b+','+c+',tft.height()-1,0));\ngraph.createSprite(tft.width(),tft.height());\ndrawTFTchart(chartNumList,'+d+','+e+','+g+');\nu8g2.begin(graph);\n'+f+'graph.pushSprite(0, 0);\ngraph.deleteSprite();\nu8g2.begin(tft);\n';
   else
@@ -2249,8 +2254,7 @@ Blockly.Arduino.ttgo_tft_draw_chart=function(){
 };
 
 Blockly.Arduino.ttgo_tft_clear_chart=function(){
-  Blockly.Arduino.definitions_.define_oled_clearChart_invoke='void clearTFTchart(int myNumList[])\n{\n  for(int i=0;i<TFT_HEIGHT;i++)\n    myNumList[i]=-1;\n}\n';
-  return'clearTFTchart(chartNumList);\n';
+  return'clearTFTchart();\n';
 }
 
 Blockly.Arduino.ttgo_tft_draw_line=function(){
@@ -2984,7 +2988,7 @@ Blockly.Arduino.max30105_get_temperature=function(){
       b="max3010xSensor.readTemperature()";
   if (a=="F")
     b="max3010xSensor.readTemperatureF()";
- return[b,Blockly.Arduino.ORDER_ATOMIC];
+  return[b,Blockly.Arduino.ORDER_ATOMIC];
 };
 
 Blockly.Arduino.max30105_set_beat_range=function(){
@@ -3011,4 +3015,4 @@ setTimeout(function(){
 
 	Blockly.mainWorkspace.clear();					
 	Blockly.Xml.domToWorkspace(xmlDoc, Blockly.mainWorkspace);
-}, 5000);
+}, 2000);
