@@ -3939,6 +3939,19 @@ Blockly.Blocks.ttgo_tft_rotation={init:function(){
       this.workspace&&(Blockly.Blocks.ttgo_tft.checkBlocks(this,"ttgo_tft_rotation","ttgo_tft_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.TTGO_TFT_INIT_WARNIG))}
 };
 
+Blockly.Blocks.ttgo_tft_rotation4={init:function(){
+  this.setHelpUrl(Blockly.Msg.TTGO_TFT_HELPURL);
+  this.setColour(Blockly.Blocks.ttgo_tft.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.TTGO_TFT_TITLE)
+      .appendField(Blockly.Msg.TTGO_TFT_SET_ROTATION)
+      .appendField(new Blockly.FieldDropdown([["0","0"],["1","1"],["2","2"],["3","3"]]),"ROTATION");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.TTGO_TFT_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.ttgo_tft.checkBlocks(this,"ttgo_tft_rotation4","ttgo_tft_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.TTGO_TFT_INIT_WARNIG))}
+};
 
 Blockly.Blocks.ttgo_tft_fill={init:function(){
   this.setHelpUrl(Blockly.Msg.TTGO_TFT_HELPURL);
@@ -5382,4 +5395,210 @@ Blockly.Blocks.max30105_set_spo2_clear={init:function(){
   this.setNextStatement(!0);
   this.setTooltip(Blockly.Msg.MAX30105_TOOLTIP)},onchange:function(){
       this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"set_spo2_clear","max30105_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.MAX30105_WARNING))}
+};
+
+
+//SPIFFS
+Blockly.Blocks.spiffs={};
+Blockly.Blocks.spiffs.HUE=90;
+Blockly.Blocks.spiffs.HUE_FILE=288;
+Blockly.Blocks.spiffs.checkBlocks=function(a,slave,master){
+	var b=null,
+	    d=a.type;
+		a=a.workspace.getAllBlocks();
+		for(var c=0;c<a.length;c++)
+			if(slave!=a[c].type||null!=b||(b=a[c].type!=d?!0:!1),master==a[c].type){
+			  return!0;
+      }
+		return b
+};
+
+Blockly.Blocks.spiffs_init={init:function(){
+  this.setHelpUrl(Blockly.Msg.SPIFFS_HELPURL);
+  this.setColour(Blockly.Blocks.spiffs.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.SPIFFS_TITLE)
+      .appendField(Blockly.Msg.SPIFFS_INIT);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.SPIFFS_TOOLTIP)}
+};
+
+Blockly.Blocks.spiffs_exists={init:function(){
+  this.setHelpUrl(Blockly.Msg.SPIFFS_HELPURL);
+  this.setColour(Blockly.Blocks.spiffs.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.SPIFFS_TITLE)
+      .appendField(Blockly.Msg.SPIFFS_EXISTS);
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Boolean");
+  this.setTooltip(Blockly.Msg.SPIFFS_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.spiffs.checkBlocks(this,"spiffs_exists","spiffs_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SPIFFS_INIT_WARNIG))}
+};
+
+Blockly.Blocks.spiffs_format={init:function(){
+  this.setHelpUrl(Blockly.Msg.SPIFFS_HELPURL);
+  this.setColour(Blockly.Blocks.spiffs.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.SPIFFS_TITLE)
+      .appendField(Blockly.Msg.SPIFFS_FORMAT);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.SPIFFS_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.spiffs.checkBlocks(this,"spiffs_format","spiffs_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SPIFFS_INIT_WARNIG))}
+};
+
+Blockly.Blocks.spiffs_file_init={init:function(){
+  this.setHelpUrl(Blockly.Msg.SPIFFS_HELPURL);
+  this.setColour(Blockly.Blocks.spiffs.HUE_FILE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.SPIFFS_TITLE);
+  this.appendValueInput("VARIABLE_NAME")
+      .setCheck("String")
+      .appendField(Blockly.Msg.SD_VARIABLE);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.SPIFFS_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.spiffs.checkBlocks(this,"spiffs_file_init","spiffs_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SPIFFS_INIT_WARNIG))}
+};
+
+Blockly.Blocks.spiffs_file_open={init:function(){
+  this.setHelpUrl(Blockly.Msg.SPIFFS_HELPURL);
+  this.setColour(Blockly.Blocks.spiffs.HUE_FILE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.SPIFFS_TITLE);
+  this.appendValueInput("VARIABLE_NAME")
+      .setCheck("String")
+      .appendField(Blockly.Msg.SD_FILE_VARIABLE);
+  this.appendValueInput("FILE_NAME")
+      .setCheck("String")
+      .appendField(Blockly.Msg.SD_FILE_OPEN);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.SD_FILE_OPEN_MODE_TITLE)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.SPIFFS_FILE_OPEN_MODE),"MODE");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.SPIFFS_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.spiffs.checkBlocks(this,"spiffs_file_open","spiffs_file_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SPIFFS_FILE_INIT_WARNIG))}
+};
+
+Blockly.Blocks.spiffs_file_exists={init:function(){
+  this.setHelpUrl(Blockly.Msg.SPIFFS_HELPURL);
+  this.setColour(Blockly.Blocks.spiffs.HUE_FILE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.SPIFFS_TITLE);
+  this.appendValueInput("VARIABLE_NAME")
+      .setCheck("String")
+      .appendField(Blockly.Msg.SD_FILE_VARIABLE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.SD_FILE_EXISTS);
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Boolean");
+  this.setTooltip(Blockly.Msg.SPIFFS_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.spiffs.checkBlocks(this,"spiffs_file_exists","spiffs_file_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SPIFFS_FILE_INIT_WARNIG))}
+};
+
+Blockly.Blocks.spiffs_file_println={init:function(){
+  this.setHelpUrl(Blockly.Msg.SPIFFS_HELPURL);
+  this.setColour(Blockly.Blocks.spiffs.HUE_FILE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.SPIFFS_TITLE);
+  this.appendValueInput("VARIABLE_NAME")
+      .setCheck("String")
+      .appendField(Blockly.Msg.SD_FILE_VARIABLE);
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.SD_FILE_PRINT_MODE),"MODE");
+  this.appendValueInput("CONTENT")
+      .setCheck("String")
+      .appendField(Blockly.Msg.SD_FILE_PRINT_CONTENT);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.SPIFFS_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.spiffs.checkBlocks(this,"spiffs_file_println","spiffs_file_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SPIFFS_FILE_INIT_WARNIG))}
+};
+
+Blockly.Blocks.spiffs_file_available={init:function(){
+  this.setHelpUrl(Blockly.Msg.SPIFFS_HELPURL);
+  this.setColour(Blockly.Blocks.spiffs.HUE_FILE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.SPIFFS_TITLE);
+  this.appendValueInput("VARIABLE_NAME")
+      .setCheck("String")
+      .appendField(Blockly.Msg.SD_FILE_VARIABLE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.SD_FILE_AVAILABLE);
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Boolean");
+  this.setTooltip(Blockly.Msg.SPIFFS_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.spiffs.checkBlocks(this,"spiffs_file_available","spiffs_file_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SPIFFS_FILE_INIT_WARNIG))}
+};
+
+Blockly.Blocks.spiffs_file_readuntil_char={init:function(){
+  this.setHelpUrl(Blockly.Msg.SPIFFS_HELPURL);
+  this.setColour(Blockly.Blocks.spiffs.HUE_FILE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.SPIFFS_TITLE);
+  this.appendValueInput("VARIABLE_NAME")
+      .setCheck("String")
+      .appendField(Blockly.Msg.SD_FILE_VARIABLE);
+  this.appendValueInput("CHAR")
+      .setCheck("String")
+      .appendField(Blockly.Msg.SD_FILE_READ_UNTIL_CHAR);
+  this.setInputsInline(!0);
+  this.setOutput(!0,"String");
+  this.setTooltip(Blockly.Msg.SPIFFS_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.spiffs.checkBlocks(this,"spiffs_file_readuntil_char","spiffs_file_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SPIFFS_FILE_INIT_WARNIG))}
+};
+
+Blockly.Blocks.spiffs_file_read_line={init:function(){
+  this.setHelpUrl(Blockly.Msg.SPIFFS_HELPURL);
+  this.setColour(Blockly.Blocks.spiffs.HUE_FILE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.SPIFFS_TITLE);
+  this.appendValueInput("VARIABLE_NAME")
+      .setCheck("String")
+      .appendField(Blockly.Msg.SD_FILE_VARIABLE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.SD_FILE_READ_LINE);
+  this.setInputsInline(!0);
+  this.setOutput(!0,"String");
+  this.setTooltip(Blockly.Msg.SPIFFS_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.spiffs.checkBlocks(this,"spiffs_file_read_line","spiffs_file_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SPIFFS_FILE_INIT_WARNIG))}
+};
+
+Blockly.Blocks.spiffs_file_close={init:function(){
+  this.setHelpUrl(Blockly.Msg.SPIFFS_HELPURL);
+  this.setColour(Blockly.Blocks.spiffs.HUE_FILE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.SPIFFS_TITLE);
+  this.appendValueInput("VARIABLE_NAME")
+      .setCheck("String")
+      .appendField(Blockly.Msg.SD_FILE_VARIABLE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.SD_FILE_CLOSE);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.SPIFFS_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.spiffs.checkBlocks(this,"spiffs_file_close","spiffs_file_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SPIFFS_FILE_INIT_WARNIG))}
+};
+
+Blockly.Blocks.spiffs_file_delete={init:function(){
+  this.setHelpUrl(Blockly.Msg.SPIFFS_HELPURL);
+  this.setColour(Blockly.Blocks.spiffs.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.SPIFFS_TITLE);
+  this.appendValueInput("F_NAME")
+      .setCheck("String")
+      .appendField(Blockly.Msg.SPIFFS_FILE_DELETE);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.SPIFFS_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.spiffs.checkBlocks(this,"spiffs_file_delete","spiffs_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SPIFFS_INIT_WARNIG))}
 };

@@ -709,3 +709,15 @@ Blockly.Msg.MAX30105_TEMPERATURE = "溫度";
 Blockly.Msg.MAX30105_TEMP_LIST = [["攝氏","C"],["華氏","F"]];
 Blockly.Msg.MAX30105_BEAT_RANGE = "設定合理偵測心率範圍";
 Blockly.Msg.MAX30105_SPO2_CLEAR = "血氧SpO2感測資料重設";
+
+//SPIFFS
+Blockly.Msg.SPIFFS_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/spiffs";
+Blockly.Msg.SPIFFS_TITLE = "SPIFFS";
+Blockly.Msg.SPIFFS_INIT = Blockly.Msg.SD_INIT;
+Blockly.Msg.SPIFFS_TOOLTIP = "SPIFFS";
+Blockly.Msg.SPIFFS_EXISTS ="掛載成功？";
+Blockly.Msg.SPIFFS_INIT_WARNIG = "必須先設定「"+Blockly.Msg.SPIFFS_TITLE+Blockly.Msg.SPIFFS_INIT+"」積木";
+Blockly.Msg.SPIFFS_FORMAT = "格式化";
+Blockly.Msg.SPIFFS_FILE_INIT_WARNIG = "必須先設定「"+Blockly.Msg.SD_VARIABLE+"」積木";
+Blockly.Msg.SPIFFS_FILE_OPEN_MODE =[["唯讀","r"],["覆寫","w"],["接續寫入檔案之後","a"],["接續寫入檔案之後，檔案不存在則自動建立檔案","a+"]];
+Blockly.Msg.SPIFFS_FILE_DELETE = "刪除檔案(含路徑)";

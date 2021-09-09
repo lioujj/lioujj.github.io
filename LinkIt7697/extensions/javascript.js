@@ -2162,6 +2162,11 @@ Blockly.Arduino.ttgo_tft_rotation=function(){
   return'tft.setRotation('+a+');\n';
 };
 
+Blockly.Arduino.ttgo_tft_rotation4=function(){
+  var a=this.getFieldValue("ROTATION");
+  return'tft.setRotation('+a+');\n';
+};
+
 Blockly.Arduino.ttgo_tft_fill=function(){
   var a=Blockly.Arduino.valueToCode(this,"COLOR",Blockly.Arduino.ORDER_ATOMIC)||"";
 	a=a.replace(/\"/g,"");
@@ -3007,6 +3012,134 @@ Blockly.Arduino.max30105_set_spo2_clear=function(){
   return 'avgRed = 0;\navgIR = 0;\nESpO2 = MINIMUM_SPO2;\n';
 };
 
+//SPIFFS
+Blockly.Arduino.spiffs={};
+Blockly.Arduino.spiffs_init=function(){
+  if (Blockly.Arduino.my_board_type.startsWith("ESP")){
+    Blockly.Arduino.definitions_.define_SPIFFS_include='#include "SPIFFS.h"';
+    if (Blockly.Arduino.my_board_type=="ESP8266")
+      Blockly.Arduino.definitions_.define_SPIFFS_include='#include "FS.h"';
+    Blockly.Arduino.definitions_.define_SPIFFS_variable_invoke='bool SPIFFS_exists=false;\n';
+    if (Blockly.Arduino.my_board_type=="ESP8266")
+      return'SPIFFS_exists=SPIFFS.begin();\n';
+    else
+      return'SPIFFS_exists=SPIFFS.begin(true);\n';
+  } else {
+    return'';
+  }
+}
+
+Blockly.Arduino.spiffs_exists=function(){
+  if (Blockly.Arduino.my_board_type.startsWith("ESP"))
+    return['SPIFFS_exists',Blockly.Arduino.ORDER_ATOMIC];
+  else
+    return'';
+}
+
+Blockly.Arduino.spiffs_format=function(){
+  if (Blockly.Arduino.my_board_type.startsWith("ESP"))
+    return'SPIFFS_exists=SPIFFS.format();\n';
+  else
+    return'';
+}
+
+Blockly.Arduino.spiffs_file_init=function(){
+  if (Blockly.Arduino.my_board_type.startsWith("ESP")){
+    var a=Blockly.Arduino.valueToCode(this,"VARIABLE_NAME",Blockly.Arduino.ORDER_ATOMIC)||"";
+    a=a.replace(/\"/g,"");
+    Blockly.Arduino.definitions_.define_SPIFFS_variable_invoke+=('File '+a+';\n');
+  }
+  return'';
+}
+
+Blockly.Arduino.spiffs_file_open=function(){
+  if (Blockly.Arduino.my_board_type.startsWith("ESP")){
+    var a=Blockly.Arduino.valueToCode(this,"VARIABLE_NAME",Blockly.Arduino.ORDER_ATOMIC)||"",
+        b=Blockly.Arduino.valueToCode(this,"FILE_NAME",Blockly.Arduino.ORDER_ATOMIC)||"",
+        c=this.getFieldValue("MODE"),
+        returnStr='';
+    a=a.replace(/\"/g,"");
+    return a+'=SPIFFS.open(String('+b+').c_str(),"'+c+'");\n';
+  }
+  else
+    return'';
+}
+
+Blockly.Arduino.spiffs_file_exists=function(){
+  if (Blockly.Arduino.my_board_type.startsWith("ESP")){
+    var a=Blockly.Arduino.valueToCode(this,"VARIABLE_NAME",Blockly.Arduino.ORDER_ATOMIC)||"";
+    a=a.replace(/\"/g,"");
+    return[a,Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else 
+    return'';
+}
+
+Blockly.Arduino.spiffs_file_println=function(){
+  if (Blockly.Arduino.my_board_type.startsWith("ESP")){
+    var a=Blockly.Arduino.valueToCode(this,"VARIABLE_NAME",Blockly.Arduino.ORDER_ATOMIC)||"",
+        b=Blockly.Arduino.valueToCode(this,"CONTENT",Blockly.Arduino.ORDER_ATOMIC)||"",
+        c=this.getFieldValue("MODE");
+    a=a.replace(/\"/g,"");
+    return a+c+'(String('+b+').c_str());\n'+a+'.flush();\n';
+  }
+  else
+    return'';
+}
+
+Blockly.Arduino.spiffs_file_available=function(){
+  if (Blockly.Arduino.my_board_type.startsWith("ESP")){
+    var a=Blockly.Arduino.valueToCode(this,"VARIABLE_NAME",Blockly.Arduino.ORDER_ATOMIC)||"";
+    a=a.replace(/\"/g,"");
+    return[a+'.available()',Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else
+    return'';  
+}
+
+Blockly.Arduino.spiffs_file_readuntil_char=function(){
+  if (Blockly.Arduino.my_board_type.startsWith("ESP")){
+    var a=Blockly.Arduino.valueToCode(this,"VARIABLE_NAME",Blockly.Arduino.ORDER_ATOMIC)||"",
+        b=Blockly.Arduino.valueToCode(this,"CHAR",Blockly.Arduino.ORDER_ATOMIC)||"";
+    a=a.replace(/\"/g,"");
+    b=b.replace(/\"/g,"");
+    b=b.replace("\\\\","\\");
+    Blockly.Arduino.definitions_.define_spiffs_file_read_until_invoke="String readStringUntil(File *filePtr,char myChar){\n  String myTempStr=\"\";\n  char nowRead;\n  if (filePtr->available()){\n    nowRead=filePtr->read();\n    while(nowRead!=myChar){\n      if (myChar!='\\n'){\n        if(nowRead!='\\n'){\n          myTempStr+=nowRead;\n        } else{\n          break;\n        }\n      } else {\n        myTempStr+=nowRead;\n      }\n      if (filePtr->available())\n        nowRead=filePtr->read();\n      else\n        break;\n    }\n  }\n  return myTempStr;\n}\n";
+    return["readStringUntil(&"+a+",'"+b+"').c_str()",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else
+    return'';  
+}
+
+Blockly.Arduino.spiffs_file_read_line=function(){
+  if (Blockly.Arduino.my_board_type.startsWith("ESP")){
+    var a=Blockly.Arduino.valueToCode(this,"VARIABLE_NAME",Blockly.Arduino.ORDER_ATOMIC)||"";
+    a=a.replace(/\"/g,"");
+    Blockly.Arduino.definitions_.define_spiffs_file_read_until_invoke="String readStringUntil(File *filePtr,char myChar){\n  String myTempStr=\"\";\n  char nowRead;\n  if (filePtr->available()){\n    nowRead=filePtr->read();\n    while(nowRead!=myChar){\n      if (myChar!='\\n'){\n        if(nowRead!='\\n'){\n          myTempStr+=nowRead;\n        } else{\n          break;\n        }\n      } else {\n        myTempStr+=nowRead;\n      }\n      if (filePtr->available())\n        nowRead=filePtr->read();\n      else\n        break;\n    }\n  }\n  return myTempStr;\n}\n";
+    return["readStringUntil(&"+a+",'\\n').c_str()",Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else
+    return''; 
+}
+
+Blockly.Arduino.spiffs_file_close=function(){
+  if (Blockly.Arduino.my_board_type.startsWith("ESP")){
+    var a=Blockly.Arduino.valueToCode(this,"VARIABLE_NAME",Blockly.Arduino.ORDER_ATOMIC)||"";
+    a=a.replace(/\"/g,"");
+    return a+'.close();\n';
+  }
+  else
+    return''; 
+}
+
+Blockly.Arduino.spiffs_file_delete=function(){
+  if (Blockly.Arduino.my_board_type.startsWith("ESP")){
+    var a=Blockly.Arduino.valueToCode(this,"F_NAME",Blockly.Arduino.ORDER_ATOMIC)||"";
+    return 'SPIFFS.remove((String()+'+a+').c_str());\n';
+  }
+  else
+    return''; 
+}
 setTimeout(function(){
 	if (Blockly.Blocks.board_initializes_setup)
 		var xmlDoc = Blockly.Xml.textToDom('<xml xmlns="https://developers.google.com/blockly/xml"><block type="board_initializes_setup" id="0" x="100" y="50"><next><block type="initializes_loop" id="1"></block></next></block></xml>');
@@ -3015,4 +3148,4 @@ setTimeout(function(){
 
 	Blockly.mainWorkspace.clear();					
 	Blockly.Xml.domToWorkspace(xmlDoc, Blockly.mainWorkspace);
-}, 2000);
+}, 3000);
