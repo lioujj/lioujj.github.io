@@ -212,6 +212,89 @@
         </value>
       </block>
     </category>
+    <category id="category_spiffs" name="SPIFFS">
+      <block type="spiffs_init"></block>
+      <block type="spiffs_exists"></block>
+      <block type="spiffs_format"></block>
+      <block type="spiffs_file_delete">
+				<value name="F_NAME">
+					<block type="text">
+						<field name="TEXT"></field>
+          </block>
+				</value>
+      </block>
+      <block type="spiffs_file_init">
+				<value name="VARIABLE_NAME">
+					<block type="text">
+						<field name="TEXT">myFile</field>
+          </block>
+				</value>
+      </block>
+      <block type="spiffs_file_open">
+				<value name="VARIABLE_NAME">
+					<block type="text">
+						<field name="TEXT">myFile</field>
+          </block>
+				</value>
+				<value name="FILE_NAME">
+					<block type="text">
+						<field name="TEXT"></field>
+          </block>
+				</value>
+      </block>
+      <block type="spiffs_file_exists">
+				<value name="VARIABLE_NAME">
+					<block type="text">
+						<field name="TEXT">myFile</field>
+          </block>
+				</value>
+      </block>
+      <block type="spiffs_file_println">
+				<value name="VARIABLE_NAME">
+					<block type="text">
+						<field name="TEXT">myFile</field>
+          </block>
+				</value>
+				<value name="CONTENT">
+					<block type="text">
+						<field name="TEXT"></field>
+          </block>
+				</value>
+      </block>
+      <block type="spiffs_file_available">
+				<value name="VARIABLE_NAME">
+					<block type="text">
+						<field name="TEXT">myFile</field>
+          </block>
+				</value>
+      </block>
+      <block type="spiffs_file_readuntil_char">
+				<value name="VARIABLE_NAME">
+					<block type="text">
+						<field name="TEXT">myFile</field>
+          </block>
+				</value>
+				<value name="CHAR">
+					<block type="text">
+						<field name="TEXT"></field>
+          </block>
+				</value>
+      </block>
+      <block type="spiffs_file_read_line">
+				<value name="VARIABLE_NAME">
+					<block type="text">
+						<field name="TEXT">myFile</field>
+          </block>
+				</value>
+      </block>
+      <block type="spiffs_file_close">
+				<value name="VARIABLE_NAME">
+					<block type="text">
+						<field name="TEXT">myFile</field>
+          </block>
+				</value>
+      </block>
+    </category>
     <category id="category_yu" name="YuBoard">
       <block type="esp32_board_usb">
         <value name="ON_OFF">
@@ -330,6 +413,7 @@
       <category id="category_ttgo_tft" name="TTGO_TFT">
         <block type="ttgo_tft_init"></block>
         <block type="ttgo_tft_rotation"></block>
+        <block type="ttgo_tft_rotation4"></block>
         <block type="ttgo_tft_fill">
           <value name="COLOR">
             <block type="ttgo_getFromColorPicker"></block>

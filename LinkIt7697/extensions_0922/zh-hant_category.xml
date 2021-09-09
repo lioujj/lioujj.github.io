@@ -49,4 +49,5 @@
 <category><name>L9110</name><replace>L9110馬達驅動</replace></category>
 <category><name>StartPlus</name><replace>EZ Start Kit +</replace></category>
 <category><name>MAX30105</name><replace>MAX30102血氧濃度</replace></category>
+<category><name>SPIFFS</name><replace>SPIFFS檔案系統</replace></category>
 </xml>
