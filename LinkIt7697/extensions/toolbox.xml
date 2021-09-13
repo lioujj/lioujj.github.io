@@ -1786,6 +1786,7 @@
             </block>
         </value>
       </block>
+      <block type="startPlus_pin"></block>
       <block type="startPlus_tone"></block>
       <block type="startPlus_no_tone"></block>
       <block type="startPlus_custom_tone">

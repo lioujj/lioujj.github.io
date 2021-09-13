@@ -2822,6 +2822,7 @@ Blockly.Arduino.startPlus_led=function(){
   }
 };
 
+
 Blockly.Arduino.startPlus_led_analog=function(){
   var a=this.getFieldValue("LED"),
       b=Blockly.Arduino.valueToCode(this,"NUM",Blockly.Arduino.ORDER_ATOMIC)||"0",
@@ -2841,6 +2842,19 @@ Blockly.Arduino.startPlus_led_analog=function(){
     return"analogWrite("+a+", "+b+");\n";
   }
   else {
+    return"";
+  }
+};
+
+Blockly.Arduino.startPlus_pin=function(){
+  var a=this.getFieldValue("PIN");
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+     var myStartPin=["35","17","32","4","27","16","12"];
+     return[myStartPin[parseInt(a)],Blockly.Arduino.ORDER_ATOMIC];
+  } else if (Blockly.Arduino.my_board_type=="7697"){
+     var myStartPin=["2","6","3","X","1","13","12"];
+     return[myStartPin[parseInt(a)],Blockly.Arduino.ORDER_ATOMIC];
+  } else {
     return"";
   }
 };
