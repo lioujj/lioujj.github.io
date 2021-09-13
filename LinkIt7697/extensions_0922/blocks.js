@@ -5082,6 +5082,7 @@ Blockly.Blocks.startPlus.HUE2=236;
 Blockly.Blocks.startPlus.HUE3=97;
 Blockly.Blocks.startPlus.HUE4=157;
 Blockly.Blocks.startPlus.HUE5=290;
+Blockly.Blocks.startPlus.HUE6=60;
 Blockly.Blocks.startPlus_button={init:function(){
   this.setHelpUrl(Blockly.Msg.STARTPLUS_HELPURL);
   this.setColour(Blockly.Blocks.startPlus.HUE);
@@ -5165,6 +5166,19 @@ Blockly.Blocks.startPlus_led_analog={init:function(){
   this.setNextStatement(!0,null);
   this.setTooltip(Blockly.Msg.STARTPLUS_TOOLTIP)}
 };
+
+Blockly.Blocks.startPlus_pin={init:function(){
+  this.setHelpUrl(Blockly.Msg.STARTPLUS_HELPURL);
+  this.setColour(Blockly.Blocks.startPlus.HUE6);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.STARTPLUS_TITLE)
+      .appendField(new Blockly.FieldDropdown([["IO_8","0"],["IO_9","2"],["IO_10","1"],["IO_12","3"],["IO_14","4"],["IO_4","5"],["IO_5","6"]]),"PIN");
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Number");
+  this.setTooltip(Blockly.Msg.STARTPLUS_TOOLTIP)}
+};
+
+
 
 Blockly.Blocks.startPlus_tone={init:function(){
   this.setHelpUrl(Blockly.Msg.STARTPLUS_HELPURL);
