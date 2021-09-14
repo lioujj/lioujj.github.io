@@ -2044,7 +2044,7 @@ Blockly.Arduino.updateCellValue=function(){
     }  
   }
   var c=Blockly.Arduino.valueToCode(this,"data",Blockly.Arduino.ORDER_ATOMIC)||"";
-  return'updateCellValue('+a+',URLEncode('+b+'));\n'
+  return'updateCellValue('+a+',URLEncode(String(String()+'+b+').c_str()));\n'
 };
 
 //ESP32 NTP
