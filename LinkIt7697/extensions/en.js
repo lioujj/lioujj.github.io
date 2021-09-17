@@ -324,6 +324,10 @@ Blockly.Msg.OLED_DISPLAY_CHART_TYPE_LIST = [["Line chart","0"],["Bar chart","1"]
 Blockly.Msg.OLED_DISPLAY_CHART_SCROLL = "scroll from";
 Blockly.Msg.OLED_DISPLAY_CHART_DIR_LIST = [["right to left","0"],["left to right","1"]];
 Blockly.Msg.OLED_DISPLAY_CHART_CLEAR = "clear Statistics of chart";
+Blockly.Msg.OLED_DISPLAY_QR = "draw QR Code";
+Blockly.Msg.OLED_DISPLAY_QR_SIZE = "size";
+Blockly.Msg.OLED_DISPLAY_QR_CONTENT = "content";
+
 
 //AIRBOX
 Blockly.Msg.CATEGORY_AIRBOX = "AIRBOX";

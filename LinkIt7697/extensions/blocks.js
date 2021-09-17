@@ -2016,6 +2016,30 @@ Blockly.Blocks.oled_display_clear_chart={init:function(){
   this.setTooltip(Blockly.Msg.OLED_DISPLAY_TOOLTIP)}
 };
 
+Blockly.Blocks.oled_display_draw_qr={init:function(){
+  this.setHelpUrl(Blockly.Msg.OLED_DISPLAY_HELPURL_CHART);
+  this.setColour(Blockly.Blocks.oled_display.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.OLED_DISPLAY_TITLE)
+      .appendField(Blockly.Msg.OLED_DISPLAY_QR);
+  this.appendValueInput("START_X")
+      .setCheck("Number")
+      .appendField("X:");
+  this.appendValueInput("START_Y")
+      .setCheck("Number")
+      .appendField("Y:");
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.OLED_DISPLAY_QR_SIZE)
+      .appendField(new Blockly.FieldDropdown([["63x63","10"],["59x59","9"],["55x55","8"],["51x51","7"],["47x47","6"],["43x43","5"],["39x39","4"],["35x35","3"],["31x31","2"],["27x27","1"]]),"SIZE");
+  this.appendValueInput("CONTENT")
+      .setCheck("String")
+      .appendField(Blockly.Msg.OLED_DISPLAY_QR_CONTENT);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.OLED_DISPLAY_TOOLTIP)}
+};
+
 //airbox
 Blockly.Blocks.airbox={};
 Blockly.Blocks.airbox.HUE=180;
