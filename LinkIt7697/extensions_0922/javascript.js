@@ -1144,6 +1144,18 @@ Blockly.Arduino.oled_display_clear_chart=function(){
   return'clearChart();\n';
 }
 
+Blockly.Arduino.oled_display_draw_qr=function(){
+  var a=Blockly.Arduino.valueToCode(this,"START_X",Blockly.Arduino.ORDER_NONE)||"0",
+  b=Blockly.Arduino.valueToCode(this,"START_Y",Blockly.Arduino.ORDER_NONE)||"0",
+  c=this.getFieldValue("SIZE"),
+  d=Blockly.Arduino.valueToCode(this,"CONTENT",Blockly.Arduino.ORDER_NONE)||'""';
+  if (Blockly.Arduino.definitions_.define_u8g2_oled_include)
+    Blockly.Arduino.definitions_.define_u8g2_oled_include+='\n#include \"qrcode.h\"';
+  Blockly.Arduino.definitions_.define_oled_draw_QR_invoke='void drawQRcode(U8G2_SSD1306_128X64_NONAME_F_HW_I2C *myOled,int myX,int myY, byte myVersion,String myData,byte border)\n{\n    QRCode qrcode;\n    uint8_t qrcodeData[qrcode_getBufferSize(myVersion)];\n    qrcode_initText(&qrcode, qrcodeData,myVersion , 0, myData.c_str());\n    myOled->setDrawColor(1);\n    myOled->drawBox(myX,myY,qrcode.size+border*2,qrcode.size+border*2);\n    myOled->setDrawColor(0);\n    myX+=border;\n    myY+=border;\n    myOled->drawBox(myX,myY,qrcode.size,qrcode.size);\n    myOled->setDrawColor(1);\n    for (uint8_t y = 0; y < qrcode.size; y++) {\n        for (uint8_t x = 0; x < qrcode.size; x++) {\n          if (!qrcode_getModule(&qrcode, x, y))\n            myOled->drawPixel(x+myX,y+myY);\n        }\n    }\n}\n';
+  return'drawQRcode(&u8g2,'+a+','+b+','+c+','+d+',3);\n';
+};
+
+
 //airbox
 Blockly.Arduino.airbox={};
 Blockly.Arduino.airbox_fetchData=function(){

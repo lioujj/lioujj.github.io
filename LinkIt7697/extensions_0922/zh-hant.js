@@ -322,6 +322,9 @@ Blockly.Msg.OLED_DISPLAY_CHART_TYPE_LIST = [["折線圖","0"],["長條圖","1"]]
 Blockly.Msg.OLED_DISPLAY_CHART_SCROLL = "捲動方向";
 Blockly.Msg.OLED_DISPLAY_CHART_DIR_LIST = [["由右到左","0"],["由左到右","1"]];
 Blockly.Msg.OLED_DISPLAY_CHART_CLEAR = "清除圖表統計數據";
+Blockly.Msg.OLED_DISPLAY_QR = "繪製QR Code";
+Blockly.Msg.OLED_DISPLAY_QR_SIZE = "尺寸";
+Blockly.Msg.OLED_DISPLAY_QR_CONTENT = "內容";
 
 //AIRBOX
 Blockly.Msg.CATEGORY_AIRBOX = "AIRBOX";
