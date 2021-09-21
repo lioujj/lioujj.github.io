@@ -613,6 +613,7 @@ Blockly.Blocks.maqueen_custom_tone={init:function(){
     this.setTooltip(Blockly.Msg.INOUT_TONE_TOOLTIP)}
 };
 
+/*
 Blockly.Blocks.neopixel.checkBlocks=function(a){
 	var b=null,
 	    d=a.type;
@@ -622,6 +623,7 @@ Blockly.Blocks.neopixel.checkBlocks=function(a){
 				return!0;
 		return b
 };
+*/
 
 Blockly.Blocks.neopixel_begin_maqueen={init:function(){
 	this.setHelpUrl(Blockly.Msg.NEOPIXEL_BEGIN_HELPURL);
