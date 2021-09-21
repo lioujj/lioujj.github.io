@@ -725,7 +725,7 @@ Blockly.Msg.SPIFFS_TITLE = "SPIFFS";
 Blockly.Msg.SPIFFS_INIT = Blockly.Msg.SD_INIT;
 Blockly.Msg.SPIFFS_TOOLTIP = "SPIFFS";
 Blockly.Msg.SPIFFS_EXISTS ="SPIFFS exists?";
-Blockly.Msg.SPIFFS_INIT_WARNIG = = "You have to "+Blockly.Msg.SPIFFS_INIT+" "+Blockly.Msg.SPIFFS_TITLE+" first.";
+Blockly.Msg.SPIFFS_INIT_WARNIG = "You have to "+Blockly.Msg.SPIFFS_INIT+" "+Blockly.Msg.SPIFFS_TITLE+" first.";
 Blockly.Msg.SPIFFS_FORMAT = "format";
 Blockly.Msg.SPIFFS_FILE_INIT_WARNIG = "You have to "+Blockly.Msg.SD_VARIABLE+" first.";
 Blockly.Msg.SPIFFS_FILE_OPEN_MODE =[["read only","r"],["over write","w"],["append","a"],["append+","a+"]];
