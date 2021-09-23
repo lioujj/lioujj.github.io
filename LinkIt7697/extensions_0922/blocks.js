@@ -4215,6 +4215,34 @@ Blockly.Blocks.ttgo_tft_clear_chart={init:function(){
       this.workspace&&(Blockly.Blocks.ttgo_tft.checkBlocks(this,"ttgo_tft_clear_chart","ttgo_tft_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.TTGO_TFT_INIT_WARNIG))}
 };
 
+Blockly.Blocks.ttgo_tft_draw_qr={init:function(){
+  this.setHelpUrl(Blockly.Msg.TTGO_TFT_HELPURL);
+  this.setColour(Blockly.Blocks.ttgo_tft.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.TTGO_TFT_TITLE)
+      .appendField(Blockly.Msg.OLED_DISPLAY_QR);
+  this.appendValueInput("START_X")
+      .setCheck("Number")
+      .appendField("X:");
+  this.appendValueInput("START_Y")
+      .setCheck("Number")
+      .appendField("Y:");
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.OLED_DISPLAY_QR_SIZE)
+      .appendField(new Blockly.FieldDropdown([["132x132","11"],["124x124","10"],["116x116","9"],["108x108","8"],["100x100","7"],["92x92","6"],["84x84","5"],["76x76","4"],["68x68","3"],["60x60","2"],["52x52","1"]]),"SIZE");
+  this.appendValueInput("COLOR")
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .setCheck("String")
+      .appendField(Blockly.Msg.PROBBIE_COLOR);
+  this.appendValueInput("CONTENT")
+      .setCheck("String")
+      .appendField(Blockly.Msg.OLED_DISPLAY_QR_CONTENT);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.OLED_DISPLAY_TOOLTIP)}
+};
+
 Blockly.Blocks.ttgo_tft_draw_line={init:function(){
   this.setHelpUrl(Blockly.Msg.TTGO_TFT_HELPURL);
   this.setColour(Blockly.Blocks.ttgo_tft.HUE);

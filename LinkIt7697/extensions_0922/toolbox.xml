@@ -550,6 +550,26 @@
           </value>
         </block>
         <block type="ttgo_tft_clear_chart"></block>
+        <block type="ttgo_tft_draw_qr">
+          <value name="START_X">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="START_Y">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="COLOR">
+            <block type="ttgo_getFromColorPicker"></block>
+          </value>
+          <value name="CONTENT">
+            <block type="text">
+              <field name="TEXT"></field>
+            </block>
+          </value>
+        </block>
         <block type="ttgo_tft_draw_line">
           <value name="START_X">
             <block type="math_number">
