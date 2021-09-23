@@ -2274,6 +2274,18 @@ Blockly.Arduino.ttgo_tft_clear_chart=function(){
   return'clearTFTchart();\n';
 }
 
+Blockly.Arduino.ttgo_tft_draw_qr=function(){
+  var a=Blockly.Arduino.valueToCode(this,"START_X",Blockly.Arduino.ORDER_NONE)||"0",
+  b=Blockly.Arduino.valueToCode(this,"START_Y",Blockly.Arduino.ORDER_NONE)||"0",
+  c=this.getFieldValue("SIZE"),
+  d=Blockly.Arduino.valueToCode(this,"COLOR",Blockly.Arduino.ORDER_ATOMIC)||"",
+  e=Blockly.Arduino.valueToCode(this,"CONTENT",Blockly.Arduino.ORDER_NONE)||'""';
+  if (Blockly.Arduino.definitions_.define_ttgo_tft)
+    Blockly.Arduino.definitions_.define_ttgo_tft+='\n#include \"qrcode.h\"';
+  Blockly.Arduino.definitions_.define_ttgo_tft_draw_QR_invoke='void drawQRcode(TFT_eSPI *myTft,int myX,int myY, byte myVersion,String myData,byte border,uint16_t myColor)\n{\n    QRCode qrcode;\n    uint8_t qrcodeData[qrcode_getBufferSize(myVersion)];\n    qrcode_initText(&qrcode, qrcodeData,myVersion , 0, myData.c_str());\n    TFT_eSprite graphQR= TFT_eSprite(myTft);\n    graphQR.createSprite((qrcode.size+border)*2,(qrcode.size+border)*2);\n    graphQR.fillRect(0, 0, (qrcode.size+border)*2,(qrcode.size+border)*2, myColor);\n    graphQR.fillRect(border, border, qrcode.size*2, qrcode.size*2, TFT_BLACK);\n    for (uint8_t y = 0; y < qrcode.size; y++) {\n        for (uint8_t x = 0; x < qrcode.size; x++) {\n          if (!qrcode_getModule(&qrcode, x, y))\n            graphQR.fillRect(x*2+border, y*2+border, 2,2, myColor);\n        }\n    }\n    graphQR.pushSprite(myX, myY);\n    graphQR.deleteSprite();\n}\n';
+  return'drawQRcode(&tft,'+a+','+b+','+c+','+e+',5,'+d+');\n';
+};
+
 Blockly.Arduino.ttgo_tft_draw_line=function(){
   var a=Blockly.Arduino.valueToCode(this,"START_X",Blockly.Arduino.ORDER_NONE)||"0",
       b=Blockly.Arduino.valueToCode(this,"START_Y",Blockly.Arduino.ORDER_NONE)||"0",
