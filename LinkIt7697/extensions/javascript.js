@@ -1777,6 +1777,11 @@ Blockly.Arduino.esp32_touch_read=function(){
   return['touchRead('+a+')',Blockly.Arduino.ORDER_ATOMIC];
 }
 
+Blockly.Arduino.esp32_touched=function(){
+  var a=this.getFieldValue("TOUCH_PIN"),
+      b=Blockly.Arduino.statementToCode(this,"TOUCHED");
+  return'if (touchRead('+a+')<30){\n'+b+'  while(touchRead('+a+')<30){}\n  delay(100);\n}\n';
+}
 
 Blockly.Arduino.esp32_core_task=function(){
   var a=Blockly.Arduino.valueToCode(this,"TASK_NAME",Blockly.Arduino.ORDER_ATOMIC)||"",

@@ -3057,6 +3057,23 @@ Blockly.Blocks.esp32_touch_read={init:function(){
   this.setTooltip(Blockly.Msg.BUILTIN_TOOLTIP)}
 };
 
+Blockly.Blocks.esp32_touched={init:function(){
+  this.setHelpUrl(Blockly.Msg.BUILTIN_HELPURL);
+  this.setColour(Blockly.Blocks.builtin.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.BUILTIN_TITLE)
+      .appendField(Blockly.Msg.BUILTIN_TOUCHED_PREFIX);
+  this.appendDummyInput()
+      .appendField("Pin")
+      .appendField(new Blockly.FieldDropdown([["2","2"],["4","4"],["12","12"],["13","13"],["14","14"],["15","15"],["27","27"],["32","32"],["33","33"]]),"TOUCH_PIN")
+      .appendField(Blockly.Msg.BUILTIN_TOUCHED_POSTFIX);
+  this.appendStatementInput("TOUCHED");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.BUILTIN_TOOLTIP)}
+};
+
 Blockly.Blocks.esp32_core_run={init:function(){
   this.setHelpUrl(Blockly.Msg.BUILTIN_HELPURL);
   this.setColour(Blockly.Blocks.builtin.HUE);
