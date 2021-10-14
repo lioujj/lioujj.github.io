@@ -94,6 +94,7 @@
     <category id="category_esp32_builtin" name="ESP32_BUILTIN">
       <block type="esp32_hall_read"></block>
       <block type="esp32_touch_read"></block>
+      <block type="esp32_touched"></block>
       <block type="esp32_core_task">
         <value name="TASK_NAME">
           <block type="text">
