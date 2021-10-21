@@ -596,6 +596,7 @@ Blockly.Msg.TTGO_TFT_PRINT_ENG_TEXT = "show English text";
 Blockly.Msg.TTGO_TFT_DRAW_ENG_TEXT = "draw English text";
 Blockly.Msg.TTGO_TFT_DRAW_ENG_FONT_NUMBER = "set specific font number(1~8)";
 Blockly.Msg.TTGO_SET_FONT_NAME = "set symbol font name";
+Blockly.Msg.TTGO_SET_ALPHABET_FONT_NAME = "set a font name";
 Blockly.Msg.TTGO_TFT_DRAW_SYMBOL = "draw glyph";
 Blockly.Msg.TTGO_TFT_DRAW_SYMBOL_NUMBER = "glyph number";
 Blockly.Msg.TTGO_TFT_SET_ROTATION = "set TFT rotation";
@@ -732,3 +733,20 @@ Blockly.Msg.SPIFFS_FORMAT = "format";
 Blockly.Msg.SPIFFS_FILE_INIT_WARNIG = "You have to "+Blockly.Msg.SD_VARIABLE+" first.";
 Blockly.Msg.SPIFFS_FILE_OPEN_MODE =[["read only","r"],["over write","w"],["append","a"],["append+","a+"]];
 Blockly.Msg.SPIFFS_FILE_DELETE = "remove file(include path)";
+
+//ASR
+Blockly.Msg.ASR_HELPURL = "";
+Blockly.Msg.ASR_TITLE = "ASR";
+Blockly.Msg.ASR_CHECK = "check speech recognition result";
+Blockly.Msg.ASR_TOOLTIP = "ASR";
+Blockly.Msg.ASR_WHEN_CHECKED = "is recognized?";
+Blockly.Msg.ASR_WARNING = "You have to set \""+Blockly.Msg.ASR_TITLE+" "+Blockly.Msg.ASR_CHECK+"\" first.";
+Blockly.Msg.ASR_SPEECH_LIST =[
+["Hi,Shaun","1"],["Turn on lights","16"],["Turn off lights","17"],["Turn left","18"],["Turn right","19"],["Go forward","20"],["Go Backward","21"],
+["Line Tracking","22"],["Avoid object","23"],["Stop car","24"],["Start device","32"],["Close device","33"],["Pause device","34"],["Keep going","35"],
+["Add a level","36"],["Lower a level","37"],["Music on","38"],["Music off","39"],["Switch music","40"],["Execute function one","49"],
+["Execute function two","50"],["Learning entry 1","80"],["Learning entry 2","81"],["Learning entry 3","82"],["Learning entry 4","83"],
+["Learning entry 5","84"],["Learning entry 6","85"],["Learning entry 7","86"],["Learning entry 8","87"],["Learning entry 9","88"],["Learning entry 10","89"]
+];
+Blockly.Msg.ASR_CLEAR = "restore factory settings";
+Blockly.Msg.ASR_LEARN = "enter learning-model";

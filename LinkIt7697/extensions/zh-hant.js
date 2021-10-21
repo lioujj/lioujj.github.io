@@ -590,6 +590,7 @@ Blockly.Msg.TTGO_TFT_PRINT_ENG_TEXT = "顯示英數字";
 Blockly.Msg.TTGO_TFT_DRAW_ENG_TEXT = "繪製英數字";
 Blockly.Msg.TTGO_TFT_DRAW_ENG_FONT_NUMBER = "設定英數字型編號(1~8)";
 Blockly.Msg.TTGO_SET_FONT_NAME = "設定使用圖形字型";
+Blockly.Msg.TTGO_SET_ALPHABET_FONT_NAME = "設定使用字型";
 Blockly.Msg.TTGO_TFT_DRAW_SYMBOL = "繪製圖形";
 Blockly.Msg.TTGO_TFT_DRAW_SYMBOL_NUMBER = "圖形編號";
 Blockly.Msg.TTGO_TFT_SET_ROTATION = "設定螢幕方向";
@@ -726,3 +727,20 @@ Blockly.Msg.SPIFFS_FORMAT = "格式化";
 Blockly.Msg.SPIFFS_FILE_INIT_WARNIG = "必須先設定「"+Blockly.Msg.SD_VARIABLE+"」積木";
 Blockly.Msg.SPIFFS_FILE_OPEN_MODE =[["唯讀","r"],["覆寫","w"],["接續寫入檔案之後","a"],["接續寫入檔案之後，檔案不存在則自動建立檔案","a+"]];
 Blockly.Msg.SPIFFS_FILE_DELETE = "刪除檔案(含路徑)";
+
+//ASR
+Blockly.Msg.ASR_HELPURL = "";
+Blockly.Msg.ASR_TITLE = "ASR語音辨識";
+Blockly.Msg.ASR_CHECK = "檢查辨識結果";
+Blockly.Msg.ASR_TOOLTIP = "ASR";
+Blockly.Msg.ASR_WHEN_CHECKED = "語音被偵測？";
+Blockly.Msg.ASR_WARNING = "必須先設定「"+Blockly.Msg.ASR_TITLE+" "+Blockly.Msg.ASR_CHECK+"」積木";
+Blockly.Msg.ASR_SPEECH_LIST =[
+["你好小恩","1"],["打開車燈","16"],["關閉車燈","17"],["向左轉","18"],["向右轉","19"],["向前進","20"],["向後退","21"],
+["循線模式","22"],["避障模式","23"],["停車","24"],["啟動設備","32"],["停止設備","33"],["暫停運行","34"],["繼續運行","35"],
+["增加一檔","36"],["降低一檔","37"],["播放音樂","38"],["關閉音樂","39"],["切換音樂","40"],["執行功能1","49"],
+["執行功能2","50"],["自訂語音1","80"],["自訂語音2","81"],["自訂語音3","82"],["自訂語音4","83"],
+["自訂語音5","84"],["自訂語音6","85"],["自訂語音7","86"],["自訂語音8","87"],["自訂語音9","88"],["自訂語音10","89"]
+];
+Blockly.Msg.ASR_CLEAR = "清除所有自訂語音";
+Blockly.Msg.ASR_LEARN = "進入自訂語音學習模式";
