@@ -1069,6 +1069,12 @@ Blockly.Arduino.oled_display_set_chinese_font=function(){
   return'u8g2.setFont(u8g2_font_unifont_t_chinese1);\n'
 };
 
+Blockly.Arduino.oled_display_set_alphabet_font=function(){
+  var a=Blockly.Arduino.valueToCode(this,"FONT",Blockly.Arduino.ORDER_NONE)||"";
+  a=a.replace(/\"/g,"");
+  return"u8g2.setFont("+a+");\n";
+};
+
 Blockly.Arduino.oled_display_draw_text=function(){
   var a=Blockly.Arduino.valueToCode(this,"START_X",Blockly.Arduino.ORDER_NONE)||"0",
   b=Blockly.Arduino.valueToCode(this,"START_Y",Blockly.Arduino.ORDER_NONE)||"0",
@@ -3183,6 +3189,42 @@ Blockly.Arduino.spiffs_file_delete=function(){
   else
     return''; 
 }
+
+//ASR
+Blockly.Arduino.asr={};
+Blockly.Arduino.asr_check=function(){
+  Blockly.Arduino.definitions_.define_wire="#include <Wire.h>";
+  Blockly.Arduino.definitions_.define_asr_invoke='uint8_t asr_value=0;\nuint8_t checkASR(byte asrAddress){\n  uint8_t myASRvalue=0;\n  Wire.setClock(100000);\n  Wire.requestFrom(asrAddress,1,true);\n  if (Wire.available()){\n    myASRvalue=Wire.read();\n  }\n  return myASRvalue;\n}\nvoid asrSet(byte asrAddress, byte myData){\n  Wire.setClock(100000);\n  Wire.beginTransmission(asrAddress);\n  Wire.write(myData);\n  Wire.endTransmission();\n}\n';
+  if (!Blockly.Arduino.setups_.setup_wire_lib)
+      Blockly.Arduino.setups_.setup_wire_lib="Wire.begin();";
+  return'asr_value=checkASR(0x0B);\n'
+}
+
+Blockly.Arduino.asr_learn=function(){
+  Blockly.Arduino.definitions_.define_wire="#include <Wire.h>";
+  Blockly.Arduino.definitions_.define_asr_invoke='uint8_t asr_value=0;\nuint8_t checkASR(byte asrAddress){\n  uint8_t myASRvalue=0;\n  Wire.setClock(100000);\n  Wire.requestFrom(asrAddress,1,true);\n  if (Wire.available()){\n    myASRvalue=Wire.read();\n  }\n  return myASRvalue;\n}\nvoid asrSet(byte asrAddress, byte myData){\n  Wire.setClock(100000);\n  Wire.beginTransmission(asrAddress);\n  Wire.write(myData);\n  Wire.endTransmission();\n}\n';
+  if (!Blockly.Arduino.setups_.setup_wire_lib)
+      Blockly.Arduino.setups_.setup_wire_lib="Wire.begin();";
+  return'asrSet(0x0B, 0x50);\n';
+}
+
+Blockly.Arduino.asr_clear=function(){
+  Blockly.Arduino.definitions_.define_wire="#include <Wire.h>";
+  Blockly.Arduino.definitions_.define_asr_invoke='uint8_t asr_value=0;\nuint8_t checkASR(byte asrAddress){\n  uint8_t myASRvalue=0;\n  Wire.setClock(100000);\n  Wire.requestFrom(asrAddress,1,true);\n  if (Wire.available()){\n    myASRvalue=Wire.read();\n  }\n  return myASRvalue;\n}\nvoid asrSet(byte asrAddress, byte myData){\n  Wire.setClock(100000);\n  Wire.beginTransmission(asrAddress);\n  Wire.write(myData);\n  Wire.endTransmission();\n}\n';
+  if (!Blockly.Arduino.setups_.setup_wire_lib)
+      Blockly.Arduino.setups_.setup_wire_lib="Wire.begin();";
+  return'asrSet(0x0B, 0x60);\n';
+}
+
+Blockly.Arduino.asr_check_result=function(){
+  var a=this.getFieldValue("RESULT");
+  Blockly.Arduino.definitions_.define_wire="#include <Wire.h>";
+  Blockly.Arduino.definitions_.define_asr_invoke='uint8_t asr_value=0;\nuint8_t checkASR(byte asrAddress){\n  uint8_t myASRvalue=0;\n  Wire.setClock(100000);\n  Wire.requestFrom(asrAddress,1,true);\n  if (Wire.available()){\n    myASRvalue=Wire.read();\n  }\n  return myASRvalue;\n}\nvoid asrSet(byte asrAddress, byte myData){\n  Wire.setClock(100000);\n  Wire.beginTransmission(asrAddress);\n  Wire.write(myData);\n  Wire.endTransmission();\n}\n';
+  if (!Blockly.Arduino.setups_.setup_wire_lib)
+      Blockly.Arduino.setups_.setup_wire_lib="Wire.begin();";
+  return['asr_value=='+a,Blockly.Arduino.ORDER_ATOMIC];
+}
+
 setTimeout(function(){
 	if (Blockly.Blocks.board_initializes_setup)
 		var xmlDoc = Blockly.Xml.textToDom('<xml xmlns="https://developers.google.com/blockly/xml"><block type="board_initializes_setup" id="0" x="100" y="50"><next><block type="initializes_loop" id="1"></block></next></block></xml>');

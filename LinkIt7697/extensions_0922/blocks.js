@@ -1804,6 +1804,20 @@ Blockly.Blocks.oled_display_set_chinese_font={
     this.setTooltip(Blockly.Msg.OLED_DISPLAY_TOOLTIP)}
 };
 
+Blockly.Blocks.oled_display_set_alphabet_font={init:function(){
+  this.setHelpUrl(Blockly.Msg.OLED_DISPLAY_HELPURL_NEW);
+  this.setColour(Blockly.Blocks.oled_display.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.OLED_DISPLAY_TITLE);
+  this.appendValueInput("FONT")
+      .setCheck("String")
+      .appendField(Blockly.Msg.TTGO_SET_ALPHABET_FONT_NAME);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.OLED_DISPLAY_TOOLTIP)}
+};
+
 Blockly.Blocks.oled_display_show_xbm={
   init:function(){
     this.setHelpUrl(Blockly.Msg.OLED_DISPLAY_HELPURL_IMAGE);
@@ -5367,7 +5381,7 @@ Blockly.Blocks.startPlus_ir_receive={init:function(){
 };
 
 
-//EZ Start Plus
+//MAX30105
 Blockly.Blocks.max30105={};
 Blockly.Blocks.max30105.HUE=97;
 Blockly.Blocks.max30105.checkBlocks=function(a,slave,master){
@@ -5481,7 +5495,6 @@ Blockly.Blocks.max30105_set_spo2_clear={init:function(){
   this.setTooltip(Blockly.Msg.MAX30105_TOOLTIP)},onchange:function(){
       this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"set_spo2_clear","max30105_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.MAX30105_WARNING))}
 };
-
 
 //SPIFFS
 Blockly.Blocks.spiffs={};
@@ -5686,4 +5699,70 @@ Blockly.Blocks.spiffs_file_delete={init:function(){
   this.setNextStatement(!0,null);
   this.setTooltip(Blockly.Msg.SPIFFS_TOOLTIP)},onchange:function(){
       this.workspace&&(Blockly.Blocks.spiffs.checkBlocks(this,"spiffs_file_delete","spiffs_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SPIFFS_INIT_WARNIG))}
+};
+
+//ASR
+Blockly.Blocks.asr={};
+Blockly.Blocks.asr.HUE=97;
+Blockly.Blocks.asr.checkBlocks=function(a,slave,master){
+	var b=null,
+	    d=a.type;
+		a=a.workspace.getAllBlocks();
+		for(var c=0;c<a.length;c++)
+			if(slave!=a[c].type||null!=b||(b=a[c].type!=d?!0:!1),master==a[c].type){
+			  return!0;
+      }
+		return b
+};
+
+Blockly.Blocks.asr_check={init:function(){
+  this.setHelpUrl(Blockly.Msg.ASR_HELPURL);
+  this.setColour(Blockly.Blocks.asr.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.ASR_TITLE)
+      .appendField(Blockly.Msg.ASR_CHECK);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.ASR_TOOLTIP)}
+};
+
+Blockly.Blocks.asr_learn={init:function(){
+  this.setHelpUrl(Blockly.Msg.ASR_HELPURL);
+  this.setColour(Blockly.Blocks.asr.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.ASR_TITLE)
+      .appendField(Blockly.Msg.ASR_LEARN);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.ASR_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.spiffs.checkBlocks(this,"asr_learn","asr_check_result")?this.setWarningText(null):this.setWarningText(Blockly.Msg.ASR_WARNING))}
+};
+
+Blockly.Blocks.asr_clear={init:function(){
+  this.setHelpUrl(Blockly.Msg.ASR_HELPURL);
+  this.setColour(Blockly.Blocks.asr.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.ASR_TITLE)
+      .appendField(Blockly.Msg.ASR_CLEAR);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.ASR_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.spiffs.checkBlocks(this,"asr_clear","asr_check_result")?this.setWarningText(null):this.setWarningText(Blockly.Msg.ASR_WARNING))}
+};
+
+Blockly.Blocks.asr_check_result={init:function(){
+  this.setHelpUrl(Blockly.Msg.ASR_HELPURL);
+  this.setColour(Blockly.Blocks.asr.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.ASR_TITLE);
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.ASR_SPEECH_LIST),"RESULT")
+      .appendField(Blockly.Msg.ASR_WHEN_CHECKED);
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Boolean");
+  this.setTooltip(Blockly.Msg.ASR_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.spiffs.checkBlocks(this,"asr_check_result","asr_check_result")?this.setWarningText(null):this.setWarningText(Blockly.Msg.ASR_WARNING))}
 };

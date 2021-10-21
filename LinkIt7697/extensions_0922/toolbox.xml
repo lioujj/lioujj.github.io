@@ -1304,6 +1304,13 @@
       <block type="oled_display_font_direction"></block>
       <block type="oled_display_set_font"></block>
       <block type="oled_display_set_chinese_font"></block>
+      <block type="oled_display_set_alphabet_font">
+        <value name="FONT">
+          <block type="text">
+            <field name="TEXT">Font name</field>
+          </block>
+        </value>
+      </block>
       <block type="oled_display_set_color"></block>
       <block type="oled_display_set_overwrite"></block>
       <block type="oled_display_clear_buffer"></block>
@@ -1918,6 +1925,14 @@
       </block>
       <block type="max30105_set_spo2_clear"></block>
     </category>
+<!--
+    <category id="category_asr" name="ASR">
+      <block type="asr_check"></block>
+      <block type="asr_learn"></block>
+      <block type="asr_clear"></block>
+      <block type="asr_check_result"></block>
+    </category>
+-->
   </category>
   <category id="category_lumex" name="Lumex">
     <category id="category_ldm6432" name="LDM6432MQTT">

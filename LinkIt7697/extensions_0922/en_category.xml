@@ -49,4 +49,5 @@
 <category><name>StartPlus</name><replace>EZ Start Kit +</replace></category>
 <category><name>MAX30105</name><replace>MAX30102</replace></category>
 <category><name>SPIFFS</name><replace>SPIFFS</replace></category>
+<category><name>ASR</name><replace>ASR</replace></category>
 </xml>
