@@ -5257,7 +5257,7 @@ Blockly.Blocks.startPlus_pin={init:function(){
   this.setColour(Blockly.Blocks.startPlus.HUE6);
   this.appendDummyInput()
       .appendField(Blockly.Msg.STARTPLUS_TITLE)
-      .appendField(new Blockly.FieldDropdown([["IO_8","0"],["IO_9","2"],["IO_10","1"],["IO_12","3"],["IO_14","4"],["IO_4","5"],["IO_5","6"]]),"PIN");
+      .appendField(new Blockly.FieldDropdown([["IO_8","0"],["IO_9","2"],["IO_10","1"],["IO_12","3"],["IO_14","4"],["IO_4","5"],["IO_5","6"],["IO_6","7"]]),"PIN");
   this.setInputsInline(!0);
   this.setOutput(!0,"Number");
   this.setTooltip(Blockly.Msg.STARTPLUS_TOOLTIP)}
