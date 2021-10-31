@@ -2485,12 +2485,13 @@ Blockly.Arduino.dac_tts_file=function(){
 
 Blockly.Arduino.dac_radio=function(){
   var a=Blockly.Arduino.valueToCode(this,"CONTENT",Blockly.Arduino.ORDER_ATOMIC)||"";
+  /*
   if (a.startsWith('"https://')){
     a=a.replace('https://','http://');
   }
   if (!a.startsWith('"http://')){
-    a='"http://'+a.replace('"','');
-  }
+    a='"http://'+a.replace('"','')+'"';
+  }*/
   return'playRadioStation('+a+');\n';
 }
 
