@@ -50,4 +50,5 @@
 <category><name>MAX30105</name><replace>MAX30102</replace></category>
 <category><name>SPIFFS</name><replace>SPIFFS</replace></category>
 <category><name>ASR</name><replace>ASR</replace></category>
+<category><name>PN532_I2C</name><replace>PN532 I2c</replace></category>
 </xml>

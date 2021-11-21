@@ -685,7 +685,6 @@
             </block>
           </value>
         </block>
-        <block type="dac_stop"></block>
         <block type="dac_set_gain">
           <value name="GAIN">
             <block type="math_number">
@@ -693,6 +692,8 @@
             </block>
           </value>
         </block>
+        <block type="dac_stop"></block>
+        <block type="dac_loop"></block>
         <block type="dac_is_running"></block>
         <block type="dac_radio">
           <value name="CONTENT">
@@ -1931,6 +1932,14 @@
       <block type="asr_clear"></block>
       <block type="asr_check_result"></block>
     </category>
+<!--
+    <category id="category_pn532i2c" name="PN532_I2C">
+      <block type="pn532i2c_init"></block>
+      <block type="pn532i2c_loop"></block>
+      <block type="pn532i2c_checkUID"></block>
+      <block type="pn532i2c_getUID"></block>
+    </category>
+-->
   </category>
   <category id="category_lumex" name="Lumex">
     <category id="category_ldm6432" name="LDM6432MQTT">

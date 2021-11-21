@@ -10,9 +10,9 @@ Blockly.Arduino.finish=function(a){
     if (Blockly.Arduino.broadcast_udp.defineFunction.broadcast_my_check_body!="")
 		   myStr=myStr+"  checkBroadcastUDP();\n";
   }
-  if (  Blockly.Arduino.dac.ESP8266Audio=='yes' && Blockly.Arduino.definitions_.define_SPIFFS_include=='#include "SPIFFS.h"'){
-		myStr=myStr+'  checkDACrunning();\n  checkTTS();\n  checkMP3();\n';
-  }
+  //if (  Blockly.Arduino.dac.ESP8266Audio=='yes' && Blockly.Arduino.definitions_.define_SPIFFS_include=='#include "SPIFFS.h"'){
+	//	myStr=myStr+'  checkDACrunning();\n  checkTTS();\n  checkMP3();\n';
+  //}
 	if (Blockly.Arduino.webserver.webserver_exist=="yes"){
     Blockly.Arduino.webserver.webserver_header=Blockly.Arduino.webserver.webserver_header.replace("#title#",Blockly.Arduino.webserver.webserver_myTitle);
     Blockly.Arduino.webserver.webserver_header=Blockly.Arduino.webserver.webserver_header.replace("#color#",Blockly.Arduino.webserver.webserver_myColor);
@@ -2037,7 +2037,8 @@ Blockly.Arduino.fetchFromSheet=function(){
       b=Blockly.Arduino.valueToCode(this,"endCell",Blockly.Arduino.ORDER_ATOMIC)||"";
   Blockly.Arduino.definitions_.define_json_include="#define ARDUINOJSON_DECODE_UNICODE 1\n#include <ArduinoJson.h>";
   Blockly.Arduino.definitions_.define_sheet_json_doc_invoke='DynamicJsonDocument docSheet(2048);\n';
-  Blockly.Arduino.definitions_.define_read_sheet_invoke='void fetchFromSheet(const String& begin, const String& end){\n  static TLSClient sheetClient;\n  const char* host="script.google.com";\n  if (!sheetClient.connect(host, 443)) {\n    return;\n  }\n  const String url = String() +"https://"+host+"/macros/s/"+asId+"/exec?type=read&sheetId="+sheetId+"&sheetTag="+sheetTag+"&begin="+begin+"&end="+end;\n  sheetClient.println("GET " + url + " HTTP/1.1");\n  sheetClient.println(String()+"Host: "+host);\n  sheetClient.println("Accept: */*");\n  sheetClient.println("Connection: close");\n  sheetClient.println();\n  sheetClient.println();\n  String newUrl="";\n  while (sheetClient.connected()) {\n    newUrl = sheetClient.readStringUntil(\'\\n\');\n    if (newUrl.startsWith("Location: https://")) {\n      newUrl.replace("Location: ","");\n      break;\n    }\n  }\n  sheetClient.stop();\n  if (!sheetClient.connect(host, 443)) {\n    return;\n  }\n  sheetClient.println("GET " + newUrl + " HTTP/1.1");\n  sheetClient.println(String()+"Host: "+host);\n  sheetClient.println("Accept: */*");\n  sheetClient.println("Connection: close");\n  sheetClient.println();\n  sheetClient.println();\n  while (sheetClient.connected()) {\n    String line = sheetClient.readStringUntil(\'\\n\');\n    if (line.startsWith("{")) {\n      DeserializationError error = deserializeJson(docSheet, line);\n      break;\n    }\n  }\n  sheetClient.stop();\n}\n';
+  //Blockly.Arduino.definitions_.define_read_sheet_invoke='void fetchFromSheet(const String& begin, const String& end){\n  static TLSClient sheetClient;\n  const char* host="script.google.com";\n  if (!sheetClient.connect(host, 443)) {\n    return;\n  }\n  const String url = String() +"https://"+host+"/macros/s/"+asId+"/exec?type=read&sheetId="+sheetId+"&sheetTag="+sheetTag+"&begin="+begin+"&end="+end;\n  sheetClient.println("GET " + url + " HTTP/1.1");\n  sheetClient.println(String()+"Host: "+host);\n  sheetClient.println("Accept: */*");\n  sheetClient.println("Connection: close");\n  sheetClient.println();\n  sheetClient.println();\n  String newUrl="";\n  while (sheetClient.connected()) {\n    newUrl = sheetClient.readStringUntil(\'\\n\');\n    if (newUrl.startsWith("Location: https://")) {\n      newUrl.replace("Location: ","");\n      break;\n    }\n  }\n  sheetClient.stop();\n  if (!sheetClient.connect(host, 443)) {\n    return;\n  }\n  sheetClient.println("GET " + newUrl + " HTTP/1.1");\n  sheetClient.println(String()+"Host: "+host);\n  sheetClient.println("Accept: */*");\n  sheetClient.println("Connection: close");\n  sheetClient.println();\n  sheetClient.println();\n  while (sheetClient.connected()) {\n    String line = sheetClient.readStringUntil(\'\\n\');\n    if (line.startsWith("{")) {\n      DeserializationError error = deserializeJson(docSheet, line);\n      break;\n    }\n  }\n  sheetClient.stop();\n}\n';
+  Blockly.Arduino.definitions_.define_read_sheet_invoke='void fetchFromSheet(const String& begin, const String& end){\n  static WiFiClientSecure sheetClient;\n  const char* host="script.google.com";\n  if (!sheetClient.connect(host, 443)) {\n    return;\n  }\n  const String url = String() +"https://"+host+"/macros/s/"+asId+"/exec?type=read&sheetId="+sheetId+"&sheetTag="+sheetTag+"&begin="+begin+"&end="+end;\n  sheetClient.println("GET " + url + " HTTP/1.1");\n  sheetClient.println(String()+"Host: "+host);\n  sheetClient.println("Accept: */*");\n  sheetClient.println("Connection: close");\n  sheetClient.println();\n  sheetClient.println();\n  String newUrl="";\n  while (sheetClient.connected()) {\n    newUrl = sheetClient.readStringUntil(\'\\n\');\n    if (newUrl.startsWith("The document has moved <A HREF=\\"")) {\n      newUrl.replace("The document has moved <A HREF=\\"","");\n      newUrl.replace("\\">here</A>.","");\n      newUrl.replace("amp;","");\n      break;\n    }\n  }\n  sheetClient.stop();\n  if (!sheetClient.connect(host, 443)) {\n    return;\n  }\n  sheetClient.println("GET " + newUrl + " HTTP/1.1");\n  sheetClient.println(String()+"Host: "+host);\n  sheetClient.println("Accept: */*");\n  sheetClient.println("Connection: close");\n  sheetClient.println();\n  sheetClient.println();\n  while (sheetClient.connected()) {\n    String line = sheetClient.readStringUntil(\'\\n\');\n    if (line.startsWith("{")) {\n      DeserializationError error = deserializeJson(docSheet, line);\n      break;\n    }\n  }\n  sheetClient.stop();\n}\n';
   if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
     Blockly.Arduino.definitions_.define_secure_include="#include <WiFiClientSecure.h>";
     Blockly.Arduino.definitions_.define_read_sheet_invoke=Blockly.Arduino.definitions_.define_read_sheet_invoke.replace("TLSClient","WiFiClientSecure");
@@ -2998,9 +2999,9 @@ Blockly.Arduino.startPlus_ir_receive=function(){
     Blockly.Arduino.definitions_.define_irremote_init="IRrecv irrecv("+a+");";
     Blockly.Arduino.definitions_.define_irremote_decode="decode_results results;\nString myCodeType;\nString myIRcode;";
     Blockly.Arduino.definitions_.define_irremote_ir_type='String ir_type(int tip)\n{\n  if (tip == 1){\n    return "RC5";\n  } else if (tip == 2){\n    return "RC6";\n  } else if (tip == 3){\n    return "NEC";\n  } else if (tip == 4){\n    return "SONY";\n  } else if (tip == 5){\n    return "PANASONIC";\n  } else if (tip == 6){\n    return "JVC";\n  } else if (tip == 7){\n    return "SAMSUNG";\n  } else if (tip == 10){\n    return "LG";\n  } else if (tip == 14){\n    return "SHARP";\n  } else if (tip == 17){\n    return "LEGO_PF";\n  } else {\n    return "UNKNOWN";\n  }\n}\n';
-    Blockly.Arduino.setups_["irremote_"]||(Blockly.Arduino.setups_["irremote_"]="irrecv.enableIRIn();\n");
+    //Blockly.Arduino.setups_["irremote_"]||(Blockly.Arduino.setups_["irremote_"]="irrecv.enableIRIn();\n");
   }
-  return''
+  return'irrecv.enableIRIn();\n';
 };
 
 //MAX30105
@@ -3224,6 +3225,28 @@ Blockly.Arduino.asr_check_result=function(){
   if (!Blockly.Arduino.setups_.setup_wire_lib)
       Blockly.Arduino.setups_.setup_wire_lib="Wire.begin();";
   return['asr_value=='+a,Blockly.Arduino.ORDER_ATOMIC];
+}
+
+//PN532_I2C
+Blockly.Arduino.pn532i2c={};
+Blockly.Arduino.pn532i2c_init=function(){
+  Blockly.Arduino.definitions_.define_wire="#include <Wire.h>";
+  Blockly.Arduino.definitions_.define_wire_pn532='#include <PN532_I2C.h>\n#include <PN532.h>\n#include <NfcAdapter.h>';
+  Blockly.Arduino.definitions_.define_pn532_invoke='PN532_I2C pn532i2c(Wire);\nPN532 nfc(pn532i2c);\nString myNFC_UID="";\n\nString readFromNFC_UID() {\n  uint8_t success;\n  uint8_t uid[] = { 0, 0, 0, 0, 0, 0, 0 };\n  uint8_t uidLength;\n  String cardUID="";\n  success = nfc.readPassiveTargetID(PN532_MIFARE_ISO14443A, uid, &uidLength);\n  if (success) {\n    for (uint8_t i=0; i < uidLength; i++)\n    {\n      cardUID+=String(uid[i], HEX);\n    }\n  }\n  return cardUID;\n}\n';
+  Blockly.Arduino.setups_.setup_pn532_i2c='nfc.begin();';
+  return'nfc.setPassiveActivationRetries(0xFF);\nnfc.SAMConfig();\n';
+}
+
+Blockly.Arduino.pn532i2c_loop=function(){
+  return'myNFC_UID=readFromNFC_UID();\n';
+}
+
+Blockly.Arduino.pn532i2c_checkUID=function(){
+  return['myNFC_UID!=""',Blockly.Arduino.ORDER_ATOMIC];
+}
+
+Blockly.Arduino.pn532i2c_getUID=function(){
+  return['myNFC_UID',Blockly.Arduino.ORDER_ATOMIC];
 }
 
 setTimeout(function(){
