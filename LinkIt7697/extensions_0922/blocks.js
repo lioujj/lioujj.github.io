@@ -2906,7 +2906,7 @@ Blockly.Blocks.esp32_board_usb={init:function(){
       .appendField(Blockly.Msg.ESP32_BOARD_TITLE)
       .appendField(new Blockly.FieldDropdown([["USB1","1"],["USB2","3"]]),"USB_PORT")
   this.appendValueInput("ON_OFF")
-      .setCheck("Number")
+      .setCheck("Boolean")
       .appendField(Blockly.Msg.ESP32_BOARD_RGB_STATUS);
   this.setInputsInline(!0);
   this.setPreviousStatement(!0);
@@ -2921,7 +2921,7 @@ Blockly.Blocks.esp32_board_rgb={init:function(){
       .appendField(Blockly.Msg.ESP32_BOARD_TITLE)
       .appendField(new Blockly.FieldDropdown(Blockly.Msg.ESP32_BOARD_RGB),"RGB")
   this.appendValueInput("ON_OFF")
-      .setCheck("Number")
+      .setCheck("Boolean")
       .appendField(Blockly.Msg.ESP32_BOARD_RGB_STATUS);
   this.setInputsInline(!0);
   this.setPreviousStatement(!0);
@@ -2938,7 +2938,7 @@ Blockly.Blocks.esp32_board_rgb_custom={init:function(){
       .setCheck("Number")
       .appendField(Blockly.Msg.ESP32_BOARD_RGB_CUSTOM);
   this.appendValueInput("ON_OFF")
-      .setCheck("Number")
+      .setCheck("Boolean")
       .appendField(Blockly.Msg.ESP32_BOARD_RGB_STATUS);
   this.setInputsInline(!0);
   this.setPreviousStatement(!0);
@@ -4597,6 +4597,7 @@ Blockly.Blocks.dac_stop={init:function(){
       this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"dac_stop","dac_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.DAC_INIT_WARNIG))}
 };
 
+
 Blockly.Blocks.dac_set_gain={init:function(){
   this.setHelpUrl(Blockly.Msg.DAC_HELPURL);
   this.setColour(Blockly.Blocks.dac.HUE);
@@ -5765,4 +5766,69 @@ Blockly.Blocks.asr_check_result={init:function(){
   this.setOutput(!0,"Boolean");
   this.setTooltip(Blockly.Msg.ASR_TOOLTIP)},onchange:function(){
       this.workspace&&(Blockly.Blocks.spiffs.checkBlocks(this,"asr_check_result","asr_check_result")?this.setWarningText(null):this.setWarningText(Blockly.Msg.ASR_WARNING))}
+};
+
+//PN532_I2C
+Blockly.Blocks.pn532i2c={};
+Blockly.Blocks.pn532i2c.HUE=97;
+Blockly.Blocks.pn532i2c.checkBlocks=function(a,slave,master){
+	var b=null,
+	    d=a.type;
+		a=a.workspace.getAllBlocks();
+		for(var c=0;c<a.length;c++)
+			if(slave!=a[c].type||null!=b||(b=a[c].type!=d?!0:!1),master==a[c].type){
+			  return!0;
+      }
+		return b
+};
+
+Blockly.Blocks.pn532i2c_init={init:function(){
+  this.setHelpUrl(Blockly.Msg.PN532I2C_HELPURL);
+  this.setColour(Blockly.Blocks.pn532i2c.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.PN532I2C_TITLE)
+      .appendField(Blockly.Msg.PN532I2C_INIT);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.PN532I2C_TOOLTIP)}
+};
+
+Blockly.Blocks.pn532i2c_loop={init:function(){
+  this.setHelpUrl(Blockly.Msg.PN532I2C_HELPURL);
+  this.setColour(Blockly.Blocks.pn532i2c.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.PN532I2C_TITLE)
+      .appendField(Blockly.Msg.PN532I2C_LOOP);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.PN532I2C_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.spiffs.checkBlocks(this,"pn532i2c_loop","pn532i2c_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.PN532I2C_WARNING))}
+};
+
+
+Blockly.Blocks.pn532i2c_checkUID={init:function(){
+  this.setHelpUrl(Blockly.Msg.PN532I2C_HELPURL);
+  this.setColour(Blockly.Blocks.pn532i2c.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.PN532I2C_TITLE)
+      .appendField(Blockly.Msg.PN532I2C_CHECK_UID);
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Boolean");
+  this.setTooltip(Blockly.Msg.PN532I2C_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.spiffs.checkBlocks(this,"pn532i2c_checkUID","pn532i2c_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.PN532I2C_WARNING))}
+};
+
+
+Blockly.Blocks.pn532i2c_getUID={init:function(){
+  this.setHelpUrl(Blockly.Msg.PN532I2C_HELPURL);
+  this.setColour(Blockly.Blocks.pn532i2c.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.PN532I2C_TITLE)
+      .appendField(Blockly.Msg.PN532I2C_UID);
+  this.setInputsInline(!0);
+  this.setOutput(!0,"String");
+  this.setTooltip(Blockly.Msg.PN532I2C_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.spiffs.checkBlocks(this,"pn532i2c_getUID","pn532i2c_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.PN532I2C_WARNING))}
 };
