@@ -750,3 +750,13 @@ Blockly.Msg.ASR_SPEECH_LIST =[
 ];
 Blockly.Msg.ASR_CLEAR = "restore factory settings";
 Blockly.Msg.ASR_LEARN = "enter learning-model";
+
+//PN532_I2C
+Blockly.Msg.PN532I2C_HELPURL = "";
+Blockly.Msg.PN532I2C_TITLE = "NFC PN532";
+Blockly.Msg.PN532I2C_INIT = "init";
+Blockly.Msg.PN532I2C_TOOLTIP = "";
+Blockly.Msg.PN532I2C_LOOP = "check RFID";
+Blockly.Msg.PN532I2C_WARNING = "You have to set \""+Blockly.Msg.PN532I2C_TITLE+" "+Blockly.Msg.PN532I2C_INIT+"\" first.";
+Blockly.Msg.PN532I2C_CHECK_UID = "read a RFID tag ID?";
+Blockly.Msg.PN532I2C_UID = "RFID Tag ID";

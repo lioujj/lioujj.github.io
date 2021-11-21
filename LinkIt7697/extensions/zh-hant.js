@@ -618,7 +618,7 @@ Blockly.Msg.DAC_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/i2s
 Blockly.Msg.DAC_TITLE = "I2S音訊模組"
 Blockly.Msg.DAC_INIT = "初始化";
 Blockly.Msg.DAC_TOOLTIP = "I2S DAC";
-Blockly.Msg.DAC_LOOP = "維持運作";
+Blockly.Msg.DAC_LOOP = "持續維持音訊播放的運作";
 Blockly.Msg.DAC_INIT_WARNIG =  "必須先設定「"+Blockly.Msg.DAC_TITLE+Blockly.Msg.DAC_INIT+"」積木";
 Blockly.Msg.DAC_TTS_TITLE = "Google語音唸出文字(TTS)";
 Blockly.Msg.DAC_TTS_LANGUAGE = "語音";
@@ -744,3 +744,13 @@ Blockly.Msg.ASR_SPEECH_LIST =[
 ];
 Blockly.Msg.ASR_CLEAR = "清除所有自訂語音";
 Blockly.Msg.ASR_LEARN = "進入自訂語音學習模式";
+
+//PN532_I2C
+Blockly.Msg.PN532I2C_HELPURL = "";
+Blockly.Msg.PN532I2C_TITLE = "PN532讀卡機";
+Blockly.Msg.PN532I2C_INIT = "初始化";
+Blockly.Msg.PN532I2C_TOOLTIP = "";
+Blockly.Msg.PN532I2C_LOOP = "感測RFID卡";
+Blockly.Msg.PN532I2C_WARNING = "必須先設定「"+Blockly.Msg.PN532I2C_TITLE+" "+Blockly.Msg.PN532I2C_INIT+"」積木";
+Blockly.Msg.PN532I2C_CHECK_UID = "讀取到RFID卡片?";
+Blockly.Msg.PN532I2C_UID = "取得RFID卡號";
