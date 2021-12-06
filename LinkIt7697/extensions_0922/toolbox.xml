@@ -1938,9 +1938,26 @@
       <block type="pn532i2c_loop"></block>
       <block type="pn532i2c_checkUID"></block>
       <block type="pn532i2c_getUID"></block>
+      <block type="pn532i2c_getType"></block>
+      <block type="pn532i2c_writeBlock">
+				<value name="MY_DATA">
+					<block type="text">
+						<field name="TEXT"></field>
+          </block>
+				</value>
+      </block>
+      <block type="pn532i2c_readBlock"></block>
+      <block type="pn532i2c_writePage">
+				<value name="MY_DATA">
+					<block type="text">
+						<field name="TEXT"></field>
+          </block>
+				</value>
+      </block>
+      <block type="pn532i2c_readPage"></block>
     </category>
--->
   </category>
+-->
   <category id="category_lumex" name="Lumex">
     <category id="category_ldm6432" name="LDM6432MQTT">
       <block type="ldm_mqtt_topic">

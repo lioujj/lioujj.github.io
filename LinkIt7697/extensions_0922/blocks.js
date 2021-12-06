@@ -5770,7 +5770,7 @@ Blockly.Blocks.asr_check_result={init:function(){
 
 //PN532_I2C
 Blockly.Blocks.pn532i2c={};
-Blockly.Blocks.pn532i2c.HUE=97;
+Blockly.Blocks.pn532i2c.HUE=270;
 Blockly.Blocks.pn532i2c.checkBlocks=function(a,slave,master){
 	var b=null,
 	    d=a.type;
@@ -5831,4 +5831,98 @@ Blockly.Blocks.pn532i2c_getUID={init:function(){
   this.setOutput(!0,"String");
   this.setTooltip(Blockly.Msg.PN532I2C_TOOLTIP)},onchange:function(){
       this.workspace&&(Blockly.Blocks.spiffs.checkBlocks(this,"pn532i2c_getUID","pn532i2c_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.PN532I2C_WARNING))}
+};
+
+Blockly.Blocks.pn532i2c_getType={init:function(){
+  this.setHelpUrl(Blockly.Msg.PN532I2C_HELPURL);
+  this.setColour(Blockly.Blocks.pn532i2c.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.PN532I2C_TITLE)
+      .appendField(Blockly.Msg.PN532I2C_TYPE);
+  this.setInputsInline(!0);
+  this.setOutput(!0,"String");
+  this.setTooltip(Blockly.Msg.PN532I2C_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.spiffs.checkBlocks(this,"pn532i2c_getType","pn532i2c_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.PN532I2C_WARNING))}
+};
+
+Blockly.Blocks.pn532i2c_writeBlock={init:function(){
+  this.setHelpUrl(Blockly.Msg.PN532I2C_HELPURL);
+  this.setColour(Blockly.Blocks.pn532i2c.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.PN532I2C_TITLE+"("+Blockly.Msg.PN532I2C_CLASSIC+")");
+  this.appendValueInput("MY_DATA")
+      .setCheck("String")
+      .appendField(Blockly.Msg.PN532I2C_WRITE_BLOCK);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.PN532I2C_ON)
+      .appendField(Blockly.Msg.PN532I2C_SECTOR);
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown([["1","1"],["2","2"],["3","3"],["4","4"],["5","5"],["6","6"],["7","7"],["8","8"],["9","9"],["10","10"],["11","11"],["12","12"],["13","13"],["14","14"],["15","15"]]),"SECTOR");
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.PN532I2C_BLOCK);
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown([["0","0"],["1","1"],["2","2"]]),"BLOCK");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.PN532I2C_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.spiffs.checkBlocks(this,"writeBlock","pn532i2c_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.PN532I2C_WARNING))}
+};
+
+Blockly.Blocks.pn532i2c_readBlock={init:function(){
+  this.setHelpUrl(Blockly.Msg.PN532I2C_HELPURL);
+  this.setColour(Blockly.Blocks.pn532i2c.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.PN532I2C_TITLE+"("+Blockly.Msg.PN532I2C_CLASSIC+")")
+      .appendField(Blockly.Msg.PN532I2C_READ_BLOCK);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.PN532I2C_FROM)
+      .appendField(Blockly.Msg.PN532I2C_SECTOR);
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown([["1","1"],["2","2"],["3","3"],["4","4"],["5","5"],["6","6"],["7","7"],["8","8"],["9","9"],["10","10"],["11","11"],["12","12"],["13","13"],["14","14"],["15","15"]]),"SECTOR");
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.PN532I2C_BLOCK);
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown([["0","0"],["1","1"],["2","2"]]),"BLOCK");
+  this.setInputsInline(!0);
+  this.setOutput(!0,"String");
+  this.setTooltip(Blockly.Msg.PN532I2C_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.spiffs.checkBlocks(this,"readBlock","pn532i2c_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.PN532I2C_WARNING))}
+};
+
+Blockly.Blocks.pn532i2c_writePage={init:function(){
+  this.setHelpUrl(Blockly.Msg.PN532I2C_HELPURL);
+  this.setColour(Blockly.Blocks.pn532i2c.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.PN532I2C_TITLE+"("+Blockly.Msg.PN532I2C_ULTRALIGHT+")");
+  this.appendValueInput("MY_DATA")
+      .setCheck("String")
+      .appendField(Blockly.Msg.PN532I2C_WRITE_BLOCK);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.PN532I2C_ON)
+      .appendField(Blockly.Msg.PN532I2C_PAGE);
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.PN532I2C_PAGE_List),"PAGE");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.PN532I2C_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.spiffs.checkBlocks(this,"writePage","pn532i2c_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.PN532I2C_WARNING))}
+};
+
+Blockly.Blocks.pn532i2c_readPage={init:function(){
+  this.setHelpUrl(Blockly.Msg.PN532I2C_HELPURL);
+  this.setColour(Blockly.Blocks.pn532i2c.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.PN532I2C_TITLE+"("+Blockly.Msg.PN532I2C_ULTRALIGHT+")")
+      .appendField(Blockly.Msg.PN532I2C_READ_BLOCK);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.PN532I2C_FROM)
+      .appendField(Blockly.Msg.PN532I2C_PAGE);
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.PN532I2C_PAGE_List),"PAGE");
+  this.setInputsInline(!0);
+  this.setOutput(!0,"String");
+  this.setTooltip(Blockly.Msg.PN532I2C_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.spiffs.checkBlocks(this,"readPage","pn532i2c_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.PN532I2C_WARNING))}
 };

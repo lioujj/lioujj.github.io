@@ -735,7 +735,7 @@ Blockly.Msg.SPIFFS_FILE_OPEN_MODE =[["read only","r"],["over write","w"],["appen
 Blockly.Msg.SPIFFS_FILE_DELETE = "remove file(include path)";
 
 //ASR
-Blockly.Msg.ASR_HELPURL = "";
+Blockly.Msg.ASR_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/asr語音辨識指令積木";
 Blockly.Msg.ASR_TITLE = "ASR";
 Blockly.Msg.ASR_CHECK = "check speech recognition result";
 Blockly.Msg.ASR_TOOLTIP = "ASR";
@@ -760,3 +760,17 @@ Blockly.Msg.PN532I2C_LOOP = "check RFID";
 Blockly.Msg.PN532I2C_WARNING = "You have to set \""+Blockly.Msg.PN532I2C_TITLE+" "+Blockly.Msg.PN532I2C_INIT+"\" first.";
 Blockly.Msg.PN532I2C_CHECK_UID = "read a RFID tag ID?";
 Blockly.Msg.PN532I2C_UID = "RFID Tag ID";
+Blockly.Msg.PN532I2C_TYPE = "the type of the detected RFID tag";
+Blockly.Msg.PN532I2C_CLASSIC = "Mifare Classic";
+Blockly.Msg.PN532I2C_WRITE_BLOCK = "write string";
+Blockly.Msg.PN532I2C_ON = "on";
+Blockly.Msg.PN532I2C_SECTOR = "Sector";
+Blockly.Msg.PN532I2C_BLOCK = "Block";
+Blockly.Msg.PN532I2C_READ_BLOCK = "read string";
+Blockly.Msg.PN532I2C_FROM = "from";
+Blockly.Msg.PN532I2C_ULTRALIGHT = "Mifare Ultralight";
+Blockly.Msg.PN532I2C_PAGE = "Page";
+Blockly.Msg.PN532I2C_PAGE_List = [["4","4"],["5","5"],["6","6"],["7","7"],["8","8"],["9","9"],["10","10"],["11","11"],["12","12"],["13","13"],["14","14"],
+                                  ["15","15"],["16","16"],["17","17"],["18","18"],["19","19"],["20","20"],["21","21"],["22","22"],["23","23"],["24","24"],
+                                  ["25","25"],["26","26"],["27","27"],["28","28"],["29","29"],["30","30"],["31","31"],["32","32"],["33","33"],["34","34"],
+                                  ["35","35"],["36","36"],["37","37"],["38","38"],["39","39"]];
