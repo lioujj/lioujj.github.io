@@ -1928,9 +1928,9 @@
     </category>
     <category id="category_asr" name="ASR">
       <block type="asr_check"></block>
+      <block type="asr_check_result"></block>
       <block type="asr_learn"></block>
       <block type="asr_clear"></block>
-      <block type="asr_check_result"></block>
     </category>
 <!--
     <category id="category_pn532i2c" name="PN532_I2C">
