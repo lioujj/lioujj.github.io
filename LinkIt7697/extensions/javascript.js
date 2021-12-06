@@ -3232,13 +3232,13 @@ Blockly.Arduino.pn532i2c={};
 Blockly.Arduino.pn532i2c_init=function(){
   Blockly.Arduino.definitions_.define_wire="#include <Wire.h>";
   Blockly.Arduino.definitions_.define_wire_pn532='#include <PN532_I2C.h>\n#include <PN532.h>\n#include <NfcAdapter.h>';
-  Blockly.Arduino.definitions_.define_pn532_invoke='PN532_I2C pn532i2c(Wire);\nPN532 nfc(pn532i2c);\nString myNFC_UID="";\n\nString readFromNFC_UID() {\n  uint8_t success;\n  uint8_t uid[] = { 0, 0, 0, 0, 0, 0, 0 };\n  uint8_t uidLength;\n  String cardUID="";\n  success = nfc.readPassiveTargetID(PN532_MIFARE_ISO14443A, uid, &uidLength);\n  if (success) {\n    for (uint8_t i=0; i < uidLength; i++)\n    {\n      cardUID+=String(uid[i], HEX);\n    }\n  }\n  return cardUID;\n}\n';
+  Blockly.Arduino.definitions_.define_pn532_invoke='PN532_I2C pn532i2c(Wire);\nPN532 nfc(pn532i2c);\nString myNFC_UID="";\nuint8_t myNFC_UID_array[] = { 0, 0, 0, 0, 0, 0, 0 };\nuint8_t myNFC_UID_Length;\n\nString readFromNFC_UID() {\n  uint8_t success;\n  String cardUID="";\n  success = nfc.readPassiveTargetID(PN532_MIFARE_ISO14443A, myNFC_UID_array, &myNFC_UID_Length);\n  if (success) {\n    for (uint8_t i=0; i < myNFC_UID_Length; i++)\n    {\n      cardUID+=((String(myNFC_UID_array[i], HEX).length()==1?"0":"")+String(myNFC_UID_array[i], HEX));\n    }\n  }\n  cardUID.toUpperCase();\n  return cardUID;\n}\n';
   Blockly.Arduino.setups_.setup_pn532_i2c='nfc.begin();';
   return'nfc.setPassiveActivationRetries(0xFF);\nnfc.SAMConfig();\n';
 }
 
 Blockly.Arduino.pn532i2c_loop=function(){
-  return'myNFC_UID=readFromNFC_UID();\n';
+  return'myNFC_UID_Length=0;\nmyNFC_UID=readFromNFC_UID();\n';
 }
 
 Blockly.Arduino.pn532i2c_checkUID=function(){
@@ -3247,6 +3247,40 @@ Blockly.Arduino.pn532i2c_checkUID=function(){
 
 Blockly.Arduino.pn532i2c_getUID=function(){
   return['myNFC_UID',Blockly.Arduino.ORDER_ATOMIC];
+}
+
+Blockly.Arduino.pn532i2c_getType=function(){
+  return['(myNFC_UID_Length==4?"'+Blockly.Msg.PN532I2C_CLASSIC+'":(myNFC_UID_Length==7?"'+Blockly.Msg.PN532I2C_ULTRALIGHT+'":""))',Blockly.Arduino.ORDER_ATOMIC];
+}
+
+Blockly.Arduino.pn532i2c_writeBlock=function(){
+  var a=Blockly.Arduino.valueToCode(this,"MY_DATA",Blockly.Arduino.ORDER_ATOMIC)||"",
+      b=parseInt(this.getFieldValue("SECTOR")),
+      c=parseInt(this.getFieldValue("BLOCK"));
+      d=b*4+c;
+  Blockly.Arduino.definitions_.define_pn532_write_classic_block_invoke='void writeClassicBlock(byte blockIndex, String myMsg)\n{\n  if (myNFC_UID_Length == 4)\n  {\n    uint8_t success;\n    uint8_t keya[6] = { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF };\n    success = nfc.mifareclassic_AuthenticateBlock(myNFC_UID_array, myNFC_UID_Length, blockIndex, 0, keya);\n    if (success)\n    {\n      uint8_t data[16]={0};\n      char dataArray[17];\n      myMsg.toCharArray(dataArray, 17);\n      for(int i=0;i<strlen(dataArray);i++)\n      {\n        data[i]=dataArray[i];\n      }\n      success = nfc.mifareclassic_WriteDataBlock (blockIndex, data);\n    }\n  }\n}\n';
+  return'writeClassicBlock('+d+', '+a+');\n';
+}
+
+Blockly.Arduino.pn532i2c_readBlock=function(){
+  var a=parseInt(this.getFieldValue("SECTOR")),
+      b=parseInt(this.getFieldValue("BLOCK"));
+      c=a*4+b;
+  Blockly.Arduino.definitions_.define_pn532_read_classic_block_invoke='String readClassicBlock(byte blockIndex)\n{\n  if (myNFC_UID_Length == 4)\n  {\n    uint8_t success;\n    uint8_t keya[6] = { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF };\n    success = nfc.mifareclassic_AuthenticateBlock(myNFC_UID_array, myNFC_UID_Length, blockIndex, 0, keya);\n    if (success)\n    {\n      uint8_t data[16]={0};\n      char dataArray[17]={\'\\0\'};\n      success = nfc.mifareclassic_ReadDataBlock(blockIndex, data);\n      if (success)\n      {\n        for(int i=0;i<sizeof(data);i++)\n        {\n          dataArray[i]=data[i];\n        }\n        return String(dataArray);\n      }\n      else\n        return "";\n    }\n    else\n      return "";\n  }\n  else\n    return "";\n}\n';
+  return['readClassicBlock('+c+')',Blockly.Arduino.ORDER_ATOMIC];
+}
+
+Blockly.Arduino.pn532i2c_writePage=function(){
+  var a=Blockly.Arduino.valueToCode(this,"MY_DATA",Blockly.Arduino.ORDER_ATOMIC)||"",
+      b=this.getFieldValue("PAGE");
+  Blockly.Arduino.definitions_.define_pn532_write_ultra_page_invoke='void writeUltraPage(byte page, String myMsg)\n{\n  if (myNFC_UID_Length == 7)\n  {\n    uint8_t success;\n    uint8_t data[4]={0};\n    char dataArray[5];\n    myMsg.toCharArray(dataArray, 5);\n    for(int i=0;i<strlen(dataArray);i++)\n    {\n      data[i]=dataArray[i];\n    }\n    success = nfc.mifareultralight_WritePage (page, data);\n  }\n}\n';
+  return'writeUltraPage('+b+','+a+');\n';
+}
+
+Blockly.Arduino.pn532i2c_readPage=function(){
+  var a=this.getFieldValue("PAGE");
+  Blockly.Arduino.definitions_.define_pn532_read_ultra_page_invoke='String readUltraPage(byte page)\n{\n  if (myNFC_UID_Length == 7)\n  {\n    uint8_t success;\n    uint8_t data[4]={0};\n    char dataArray[5]={\'\\0\'};\n    success = nfc.mifareultralight_ReadPage(page, data);\n    if (success)\n    {\n      for(int i=0;i<sizeof(data);i++)\n      {\n        dataArray[i]=data[i];\n      }\n      return String(dataArray);\n    }\n    else\n      return "";\n  }\n  else\n    return "";\n}\n';
+  return['readUltraPage('+a+')',Blockly.Arduino.ORDER_ATOMIC];
 }
 
 setTimeout(function(){

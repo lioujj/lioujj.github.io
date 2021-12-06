@@ -729,7 +729,7 @@ Blockly.Msg.SPIFFS_FILE_OPEN_MODE =[["唯讀","r"],["覆寫","w"],["接續寫入
 Blockly.Msg.SPIFFS_FILE_DELETE = "刪除檔案(含路徑)";
 
 //ASR
-Blockly.Msg.ASR_HELPURL = "";
+Blockly.Msg.ASR_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/asr語音辨識指令積木";
 Blockly.Msg.ASR_TITLE = "ASR語音辨識";
 Blockly.Msg.ASR_CHECK = "檢查辨識結果";
 Blockly.Msg.ASR_TOOLTIP = "ASR";
@@ -754,3 +754,17 @@ Blockly.Msg.PN532I2C_LOOP = "感測RFID卡";
 Blockly.Msg.PN532I2C_WARNING = "必須先設定「"+Blockly.Msg.PN532I2C_TITLE+" "+Blockly.Msg.PN532I2C_INIT+"」積木";
 Blockly.Msg.PN532I2C_CHECK_UID = "讀取到RFID卡片?";
 Blockly.Msg.PN532I2C_UID = "取得RFID卡號";
+Blockly.Msg.PN532I2C_TYPE = "偵測到的RFID卡的種類";
+Blockly.Msg.PN532I2C_CLASSIC = "Mifare Classic";
+Blockly.Msg.PN532I2C_WRITE_BLOCK = "寫入字串";
+Blockly.Msg.PN532I2C_ON = "在";
+Blockly.Msg.PN532I2C_SECTOR = "Sector";
+Blockly.Msg.PN532I2C_BLOCK = "Block";
+Blockly.Msg.PN532I2C_READ_BLOCK = "讀取字串";
+Blockly.Msg.PN532I2C_FROM = "從";
+Blockly.Msg.PN532I2C_ULTRALIGHT = "Mifare Ultralight";
+Blockly.Msg.PN532I2C_PAGE = "Page";
+Blockly.Msg.PN532I2C_PAGE_List = [["4","4"],["5","5"],["6","6"],["7","7"],["8","8"],["9","9"],["10","10"],["11","11"],["12","12"],["13","13"],["14","14"],
+                                  ["15","15"],["16","16"],["17","17"],["18","18"],["19","19"],["20","20"],["21","21"],["22","22"],["23","23"],["24","24"],
+                                  ["25","25"],["26","26"],["27","27"],["28","28"],["29","29"],["30","30"],["31","31"],["32","32"],["33","33"],["34","34"],
+                                  ["35","35"],["36","36"],["37","37"],["38","38"],["39","39"]];
