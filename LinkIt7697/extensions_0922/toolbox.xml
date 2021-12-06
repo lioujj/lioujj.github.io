@@ -1956,8 +1956,9 @@
       </block>
       <block type="pn532i2c_readPage"></block>
     </category>
-  </category>
 -->
+  </category>
+
   <category id="category_lumex" name="Lumex">
     <category id="category_ldm6432" name="LDM6432MQTT">
       <block type="ldm_mqtt_topic">
