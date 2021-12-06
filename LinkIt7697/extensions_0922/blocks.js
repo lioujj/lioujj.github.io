@@ -5737,8 +5737,7 @@ Blockly.Blocks.asr_learn={init:function(){
   this.setInputsInline(!0);
   this.setPreviousStatement(!0,null);
   this.setNextStatement(!0,null);
-  this.setTooltip(Blockly.Msg.ASR_TOOLTIP)},onchange:function(){
-      this.workspace&&(Blockly.Blocks.spiffs.checkBlocks(this,"asr_learn","asr_check_result")?this.setWarningText(null):this.setWarningText(Blockly.Msg.ASR_WARNING))}
+  this.setTooltip(Blockly.Msg.ASR_TOOLTIP)}
 };
 
 Blockly.Blocks.asr_clear={init:function(){
@@ -5750,8 +5749,7 @@ Blockly.Blocks.asr_clear={init:function(){
   this.setInputsInline(!0);
   this.setPreviousStatement(!0,null);
   this.setNextStatement(!0,null);
-  this.setTooltip(Blockly.Msg.ASR_TOOLTIP)},onchange:function(){
-      this.workspace&&(Blockly.Blocks.spiffs.checkBlocks(this,"asr_clear","asr_check_result")?this.setWarningText(null):this.setWarningText(Blockly.Msg.ASR_WARNING))}
+  this.setTooltip(Blockly.Msg.ASR_TOOLTIP)}
 };
 
 Blockly.Blocks.asr_check_result={init:function(){
@@ -5765,7 +5763,7 @@ Blockly.Blocks.asr_check_result={init:function(){
   this.setInputsInline(!0);
   this.setOutput(!0,"Boolean");
   this.setTooltip(Blockly.Msg.ASR_TOOLTIP)},onchange:function(){
-      this.workspace&&(Blockly.Blocks.spiffs.checkBlocks(this,"asr_check_result","asr_check_result")?this.setWarningText(null):this.setWarningText(Blockly.Msg.ASR_WARNING))}
+      this.workspace&&(Blockly.Blocks.spiffs.checkBlocks(this,"asr_check_result","asr_check")?this.setWarningText(null):this.setWarningText(Blockly.Msg.ASR_WARNING))}
 };
 
 //PN532_I2C
