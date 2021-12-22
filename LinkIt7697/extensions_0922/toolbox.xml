@@ -697,11 +697,10 @@
         <block type="dac_is_running"></block>
         <block type="dac_radio">
           <value name="CONTENT">
-            <block type="text">
-              <field name="TEXT"></field>
-            </block>
+            <block type="dac_radioList"></block>
           </value>
         </block>
+        <block type="dac_radioList"></block>
         <block type="dac_tts">
           <value name="CONTENT">
             <block type="text">
@@ -1958,7 +1957,6 @@
     </category>
 -->
   </category>
-
   <category id="category_lumex" name="Lumex">
     <category id="category_ldm6432" name="LDM6432MQTT">
       <block type="ldm_mqtt_topic">
