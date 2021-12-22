@@ -638,6 +638,21 @@ Blockly.Msg.DAC_TTS_FILE_TITLE = "儲存Google TTS語音MP3檔案";
 Blockly.Msg.DAC_TTS_SAVE_TO = "到";
 Blockly.Msg.DAC_STOP = "停止播放所有音訊";
 Blockly.Msg.DAC_GAIN = "設定音量增益(0.0~4.0)";
+Blockly.Msg.DAC_RADIO_LIST_TITLE = "網路電台";
+Blockly.Msg.DAC_RADIO_LIST = [["ICRT","http://live.leanstream.co/ICRTFM-MP3"],
+                              ["NPR News","http://npr-ice.streamguys1.com/live.mp3"],
+                              ["BBC News","http://stream.live.vc.bbcmedia.co.uk/bbc_world_service"],
+                              ["城市廣播網","http://fm929.cityfm.tw:8080/929.mp3"],
+                              ["Kids public radio","http://kidspublicradio2.got.net:8000/pipsqueaks"],
+                              ["Piano Solo","http://pianosolo.streamguys.net/live"],
+                              ["古典音樂台","http://onair.family977.com.tw:8000/live.mp3"],
+                              ["栗子的輕音樂","http://lizeradio.com:8080/;&type=mp3"],
+                              ["紐約愛樂","http://stream.wqxr.org/wqxr"],
+                              ["下港之聲","http://59.120.255.155:8081/"],
+                              ["環球廣播電台","http://60.248.53.115:8081/"],
+                              ["大千電台","http://stream.superfm99-1.com.tw:8554/"],
+                              ["寶島新聲","http://stream.superfm99-1.com.tw:8555/"]
+                             ];
 
 //SD_Card
 Blockly.Msg.SD_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/sd記憶卡積木";

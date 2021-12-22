@@ -3181,7 +3181,7 @@ Blockly.Blocks.pocketcard_pinMap={init:function(){
   this.appendDummyInput()
       .appendField("PocketCard "+Blockly.Msg.MTK7697BIT_PINMAP_TITLE);
   this.appendDummyInput()
-      .appendField(new Blockly.FieldDropdown([["P0","26"],["P1","33"],["P2","32"],["P3","35"],["P4","4"],["P5","14"],["P6","16"],["P7","17"],["P8","27"],["P9","13"],["P10","2"],["P11","25"],["P12","15"],["P13","18"],["P14","19"],["P15","23"],["P16","5"],["P17",""],["P19-SCL","22"],["P20-SDA","21"]]),"POCKETCARD_PIN");
+      .appendField(new Blockly.FieldDropdown([["P0","26"],["P1","33"],["P2","32"],["P3 (INPUT ONLY)","35"],["P4","4"],["P5","14"],["P6","16"],["P7","17"],["P8","27"],["P9","13"],["P10","2"],["P11","25"],["P12","15"],["P13","18"],["P14","19"],["P15","23"],["P16","5"],["P17",""],["P19-SCL","22"],["P20-SDA","21"]]),"POCKETCARD_PIN");
   this.setInputsInline(!0);
   this.setOutput(!0,"Number");
   this.setTooltip(Blockly.Msg.POCKETCARD_TOOLTIP)}
@@ -3194,7 +3194,7 @@ Blockly.Blocks.pocketcard_pinMap_ez={init:function(){
       .appendField("PocketCard "+Blockly.Msg.STARTPLUS_TITLE)
       .appendField(Blockly.Msg.LIOU_ROBOT_PIN);
   this.appendDummyInput()
-      .appendField(new Blockly.FieldDropdown([["IO_0","26"],["IO_1","33"],["IO_2","32"],["IO_3","27"],["IO_4","18"],["IO_5","19"],["IO_6","23"],["IO_7","5"],["IO_8","35"],["IO_9","16"],["IO_10","4"],["IO_11","14"],["IO_12","17"],["IO_13","13"],["IO_14","2"],["IO_15","25"],["IO_16","15"],["IO_17","22"],["IO_18","21"]]),"EZ_PIN");
+      .appendField(new Blockly.FieldDropdown([["IO_0","26"],["IO_1","33"],["IO_2","32"],["IO_3","27"],["IO_4","18"],["IO_5","19"],["IO_6","23"],["IO_7","5"],["IO_8 (INPUT ONLY)","35"],["IO_9","16"],["IO_10","4"],["IO_11","14"],["IO_12","17"],["IO_13","13"],["IO_14","2"],["IO_15","25"],["IO_16","15"],["IO_17","22"],["IO_18","21"]]),"EZ_PIN");
   this.setInputsInline(!0);
   this.setOutput(!0,"Number");
   this.setTooltip(Blockly.Msg.POCKETCARD_TOOLTIP)}
@@ -4670,6 +4670,20 @@ Blockly.Blocks.dac_radio={init:function(){
       this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"dac_radio","dac_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.DAC_INIT_WARNIG))}
 };
 
+Blockly.Blocks.dac_radioList={init:function(){
+  this.setHelpUrl(Blockly.Msg.DAC_HELPURL);
+  this.setColour(Blockly.Blocks.dac.HUE3);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.DAC_TITLE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.DAC_RADIO_LIST_TITLE)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.DAC_RADIO_LIST),"RADIO_URL");
+  this.setInputsInline(!0);
+  this.setOutput(!0,"String");
+  this.setTooltip(Blockly.Msg.DAC_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"dac_radioList","dac_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.DAC_INIT_WARNIG))}
+};
+
 Blockly.Blocks.dac_tts_end={init:function(){
   this.setHelpUrl(Blockly.Msg.DAC_HELPURL);
   this.setColour(Blockly.Blocks.dac.HUE1);
@@ -5258,7 +5272,7 @@ Blockly.Blocks.startPlus_pin={init:function(){
   this.setColour(Blockly.Blocks.startPlus.HUE6);
   this.appendDummyInput()
       .appendField(Blockly.Msg.STARTPLUS_TITLE)
-      .appendField(new Blockly.FieldDropdown([["IO_8","0"],["IO_9","2"],["IO_10","1"],["IO_12","3"],["IO_14","4"],["IO_4","5"],["IO_5","6"],["IO_6","7"]]),"PIN");
+      .appendField(new Blockly.FieldDropdown([["IO_4","5"],["IO_5","6"],["IO_6","7"],["IO_8 (INPUT ONLY FOR ESP32)","0"],["IO_9","2"],["IO_10","1"],["IO_12 (ONLY FOR ESP32)","3"],["IO_14","4"]]),"PIN");
   this.setInputsInline(!0);
   this.setOutput(!0,"Number");
   this.setTooltip(Blockly.Msg.STARTPLUS_TOOLTIP)}
