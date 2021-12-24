@@ -3260,12 +3260,27 @@ Blockly.Arduino.pn532i2c_writeBlock=function(){
   return'writeClassicBlock('+d+', '+a+');\n';
 }
 
+Blockly.Arduino.pn532i2c_writeSector=function(){
+  var a=Blockly.Arduino.valueToCode(this,"MY_DATA",Blockly.Arduino.ORDER_ATOMIC)||"",
+      b=parseInt(this.getFieldValue("SECTOR"));
+  Blockly.Arduino.definitions_.define_pn532_write_classic_sector_invoke='void writeClassicSector(byte sectorIndex, String myMsg)\n{\n  byte firstBlockIndex=sectorIndex*4;\n  if (myNFC_UID_Length == 4)\n  {\n    uint8_t success;\n    uint8_t keya[6] = { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF };\n    uint8_t data[48]={0};\n    uint8_t data_block[16]={0};\n    char dataArray[49];\n    myMsg.toCharArray(dataArray, 49);\n    for(int i=0;i<strlen(dataArray);i++)\n    {\n      data[i]=dataArray[i];\n    }\n    for(int i=0; i<48;i++){\n      data_block[i%16]=data[i];\n      if(((i+1)%16)==0){\n        success = nfc.mifareclassic_AuthenticateBlock(myNFC_UID_array, myNFC_UID_Length, firstBlockIndex, 0, keya);\n        success = nfc.mifareclassic_WriteDataBlock (firstBlockIndex, data_block);\n        data_block[16]={0};\n        firstBlockIndex++;\n      }\n    }\n  }\n}\n';
+  return'writeClassicSector('+b+', '+a+');\n';
+}
+
 Blockly.Arduino.pn532i2c_readBlock=function(){
   var a=parseInt(this.getFieldValue("SECTOR")),
       b=parseInt(this.getFieldValue("BLOCK"));
       c=a*4+b;
   Blockly.Arduino.definitions_.define_pn532_read_classic_block_invoke='String readClassicBlock(byte blockIndex)\n{\n  if (myNFC_UID_Length == 4)\n  {\n    uint8_t success;\n    uint8_t keya[6] = { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF };\n    success = nfc.mifareclassic_AuthenticateBlock(myNFC_UID_array, myNFC_UID_Length, blockIndex, 0, keya);\n    if (success)\n    {\n      uint8_t data[16]={0};\n      char dataArray[17]={\'\\0\'};\n      success = nfc.mifareclassic_ReadDataBlock(blockIndex, data);\n      if (success)\n      {\n        for(int i=0;i<sizeof(data);i++)\n        {\n          dataArray[i]=data[i];\n        }\n        return String(dataArray);\n      }\n      else\n        return "";\n    }\n    else\n      return "";\n  }\n  else\n    return "";\n}\n';
   return['readClassicBlock('+c+')',Blockly.Arduino.ORDER_ATOMIC];
+}
+
+Blockly.Arduino.pn532i2c_readSector=function(){
+  var a=parseInt(this.getFieldValue("SECTOR"));
+  if (!Blockly.Arduino.definitions_.define_pn532_read_classic_block_invoke)
+    Blockly.Arduino.definitions_.define_pn532_read_classic_block_invoke='String readClassicBlock(byte blockIndex)\n{\n  if (myNFC_UID_Length == 4)\n  {\n    uint8_t success;\n    uint8_t keya[6] = { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF };\n    success = nfc.mifareclassic_AuthenticateBlock(myNFC_UID_array, myNFC_UID_Length, blockIndex, 0, keya);\n    if (success)\n    {\n      uint8_t data[16]={0};\n      char dataArray[17]={\'\\0\'};\n      success = nfc.mifareclassic_ReadDataBlock(blockIndex, data);\n      if (success)\n      {\n        for(int i=0;i<sizeof(data);i++)\n        {\n          dataArray[i]=data[i];\n        }\n        return String(dataArray);\n      }\n      else\n        return "";\n    }\n    else\n      return "";\n  }\n  else\n    return "";\n}\n';
+  Blockly.Arduino.definitions_.define_pn532_read_classic_sector_invoke='String readClassicSector(byte sectorIndex)\n{\n  byte firstBlockIndex=sectorIndex*4;\n  String myTempBlock="";\n  if (myNFC_UID_Length == 4)\n  {\n    for(int i=0;i<3;i++)\n      myTempBlock+=readClassicBlock(firstBlockIndex+i);\n  }\n  return myTempBlock;\n}\n';
+  return['readClassicSector('+a+')',Blockly.Arduino.ORDER_ATOMIC];
 }
 
 Blockly.Arduino.pn532i2c_writePage=function(){

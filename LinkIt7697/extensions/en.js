@@ -780,7 +780,7 @@ Blockly.Msg.ASR_CLEAR = "restore factory settings";
 Blockly.Msg.ASR_LEARN = "enter learning-model";
 
 //PN532_I2C
-Blockly.Msg.PN532I2C_HELPURL = "";
+Blockly.Msg.PN532I2C_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/pn532讀取rfid";
 Blockly.Msg.PN532I2C_TITLE = "NFC PN532";
 Blockly.Msg.PN532I2C_INIT = "init";
 Blockly.Msg.PN532I2C_TOOLTIP = "";
@@ -791,10 +791,12 @@ Blockly.Msg.PN532I2C_UID = "RFID Tag ID";
 Blockly.Msg.PN532I2C_TYPE = "the type of the detected RFID tag";
 Blockly.Msg.PN532I2C_CLASSIC = "Mifare Classic";
 Blockly.Msg.PN532I2C_WRITE_BLOCK = "write string";
+Blockly.Msg.PN532I2C_WRITE_SECTOR = "write long string";
 Blockly.Msg.PN532I2C_ON = "on";
 Blockly.Msg.PN532I2C_SECTOR = "Sector";
 Blockly.Msg.PN532I2C_BLOCK = "Block";
 Blockly.Msg.PN532I2C_READ_BLOCK = "read string";
+Blockly.Msg.PN532I2C_READ_SECTOR = "read long string";
 Blockly.Msg.PN532I2C_FROM = "from";
 Blockly.Msg.PN532I2C_ULTRALIGHT = "Mifare Ultralight";
 Blockly.Msg.PN532I2C_PAGE = "Page";
