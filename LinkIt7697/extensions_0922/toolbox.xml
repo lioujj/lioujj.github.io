@@ -743,7 +743,38 @@
             </block>
           </value>
         </block>       
-       </category>
+      </category>
+      <category id="category_pn532i2c" name="PN532_I2C">
+        <block type="pn532i2c_init"></block>
+        <block type="pn532i2c_loop"></block>
+        <block type="pn532i2c_checkUID"></block>
+        <block type="pn532i2c_getUID"></block>
+        <block type="pn532i2c_getType"></block>
+        <block type="pn532i2c_writeBlock">
+			  	<value name="MY_DATA">
+				  	<block type="text">
+					  	<field name="TEXT"></field>
+            </block>
+	  			</value>
+        </block>
+        <block type="pn532i2c_writeSector">
+				  <value name="MY_DATA">
+  					<block type="text">
+	  					<field name="TEXT"></field>
+            </block>
+			  	</value>
+        </block>
+        <block type="pn532i2c_readBlock"></block>
+        <block type="pn532i2c_readSector"></block>
+        <block type="pn532i2c_writePage">
+				  <value name="MY_DATA">
+  					<block type="text">
+	  					<field name="TEXT"></field>
+            </block>
+			  	</value>
+        </block>
+        <block type="pn532i2c_readPage"></block>
+      </category>
     </category>
   </category>
   <category id="category_esp8266" name="ESP8266">
@@ -1931,31 +1962,6 @@
       <block type="asr_learn"></block>
       <block type="asr_clear"></block>
     </category>
-<!--
-    <category id="category_pn532i2c" name="PN532_I2C">
-      <block type="pn532i2c_init"></block>
-      <block type="pn532i2c_loop"></block>
-      <block type="pn532i2c_checkUID"></block>
-      <block type="pn532i2c_getUID"></block>
-      <block type="pn532i2c_getType"></block>
-      <block type="pn532i2c_writeBlock">
-				<value name="MY_DATA">
-					<block type="text">
-						<field name="TEXT"></field>
-          </block>
-				</value>
-      </block>
-      <block type="pn532i2c_readBlock"></block>
-      <block type="pn532i2c_writePage">
-				<value name="MY_DATA">
-					<block type="text">
-						<field name="TEXT"></field>
-          </block>
-				</value>
-      </block>
-      <block type="pn532i2c_readPage"></block>
-    </category>
--->
   </category>
   <category id="category_lumex" name="Lumex">
     <category id="category_ldm6432" name="LDM6432MQTT">

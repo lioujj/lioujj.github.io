@@ -5880,6 +5880,25 @@ Blockly.Blocks.pn532i2c_writeBlock={init:function(){
   this.setTooltip(Blockly.Msg.PN532I2C_TOOLTIP)},onchange:function(){
       this.workspace&&(Blockly.Blocks.spiffs.checkBlocks(this,"writeBlock","pn532i2c_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.PN532I2C_WARNING))}
 };
+Blockly.Blocks.pn532i2c_writeSector={init:function(){
+  this.setHelpUrl(Blockly.Msg.PN532I2C_HELPURL);
+  this.setColour(Blockly.Blocks.pn532i2c.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.PN532I2C_TITLE+"("+Blockly.Msg.PN532I2C_CLASSIC+")");
+  this.appendValueInput("MY_DATA")
+      .setCheck("String")
+      .appendField(Blockly.Msg.PN532I2C_WRITE_SECTOR);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.PN532I2C_ON)
+      .appendField(Blockly.Msg.PN532I2C_SECTOR);
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown([["1","1"],["2","2"],["3","3"],["4","4"],["5","5"],["6","6"],["7","7"],["8","8"],["9","9"],["10","10"],["11","11"],["12","12"],["13","13"],["14","14"],["15","15"]]),"SECTOR");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.PN532I2C_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.spiffs.checkBlocks(this,"writeSector","pn532i2c_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.PN532I2C_WARNING))}
+};
 
 Blockly.Blocks.pn532i2c_readBlock={init:function(){
   this.setHelpUrl(Blockly.Msg.PN532I2C_HELPURL);
@@ -5900,6 +5919,23 @@ Blockly.Blocks.pn532i2c_readBlock={init:function(){
   this.setOutput(!0,"String");
   this.setTooltip(Blockly.Msg.PN532I2C_TOOLTIP)},onchange:function(){
       this.workspace&&(Blockly.Blocks.spiffs.checkBlocks(this,"readBlock","pn532i2c_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.PN532I2C_WARNING))}
+};
+
+Blockly.Blocks.pn532i2c_readSector={init:function(){
+  this.setHelpUrl(Blockly.Msg.PN532I2C_HELPURL);
+  this.setColour(Blockly.Blocks.pn532i2c.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.PN532I2C_TITLE+"("+Blockly.Msg.PN532I2C_CLASSIC+")")
+      .appendField(Blockly.Msg.PN532I2C_READ_SECTOR);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.PN532I2C_FROM)
+      .appendField(Blockly.Msg.PN532I2C_SECTOR);
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown([["1","1"],["2","2"],["3","3"],["4","4"],["5","5"],["6","6"],["7","7"],["8","8"],["9","9"],["10","10"],["11","11"],["12","12"],["13","13"],["14","14"],["15","15"]]),"SECTOR");
+  this.setInputsInline(!0);
+  this.setOutput(!0,"String");
+  this.setTooltip(Blockly.Msg.PN532I2C_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.spiffs.checkBlocks(this,"readSector","pn532i2c_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.PN532I2C_WARNING))}
 };
 
 Blockly.Blocks.pn532i2c_writePage={init:function(){

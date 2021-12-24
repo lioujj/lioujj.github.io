@@ -774,7 +774,7 @@ Blockly.Msg.ASR_CLEAR = "清除所有自訂語音";
 Blockly.Msg.ASR_LEARN = "進入自訂語音學習模式";
 
 //PN532_I2C
-Blockly.Msg.PN532I2C_HELPURL = "";
+Blockly.Msg.PN532I2C_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/pn532讀取rfid";
 Blockly.Msg.PN532I2C_TITLE = "PN532讀卡機";
 Blockly.Msg.PN532I2C_INIT = "初始化";
 Blockly.Msg.PN532I2C_TOOLTIP = "";
@@ -785,10 +785,12 @@ Blockly.Msg.PN532I2C_UID = "取得RFID卡號";
 Blockly.Msg.PN532I2C_TYPE = "偵測到的RFID卡的種類";
 Blockly.Msg.PN532I2C_CLASSIC = "Mifare Classic";
 Blockly.Msg.PN532I2C_WRITE_BLOCK = "寫入字串";
+Blockly.Msg.PN532I2C_WRITE_SECTOR = "寫入長字串";
 Blockly.Msg.PN532I2C_ON = "在";
 Blockly.Msg.PN532I2C_SECTOR = "Sector";
 Blockly.Msg.PN532I2C_BLOCK = "Block";
 Blockly.Msg.PN532I2C_READ_BLOCK = "讀取字串";
+Blockly.Msg.PN532I2C_READ_SECTOR = "讀取長字串";
 Blockly.Msg.PN532I2C_FROM = "從";
 Blockly.Msg.PN532I2C_ULTRALIGHT = "Mifare Ultralight";
 Blockly.Msg.PN532I2C_PAGE = "Page";
