@@ -701,6 +701,21 @@
           </value>
         </block>
         <block type="dac_radioList"></block>
+        <block type="dac_http_mp3">
+          <value name="CONTENT">
+            <block type="text">
+              <field name="TEXT"></field>
+            </block>
+          </value>
+        </block>
+        <block type="dac_http_mp3_end"></block>
+        <block type="dac_http_mp3_ends_with">
+          <value name="CONTENT">
+            <block type="text">
+              <field name="TEXT"></field>
+            </block>
+          </value>
+        </block>
         <block type="dac_tts">
           <value name="CONTENT">
             <block type="text">
