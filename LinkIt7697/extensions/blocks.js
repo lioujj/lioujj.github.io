@@ -4539,6 +4539,7 @@ Blockly.Blocks.dac.HUE=90;
 Blockly.Blocks.dac.HUE1=288;
 Blockly.Blocks.dac.HUE2=166;
 Blockly.Blocks.dac.HUE3=222;
+Blockly.Blocks.dac.HUE4=30;
 Blockly.Blocks.dac.checkBlocks=function(a,slave,master){
 	var b=null,
 	    d=a.type;
@@ -4682,6 +4683,49 @@ Blockly.Blocks.dac_radioList={init:function(){
   this.setOutput(!0,"String");
   this.setTooltip(Blockly.Msg.DAC_TOOLTIP)},onchange:function(){
       this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"dac_radioList","dac_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.DAC_INIT_WARNIG))}
+};
+
+Blockly.Blocks.dac_http_mp3={init:function(){
+  this.setHelpUrl(Blockly.Msg.DAC_HELPURL);
+  this.setColour(Blockly.Blocks.dac.HUE4);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.DAC_TITLE);
+  this.appendValueInput("CONTENT")
+      .setCheck("String")
+      .appendField(Blockly.Msg.DAC_HTTP_MP3_TITLE+" URL");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.DAC_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"dac_http_mp3","dac_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.DAC_INIT_WARNIG))}
+};
+
+Blockly.Blocks.dac_http_mp3_end={init:function(){
+  this.setHelpUrl(Blockly.Msg.DAC_HELPURL);
+  this.setColour(Blockly.Blocks.dac.HUE4);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.DAC_TITLE)
+      .appendField(Blockly.Msg.DAC_HTTP_MP3_END);
+  this.setInputsInline(!0);
+  this.appendStatementInput("HTTP_MP3_END_CALL");
+  this.setTooltip(Blockly.Msg.DAC_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"dac_http_mp3_end","dac_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.DAC_INIT_WARNIG))}
+};
+
+Blockly.Blocks.dac_http_mp3_ends_with={init:function(){
+  this.setHelpUrl(Blockly.Msg.DAC_HELPURL);
+  this.setColour(Blockly.Blocks.dac.HUE4);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.DAC_TITLE);
+  this.appendValueInput("CONTENT")
+      .setCheck("String")
+      .appendField(Blockly.Msg.DAC_HTTP_MP3_ENDS_WITH);
+  this.appendStatementInput("HTTP_MP3_ENDS_WITH_CALL");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.DAC_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"dac_http_mp3_ends_with","dac_http_mp3_end")?this.setWarningText(null):this.setWarningText(Blockly.Msg.DAC_HTTP_MP3_ENDS_WITH_WARNIG))}
 };
 
 Blockly.Blocks.dac_tts_end={init:function(){

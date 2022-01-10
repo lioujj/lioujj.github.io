@@ -672,6 +672,11 @@ Blockly.Msg.DAC_RADIO_LIST = [["ICRT","http://live.leanstream.co/ICRTFM-MP3"],
                               ["大千電台","http://stream.superfm99-1.com.tw:8554/"],
                               ["寶島新聲","http://stream.superfm99-1.com.tw:8555/"]
                              ];
+Blockly.Msg.DAC_HTTP_MP3_TITLE = "play internet MP3 from";
+Blockly.Msg.DAC_HTTP_MP3_END = "when internet MP3 ends";
+Blockly.Msg.DAC_HTTP_MP3_ENDS_WITH = "if internet MP3 URL is";
+Blockly.Msg.DAC_HTTP_MP3_ENDS_WITH_WARNIG = "You have to put the block into \""+Blockly.Msg.DAC_HTTP_MP3_END+"\" block.";
+
 
 //SD_Card
 Blockly.Msg.SD_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/sd記憶卡積木";
