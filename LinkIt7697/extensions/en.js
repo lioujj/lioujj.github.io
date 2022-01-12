@@ -173,6 +173,9 @@ Blockly.Msg.AQI_GET_VALUE_STATION = "station:";
 Blockly.Msg.AQI_GET_VALUE_ATTR = "information:";
 Blockly.Msg.AQI_WARNING = "You have to set \""+ Blockly.Msg.FETCH_AQI_TITLE+"\" first.";
 Blockly.Msg.AQI_WARNING2 = "You have to set \"ESP8266 "+ Blockly.Msg.FETCH_AQI_TITLE+"\" first.";
+Blockly.Msg.AQI_AttrName=[["AQI index","AQI"],["Status","Status"],["SO2","SO2"],["CO","CO"],["O3","O3"],["Wind Speed","WIND_SPEED"],["Wind Direction","WIND_DIREC"],
+               ["PM10","PM10"],["PM2.5","PM2.5"],["PM10 average","PM10_AVG"],["PM2.5 average","PM2.5_AVG"],["Puslish Time","PublishTime"],["Site Name","SiteName"]];
+
 
 //KSB045
 Blockly.Msg.KSB045_HELPURL= "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/搖桿積木";
@@ -401,6 +404,7 @@ Blockly.Msg.BROADCAST_UDP_RECEIVED_EVENT = "on received broadcast message";
 Blockly.Msg.BROADCAST_UDP_RECEIVED_MSG = "received message";
 Blockly.Msg.BROADCAST_UDP_RESET = "reset broadcast port:";
 Blockly.Msg.BROADCAST_UDP_WARNING = "You have to init your broadcast port first.";
+Blockly.Msg.BROADCAST_UDP_CHECK = "check UDP message";
 
 //WEBSERVER
 Blockly.Msg.WEBSERVER_HELPURL= "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/網頁伺服器積木";

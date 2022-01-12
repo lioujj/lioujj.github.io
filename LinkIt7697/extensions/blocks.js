@@ -1070,13 +1070,11 @@ Blockly.Blocks.ESP8266_aqi_getAQIValue={init:function(){
 
 
 Blockly.Blocks.aqi_attrname_list={init:function(){
-  var AttrName=[["AQI指標","AQI"],["狀態(Status)","Status"],["二氧化硫(SO2)","SO2"],["一氧化碳(CO)","CO"],["臭氧(O3)","O3"],["風速","WindSpeed"],["風向角度","WindDirec"],
-               ["PM10","PM10"],["PM2.5","PM2.5"],["PM10平均值","PM10_AVG"],["PM2.5平均值","PM2.5_AVG"],["發佈時間","PublishTime"],["監測站名","SiteName"]];
   this.setHelpUrl(Blockly.Msg.AQI_HELPURL);
   this.setColour(Blockly.Blocks.aqi.HUE);
   this.appendDummyInput()  
       .appendField(" ")
-      .appendField(new Blockly.FieldDropdown(AttrName),"ATTRNAME");
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.AQI_AttrName),"ATTRNAME");
   this.setInputsInline(!0);
   this.setOutput(!0,"String");
   this.setTooltip(Blockly.Msg.AQI_TOOLTIP)}
@@ -2312,7 +2310,7 @@ Blockly.Blocks.broadcast_udp.checkBlocks=function(a){
 	    d=a.type;
 		a=a.workspace.getAllBlocks();
 		for(var c=0;c<a.length;c++)
-			if("broadcast_udp_send"!=a[c].type&&"broadcast_udp_received_event"!=a[c].type&&"broadcast_udp_received_msg"!=a[c].type&&"broadcast_udp_reset"!=a[c].type||null!=b||(b=a[c].type!=d?!0:!1),"broadcast_udp_init"==a[c].type)
+			if("broadcast_udp_send"!=a[c].type && "broadcast_udp_check_msg"!=a[c].type && "broadcast_udp_received_event"!=a[c].type&&"broadcast_udp_received_msg"!=a[c].type&&"broadcast_udp_reset"!=a[c].type||null!=b||(b=a[c].type!=d?!0:!1),"broadcast_udp_init"==a[c].type)
 				return!0;
 		return b
 };
@@ -2330,6 +2328,20 @@ Blockly.Blocks.broadcast_udp_init={init:function(){
   this.setNextStatement(!0,null);
   this.setTooltip(Blockly.Msg.BROADCAST_UDP_TOOLTIP)},onchange:function(){}
 };
+
+Blockly.Blocks.broadcast_udp_check_msg={init:function(){
+  this.setHelpUrl(Blockly.Msg.BROADCAST_UDP_HELPURL);
+  this.setColour(Blockly.Blocks.broadcast_udp.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.BROADCAST_UDP_TITLE)
+      .appendField(Blockly.Msg.BROADCAST_UDP_CHECK);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.BROADCAST_UDP_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.broadcast_udp.checkBlocks(this)?this.setWarningText(null):this.setWarningText(Blockly.Msg.BROADCAST_UDP_WARNING))}
+};
+
 
 Blockly.Blocks.broadcast_udp_send={init:function(){
   this.setHelpUrl(Blockly.Msg.BROADCAST_UDP_HELPURL);
