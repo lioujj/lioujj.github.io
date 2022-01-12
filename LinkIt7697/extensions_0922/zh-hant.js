@@ -172,6 +172,8 @@ Blockly.Msg.AQI_GET_VALUE_STATION = "監測站";
 Blockly.Msg.AQI_GET_VALUE_ATTR = "資訊";
 Blockly.Msg.AQI_WARNING = "必須先設定「"+Blockly.Msg.FETCH_AQI_TITLE+"」積木";
 Blockly.Msg.AQI_WARNING2 = "必須先設定「ESP8266 "+Blockly.Msg.FETCH_AQI_TITLE+"」積木";
+Blockly.Msg.AQI_AttrName=[["AQI指標","AQI"],["狀態(Status)","Status"],["二氧化硫(SO2)","SO2"],["一氧化碳(CO)","CO"],["臭氧(O3)","O3"],["風速","WIND_SPEED"],["風向角度","WIND_DIREC"],
+               ["PM10","PM10"],["PM2.5","PM2.5"],["PM10平均值","PM10_AVG"],["PM2.5平均值","PM2.5_AVG"],["發佈時間","PublishTime"],["監測站名","SiteName"]];
 
 //KSB045
 Blockly.Msg.KSB045_HELPURL= "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/搖桿積木";
@@ -395,6 +397,7 @@ Blockly.Msg.BROADCAST_UDP_RECEIVED_EVENT = "當接收到訊息時";
 Blockly.Msg.BROADCAST_UDP_RECEIVED_MSG = "接收到的訊息";
 Blockly.Msg.BROADCAST_UDP_RESET = "重設廣播埠";
 Blockly.Msg.BROADCAST_UDP_WARNING = "你必須先設定「"+Blockly.Msg.BROADCAST_UDP_INIT+"」積木！";
+Blockly.Msg.BROADCAST_UDP_CHECK = "檢查UDP廣播訊息";
 
 //WEBSERVER
 Blockly.Msg.WEBSERVER_HELPURL= "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/網頁伺服器積木";

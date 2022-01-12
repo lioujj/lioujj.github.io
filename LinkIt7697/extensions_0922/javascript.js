@@ -5,14 +5,6 @@ Blockly.Arduino.finish=function(a){
 	var myStr="";
 	if (Blockly.Arduino.definitions_.define_mqtt_include=="#include <PubSubClient.h>")
 		myStr="  myClient.loop();\n";
-	if (Blockly.Arduino.definitions_.define_broadcast_include=="#include <WiFiUdp.h>"){
-    delete Blockly.Arduino.definitions_.define_udp;
-    if (Blockly.Arduino.broadcast_udp.defineFunction.broadcast_my_check_body!="")
-		   myStr=myStr+"  checkBroadcastUDP();\n";
-  }
-  //if (  Blockly.Arduino.dac.ESP8266Audio=='yes' && Blockly.Arduino.definitions_.define_SPIFFS_include=='#include "SPIFFS.h"'){
-	//	myStr=myStr+'  checkDACrunning();\n  checkTTS();\n  checkMP3();\n';
-  //}
 	if (Blockly.Arduino.webserver.webserver_exist=="yes"){
     Blockly.Arduino.webserver.webserver_header=Blockly.Arduino.webserver.webserver_header.replace("#title#",Blockly.Arduino.webserver.webserver_myTitle);
     Blockly.Arduino.webserver.webserver_header=Blockly.Arduino.webserver.webserver_header.replace("#color#",Blockly.Arduino.webserver.webserver_myColor);
@@ -22,10 +14,13 @@ Blockly.Arduino.finish=function(a){
 	a=a.replace(/\n\s+$/,"\n");
 	a="void loop() \n{\n"+myStr+a+"\n}";
 	a=a.replace("  if (myBtnStatus=='","  myBtnStatus=getBtnStatus();\n  if (myBtnStatus=='");
-	var b=[],c=[];
+	var b=[],c=[],f=[];
 	for(e in Blockly.Arduino.definitions_){
 		var d=Blockly.Arduino.definitions_[e];
-		d.match(/^#include/)?b.push(d):c.push(d)
+    if (e.indexOf("_event")>0)
+      f.push(d);
+    else
+		  d.match(/^#include/)?b.push(d):c.push(d)
 	}
 	d=[];
 	for(e in Blockly.Arduino.setups_){
@@ -36,21 +31,13 @@ Blockly.Arduino.finish=function(a){
 	if (Blockly.Arduino.mqtt_exist=="yes")
 		b=b.join("\n")+"\n\n"+c.join("\n")+"\n\n"+Blockly.Arduino.mqtt_callback_header+Blockly.Arduino.mqtt_callback_body+Blockly.Arduino.mqtt_callback_footer+"\nvoid setup() \n{\n  "+d.join("\n  ")+"\n}\n\n";
 	else
-		b=b.join("\n")+"\n\n"+c.join("\n")+"\n\nvoid setup() \n{\n  "+d.join("\n  ")+"\n}\n\n";
+		b=b.join("\n")+"\n\n"+c.join("\n")+"\n"+f.join("\n")+"\n\nvoid setup() \n{\n  "+d.join("\n  ")+"\n}\n\n";
 	b=b.replace(/\n\n+/g,"\n\n").replace(/\n*$/,"\n\n\n")+a;
 	Blockly.Arduino.mqtt_exist="no";
 	b="/*\n * Generated using BlocklyDuino:\n *\n * https://github.com/MediaTek-Labs/BlocklyDuino-for-LinkIt\n *\n * Date: "+e.toUTCString()+"\n */\n"+"/*  部份程式由吉哥積木產生  */\n/*  https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697  */\n"+b
   if (Blockly.Arduino.webserver.webserver_exist=="yes"){
     b=b+Blockly.Arduino.webserver.webserver_header+Blockly.Arduino.webserver.webserver_body+Blockly.Arduino.webserver.webserver_footer;
     Blockly.Arduino.webserver.webserver_exist="no";
-  }
-
-  if (Blockly.Arduino.broadcast_udp.broadcast_exist=="yes"){
-	  for(e in Blockly.Arduino.broadcast_udp.defineFunction){
-		  b=b+Blockly.Arduino.broadcast_udp.defineFunction[e];
-	  }
-    //b=b+Blockly.Arduino.webserver.webserver_header+Blockly.Arduino.webserver.webserver_body+Blockly.Arduino.webserver.webserver_footer;
-    Blockly.Arduino.broadcast_udp.broadcast_exist="no";
   }
   return b
 };
@@ -1319,15 +1306,17 @@ Blockly.Arduino.broadcast_udp_init=function(){
   Blockly.Arduino.definitions_.define_broadcast_include="#include <WiFiUdp.h>";
   delete Blockly.Arduino.definitions_.define_udp;
   Blockly.Arduino.definitions_.define_broadcast_port="const int UDP_BUFFER_SIZE=255;\nuint16_t UDP_LISTEN_PORT="+a+";\nWiFiUDP castUdp;\n//IPAddress broadcastIP;\nchar broadcastBuffer[UDP_BUFFER_SIZE];\n";
-  Blockly.Arduino.definitions_.define_broadcast_send="void sendBroadcastUDP(const char* myMessage){\n  IPAddress broadcastIP(WiFi.localIP()[0],WiFi.localIP()[1],WiFi.localIP()[2],255);\n  castUdp.beginPacket(broadcastIP,UDP_LISTEN_PORT);\n  for (int myi = 0; myi < strlen(myMessage); myi++)\n  {\n    castUdp.write(myMessage[myi]);\n  }\n  castUdp.endPacket();\n}\n";
-  Blockly.Arduino.broadcast_udp.defineFunction={};
+  Blockly.Arduino.definitions_.define_broadcast_send_event="\nvoid sendBroadcastUDP(const char* myMessage){\n  IPAddress broadcastIP(WiFi.localIP()[0],WiFi.localIP()[1],WiFi.localIP()[2],255);\n  castUdp.beginPacket(broadcastIP,UDP_LISTEN_PORT);\n  for (int myi = 0; myi < strlen(myMessage); myi++)\n  {\n    castUdp.write(myMessage[myi]);\n  }\n  castUdp.endPacket();\n}\n";
 	//Blockly.Arduino.broadcast_udp.defineFunction.broadcast_send="\nvoid sendBroadcastUDP(const char* myMessage){\n  IPAddress broadcastIP(WiFi.localIP()[0],WiFi.localIP()[1],WiFi.localIP()[2],255);\n  castUdp.beginPacket(broadcastIP,UDP_LISTEN_PORT);\n  castUdp.write(myMessage);\n  castUdp.endPacket();\n}\n";
-  Blockly.Arduino.broadcast_udp.defineFunction.broadcast_my_check_header="\nvoid myCheckUDP(){\n";
-  Blockly.Arduino.broadcast_udp.defineFunction.broadcast_my_check_body="";
-  Blockly.Arduino.broadcast_udp.defineFunction.broadcast_my_check_footer="}\n";
-  Blockly.Arduino.broadcast_udp.defineFunction.broadcast_check="\nvoid checkBroadcastUDP(){\n  int packetSize = castUdp.parsePacket();\n  if (packetSize) {\n    int len = castUdp.read(broadcastBuffer, UDP_BUFFER_SIZE);\n    if (len > 0) {\n      broadcastBuffer[len] = 0;\n      myCheckUDP();\n    }\n  }\n}\n";
+  Blockly.Arduino.definitions_.define_broadcast_check1_event="\nvoid myCheckUDP(){\n}\n";
+  Blockly.Arduino.definitions_.define_broadcast_check2_event="\nvoid checkBroadcastUDP(){\n  int packetSize = castUdp.parsePacket();\n  if (packetSize) {\n    int len = castUdp.read(broadcastBuffer, UDP_BUFFER_SIZE);\n    if (len > 0) {\n      broadcastBuffer[len] = 0;\n      myCheckUDP();\n    }\n  }\n}\n";
   return"castUdp.begin(UDP_LISTEN_PORT);\n"
 };
+
+Blockly.Arduino.broadcast_udp_check_msg=function(){
+  return'checkBroadcastUDP();\n';
+};
+
 
 Blockly.Arduino.broadcast_udp_send=function(){
 	var a=Blockly.Arduino.valueToCode(this,"MESSAGE",Blockly.Arduino.ORDER_ATOMIC)||"";
@@ -1335,9 +1324,11 @@ Blockly.Arduino.broadcast_udp_send=function(){
 };
 
 Blockly.Arduino.broadcast_udp_received_event=function(){
-	Blockly.Arduino.broadcast_udp.defineFunction.broadcast_my_check_body=Blockly.Arduino.statementToCode(this,"MSG_UDP");
-	return''
-};
+  var a=Blockly.Arduino.statementToCode(this,"MSG_UDP");
+  a=a.replace(/\n  /g,"\n  ");
+  Blockly.Arduino.definitions_.define_broadcast_check1_event="void myCheckUDP(){\n"+a+"}\n";
+  return'';
+}
 
 Blockly.Arduino.broadcast_udp_received_msg=function(){
   return["String(broadcastBuffer)",Blockly.Arduino.ORDER_ATOMIC];
