@@ -3567,6 +3567,17 @@ Blockly.Blocks.setupForm={init:function(){
       this.workspace&&(Blockly.Blocks.stock.checkBlocks(this,"setupForm","setupSheets")?this.setWarningText(null):this.setWarningText(Blockly.Msg.GOOGLESHEETS_SETUP_SHEET_WARNIG))}
 };
 
+Blockly.Blocks.getLastRow={init:function(){
+  this.setHelpUrl(Blockly.Msg.GOOGLESHEETS_HELPURL);
+  this.setColour(Blockly.Blocks.googlesheets.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.GOOGLESHEETS_TITLE+" "+Blockly.Msg.GOOGLESHEETS_GET_LAST_ROW);
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Number");
+  this.setTooltip(Blockly.Msg.GOOGLESHEETS_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.stock.checkBlocks(this,"getLastRow","setupForm")?this.setWarningText(null):this.setWarningText(Blockly.Msg.GOOGLESHEETS_SETUP_FORM_WARNIG))}
+};
+
 Blockly.Blocks.fetchFromSheet={init:function(){
   this.setHelpUrl(Blockly.Msg.GOOGLESHEETS_HELPURL);
   this.setColour(Blockly.Blocks.googlesheets.HUE);

@@ -563,6 +563,7 @@ Blockly.Msg.GOOGLESHEETS_UPDATE_DATA_TITLE = "value:";
 Blockly.Msg.GOOGLESHEETS_SETUP_SHEET_WARNIG = "You have to "+Blockly.Msg.GOOGLESHEETS_SETUP_TITLE+" "+Blockly.Msg.GOOGLESHEETS_SHEETID+" first.";
 Blockly.Msg.GOOGLESHEETS_SETUP_FORM_WARNIG = "You have to "+Blockly.Msg.GOOGLESHEETS_SETUP_TITLE+" "+Blockly.Msg.GOOGLESHEETS_SHEETTAG+" first.";
 Blockly.Msg.GOOGLESHEETS_FETCH_DATA_WARNIG = 'You have to '+Blockly.Msg.GOOGLESHEETS_SETUP_TITLE+' "'+Blockly.Msg.GOOGLESHEETS_FETCH_FROM_SHEET+'" first.';
+Blockly.Msg.GOOGLESHEETS_GET_LAST_ROW = "get the last row number";
 
 //ESP32 NTP
 Blockly.Msg.ESP32NTP_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/rtc及網路校時";

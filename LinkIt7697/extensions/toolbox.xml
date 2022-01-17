@@ -951,6 +951,7 @@
           </block>
         </value>
       </block>
+      <block type="getLastRow"></block>
       <block type="fetchFromSheet">
 				<value name="beginCell">
 					<block type="text">
