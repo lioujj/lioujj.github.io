@@ -19,9 +19,9 @@ Blockly.Arduino.finish=function(a){
 		var d=Blockly.Arduino.definitions_[e];
     if (e.indexOf("_event")>0)
       f.push(d);
-    else
-      (d.indexOf("#include")>-1)?b.push(d):c.push(d)
-//		  d.match(/^#include/)?b.push(d):c.push(d)
+    else{
+      (d.match(/^#include/)||d.match(/^#define/))?b.push(d):c.push(d);
+    }
 	}
 	d=[];
 	for(e in Blockly.Arduino.setups_){
@@ -2028,6 +2028,19 @@ Blockly.Arduino.sendToGoogle=function(){
   var c=Blockly.Arduino.valueToCode(this,"data",Blockly.Arduino.ORDER_ATOMIC)||"";
   return'sendToGoogleSheets("'+a+'",URLEncode(('+c+').c_str()));\n'
 };
+
+Blockly.Arduino.getLastRow=function(){
+  Blockly.Arduino.definitions_.define_read_sheet_last_row_event='int getSheetLastRow(){\n  static TLSClient sheetClient;\n  const char* host="script.google.com";\n  String newUrl="";\n  while (!newUrl.startsWith("https:")){\n     if (!sheetClient.connect(host, 443)) {\n      return 0;\n    }\n    const String url = String() +"https://"+host+"/macros/s/"+asId+"/exec?type=getLastRow&sheetId="+sheetId+"&sheetTag="+sheetTag;\n    sheetClient.print("GET " + url + " HTTP/1.1\\n"+String()+"Host: "+host+"\\nAccept: */*\\nConnection: keep-alive\\n\\n\\n");\n    while (sheetClient.connected()) {\n      newUrl = sheetClient.readStringUntil(\'\\n\');\n      if (newUrl.startsWith("Location: https://")) {\n        newUrl.replace("Location: ","");\n        break;\n      }\n    }\n  }\n  sheetClient.stop();\n  String jsonData ="";\n  String dataResult="";\n  while(!jsonData.startsWith("{")){\n    if (!sheetClient.connect(host, 443)) {\n      return 0;\n    }\n    sheetClient.print("GET " + newUrl + " HTTP/1.1\\n"+String()+"Host: "+host+"\\nAccept: */*\\nConnection: keep-alive\\n\\n\\n");\n    while (sheetClient.connected()) {\n      jsonData = sheetClient.readStringUntil(\'\\n\');\n      if (jsonData.startsWith("{")) {\n        dataResult=jsonData;\n        dataResult.replace("{\\"lastRow\\":","");\n        dataResult.replace("}","");\n        break;\n      }\n    }\n  }\n  sheetClient.stop();\n  return dataResult.toInt();\n}\n';
+  if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
+    Blockly.Arduino.definitions_.define_secure_include="#include <WiFiClientSecure.h>";
+    Blockly.Arduino.definitions_.define_read_sheet_last_row_event=Blockly.Arduino.definitions_.define_read_sheet_last_row_event.replace("TLSClient","WiFiClientSecure");
+    if (Blockly.Arduino.my_board_type=="ESP8266"){
+      Blockly.Arduino.definitions_.define_read_sheet_last_row_event=Blockly.Arduino.definitions_.define_read_sheet_last_row_event.replace(" sheetClient;\n"," sheetClient;\n  sheetClient.setInsecure();\n");
+    }  
+  }
+  return['getSheetLastRow()',Blockly.Arduino.ORDER_ATOMIC];
+};
+
 
 Blockly.Arduino.fetchFromSheet=function(){
   var a=Blockly.Arduino.valueToCode(this,"beginCell",Blockly.Arduino.ORDER_ATOMIC)||"",
