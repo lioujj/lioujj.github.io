@@ -77,6 +77,7 @@ Blockly.Msg.THINGS_FIELD6 = "Field6";
 Blockly.Msg.THINGS_FIELD7 = "Field7";
 Blockly.Msg.THINGS_FIELD8 = "Field8";
 Blockly.Msg.THINGS_GET_URL_TOOLTIP = "ThingSpeak";
+Blockly.Msg.THINGS_GET_REC_TITLE = "get the update entry ID";
 
 //Ljj_modules
 Blockly.Msg.CATEGORY_LIOU_MODULES = "modules";
@@ -770,6 +771,8 @@ Blockly.Msg.SPIFFS_FORMAT = "format";
 Blockly.Msg.SPIFFS_FILE_INIT_WARNIG = "You have to "+Blockly.Msg.SD_VARIABLE+" first.";
 Blockly.Msg.SPIFFS_FILE_OPEN_MODE =[["read only","r"],["over write","w"],["append","a"],["append+","a+"]];
 Blockly.Msg.SPIFFS_FILE_DELETE = "remove file(include path)";
+Blockly.Msg.SPIFFS_FILE_DOWNLOAD = "download file from URL";
+Blockly.Msg.SPIFFS_FILE_SAVE = "save to file name(include path)";
 
 //ASR
 Blockly.Msg.ASR_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/asr語音辨識指令積木";

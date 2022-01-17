@@ -76,6 +76,7 @@ Blockly.Msg.THINGS_FIELD6 = "Field6";
 Blockly.Msg.THINGS_FIELD7 = "Field7";
 Blockly.Msg.THINGS_FIELD8 = "Field8";
 Blockly.Msg.THINGS_GET_URL_TOOLTIP = "ThingSpeak";
+Blockly.Msg.THINGS_GET_REC_TITLE = "取得ThingSpeak更新資料的Entry ID";
 
 //Ljj_modules
 Blockly.Msg.CATEGORY_LIOU_MODULES = "模組";
@@ -762,6 +763,8 @@ Blockly.Msg.SPIFFS_FORMAT = "格式化";
 Blockly.Msg.SPIFFS_FILE_INIT_WARNIG = "必須先設定「"+Blockly.Msg.SD_VARIABLE+"」積木";
 Blockly.Msg.SPIFFS_FILE_OPEN_MODE =[["唯讀","r"],["覆寫","w"],["接續寫入檔案之後","a"],["接續寫入檔案之後，檔案不存在則自動建立檔案","a+"]];
 Blockly.Msg.SPIFFS_FILE_DELETE = "刪除檔案(含路徑)";
+Blockly.Msg.SPIFFS_FILE_DOWNLOAD = "下載網路檔案URL";
+Blockly.Msg.SPIFFS_FILE_SAVE = "儲存檔名(含路徑)";
 
 //ASR
 Blockly.Msg.ASR_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/asr語音辨識指令積木";

@@ -137,6 +137,13 @@ Blockly.Blocks.things_get_url={init:function(){
   this.setTooltip(Blockly.Msg.THINGS_GET_URL_TOOLTIP)}
 };  
 
+Blockly.Blocks.things_get_rec={init:function(){
+  this.setHelpUrl(Blockly.Msg.THINGS_GET_URL_HELPURL);
+  this.setColour(Blockly.Blocks.thingspeak.HUE);
+  this.appendDummyInput().appendField(Blockly.Msg.THINGS_GET_REC_TITLE);
+  this.setOutput(!0,"Number");
+  this.setTooltip(Blockly.Msg.THINGS_GET_URL_TOOLTIP)}
+};  
 
 //jetmole
 Blockly.Blocks.jetmole={};
@@ -5770,6 +5777,24 @@ Blockly.Blocks.spiffs_file_delete={init:function(){
   this.setNextStatement(!0,null);
   this.setTooltip(Blockly.Msg.SPIFFS_TOOLTIP)},onchange:function(){
       this.workspace&&(Blockly.Blocks.spiffs.checkBlocks(this,"spiffs_file_delete","spiffs_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SPIFFS_INIT_WARNIG))}
+};
+
+Blockly.Blocks.spiffs_file_download={init:function(){
+  this.setHelpUrl(Blockly.Msg.SPIFFS_HELPURL);
+  this.setColour(Blockly.Blocks.spiffs.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.SPIFFS_TITLE);
+  this.appendValueInput("URL")
+      .setCheck("String")
+      .appendField(Blockly.Msg.SPIFFS_FILE_DOWNLOAD);
+  this.appendValueInput("F_NAME")
+      .setCheck("String")
+      .appendField(Blockly.Msg.SPIFFS_FILE_SAVE);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.SPIFFS_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.spiffs.checkBlocks(this,"spiffs_file_download","spiffs_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SPIFFS_INIT_WARNIG))}
 };
 
 //ASR
