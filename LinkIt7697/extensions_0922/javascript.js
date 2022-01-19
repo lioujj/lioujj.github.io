@@ -60,7 +60,11 @@ Blockly.Arduino.connect_mqtt=function(){
 	Blockly.Arduino.definitions_.define_mqtt_received_msg='String receivedMsg="";\nbool waitForE=true;\nbool ended=true;\nbool pubCtrl=false;\n';
 	Blockly.Arduino.definitions_.define_mqtt_client='WiFiClient mqttClient;';
 	Blockly.Arduino.definitions_.define_mqtt_pubclient='PubSubClient myClient(mqttClient);\n';
+	Blockly.Arduino.mqtt_callback_header='void mqttCallback(char* topic, byte* payload, unsigned int length){\n  receivedTopic=String(topic);\n  receivedMsg="";\n  for (unsigned int myIndex = 0; myIndex < length; myIndex++)\n  {\n      receivedMsg += (char)payload[myIndex];\n  }\n  receivedMsg.trim();\n';
+	Blockly.Arduino.mqtt_callback_body='';
+	Blockly.Arduino.mqtt_callback_footer='\n}\n';
 	Blockly.Arduino.definitions_.define_mqtt_connect_mqtt_event='void connectMQTT(){\n  while (!myClient.connected()){\n    if (!myClient.connect(MQTT_ID,MQTT_USERNAME,MQTT_PASSWORD))\n    {\n      delay(5000);\n    }\n  }\n}\n';
+  Blockly.Arduino.definitions_.define_mqtt_receivedMsg_event=Blockly.Arduino.mqtt_callback_header+Blockly.Arduino.mqtt_callback_body+Blockly.Arduino.mqtt_callback_footer;
   Blockly.Arduino.setups_["setup_mqtt_"]="myClient.setServer(MQTT_SERVER_IP, MQTT_SERVER_PORT);\n  myClient.setCallback(mqttCallback);\n";
 	return"connectMQTT();\n"
 };
@@ -86,10 +90,7 @@ Blockly.Arduino.mqtt_event=function(){
 	var a=Blockly.Arduino.valueToCode(this,"TOPIC",Blockly.Arduino.ORDER_ATOMIC)||"",b=Blockly.Arduino.valueToCode(this,"MESSAGE",Blockly.Arduino.ORDER_ATOMIC)||"",
         a=a.replace(/"/g,""),
         b=b.replace(/"/g,"");
-	myHeader='void mqttCallback(char* topic, byte* payload, unsigned int length){\n  receivedTopic=String(topic);\n  receivedMsg="";\n  for (unsigned int myIndex = 0; myIndex < length; myIndex++)\n  {\n      receivedMsg += (char)payload[myIndex];\n  }\n  receivedMsg.trim();\n';
-	myBody='';
-	myFooter='\n}\n';
-  Blockly.Arduino.definitions_.define_mqtt_receivedMsg_event=myHeader+Blockly.Arduino.statementToCode(this,"MSG_TOPIC_EQAL")+myFooter;
+  Blockly.Arduino.definitions_.define_mqtt_receivedMsg_event=Blockly.Arduino.mqtt_callback_header+Blockly.Arduino.statementToCode(this,"MSG_TOPIC_EQAL")+Blockly.Arduino.mqtt_callback_footer;
 	return''
 };
 
