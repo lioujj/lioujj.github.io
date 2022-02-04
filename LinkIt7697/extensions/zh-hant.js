@@ -557,6 +557,11 @@ Blockly.Msg.GOOGLESHEETS_SETUP_SHEET_WARNIG = "必須先設定「"+Blockly.Msg.G
 Blockly.Msg.GOOGLESHEETS_SETUP_FORM_WARNIG = "必須先設定「"+Blockly.Msg.GOOGLESHEETS_SETUP_TITLE+Blockly.Msg.GOOGLESHEETS_SHEETTAG+"」積木";
 Blockly.Msg.GOOGLESHEETS_FETCH_DATA_WARNIG = '必須先設定「'+Blockly.Msg.GOOGLESHEETS_FETCH_FROM_SHEET+"」積木";
 Blockly.Msg.GOOGLESHEETS_GET_LAST_ROW = "取得最後一列的編號";
+Blockly.Msg.GOOGLESHEETS_SEARCH_FROM_SHEET = "搜尋並取得一列資料";
+Blockly.Msg.GOOGLESHEETS_COLUMN_NAME = "欄位名稱";
+Blockly.Msg.GOOGLESHEETS_KEY_WORD = "等於";
+Blockly.Msg.GOOGLESHEETS_GET_FIELD_VALUE = "從搜尋結果取得資料";
+Blockly.Msg.GOOGLESHEETS_SEARCH_DATA_WARNIG = "必須先設定「"+Blockly.Msg.GOOGLESHEETS_TITLE+" "+Blockly.Msg.GOOGLESHEETS_SEARCH_FROM_SHEET+"」積木";
 
 //ESP32 NTP
 Blockly.Msg.ESP32NTP_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/rtc及網路校時";

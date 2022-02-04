@@ -971,6 +971,25 @@
 					</block>
 				</value>
       </block>
+      <block type="searchSheet">
+				<value name="Column">
+					<block type="text">
+						<field name="TEXT">A</field>
+					</block>
+				</value>
+				<value name="keyWord">
+					<block type="text">
+						<field name="TEXT"></field>
+					</block>
+				</value>
+      </block>
+      <block type="getFieldValue">
+				<value name="field">
+					<block type="text">
+						<field name="TEXT">A</field>
+					</block>
+				</value>
+      </block>
       <block type="updateCellValue">
 				<value name="cell">
 					<block type="text">
