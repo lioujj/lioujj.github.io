@@ -564,6 +564,11 @@ Blockly.Msg.GOOGLESHEETS_SETUP_SHEET_WARNIG = "You have to "+Blockly.Msg.GOOGLES
 Blockly.Msg.GOOGLESHEETS_SETUP_FORM_WARNIG = "You have to "+Blockly.Msg.GOOGLESHEETS_SETUP_TITLE+" "+Blockly.Msg.GOOGLESHEETS_SHEETTAG+" first.";
 Blockly.Msg.GOOGLESHEETS_FETCH_DATA_WARNIG = 'You have to '+Blockly.Msg.GOOGLESHEETS_SETUP_TITLE+' "'+Blockly.Msg.GOOGLESHEETS_FETCH_FROM_SHEET+'" first.';
 Blockly.Msg.GOOGLESHEETS_GET_LAST_ROW = "get the last row number";
+Blockly.Msg.GOOGLESHEETS_SEARCH_FROM_SHEET = "search a row where";
+Blockly.Msg.GOOGLESHEETS_COLUMN_NAME = "column";
+Blockly.Msg.GOOGLESHEETS_KEY_WORD = "equals";
+Blockly.Msg.GOOGLESHEETS_GET_FIELD_VALUE = "get field value from search result";
+Blockly.Msg.GOOGLESHEETS_SEARCH_DATA_WARNIG = 'You have to setup "'+Blockly.Msg.GOOGLESHEETS_TITLE+' '+Blockly.Msg.GOOGLESHEETS_SEARCH_FROM_SHEET+'" first.';
 
 //ESP32 NTP
 Blockly.Msg.ESP32NTP_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/rtc及網路校時";
