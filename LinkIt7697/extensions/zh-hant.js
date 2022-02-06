@@ -88,6 +88,7 @@ Blockly.Msg.MP3_SET_PINS_TITLE = "設定DFPlayer mini 腳位";
 Blockly.Msg.MP3_TOOLTIP = "MP3";
 Blockly.Msg.MP3_RX_PIN = "RX連接到Pin";
 Blockly.Msg.MP3_TX_PIN = "TX連接到Pin(2或3)";
+Blockly.Msg.MP3_TX_PIN_ESP32 = "TX連接到Pin";
 Blockly.Msg.MP3_PLAYFOLDER_TITLE = "播放資料夾中音樂";
 Blockly.Msg.MP3_FOLDER = "資料夾編號";
 Blockly.Msg.MP3_INDEX_IN_FOLDER = "歌曲編號";

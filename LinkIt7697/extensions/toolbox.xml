@@ -1641,12 +1641,24 @@
 				<value name="RX_PIN">
 					<block type="math_number">
 						<field name="NUM">2</field>
-                    </block>
+          </block>
 				</value>
 				<value name="TX_PIN">
 					<block type="math_number">
 						<field name="NUM">0</field>
-                    </block>
+          </block>
+				</value>
+			</block>
+			<block type="mp3_set_pins_esp32">
+				<value name="RX_PIN">
+					<block type="math_number">
+						<field name="NUM">16</field>
+          </block>
+				</value>
+				<value name="TX_PIN">
+					<block type="math_number">
+						<field name="NUM">17</field>
+          </block>
 				</value>
 			</block>
 			<block type="mp3_playfolder">

@@ -195,6 +195,16 @@ Blockly.Arduino.mp3_set_pins1=function(){
 	return''
 };
 
+Blockly.Arduino.mp3_set_pins_esp32=function(){
+	var a=Blockly.Arduino.valueToCode(this,"RX_PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
+	    b=Blockly.Arduino.valueToCode(this,"TX_PIN",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  Blockly.Arduino.definitions_.define_mp3_include='#include <DFRobotDFPlayerMini.h>\n';
+  Blockly.Arduino.definitions_["mp3_serial"]='HardwareSerial mp3Serial(2);';
+	Blockly.Arduino.definitions_["mp3_dfplayer"]='DFRobotDFPlayerMini myDFPlayer;';
+	Blockly.Arduino.setups_["setup_mp3_"]="mp3Serial.begin(9600,SERIAL_8N1,"+a+","+b+");\n  myDFPlayer.begin(mp3Serial);\n";
+	return''
+};
+
 Blockly.Arduino.mp3_playfolder=function(){
 	var a=Blockly.Arduino.valueToCode(this,"FOLDER",Blockly.Arduino.ORDER_ATOMIC)||"1",
 	    b=Blockly.Arduino.valueToCode(this,"MP3_INDEX",Blockly.Arduino.ORDER_ATOMIC)||"1";

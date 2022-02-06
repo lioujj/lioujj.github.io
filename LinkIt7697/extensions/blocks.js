@@ -231,6 +231,24 @@ Blockly.Blocks.mp3_set_pins1={init:function(){
   this.setTooltip(Blockly.Msg.MP3_TOOLTIP)}
 };
 
+Blockly.Blocks.mp3_set_pins_esp32={init:function(){
+  this.setHelpUrl(Blockly.Msg.MP3_HELPURL);
+  this.setColour(Blockly.Blocks.mp3.HUE);
+  this.appendDummyInput().appendField(Blockly.Msg.MP3_SET_PINS_TITLE+"  ESP32");
+  this.appendValueInput("RX_PIN")
+      .setCheck("Number")
+	  .setAlign(Blockly.ALIGN_RIGHT)
+	  .appendField(Blockly.Msg.MP3_TX_PIN_ESP32);
+  this.appendValueInput("TX_PIN")
+      .setCheck("Number")
+	  .setAlign(Blockly.ALIGN_RIGHT)
+	  .appendField(Blockly.Msg.MP3_RX_PIN);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.MP3_TOOLTIP)}
+};
+
 Blockly.Blocks.mp3_playfolder={init:function(){
   this.setHelpUrl(Blockly.Msg.MP3_HELPURL);
   this.setColour(Blockly.Blocks.mp3.HUE);
