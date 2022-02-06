@@ -89,6 +89,7 @@ Blockly.Msg.MP3_SET_PINS_TITLE = "set DFPlayer mini pin";
 Blockly.Msg.MP3_TOOLTIP = "MP3";
 Blockly.Msg.MP3_RX_PIN = "RX Pin connect to Pin";
 Blockly.Msg.MP3_TX_PIN = "TX Pin connect to Pin(2 or 3)";
+Blockly.Msg.MP3_TX_PIN_ESP32 = "TX Pin connect to Pin";
 Blockly.Msg.MP3_PLAYFOLDER_TITLE = "Play MP3 in folder";
 Blockly.Msg.MP3_FOLDER = "Folder Index";
 Blockly.Msg.MP3_INDEX_IN_FOLDER = "MP3 Index";
