@@ -3664,6 +3664,39 @@ Blockly.Blocks.searchSheet={init:function(){
       this.workspace&&(Blockly.Blocks.stock.checkBlocks(this,"searchSheet","setupForm")?this.setWarningText(null):this.setWarningText(Blockly.Msg.GOOGLESHEETS_SETUP_FORM_WARNIG))}
 };
 
+Blockly.Blocks.deleteSearch={init:function(){
+  this.setHelpUrl(Blockly.Msg.GOOGLESHEETS_HELPURL);
+  this.setColour(Blockly.Blocks.googlesheets.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.GOOGLESHEETS_TITLE+"  "+Blockly.Msg.GOOGLESHEETS_DELETE_SEARCH);
+  this.appendValueInput("Column")
+      .setCheck("String")
+      .appendField(Blockly.Msg.GOOGLESHEETS_COLUMN_NAME);
+  this.appendValueInput("keyWord")
+      .setCheck("String")
+      .appendField(Blockly.Msg.GOOGLESHEETS_KEY_WORD);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.GOOGLESHEETS_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.stock.checkBlocks(this,"deleteSearch","setupForm")?this.setWarningText(null):this.setWarningText(Blockly.Msg.GOOGLESHEETS_SETUP_FORM_WARNIG))}
+};
+
+Blockly.Blocks.deleteRow={init:function(){
+  this.setHelpUrl(Blockly.Msg.GOOGLESHEETS_HELPURL);
+  this.setColour(Blockly.Blocks.googlesheets.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.GOOGLESHEETS_TITLE+"  "+Blockly.Msg.GOOGLESHEETS_DELETE_ROW);
+  this.appendValueInput("RowIndex")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.GOOGLESHEETS_ROWINDEX);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.GOOGLESHEETS_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.stock.checkBlocks(this,"deleteSingle","setupForm")?this.setWarningText(null):this.setWarningText(Blockly.Msg.GOOGLESHEETS_SETUP_FORM_WARNIG))}
+};
+
 Blockly.Blocks.getFieldValue={init:function(){
   this.setHelpUrl(Blockly.Msg.GOOGLESHEETS_HELPURL);
   this.setColour(Blockly.Blocks.googlesheets.HUE);

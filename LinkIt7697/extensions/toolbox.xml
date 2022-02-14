@@ -929,20 +929,20 @@
 				</block>
         <block type="things_get_rec"></block>
 		</category>
-		<category id="category_googlesheets" name="GoogleSheets">
+    <category id="category_googlesheets" name="GoogleSheets">
       <block type="setupSheets">
-				<value name="sheetId">
-					<block type="text">
-						<field name="TEXT">Enter your SheetID</field>
-					</block>
-				</value>
+        <value name="sheetId">
+          <block type="text">
+            <field name="TEXT">Enter your SheetID</field>
+          </block>
+        </value>
       </block>
       <block type="setupForm">
-				<value name="sheetTag">
-					<block type="text">
-						<field name="TEXT">Enter your WorkSheet Name</field>
-					</block>
-				</value>
+        <value name="sheetTag">
+          <block type="text">
+            <field name="TEXT">Enter your WorkSheet Name</field>
+          </block>
+        </value>
       </block>
       <block type="sendToGoogle">
         <value name="data">
@@ -953,54 +953,73 @@
       </block>
       <block type="getLastRow"></block>
       <block type="fetchFromSheet">
-				<value name="beginCell">
-					<block type="text">
-						<field name="TEXT"></field>
-					</block>
-				</value>
-				<value name="endCell">
-					<block type="text">
-						<field name="TEXT"></field>
-					</block>
-				</value>
+        <value name="beginCell">
+          <block type="text">
+            <field name="TEXT"></field>
+          </block>
+        </value>
+        <value name="endCell">
+          <block type="text">
+            <field name="TEXT"></field>
+          </block>
+        </value>
       </block>
       <block type="getCellValue">
-				<value name="cell">
-					<block type="text">
-						<field name="TEXT"></field>
-					</block>
-				</value>
+        <value name="cell">
+          <block type="text">
+            <field name="TEXT"></field>
+          </block>
+        </value>
       </block>
       <block type="searchSheet">
-				<value name="Column">
-					<block type="text">
-						<field name="TEXT">A</field>
-					</block>
-				</value>
-				<value name="keyWord">
-					<block type="text">
-						<field name="TEXT"></field>
-					</block>
-				</value>
+        <value name="Column">
+          <block type="text">
+            <field name="TEXT">A</field>
+          </block>
+        </value>
+        <value name="keyWord">
+          <block type="text">
+            <field name="TEXT"></field>
+          </block>
+        </value>
       </block>
       <block type="getFieldValue">
-				<value name="field">
-					<block type="text">
-						<field name="TEXT">A</field>
-					</block>
-				</value>
+        <value name="field">
+          <block type="text">
+            <field name="TEXT">A</field>
+          </block>
+        </value>
+      </block>
+      <block type="deleteSearch">
+        <value name="Column">
+          <block type="text">
+            <field name="TEXT">A</field>
+          </block>
+        </value>
+        <value name="keyWord">
+          <block type="text">
+            <field name="TEXT"></field>
+          </block>
+        </value>
+      </block>
+      <block type="deleteRow">
+        <value name="RowIndex">
+          <block type="math_number">
+            <field name="NUM">1</field>
+          </block>
+        </value>
       </block>
       <block type="updateCellValue">
-				<value name="cell">
-					<block type="text">
-						<field name="TEXT"></field>
-					</block>
-				</value>
-				<value name="data">
-					<block type="text">
-						<field name="TEXT"></field>
-					</block>
-				</value>
+        <value name="cell">
+          <block type="text">
+            <field name="TEXT"></field>
+          </block>
+        </value>
+        <value name="data">
+          <block type="text">
+            <field name="TEXT"></field>
+          </block>
+        </value>
       </block>
     </category>
     <category id="category_broadcast_udp" name="Broadcast">
