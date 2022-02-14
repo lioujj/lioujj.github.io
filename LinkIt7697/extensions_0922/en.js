@@ -569,7 +569,10 @@ Blockly.Msg.GOOGLESHEETS_SEARCH_FROM_SHEET = "search a row where";
 Blockly.Msg.GOOGLESHEETS_COLUMN_NAME = "column";
 Blockly.Msg.GOOGLESHEETS_KEY_WORD = "equals";
 Blockly.Msg.GOOGLESHEETS_GET_FIELD_VALUE = "get field value from search result";
+Blockly.Msg.GOOGLESHEETS_DELETE_SEARCH = "delete a row where";
 Blockly.Msg.GOOGLESHEETS_SEARCH_DATA_WARNIG = 'You have to setup "'+Blockly.Msg.GOOGLESHEETS_TITLE+' '+Blockly.Msg.GOOGLESHEETS_SEARCH_FROM_SHEET+'" first.';
+Blockly.Msg.GOOGLESHEETS_DELETE_ROW = "delete a row where";
+Blockly.Msg.GOOGLESHEETS_ROWINDEX = "row index is";
 
 //ESP32 NTP
 Blockly.Msg.ESP32NTP_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/rtc及網路校時";

@@ -111,7 +111,7 @@ Blockly.Arduino.things_get_url=function(){
   else {
     Blockly.Arduino.definitions_.define_HTTPCLIENT_include='#include <HTTPClient.h>';
     Blockly.Arduino.definitions_.define_thingspeak_event='\nvoid invokeThingSpeak(const String& key, const String& p1, const String& p2, const String& p3, const String& p4, const String& p5, const String& p6, const String& p7, const String& p8)\n{\n  static HTTPClient client;\n  client.begin("http://api.thingspeak.com/update");\n  client.addHeader("Content-Type", "application/json");\n  const String payload = String() + "{\\"api_key\\":\\"" + key\n                        + "\\",\\"field1\\":\\"" + p1\n                        + "\\",\\"field2\\":\\"" + p2\n                        + "\\",\\"field3\\":\\"" + p3\n                        + "\\",\\"field4\\":\\"" + p4\n                        + "\\",\\"field5\\":\\"" + p5\n                        + "\\",\\"field6\\":\\"" + p6\n                        + "\\",\\"field7\\":\\"" + p7\n                        + "\\",\\"field8\\":\\"" + p8\n                        + "\\"}";\n  int postCode=client.POST(payload);\n  if (postCode==200)\n    thingSpeakRec=client.getString().toInt();\n  else\n    thingSpeakRec=0;\n  client.end();\n}\n';
-	}
+  }
   var a=Blockly.Arduino.valueToCode(this,"KEY",Blockly.Arduino.ORDER_ATOMIC)||'"---"',
 	b=Blockly.Arduino.valueToCode(this,"FIELD1",Blockly.Arduino.ORDER_ATOMIC)||"0",
 	c=Blockly.Arduino.valueToCode(this,"FIELD2",Blockly.Arduino.ORDER_ATOMIC)||"0",
@@ -2075,6 +2075,7 @@ Blockly.Arduino.fetchFromSheet=function(){
 Blockly.Arduino.searchSheet=function(){
   var a=Blockly.Arduino.valueToCode(this,"Column",Blockly.Arduino.ORDER_ATOMIC)||"",
       b=Blockly.Arduino.valueToCode(this,"keyWord",Blockly.Arduino.ORDER_ATOMIC)||"";
+  a=a.toUpperCase();
   Blockly.Arduino.definitions_.define_json_include="#define ARDUINOJSON_DECODE_UNICODE 1\n#include <ArduinoJson.h>";
   Blockly.Arduino.definitions_.define_sheet_json_doc_invoke='DynamicJsonDocument docSheet(2048);\n';
   Blockly.Arduino.definitions_.define_search_sheet_event='void searchSheet(const String& fname, const String& sname){\n  static TLSClient sheetClient;\n  const char* host="script.google.com";\n  String newUrl="";\n  sheetClient.connect(host, 443);\n  while (!sheetClient.connected());\n  const String url = String() +"https://"+host+"/macros/s/"+asId+"/exec?type=search&sheetId="+sheetId+"&sheetTag="+sheetTag+"&fname="+fname+"&sname="+sname;\n  sheetClient.print("GET " + url + " HTTP/1.1\\n"+String()+"Host: "+host+"\\nAccept: */*\\nConnection: close\\n\\n\\n");\n  while (!newUrl.startsWith("https:")){\n    newUrl = sheetClient.readStringUntil(\'\\n\');\n    if (newUrl.startsWith("Location: https://")) {\n      newUrl.replace("Location: ","");\n      break;\n    }\n  }\n  sheetClient.stop();\n  String jsonData ="";\n  sheetClient.connect(host, 443);\n  while (!sheetClient.connected());\n  sheetClient.print("GET " + newUrl + " HTTP/1.1\\n"+String()+"Host: "+host+"\\nAccept: */*\\nConnection: close\\n\\n\\n");\n  while(!jsonData.startsWith("{")){\n    jsonData = sheetClient.readStringUntil(\'\\n\');\n    if (jsonData.startsWith("{")) {\n      DeserializationError error = deserializeJson(docSheet, jsonData);\n      break;\n    }\n  }\n  sheetClient.stop();\n}\n';
@@ -2089,6 +2090,33 @@ Blockly.Arduino.searchSheet=function(){
   return'searchSheet('+a+',URLEncode('+b+').c_str());\n'
 };
 
+Blockly.Arduino.deleteSearch=function(){
+  var a=Blockly.Arduino.valueToCode(this,"Column",Blockly.Arduino.ORDER_ATOMIC)||"",
+      b=Blockly.Arduino.valueToCode(this,"keyWord",Blockly.Arduino.ORDER_ATOMIC)||"";
+  a=a.toUpperCase();
+  Blockly.Arduino.definitions_.define_search_sheet_event='void deleteSearch(const String& fname, const String& sname){\n  static TLSClient sheetClient;\n  const char* host="script.google.com";\n  String newUrl="";\n  sheetClient.connect(host, 443);\n  while (!sheetClient.connected());\n  const String url = String() +"https://"+host+"/macros/s/"+asId+"/exec?type=deleteQ&sheetId="+sheetId+"&sheetTag="+sheetTag+"&fname="+fname+"&sname="+sname;\n  sheetClient.print("GET " + url + " HTTP/1.1\\n"+String()+"Host: "+host+"\\nAccept: */*\\nConnection: close\\n\\n\\n");\n  sheetClient.stop();\n}\n';
+  if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
+    Blockly.Arduino.definitions_.define_secure_include="#include <WiFiClientSecure.h>";
+    Blockly.Arduino.definitions_.define_search_sheet_event=Blockly.Arduino.definitions_.define_search_sheet_event.replace("TLSClient","WiFiClientSecure");
+    if (Blockly.Arduino.my_board_type=="ESP8266"){
+      Blockly.Arduino.definitions_.define_search_sheet_event=Blockly.Arduino.definitions_.define_search_sheet_event.replace(" sheetClient;\n"," sheetClient;\n  sheetClient.setInsecure();\n");
+    }  
+  }
+  return'deleteSearch('+a+',URLEncode('+b+').c_str());\n'
+};
+
+Blockly.Arduino.deleteRow=function(){
+  var a=Blockly.Arduino.valueToCode(this,"RowIndex",Blockly.Arduino.ORDER_ATOMIC)||"";
+  Blockly.Arduino.definitions_.define_search_sheet_event='void deleteRows(int nBegin, int nEnd){\n  static TLSClient sheetClient;\n  const char* host="script.google.com";\n  String newUrl="";\n  sheetClient.connect(host, 443);\n  while (!sheetClient.connected());\n  String url="";\n  if (nEnd<0){\n    url= String() +"https://"+host+"/macros/s/"+asId+"/exec?type=deleteRow&sheetId="+sheetId+"&sheetTag="+sheetTag+"&dBegin="+nBegin;\n  } else {\n    url= String() +"https://"+host+"/macros/s/"+asId+"/exec?type=deleteRows&sheetId="+sheetId+"&sheetTag="+sheetTag+"&dBegin="+nBegin+"&dEnd="+nEnd;\n  }\n  sheetClient.print("GET " + url + " HTTP/1.1\\n"+String()+"Host: "+host+"\\nAccept: */*\\nConnection: close\\n\\n\\n");\n  sheetClient.stop();\n}\n';
+  if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
+    Blockly.Arduino.definitions_.define_secure_include="#include <WiFiClientSecure.h>";
+    Blockly.Arduino.definitions_.define_search_sheet_event=Blockly.Arduino.definitions_.define_search_sheet_event.replace("TLSClient","WiFiClientSecure");
+    if (Blockly.Arduino.my_board_type=="ESP8266"){
+      Blockly.Arduino.definitions_.define_search_sheet_event=Blockly.Arduino.definitions_.define_search_sheet_event.replace(" sheetClient;\n"," sheetClient;\n  sheetClient.setInsecure();\n");
+    }  
+  }
+  return'deleteRows('+a+',-1);\n'
+};
 
 Blockly.Arduino.getCellValue=function(){
   var a=Blockly.Arduino.valueToCode(this,"cell",Blockly.Arduino.ORDER_ATOMIC)||"";
@@ -2098,6 +2126,7 @@ Blockly.Arduino.getCellValue=function(){
 
 Blockly.Arduino.getFieldValue=function(){
   var a=Blockly.Arduino.valueToCode(this,"field",Blockly.Arduino.ORDER_ATOMIC)||"";
+  a=a.toUpperCase();
   return['docSheet['+a+'].as<String>()',Blockly.Arduino.ORDER_ATOMIC]
 };
 
@@ -2485,14 +2514,14 @@ Blockly.Arduino.dac_init=function(){
   Blockly.Arduino.definitions_.define_SPIFFS_include='#include "SPIFFS.h"';
   Blockly.Arduino.definitions_.define_HTTPCLIENT_include='#include <HTTPClient.h>';
   Blockly.Arduino.definitions_.define_ESP8266Audio_include='#include "AudioFileSourceSPIFFS.h"\n#include "AudioFileSourceSD.h"\n#include "AudioFileSourceHTTPStream.h"\n#include "AudioFileSourceBuffer.h"\n#include "AudioOutputI2S.h"\n#include "AudioGeneratorMP3.h"\n';
-  Blockly.Arduino.definitions_.define_ESP8266Audio_variable_invoke='AudioFileSourceSD *i2sSdFile;\nAudioFileSourceSPIFFS *i2sSPIFFSfile;\nAudioGeneratorMP3 *i2sMp3;\nAudioFileSourceHTTPStream *i2sFile;\nAudioFileSourceBuffer *i2sBuff;\nAudioOutputI2S *i2sOut;\nString dacPlayType;\nString mp3FileName;\nString ttsContent;\nString httpLink;\nfloat gainValue=1.0;\nbool ttsDone=true;\nbool httpDone=true;\nbool mp3Done=true;\n';
+  Blockly.Arduino.definitions_.define_ESP8266Audio_variable_invoke='AudioFileSourceSD *i2sSdFile;\nAudioFileSourceSPIFFS *i2sSPIFFSfile;\nAudioGeneratorMP3 *i2sMp3;\nAudioFileSourceHTTPStream *i2sFile=new AudioFileSourceHTTPStream();\nAudioFileSourceBuffer *i2sBuff;\nAudioOutputI2S *i2sOut;\nString dacPlayType;\nString mp3FileName;\nString ttsContent;\nString httpLink;\nfloat gainValue=1.0;\nbool ttsDone=true;\nbool httpDone=true;\nbool mp3Done=true;\n';
   Blockly.Arduino.definitions_.define_urlencode_event="String URLEncode(const char* msg)\n{\n  const char *hex = \"0123456789abcdef\";\n  String encodedMsg = \"\";\n  while (*msg!='\\0'){\n      if( ('a' <= *msg && *msg <= 'z')\n              || ('A' <= *msg && *msg <= 'Z')\n              || ('0' <= *msg && *msg <= '9') ) {\n          encodedMsg += *msg;\n      } else {\n          encodedMsg += '%';\n          encodedMsg += hex[*msg >> 4];\n          encodedMsg += hex[*msg & 15];\n      }\n      msg++;\n  }\n  return encodedMsg;\n}\n";
   Blockly.Arduino.definitions_.define_ESP8266Audio_function_invoke_checkRunning_event='bool checkDACrunning()\n{\n  bool isRunning=false;\n  if (i2sMp3->isRunning()) {\n    isRunning=true;\n    if (!i2sMp3->loop()){\n      i2sMp3->stop();\n      mp3Done=true;\n      ttsDone=true;\n      httpDone=true;\n      isRunning=false;\n    }\n  }else{\n    isRunning=false;\n  }\n  return isRunning;\n}\n';
   Blockly.Arduino.definitions_.define_ESP8266Audio_function_invoke_TTS_event='void getVoiceFromGoogle(String myTalk,String tl)\n{\n  myTalk=URLEncode(myTalk.c_str());\n  ttsDone=false;\n  httpDone=true;\n  mp3Done=true;\n  dacPlayType="TTS";\n  ttsContent=myTalk;\n  myTalk="http://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl="+tl+"&q="+myTalk;\n  saveTTStoFile(myTalk,"/TTS/tts.mp3",2);\n  getVoiceFromFile("/TTS/tts.mp3",2);\n}\n';
   Blockly.Arduino.definitions_.define_ESP8266Audio_function_invoke_saveTTStoFile_event='void saveTTStoFile(String myLink,String fileName,byte sdType)\n{\n  myLink.replace(" ","%20");\n  Serial.println("filename:"+fileName);\n  File myTTSFile;\n  if(fileName.indexOf("/")!=0)\n    fileName="/"+fileName;\n  if (sdType==1){\n    if(!SD.begin()){\n      return;\n    }\n    String path=fileName.substring(1,fileName.lastIndexOf("/"));\n    String mySubStr="/";\n    while(path.indexOf("/")>-1){\n      mySubStr+=path.substring(0,path.indexOf("/"));\n      if( !SD.exists( mySubStr.c_str()))\n        SD.mkdir(mySubStr.c_str());\n      mySubStr+="/";\n      path= path.substring(path.indexOf("/")+1);\n    }\n    if (path!=""){\n      mySubStr+=path;\n      if( !SD.exists( mySubStr.c_str()))\n        SD.mkdir(mySubStr.c_str());\n    }\n    myTTSFile = SD.open(fileName, "w");\n    if (!myTTSFile) {\n      return;\n    }\n  } else if (sdType==2){\n    if(!SPIFFS.begin(true)){\n      return;\n    }\n    myTTSFile = SPIFFS.open(fileName, "w");\n    if (!myTTSFile) {\n      return;\n    }\n  }\n  HTTPClient http;\n  http.begin(myLink);\n  int httpCode = http.GET();\n  if (httpCode == HTTP_CODE_OK) {\n      http.writeToStream(&myTTSFile);\n  }\n  myTTSFile.close();\n  http.end();\n}\n';
-  Blockly.Arduino.definitions_.define_ESP8266Audio_function_invoke_radio_event='void playRadioStation(String myStationURL)\n{\n  httpDone=true;\n  mp3Done=true;\n  ttsDone=true;\n  dacPlayType="radio";\n  i2sFile = new AudioFileSourceHTTPStream(myStationURL.c_str());\n  i2sBuff = new AudioFileSourceBuffer(i2sFile, 2048);\n  i2sMp3->begin(i2sBuff, i2sOut);\n}\n';
-  Blockly.Arduino.definitions_.define_ESP8266Audio_function_invoke_httpMp3_event='void playHttpMP3(String myStationURL)\n{\n  mp3Done=true;\n  ttsDone=true;\n  httpDone=false;\n  dacPlayType="HTTPMP3";\n  httpLink=myStationURL;\n  myStationURL.replace("www.dropbox","dl.dropboxusercontent");\n  myStationURL.replace("?dl=0","");\n  i2sFile = new AudioFileSourceHTTPStream(myStationURL.c_str());\n  i2sBuff = new AudioFileSourceBuffer(i2sFile, 2048);\n  i2sMp3->begin(i2sBuff, i2sOut);\n}\n';
-  Blockly.Arduino.definitions_.define_ESP8266Audio_function_invoke_file_event='void getVoiceFromFile(String myFileName,byte sdType)\n{\n  httpDone=true;\n  ttsDone=true;\n  mp3Done=false;\n  dacPlayType="MP3";\n  if(myFileName.indexOf("/")!=0)\n    myFileName="/"+myFileName;\n  if (sdType==1){\n    SD.begin();\n    i2sSdFile = new AudioFileSourceSD(String(myFileName).c_str());\n    i2sBuff = new AudioFileSourceBuffer(i2sSdFile, 2048);\n    mp3FileName=myFileName;\n  }\n  else {\n    if (myFileName=="/TTS/tts.mp3"){\n      ttsDone=false;\n      mp3Done=true;\n      dacPlayType="TTS";\n    } else {\n      mp3FileName=myFileName;\n    }\n    SPIFFS.begin();\n    i2sSPIFFSfile=new AudioFileSourceSPIFFS(String(myFileName).c_str());\n    i2sBuff = new AudioFileSourceBuffer(i2sSPIFFSfile, 2048);\n  }\n  i2sMp3->begin(i2sBuff, i2sOut);\n}\n';
+  Blockly.Arduino.definitions_.define_ESP8266Audio_function_invoke_radio_event='void playRadioStation(String myStationURL)\n{\n  httpDone=true;\n  mp3Done=true;\n  ttsDone=true;\n  dacPlayType="radio";\n  i2sFile->open(myStationURL.c_str());\n  if (i2sBuff!=NULL)\n    i2sBuff->close();\n  i2sBuff = new AudioFileSourceBuffer(i2sFile, 2048);\n  i2sMp3->begin(i2sBuff, i2sOut);\n}\n';
+  Blockly.Arduino.definitions_.define_ESP8266Audio_function_invoke_httpMp3_event='void playHttpMP3(String myStationURL)\n{\n  mp3Done=true;\n  ttsDone=true;\n  httpDone=false;\n  dacPlayType="HTTPMP3";\n  httpLink=myStationURL;\n  myStationURL.replace("www.dropbox","dl.dropboxusercontent");\n  myStationURL.replace("?dl=0","");\n  i2sFile->open(myStationURL.c_str());\n  if (i2sBuff!=NULL)\n    i2sBuff->close();\n  i2sBuff = new AudioFileSourceBuffer(i2sFile, 2048);\n  i2sMp3->begin(i2sBuff, i2sOut);\n}\n';
+  Blockly.Arduino.definitions_.define_ESP8266Audio_function_invoke_file_event='void getVoiceFromFile(String myFileName,byte sdType)\n{\n  httpDone=true;\n  ttsDone=true;\n  mp3Done=false;\n  dacPlayType="MP3";\n  if(myFileName.indexOf("/")!=0)\n    myFileName="/"+myFileName;\n  if (sdType==1){\n    SD.begin();\n    i2sSdFile = new AudioFileSourceSD(String(myFileName).c_str());\n    if (i2sBuff!=NULL)\n      i2sBuff->close();\n    i2sBuff = new AudioFileSourceBuffer(i2sSdFile, 2048);\n    mp3FileName=myFileName;\n  }\n  else {\n    if (myFileName=="/TTS/tts.mp3"){\n      ttsDone=false;\n      mp3Done=true;\n      dacPlayType="TTS";\n    } else {\n      mp3FileName=myFileName;\n    }\n    SPIFFS.begin();\n    i2sSPIFFSfile=new AudioFileSourceSPIFFS(String(myFileName).c_str());\n    if (i2sBuff!=NULL)\n      i2sBuff->close();\n    i2sBuff = new AudioFileSourceBuffer(i2sSPIFFSfile, 2048);\n  }\n  i2sMp3->begin(i2sBuff, i2sOut);\n}\n';
   Blockly.Arduino.definitions_.define_DAC_checkTTS_event='void checkTTS(){\n}\n';
   Blockly.Arduino.definitions_.define_DAC_checkMP3_event='void checkMP3(){\n}\n';
   Blockly.Arduino.definitions_.define_DAC_checkHttpMP3_event='void checkHttpMP3(){\n}\n';

@@ -562,7 +562,10 @@ Blockly.Msg.GOOGLESHEETS_SEARCH_FROM_SHEET = "搜尋並取得一列資料";
 Blockly.Msg.GOOGLESHEETS_COLUMN_NAME = "欄位名稱";
 Blockly.Msg.GOOGLESHEETS_KEY_WORD = "等於";
 Blockly.Msg.GOOGLESHEETS_GET_FIELD_VALUE = "從搜尋結果取得資料";
+Blockly.Msg.GOOGLESHEETS_DELETE_SEARCH = "刪除資料";
 Blockly.Msg.GOOGLESHEETS_SEARCH_DATA_WARNIG = "必須先設定「"+Blockly.Msg.GOOGLESHEETS_TITLE+" "+Blockly.Msg.GOOGLESHEETS_SEARCH_FROM_SHEET+"」積木";
+Blockly.Msg.GOOGLESHEETS_DELETE_ROW = "刪除一列資料";
+Blockly.Msg.GOOGLESHEETS_ROWINDEX = "列的編號是";
 
 //ESP32 NTP
 Blockly.Msg.ESP32NTP_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/rtc及網路校時";
