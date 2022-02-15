@@ -2087,32 +2087,32 @@ Blockly.Arduino.searchSheet=function(){
       Blockly.Arduino.definitions_.define_search_sheet_event=Blockly.Arduino.definitions_.define_search_sheet_event.replace(" sheetClient;\n"," sheetClient;\n  sheetClient.setInsecure();\n");
     }  
   }
-  return'searchSheet('+a+',URLEncode('+b+').c_str());\n'
+  return'searchSheet('+a+',URLEncode(String('+b+').c_str()).c_str());\n'
 };
 
 Blockly.Arduino.deleteSearch=function(){
   var a=Blockly.Arduino.valueToCode(this,"Column",Blockly.Arduino.ORDER_ATOMIC)||"",
       b=Blockly.Arduino.valueToCode(this,"keyWord",Blockly.Arduino.ORDER_ATOMIC)||"";
   a=a.toUpperCase();
-  Blockly.Arduino.definitions_.define_search_sheet_event='void deleteSearch(const String& fname, const String& sname){\n  static TLSClient sheetClient;\n  const char* host="script.google.com";\n  String newUrl="";\n  sheetClient.connect(host, 443);\n  while (!sheetClient.connected());\n  const String url = String() +"https://"+host+"/macros/s/"+asId+"/exec?type=deleteQ&sheetId="+sheetId+"&sheetTag="+sheetTag+"&fname="+fname+"&sname="+sname;\n  sheetClient.print("GET " + url + " HTTP/1.1\\n"+String()+"Host: "+host+"\\nAccept: */*\\nConnection: close\\n\\n\\n");\n  sheetClient.stop();\n}\n';
+  Blockly.Arduino.definitions_.define_delete_search_sheet_event='void deleteSearch(const String& fname, const String& sname){\n  static TLSClient sheetClient;\n  const char* host="script.google.com";\n  String newUrl="";\n  sheetClient.connect(host, 443);\n  while (!sheetClient.connected());\n  const String url = String() +"https://"+host+"/macros/s/"+asId+"/exec?type=deleteQ&sheetId="+sheetId+"&sheetTag="+sheetTag+"&fname="+fname+"&sname="+sname;\n  sheetClient.print("GET " + url + " HTTP/1.1\\n"+String()+"Host: "+host+"\\nAccept: */*\\nConnection: close\\n\\n\\n");\n  sheetClient.stop();\n}\n';
   if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
     Blockly.Arduino.definitions_.define_secure_include="#include <WiFiClientSecure.h>";
-    Blockly.Arduino.definitions_.define_search_sheet_event=Blockly.Arduino.definitions_.define_search_sheet_event.replace("TLSClient","WiFiClientSecure");
+    Blockly.Arduino.definitions_.define_delete_search_sheet_event=Blockly.Arduino.definitions_.define_delete_search_sheet_event.replace("TLSClient","WiFiClientSecure");
     if (Blockly.Arduino.my_board_type=="ESP8266"){
-      Blockly.Arduino.definitions_.define_search_sheet_event=Blockly.Arduino.definitions_.define_search_sheet_event.replace(" sheetClient;\n"," sheetClient;\n  sheetClient.setInsecure();\n");
+      Blockly.Arduino.definitions_.define_delete_search_sheet_event=Blockly.Arduino.definitions_.define_delete_search_sheet_event.replace(" sheetClient;\n"," sheetClient;\n  sheetClient.setInsecure();\n");
     }  
   }
-  return'deleteSearch('+a+',URLEncode('+b+').c_str());\n'
+  return'deleteSearch('+a+',URLEncode(String('+b+').c_str()).c_str());\n'
 };
 
 Blockly.Arduino.deleteRow=function(){
   var a=Blockly.Arduino.valueToCode(this,"RowIndex",Blockly.Arduino.ORDER_ATOMIC)||"";
-  Blockly.Arduino.definitions_.define_search_sheet_event='void deleteRows(int nBegin, int nEnd){\n  static TLSClient sheetClient;\n  const char* host="script.google.com";\n  String newUrl="";\n  sheetClient.connect(host, 443);\n  while (!sheetClient.connected());\n  String url="";\n  if (nEnd<0){\n    url= String() +"https://"+host+"/macros/s/"+asId+"/exec?type=deleteRow&sheetId="+sheetId+"&sheetTag="+sheetTag+"&dBegin="+nBegin;\n  } else {\n    url= String() +"https://"+host+"/macros/s/"+asId+"/exec?type=deleteRows&sheetId="+sheetId+"&sheetTag="+sheetTag+"&dBegin="+nBegin+"&dEnd="+nEnd;\n  }\n  sheetClient.print("GET " + url + " HTTP/1.1\\n"+String()+"Host: "+host+"\\nAccept: */*\\nConnection: close\\n\\n\\n");\n  sheetClient.stop();\n}\n';
+  Blockly.Arduino.definitions_.define_delete_rows_sheet_event='void deleteRows(int nBegin, int nEnd){\n  static TLSClient sheetClient;\n  const char* host="script.google.com";\n  String newUrl="";\n  sheetClient.connect(host, 443);\n  while (!sheetClient.connected());\n  String url="";\n  if (nEnd<0){\n    url= String() +"https://"+host+"/macros/s/"+asId+"/exec?type=deleteRow&sheetId="+sheetId+"&sheetTag="+sheetTag+"&dBegin="+nBegin;\n  } else {\n    url= String() +"https://"+host+"/macros/s/"+asId+"/exec?type=deleteRows&sheetId="+sheetId+"&sheetTag="+sheetTag+"&dBegin="+nBegin+"&dEnd="+nEnd;\n  }\n  sheetClient.print("GET " + url + " HTTP/1.1\\n"+String()+"Host: "+host+"\\nAccept: */*\\nConnection: close\\n\\n\\n");\n  sheetClient.stop();\n}\n';
   if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
     Blockly.Arduino.definitions_.define_secure_include="#include <WiFiClientSecure.h>";
-    Blockly.Arduino.definitions_.define_search_sheet_event=Blockly.Arduino.definitions_.define_search_sheet_event.replace("TLSClient","WiFiClientSecure");
+    Blockly.Arduino.definitions_.define_delete_rows_sheet_event=Blockly.Arduino.definitions_.define_delete_rows_sheet_event.replace("TLSClient","WiFiClientSecure");
     if (Blockly.Arduino.my_board_type=="ESP8266"){
-      Blockly.Arduino.definitions_.define_search_sheet_event=Blockly.Arduino.definitions_.define_search_sheet_event.replace(" sheetClient;\n"," sheetClient;\n  sheetClient.setInsecure();\n");
+      Blockly.Arduino.definitions_.define_delete_rows_sheet_event=Blockly.Arduino.definitions_.define_delete_rows_sheet_event.replace(" sheetClient;\n"," sheetClient;\n  sheetClient.setInsecure();\n");
     }  
   }
   return'deleteRows('+a+',-1);\n'
@@ -3349,7 +3349,7 @@ Blockly.Arduino.pn532i2c_loop=function(){
 }
 
 Blockly.Arduino.pn532i2c_checkUID=function(){
-  return['myNFC_UID!=""',Blockly.Arduino.ORDER_ATOMIC];
+  return['(myNFC_UID!="")',Blockly.Arduino.ORDER_ATOMIC];
 }
 
 Blockly.Arduino.pn532i2c_getUID=function(){
