@@ -829,7 +829,7 @@ Blockly.Msg.PN532I2C_PAGE_List = [["4","4"],["5","5"],["6","6"],["7","7"],["8","
                                   ["35","35"],["36","36"],["37","37"],["38","38"],["39","39"]];
 
 //CCS811
-Blockly.Msg.CCS811_HELPURL = "";
+Blockly.Msg.CCS811_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/ccs811空氣品質感測積木";
 Blockly.Msg.CCS811_TITLE = "CCS811 AirQuality sensor";
 Blockly.Msg.CCS811_INIT = "init";
 Blockly.Msg.CCS811_TOOLTIP = "";
