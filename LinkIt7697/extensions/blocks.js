@@ -2383,6 +2383,24 @@ Blockly.Blocks.broadcast_udp_send={init:function(){
       this.workspace&&(Blockly.Blocks.broadcast_udp.checkBlocks(this)?this.setWarningText(null):this.setWarningText(Blockly.Msg.BROADCAST_UDP_WARNING))}
 };
 
+Blockly.Blocks.broadcast_udp_send_to_ip={init:function(){
+  this.setHelpUrl(Blockly.Msg.BROADCAST_UDP_HELPURL);
+  this.setColour(Blockly.Blocks.broadcast_udp.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.BROADCAST_UDP_TITLE)
+      .appendField(Blockly.Msg.BROADCAST_UDP_SEND);
+  this.appendValueInput("MESSAGE")
+      .setCheck("String");
+  this.appendValueInput("IP")
+      .setCheck("String")
+      .appendField(Blockly.Msg.BROADCAST_UDP_SEND_IP);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.BROADCAST_UDP_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.broadcast_udp.checkBlocks(this)?this.setWarningText(null):this.setWarningText(Blockly.Msg.BROADCAST_UDP_WARNING))}
+};
+
 Blockly.Blocks.broadcast_udp_received_event={init:function(){
   this.setHelpUrl(Blockly.Msg.BROADCAST_UDP_HELPURL);
   this.setColour(Blockly.Blocks.broadcast_udp.HUE);
@@ -5954,6 +5972,91 @@ Blockly.Blocks.asr_check_result={init:function(){
   this.setTooltip(Blockly.Msg.ASR_TOOLTIP)},onchange:function(){
       this.workspace&&(Blockly.Blocks.spiffs.checkBlocks(this,"asr_check_result","asr_check")?this.setWarningText(null):this.setWarningText(Blockly.Msg.ASR_WARNING))}
 };
+
+//CCS811
+Blockly.Blocks.ccs811={};
+Blockly.Blocks.ccs811.HUE=236;
+Blockly.Blocks.ccs811.checkBlocks=function(a,slave,master){
+	var b=null,
+	    d=a.type;
+		a=a.workspace.getAllBlocks();
+		for(var c=0;c<a.length;c++)
+			if(slave!=a[c].type||null!=b||(b=a[c].type!=d?!0:!1),master==a[c].type){
+			  return!0;
+      }
+		return b
+};
+
+Blockly.Blocks.ccs811_init={init:function(){
+  this.setHelpUrl(Blockly.Msg.CCS811_HELPURL);
+  this.setColour(Blockly.Blocks.ccs811.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.CCS811_TITLE)
+      .appendField(Blockly.Msg.CCS811_INIT);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.CCS811_TOOLTIP)}
+};
+
+Blockly.Blocks.ccs811_freq={init:function(){
+  this.setHelpUrl(Blockly.Msg.CCS811_HELPURL);
+  this.setColour(Blockly.Blocks.ccs811.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.CCS811_TITLE)
+      .appendField(Blockly.Msg.CCS811_FREQ)
+      .appendField(new Blockly.FieldDropdown([["1","1"],["10","2"],["60","3"],["0.25","4"]]),"FREQ")
+      .appendField(Blockly.Msg.CCS811_FREQ_UNIT);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.CCS811_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.ccs811.checkBlocks(this,"ccs811_freq","ccs811_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.CCS811_WARNING))}
+};
+
+Blockly.Blocks.ccs811_update={init:function(){
+  this.setHelpUrl(Blockly.Msg.CCS811_HELPURL);
+  this.setColour(Blockly.Blocks.ccs811.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.CCS811_TITLE)
+      .appendField(Blockly.Msg.CCS811_UPDATE);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.CCS811_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.ccs811.checkBlocks(this,"ccs811_update","ccs811_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.CCS811_WARNING))}
+};
+
+Blockly.Blocks.ccs811_check={init:function(){
+  this.setHelpUrl(Blockly.Msg.CCS811_HELPURL);
+  this.setColour(Blockly.Blocks.ccs811.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.CCS811_TITLE)
+      .appendField(Blockly.Msg.CCS811_CHECK);
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Boolean");
+  this.setTooltip(Blockly.Msg.CCS811_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.ccs811.checkBlocks(this,"ccs811_check","ccs811_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.CCS811_WARNING))}
+};
+
+Blockly.Blocks.ccs811_getData={init:function(){
+  this.setHelpUrl(Blockly.Msg.CCS811_HELPURL);
+  this.setColour(Blockly.Blocks.ccs811.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.CCS811_TITLE)
+      .appendField(Blockly.Msg.CCS811_GET_DATA)
+      .appendField(new Blockly.FieldDropdown([["eCO2(PPM)","CO2"],["TVOC(PPB)","TVOC"]]),"DATA_TYPE");
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Number");
+  this.setTooltip(Blockly.Msg.CCS811_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.ccs811.checkBlocks(this,"ccs811_getData","ccs811_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.CCS811_WARNING))}
+};
+
+
+
+
+
+
 
 //PN532_I2C
 Blockly.Blocks.pn532i2c={};

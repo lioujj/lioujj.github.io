@@ -400,6 +400,7 @@ Blockly.Msg.BROADCAST_UDP_RECEIVED_MSG = "接收到的訊息";
 Blockly.Msg.BROADCAST_UDP_RESET = "重設廣播埠";
 Blockly.Msg.BROADCAST_UDP_WARNING = "你必須先設定「"+Blockly.Msg.BROADCAST_UDP_INIT+"」積木！";
 Blockly.Msg.BROADCAST_UDP_CHECK = "檢查UDP廣播訊息";
+Blockly.Msg.BROADCAST_UDP_SEND_IP = "傳送到單一IP:";
 
 //WEBSERVER
 Blockly.Msg.WEBSERVER_HELPURL= "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/網頁伺服器積木";
@@ -818,3 +819,15 @@ Blockly.Msg.PN532I2C_PAGE_List = [["4","4"],["5","5"],["6","6"],["7","7"],["8","
                                   ["15","15"],["16","16"],["17","17"],["18","18"],["19","19"],["20","20"],["21","21"],["22","22"],["23","23"],["24","24"],
                                   ["25","25"],["26","26"],["27","27"],["28","28"],["29","29"],["30","30"],["31","31"],["32","32"],["33","33"],["34","34"],
                                   ["35","35"],["36","36"],["37","37"],["38","38"],["39","39"]];
+
+//CCS811
+Blockly.Msg.CCS811_HELPURL = "";
+Blockly.Msg.CCS811_TITLE = "CCS811空氣品質感測器";
+Blockly.Msg.CCS811_INIT = "初始化";
+Blockly.Msg.CCS811_TOOLTIP = "";
+Blockly.Msg.CCS811_UPDATE = "計算濃度";
+Blockly.Msg.CCS811_CHECK = "是否有可用資料？";
+Blockly.Msg.CCS811_WARNING= "必須先設定「"+Blockly.Msg.CCS811_TITLE+" "+Blockly.Msg.CCS811_INIT+"」積木";
+Blockly.Msg.CCS811_GET_DATA = "取得感測值";
+Blockly.Msg.CCS811_FREQ= "設定每";
+Blockly.Msg.CCS811_FREQ_UNIT = "秒量測一次";

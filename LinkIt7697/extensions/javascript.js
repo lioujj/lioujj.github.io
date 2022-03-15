@@ -1319,12 +1319,11 @@ Blockly.Arduino.probbie_custom_tone=function(){
 Blockly.Arduino.broadcast_udp={};
 Blockly.Arduino.broadcast_udp_init=function(){
   Blockly.Arduino.broadcast_udp.broadcast_exist="yes";
-	var a=Blockly.Arduino.valueToCode(this,"PORT",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  var a=Blockly.Arduino.valueToCode(this,"PORT",Blockly.Arduino.ORDER_ATOMIC)||"0";
   Blockly.Arduino.definitions_.define_broadcast_include="#include <WiFiUdp.h>";
   delete Blockly.Arduino.definitions_.define_udp;
   Blockly.Arduino.definitions_.define_broadcast_port="const int UDP_BUFFER_SIZE=255;\nuint16_t UDP_LISTEN_PORT="+a+";\nWiFiUDP castUdp;\n//IPAddress broadcastIP;\nchar broadcastBuffer[UDP_BUFFER_SIZE];\n";
-  Blockly.Arduino.definitions_.define_broadcast_send_event="\nvoid sendBroadcastUDP(const char* myMessage){\n  IPAddress broadcastIP(WiFi.localIP()[0],WiFi.localIP()[1],WiFi.localIP()[2],255);\n  castUdp.beginPacket(broadcastIP,UDP_LISTEN_PORT);\n  for (int myi = 0; myi < strlen(myMessage); myi++)\n  {\n    castUdp.write(myMessage[myi]);\n  }\n  castUdp.endPacket();\n}\n";
-	//Blockly.Arduino.broadcast_udp.defineFunction.broadcast_send="\nvoid sendBroadcastUDP(const char* myMessage){\n  IPAddress broadcastIP(WiFi.localIP()[0],WiFi.localIP()[1],WiFi.localIP()[2],255);\n  castUdp.beginPacket(broadcastIP,UDP_LISTEN_PORT);\n  castUdp.write(myMessage);\n  castUdp.endPacket();\n}\n";
+  Blockly.Arduino.definitions_.define_broadcast_send_event="\nvoid sendBroadcastUDP(IPAddress broadcastIP, const char* myMessage){\n  castUdp.beginPacket(broadcastIP,UDP_LISTEN_PORT);\n  for (int myi = 0; myi < strlen(myMessage); myi++)\n  {\n    castUdp.write(myMessage[myi]);\n  }\n  castUdp.endPacket();\n}\n";
   Blockly.Arduino.definitions_.define_broadcast_check1_event="\nvoid myCheckUDP(){\n}\n";
   Blockly.Arduino.definitions_.define_broadcast_check2_event="\nvoid checkBroadcastUDP(){\n  int packetSize = castUdp.parsePacket();\n  if (packetSize) {\n    int len = castUdp.read(broadcastBuffer, UDP_BUFFER_SIZE);\n    if (len > 0) {\n      broadcastBuffer[len] = 0;\n      myCheckUDP();\n    }\n  }\n}\n";
   return"castUdp.begin(UDP_LISTEN_PORT);\n"
@@ -1336,8 +1335,18 @@ Blockly.Arduino.broadcast_udp_check_msg=function(){
 
 
 Blockly.Arduino.broadcast_udp_send=function(){
-	var a=Blockly.Arduino.valueToCode(this,"MESSAGE",Blockly.Arduino.ORDER_ATOMIC)||"";
-  return'sendBroadcastUDP(String('+a+').c_str());\n';
+  var a=Blockly.Arduino.valueToCode(this,"MESSAGE",Blockly.Arduino.ORDER_ATOMIC)||"";
+  var myReturStr='IPAddress myBroadCastIP(WiFi.localIP()[0],WiFi.localIP()[1],WiFi.localIP()[2],255);\nsendBroadcastUDP(myBroadCastIP,String('+a+').c_str());\n'
+  return myReturStr;
+};
+
+Blockly.Arduino.broadcast_udp_send_to_ip=function(){
+  var a=Blockly.Arduino.valueToCode(this,"MESSAGE",Blockly.Arduino.ORDER_ATOMIC)||"",
+      b=Blockly.Arduino.valueToCode(this,"IP",Blockly.Arduino.ORDER_ATOMIC)||"";
+  b=b.replace(/\"/g,"");
+  b=b.replace(/\./g,",");
+  var myReturStr='IPAddress myBroadCastIP('+b+');\nsendBroadcastUDP(myBroadCastIP,String('+a+').c_str());\n'
+  return myReturStr;
 };
 
 Blockly.Arduino.broadcast_udp_received_event=function(){
@@ -3331,6 +3340,32 @@ Blockly.Arduino.asr_check_result=function(){
   if (!Blockly.Arduino.setups_.setup_wire_lib)
       Blockly.Arduino.setups_.setup_wire_lib="Wire.begin();";
   return['asr_value=='+a,Blockly.Arduino.ORDER_ATOMIC];
+}
+
+//CCS811
+Blockly.Arduino.ccs811={};
+Blockly.Arduino.ccs811_init=function(){
+  Blockly.Arduino.definitions_.define_ccs811="#include \"SparkFunCCS811.h\"";
+  Blockly.Arduino.definitions_.define_ccs811_invoke='CCS811 myCCS811(0x5B);';
+  return'myCCS811.begin();\n'
+}
+
+Blockly.Arduino.ccs811_freq=function(){
+  var a=this.getFieldValue("FREQ");
+  return'myCCS811.setDriveMode('+a+');\n';
+}
+
+Blockly.Arduino.ccs811_update=function(){
+  return'myCCS811.readAlgorithmResults();\n';
+}
+
+Blockly.Arduino.ccs811_check=function(){
+  return['myCCS811.dataAvailable()',Blockly.Arduino.ORDER_ATOMIC];
+}
+
+Blockly.Arduino.ccs811_getData=function(){
+  var a=this.getFieldValue("DATA_TYPE");
+  return['myCCS811.get'+a+'()',Blockly.Arduino.ORDER_ATOMIC];
 }
 
 //PN532_I2C
