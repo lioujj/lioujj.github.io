@@ -1034,7 +1034,19 @@
       <block type="broadcast_udp_send">
         <value name="MESSAGE">
           <block type="text">
-            <field name="TEXT">write your message here to send</field>
+            <field name="TEXT">leave your message here to send</field>
+          </block>
+        </value>
+      </block>
+      <block type="broadcast_udp_send_to_ip">
+        <value name="MESSAGE">
+          <block type="text">
+            <field name="TEXT">leave your message here to send</field>
+          </block>
+        </value>
+        <value name="IP">
+          <block type="text">
+            <field name="TEXT">IP address</field>
           </block>
         </value>
       </block>
@@ -2041,6 +2053,13 @@
       <block type="asr_check_result"></block>
       <block type="asr_learn"></block>
       <block type="asr_clear"></block>
+    </category>
+    <category id="category_ccs811" name="CCS811">
+      <block type="ccs811_init"></block>
+      <block type="ccs811_freq"></block>
+      <block type="ccs811_update"></block>
+      <block type="ccs811_check"></block>
+      <block type="ccs811_getData"></block>
     </category>
   </category>
   <category id="category_lumex" name="Lumex">

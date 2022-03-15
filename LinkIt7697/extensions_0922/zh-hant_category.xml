@@ -52,4 +52,5 @@
 <category><name>SPIFFS</name><replace>SPIFFS檔案系統</replace></category>
 <category><name>ASR</name><replace>ASR語音辨識</replace></category>
 <category><name>PN532_I2C</name><replace>PN532 NFC讀卡</replace></category>
+<category><name>CCS811</name><replace>CCS811空氣品質</replace></category>
 </xml>
