@@ -1,0 +1,20 @@
+//Broadcast UDP
+Blockly.Msg.YCSH_UDP_HELPURL= "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/udp廣播積木";
+Blockly.Msg.YCSH_UDP_TITLE = "YCSH UDP Broadcast";
+Blockly.Msg.YCSH_UDP_INIT = "init";
+Blockly.Msg.YCSH_UDP_SET_PORT = "set port:";
+Blockly.Msg.YCSH_UDP_BEGIN = "start to connect";
+Blockly.Msg.YCSH_UDP_STOP = "close connection";
+Blockly.Msg.YCSH_UDP_TOOLTIP= "Broadcast UDP";
+Blockly.Msg.YCSH_UDP_SEND = "send message:";
+Blockly.Msg.YCSH_UDP_RECEIVED_EVENT = "on received broadcast message";
+Blockly.Msg.YCSH_UDP_RECEIVED_MSG = "received message";
+Blockly.Msg.YCSH_UDP_CHECK = "listen UDP message";
+Blockly.Msg.YCSH_UDP_WARNING = "You have to set \""+Blockly.Msg.YCSH_UDP_TITLE+" "+Blockly.Msg.YCSH_UDP_INIT+"\" first.";
+Blockly.Msg.YCSH_UDP_BEGIN_WARNING ="You have to set \""+Blockly.Msg.YCSH_UDP_TITLE+" "+Blockly.Msg.YCSH_UDP_BEGIN+"\" first.";
+Blockly.Msg.YCSH_UDP_LISTEN_WARNING ="You have to set \""+Blockly.Msg.YCSH_UDP_TITLE+" "+Blockly.Msg.YCSH_UDP_CHECK+"\" first."; 
+Blockly.Msg.YCSH_UDP_SEND_IP = "to IP:";
+Blockly.Msg.YCSH_UDP_IMEI = "IMEI";
+Blockly.Msg.YCSH_UDP_FIELD_NO = "Field No.";
+Blockly.Msg.YCSH_UDP_MESSAGE = "Data";
+Blockly.Msg.YCSH_UDP_CODE = "Check Code";

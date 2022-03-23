@@ -1,0 +1,20 @@
+//Broadcast UDP
+Blockly.Msg.YCSH_UDP_HELPURL= "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/udp廣播積木";
+Blockly.Msg.YCSH_UDP_TITLE = "永慶UDP";
+Blockly.Msg.YCSH_UDP_INIT = "初始化";
+Blockly.Msg.YCSH_UDP_SET_PORT = "設定連接埠";
+Blockly.Msg.YCSH_UDP_BEGIN = "開始連線";
+Blockly.Msg.YCSH_UDP_STOP = "結束連線";
+Blockly.Msg.YCSH_UDP_TOOLTIP= "Broadcast UDP";
+Blockly.Msg.YCSH_UDP_SEND = "傳送訊息";
+Blockly.Msg.YCSH_UDP_RECEIVED_EVENT = "當接收到訊息時";
+Blockly.Msg.YCSH_UDP_RECEIVED_MSG = "接收到的訊息";
+Blockly.Msg.YCSH_UDP_CHECK = "偵聽UDP訊息";
+Blockly.Msg.YCSH_UDP_WARNING = "你必須先設定「"+Blockly.Msg.YCSH_UDP_TITLE+" "+Blockly.Msg.YCSH_UDP_INIT+"」積木！";
+Blockly.Msg.YCSH_UDP_BEGIN_WARNING ="你必須先設定「"+Blockly.Msg.YCSH_UDP_TITLE+" "+Blockly.Msg.YCSH_UDP_BEGIN+"」積木！";
+Blockly.Msg.YCSH_UDP_LISTEN_WARNING ="你必須先設定「"+Blockly.Msg.YCSH_UDP_TITLE+" "+Blockly.Msg.YCSH_UDP_CHECK+"」積木！";
+Blockly.Msg.YCSH_UDP_SEND_IP = "到永慶UDP伺服器IP:";
+Blockly.Msg.YCSH_UDP_IMEI = "IMEI";
+Blockly.Msg.YCSH_UDP_FIELD_NO = "欄位號碼";
+Blockly.Msg.YCSH_UDP_MESSAGE = "訊息內容";
+Blockly.Msg.YCSH_UDP_CODE = "欄查碼";
