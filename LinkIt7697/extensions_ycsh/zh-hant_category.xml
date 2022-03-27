@@ -1,4 +1,4 @@
 <xml>
-<category><name>YCSH</name><replace>永慶雲</replace></category>
-<category><name>YCSH_Broadcast</name><replace>永慶雲UDP</replace></category>
+<category><name>YCSH</name><replace>YCIoT</replace></category>
+<category><name>YCSH_Broadcast</name><replace>YCIoT UDP</replace></category>
 </xml>

@@ -55,5 +55,5 @@ Blockly.Arduino.ycsh_udp_received_event=function(){
 }
 
 Blockly.Arduino.ycsh_udp_received_msg=function(){
-  return["String(broadcastBuffer).substring(2,strlen(broadcastBuffer)-1)",Blockly.Arduino.ORDER_ATOMIC];
+  return["broadcastBuffer",Blockly.Arduino.ORDER_ATOMIC];
 };
