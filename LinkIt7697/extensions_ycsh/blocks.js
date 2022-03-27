@@ -100,13 +100,9 @@ Blockly.Blocks.ycsh_udp_send_to_ip={init:function(){
   this.appendDummyInput()
       .appendField(Blockly.Msg.YCSH_UDP_TITLE)
       .appendField(Blockly.Msg.YCSH_UDP_SEND);
-
   this.appendValueInput("IMEI")
       .setCheck("String")
       .appendField(Blockly.Msg.YCSH_UDP_IMEI);
-  this.appendValueInput("FIELD_NO")
-      .setCheck("String")
-      .appendField(Blockly.Msg.YCSH_UDP_FIELD_NO);
   this.appendValueInput("MESSAGE")
       .setCheck("String")
       .appendField(Blockly.Msg.YCSH_UDP_MESSAGE);
@@ -120,6 +116,24 @@ Blockly.Blocks.ycsh_udp_send_to_ip={init:function(){
   this.setNextStatement(!0,null);
   this.setTooltip(Blockly.Msg.YCSH_UDP_TOOLTIP)},onchange:function(){
       this.workspace&&(Blockly.Blocks.ycsh_udp.checkBlocks(this,"ycsh_udp_send_to_ip","ycsh_udp_begin")?this.setWarningText(null):this.setWarningText(Blockly.Msg.YCSH_UDP_BEGIN_WARNING))}
+};
+
+Blockly.Blocks.ycsh_udp_send_to_ip2={init:function(){
+  this.setHelpUrl(Blockly.Msg.YCSH_UDP_HELPURL);
+  this.setColour(Blockly.Blocks.ycsh_udp.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.YCSH_UDP_TITLE)
+      .appendField(Blockly.Msg.YCSH_UDP_SEND);
+  this.appendValueInput("MESSAGE")
+      .setCheck("String")
+      .appendField(Blockly.Msg.YCSH_UDP_MESSAGE);
+  this.appendValueInput("IP")
+      .setCheck("String")
+      .appendField(Blockly.Msg.YCSH_UDP_SEND_IP);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.YCSH_UDP_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.ycsh_udp.checkBlocks(this,"ycsh_udp_send_to_ip2","ycsh_udp_begin")?this.setWarningText(null):this.setWarningText(Blockly.Msg.YCSH_UDP_BEGIN_WARNING))}
 };
 
 Blockly.Blocks.ycsh_udp_received_event={init:function(){

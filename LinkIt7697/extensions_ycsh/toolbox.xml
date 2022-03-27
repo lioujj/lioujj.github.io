@@ -17,17 +17,24 @@
           <field name="TEXT"></field>
         </block>
       </value>
-      <value name="FIELD_NO">
-        <block type="text">
-          <field name="TEXT"></field>
-        </block>
-      </value>
       <value name="MESSAGE">
         <block type="text">
           <field name="TEXT"></field>
         </block>
       </value>
       <value name="TEST_CODE">
+        <block type="text">
+          <field name="TEXT"></field>
+        </block>
+      </value>
+      <value name="IP">
+        <block type="text">
+          <field name="TEXT">163.27.116.21</field>
+        </block>
+      </value>
+    </block>
+    <block type="ycsh_udp_send_to_ip2">
+      <value name="MESSAGE">
         <block type="text">
           <field name="TEXT"></field>
         </block>

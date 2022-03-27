@@ -38,12 +38,21 @@ Blockly.Arduino.ycsh_udp_send_to_ip=function(){
   var a=Blockly.Arduino.valueToCode(this,"MESSAGE",Blockly.Arduino.ORDER_ATOMIC)||"",
       b=Blockly.Arduino.valueToCode(this,"IP",Blockly.Arduino.ORDER_ATOMIC)||"",
       c=Blockly.Arduino.valueToCode(this,"IMEI",Blockly.Arduino.ORDER_ATOMIC)||"",
-      d=Blockly.Arduino.valueToCode(this,"FIELD_NO",Blockly.Arduino.ORDER_ATOMIC)||"",
+      //d=Blockly.Arduino.valueToCode(this,"FIELD_NO",Blockly.Arduino.ORDER_ATOMIC)||"",
       e=Blockly.Arduino.valueToCode(this,"TEST_CODE",Blockly.Arduino.ORDER_ATOMIC)||"";
   b=b.replace(/\"/g,"");
   b=b.replace(/\./g,",");
-  var myReturStr='IPAddress myBroadCastIP('+b+');\nsendBroadcastUDP(myBroadCastIP,String(String("@")+'+c+'+","+'+d+'+","+'+a+'+",*"+'+e+').c_str());\n'
-//  var myReturStr='IPAddress myBroadCastIP('+b+');\nsendBroadcastUDP(myBroadCastIP,String(String("@")+'+c+'+","+'+a+'+",*"+'+e+').c_str());\n'
+  //var myReturStr='IPAddress myBroadCastIP('+b+');\nsendBroadcastUDP(myBroadCastIP,String(String("@")+'+c+'+","+'+d+'+","+'+a+'+",*"+'+e+').c_str());\n'
+  var myReturStr='IPAddress myBroadCastIP('+b+');\nsendBroadcastUDP(myBroadCastIP,String(String("@")+'+c+'+","+'+a+'+",*"+'+e+').c_str());\n'
+  return myReturStr;
+};
+
+Blockly.Arduino.ycsh_udp_send_to_ip2=function(){
+  var a=Blockly.Arduino.valueToCode(this,"MESSAGE",Blockly.Arduino.ORDER_ATOMIC)||"",
+      b=Blockly.Arduino.valueToCode(this,"IP",Blockly.Arduino.ORDER_ATOMIC)||"";
+  b=b.replace(/\"/g,"");
+  b=b.replace(/\./g,",");
+  var myReturStr='IPAddress myBroadCastIP('+b+');\nsendBroadcastUDP(myBroadCastIP,String('+a+').c_str());\n'
   return myReturStr;
 };
 

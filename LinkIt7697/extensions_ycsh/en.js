@@ -1,6 +1,6 @@
 //Broadcast UDP
 Blockly.Msg.YCSH_UDP_HELPURL= "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/udp廣播積木";
-Blockly.Msg.YCSH_UDP_TITLE = "YCSH UDP Broadcast";
+Blockly.Msg.YCSH_UDP_TITLE = "YCIoT";
 Blockly.Msg.YCSH_UDP_INIT = "init";
 Blockly.Msg.YCSH_UDP_SET_PORT = "set port:";
 Blockly.Msg.YCSH_UDP_BEGIN = "start to connect";
