@@ -839,3 +839,7 @@ Blockly.Msg.CCS811_WARNING= "You have to set \""+Blockly.Msg.CCS811_TITLE+" "+Bl
 Blockly.Msg.CCS811_GET_DATA = "get the data of";
 Blockly.Msg.CCS811_FREQ= "set measurement frequence:every";
 Blockly.Msg.CCS811_FREQ_UNIT = "seconds";
+
+//7697EXT
+Blockly.Msg.EXT_7697_PIN_MAP = [["IO4","5"],["IO5","3"],["IO19","12"],["IO13","11"],["IO14","13"],["IO16","2"],["IO17","10"],["IO21","9"],["IO22","8"],
+                                ["IO23","7"],["IO25","16"],["IO26","17"],["IO27","4"],["IO32","14"],["IO33","15"],["IO34","6"],["IO36","0"],["IO39","1"]];

@@ -2429,5 +2429,8 @@
 			  </value>
 		  </block>
     </category>
+	  <category id="category_pimMap" name="pin_map">
+      <block type="pinMap_7697ext"></block>
+    </category>
 	</category>
 </category>

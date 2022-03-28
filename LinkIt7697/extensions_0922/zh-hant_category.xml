@@ -53,4 +53,5 @@
 <category><name>ASR</name><replace>ASR語音辨識</replace></category>
 <category><name>PN532_I2C</name><replace>PN532 NFC讀卡</replace></category>
 <category><name>CCS811</name><replace>CCS811空氣品質</replace></category>
+<category><name>pin_map</name><replace>腳位轉換</replace></category>
 </xml>
