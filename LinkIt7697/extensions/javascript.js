@@ -3440,6 +3440,11 @@ Blockly.Arduino.pn532i2c_readPage=function(){
   return['readUltraPage('+a+')',Blockly.Arduino.ORDER_ATOMIC];
 }
 
+Blockly.Arduino.pinMap_7697ext=function(){
+  var a=this.getFieldValue("PIN");
+  return[a,Blockly.Arduino.ORDER_ATOMIC];
+};
+
 setTimeout(function(){
 	if (Blockly.Blocks.board_initializes_setup)
 		var xmlDoc = Blockly.Xml.textToDom('<xml xmlns="https://developers.google.com/blockly/xml"><block type="board_initializes_setup" id="0" x="100" y="50"><next><block type="initializes_loop" id="1"></block></next></block></xml>');

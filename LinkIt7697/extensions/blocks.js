@@ -6252,3 +6252,20 @@ Blockly.Blocks.pn532i2c_readPage={init:function(){
   this.setTooltip(Blockly.Msg.PN532I2C_TOOLTIP)},onchange:function(){
       this.workspace&&(Blockly.Blocks.spiffs.checkBlocks(this,"readPage","pn532i2c_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.PN532I2C_WARNING))}
 };
+
+
+//PINMAP
+Blockly.Blocks.pimMap={};
+Blockly.Blocks.pimMap.HUE=120;
+Blockly.Blocks.pinMap_7697ext={init:function(){
+  this.setHelpUrl("123");
+  this.setColour(Blockly.Blocks.pimMap.HUE);
+  this.appendDummyInput()
+      .appendField("7697_EXT")
+      .appendField("Pin");
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.EXT_7697_PIN_MAP),"PIN");
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Number");
+  this.setTooltip("123")}
+};
