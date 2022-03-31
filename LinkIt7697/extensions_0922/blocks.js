@@ -5050,6 +5050,24 @@ Blockly.Blocks.sd_rmdir={init:function(){
       this.workspace&&(Blockly.Blocks.sd.checkBlocks(this,"sd_rmdir","sd_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SD_INIT_WARNIG))}
 };
 
+Blockly.Blocks.sd_file_download={init:function(){
+  this.setHelpUrl(Blockly.Msg.SPIFFS_HELPURL);
+  this.setColour(Blockly.Blocks.spiffs.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.SD_TITLE);
+  this.appendValueInput("URL")
+      .setCheck("String")
+      .appendField(Blockly.Msg.SPIFFS_FILE_DOWNLOAD);
+  this.appendValueInput("F_NAME")
+      .setCheck("String")
+      .appendField(Blockly.Msg.SPIFFS_FILE_SAVE);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.SPIFFS_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.sd.checkBlocks(this,"sd_file_download","sd_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SD_INIT_WARNIG))}
+};
+
 Blockly.Blocks.sd_file_init={init:function(){
   this.setHelpUrl(Blockly.Msg.SD_HELPURL);
   this.setColour(Blockly.Blocks.sd.HUE_FILE);

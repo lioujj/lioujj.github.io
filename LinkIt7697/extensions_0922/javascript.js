@@ -2687,6 +2687,18 @@ Blockly.Arduino.sd_rmdir=function(){
   return'mySD.rmdir('+a+');\n';
 }
 
+Blockly.Arduino.sd_file_download=function(){
+    var a=Blockly.Arduino.valueToCode(this,"F_NAME",Blockly.Arduino.ORDER_ATOMIC)||"",
+        b=Blockly.Arduino.valueToCode(this,"URL",Blockly.Arduino.ORDER_ATOMIC)||"";
+    Blockly.Arduino.definitions_.define_HTTPCLIENT_include='#include <HTTPClient.h>';
+    Blockly.Arduino.definitions_.define_SDFAT_download_event = 'void saveToSD(String myLink,String fileName)\n{\n  myLink.replace("www.dropbox","dl.dropboxusercontent");\n  myLink.replace("?dl=0","");\n  myLink.replace(" ","%20");\n  File mySDFile;\n  if(fileName.indexOf("/")!=0)\n    fileName="/"+fileName;\n  if(!SD_exists){\n    return;\n  }\n  mySDFile = mySD.open(fileName, O_CREAT | O_WRITE);\n  if (!mySDFile) {\n    return;\n  }\n  WiFiClientSecure sslClient;\n  HTTPClient http;\n  http.begin(sslClient,myLink);\n  int httpCode = http.GET();\n  if (httpCode == HTTP_CODE_OK) {\n      http.writeToStream(&mySDFile);\n  }\n  mySDFile.close();\n  http.end();\n}\n';
+    if (Blockly.Arduino.my_board_type=="ESP8266")
+      Blockly.Arduino.definitions_.define_SDFAT_download_event=Blockly.Arduino.definitions_.define_SDFAT_download_event.replace("WiFiClientSecure sslClient;\n","WiFiClientSecure sslClient;\n  sslClient.setInsecure();\n");
+    else if (Blockly.Arduino.my_board_type=="7697")
+      Blockly.Arduino.definitions_.define_SDFAT_download_event=Blockly.Arduino.definitions_.define_SDFAT_download_event.replace("WiFiClientSecure","TLSClient");
+    return 'saveToSD('+b+','+a+');\n';
+}
+
 Blockly.Arduino.sd_file_init=function(){
   var a=Blockly.Arduino.valueToCode(this,"VARIABLE_NAME",Blockly.Arduino.ORDER_ATOMIC)||"";
   a=a.replace(/\"/g,"");
