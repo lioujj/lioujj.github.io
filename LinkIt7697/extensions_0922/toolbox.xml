@@ -697,6 +697,7 @@
             </block>
           </value>
         </block>
+        <block type="pocketcard_dac_init"></block>
         <block type="dac_set_gain">
           <value name="GAIN">
             <block type="math_number">
@@ -1810,6 +1811,13 @@
     </category>
     <category id="category_sd" name="SD_CARD">
       <block type="sd_init"></block>
+      <block type="sd_set_cs">
+        <value name="CS_PIN">
+          <block type="math_number">
+            <field name="NUM">5</field>
+          </block>
+        </value>
+      </block>
       <block type="sd_exists"></block>
       <block type="sd_mkdir">
 				<value name="DIR">

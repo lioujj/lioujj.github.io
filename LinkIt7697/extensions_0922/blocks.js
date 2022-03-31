@@ -402,7 +402,7 @@ Blockly.Blocks.ksb045_button={init:function(){
   this.setPreviousStatement(!0,null);
   this.setNextStatement(!0,null);
   this.setTooltip(Blockly.Msg.KSB045_TOOLTIP)},onchange:function(){
-      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"ksb045_button","ksb045_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.KSB045_WARNING))}
+      this.workspace&&(Blockly.Blocks.ksb045.checkBlocks(this,"ksb045_button","ksb045_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.KSB045_WARNING))}
 };
 
 Blockly.Blocks.ksb045_xy={init:function(){
@@ -417,7 +417,7 @@ Blockly.Blocks.ksb045_xy={init:function(){
   this.setInputsInline(!0);
   this.setOutput(!0,"Number");
   this.setTooltip(Blockly.Msg.KSB045_TOOLTIP)},onchange:function(){
-      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"ksb045_xy","ksb045_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.KSB045_WARNING))}
+      this.workspace&&(Blockly.Blocks.ksb045.checkBlocks(this,"ksb045_xy","ksb045_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.KSB045_WARNING))}
 };
 
 Blockly.Blocks.ksb045_mid_xy={init:function(){
@@ -432,7 +432,7 @@ Blockly.Blocks.ksb045_mid_xy={init:function(){
   this.setInputsInline(!0);
   this.setOutput(!0,"Number");
   this.setTooltip(Blockly.Msg.KSB045_TOOLTIP)},onchange:function(){
-      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"ksb045_mid_xy","ksb045_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.KSB045_WARNING))}
+      this.workspace&&(Blockly.Blocks.ksb045.checkBlocks(this,"ksb045_mid_xy","ksb045_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.KSB045_WARNING))}
 };
 
 Blockly.Blocks.ksb045_vibration={init:function(){
@@ -446,7 +446,7 @@ Blockly.Blocks.ksb045_vibration={init:function(){
   this.setPreviousStatement(!0,null);
   this.setNextStatement(!0,null);
   this.setTooltip(Blockly.Msg.KSB045_TOOLTIP)},onchange:function(){
-      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"ksb045_vibration","ksb045_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.KSB045_WARNING))}
+      this.workspace&&(Blockly.Blocks.ksb045.checkBlocks(this,"ksb045_vibration","ksb045_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.KSB045_WARNING))}
 };
 
 Blockly.Blocks.ksb045_tone={init:function(){
@@ -462,7 +462,7 @@ Blockly.Blocks.ksb045_tone={init:function(){
     this.setPreviousStatement(!0);
     this.setNextStatement(!0);
     this.setTooltip(Blockly.Msg.INOUT_TONE_TOOLTIP)},onchange:function(){
-      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"ksb045_tone","ksb045_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.KSB045_WARNING))}
+      this.workspace&&(Blockly.Blocks.ksb045.checkBlocks(this,"ksb045_tone","ksb045_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.KSB045_WARNING))}
 };
 
 Blockly.Blocks.ksb045_no_tone={init:function(){
@@ -475,7 +475,7 @@ Blockly.Blocks.ksb045_no_tone={init:function(){
     this.setPreviousStatement(!0);
     this.setNextStatement(!0);
     this.setTooltip(Blockly.Msg.INOUT_TONE_TOOLTIP)},onchange:function(){
-      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"ksb045_no_tone","ksb045_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.KSB045_WARNING))}
+      this.workspace&&(Blockly.Blocks.ksb045.checkBlocks(this,"ksb045_no_tone","ksb045_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.KSB045_WARNING))}
 };
 
 Blockly.Blocks.ksb045_custom_tone={init:function(){
@@ -492,7 +492,7 @@ Blockly.Blocks.ksb045_custom_tone={init:function(){
     this.setPreviousStatement(!0);
     this.setNextStatement(!0);
     this.setTooltip(Blockly.Msg.INOUT_TONE_TOOLTIP)},onchange:function(){
-      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"ksb045_custom_tone","ksb045_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.KSB045_WARNING))}
+      this.workspace&&(Blockly.Blocks.ksb045.checkBlocks(this,"ksb045_custom_tone","ksb045_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.KSB045_WARNING))}
 };
 
 //Maqueen
@@ -3165,7 +3165,7 @@ Blockly.Blocks.esp32_core_run={init:function(){
   this.setPreviousStatement(!0);
   this.setNextStatement(!0);
   this.setTooltip(Blockly.Msg.BUILTIN_TOOLTIP)},onchange:function(){
-      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"esp32_core_run","esp32_core_task")?this.setWarningText(null):this.setWarningText(Blockly.Msg.CORE_WARNIG))}
+      this.workspace&&(Blockly.Blocks.builtin.checkBlocks(this,"esp32_core_run","esp32_core_task")?this.setWarningText(null):this.setWarningText(Blockly.Msg.CORE_WARNIG))}
 };
 
 Blockly.Blocks.esp32_core_task={init:function(){
@@ -3198,7 +3198,7 @@ Blockly.Blocks.esp32_core_stop={init:function(){
   this.setNextStatement(!0);
   this.setInputsInline(!0);
   this.setTooltip(Blockly.Msg.BUILTIN_TOOLTIP)},onchange:function(){
-      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"esp32_core_stop","esp32_core_task")?this.setWarningText(null):this.setWarningText(Blockly.Msg.CORE_WARNIG))}
+      this.workspace&&(Blockly.Blocks.builtin.checkBlocks(this,"esp32_core_stop","esp32_core_task")?this.setWarningText(null):this.setWarningText(Blockly.Msg.CORE_WARNIG))}
 };
 
 Blockly.Blocks.esp32_core_num={init:function(){
@@ -4675,10 +4675,18 @@ Blockly.Blocks.dac.checkBlocks=function(a,slave,master){
 	var b=null,
 	    d=a.type;
 		a=a.workspace.getAllBlocks();
-		for(var c=0;c<a.length;c++)
-			if(slave!=a[c].type||null!=b||(b=a[c].type!=d?!0:!1),master==a[c].type){
-			  return!0;
+    if (master.indexOf('dac_init')>-1){
+	  	for(var c=0;c<a.length;c++){
+		  	if(slave!=a[c].type||null!=b||(b=a[c].type!=d?!0:!1),(master==a[c].type)||(a[c].type.indexOf('pocketcard')>-1)){
+			    return!0;
+        }
       }
+    } else {
+	  	for(var c=0;c<a.length;c++)
+		  	if(slave!=a[c].type||null!=b||(b=a[c].type!=d?!0:!1),master==a[c].type){
+			    return!0;
+      }
+    }
 		return b
 };
 
@@ -4697,6 +4705,18 @@ Blockly.Blocks.dac_init={init:function(){
   this.appendValueInput("DATA_PIN")
       .setCheck("Number")
       .appendField("DATA "+Blockly.Msg.LIOU_ROBOT_PIN);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.DAC_TOOLTIP)}
+};
+
+Blockly.Blocks.pocketcard_dac_init={init:function(){
+  this.setHelpUrl(Blockly.Msg.DAC_HELPURL);
+  this.setColour(Blockly.Blocks.dac.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.DAC_TITLE)
+      .appendField("PocketCard "+Blockly.Msg.POCKETCARD_DAC_INIT)
   this.setInputsInline(!0);
   this.setPreviousStatement(!0,null);
   this.setNextStatement(!0,null);
@@ -4973,6 +4993,21 @@ Blockly.Blocks.sd_init={init:function(){
   this.setTooltip(Blockly.Msg.SD_TOOLTIP)}
 };
 
+Blockly.Blocks.sd_set_cs={init:function(){
+  this.setHelpUrl(Blockly.Msg.SD_HELPURL);
+  this.setColour(Blockly.Blocks.sd.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.SD_TITLE);
+  this.appendValueInput("CS_PIN")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.SD_SET_CS);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.SD_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.sd.checkBlocks(this,"sd_set_cs","sd_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SD_INIT_WARNIG))}
+};
+
 Blockly.Blocks.sd_exists={init:function(){
   this.setHelpUrl(Blockly.Msg.SD_HELPURL);
   this.setColour(Blockly.Blocks.sd.HUE);
@@ -4982,7 +5017,7 @@ Blockly.Blocks.sd_exists={init:function(){
   this.setInputsInline(!0);
   this.setOutput(!0,"Boolean");
   this.setTooltip(Blockly.Msg.SD_TOOLTIP)},onchange:function(){
-      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"sd_exists","sd_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SD_INIT_WARNIG))}
+      this.workspace&&(Blockly.Blocks.sd.checkBlocks(this,"sd_exists","sd_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SD_INIT_WARNIG))}
 };
 
 Blockly.Blocks.sd_mkdir={init:function(){
@@ -4997,7 +5032,7 @@ Blockly.Blocks.sd_mkdir={init:function(){
   this.setPreviousStatement(!0,null);
   this.setNextStatement(!0,null);
   this.setTooltip(Blockly.Msg.SD_TOOLTIP)},onchange:function(){
-      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"sd_mkdir","sd_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SD_INIT_WARNIG))}
+      this.workspace&&(Blockly.Blocks.sd.checkBlocks(this,"sd_mkdir","sd_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SD_INIT_WARNIG))}
 };
 
 Blockly.Blocks.sd_rmdir={init:function(){
@@ -5012,7 +5047,7 @@ Blockly.Blocks.sd_rmdir={init:function(){
   this.setPreviousStatement(!0,null);
   this.setNextStatement(!0,null);
   this.setTooltip(Blockly.Msg.SD_TOOLTIP)},onchange:function(){
-      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"sd_rmdir","sd_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SD_INIT_WARNIG))}
+      this.workspace&&(Blockly.Blocks.sd.checkBlocks(this,"sd_rmdir","sd_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SD_INIT_WARNIG))}
 };
 
 Blockly.Blocks.sd_file_init={init:function(){
@@ -5027,7 +5062,7 @@ Blockly.Blocks.sd_file_init={init:function(){
   this.setPreviousStatement(!0,null);
   this.setNextStatement(!0,null);
   this.setTooltip(Blockly.Msg.SD_TOOLTIP)},onchange:function(){
-      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"sd_file_init","sd_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SD_INIT_WARNIG))}
+      this.workspace&&(Blockly.Blocks.sd.checkBlocks(this,"sd_file_init","sd_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SD_INIT_WARNIG))}
 };
 
 Blockly.Blocks.sd_file_open={init:function(){
@@ -5048,7 +5083,7 @@ Blockly.Blocks.sd_file_open={init:function(){
   this.setPreviousStatement(!0,null);
   this.setNextStatement(!0,null);
   this.setTooltip(Blockly.Msg.SD_TOOLTIP)},onchange:function(){
-      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"sd_file_open","sd_file_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SD_FILE_INIT_WARNIG))}
+      this.workspace&&(Blockly.Blocks.sd.checkBlocks(this,"sd_file_open","sd_file_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SD_FILE_INIT_WARNIG))}
 };
 
 Blockly.Blocks.sd_file_exists={init:function(){
@@ -5064,7 +5099,7 @@ Blockly.Blocks.sd_file_exists={init:function(){
   this.setInputsInline(!0);
   this.setOutput(!0,"Boolean");
   this.setTooltip(Blockly.Msg.SD_TOOLTIP)},onchange:function(){
-      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"sd_file_exists","sd_file_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SD_FILE_INIT_WARNIG))}
+      this.workspace&&(Blockly.Blocks.sd.checkBlocks(this,"sd_file_exists","sd_file_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SD_FILE_INIT_WARNIG))}
 };
 
 Blockly.Blocks.sd_file_close={init:function(){
@@ -5081,7 +5116,7 @@ Blockly.Blocks.sd_file_close={init:function(){
   this.setPreviousStatement(!0,null);
   this.setNextStatement(!0,null);
   this.setTooltip(Blockly.Msg.SD_TOOLTIP)},onchange:function(){
-      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"sd_file_close","sd_file_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SD_FILE_INIT_WARNIG))}
+      this.workspace&&(Blockly.Blocks.sd.checkBlocks(this,"sd_file_close","sd_file_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SD_FILE_INIT_WARNIG))}
 };
 
 Blockly.Blocks.sd_file_println={init:function(){
@@ -5101,7 +5136,7 @@ Blockly.Blocks.sd_file_println={init:function(){
   this.setPreviousStatement(!0,null);
   this.setNextStatement(!0,null);
   this.setTooltip(Blockly.Msg.SD_TOOLTIP)},onchange:function(){
-      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"sd_file_println","sd_file_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SD_FILE_INIT_WARNIG))}
+      this.workspace&&(Blockly.Blocks.sd.checkBlocks(this,"sd_file_println","sd_file_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SD_FILE_INIT_WARNIG))}
 };
 
 Blockly.Blocks.sd_file_available={init:function(){
@@ -5117,7 +5152,7 @@ Blockly.Blocks.sd_file_available={init:function(){
   this.setInputsInline(!0);
   this.setOutput(!0,"Boolean");
   this.setTooltip(Blockly.Msg.SD_TOOLTIP)},onchange:function(){
-      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"sd_file_available","sd_file_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SD_FILE_INIT_WARNIG))}
+      this.workspace&&(Blockly.Blocks.sd.checkBlocks(this,"sd_file_available","sd_file_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SD_FILE_INIT_WARNIG))}
 };
 
 Blockly.Blocks.sd_file_readuntil_char={init:function(){
@@ -5134,7 +5169,7 @@ Blockly.Blocks.sd_file_readuntil_char={init:function(){
   this.setInputsInline(!0);
   this.setOutput(!0,"String");
   this.setTooltip(Blockly.Msg.SD_TOOLTIP)},onchange:function(){
-      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"sd_file_readuntil_char","sd_file_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SD_FILE_INIT_WARNIG))}
+      this.workspace&&(Blockly.Blocks.sd.checkBlocks(this,"sd_file_readuntil_char","sd_file_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SD_FILE_INIT_WARNIG))}
 };
 
 Blockly.Blocks.sd_file_read_line={init:function(){
@@ -5150,7 +5185,7 @@ Blockly.Blocks.sd_file_read_line={init:function(){
   this.setInputsInline(!0);
   this.setOutput(!0,"String");
   this.setTooltip(Blockly.Msg.SD_TOOLTIP)},onchange:function(){
-      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"sd_file_read_line","sd_file_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SD_FILE_INIT_WARNIG))}
+      this.workspace&&(Blockly.Blocks.sd.checkBlocks(this,"sd_file_read_line","sd_file_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SD_FILE_INIT_WARNIG))}
 };
 
 //ESP32_IRQ
@@ -5203,7 +5238,7 @@ Blockly.Blocks.esp32_irq_timer_run={init:function(){
   this.setPreviousStatement(!0,null);
   this.setNextStatement(!0,null);
   this.setTooltip(Blockly.Msg.ESP32_IRQ_TOOLTIP)},onchange:function(){
-      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"esp32_irq_timer_run","esp32_irq_timer_task")?this.setWarningText(null):this.setWarningText(Blockly.Msg.ESP32_IRQ_TIMER_WARNIG))}
+      this.workspace&&(Blockly.Blocks.esp32_irq.checkBlocks(this,"esp32_irq_timer_run","esp32_irq_timer_task")?this.setWarningText(null):this.setWarningText(Blockly.Msg.ESP32_IRQ_TIMER_WARNIG))}
 };
 
 Blockly.Blocks.esp32_irq_timer_delete={init:function(){
@@ -5219,7 +5254,7 @@ Blockly.Blocks.esp32_irq_timer_delete={init:function(){
   this.setPreviousStatement(!0,null);
   this.setNextStatement(!0,null);
   this.setTooltip(Blockly.Msg.ESP32_IRQ_TOOLTIP)},onchange:function(){
-      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"esp32_irq_timer_delete","esp32_irq_timer_run")?this.setWarningText(null):this.setWarningText(Blockly.Msg.ESP32_IRQ_TIMER_DELETE_WARNIG))}
+      this.workspace&&(Blockly.Blocks.esp32_irq.checkBlocks(this,"esp32_irq_timer_delete","esp32_irq_timer_run")?this.setWarningText(null):this.setWarningText(Blockly.Msg.ESP32_IRQ_TIMER_DELETE_WARNIG))}
 };
 
 Blockly.Blocks.esp32_irq_pin_task={init:function(){
@@ -5254,7 +5289,7 @@ Blockly.Blocks.esp32_irq_pin_run={init:function(){
   this.setPreviousStatement(!0,null);
   this.setNextStatement(!0,null);
   this.setTooltip(Blockly.Msg.ESP32_IRQ_TOOLTIP)},onchange:function(){
-      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"esp32_irq_pin_run","esp32_irq_pin_task")?this.setWarningText(null):this.setWarningText(Blockly.Msg.ESP32_IRQ_PIN_WARNIG))}
+      this.workspace&&(Blockly.Blocks.esp32_irq.checkBlocks(this,"esp32_irq_pin_run","esp32_irq_pin_task")?this.setWarningText(null):this.setWarningText(Blockly.Msg.ESP32_IRQ_PIN_WARNIG))}
 };
 
 Blockly.Blocks.esp32_irq_pin_delete={init:function(){
@@ -5270,7 +5305,7 @@ Blockly.Blocks.esp32_irq_pin_delete={init:function(){
   this.setPreviousStatement(!0,null);
   this.setNextStatement(!0,null);
   this.setTooltip(Blockly.Msg.ESP32_IRQ_TOOLTIP)},onchange:function(){
-      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"esp32_irq_pin_delete","esp32_irq_pin_run")?this.setWarningText(null):this.setWarningText(Blockly.Msg.ESP32_IRQ_PIN_DELETE_WARNIG))}
+      this.workspace&&(Blockly.Blocks.esp32_irq.checkBlocks(this,"esp32_irq_pin_delete","esp32_irq_pin_run")?this.setWarningText(null):this.setWarningText(Blockly.Msg.ESP32_IRQ_PIN_DELETE_WARNIG))}
 };
 
 //L9110
@@ -5329,7 +5364,7 @@ Blockly.Blocks.l9110_run={init:function(){
   this.setPreviousStatement(!0,null);
   this.setNextStatement(!0,null);
   this.setTooltip(Blockly.Msg.L9110_TOOLTIP)},onchange:function(){
-      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"l9110_run","l9110_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.L9110_WARNING))}
+      this.workspace&&(Blockly.Blocks.l9110.checkBlocks(this,"l9110_run","l9110_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.L9110_WARNING))}
 };
 
 Blockly.Blocks.l9110_stop={init:function(){
@@ -5346,7 +5381,7 @@ Blockly.Blocks.l9110_stop={init:function(){
   this.setPreviousStatement(!0,null);
   this.setNextStatement(!0,null);
   this.setTooltip(Blockly.Msg.L9110_TOOLTIP)},onchange:function(){
-      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"l9110_stop","l9110_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.L9110_WARNING))}
+      this.workspace&&(Blockly.Blocks.l9110.checkBlocks(this,"l9110_stop","l9110_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.L9110_WARNING))}
 };
 
 //EZ Start Plus
@@ -5611,7 +5646,7 @@ Blockly.Blocks.max30105_check={init:function(){
   this.setInputsInline(!0);
   this.setOutput(!0,"Boolean");
   this.setTooltip(Blockly.Msg.MAX30105_TOOLTIP)},onchange:function(){
-      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"max30105_check","max30105_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.MAX30105_WARNING))}
+      this.workspace&&(Blockly.Blocks.max30105.checkBlocks(this,"max30105_check","max30105_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.MAX30105_WARNING))}
 };
 
 Blockly.Blocks.max30105_get_beat_rate={init:function(){
@@ -5627,7 +5662,7 @@ Blockly.Blocks.max30105_get_beat_rate={init:function(){
   this.setInputsInline(!0);
   this.setOutput(!0,"Number");
   this.setTooltip(Blockly.Msg.MAX30105_TOOLTIP)},onchange:function(){
-      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"max30105_get_beat_rate","max30105_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.MAX30105_WARNING))}
+      this.workspace&&(Blockly.Blocks.max30105.checkBlocks(this,"max30105_get_beat_rate","max30105_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.MAX30105_WARNING))}
 };
 
 Blockly.Blocks.max30105_get_spo2={init:function(){
@@ -5639,7 +5674,7 @@ Blockly.Blocks.max30105_get_spo2={init:function(){
   this.setInputsInline(!0);
   this.setOutput(!0,"Number");
   this.setTooltip(Blockly.Msg.MAX30105_TOOLTIP)},onchange:function(){
-      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"max30105_get_spo2","max30105_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.MAX30105_WARNING))}
+      this.workspace&&(Blockly.Blocks.max30105.checkBlocks(this,"max30105_get_spo2","max30105_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.MAX30105_WARNING))}
 };
 
 Blockly.Blocks.max30105_get_temperature={init:function(){
@@ -5652,7 +5687,7 @@ Blockly.Blocks.max30105_get_temperature={init:function(){
   this.setInputsInline(!0);
   this.setOutput(!0,"Number");
   this.setTooltip(Blockly.Msg.MAX30105_TOOLTIP)},onchange:function(){
-      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"max30105_get_temperature","max30105_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.MAX30105_WARNING))}
+      this.workspace&&(Blockly.Blocks.max30105.checkBlocks(this,"max30105_get_temperature","max30105_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.MAX30105_WARNING))}
 };
 
 Blockly.Blocks.max30105_set_beat_range={init:function(){
@@ -5670,7 +5705,7 @@ Blockly.Blocks.max30105_set_beat_range={init:function(){
   this.setPreviousStatement(!0);
   this.setNextStatement(!0);
   this.setTooltip(Blockly.Msg.MAX30105_TOOLTIP)},onchange:function(){
-      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"max30105_set_beat_range","max30105_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.MAX30105_WARNING))}
+      this.workspace&&(Blockly.Blocks.max30105.checkBlocks(this,"max30105_set_beat_range","max30105_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.MAX30105_WARNING))}
 };
 
 Blockly.Blocks.max30105_set_spo2_clear={init:function(){
@@ -5683,7 +5718,7 @@ Blockly.Blocks.max30105_set_spo2_clear={init:function(){
   this.setPreviousStatement(!0);
   this.setNextStatement(!0);
   this.setTooltip(Blockly.Msg.MAX30105_TOOLTIP)},onchange:function(){
-      this.workspace&&(Blockly.Blocks.dac.checkBlocks(this,"set_spo2_clear","max30105_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.MAX30105_WARNING))}
+      this.workspace&&(Blockly.Blocks.max30105.checkBlocks(this,"set_spo2_clear","max30105_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.MAX30105_WARNING))}
 };
 
 //SPIFFS
