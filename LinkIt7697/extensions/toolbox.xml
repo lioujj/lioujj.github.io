@@ -1833,6 +1833,18 @@
           </block>
 				</value>
       </block>
+      <block type="sd_file_download">
+				<value name="URL">
+					<block type="text">
+						<field name="TEXT"></field>
+          </block>
+				</value>
+				<value name="F_NAME">
+					<block type="text">
+						<field name="TEXT"></field>
+          </block>
+				</value>
+      </block>
       <block type="sd_file_init">
 				<value name="VARIABLE_NAME">
 					<block type="text">
