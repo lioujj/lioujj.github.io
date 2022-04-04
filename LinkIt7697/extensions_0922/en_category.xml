@@ -4,7 +4,7 @@
 <category><name>String_tool</name><replace>String tools</replace></category>
 <category><name>Custom_block</name><replace>Custom blocks</replace></category>
 <category><name>Lumex</name><replace>Lumex</replace></category>
-<category><name>LDM6432MQTT</name><replace>LDM6432 MQTT</replace></category>
+<category><name>LDM6432MQTT</name><replace>LDM6432</replace></category>
 <category><name>Modules</name><replace>Modules</replace></category>
 <category><name>OLED128*64</name><replace>OLED 128*64</replace></category>
 <category><name>7697:bit</name><replace>7697:bit</replace></category>

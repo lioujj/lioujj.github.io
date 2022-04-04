@@ -4,7 +4,7 @@
 <category><name>String_tool</name><replace>字串處理</replace></category>
 <category><name>Custom_block</name><replace>客製化程式碼</replace></category>
 <category><name>Lumex</name><replace>Lumex</replace></category>
-<category><name>LDM6432MQTT</name><replace>LDM6432燈板MQTT</replace></category>
+<category><name>LDM6432MQTT</name><replace>LDM6432燈板</replace></category>
 <category><name>Modules</name><replace>模組</replace></category>
 <category><name>Modules</name><replace>模組</replace></category>
 <category><name>OLED128*64</name><replace>OLED 128*64</replace></category>

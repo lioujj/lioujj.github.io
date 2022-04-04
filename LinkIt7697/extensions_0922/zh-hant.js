@@ -189,6 +189,7 @@ Blockly.Msg.KSB045_WARNING = "必須先設定「"+Blockly.Msg.KSB045_TITLE+" 初
 
 //LDM6432
 Blockly.Msg.LDM6432_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/ldm6432-mqtt";
+Blockly.Msg.LDM6432_UART_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/ldm6432燈板";
 Blockly.Msg.LDM6432_TOOLTIP= "LDM6432";
 Blockly.Msg.LDM6432_SET_TOPIC_PREFIX = "單獨控制ID為";
 Blockly.Msg.LDM6432_SET_TOPIC_POST = "的LDM";
@@ -196,6 +197,10 @@ Blockly.Msg.LDM6432_SET_MQTT_PUBLIC = "開始群播控制多個LDM，設定MQTT 
 Blockly.Msg.LDM6432_SET_MQTT_BITMAP_PUBLIC = "圖檔傳送Topic";
 Blockly.Msg.LDM6432_SEND_BITMAP = "傳送圖檔字串到LDM顯示";
 Blockly.Msg.LDM6432_WARNING = "請先設定MQTT連線";
+Blockly.Msg.LDM6432_ESP32_INIT = "設定LDM6432連接到ESP32";
+Blockly.Msg.LDM6432_7697_INIT = "設定LDM6432連接到7697";
+Blockly.Msg.LDM6432_TX_PIN = "RX(白線)連到GPIO";
+Blockly.Msg.LDM6432_RX_PIN = "TX(黃線)連到GPIO";
 Blockly.Msg.LDM6432_WAIT_FOR_E = "每個命令執行後，是否等候LDM確認回覆";
 Blockly.Msg.LDM6432_CLOCK = "設定LDM時鐘模式";
 Blockly.Msg.LDM6432_SHOWPAGE1 = "LDM無特效顯示單一頁面(0~6)";
