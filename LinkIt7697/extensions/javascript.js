@@ -743,7 +743,8 @@ Blockly.Arduino.LDM_Check_postfix="  while(!ended){myClient.loop();}\n  ended=tr
 Blockly.Arduino.LDM_Check_postfix2="  while(!ended){myClient.loop();}\n  ended=true;\n  delay(800);\n}\n";
 Blockly.Arduino.ldm_mqtt_topic=function(){
   var a=Blockly.Arduino.valueToCode(this,"TOPIC",Blockly.Arduino.ORDER_ATOMIC)||"";
-  Blockly.Arduino.definitions_.define_ldm6432_topic='String ldmTopic="";\nString echoTopic="";\nString bitmapTopic="";\n';
+  Blockly.Arduino.LDM_CONNECTION_TYPE="MQTT";
+  Blockly.Arduino.definitions_.define_ldm6432_topic_invoke='String ldmTopic="";\nString echoTopic="";\nString bitmapTopic="";\n';
   var tempCode='  if (receivedTopic == echoTopic){\n    if (receivedMsg == "E") {\n      ended = true;\n    }\n  }\n';
   Blockly.Arduino.mqtt_callback_body=Blockly.Arduino.mqtt_callback_body.replace(tempCode,"");
   Blockly.Arduino.mqtt_callback_body+=tempCode;
@@ -753,97 +754,187 @@ Blockly.Arduino.ldm_mqtt_topic=function(){
 Blockly.Arduino.ldm_mqtt_public=function(){
   var a=Blockly.Arduino.valueToCode(this,"TOPIC",Blockly.Arduino.ORDER_ATOMIC)||"",
       b=Blockly.Arduino.valueToCode(this,"BITMAP_TOPIC",Blockly.Arduino.ORDER_ATOMIC)||"";
-  Blockly.Arduino.definitions_.define_ldm6432_topic='String ldmTopic="";\nString echoTopic="";\nString bitmapTopic="";\n';
+  Blockly.Arduino.LDM_CONNECTION_TYPE="MQTT";
+  Blockly.Arduino.definitions_.define_ldm6432_topic_invoke='String ldmTopic="";\nString echoTopic="";\nString bitmapTopic="";\n';
   //Blockly.Arduino.mqtt_callback_body+='  if (receivedTopic == echoTopic){\n    if (receivedMsg == "E") {\n      ended = true;\n    }\n  }\n';
   return'pubCtrl=true;\nldmTopic='+a+';\nbitmapTopic='+b+';\nechoTopic="NoThisTopic";\n';
 };
 
 Blockly.Arduino.ldm_send_bitmap=function(){
   var a=Blockly.Arduino.valueToCode(this,"BITMAP",Blockly.Arduino.ORDER_ATOMIC)||"";
-  return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(bitmapTopic.c_str(),String('+a+').c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+  if (Blockly.Arduino.LDM_CONNECTION_TYPE=="MQTT")
+    return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(bitmapTopic.c_str(),String('+a+').c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+  else
+    return'';
+};
+
+Blockly.Arduino.ldm_esp32_init=function(){
+  Blockly.Arduino.LDM_CONNECTION_TYPE="SERIAL";
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    var a=Blockly.Arduino.valueToCode(this,"TX_PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
+        b=Blockly.Arduino.valueToCode(this,"RX_PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
+        c=this.getFieldValue("UART_NO");
+    Blockly.Arduino.definitions_.define_ldm6432_esp32_init_event='void sendToLDM6432(const char* myCommand){\n  '+c+'.print(myCommand);\n  while('+c+'.read()!=\'E\'){}\n}\n';
+    return c+'.begin(115200,SERIAL_8N1,'+b+','+a+');\n';
+  } else {
+    return'';
+  }
+};
+
+Blockly.Arduino.ldm_7697_init=function(){
+  Blockly.Arduino.LDM_CONNECTION_TYPE="SERIAL";
+  if (Blockly.Arduino.my_board_type!="ESP32"){
+    var c=this.getFieldValue("UART_NO");
+    Blockly.Arduino.definitions_.define_ldm6432_esp32_init_event='void sendToLDM6432(const char* myCommand){\n  '+c+'.print(myCommand);\n  while('+c+'.read()!=\'E\'){}\n}\n';
+    return c+'.begin(115200);\n';
+  } else {
+    return'';
+  }
 };
 
 Blockly.Arduino.ldm_waitForE=function(){
   var a=this.getFieldValue("WAITFORE");
-  if (a=="1")
-    return'waitForE=true;\n'
-  else
-    return'waitForE=false;\n'
+  if (Blockly.Arduino.LDM_CONNECTION_TYPE=="MQTT"){
+    if (a=="1")
+      return'waitForE=true;\n'
+    else
+      return'waitForE=false;\n'
+  } else {
+    return'';
+  }
 };
 
 Blockly.Arduino.ldm_clock=function(){
-  var a=this.getFieldValue("CLOCK");
-  return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String("'+a+'").c_str());\n'+Blockly.Arduino.LDM_Check_postfix2;
+  var sendCommand=this.getFieldValue("CLOCK");
+  if (Blockly.Arduino.LDM_CONNECTION_TYPE=="MQTT"){
+    return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String("'+sendCommand+'").c_str());\n'+Blockly.Arduino.LDM_Check_postfix2;
+  } else {
+    return 'sendToLDM6432(String("'+sendCommand+'").c_str());\n';
+  }
 };
 
 Blockly.Arduino.ldm_clear=function(){
-  return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String("ATd0=()").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+  var sendCommand='ATd0=()';
+  if (Blockly.Arduino.LDM_CONNECTION_TYPE=="MQTT"){
+    return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String("'+sendCommand+'").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+  } else {
+    return 'sendToLDM6432(String("'+sendCommand+'").c_str());\n';
+  }
 };
 
 Blockly.Arduino.ldm_display=function(){
-  return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String("ATd1=()").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+  var sendCommand='ATd1=()';
+  if (Blockly.Arduino.LDM_CONNECTION_TYPE=="MQTT"){
+    return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String("'+sendCommand+'").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+  } else {
+    return 'sendToLDM6432(String("'+sendCommand+'").c_str());\n';
+  }
 };
 
 Blockly.Arduino.ldm_on_off=function(){
-  var a=this.getFieldValue("LDM");
-  return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String("'+a+'").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+  var sendCommand=this.getFieldValue("LDM");
+  if (Blockly.Arduino.LDM_CONNECTION_TYPE=="MQTT"){
+    return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String("'+sendCommand+'").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+  } else {
+    return 'sendToLDM6432(String("'+sendCommand+'").c_str());\n';
+  }
 };
 
 Blockly.Arduino.ldm_show_ver=function(){
-  return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String("AT20=()").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+  var sendCommand='AT20=()';
+  if (Blockly.Arduino.LDM_CONNECTION_TYPE=="MQTT"){
+    return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String("'+sendCommand+'").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+  } else {
+    return 'sendToLDM6432(String("'+sendCommand+'").c_str());\n';
+  }
 };
 
 Blockly.Arduino.ldm_command=function(){
-  var a=Blockly.Arduino.valueToCode(this,"COMMAND",Blockly.Arduino.ORDER_ATOMIC)||"";
-  return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String('+a+').c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+  var sendCommand=Blockly.Arduino.valueToCode(this,"COMMAND",Blockly.Arduino.ORDER_ATOMIC)||"";
+  if (Blockly.Arduino.LDM_CONNECTION_TYPE=="MQTT"){
+    return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String('+sendCommand+').c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+  } else {
+    return 'sendToLDM6432(String('+sendCommand+').c_str());\n';
+  }
 };
 
 Blockly.Arduino.ldm_showPage1=function(){
   var a=Blockly.Arduino.valueToCode(this,"PAGE",Blockly.Arduino.ORDER_ATOMIC)||"";
-  return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("ATfc=(") +'+a+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+  if (Blockly.Arduino.LDM_CONNECTION_TYPE=="MQTT"){
+    return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("ATfc=(") +'+a+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+  } else {
+    return 'sendToLDM6432(String(String("ATfc=(") +'+a+'+")").c_str());\n';
+  }
 };
 
 Blockly.Arduino.ldm_effectSpeed=function(){
   var a=Blockly.Arduino.valueToCode(this,"SPEED",Blockly.Arduino.ORDER_ATOMIC)||"";
-  return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("ATbf=(") +'+a+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+  if (Blockly.Arduino.LDM_CONNECTION_TYPE=="MQTT"){
+    return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("ATbf=(") +'+a+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+  } else {
+    return 'sendToLDM6432(String(String("ATbf=(") +'+a+'+")").c_str());\n';
+  }
 };
 
 Blockly.Arduino.ldm_showPage2=function(){
   var a=Blockly.Arduino.valueToCode(this,"PAGE",Blockly.Arduino.ORDER_ATOMIC)||"",
       b=this.getFieldValue("EFFECT");
-
-  a=Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("ATfc=(") +'+a+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
-  b=Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String("'+b+'").c_str());\n'+Blockly.Arduino.LDM_Check_postfix2;
-  //var pre_command=Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String("ATfd=(0)").c_str());\n'+Blockly.Arduino.LDM_Check_postfix2;
-  return a+b;
+  if (Blockly.Arduino.LDM_CONNECTION_TYPE=="MQTT"){
+    a=Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("ATfc=(") +'+a+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+    b=Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String("'+b+'").c_str());\n'+Blockly.Arduino.LDM_Check_postfix2;
+    return a+b;
+  } else {
+    return 'sendToLDM6432(String(String("ATfc=(") +'+a+'+")").c_str());\nsendToLDM6432(String("'+b+'").c_str());\n';
+  }  
 };
 
 Blockly.Arduino.ldm_stop_animation=function(){
-  return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String("ATfd=(0)").c_str());\n'+Blockly.Arduino.LDM_Check_postfix2;
+  var sendCommand='ATfd=(0)';
+  if (Blockly.Arduino.LDM_CONNECTION_TYPE=="MQTT"){
+    return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String("'+sendCommand+'").c_str());\n'+Blockly.Arduino.LDM_Check_postfix2;
+  } else {
+    return 'sendToLDM6432(String("'+sendCommand+'").c_str());\n';
+  }
 };
 
 Blockly.Arduino.ldm_saveToROM=function(){
-  return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String("ATfe=()").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+  var sendCommand='ATfe=()';
+  if (Blockly.Arduino.LDM_CONNECTION_TYPE=="MQTT"){
+    return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String("'+sendCommand+'").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+  } else {
+    return 'sendToLDM6432(String("'+sendCommand+'").c_str());\n';
+  }
 };
 
 Blockly.Arduino.ldm_pagesInterval=function(){
   var a=Blockly.Arduino.valueToCode(this,"INTERVAL",Blockly.Arduino.ORDER_ATOMIC)||"";
-  return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("ATbe=(") +'+a+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+  if (Blockly.Arduino.LDM_CONNECTION_TYPE=="MQTT"){
+    return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("ATbe=(") +'+a+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+  } else {
+    return 'sendToLDM6432(String(String("ATbe=(") +'+a+'+")").c_str());\n';
+  }
 };
 
 Blockly.Arduino.ldm_playPages=function(){
   var a=Blockly.Arduino.valueToCode(this,"PAGES",Blockly.Arduino.ORDER_ATOMIC)||"",
-      b=this.getFieldValue("EFFECT"),
-  a=Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("ATdf=(") +'+a+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
-  b=Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String("'+b+'").c_str());\n'+Blockly.Arduino.LDM_Check_postfix2;
-  //var pre_command=Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String("ATfd=(0)").c_str());\n'+Blockly.Arduino.LDM_Check_postfix2;
-  return a+b;
+      b=this.getFieldValue("EFFECT");
+  if (Blockly.Arduino.LDM_CONNECTION_TYPE=="MQTT"){
+    a=Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("ATdf=(") +'+a+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+    b=Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String("'+b+'").c_str());\n'+Blockly.Arduino.LDM_Check_postfix2;
+    return a+b;
+  } else {
+    return 'sendToLDM6432(String(String("ATdf=(") +'+a+'+")").c_str());\nsendToLDM6432(String("'+b+'").c_str());\n';
+  }
 };
 
 Blockly.Arduino.ldm_setColor=function(){
   var a=Blockly.Arduino.valueToCode(this,"COLOR",Blockly.Arduino.ORDER_ATOMIC)||"";
-  a=Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("ATef=(") +'+a+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
-  return a;
+  if (Blockly.Arduino.LDM_CONNECTION_TYPE=="MQTT"){
+    a=Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("ATef=(") +'+a+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+    return a;
+  } else {
+    return 'sendToLDM6432(String(String("ATef=(") +'+a+'+")").c_str());\n';
+  }
 };
 
 Blockly.Arduino.ldm_putString=function(){
@@ -851,15 +942,21 @@ Blockly.Arduino.ldm_putString=function(){
       b=this.getFieldValue("FONT"),
       c=Blockly.Arduino.valueToCode(this,"LINE",Blockly.Arduino.ORDER_ATOMIC)||"",
       d=Blockly.Arduino.valueToCode(this,"COLUMN",Blockly.Arduino.ORDER_ATOMIC)||"";
-      //e=Blockly.Arduino.valueToCode(this,"COLOR",Blockly.Arduino.ORDER_ATOMIC)||"";
-  //e=Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("ATef=(") +'+e+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
-  a=Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("'+b +'(") +'+c+'+","+'+ d+'+","+'+a+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
-  return a;
+  if (Blockly.Arduino.LDM_CONNECTION_TYPE=="MQTT"){
+    a=Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("'+b +'(") +'+c+'+","+'+ d+'+","+'+a+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+    return a;
+  } else {
+    return 'sendToLDM6432(String(String("'+b +'(") +'+c+'+","+'+ d+'+","+'+a+'+")").c_str());\n';
+  }
 };
 
 Blockly.Arduino.ldm_transparent=function(){
   var a=this.getFieldValue("TRANSPARENT");
-  return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String("'+a+'").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+  if (Blockly.Arduino.LDM_CONNECTION_TYPE=="MQTT"){
+    return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String("'+a+'").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+  } else {
+    return 'sendToLDM6432(String("'+a+'").c_str());\n';
+  }
 };
 
 Blockly.Arduino.ldm_colorCode=function(){
@@ -869,13 +966,21 @@ Blockly.Arduino.ldm_colorCode=function(){
 
 Blockly.Arduino.ldm_background=function(){
   var a=Blockly.Arduino.valueToCode(this,"COLOR",Blockly.Arduino.ORDER_ATOMIC)||"";
-  return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("ATec=(") +'+a+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+  if (Blockly.Arduino.LDM_CONNECTION_TYPE=="MQTT"){
+    return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("ATec=(") +'+a+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+  } else {
+    return 'sendToLDM6432(String(String("ATec=(") +'+a+'+")").c_str());\n';
+  }
 };
 
 Blockly.Arduino.ldm_global_change_color=function(){
   var a=Blockly.Arduino.valueToCode(this,"COLOR1",Blockly.Arduino.ORDER_ATOMIC)||"",
       b=Blockly.Arduino.valueToCode(this,"COLOR2",Blockly.Arduino.ORDER_ATOMIC)||"";
-  return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("ATcc=(") +'+a +'+","+'+ b+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+  if (Blockly.Arduino.LDM_CONNECTION_TYPE=="MQTT"){
+    return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("ATcc=(") +'+a +'+","+'+ b+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+  } else {
+    return 'sendToLDM6432(String(String("ATcc=(") +'+a +'+","+'+ b+'+")").c_str());\n';
+  }
 };
 
 Blockly.Arduino.ldm_local_change_color=function(){
@@ -885,19 +990,31 @@ Blockly.Arduino.ldm_local_change_color=function(){
       d=Blockly.Arduino.valueToCode(this,"HEIGHT",Blockly.Arduino.ORDER_ATOMIC)||"",
       e=Blockly.Arduino.valueToCode(this,"COLOR1",Blockly.Arduino.ORDER_ATOMIC)||"",
       f=Blockly.Arduino.valueToCode(this,"COLOR2",Blockly.Arduino.ORDER_ATOMIC)||"";
-  return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("ATcf=(") +'+a +'+","+'+ b +'+","+'+ c+'+","+'+ d+'+","+'+e+'+","+'+f+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+  if (Blockly.Arduino.LDM_CONNECTION_TYPE=="MQTT"){
+    return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("ATcf=(") +'+a +'+","+'+ b +'+","+'+ c+'+","+'+ d+'+","+'+e+'+","+'+f+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+  } else {
+    return 'sendToLDM6432(String(String("ATcf=(") +'+a +'+","+'+ b +'+","+'+ c+'+","+'+ d+'+","+'+e+'+","+'+f+'+")").c_str());\n';
+  }
 };
 
 Blockly.Arduino.ldm_setXYcolor=function(){
   var a=Blockly.Arduino.valueToCode(this,"X",Blockly.Arduino.ORDER_ATOMIC)||"",
       b=Blockly.Arduino.valueToCode(this,"Y",Blockly.Arduino.ORDER_ATOMIC)||"",
       c=Blockly.Arduino.valueToCode(this,"COLOR",Blockly.Arduino.ORDER_ATOMIC)||"";
-  return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("ATee=(") +'+a +'+","+'+ b +'+","+'+ c+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+  if (Blockly.Arduino.LDM_CONNECTION_TYPE=="MQTT"){
+    return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("ATee=(") +'+a +'+","+'+ b +'+","+'+ c+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+  } else {
+    return 'sendToLDM6432(String(String("ATee=(") +'+a +'+","+'+ b +'+","+'+ c+'+")").c_str());\n';
+  }
 };
 
 Blockly.Arduino.ldm_allColorChange=function(){
   var a=Blockly.Arduino.valueToCode(this,"COLOR",Blockly.Arduino.ORDER_ATOMIC)||"";
-  return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("ATc0=(") +'+a+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+  if (Blockly.Arduino.LDM_CONNECTION_TYPE=="MQTT"){
+    return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("ATc0=(") +'+a+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+  } else {
+    return 'sendToLDM6432(String(String("ATc0=(") +'+a+'+")").c_str());\n';
+  }
 };
 
 Blockly.Arduino.ldm_drawLine=function(){
@@ -906,7 +1023,11 @@ Blockly.Arduino.ldm_drawLine=function(){
       c=Blockly.Arduino.valueToCode(this,"X2",Blockly.Arduino.ORDER_ATOMIC)||"",
       d=Blockly.Arduino.valueToCode(this,"Y2",Blockly.Arduino.ORDER_ATOMIC)||"",
       e=Blockly.Arduino.valueToCode(this,"COLOR",Blockly.Arduino.ORDER_ATOMIC)||"";
-  return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("AT90=(") +'+a +'+","+'+ b +'+","+'+ c+'+","+'+ d+'+","+'+e+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+  if (Blockly.Arduino.LDM_CONNECTION_TYPE=="MQTT"){
+    return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("AT90=(") +'+a +'+","+'+ b +'+","+'+ c+'+","+'+ d+'+","+'+e+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+  } else {
+    return 'sendToLDM6432(String(String("AT90=(") +'+a +'+","+'+ b +'+","+'+ c+'+","+'+ d+'+","+'+e+'+")").c_str());\n';
+  }
 };
 
 Blockly.Arduino.ldm_drawRectangle=function(){
@@ -916,10 +1037,17 @@ Blockly.Arduino.ldm_drawRectangle=function(){
       d=Blockly.Arduino.valueToCode(this,"Y2",Blockly.Arduino.ORDER_ATOMIC)||"",
       e=Blockly.Arduino.valueToCode(this,"COLOR",Blockly.Arduino.ORDER_ATOMIC)||"",
       f=this.getFieldValue("FILLED_TYPE");
-  if (f=="1")
-    return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("AT92=(") +'+a +'+","+'+ b +'+","+'+ c+'+","+'+ d+'+","+'+e+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
-  else
-    return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("AT91=(") +'+a +'+","+'+ b +'+","+'+ c+'+","+'+ d+'+","+'+e+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+  if (Blockly.Arduino.LDM_CONNECTION_TYPE=="MQTT"){
+    if (f=="1")
+      return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("AT92=(") +'+a +'+","+'+ b +'+","+'+ c+'+","+'+ d+'+","+'+e+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+    else
+      return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("AT91=(") +'+a +'+","+'+ b +'+","+'+ c+'+","+'+ d+'+","+'+e+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+  } else {
+    if (f=="1")
+      return 'sendToLDM6432(String(String("AT92=(") +'+a +'+","+'+ b +'+","+'+ c+'+","+'+ d+'+","+'+e+'+")").c_str());\n';
+    else
+      return 'sendToLDM6432(String(String("AT91=(") +'+a +'+","+'+ b +'+","+'+ c+'+","+'+ d+'+","+'+e+'+")").c_str());\n';
+  }
 };
 
 Blockly.Arduino.ldm_drawCircle=function(){
@@ -928,10 +1056,17 @@ Blockly.Arduino.ldm_drawCircle=function(){
       c=Blockly.Arduino.valueToCode(this,"RADIUS",Blockly.Arduino.ORDER_ATOMIC)||"",
       d=Blockly.Arduino.valueToCode(this,"COLOR",Blockly.Arduino.ORDER_ATOMIC)||"",
       e=this.getFieldValue("FILLED_TYPE");
-  if (e=="1")
-    return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("AT95=(") +'+a +'+","+'+ b +'+","+'+ c+'+","+'+ d+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
-  else
-    return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("AT94=(") +'+a +'+","+'+ b +'+","+'+ c+'+","+'+ d+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+  if (Blockly.Arduino.LDM_CONNECTION_TYPE=="MQTT"){
+    if (e=="1")
+      return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("AT95=(") +'+a +'+","+'+ b +'+","+'+ c+'+","+'+ d+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+    else
+      return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("AT94=(") +'+a +'+","+'+ b +'+","+'+ c+'+","+'+ d+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+  } else {
+    if (e=="1")
+      return 'sendToLDM6432(String(String("AT95=(") +'+a +'+","+'+ b +'+","+'+ c+'+","+'+ d+'+")").c_str());\n';
+    else
+      return 'sendToLDM6432(String(String("AT94=(") +'+a +'+","+'+ b +'+","+'+ c+'+","+'+ d+'+")").c_str());\n';
+  }
 };
 
 Blockly.Arduino.ldm_drawSquare=function(){
@@ -939,14 +1074,22 @@ Blockly.Arduino.ldm_drawSquare=function(){
       b=Blockly.Arduino.valueToCode(this,"Y1",Blockly.Arduino.ORDER_ATOMIC)||"",
       c=Blockly.Arduino.valueToCode(this,"WIDTH",Blockly.Arduino.ORDER_ATOMIC)||"",
       d=Blockly.Arduino.valueToCode(this,"COLOR",Blockly.Arduino.ORDER_ATOMIC)||"";
-  return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("AT93=(") +'+a +'+","+'+ b +'+","+'+ c+'+","+'+ d+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+  if (Blockly.Arduino.LDM_CONNECTION_TYPE=="MQTT"){
+    return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("AT93=(") +'+a +'+","+'+ b +'+","+'+ c+'+","+'+ d+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+  } else {
+    return 'sendToLDM6432(String(String("AT93=(") +'+a +'+","+'+ b +'+","+'+ c+'+","+'+ d+'+")").c_str());\n';
+  }
 };
 
 Blockly.Arduino.ldm_pageScroll=function(){
   var a=this.getFieldValue("SCROLL_TYPE"),
       b=Blockly.Arduino.valueToCode(this,"SCROLLTIME",Blockly.Arduino.ORDER_ATOMIC)||"";
-  a=Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("'+a +'(") +'+b+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
-  return a;
+  if (Blockly.Arduino.LDM_CONNECTION_TYPE=="MQTT"){
+    a=Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("'+a +'(") +'+b+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+    return a;
+  } else {
+    return 'sendToLDM6432(String(String("'+a +'(") +'+b+'+")").c_str());\n';
+  } 
 };
 
 Blockly.Arduino.ldm_eraseImageInOut=function(){
@@ -957,8 +1100,12 @@ Blockly.Arduino.ldm_eraseImageInOut=function(){
     myCommand="ATaa=";
   else
     myCommand="ATab=";
-  a=Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("'+myCommand +'(") +'+b+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
-  return a;
+  if (Blockly.Arduino.LDM_CONNECTION_TYPE=="MQTT"){
+    a=Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("'+myCommand +'(") +'+b+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+    return a;
+  } else {
+    return 'sendToLDM6432(String(String("'+myCommand +'(") +'+b+'+")").c_str());\n';
+  } 
 };
 
 Blockly.Arduino.ldm_showImageInOut=function(){
@@ -969,16 +1116,28 @@ Blockly.Arduino.ldm_showImageInOut=function(){
     myCommand="ATa8=";
   else
     myCommand="ATa9=";
-  a=Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("'+myCommand +'(") +'+b+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
-  return a;
+  if (Blockly.Arduino.LDM_CONNECTION_TYPE=="MQTT"){
+    a=Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("'+myCommand +'(") +'+b+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+    return a;
+  } else {
+    return 'sendToLDM6432(String(String("'+myCommand +'(") +'+b+'+")").c_str());\n';
+  } 
 };
 
 Blockly.Arduino.ldm_saveDisplayed=function(){
-  return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String("AT2c=()").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+  if (Blockly.Arduino.LDM_CONNECTION_TYPE=="MQTT"){
+    return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String("AT2c=()").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+  } else {
+    return 'sendToLDM6432(String("AT2c=()").c_str());\n';
+  } 
 };
 
 Blockly.Arduino.ldm_loadDisplayed=function(){
-  return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String("AT2d=()").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+  if (Blockly.Arduino.LDM_CONNECTION_TYPE=="MQTT"){
+    return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String("AT2d=()").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+  } else {
+    return 'sendToLDM6432(String("AT2d=()").c_str());\n';
+  } 
 };
 
 Blockly.Arduino.ldm_loadPattern=function(){
@@ -990,20 +1149,32 @@ Blockly.Arduino.ldm_loadPattern=function(){
   var myCommand="AT29=";
   if(a=="0")
     myCommand="AT2e=";
-  a=Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("'+myCommand +'(") +'+b +'+","+'+ c+'+","+'+ d+'+","+'+ d+'+","+'+ e+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
-  return a;
+  if (Blockly.Arduino.LDM_CONNECTION_TYPE=="MQTT"){
+    a=Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("'+myCommand +'(") +'+b +'+","+'+ c+'+","+'+ d+'+","+'+ d+'+","+'+ e+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+    return a;
+  } else {
+    return 'sendToLDM6432(String(String("'+myCommand +'(") +'+b +'+","+'+ c+'+","+'+ d+'+","+'+ d+'+","+'+ e+'+")").c_str());\n';
+  } 
 };
 
 Blockly.Arduino.ldm_movePattern=function(){
   var a=this.getFieldValue("MOVE_TYPE"),
       b=this.getFieldValue("ICON_TYPE"),
       c=Blockly.Arduino.valueToCode(this,"ICON_ID",Blockly.Arduino.ORDER_ATOMIC)||"";
-  a=Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("'+a +'(") +'+b +'+","+'+ b+'+","+'+ c+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
-  return a;
+  if (Blockly.Arduino.LDM_CONNECTION_TYPE=="MQTT"){
+    a=Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("'+a +'(") +'+b +'+","+'+ b+'+","+'+ c+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+    return a;
+  } else {
+    return 'sendToLDM6432(String(String("'+a +'(") +'+b +'+","+'+ b+'+","+'+ c+'+")").c_str());\n';
+  }
 };
 
 Blockly.Arduino.ldm_showAll=function(){
-  return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String("AT2f=()").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+  if (Blockly.Arduino.LDM_CONNECTION_TYPE=="MQTT"){
+    return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String("AT2f=()").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+  } else {
+    return 'sendToLDM6432(String("AT2f=()").c_str());\n';
+  }
 };
 
 //BME280

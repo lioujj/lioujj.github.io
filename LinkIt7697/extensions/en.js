@@ -191,6 +191,7 @@ Blockly.Msg.KSB045_WARNING = "You have to set \""+Blockly.Msg.KSB045_TITLE+" ini
 
 //LDM6432
 Blockly.Msg.LDM6432_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/ldm6432-mqtt";
+Blockly.Msg.LDM6432_UART_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/ldm6432燈板";
 Blockly.Msg.LDM6432_TOOLTIP= "LDM6432";
 Blockly.Msg.LDM6432_SET_TOPIC = "set LDM6432 MQTT Topic:";
 Blockly.Msg.LDM6432_SET_TOPIC_PREFIX = "control the device ID";
@@ -199,6 +200,10 @@ Blockly.Msg.LDM6432_SET_MQTT_PUBLIC = "control your LDMs，MQTT Topic";
 Blockly.Msg.LDM6432_SET_MQTT_BITMAP_PUBLIC = "bitmap Topic";
 Blockly.Msg.LDM6432_SEND_BITMAP = "send bitmap string to display on LDM";
 Blockly.Msg.LDM6432_WARNING = "set MQTT connection first.";
+Blockly.Msg.LDM6432_ESP32_INIT = "set LDM6432 connect to ESP32";
+Blockly.Msg.LDM6432_7697_INIT = "set LDM6432 connect to 7697";
+Blockly.Msg.LDM6432_TX_PIN = "RX(white wire) connect to GPIO";
+Blockly.Msg.LDM6432_RX_PIN = "TX(yellow wire) connect to GPIO";
 Blockly.Msg.LDM6432_WAIT_FOR_E = "whether wait for echo after every command?";
 Blockly.Msg.LDM6432_CLOCK = "set clock mode";
 Blockly.Msg.LDM6432_SHOWPAGE1 = "LDM show single page(0~6):";

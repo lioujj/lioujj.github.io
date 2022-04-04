@@ -216,7 +216,8 @@ Blockly.Blocks.mp3_set_pins={init:function(){
 Blockly.Blocks.mp3_set_pins1={init:function(){
   this.setHelpUrl(Blockly.Msg.MP3_HELPURL);
   this.setColour(Blockly.Blocks.mp3.HUE);
-  this.appendDummyInput().appendField(Blockly.Msg.MP3_SET_PINS_TITLE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.MP3_SET_PINS_TITLE);
   this.appendValueInput("RX_PIN")
       .setCheck("Number")
 	  .setAlign(Blockly.ALIGN_RIGHT)
@@ -234,7 +235,7 @@ Blockly.Blocks.mp3_set_pins1={init:function(){
 Blockly.Blocks.mp3_set_pins_esp32={init:function(){
   this.setHelpUrl(Blockly.Msg.MP3_HELPURL);
   this.setColour(Blockly.Blocks.mp3.HUE);
-  this.appendDummyInput().appendField(Blockly.Msg.MP3_SET_PINS_TITLE+"  ESP32");
+  this.appendDummyInput().appendField(Blockly.Msg.MP3_SET_PINS_TITLE+"  ESP32(Serial2)");
   this.appendValueInput("RX_PIN")
       .setCheck("Number")
 	  .setAlign(Blockly.ALIGN_RIGHT)
@@ -1142,6 +1143,38 @@ Blockly.Blocks.ldm_send_bitmap={init:function(){
   this.appendDummyInput().appendField(Blockly.Msg.LDM6432_SEND_BITMAP);
   this.appendValueInput("BITMAP")
       .setCheck("String");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LDM6432_TOOLTIP)}
+};
+
+Blockly.Blocks.ldm_esp32_init={init:function(){
+  this.setHelpUrl(Blockly.Msg.LDM6432_UART_HELPURL);
+  this.setColour(Blockly.Blocks.ldm6432.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LDM6432_ESP32_INIT);
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown([["Serial1","Serial1"],["Serial2","Serial2"],["Serial","Serial"]]),"UART_NO");
+  this.appendValueInput("TX_PIN")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LDM6432_TX_PIN);
+  this.appendValueInput("RX_PIN")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LDM6432_RX_PIN);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LDM6432_TOOLTIP)}
+};
+
+Blockly.Blocks.ldm_7697_init={init:function(){
+  this.setHelpUrl(Blockly.Msg.LDM6432_UART_HELPURL);
+  this.setColour(Blockly.Blocks.ldm6432.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LDM6432_7697_INIT);
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown([["Serial1","Serial1"],["Serial","Serial"]]),"UART_NO");
   this.setInputsInline(!0);
   this.setPreviousStatement(!0);
   this.setNextStatement(!0);

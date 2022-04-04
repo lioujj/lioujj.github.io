@@ -2111,11 +2111,24 @@
         </value>
       </block>
       <block type="ldm_waitForE"></block>
+      <block type="ldm_clock"></block>
+      <block type="ldm_esp32_init">
+        <value name="TX_PIN">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="RX_PIN">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
+      <block type="ldm_7697_init"></block>
       <block type="ldm_clear"></block>
       <block type="ldm_display"></block>
       <block type="ldm_on_off"></block>
       <block type="ldm_show_ver"></block>
-      <block type="ldm_clock"></block>
       <block type="ldm_command">
         <value name="COMMAND">
           <block type="text">
