@@ -1840,6 +1840,16 @@ Blockly.Arduino.board_i2c_reset=function(){
   return'';
 }
 
+Blockly.Arduino.board_spi_reset=function(){
+  var a=Blockly.Arduino.valueToCode(this,"SCLK_PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=Blockly.Arduino.valueToCode(this,"MISO_PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      c=Blockly.Arduino.valueToCode(this,"MOSI_PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      d=Blockly.Arduino.valueToCode(this,"CS_PIN",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  Blockly.Arduino.definitions_.define_spi="#include <SPI.h>";
+  Blockly.Arduino.definitions_.define_SD_CS_invoke='int pinCS=SS;';
+  return'pinCS='+d+';\nSPI.begin('+a+','+b+','+c+',pinCS);\n';
+}
+
 Blockly.Arduino.board_7697_digital=function(){
   return[this.getFieldValue("MY_PIN"),Blockly.Arduino.ORDER_ATOMIC];
 }
@@ -2684,7 +2694,7 @@ Blockly.Arduino.dac_init=function(){
   Blockly.Arduino.definitions_.define_SPIFFS_include='#include "SPIFFS.h"';
   Blockly.Arduino.definitions_.define_HTTPCLIENT_include='#include <HTTPClient.h>';
   Blockly.Arduino.definitions_.define_ESP8266Audio_include='#include "AudioFileSourceSPIFFS.h"\n#include "AudioFileSourceSD.h"\n#include "AudioFileSourceHTTPStream.h"\n#include "AudioFileSourceBuffer.h"\n#include "AudioOutputI2S.h"\n#include "AudioGeneratorMP3.h"\n';
-  Blockly.Arduino.definitions_.define_SD_CS_invoke='int pinCS=5;';
+  Blockly.Arduino.definitions_.define_SD_CS_invoke='int pinCS=SS;';
   Blockly.Arduino.definitions_.define_ESP8266Audio_variable_invoke='AudioFileSourceSD *i2sSdFile;\nAudioFileSourceSPIFFS *i2sSPIFFSfile;\nAudioGeneratorMP3 *i2sMp3;\nAudioFileSourceHTTPStream *i2sFile=new AudioFileSourceHTTPStream();\nAudioFileSourceBuffer *i2sBuff;\nAudioOutputI2S *i2sOut;\nString dacPlayType;\nString mp3FileName;\nString ttsContent;\nString httpLink;\nfloat gainValue=1.0;\nbool ttsDone=true;\nbool httpDone=true;\nbool mp3Done=true;\n';
   Blockly.Arduino.definitions_.define_urlencode_event="String URLEncode(const char* msg)\n{\n  const char *hex = \"0123456789abcdef\";\n  String encodedMsg = \"\";\n  while (*msg!='\\0'){\n      if( ('a' <= *msg && *msg <= 'z')\n              || ('A' <= *msg && *msg <= 'Z')\n              || ('0' <= *msg && *msg <= '9') ) {\n          encodedMsg += *msg;\n      } else {\n          encodedMsg += '%';\n          encodedMsg += hex[*msg >> 4];\n          encodedMsg += hex[*msg & 15];\n      }\n      msg++;\n  }\n  return encodedMsg;\n}\n";
   Blockly.Arduino.definitions_.define_ESP8266Audio_function_invoke_checkRunning_event='bool checkDACrunning()\n{\n  bool isRunning=false;\n  if (i2sMp3->isRunning()) {\n    isRunning=true;\n    if (!i2sMp3->loop()){\n      i2sMp3->stop();\n      mp3Done=true;\n      ttsDone=true;\n      httpDone=true;\n      isRunning=false;\n    }\n  }else{\n    isRunning=false;\n  }\n  return isRunning;\n}\n';
@@ -2834,8 +2844,7 @@ Blockly.Arduino.sd_init=function(){
 
 Blockly.Arduino.sd_set_cs=function(){
   var a=Blockly.Arduino.valueToCode(this,"CS_PIN",Blockly.Arduino.ORDER_ATOMIC)||"0";
-  Blockly.Arduino.definitions_.define_SD_CS_invoke='int pinCS='+a+';';
-  return'';
+  return'pinCS='+a+';\n';
 }
 
 Blockly.Arduino.sd_exists=function(){
@@ -3644,10 +3653,76 @@ Blockly.Arduino.pn532i2c_readPage=function(){
   return['readUltraPage('+a+')',Blockly.Arduino.ORDER_ATOMIC];
 }
 
+//pinMap
 Blockly.Arduino.pinMap_7697ext=function(){
   var a=this.getFieldValue("PIN");
   return[a,Blockly.Arduino.ORDER_ATOMIC];
 };
+
+//I2S MIC
+Blockly.Arduino.i2s_mic={};
+Blockly.Arduino.i2sMic_init=function(){
+  var a=Blockly.Arduino.valueToCode(this,"SCK_PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=Blockly.Arduino.valueToCode(this,"WS_PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      c=Blockly.Arduino.valueToCode(this,"SD_PIN",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    Blockly.Arduino.definitions_.define_i2sMic_include="#include <driver/i2s.h>\n#include \"SPIFFS.h\"\n#include <SD.h>";
+    Blockly.Arduino.definitions_.define_i2sMic_invoke='#define MIC_SCK '+a+'\n#define MIC_WS '+b+'\n#define MIC_SD '+c+'\n#define I2S_PORT I2S_NUM_0\n#define RECORD_TIME (recTime)\n#define MIC_SAMPLE_RATE     (16000)\n#define MIC_SAMPLE_BITS     (16)\n#define MIC_READ_LEN        (16 * 1024)\n#define MIC_CHANNEL_NUM     (1)\n#define FLASH_RECORD_SIZE   (MIC_CHANNEL_NUM * MIC_SAMPLE_RATE * MIC_SAMPLE_BITS / 8 * RECORD_TIME)\nint recTime=5;\nFile wavFile;\nconst int headerSize = 44;\n';
+    Blockly.Arduino.definitions_.define_SD_CS_invoke='int pinCS=SS;';
+    Blockly.Arduino.definitions_.define_i2sMic_event='void i2sMicInit(){\n  i2s_config_t i2s_config = {\n    .mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_RX),\n    .sample_rate = MIC_SAMPLE_RATE,\n    .bits_per_sample = i2s_bits_per_sample_t(MIC_SAMPLE_BITS),\n    .channel_format = I2S_CHANNEL_FMT_ONLY_LEFT,\n    .communication_format = i2s_comm_format_t(I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_MSB),\n    .intr_alloc_flags = 0,\n    .dma_buf_count = 64,\n    .dma_buf_len = 1024,\n    .use_apll = 1\n  };\n  i2s_driver_install(I2S_PORT, &i2s_config, 0, NULL);\n  const i2s_pin_config_t pin_config = {\n    .bck_io_num = MIC_SCK,\n    .ws_io_num = MIC_WS,\n    .data_out_num = -1,\n    .data_in_num = MIC_SD\n  };\n  i2s_set_pin(I2S_PORT, &pin_config);\n}\n';
+  }
+  return'';
+}
+
+Blockly.Arduino.PocketCard_i2sMic_init=function(){
+  var a=2,
+      b=13,
+      c=15;
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    Blockly.Arduino.definitions_.define_i2sMic_include="#include <driver/i2s.h>\n#include \"SPIFFS.h\"\n#include <SD.h>";
+    Blockly.Arduino.definitions_.define_i2sMic_invoke='#define MIC_SCK '+a+'\n#define MIC_WS '+b+'\n#define MIC_SD '+c+'\n#define I2S_PORT I2S_NUM_0\n#define RECORD_TIME (recTime)\n#define MIC_SAMPLE_RATE     (16000)\n#define MIC_SAMPLE_BITS     (16)\n#define MIC_READ_LEN        (16 * 1024)\n#define MIC_CHANNEL_NUM     (1)\n#define FLASH_RECORD_SIZE   (MIC_CHANNEL_NUM * MIC_SAMPLE_RATE * MIC_SAMPLE_BITS / 8 * RECORD_TIME)\nint recTime=5;\nFile wavFile;\nconst int headerSize = 44;\n';
+    Blockly.Arduino.definitions_.define_SD_CS_invoke='int pinCS=SS;';
+    Blockly.Arduino.definitions_.define_i2sMic_event='void i2sMicInit(){\n  i2s_config_t i2s_config = {\n    .mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_RX),\n    .sample_rate = MIC_SAMPLE_RATE,\n    .bits_per_sample = i2s_bits_per_sample_t(MIC_SAMPLE_BITS),\n    .channel_format = I2S_CHANNEL_FMT_ONLY_LEFT,\n    .communication_format = i2s_comm_format_t(I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_MSB),\n    .intr_alloc_flags = 0,\n    .dma_buf_count = 64,\n    .dma_buf_len = 1024,\n    .use_apll = 1\n  };\n  i2s_driver_install(I2S_PORT, &i2s_config, 0, NULL);\n  const i2s_pin_config_t pin_config = {\n    .bck_io_num = MIC_SCK,\n    .ws_io_num = MIC_WS,\n    .data_out_num = -1,\n    .data_in_num = MIC_SD\n  };\n  i2s_set_pin(I2S_PORT, &pin_config);\n}\n';
+  }
+  return'pinCS='+4+';\n';
+}
+
+Blockly.Arduino.i2sMic_record=function(){
+  var a=Blockly.Arduino.valueToCode(this,"FILENAME",Blockly.Arduino.ORDER_ATOMIC)||"",
+      b=Blockly.Arduino.valueToCode(this,"REC_TIME",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      c=this.getFieldValue("F_TARGET");
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    //Blockly.Arduino.definitions_.define_i2sMic_rec_event='void i2sMic_adc_toFile(){\n  int i2s_read_len = MIC_READ_LEN;\n  int flash_wr_size = 0;\n  size_t bytes_read;\n  char* i2s_read_buff = (char*) calloc(i2s_read_len, sizeof(char));\n  uint8_t* flash_write_buff = (uint8_t*) calloc(i2s_read_len, sizeof(char));\n  i2s_read(I2S_PORT, (void*) i2s_read_buff, i2s_read_len, &bytes_read, portMAX_DELAY);\n  i2s_read(I2S_PORT, (void*) i2s_read_buff, i2s_read_len, &bytes_read, portMAX_DELAY);\n  while (flash_wr_size < FLASH_RECORD_SIZE) {\n    i2s_read(I2S_PORT, (void*) i2s_read_buff, i2s_read_len, &bytes_read, portMAX_DELAY);\n    i2s_adc_data_scale(flash_write_buff, (uint8_t*)i2s_read_buff, i2s_read_len);\n    wavFile.write((const byte*) flash_write_buff, i2s_read_len);\n    flash_wr_size += i2s_read_len;\n  };\n  free(i2s_read_buff);\n  i2s_read_buff = NULL;\n  free(flash_write_buff);\n  flash_write_buff = NULL;\n}\n\nvoid i2s_adc_data_scale(uint8_t * d_buff, uint8_t* s_buff, uint32_t len){\n  uint32_t j = 0;\n  uint32_t dac_value = 0;\n  for (int i = 0; i < len; i += 2) {\n    dac_value = ((((uint16_t) (s_buff[i + 1] & 0xf) << 8) | ((s_buff[i + 0]))));\n    d_buff[j++] = 0;\n    d_buff[j++] = dac_value * 256 / 2048;\n  }\n}\n\nvoid wavHeader(byte* header, int wavSize){\n  header[0] = \'R\';\n  header[1] = \'I\';\n  header[2] = \'F\';\n  header[3] = \'F\';\n  unsigned int fileSize = wavSize + headerSize - 8;\n  header[4] = (byte)(fileSize & 0xFF);\n  header[6] = (byte)((fileSize >> 16) & 0xFF);\n  header[7] = (byte)((fileSize >> 24) & 0xFF);\n  header[8] = \'W\';\n  header[9] = \'A\';\n  header[10] = \'V\';\n  header[11] = \'E\';\n  header[12] = \'f\';\n  header[13] = \'m\';\n  header[14] = \'t\';\n  header[15] = \' \';\n  header[16] = 0x10;\n  header[17] = 0x00;\n  header[18] = 0x00;\n  header[19] = 0x00;\n  header[20] = 0x01;\n  header[21] = 0x00;\n  header[22] = 0x01;\n  header[23] = 0x00;\n  header[24] = 0x80;\n  header[25] = 0x3E;\n  header[26] = 0x00;\n  header[27] = 0x00;\n  header[28] = 0x00;\n  header[29] = 0x7D;\n  header[30] = 0x00;\n  header[31] = 0x00;\n  header[32] = 0x02;\n  header[33] = 0x00;\n  header[34] = 0x10;\n  header[35] = 0x00;\n  header[36] = \'d\';\n  header[37] = \'a\';\n  header[38] = \'t\';\n  header[39] = \'a\';\n  header[40] = (byte)(wavSize & 0xFF);\n  header[41] = (byte)((wavSize >> 8) & 0xFF);\n  header[42] = (byte)((wavSize >> 16) & 0xFF);\n  header[43] = (byte)((wavSize >> 24) & 0xFF);\n}\nvoid saveWave(byte mediaType,String fileName) {\n if (mediaType==1){\n   if(!SD.begin(pinCS))\n     return;\n   wavFile = SD.open(fileName.c_str(), "w");\n } else if (mediaType==2){\n   if(!SPIFFS.begin(true))\n     return;\n   wavFile = SPIFFS.open(fileName.c_str(), "w");\n }\n if (!wavFile)\n   return;\n byte header[headerSize];\n wavHeader(header, FLASH_RECORD_SIZE);\n wavFile.write(header, headerSize);\n  wavFile.close();\n}\n';
+    Blockly.Arduino.definitions_.define_i2sMic_rec_event='void i2sMic_adc_toFile(){\n  int i2s_read_len = MIC_READ_LEN;\n  int flash_wr_size = 0;\n  size_t bytes_read;\n  char* i2s_read_buff = (char*) calloc(i2s_read_len, sizeof(char));\n  uint8_t* flash_write_buff = (uint8_t*) calloc(i2s_read_len, sizeof(char));\n  i2s_read(I2S_PORT, (void*) i2s_read_buff, i2s_read_len, &bytes_read, portMAX_DELAY);\n  i2s_read(I2S_PORT, (void*) i2s_read_buff, i2s_read_len, &bytes_read, portMAX_DELAY);\n  while (flash_wr_size < FLASH_RECORD_SIZE) {\n    i2s_read(I2S_PORT, (void*) i2s_read_buff, i2s_read_len, &bytes_read, portMAX_DELAY);\n    i2s_adc_data_scale(flash_write_buff, (uint8_t*)i2s_read_buff, i2s_read_len);\n    wavFile.write((const byte*) flash_write_buff, i2s_read_len);\n    flash_wr_size += i2s_read_len;\n  };\n  free(i2s_read_buff);\n  i2s_read_buff = NULL;\n  free(flash_write_buff);\n  flash_write_buff = NULL;\n}\n\nvoid i2s_adc_data_scale(uint8_t * d_buff, uint8_t* s_buff, uint32_t len){\n  uint32_t j = 0;\n  uint32_t dac_value = 0;\n  for (int i = 0; i < len; i += 2) {\n    dac_value = ((((uint16_t) (s_buff[i + 1] & 0xf) << 8) | ((s_buff[i + 0]))));\n    d_buff[j++] = 0;\n    d_buff[j++] = dac_value * 256 / 2048;\n  }\n}\n\nvoid wavHeader(byte* header, int wavSize){\n  header[0] = \'R\';\n  header[1] = \'I\';\n  header[2] = \'F\';\n  header[3] = \'F\';\n  unsigned int fileSize = wavSize + headerSize - 8;\n  header[4] = (byte)(fileSize & 0xFF);\n  header[6] = (byte)((fileSize >> 16) & 0xFF);\n  header[7] = (byte)((fileSize >> 24) & 0xFF);\n  header[8] = \'W\';\n  header[9] = \'A\';\n  header[10] = \'V\';\n  header[11] = \'E\';\n  header[12] = \'f\';\n  header[13] = \'m\';\n  header[14] = \'t\';\n  header[15] = \' \';\n  header[16] = 0x10;\n  header[17] = 0x00;\n  header[18] = 0x00;\n  header[19] = 0x00;\n  header[20] = 0x01;\n  header[21] = 0x00;\n  header[22] = 0x01;\n  header[23] = 0x00;\n  header[24] = 0x80;\n  header[25] = 0x3E;\n  header[26] = 0x00;\n  header[27] = 0x00;\n  header[28] = 0x00;\n  header[29] = 0x7D;\n  header[30] = 0x00;\n  header[31] = 0x00;\n  header[32] = 0x02;\n  header[33] = 0x00;\n  header[34] = 0x10;\n  header[35] = 0x00;\n  header[36] = \'d\';\n  header[37] = \'a\';\n  header[38] = \'t\';\n  header[39] = \'a\';\n  header[40] = (byte)(wavSize & 0xFF);\n  header[41] = (byte)((wavSize >> 8) & 0xFF);\n  header[42] = (byte)((wavSize >> 16) & 0xFF);\n  header[43] = (byte)((wavSize >> 24) & 0xFF);\n}\nvoid saveWave(byte mediaType,String fileName) {\n  i2s_driver_uninstall(I2S_PORT);\n  i2sMicInit();\n  if (mediaType==1){\n    if(!SD.begin(pinCS))\n      return;\n    wavFile = SD.open(fileName.c_str(), "w");\n  } else if (mediaType==2){\n    if(!SPIFFS.begin(true))\n      return;\n    wavFile = SPIFFS.open(fileName.c_str(), "w");\n  }\n  if (!wavFile)\n    return;\n  byte header[headerSize];\n  wavHeader(header, FLASH_RECORD_SIZE);\n  wavFile.write(header, headerSize);\n  i2sMic_adc_toFile();\n  wavFile.close();\n  i2s_driver_uninstall(I2S_PORT);\n  if (mediaType==1){\n    SD.end();\n  } else if (mediaType==2){\n    SPIFFS.end();\n  }\n}\n';
+    return'recTime='+b+';\nsaveWave('+c+','+a+');\n';
+  } else {
+    return'';
+  }
+}
+
+Blockly.Arduino.i2sMic_STT=function(){
+  var a=Blockly.Arduino.valueToCode(this,"FILENAME",Blockly.Arduino.ORDER_ATOMIC)||"",
+      b=this.getFieldValue("L_CODE"),
+      c=Blockly.Arduino.valueToCode(this,"KEY",Blockly.Arduino.ORDER_ATOMIC)||"",
+      d=this.getFieldValue("F_TARGET");
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    Blockly.Arduino.definitions_.define_secure_include="#include <WiFiClientSecure.h>";
+    Blockly.Arduino.definitions_.define_base64Mic_include="#include \"Base64_tool.h\"";
+    Blockly.Arduino.definitions_.define_i2sMic_RecgText_invoke='String myRecgText="";';
+    Blockly.Arduino.definitions_.define_i2sMic_RecgText_event='void uploadWavFile(String fileName,String lang_code,String api_key,int mediaType){\n  File myWavFile;\n  if (mediaType==1){\n    if(!SD.begin(pinCS)){\n      myRecgText="SD error";\n      return;\n    }\n    myWavFile = SD.open(fileName.c_str(), FILE_READ);\n  } else if (mediaType==2){\n    if(!SPIFFS.begin(true)){\n      myRecgText="SPIFFS error";\n      return;\n    }\n    myWavFile = SPIFFS.open(fileName.c_str(), FILE_READ);\n  }\n  if(!myWavFile){\n    myRecgText="file error";\n    return;\n  }\n  String wavString = "";\n  uint8_t *fileinput;\n  unsigned int fileSize = myWavFile.size();\n  unsigned int extendSize = 0;\n  unsigned int encodeSize = 0;\n  if ((fileSize%3)!=0)\n    extendSize=fileSize+(3-(fileSize % 3));\n  else\n    extendSize=fileSize;\n  encodeSize=extendSize/3*4;\n  String fixStr=String("")+"{\\"config\\":{\\"encoding\\":\\"LINEAR16\\",\\"sampleRateHertz\\":16000,\\"languageCode\\":\\""+lang_code+"\\"},\\"audio\\":{\\"content\\":\\"";\n  String postStr="\\"}}";\n  static WiFiClientSecure sheetClient;\n  const char* host="speech.googleapis.com";\n  String url="/v1/speech:recognize?key="+api_key;\n  sheetClient.connect(host, 443);\n  while(!sheetClient.connected());\n  sheetClient.println("POST " + url + " HTTP/1.1");\n  sheetClient.println("Host: " + String(host));\n  sheetClient.println("Content-Type: application/json");\n  sheetClient.println("Content-Length: " + String(fixStr.length()+postStr.length()+encodeSize));\n  sheetClient.println();\n  sheetClient.print(fixStr);\n  char input[3] ={\'\\0\'};\n  char output[base64_enc_len(3)];\n  for (int i = 0; i < extendSize; i+=3) {\n    for(int j=0;j<3;j++){\n      if (myWavFile.available())\n        input[j]=myWavFile.read();\n      else\n        input[j]=\'\\0\';\n    }\n    base64_encode(output, input, 3);\n    wavString+=String(output);\n    if ((i%3000)==0){\n      sheetClient.print(wavString);\n      wavString="";\n    }\n  }\n  if (wavString.length()>0)\n    sheetClient.print(wavString);\n  sheetClient.print(postStr);\n  myWavFile.close();\n  while (!sheetClient.available());\n  String resStr="";\n  while (sheetClient.available()){\n    resStr=sheetClient.readStringUntil(\'\\n\');\n    if (resStr.indexOf("transcript")>0){\n      resStr.replace(" ","");\n      resStr.replace("\\"transcript\\":","");\n      resStr.replace("\\"","");\n      resStr.replace(",","");\n      resStr.replace("\\r","");\n      myRecgText=resStr;\n      break;\n    }\n  }\n  sheetClient.stop();\n  if (mediaType==1){\n    SD.end();\n  } else if (mediaType==2){\n    SPIFFS.end();\n  }\n}\n';
+    return'uploadWavFile('+a+',"'+b+'",'+c+','+d+');\n';
+  } else {
+    return'';
+  }
+}
+
+Blockly.Arduino.i2sMic_STT_result=function(){
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    return['myRecgText',Blockly.Arduino.ORDER_ATOMIC];
+  } else {
+    return['""',Blockly.Arduino.ORDER_ATOMIC];
+  }
+}
 
 setTimeout(function(){
 	if (Blockly.Blocks.board_initializes_setup)

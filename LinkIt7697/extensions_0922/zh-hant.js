@@ -456,6 +456,7 @@ Blockly.Msg.BOARDS_TOOLTIP = "設定開發板";
 Blockly.Msg.BOARDS_DIGITAL = "數位腳位";
 Blockly.Msg.BOARDS_ANALOG = "類比腳位";
 Blockly.Msg.BOARDS_I2C_RESET = "重設I2C腳位";
+Blockly.Msg.BOARDS_SPI_RESET = "重設SPI腳位";
 Blockly.Msg.BOARDS_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/開發板設定積木";
 
 //ESP32_Board尤哲哲
@@ -697,7 +698,7 @@ Blockly.Msg.SD_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697
 Blockly.Msg.SD_TOOLTIP = "";
 Blockly.Msg.SD_TITLE = "SD記憶卡";
 Blockly.Msg.SD_INIT = "初始化";
-Blockly.Msg.SD_SET_CS = "設定CS腳位";
+Blockly.Msg.SD_SET_CS = "CS腳位";
 Blockly.Msg.SD_EXISTS = "SD卡啟動成功？";
 Blockly.Msg.SD_INIT_WARNIG = "必須先設定「"+Blockly.Msg.SD_TITLE+Blockly.Msg.SD_INIT+"」積木";
 Blockly.Msg.SD_MKDIR = "建立資料夾";
@@ -842,3 +843,16 @@ Blockly.Msg.CCS811_FREQ_UNIT = "秒量測一次";
 //7697EXT
 Blockly.Msg.EXT_7697_PIN_MAP = [["IO4","5"],["IO5","3"],["IO19","12"],["IO13","11"],["IO14","13"],["IO16","2"],["IO17","10"],["IO21","9"],["IO22","8"],
                                 ["IO23","7"],["IO25","16"],["IO26","17"],["IO27","4"],["IO32","14"],["IO33","15"],["IO34","6"],["IO36","0"],["IO39","1"]];
+
+//I2S MIC
+Blockly.Msg.I2S_MIC_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/i2s麥克風積木";
+Blockly.Msg.I2S_MIC_TITLE = "I2S麥克風";
+Blockly.Msg.I2S_MIC_INIT = "初始化";
+Blockly.Msg.I2S_MIC_TOOLTIP = "I2S MIC";
+Blockly.Msg.I2S_MIC_SAVE_TO = "錄製WAV到";
+Blockly.Msg.I2S_MIC_REC_TIME = "錄音秒數";
+Blockly.Msg.I2S_MIC_STT = "上傳WAV檔(Google)辨識成文字";
+Blockly.Msg.I2S_MIC_STT_RESULT = "WAV檔辨識的字串";
+Blockly.Msg.I2S_MIC_UPLOAD_FROM = "從";
+Blockly.Msg.I2S_MIC_KEY = "金鑰";
+Blockly.Msg.I2S_MIC_POCKETCARD_INIT = "PocketCard音訊板初始化";

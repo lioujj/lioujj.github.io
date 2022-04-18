@@ -53,4 +53,5 @@
 <category><name>PN532_I2C</name><replace>PN532 I2c</replace></category>
 <category><name>CCS811</name><replace>CCS811</replace></category>
 <category><name>pin_map</name><replace>Pin Map</replace></category>
+<category><name>I2S_MIC</name><replace>I2S MIC</replace></category>
 </xml>
