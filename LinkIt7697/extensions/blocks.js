@@ -2903,6 +2903,30 @@ Blockly.Blocks.board_i2c_reset={init:function(){
   this.setTooltip(Blockly.Msg.ESP32_BOARD_TOOLTIP)}
 };
 
+Blockly.Blocks.board_spi_reset={init:function(){
+  this.setHelpUrl(Blockly.Msg.BOARDS_HELPURL);
+  this.setColour(Blockly.Blocks.initializes.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.BOARDS_TITLE)
+      .appendField(Blockly.Msg.BOARDS_SPI_RESET);
+  this.appendValueInput("SCLK_PIN")
+      .setCheck("Number")
+      .appendField("SCLK");
+  this.appendValueInput("MISO_PIN")
+      .setCheck("Number")
+      .appendField("MISO");
+  this.appendValueInput("MOSI_PIN")
+      .setCheck("Number")
+      .appendField("MOSI");
+  this.appendValueInput("CS_PIN")
+      .setCheck("Number")
+      .appendField("CS");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.ESP32_BOARD_TOOLTIP)}
+};
+
 Blockly.Blocks.board_7697_digital={init:function(){
   this.setHelpUrl(Blockly.Msg.BOARDS_HELPURL);
   this.setColour(Blockly.Blocks.math.HUE);
@@ -5037,8 +5061,7 @@ Blockly.Blocks.sd_set_cs={init:function(){
   this.setInputsInline(!0);
   this.setPreviousStatement(!0,null);
   this.setNextStatement(!0,null);
-  this.setTooltip(Blockly.Msg.SD_TOOLTIP)},onchange:function(){
-      this.workspace&&(Blockly.Blocks.sd.checkBlocks(this,"sd_set_cs","sd_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.SD_INIT_WARNIG))}
+  this.setTooltip(Blockly.Msg.SD_TOOLTIP)}
 };
 
 Blockly.Blocks.sd_exists={init:function(){
@@ -6354,4 +6377,95 @@ Blockly.Blocks.pinMap_7697ext={init:function(){
   this.setInputsInline(!0);
   this.setOutput(!0,"Number");
   this.setTooltip("123")}
+};
+
+//I2S MIC
+Blockly.Blocks.i2s_mic={};
+Blockly.Blocks.i2s_mic.HUE=180;
+Blockly.Blocks.i2sMic_init={init:function(){
+  this.setHelpUrl(Blockly.Msg.I2S_MIC_HELPURL);
+  this.setColour(Blockly.Blocks.i2s_mic.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.I2S_MIC_TITLE)
+      .appendField(Blockly.Msg.I2S_MIC_INIT);
+  this.appendValueInput("SCK_PIN")
+      .setCheck("Number")
+      .appendField("SCK "+Blockly.Msg.LIOU_ROBOT_PIN);
+  this.appendValueInput("WS_PIN")
+      .setCheck("Number")
+      .appendField("WS "+Blockly.Msg.LIOU_ROBOT_PIN);
+  this.appendValueInput("SD_PIN")
+      .setCheck("Number")
+      .appendField("SD "+Blockly.Msg.LIOU_ROBOT_PIN);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.I2S_MIC_TOOLTIP)}
+};
+
+Blockly.Blocks.PocketCard_i2sMic_init={init:function(){
+  this.setHelpUrl(Blockly.Msg.I2S_MIC_HELPURL);
+  this.setColour(Blockly.Blocks.i2s_mic.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.I2S_MIC_TITLE)
+      .appendField(Blockly.Msg.I2S_MIC_POCKETCARD_INIT);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.I2S_MIC_TOOLTIP)}
+};
+
+Blockly.Blocks.i2sMic_record={init:function(){
+  this.setHelpUrl(Blockly.Msg.I2S_MIC_HELPURL);
+  this.setColour(Blockly.Blocks.i2s_mic.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.I2S_MIC_TITLE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.I2S_MIC_SAVE_TO)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.DAC_FILE_SOURCE),"F_TARGET");
+  this.appendValueInput("FILENAME")
+      .setCheck("String")
+      .appendField(Blockly.Msg.DAC_FILE_NAME);
+  this.appendValueInput("REC_TIME")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.I2S_MIC_REC_TIME);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.I2S_MIC_TOOLTIP)}
+};
+
+Blockly.Blocks.i2sMic_STT={init:function(){
+  this.setHelpUrl(Blockly.Msg.I2S_MIC_HELPURL);
+  this.setColour(Blockly.Blocks.i2s_mic.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.I2S_MIC_TITLE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.I2S_MIC_UPLOAD_FROM)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.DAC_FILE_SOURCE),"F_TARGET")
+      .appendField(Blockly.Msg.I2S_MIC_STT);
+  this.appendValueInput("FILENAME")
+      .setCheck("String")
+      .appendField(Blockly.Msg.DAC_FILE_NAME);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.DAC_TTS_LANGUAGE)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.DAC_TTS_LANGUAGES),"L_CODE");
+  this.appendValueInput("KEY")
+      .setCheck("String")
+      .appendField(Blockly.Msg.I2S_MIC_KEY);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.I2S_MIC_TOOLTIP)}
+};
+
+Blockly.Blocks.i2sMic_STT_result={init:function(){
+  this.setHelpUrl(Blockly.Msg.I2S_MIC_HELPURL);
+  this.setColour(Blockly.Blocks.i2s_mic.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.I2S_MIC_TITLE)
+      .appendField(Blockly.Msg.I2S_MIC_STT_RESULT);
+  this.setInputsInline(!0);
+  this.setOutput(!0,"String");
+  this.setTooltip(Blockly.Msg.I2S_MIC_TOOLTIP)}
 };

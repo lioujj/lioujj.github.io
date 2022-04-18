@@ -463,6 +463,7 @@ Blockly.Msg.BOARDS_TOOLTIP = "Setup your board";
 Blockly.Msg.BOARDS_DIGITAL = "Digital pin";
 Blockly.Msg.BOARDS_ANALOG = "Analog pin";
 Blockly.Msg.BOARDS_I2C_RESET = "Reset I2C pin";
+Blockly.Msg.BOARDS_SPI_RESET = "Reset SPI pin";
 Blockly.Msg.BOARDS_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/開發板設定積木";
 
 //ESP32_Board尤哲哲
@@ -705,7 +706,7 @@ Blockly.Msg.SD_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697
 Blockly.Msg.SD_TOOLTIP = "";
 Blockly.Msg.SD_TITLE = "SD_Card";
 Blockly.Msg.SD_INIT = "initial";
-Blockly.Msg.SD_SET_CS = "set CS pin";
+Blockly.Msg.SD_SET_CS = "CS pin";
 Blockly.Msg.SD_EXISTS = "SD exists?";
 Blockly.Msg.SD_INIT_WARNIG = "You have to "+Blockly.Msg.SD_INIT+" "+Blockly.Msg.SD_TITLE+" first.";
 Blockly.Msg.SD_MKDIR = "create directory";
@@ -850,3 +851,16 @@ Blockly.Msg.CCS811_FREQ_UNIT = "seconds";
 //7697EXT
 Blockly.Msg.EXT_7697_PIN_MAP = [["IO4","5"],["IO5","3"],["IO19","12"],["IO13","11"],["IO14","13"],["IO16","2"],["IO17","10"],["IO21","9"],["IO22","8"],
                                 ["IO23","7"],["IO25","16"],["IO26","17"],["IO27","4"],["IO32","14"],["IO33","15"],["IO34","6"],["IO36","0"],["IO39","1"]];
+
+//I2S MIC
+Blockly.Msg.I2S_MIC_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/i2s麥克風積木";
+Blockly.Msg.I2S_MIC_TITLE = "I2S MIC";
+Blockly.Msg.I2S_MIC_INIT = "initial";
+Blockly.Msg.I2S_MIC_TOOLTIP = "";
+Blockly.Msg.I2S_MIC_SAVE_TO = "record WAV file to";
+Blockly.Msg.I2S_MIC_REC_TIME = "time(secs)";
+Blockly.Msg.I2S_MIC_STT = "upload WAV file(Google) to recognize";
+Blockly.Msg.I2S_MIC_STT_RESULT = "get the recognition text";
+Blockly.Msg.I2S_MIC_UPLOAD_FROM = "from";
+Blockly.Msg.I2S_MIC_KEY = "API key";
+Blockly.Msg.I2S_MIC_POCKETCARD_INIT = "PocketCard initial";

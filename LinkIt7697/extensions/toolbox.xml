@@ -15,6 +15,28 @@
           </block>
         </value>
       </block>
+      <block type="board_spi_reset">
+        <value name="SCLK_PIN">
+          <block type="math_number">
+            <field name="NUM">18</field>
+          </block>
+        </value>
+        <value name="MISO_PIN">
+          <block type="math_number">
+            <field name="NUM">19</field>
+          </block>
+        </value>
+        <value name="MOSI_PIN">
+          <block type="math_number">
+            <field name="NUM">23</field>
+          </block>
+        </value>
+        <value name="CS_PIN">
+          <block type="math_number">
+            <field name="NUM">5</field>
+          </block>
+        </value>
+      </block>
       <block type="board_7697_digital"></block>
       <block type="board_7697_analog"></block>
       <block type="board_arduino_digital"></block>
@@ -771,6 +793,51 @@
             </block>
           </value>
         </block>       
+      </category>
+      <category id="category_i2s_mic" name="I2S_MIC">
+        <block type="i2sMic_init">
+          <value name="SCK_PIN">
+            <block type="math_number">
+              <field name="NUM">2</field>
+            </block>
+          </value>
+          <value name="WS_PIN">
+            <block type="math_number">
+              <field name="NUM">13</field>
+            </block>
+          </value>
+          <value name="SD_PIN">
+            <block type="math_number">
+              <field name="NUM">15</field>
+            </block>
+          </value>
+        </block>
+        <block type="PocketCard_i2sMic_init"></block>
+        <block type="i2sMic_record">
+ 			  	<value name="FILENAME">
+				  	<block type="text">
+					  	<field name="TEXT">/wav/recording.wav</field>
+            </block>
+	  			</value>
+          <value name="REC_TIME">
+            <block type="math_number">
+              <field name="NUM">10</field>
+            </block>
+          </value>
+        </block>
+        <block type="i2sMic_STT">
+ 			  	<value name="FILENAME">
+				  	<block type="text">
+					  	<field name="TEXT">/wav/recording.wav</field>
+            </block>
+	  			</value>
+ 			  	<value name="KEY">
+				  	<block type="text">
+					  	<field name="TEXT"></field>
+            </block>
+	  			</value>
+        </block>
+        <block type="i2sMic_STT_result"></block>
       </category>
       <category id="category_pn532i2c" name="PN532_I2C">
         <block type="pn532i2c_init"></block>
