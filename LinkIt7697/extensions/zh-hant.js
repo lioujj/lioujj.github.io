@@ -852,6 +852,7 @@ Blockly.Msg.I2S_MIC_TOOLTIP = "I2S MIC";
 Blockly.Msg.I2S_MIC_SAVE_TO = "錄製WAV到";
 Blockly.Msg.I2S_MIC_REC_TIME = "錄音秒數";
 Blockly.Msg.I2S_MIC_STT = "上傳WAV檔(Google)辨識成文字";
+Blockly.Msg.I2S_MIC_STT_AZURE = "上傳WAV檔(Azure)辨識成文字";
 Blockly.Msg.I2S_MIC_STT_RESULT = "WAV檔辨識的字串";
 Blockly.Msg.I2S_MIC_UPLOAD_FROM = "從";
 Blockly.Msg.I2S_MIC_KEY = "金鑰";
