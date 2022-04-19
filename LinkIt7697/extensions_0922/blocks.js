@@ -6459,6 +6459,30 @@ Blockly.Blocks.i2sMic_STT={init:function(){
   this.setTooltip(Blockly.Msg.I2S_MIC_TOOLTIP)}
 };
 
+Blockly.Blocks.i2sMic_STT_Azure={init:function(){
+  this.setHelpUrl(Blockly.Msg.I2S_MIC_HELPURL);
+  this.setColour(Blockly.Blocks.i2s_mic.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.I2S_MIC_TITLE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.I2S_MIC_UPLOAD_FROM)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.DAC_FILE_SOURCE),"F_TARGET")
+      .appendField(Blockly.Msg.I2S_MIC_STT_AZURE);
+  this.appendValueInput("FILENAME")
+      .setCheck("String")
+      .appendField(Blockly.Msg.DAC_FILE_NAME);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.DAC_TTS_LANGUAGE)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.DAC_TTS_LANGUAGES),"L_CODE");
+  this.appendValueInput("KEY")
+      .setCheck("String")
+      .appendField(Blockly.Msg.I2S_MIC_KEY);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.I2S_MIC_TOOLTIP)}
+};
+
 Blockly.Blocks.i2sMic_STT_result={init:function(){
   this.setHelpUrl(Blockly.Msg.I2S_MIC_HELPURL);
   this.setColour(Blockly.Blocks.i2s_mic.HUE);

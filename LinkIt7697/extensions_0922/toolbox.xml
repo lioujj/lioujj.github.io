@@ -825,6 +825,18 @@
             </block>
           </value>
         </block>
+        <block type="i2sMic_STT_Azure">
+ 			  	<value name="FILENAME">
+				  	<block type="text">
+					  	<field name="TEXT">/wav/recording.wav</field>
+            </block>
+	  			</value>
+ 			  	<value name="KEY">
+				  	<block type="text">
+					  	<field name="TEXT"></field>
+            </block>
+	  			</value>
+        </block>
         <block type="i2sMic_STT">
  			  	<value name="FILENAME">
 				  	<block type="text">
