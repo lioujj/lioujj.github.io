@@ -857,3 +857,4 @@ Blockly.Msg.I2S_MIC_STT_RESULT = "WAV檔辨識的字串";
 Blockly.Msg.I2S_MIC_UPLOAD_FROM = "從";
 Blockly.Msg.I2S_MIC_KEY = "金鑰";
 Blockly.Msg.I2S_MIC_POCKETCARD_INIT = "PocketCard音訊板初始化";
+Blockly.Msg.I2S_MIC_PUNCTUATION = [["不含標點","false"],["自動標點","true"]];
