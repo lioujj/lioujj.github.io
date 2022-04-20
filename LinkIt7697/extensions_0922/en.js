@@ -865,3 +865,4 @@ Blockly.Msg.I2S_MIC_STT_RESULT = "get the recognition text";
 Blockly.Msg.I2S_MIC_UPLOAD_FROM = "from";
 Blockly.Msg.I2S_MIC_KEY = "API key";
 Blockly.Msg.I2S_MIC_POCKETCARD_INIT = "PocketCard initial";
+Blockly.Msg.I2S_MIC_PUNCTUATION = [["without punctuation","false"],["with punctuation","true"]];

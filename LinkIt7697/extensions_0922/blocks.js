@@ -6467,7 +6467,8 @@ Blockly.Blocks.i2sMic_STT_Azure={init:function(){
   this.appendDummyInput()
       .appendField(Blockly.Msg.I2S_MIC_UPLOAD_FROM)
       .appendField(new Blockly.FieldDropdown(Blockly.Msg.DAC_FILE_SOURCE),"F_TARGET")
-      .appendField(Blockly.Msg.I2S_MIC_STT_AZURE);
+      .appendField(Blockly.Msg.I2S_MIC_STT_AZURE)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.I2S_MIC_PUNCTUATION),"PUNCTUATION");
   this.appendValueInput("FILENAME")
       .setCheck("String")
       .appendField(Blockly.Msg.DAC_FILE_NAME);
