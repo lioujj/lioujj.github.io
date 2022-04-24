@@ -55,5 +55,5 @@
 <category><name>CCS811</name><replace>CCS811空氣品質</replace></category>
 <category><name>pin_map</name><replace>腳位轉換</replace></category>
 <category><name>I2S_MIC</name><replace>I2S麥克風</replace></category>
-<category><name>KEYBOARDS</name><replace>鍵盤</replace></category>
+<category><name>KEYBOARDS</name><replace>Keypad鍵盤</replace></category>
 </xml>
