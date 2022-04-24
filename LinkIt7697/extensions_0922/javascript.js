@@ -3746,6 +3746,61 @@ Blockly.Arduino.i2sMic_STT_result=function(){
   }
 }
 
+//Keyboards
+Blockly.Arduino.keyboards={};
+Blockly.Arduino.keyboards_0_init=function(){
+  var a0=Blockly.Arduino.valueToCode(this,"PIN_0",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      a1=Blockly.Arduino.valueToCode(this,"PIN_1",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      a2=Blockly.Arduino.valueToCode(this,"PIN_2",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      a3=Blockly.Arduino.valueToCode(this,"PIN_3",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      a4=Blockly.Arduino.valueToCode(this,"PIN_4",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      a5=Blockly.Arduino.valueToCode(this,"PIN_5",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      a6=Blockly.Arduino.valueToCode(this,"PIN_6",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  Blockly.Arduino.definitions_.define_keypad_include="#include \"Adafruit_Keypad.h\"";
+  Blockly.Arduino.definitions_.define_keypad_invoke='char keyPadChar=\'\\0\';\nconst byte keyRowsCount = 4;\nconst byte keyColsCount = 3;\nchar keys[keyRowsCount][keyColsCount] = {{\'1\', \'2\', \'3\'}, {\'4\', \'5\', \'6\'}, {\'7\', \'8\', \'9\'}, {\'*\', \'0\', \'#\'}};\nbyte rowPins[keyRowsCount] = {'+a0+','+a1+','+a2+','+a3+'};\nbyte colPins[keyColsCount] = {'+a4+','+a5+','+a6+'};\nAdafruit_Keypad customKeypad = Adafruit_Keypad( makeKeymap(keys), rowPins, colPins, keyRowsCount, keyColsCount);\n';
+  Blockly.Arduino.definitions_.define_keypad_event="void checkPad(keypadEvent e)\n{\n  if (((char)e.bit.KEY!=\'\\0\')&&(e.bit.EVENT == KEY_JUST_PRESSED))\n    checkPadPress();\n  else if (((char)e.bit.KEY!=\'\\0\')&&(e.bit.EVENT == KEY_JUST_RELEASED))\n    checkPadRelease();\n}\n";
+  Blockly.Arduino.definitions_.define_keypad_press_event="void checkPadPress()\n{\n}\n";
+  Blockly.Arduino.definitions_.define_keypad_release_event="void checkPadRelease()\n{\n}\n";
+  return'customKeypad.begin();\n';
+}
+
+Blockly.Arduino.keyboards_1_init=function(){
+  var a0=Blockly.Arduino.valueToCode(this,"PIN_0",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      a1=Blockly.Arduino.valueToCode(this,"PIN_1",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      a2=Blockly.Arduino.valueToCode(this,"PIN_2",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      a3=Blockly.Arduino.valueToCode(this,"PIN_3",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      a4=Blockly.Arduino.valueToCode(this,"PIN_4",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      a5=Blockly.Arduino.valueToCode(this,"PIN_5",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      a6=Blockly.Arduino.valueToCode(this,"PIN_6",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      a7=Blockly.Arduino.valueToCode(this,"PIN_7",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  Blockly.Arduino.definitions_.define_keypad_include="#include \"Adafruit_Keypad.h\"";
+  Blockly.Arduino.definitions_.define_keypad_invoke='char keyPadChar=\'\\0\';\nconst byte keyRowsCount = 4;\nconst byte keyColsCount = 4;\nchar keys[keyRowsCount][keyColsCount] = {{\'1\', \'2\', \'3\', \'A\'}, {\'4\', \'5\', \'6\', \'B\'}, {\'7\', \'8\', \'9\', \'C\'}, {\'*\', \'0\', \'#\', \'D\'}};\nbyte rowPins[keyRowsCount] = {'+a0+','+a1+','+a2+','+a3+'};\nbyte colPins[keyColsCount] = {'+a4+','+a5+','+a6+','+a7+'};\nAdafruit_Keypad customKeypad = Adafruit_Keypad( makeKeymap(keys), rowPins, colPins, keyRowsCount, keyColsCount);\n';
+  Blockly.Arduino.definitions_.define_keypad_event="void checkPad(keypadEvent e)\n{\n  if (((char)e.bit.KEY!=\'\\0\')&&(e.bit.EVENT == KEY_JUST_PRESSED))\n    checkPadPress();\n  else if (((char)e.bit.KEY!=\'\\0\')&&(e.bit.EVENT == KEY_JUST_RELEASED))\n    checkPadRelease();\n}\n";
+  Blockly.Arduino.definitions_.define_keypad_press_event="void checkPadPress()\n{\n}\n";
+  Blockly.Arduino.definitions_.define_keypad_release_event="void checkPadRelease()\n{\n}\n";
+  return'customKeypad.begin();\n';
+}
+
+Blockly.Arduino.keyboards_check=function(){
+  return'customKeypad.tick();\nif(customKeypad.available()){\n  keypadEvent e = customKeypad.read();\n  keyPadChar=(char)e.bit.KEY;\n  checkPad(e);\n}\n';
+}
+
+Blockly.Arduino.keyboards_event=function(){
+  var a=this.getFieldValue("EVENT"),
+      b=Blockly.Arduino.statementToCode(this,"KEYBOARD_EVENT");
+  if (a=="1"){
+    Blockly.Arduino.definitions_.define_keypad_press_event="void checkPadPress()\n{\n"+b+"}\n";
+  }
+  else if (a=="0"){
+    Blockly.Arduino.definitions_.define_keypad_release_event="void checkPadRelease()\n{\n"+b+"}\n";
+  }
+  return'';
+}
+
+Blockly.Arduino.keyboards_value=function(){
+  return['String(keyPadChar)',Blockly.Arduino.ORDER_ATOMIC];
+}
+
 setTimeout(function(){
 	if (Blockly.Blocks.board_initializes_setup)
 		var xmlDoc = Blockly.Xml.textToDom('<xml xmlns="https://developers.google.com/blockly/xml"><block type="board_initializes_setup" id="0" x="100" y="50"><next><block type="initializes_loop" id="1"></block></next></block></xml>');

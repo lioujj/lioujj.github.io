@@ -6161,12 +6161,6 @@ Blockly.Blocks.ccs811_getData={init:function(){
       this.workspace&&(Blockly.Blocks.ccs811.checkBlocks(this,"ccs811_getData","ccs811_init")?this.setWarningText(null):this.setWarningText(Blockly.Msg.CCS811_WARNING))}
 };
 
-
-
-
-
-
-
 //PN532_I2C
 Blockly.Blocks.pn532i2c={};
 Blockly.Blocks.pn532i2c.HUE=270;
@@ -6493,4 +6487,114 @@ Blockly.Blocks.i2sMic_STT_result={init:function(){
   this.setInputsInline(!0);
   this.setOutput(!0,"String");
   this.setTooltip(Blockly.Msg.I2S_MIC_TOOLTIP)}
+};
+
+//Keyboard
+Blockly.Blocks.keyboards={};
+Blockly.Blocks.keyboards.HUE=285;
+Blockly.Blocks.keyboards_0_init={init:function(){
+  this.setHelpUrl(Blockly.Msg.KEYBOARDS_HELPURL);
+  this.setColour(Blockly.Blocks.keyboards.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.KEYBOARDS_TITLE+'(3X4)')
+      .appendField(Blockly.Msg.KEYBOARDS_INIT);
+  this.appendValueInput("PIN_0")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LIOU_ROBOT_PIN+"1");
+  this.appendValueInput("PIN_1")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LIOU_ROBOT_PIN+"2");
+  this.appendValueInput("PIN_2")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LIOU_ROBOT_PIN+"3");
+  this.appendValueInput("PIN_3")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LIOU_ROBOT_PIN+"4");
+  this.appendValueInput("PIN_4")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LIOU_ROBOT_PIN+"5");
+  this.appendValueInput("PIN_5")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LIOU_ROBOT_PIN+"6");
+  this.appendValueInput("PIN_6")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LIOU_ROBOT_PIN+"7");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.KEYBOARDS_TOOLTIP)}
+};
+
+Blockly.Blocks.keyboards_1_init={init:function(){
+  this.setHelpUrl(Blockly.Msg.KEYBOARDS_HELPURL);
+  this.setColour(Blockly.Blocks.keyboards.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.KEYBOARDS_TITLE+'(4X4)')
+      .appendField(Blockly.Msg.KEYBOARDS_INIT);
+  this.appendValueInput("PIN_0")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LIOU_ROBOT_PIN+"1");
+  this.appendValueInput("PIN_1")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LIOU_ROBOT_PIN+"2");
+  this.appendValueInput("PIN_2")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LIOU_ROBOT_PIN+"3");
+  this.appendValueInput("PIN_3")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LIOU_ROBOT_PIN+"4");
+  this.appendValueInput("PIN_4")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LIOU_ROBOT_PIN+"5");
+  this.appendValueInput("PIN_5")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LIOU_ROBOT_PIN+"6");
+  this.appendValueInput("PIN_6")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LIOU_ROBOT_PIN+"7");
+  this.appendValueInput("PIN_7")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LIOU_ROBOT_PIN+"8");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.KEYBOARDS_TOOLTIP)}
+};
+
+Blockly.Blocks.keyboards_check={init:function(){
+  this.setHelpUrl(Blockly.Msg.KEYBOARDS_HELPURL);
+  this.setColour(Blockly.Blocks.keyboards.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.KEYBOARDS_TITLE)
+      .appendField(Blockly.Msg.KEYBOARDS_CHECK);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.KEYBOARDS_TOOLTIP)}
+};
+
+Blockly.Blocks.keyboards_event={init:function(){
+  this.setHelpUrl(Blockly.Msg.KEYBOARDS_HELPURL);
+  this.setColour(Blockly.Blocks.keyboards.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.KEYBOARDS_TITLE)
+      .appendField(Blockly.Msg.KEYBOARDS_EVENT);
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.KEYBOARDS_EVENT_LIST),"EVENT");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.appendStatementInput("KEYBOARD_EVENT");
+  this.setTooltip(Blockly.Msg.KEYBOARDS_TOOLTIP)}
+};
+
+Blockly.Blocks.keyboards_value={init:function(){
+  this.setHelpUrl(Blockly.Msg.KEYBOARDS_HELPURL);
+  this.setColour(Blockly.Blocks.keyboards.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.KEYBOARDS_TITLE)
+      .appendField(Blockly.Msg.KEYBOARDS_VALUE);
+  this.setInputsInline(!0);
+  this.setOutput(!0,"String");
+  this.setTooltip(Blockly.Msg.KEYBOARDS_TOOLTIP)}
 };

@@ -866,3 +866,13 @@ Blockly.Msg.I2S_MIC_UPLOAD_FROM = "from";
 Blockly.Msg.I2S_MIC_KEY = "API key";
 Blockly.Msg.I2S_MIC_POCKETCARD_INIT = "PocketCard initial";
 Blockly.Msg.I2S_MIC_PUNCTUATION = [["without punctuation","false"],["with punctuation","true"]];
+
+//Keyboards
+Blockly.Msg.KEYBOARDS_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/keypad鍵盤";
+Blockly.Msg.KEYBOARDS_TITLE = "keyboard";
+Blockly.Msg.KEYBOARDS_INIT = "initial";
+Blockly.Msg.KEYBOARDS_TOOLTIP = "keyboard";
+Blockly.Msg.KEYBOARDS_VALUE = "value(String)";
+Blockly.Msg.KEYBOARDS_CHECK = "check status";
+Blockly.Msg.KEYBOARDS_EVENT = "when keyboard is";
+Blockly.Msg.KEYBOARDS_EVENT_LIST=[["pressed","1"],["released","0"]];
