@@ -1998,8 +1998,12 @@ Blockly.Arduino.esp32_core_task=function(){
   }
   else
     Blockly.Arduino.definitions_.define_dual_core_declaire='TaskHandle_t '+a+';\n';
-  c='  '+c.replace(/\n  /g,"\n    ");
-  Blockly.Arduino.definitions_["define_dual_core_"+a]='void '+a+'_code( void * pvParameters )\n{\n'+b+'  while(true){\n'+c+'  }\n}\n';
+  if (c!=''){
+    c='  '+c.replace(/\n  /g,"\n    ");
+    Blockly.Arduino.definitions_["define_dual_core_"+a]='void '+a+'_code( void * pvParameters )\n{\n'+b+'  while(true){\n'+c+'  }\n}\n';
+  } else {
+    Blockly.Arduino.definitions_["define_dual_core_"+a]='void '+a+'_code( void * pvParameters )\n{\n'+b+'}\n';
+  }
   return'';
 }
 
