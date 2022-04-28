@@ -736,6 +736,128 @@ Blockly.Arduino.aqi_attrname_list=function(){
   return['"'+a+'"',Blockly.Arduino.ORDER_ATOMIC];
 };
 
+
+//Lumex 7-seg
+Blockly.Arduino.lmx_7_seg={};
+Blockly.Arduino.lmx_7seg_init=function(){
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    var a=Blockly.Arduino.valueToCode(this,"TX_PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
+        b=Blockly.Arduino.valueToCode(this,"RX_PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
+        c=this.getFieldValue("UART_NO");
+    Blockly.Arduino.definitions_.define_lmx_7seg_esp32_init_invoke="byte lmx7SegDigits=4;";
+    Blockly.Arduino.lmx_7_seg.allDigits=""+4;
+    Blockly.Arduino.definitions_.define_lmx_7seg_esp32_init_event='void sendToLMX_7seg(String myCommand){\n  '+c+'.print(myCommand);\n  while('+c+'.read()!=\'E\'){}\n  delay(10);\n}\n';
+    return c+'.begin(115200,SERIAL_8N1,'+b+','+a+');\nsendToLMX_7seg("atf2=(4)");\n';
+  } else {
+    return'';
+  }
+};
+
+Blockly.Arduino.lmx_7seg_7697_init=function(){
+  if (Blockly.Arduino.my_board_type!="ESP32"){
+    var c=this.getFieldValue("UART_NO");
+    Blockly.Arduino.definitions_.define_lmx_7seg_esp32_init_invoke="byte lmx7SegDigits=4;";
+    Blockly.Arduino.lmx_7_seg.allDigits=""+4;
+    Blockly.Arduino.definitions_.define_lmx_7seg_esp32_init_event='void sendToLMX_7seg(String myCommand){\n  '+c+'.print(myCommand);\n  while('+c+'.read()!=\'E\'){}\n  delay(10);\n}\n';
+    return c+'.begin(115200);\nsendToLMX_7seg("atf2=(4)");\n';
+  } else {
+    return'';
+  }
+};
+
+Blockly.Arduino.lmx_7seg_digits_count=function(){
+  var a=this.getFieldValue("DIGITS");
+  Blockly.Arduino.lmx_7_seg.allDigits=""+a;
+  Blockly.Arduino.definitions_.define_lmx_7seg_esp32_init_invoke='byte lmx7SegDigits='+a+';';
+  return'';
+};
+
+Blockly.Arduino.lmx_7seg_clear=function(){
+  return'sendToLMX_7seg("ATd0=()");\n';
+};
+
+Blockly.Arduino.lmx_7seg_blink=function(){
+  var a=Blockly.Arduino.valueToCode(this,"FREQ",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  return'sendToLMX_7seg(String("")+"ate1=("+'+a+'+")");\nsendToLMX_7seg("ate0=(1)");\n';
+};
+
+Blockly.Arduino.lmx_7seg_no_blink=function(){
+  return'sendToLMX_7seg("ate0=(0)");\n';
+};
+
+Blockly.Arduino.lmx_7seg_light_level=function(){
+  var a=Blockly.Arduino.valueToCode(this,"LIGHT",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  return'sendToLMX_7seg(String("")+"atf2=("+'+a+'+")");\n';
+};
+
+Blockly.Arduino.lmx_7seg_putNumber=function(){
+  var a=Blockly.Arduino.valueToCode(this,"MY_NUM",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=this.getFieldValue("ALIGN_TYPE");
+  var myTempStr=""+a;
+  var tempStr=myTempStr;
+  var allDigits=parseInt(Blockly.Arduino.lmx_7_seg.allDigits);
+  if (b=="right"){
+    if (tempStr.length<allDigits){
+      for(let i=0;i<(allDigits-tempStr.length);i++)
+        myTempStr=" "+myTempStr;
+    }
+    return'sendToLMX_7seg(String("")+'+myTempStr+');\n';
+  } else {
+    return'sendToLMX_7seg(String("")+'+myTempStr+');\n';
+  }
+};
+
+Blockly.Arduino.lmx_7seg_putString=function(){
+  var a=Blockly.Arduino.valueToCode(this,"MY_TEXT",Blockly.Arduino.ORDER_ATOMIC)||"",
+      returnStr="";
+  var myTempStr=a;
+  myTempStr=myTempStr.replace(/\"/g,'');
+  var max=myTempStr.length;
+  var allDigits=parseInt(Blockly.Arduino.lmx_7_seg.allDigits);
+  if (max>allDigits)
+    max=allDigits;
+  for(i=0;i<max;i++)
+    returnStr+='sendToLMX_7seg("AT80=(0,'+i+','+myTempStr.substr(i, 1)+')");\n';
+  return returnStr;
+}
+
+Blockly.Arduino.lmx_7seg_putSingle=function(){
+  var a=Blockly.Arduino.valueToCode(this,"MY_NUM",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=Blockly.Arduino.valueToCode(this,"POS",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  return'sendToLMX_7seg(String("")+"AT80=(0,"+'+b+'+","+'+a+'+")");\n';
+}
+
+Blockly.Arduino.lmx_7seg_clear_indicator=function(){
+  var a=this.getFieldValue("ALIGN_TYPE");
+  var returnStr="";
+  if (a=="6"){
+    returnStr+='sendToLMX_7seg("at80=(0,4, )");\n';
+    returnStr+='sendToLMX_7seg("at80=(0,5, )");\n';
+  } else {
+    returnStr='sendToLMX_7seg("at80=(0,'+a+', )");\n'
+  }
+  return returnStr;
+}
+
+Blockly.Arduino.lmx_7seg_indicatorLevel=function(){
+  var a=this.getFieldValue("ALIGN_TYPE"),
+      b=Blockly.Arduino.valueToCode(this,"LEVEL",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  var returnStr="";
+  if (a=="6"){
+    returnStr+='sendToLMX_7seg(String("")+"at80=(0,4,"+'+b+'+")");\n';
+    returnStr+='sendToLMX_7seg(String("")+"at80=(0,5,"+'+b+'+")");\n';
+  } else {
+    returnStr='sendToLMX_7seg(String("")+"at80=(0,'+a+',"+'+b+'+")");\n';
+  }
+  return returnStr;
+}
+
+Blockly.Arduino.lmx_7seg_mode_indicator=function(){
+  var a=this.getFieldValue("MODE");
+  return'sendToLMX_7seg("ate2=('+a+')");\n';
+}
+
+
 //LDM6432
 Blockly.Arduino.ldm6432={};
 Blockly.Arduino.LDM_Check_prefix="if (ended){\n  ended=((!waitForE)||pubCtrl);\n";
@@ -3719,7 +3841,7 @@ Blockly.Arduino.i2sMic_STT_Azure=function(){
   if (Blockly.Arduino.my_board_type=="ESP32"){
     Blockly.Arduino.definitions_.define_secure_include="#include <WiFiClientSecure.h>";
     Blockly.Arduino.definitions_.define_i2sMic_RecgText_invoke='String myRecgText="";';
-    Blockly.Arduino.definitions_.define_i2sMic_Azure_RecgText_event='void uploadWavFileAzure(String fileName,String lang_code,String api_key,int mediaType,bool punctuation){\n  File myWavFile;\n  if (mediaType==1){\n    if(!SD.begin(pinCS)){\n      myRecgText="SD error";\n      return;\n    }\n    myWavFile = SD.open(fileName.c_str(), FILE_READ);\n  } else if (mediaType==2){\n    if(!SPIFFS.begin(true)){\n      myRecgText="SPIFFS error";\n      return;\n    }\n    myWavFile = SPIFFS.open(fileName.c_str(), FILE_READ);\n  }\n  if(!myWavFile){\n    myRecgText="file error";\n    return;\n  }\n  myRecgText="error";\n  static WiFiClientSecure sttClient;\n  const char* host="eastasia.stt.speech.microsoft.com";\n  String url="/speech/recognition/conversation/cognitiveservices/v1?language="+lang_code+"&format=detailed";\n  sttClient.connect(host, 443);\n  while(!sttClient.connected());\n  sttClient.println("POST " + url + " HTTP/1.1\\r\\nHost: " + String(host)+ "\\r\\nOcp-Apim-Subscription-Key: "+api_key+"\\r\\nContent-Type: audio/wav\\r\\nContent-Length: " + String(myWavFile.size()));\n  sttClient.println();\n  while(myWavFile.available() && sttClient.connected()) {\n    int nextPacketSize = myWavFile.available();\n    if (nextPacketSize > 512) {\n      nextPacketSize = 512;\n    }\n    uint8_t buffer[nextPacketSize] = { 0 };\n    for(int i=0;i<nextPacketSize;i++) {\n      buffer[i]=myWavFile.read();\n    }\n    sttClient.write(buffer,nextPacketSize);\n  }\n  myWavFile.close();\n  while (!sttClient.available());\n  String resStr="";\n  while (sttClient.available()){\n    resStr=sttClient.readStringUntil(\'\\n\');\n    if (resStr.startsWith("{\\"RecognitionStatus")){\n      if (punctuation){\n        resStr.replace(resStr.substring(0,resStr.indexOf("Display")+10),"");\n        resStr=resStr.substring(0,resStr.indexOf("\\""));\n      } else {\n        resStr.replace(resStr.substring(0,resStr.indexOf("MaskedITN")+12),"");\n        resStr=resStr.substring(0,resStr.indexOf("\\",\\""));\n      }\n      myRecgText=resStr;\n      break;\n    }\n  }\n  sttClient.stop();\n  if (mediaType==1){\n    SD.end();\n  } else if (mediaType==2){\n    SPIFFS.end();\n  }\n}\n';
+    Blockly.Arduino.definitions_.define_i2sMic_Azure_RecgText_event='void uploadWavFileAzure(String fileName,String lang_code,String api_key,int mediaType,bool punctuation){\n  File myWavFile;\n  if (mediaType==1){\n    if(!SD.begin(pinCS)){\n      myRecgText="SD error";\n      return;\n    }\n    myWavFile = SD.open(fileName.c_str(), FILE_READ);\n  } else if (mediaType==2){\n    if(!SPIFFS.begin(true)){\n      myRecgText="SPIFFS error";\n      return;\n    }\n    myWavFile = SPIFFS.open(fileName.c_str(), FILE_READ);\n  }\n  if(!myWavFile){\n    myRecgText="file error";\n    return;\n  }\n  myRecgText="error";\n  static WiFiClientSecure sttClient;\n  const char* host="eastasia.stt.speech.microsoft.com";\n  String url="/speech/recognition/conversation/cognitiveservices/v1?language="+lang_code+"&format=detailed";\n  sttClient.connect(host, 443);\n  while(!sttClient.connected());\n  sttClient.println("POST " + url + " HTTP/1.1\\r\\nHost: " + String(host)+ "\\r\\nOcp-Apim-Subscription-Key: "+api_key+"\\r\\nContent-Type: audio/wav\\r\\nContent-Length: " + String(myWavFile.size()));\n  sttClient.println();\n  while(myWavFile.available() && sttClient.connected()) {\n    int nextPacketSize = myWavFile.available();\n    if (nextPacketSize > 512) {\n      nextPacketSize = 512;\n    }\n    uint8_t buffer[nextPacketSize] = { 0 };\n    for(int i=0;i<nextPacketSize;i++) {\n      buffer[i]=myWavFile.read();\n    }\n    sttClient.write(buffer,nextPacketSize);\n  }\n  myWavFile.close();\n  while (!sttClient.available());\n  String resStr="";\n  while (sttClient.available()){\n    resStr=sttClient.readStringUntil(\'\\n\');\n    if (resStr.startsWith("{\\"RecognitionStatus")){\n      if (punctuation){\n        resStr.replace(resStr.substring(0,resStr.indexOf("Display")+10),"");\n        resStr=resStr.substring(0,resStr.indexOf("\\""));\n      } else {\n        resStr.replace(resStr.substring(0,resStr.indexOf("MaskedITN")+12),"");\n        resStr=resStr.substring(0,resStr.indexOf("\\",\\""));\n      }\n      myRecgText=resStr;\n      myRecgText.trim();\n      break;\n    }\n  }\n  sttClient.stop();\n  if (mediaType==1){\n    SD.end();\n  } else if (mediaType==2){\n    SPIFFS.end();\n  }\n}\n';
     return'uploadWavFileAzure('+a+',"'+b+'",'+c+','+d+','+e+');\n';
   } else {
     return'';
@@ -3735,7 +3857,7 @@ Blockly.Arduino.i2sMic_STT=function(){
     Blockly.Arduino.definitions_.define_secure_include="#include <WiFiClientSecure.h>";
     Blockly.Arduino.definitions_.define_base64Mic_include="#include \"Base64_tool.h\"";
     Blockly.Arduino.definitions_.define_i2sMic_RecgText_invoke='String myRecgText="";';
-    Blockly.Arduino.definitions_.define_i2sMic_RecgText_event='void uploadWavFile(String fileName,String lang_code,String api_key,int mediaType){\n  File myWavFile;\n  if (mediaType==1){\n    if(!SD.begin(pinCS)){\n      myRecgText="SD error";\n      return;\n    }\n    myWavFile = SD.open(fileName.c_str(), FILE_READ);\n  } else if (mediaType==2){\n    if(!SPIFFS.begin(true)){\n      myRecgText="SPIFFS error";\n      return;\n    }\n    myWavFile = SPIFFS.open(fileName.c_str(), FILE_READ);\n  }\n  if(!myWavFile){\n    myRecgText="file error";\n    return;\n  }\n  String wavString = "";\n  uint8_t *fileinput;\n  unsigned int fileSize = myWavFile.size();\n  unsigned int extendSize = 0;\n  unsigned int encodeSize = 0;\n  if ((fileSize%3)!=0)\n    extendSize=fileSize+(3-(fileSize % 3));\n  else\n    extendSize=fileSize;\n  encodeSize=extendSize/3*4;\n  String fixStr=String("")+"{\\"config\\":{\\"encoding\\":\\"LINEAR16\\",\\"sampleRateHertz\\":16000,\\"languageCode\\":\\""+lang_code+"\\"},\\"audio\\":{\\"content\\":\\"";\n  String postStr="\\"}}";\n  myRecgText="error";\n  static WiFiClientSecure sttClient;\n  const char* host="speech.googleapis.com";\n  String url="/v1/speech:recognize?key="+api_key;\n  sttClient.connect(host, 443);\n  while(!sttClient.connected());\n  sttClient.println("POST " + url + " HTTP/1.1");\n  sttClient.println("Host: " + String(host));\n  sttClient.println("Content-Type: application/json");\n  sttClient.println("Content-Length: " + String(fixStr.length()+postStr.length()+encodeSize));\n  sttClient.println();\n  sttClient.print(fixStr);\n  char input[3] ={\'\\0\'};\n  char output[base64_enc_len(3)];\n  for (int i = 0; i < extendSize; i+=3) {\n    for(int j=0;j<3;j++){\n      if (myWavFile.available())\n        input[j]=myWavFile.read();\n      else\n        input[j]=\'\\0\';\n    }\n    base64_encode(output, input, 3);\n    wavString+=String(output);\n    if ((i%3000)==0){\n      sttClient.print(wavString);\n      wavString="";\n    }\n  }\n  if (wavString.length()>0)\n    sttClient.print(wavString);\n  sttClient.print(postStr);\n  myWavFile.close();\n  while (!sttClient.available());\n  String resStr="";\n  while (sttClient.available()){\n    resStr=sttClient.readStringUntil(\'\\n\');\n    if (resStr.indexOf("transcript")>0){\n      resStr.replace(" ","");\n      resStr.replace("\\"transcript\\":","");\n      resStr.replace("\\"","");\n      resStr.replace(",","");\n      resStr.replace("\\r","");\n      myRecgText=resStr;\n      break;\n    }\n  }\n  sttClient.stop();\n  if (mediaType==1){\n    SD.end();\n  } else if (mediaType==2){\n    SPIFFS.end();\n  }\n}\n';
+    Blockly.Arduino.definitions_.define_i2sMic_RecgText_event='void uploadWavFile(String fileName,String lang_code,String api_key,int mediaType){\n  File myWavFile;\n  if (mediaType==1){\n    if(!SD.begin(pinCS)){\n      myRecgText="SD error";\n      return;\n    }\n    myWavFile = SD.open(fileName.c_str(), FILE_READ);\n  } else if (mediaType==2){\n    if(!SPIFFS.begin(true)){\n      myRecgText="SPIFFS error";\n      return;\n    }\n    myWavFile = SPIFFS.open(fileName.c_str(), FILE_READ);\n  }\n  if(!myWavFile){\n    myRecgText="file error";\n    return;\n  }\n  String wavString = "";\n  uint8_t *fileinput;\n  unsigned int fileSize = myWavFile.size();\n  unsigned int extendSize = 0;\n  unsigned int encodeSize = 0;\n  if ((fileSize%3)!=0)\n    extendSize=fileSize+(3-(fileSize % 3));\n  else\n    extendSize=fileSize;\n  encodeSize=extendSize/3*4;\n  String fixStr=String("")+"{\\"config\\":{\\"encoding\\":\\"LINEAR16\\",\\"sampleRateHertz\\":16000,\\"languageCode\\":\\""+lang_code+"\\"},\\"audio\\":{\\"content\\":\\"";\n  String postStr="\\"}}";\n  myRecgText="error";\n  static WiFiClientSecure sttClient;\n  const char* host="speech.googleapis.com";\n  String url="/v1/speech:recognize?key="+api_key;\n  sttClient.connect(host, 443);\n  while(!sttClient.connected());\n  sttClient.println("POST " + url + " HTTP/1.1");\n  sttClient.println("Host: " + String(host));\n  sttClient.println("Content-Type: application/json");\n  sttClient.println("Content-Length: " + String(fixStr.length()+postStr.length()+encodeSize));\n  sttClient.println();\n  sttClient.print(fixStr);\n  char input[3] ={\'\\0\'};\n  char output[base64_enc_len(3)];\n  for (int i = 0; i < extendSize; i+=3) {\n    for(int j=0;j<3;j++){\n      if (myWavFile.available())\n        input[j]=myWavFile.read();\n      else\n        input[j]=\'\\0\';\n    }\n    base64_encode(output, input, 3);\n    wavString+=String(output);\n    if ((i%3000)==0){\n      sttClient.print(wavString);\n      wavString="";\n    }\n  }\n  if (wavString.length()>0)\n    sttClient.print(wavString);\n  sttClient.print(postStr);\n  myWavFile.close();\n  while (!sttClient.available());\n  String resStr="";\n  while (sttClient.available()){\n    resStr=sttClient.readStringUntil(\'\\n\');\n    if (resStr.indexOf("transcript")>0){\n      resStr.replace(" ","");\n      resStr.replace("\\"transcript\\":","");\n      resStr.replace("\\"","");\n      resStr.replace(",","");\n      resStr.replace("\\r","");\n      myRecgText=resStr;\n      myRecgText.trim();\n      break;\n    }\n  }\n  sttClient.stop();\n  if (mediaType==1){\n    SD.end();\n  } else if (mediaType==2){\n    SPIFFS.end();\n  }\n}\n';
     return'uploadWavFile('+a+',"'+b+'",'+c+','+d+');\n';
   } else {
     return'';
