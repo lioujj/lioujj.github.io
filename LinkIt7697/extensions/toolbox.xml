@@ -2584,6 +2584,73 @@
       </block>
       <block type="ldm_showAll"></block>
     </category>
+    <category id="category_lmx_7_seg" name="7_segment_display">
+      <block type="lmx_7seg_init">
+        <value name="TX_PIN">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="RX_PIN">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
+      <block type="lmx_7seg_7697_init"></block>
+      <block type="lmx_7seg_digits_count"></block>
+      <block type="lmx_7seg_clear"></block>
+      <block type="lmx_7seg_blink">
+        <value name="FREQ">
+          <block type="math_number">
+            <field name="NUM">5</field>
+          </block>
+        </value>
+      </block>
+      <block type="lmx_7seg_no_blink"></block>
+      <block type="lmx_7seg_light_level">
+        <value name="LIGHT">
+          <block type="math_number">
+            <field name="NUM">4</field>
+          </block>
+        </value>
+      </block>
+      <block type="lmx_7seg_putNumber">
+        <value name="MY_NUM">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
+      <block type="lmx_7seg_putString">
+        <value name="MY_TEXT">
+          <block type="text">
+            <field name="TEXT"></field>
+          </block>
+        </value>
+      </block>
+      <block type="lmx_7seg_putSingle">
+        <value name="MY_NUM">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="POS">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
+      <block type="lmx_7seg_clear_indicator"></block>
+      <block type="lmx_7seg_mode_indicator"></block>
+      <block type="lmx_7seg_indicatorLevel">
+        <value name="LEVEL">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
+    </category>
   </category>
 	<category id="category_ljj_tools" name="Tools">
 	  <category id="category_string_tools" name="String_tool">
