@@ -856,6 +856,8 @@ Blockly.Msg.EXT_7697_PIN_MAP = [["IO4","5"],["IO5","3"],["IO19","12"],["IO13","1
 Blockly.Msg.I2S_MIC_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/i2s麥克風積木";
 Blockly.Msg.I2S_MIC_TITLE = "I2S MIC";
 Blockly.Msg.I2S_MIC_INIT = "initial";
+Blockly.Msg.I2S_MIC_START = "start";
+Blockly.Msg.I2S_MIC_STOP = "stop";
 Blockly.Msg.I2S_MIC_TOOLTIP = "";
 Blockly.Msg.I2S_MIC_SAVE_TO = "record WAV file to";
 Blockly.Msg.I2S_MIC_REC_TIME = "time(secs)";
@@ -903,3 +905,8 @@ Blockly.Msg.LMX_7SEG_MODE_INDICATOR ="set indicators display mode";
 Blockly.Msg.LMX_7SEG_INDICATOR_MODE_LIST = [["mode 1","0"],["mode 2","1"],["mode 3","2"]];
 Blockly.Msg.LMX_7SEG_TX_PIN = "RX connect to";
 Blockly.Msg.LMX_7SEG_RX_PIN = "TX connect to";
+
+//MPU6050
+Blockly.Msg.MPU6050_HELPURL = "";
+Blockly.Msg.MPU6050_TITLE = "MPU6050";
+Blockly.Msg.MPU6050_TOOLTIP = "MPU6050";

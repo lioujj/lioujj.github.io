@@ -3819,13 +3819,27 @@ Blockly.Arduino.PocketCard_i2sMic_init=function(){
   return'pinCS='+4+';\n';
 }
 
+Blockly.Arduino.i2sMic_start=function(){
+  if (Blockly.Arduino.my_board_type=="ESP32")
+    return'i2sMicInit();\n';
+  else
+    return'';
+}
+
+Blockly.Arduino.i2sMic_stop=function(){
+  if (Blockly.Arduino.my_board_type=="ESP32")
+    return'i2s_driver_uninstall(I2S_MIC_PORT);\n';
+  else
+    return'';
+}
+
 Blockly.Arduino.i2sMic_record=function(){
   var a=Blockly.Arduino.valueToCode(this,"FILENAME",Blockly.Arduino.ORDER_ATOMIC)||"",
       b=Blockly.Arduino.valueToCode(this,"REC_TIME",Blockly.Arduino.ORDER_ATOMIC)||"0",
       c=this.getFieldValue("F_TARGET");
   if (Blockly.Arduino.my_board_type=="ESP32"){
-    //Blockly.Arduino.definitions_.define_i2sMic_rec_event='void i2sMic_adc_toFile(){\n  int i2s_read_len = MIC_READ_LEN;\n  int flash_wr_size = 0;\n  size_t bytes_read;\n  char* i2s_read_buff = (char*) calloc(i2s_read_len, sizeof(char));\n  uint8_t* flash_write_buff = (uint8_t*) calloc(i2s_read_len, sizeof(char));\n  i2s_read(I2S_MIC_PORT, (void*) i2s_read_buff, i2s_read_len, &bytes_read, portMAX_DELAY);\n  i2s_read(I2S_MIC_PORT, (void*) i2s_read_buff, i2s_read_len, &bytes_read, portMAX_DELAY);\n  while (flash_wr_size < FLASH_RECORD_SIZE) {\n    i2s_read(I2S_MIC_PORT, (void*) i2s_read_buff, i2s_read_len, &bytes_read, portMAX_DELAY);\n    i2s_adc_data_scale(flash_write_buff, (uint8_t*)i2s_read_buff, i2s_read_len);\n    wavFile.write((const byte*) flash_write_buff, i2s_read_len);\n    flash_wr_size += i2s_read_len;\n  };\n  free(i2s_read_buff);\n  i2s_read_buff = NULL;\n  free(flash_write_buff);\n  flash_write_buff = NULL;\n}\n\nvoid i2s_adc_data_scale(uint8_t * d_buff, uint8_t* s_buff, uint32_t len){\n  uint32_t j = 0;\n  uint32_t dac_value = 0;\n  for (int i = 0; i < len; i += 2) {\n    dac_value = ((((uint16_t) (s_buff[i + 1] & 0xf) << 8) | ((s_buff[i + 0]))));\n    d_buff[j++] = 0;\n    d_buff[j++] = dac_value * 256 / 2048;\n  }\n}\n\nvoid wavHeader(byte* header, int wavSize){\n  header[0] = \'R\';\n  header[1] = \'I\';\n  header[2] = \'F\';\n  header[3] = \'F\';\n  unsigned int fileSize = wavSize + headerSize - 8;\n  header[4] = (byte)(fileSize & 0xFF);\n  header[6] = (byte)((fileSize >> 16) & 0xFF);\n  header[7] = (byte)((fileSize >> 24) & 0xFF);\n  header[8] = \'W\';\n  header[9] = \'A\';\n  header[10] = \'V\';\n  header[11] = \'E\';\n  header[12] = \'f\';\n  header[13] = \'m\';\n  header[14] = \'t\';\n  header[15] = \' \';\n  header[16] = 0x10;\n  header[17] = 0x00;\n  header[18] = 0x00;\n  header[19] = 0x00;\n  header[20] = 0x01;\n  header[21] = 0x00;\n  header[22] = 0x01;\n  header[23] = 0x00;\n  header[24] = 0x80;\n  header[25] = 0x3E;\n  header[26] = 0x00;\n  header[27] = 0x00;\n  header[28] = 0x00;\n  header[29] = 0x7D;\n  header[30] = 0x00;\n  header[31] = 0x00;\n  header[32] = 0x02;\n  header[33] = 0x00;\n  header[34] = 0x10;\n  header[35] = 0x00;\n  header[36] = \'d\';\n  header[37] = \'a\';\n  header[38] = \'t\';\n  header[39] = \'a\';\n  header[40] = (byte)(wavSize & 0xFF);\n  header[41] = (byte)((wavSize >> 8) & 0xFF);\n  header[42] = (byte)((wavSize >> 16) & 0xFF);\n  header[43] = (byte)((wavSize >> 24) & 0xFF);\n}\nvoid saveWave(byte mediaType,String fileName) {\n if (mediaType==1){\n   if(!SD.begin(pinCS))\n     return;\n   wavFile = SD.open(fileName.c_str(), "w");\n } else if (mediaType==2){\n   if(!SPIFFS.begin(true))\n     return;\n   wavFile = SPIFFS.open(fileName.c_str(), "w");\n }\n if (!wavFile)\n   return;\n byte header[headerSize];\n wavHeader(header, FLASH_RECORD_SIZE);\n wavFile.write(header, headerSize);\n  wavFile.close();\n}\n';
-    Blockly.Arduino.definitions_.define_i2sMic_rec_event='void i2sMic_adc_toFile(){\n  int i2s_read_len = MIC_READ_LEN;\n  int flash_wr_size = 0;\n  size_t bytes_read;\n  char* i2s_read_buff = (char*) calloc(i2s_read_len, sizeof(char));\n  uint8_t* flash_write_buff = (uint8_t*) calloc(i2s_read_len, sizeof(char));\n  i2s_read(I2S_MIC_PORT, (void*) i2s_read_buff, i2s_read_len, &bytes_read, portMAX_DELAY);\n  i2s_read(I2S_MIC_PORT, (void*) i2s_read_buff, i2s_read_len, &bytes_read, portMAX_DELAY);\n  while (flash_wr_size < FLASH_RECORD_SIZE) {\n    i2s_read(I2S_MIC_PORT, (void*) i2s_read_buff, i2s_read_len, &bytes_read, portMAX_DELAY);\n    i2s_adc_data_scale(flash_write_buff, (uint8_t*)i2s_read_buff, i2s_read_len);\n    wavFile.write((const byte*) flash_write_buff, i2s_read_len);\n    flash_wr_size += i2s_read_len;\n  };\n  free(i2s_read_buff);\n  i2s_read_buff = NULL;\n  free(flash_write_buff);\n  flash_write_buff = NULL;\n}\n\nvoid i2s_adc_data_scale(uint8_t * d_buff, uint8_t* s_buff, uint32_t len){\n  uint32_t j = 0;\n  uint32_t dac_value = 0;\n  for (int i = 0; i < len; i += 2) {\n    dac_value = ((((uint16_t) (s_buff[i + 1] & 0xf) << 8) | ((s_buff[i + 0]))));\n    d_buff[j++] = 0;\n    d_buff[j++] = dac_value * 256 / 2048;\n  }\n}\n\nvoid wavHeader(byte* header, int wavSize){\n  header[0] = \'R\';\n  header[1] = \'I\';\n  header[2] = \'F\';\n  header[3] = \'F\';\n  unsigned int fileSize = wavSize + headerSize - 8;\n  header[4] = (byte)(fileSize & 0xFF);\n  header[6] = (byte)((fileSize >> 16) & 0xFF);\n  header[7] = (byte)((fileSize >> 24) & 0xFF);\n  header[8] = \'W\';\n  header[9] = \'A\';\n  header[10] = \'V\';\n  header[11] = \'E\';\n  header[12] = \'f\';\n  header[13] = \'m\';\n  header[14] = \'t\';\n  header[15] = \' \';\n  header[16] = 0x10;\n  header[17] = 0x00;\n  header[18] = 0x00;\n  header[19] = 0x00;\n  header[20] = 0x01;\n  header[21] = 0x00;\n  header[22] = 0x01;\n  header[23] = 0x00;\n  header[24] = 0x80;\n  header[25] = 0x3E;\n  header[26] = 0x00;\n  header[27] = 0x00;\n  header[28] = 0x00;\n  header[29] = 0x7D;\n  header[30] = 0x00;\n  header[31] = 0x00;\n  header[32] = 0x02;\n  header[33] = 0x00;\n  header[34] = 0x10;\n  header[35] = 0x00;\n  header[36] = \'d\';\n  header[37] = \'a\';\n  header[38] = \'t\';\n  header[39] = \'a\';\n  header[40] = (byte)(wavSize & 0xFF);\n  header[41] = (byte)((wavSize >> 8) & 0xFF);\n  header[42] = (byte)((wavSize >> 16) & 0xFF);\n  header[43] = (byte)((wavSize >> 24) & 0xFF);\n}\nvoid saveWave(byte mediaType,String fileName) {\n  //i2s_driver_uninstall(I2S_MIC_PORT);\n  i2sMicInit();\n  if (mediaType==1){\n    if(!SD.begin(pinCS))\n      return;\n    wavFile = SD.open(fileName.c_str(), "w");\n  } else if (mediaType==2){\n    if(!SPIFFS.begin(true))\n      return;\n    wavFile = SPIFFS.open(fileName.c_str(), "w");\n  }\n  if (!wavFile)\n    return;\n  byte header[headerSize];\n  wavHeader(header, FLASH_RECORD_SIZE);\n  wavFile.write(header, headerSize);\n  i2sMic_adc_toFile();\n  wavFile.close();\n  i2s_driver_uninstall(I2S_MIC_PORT);\n  if (mediaType==1){\n    SD.end();\n  } else if (mediaType==2){\n    SPIFFS.end();\n  }\n}\n';
+    Blockly.Arduino.definitions_.define_i2sMic_rec_event='void i2sMic_adc_toFile(){\n  int i2s_read_len = MIC_READ_LEN;\n  int flash_wr_size = 0;\n  size_t bytes_read;\n  char* i2s_read_buff = (char*) calloc(i2s_read_len, sizeof(char));\n  uint8_t* flash_write_buff = (uint8_t*) calloc(i2s_read_len, sizeof(char));\n  i2s_read(I2S_MIC_PORT, (void*) i2s_read_buff, i2s_read_len, &bytes_read, portMAX_DELAY);\n  i2s_read(I2S_MIC_PORT, (void*) i2s_read_buff, i2s_read_len, &bytes_read, portMAX_DELAY);\n  while (flash_wr_size < FLASH_RECORD_SIZE) {\n    i2s_read(I2S_MIC_PORT, (void*) i2s_read_buff, i2s_read_len, &bytes_read, portMAX_DELAY);\n    i2s_adc_data_scale(flash_write_buff, (uint8_t*)i2s_read_buff, i2s_read_len);\n    wavFile.write((const byte*) flash_write_buff, i2s_read_len);\n    flash_wr_size += i2s_read_len;\n  };\n  free(i2s_read_buff);\n  i2s_read_buff = NULL;\n  free(flash_write_buff);\n  flash_write_buff = NULL;\n}\n\nvoid i2s_adc_data_scale(uint8_t * d_buff, uint8_t* s_buff, uint32_t len){\n  uint32_t j = 0;\n  uint32_t dac_value = 0;\n  for (int i = 0; i < len; i += 2) {\n    dac_value = ((((uint16_t) (s_buff[i + 1] & 0xf) << 8) | ((s_buff[i + 0]))));\n    d_buff[j++] = 0;\n    d_buff[j++] = dac_value * 256 / 2048;\n  }\n}\n\nvoid wavHeader(byte* header, int wavSize){\n  header[0] = \'R\';\n  header[1] = \'I\';\n  header[2] = \'F\';\n  header[3] = \'F\';\n  unsigned int fileSize = wavSize + headerSize - 8;\n  header[4] = (byte)(fileSize & 0xFF);\n  header[6] = (byte)((fileSize >> 16) & 0xFF);\n  header[7] = (byte)((fileSize >> 24) & 0xFF);\n  header[8] = \'W\';\n  header[9] = \'A\';\n  header[10] = \'V\';\n  header[11] = \'E\';\n  header[12] = \'f\';\n  header[13] = \'m\';\n  header[14] = \'t\';\n  header[15] = \' \';\n  header[16] = 0x10;\n  header[17] = 0x00;\n  header[18] = 0x00;\n  header[19] = 0x00;\n  header[20] = 0x01;\n  header[21] = 0x00;\n  header[22] = 0x01;\n  header[23] = 0x00;\n  header[24] = 0x80;\n  header[25] = 0x3E;\n  header[26] = 0x00;\n  header[27] = 0x00;\n  header[28] = 0x00;\n  header[29] = 0x7D;\n  header[30] = 0x00;\n  header[31] = 0x00;\n  header[32] = 0x02;\n  header[33] = 0x00;\n  header[34] = 0x10;\n  header[35] = 0x00;\n  header[36] = \'d\';\n  header[37] = \'a\';\n  header[38] = \'t\';\n  header[39] = \'a\';\n  header[40] = (byte)(wavSize & 0xFF);\n  header[41] = (byte)((wavSize >> 8) & 0xFF);\n  header[42] = (byte)((wavSize >> 16) & 0xFF);\n  header[43] = (byte)((wavSize >> 24) & 0xFF);\n}\nvoid saveWave(byte mediaType,String fileName) {\n  i2sMicInit();\n  if (mediaType==1){\n    if(!SD.begin(pinCS))\n      return;\n    wavFile = SD.open(fileName.c_str(), "w");\n  } else if (mediaType==2){\n    if(!SPIFFS.begin(true))\n      return;\n    wavFile = SPIFFS.open(fileName.c_str(), "w");\n  }\n  if (!wavFile)\n    return;\n  byte header[headerSize];\n  wavHeader(header, FLASH_RECORD_SIZE);\n  wavFile.write(header, headerSize);\n  i2sMic_adc_toFile();\n  wavFile.close();\n  i2s_driver_uninstall(I2S_MIC_PORT);\n  if (mediaType==1){\n    SD.end();\n  } else if (mediaType==2){\n    SPIFFS.end();\n  }\n}\n';
+//    Blockly.Arduino.definitions_.define_i2sMic_rec_event='void i2sMic_adc_toFile(){\n  int i2s_read_len = MIC_READ_LEN;\n  int flash_wr_size = 0;\n  size_t bytes_read;\n  char* i2s_read_buff = (char*) calloc(i2s_read_len, sizeof(char));\n  uint8_t* flash_write_buff = (uint8_t*) calloc(i2s_read_len, sizeof(char));\n  i2s_read(I2S_MIC_PORT, (void*) i2s_read_buff, i2s_read_len, &bytes_read, portMAX_DELAY);\n  i2s_read(I2S_MIC_PORT, (void*) i2s_read_buff, i2s_read_len, &bytes_read, portMAX_DELAY);\n  while (flash_wr_size < FLASH_RECORD_SIZE) {\n    i2s_read(I2S_MIC_PORT, (void*) i2s_read_buff, i2s_read_len, &bytes_read, portMAX_DELAY);\n    i2s_adc_data_scale(flash_write_buff, (uint8_t*)i2s_read_buff, i2s_read_len);\n    wavFile.write((const byte*) flash_write_buff, i2s_read_len);\n    flash_wr_size += i2s_read_len;\n  };\n  free(i2s_read_buff);\n  i2s_read_buff = NULL;\n  free(flash_write_buff);\n  flash_write_buff = NULL;\n}\n\nvoid i2s_adc_data_scale(uint8_t * d_buff, uint8_t* s_buff, uint32_t len){\n  uint32_t j = 0;\n  uint32_t dac_value = 0;\n  for (int i = 0; i < len; i += 2) {\n    dac_value = ((((uint16_t) (s_buff[i + 1] & 0xf) << 8) | ((s_buff[i + 0]))));\n    d_buff[j++] = 0;\n    d_buff[j++] = dac_value * 256 / 2048;\n  }\n}\n\nvoid wavHeader(byte* header, int wavSize){\n  header[0] = \'R\';\n  header[1] = \'I\';\n  header[2] = \'F\';\n  header[3] = \'F\';\n  unsigned int fileSize = wavSize + headerSize - 8;\n  header[4] = (byte)(fileSize & 0xFF);\n  header[6] = (byte)((fileSize >> 16) & 0xFF);\n  header[7] = (byte)((fileSize >> 24) & 0xFF);\n  header[8] = \'W\';\n  header[9] = \'A\';\n  header[10] = \'V\';\n  header[11] = \'E\';\n  header[12] = \'f\';\n  header[13] = \'m\';\n  header[14] = \'t\';\n  header[15] = \' \';\n  header[16] = 0x10;\n  header[17] = 0x00;\n  header[18] = 0x00;\n  header[19] = 0x00;\n  header[20] = 0x01;\n  header[21] = 0x00;\n  header[22] = 0x01;\n  header[23] = 0x00;\n  header[24] = 0x80;\n  header[25] = 0x3E;\n  header[26] = 0x00;\n  header[27] = 0x00;\n  header[28] = 0x00;\n  header[29] = 0x7D;\n  header[30] = 0x00;\n  header[31] = 0x00;\n  header[32] = 0x02;\n  header[33] = 0x00;\n  header[34] = 0x10;\n  header[35] = 0x00;\n  header[36] = \'d\';\n  header[37] = \'a\';\n  header[38] = \'t\';\n  header[39] = \'a\';\n  header[40] = (byte)(wavSize & 0xFF);\n  header[41] = (byte)((wavSize >> 8) & 0xFF);\n  header[42] = (byte)((wavSize >> 16) & 0xFF);\n  header[43] = (byte)((wavSize >> 24) & 0xFF);\n}\nvoid saveWave(byte mediaType,String fileName) {\n  //i2s_driver_uninstall(I2S_MIC_PORT);\n  if (mediaType==1){\n    if(!SD.begin(pinCS))\n      return;\n    wavFile = SD.open(fileName.c_str(), "w");\n  } else if (mediaType==2){\n    if(!SPIFFS.begin(true))\n      return;\n    wavFile = SPIFFS.open(fileName.c_str(), "w");\n  }\n  if (!wavFile)\n    return;\n  byte header[headerSize];\n  wavHeader(header, FLASH_RECORD_SIZE);\n  wavFile.write(header, headerSize);\n  i2sMic_adc_toFile();\n  wavFile.close();\n  if (mediaType==1){\n    SD.end();\n  } else if (mediaType==2){\n    SPIFFS.end();\n  }\n}\n';
     return'recTime='+b+';\nsaveWave('+c+','+a+');\n';
   } else {
     return'';
@@ -3926,6 +3940,54 @@ Blockly.Arduino.keyboards_event=function(){
 Blockly.Arduino.keyboards_value=function(){
   return['String(keyPadChar)',Blockly.Arduino.ORDER_ATOMIC];
 }
+
+
+//MPU6050
+Blockly.Arduino.mpu6050={};
+Blockly.Arduino.mpu6050_accel_begin=function(){
+  var a=this.getFieldValue("ACCEL_MODE");
+  Blockly.Arduino.definitions_.define_mpu6050_include="#include <MPU6050.h>";
+  Blockly.Arduino.definitions_.define_mpu6050_invoke="MPU6050 myMPU6050;";
+  //Blockly.Arduino.definitions_.define_mpu6050_pitch_roll_invoke="void calcMPU6050angle(){\n   pitch = atan2 (myMPU6050.accelY() ,( sqrt ((myMPU6050.accelX() * myMPU6050.accelX()) + (myMPU6050.accelZ() * myMPU6050.accelZ()))))*57.3;\n   roll = atan2(myMPU6050.accelX() ,( sqrt((myMPU6050.accelY() * myMPU6050.accelY()) + (myMPU6050.accelZ() * myMPU6050.accelZ()))))*57.3;\n}\n";
+  Blockly.Arduino.definitions_.define_mpu6050_pitch_roll_invoke='';
+  Blockly.Arduino.setups_.setup_mpu6050_begin="myMPU6050.begin();";
+	return'myMPU6050.setRange('+a+');\n';
+};
+
+Blockly.Arduino.mpu6050_accel_fetch=function(){
+	return"Vector normAccel = myMPU6050.readNormalizeAccel();\n"
+};
+
+Blockly.Arduino.mpu6050_accel_3axis=function(){
+  var a=this.getFieldValue("3AXIS_MODE");
+  return[a,Blockly.Arduino.ORDER_ATOMIC];
+};
+
+
+
+Blockly.Arduino.mpu6050_gyro_begin=function(){
+  var a=this.getFieldValue("GYRO_MODE");
+  Blockly.Arduino.definitions_.define_mpu6050_include="#include <MPU6050.h>";
+  Blockly.Arduino.definitions_.define_mpu6050_invoke="MPU6050 myMPU6050;";
+  Blockly.Arduino.definitions_.define_mpu6050_pitch_roll_invoke='';
+  Blockly.Arduino.setups_.setup_mpu6050_begin="myMPU6050.begin();";
+	return'myMPU6050.setScale('+a+');\nmyMPU6050.calibrateGyro();\n';
+};
+
+Blockly.Arduino.mpu6050_gyro_fetch=function(){
+	return"Vector normGyro = myMPU6050.readNormalizeGyro();\n"
+};
+
+Blockly.Arduino.mpu6050_gyro_3axis=function(){
+  var a=this.getFieldValue("3AXIS_MODE");
+  return[a,Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.mpu6050_temperature=function(){
+  return['myMPU6050.readTemperature()',Blockly.Arduino.ORDER_ATOMIC];
+};
+
+
 
 setTimeout(function(){
 	if (Blockly.Blocks.board_initializes_setup)
