@@ -56,4 +56,5 @@
 <category><name>I2S_MIC</name><replace>I2S MIC</replace></category>
 <category><name>KEYBOARDS</name><replace>Keyboard</replace></category>
 <category><name>7_segment_display</name><replace>7 Segment Display</replace></category>
+<category><name>MPU6050_I2C</name><replace>MPU6050 6-axis</replace></category>
 </xml>

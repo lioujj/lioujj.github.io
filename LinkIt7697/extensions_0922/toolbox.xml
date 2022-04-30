@@ -813,6 +813,8 @@
           </value>
         </block>
         <block type="PocketCard_i2sMic_init"></block>
+        <block type="i2sMic_start"></block>
+        <block type="i2sMic_stop"></block>
         <block type="i2sMic_record">
  			  	<value name="FILENAME">
 				  	<block type="text">
@@ -2244,6 +2246,17 @@
         </value>
       </block>
     </category>
+<!--
+    <category id="category_mpu6050" name="MPU6050_I2C">
+			<block type="mpu6050_accel_begin"></block>
+      <block type="mpu6050_accel_fetch"></block>
+      <block type="mpu6050_accel_3axis"></block>
+			<block type="mpu6050_gyro_begin"></block>
+      <block type="mpu6050_gyro_fetch"></block>
+      <block type="mpu6050_gyro_3axis"></block>
+      <block type="mpu6050_temperature"></block>
+    </category>
+-->
   </category>
   <category id="category_lumex" name="Lumex">
     <category id="category_ldm6432" name="LDM6432MQTT">
