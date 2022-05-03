@@ -3886,6 +3886,75 @@ Blockly.Arduino.i2sMic_STT_result=function(){
   }
 }
 
+//I2S DB Meter
+Blockly.Arduino.i2s_mic_db={};
+Blockly.Arduino.i2sMic_db_init=function(){
+  var a=Blockly.Arduino.valueToCode(this,"SCK_PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=Blockly.Arduino.valueToCode(this,"WS_PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      c=Blockly.Arduino.valueToCode(this,"SD_PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      d=this.getFieldValue("MODEL");
+      e='';
+  if (d=='None')
+    e='0.0';
+  else
+    e='3.0103';
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    Blockly.Arduino.definitions_.define_i2sMic_db_include="#include <driver/i2s.h>\n#include \"sos-iir-filter.h\"";
+    Blockly.Arduino.definitions_.define_i2sMic_db_pin_invoke='#define I2S_DB_SCK '+a+'\n#define I2S_DB_WS '+b+'\n#define I2S_DB_SD '+c+'\n#define I2S_DB_PORT I2S_NUM_1'
+    Blockly.Arduino.definitions_.define_i2sMic_db_model_invoke='#define MIC_EQUALIZER '+d+'\n#define MIC_OFFSET_DB '+e;
+    Blockly.Arduino.definitions_.define_i2sMic_db_other1_invoke='#define LEQ_PERIOD myDBperiod\n#define WEIGHTING C_weighting\n#define LEQ_UNITS \"LAeq\"\n#define DB_UNITS \"dBA\"\n#define MIC_SENSITIVITY -26\n#define MIC_REF_DB 94.0\n#define MIC_OVERLOAD_DB 116.0\n#define MIC_NOISE_DB 29\n#define MIC_BITS 24\n#define MIC_CONVERT(s) (s >> (SAMPLE_BITS - MIC_BITS))\n#define SAMPLE_RATE 48000\n#define SAMPLE_BITS 32\n#define SAMPLE_T int32_t\n#define SAMPLES_SHORT (SAMPLE_RATE / 8)\n#define SAMPLES_LEQ (SAMPLE_RATE * LEQ_PERIOD)\n#define DMA_BANK_SIZE (SAMPLES_SHORT / 16)\n#define DMA_BANKS 32\n#define I2S_TASK_PRI 4\n#define I2S_TASK_STACK 2048';
+    Blockly.Arduino.definitions_.define_i2sMic_db_other2_invoke='constexpr double MIC_REF_AMPL = pow(10, double(MIC_SENSITIVITY)/20) * ((1<<(MIC_BITS-1))-1);\nQueueHandle_t samples_queue;\nfloat samples[SAMPLES_SHORT] __attribute__((aligned(4)));\nbool dbTaskSuspended=true;\nTaskHandle_t mic_dba_task;\nfloat myDBperiod=1;\n\nSOS_IIR_Filter DC_BLOCKER = {\n  gain: 1.0,\n  sos: {{-1.0, 0.0, +0.9992, 0}}\n};\n\nSOS_IIR_Filter ICS43434 = {\n  gain: 0.477326418836803,\n  sos: {\n   {+0.96986791463971267, 0.23515976355743193, -0.06681948004769928, -0.00111521990688128},\n   {-1.98905931743624453, 0.98908924206960169, +1.99755331853906037, -0.99755481510122113}\n  }\n};\n\nSOS_IIR_Filter ICS43432 = {\n  gain: -0.457337023383413,\n  sos: {\n    {-0.544047931916859, -0.248361759321800, +0.403298891662298, -0.207346186351843},\n    {-1.909911869441421, +0.910830292683527, +1.790285722826743, -0.804085812369134},\n    {+0.000000000000000, +0.000000000000000, +1.148493493802252, -0.150599527756651}\n  }\n};\n\nSOS_IIR_Filter INMP441 = {\n  gain: 1.00197834654696,\n  sos: {\n    {-1.986920458344451, +0.986963226946616, +1.995178510504166, -0.995184322194091}\n  }\n};\n\nSOS_IIR_Filter IM69D130 = {\n  gain: 1.00124068496753,\n  sos: {\n    {-1.0, 0.0, +0.9992, 0},\n    {-1.994461610298131, 0.994469278738208, +1.997675693595542, -0.997677044195563}\n  }\n};\n\nSOS_IIR_Filter SPH0645LM4H_B_RB = {\n  gain: 1.00123377961525,\n  sos: {\n    {-1.0, 0.0, +0.9992, 0},\n    {-1.988897663539382, +0.988928479008099, +1.993853376183491, -0.993862821429572}\n  }\n};\n\nSOS_IIR_Filter A_weighting = {\n  gain: 0.169994948147430,\n  sos: {\n    {-2.00026996133106, +1.00027056142719, -1.060868438509278, -0.163987445885926},\n    {+4.35912384203144, +3.09120265783884, +1.208419926363593, -0.273166998428332},\n    {-0.70930303489759, -0.29071868393580, +1.982242159753048, -0.982298594928989}\n  }\n};\n\nSOS_IIR_Filter C_weighting = {\n  gain: -0.491647169337140,\n  sos: {\n    {+1.4604385758204708, +0.5275070373815286, +1.9946144559930252, -0.9946217070140883},\n    {+0.2376222404939509, +0.0140411206016894, -1.3396585608422749, -0.4421457807694559},\n    {-2.0000000000000000, +1.0000000000000000, +0.3775800047420818, -0.0356365756680430}\n  }\n};\n\nstruct sum_queue_t {\n  float sum_sqr_SPL;\n  float sum_sqr_weighted;\n  uint32_t proc_ticks;\n};\n';
+    Blockly.Arduino.setups_.setup_i2sMic_db='samples_queue = xQueueCreate(8, sizeof(sum_queue_t));';
+  }
+  return'';
+}
+
+Blockly.Arduino.i2sMic_pocket_db_init=function(){
+  var a='2',b='13',c='15',d='None',e='0.0';
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    Blockly.Arduino.definitions_.define_i2sMic_db_include="#include <driver/i2s.h>\n#include \"sos-iir-filter.h\"";
+    Blockly.Arduino.definitions_.define_i2sMic_db_pin_invoke='#define I2S_DB_SCK '+a+'\n#define I2S_DB_WS '+b+'\n#define I2S_DB_SD '+c+'\n#define I2S_DB_PORT I2S_NUM_1'
+    Blockly.Arduino.definitions_.define_i2sMic_db_model_invoke='#define MIC_EQUALIZER '+d+'\n#define MIC_OFFSET_DB '+e;
+    Blockly.Arduino.definitions_.define_i2sMic_db_other1_invoke='#define LEQ_PERIOD myDBperiod\n#define WEIGHTING C_weighting\n#define LEQ_UNITS \"LAeq\"\n#define DB_UNITS \"dBA\"\n#define MIC_SENSITIVITY -26\n#define MIC_REF_DB 94.0\n#define MIC_OVERLOAD_DB 116.0\n#define MIC_NOISE_DB 29\n#define MIC_BITS 24\n#define MIC_CONVERT(s) (s >> (SAMPLE_BITS - MIC_BITS))\n#define SAMPLE_RATE 48000\n#define SAMPLE_BITS 32\n#define SAMPLE_T int32_t\n#define SAMPLES_SHORT (SAMPLE_RATE / 8)\n#define SAMPLES_LEQ (SAMPLE_RATE * LEQ_PERIOD)\n#define DMA_BANK_SIZE (SAMPLES_SHORT / 16)\n#define DMA_BANKS 32\n#define I2S_TASK_PRI 4\n#define I2S_TASK_STACK 2048';
+    Blockly.Arduino.definitions_.define_i2sMic_db_other2_invoke='constexpr double MIC_REF_AMPL = pow(10, double(MIC_SENSITIVITY)/20) * ((1<<(MIC_BITS-1))-1);\nQueueHandle_t samples_queue;\nfloat samples[SAMPLES_SHORT] __attribute__((aligned(4)));\nint taskCreated=-1;\nbool dbTaskSuspended=true;\nTaskHandle_t mic_dba_task;\nfloat myDBperiod=1;\n\nSOS_IIR_Filter DC_BLOCKER = {\n  gain: 1.0,\n  sos: {{-1.0, 0.0, +0.9992, 0}}\n};\n\nSOS_IIR_Filter ICS43434 = {\n  gain: 0.477326418836803,\n  sos: {\n   {+0.96986791463971267, 0.23515976355743193, -0.06681948004769928, -0.00111521990688128},\n   {-1.98905931743624453, 0.98908924206960169, +1.99755331853906037, -0.99755481510122113}\n  }\n};\n\nSOS_IIR_Filter ICS43432 = {\n  gain: -0.457337023383413,\n  sos: {\n    {-0.544047931916859, -0.248361759321800, +0.403298891662298, -0.207346186351843},\n    {-1.909911869441421, +0.910830292683527, +1.790285722826743, -0.804085812369134},\n    {+0.000000000000000, +0.000000000000000, +1.148493493802252, -0.150599527756651}\n  }\n};\n\nSOS_IIR_Filter INMP441 = {\n  gain: 1.00197834654696,\n  sos: {\n    {-1.986920458344451, +0.986963226946616, +1.995178510504166, -0.995184322194091}\n  }\n};\n\nSOS_IIR_Filter IM69D130 = {\n  gain: 1.00124068496753,\n  sos: {\n    {-1.0, 0.0, +0.9992, 0},\n    {-1.994461610298131, 0.994469278738208, +1.997675693595542, -0.997677044195563}\n  }\n};\n\nSOS_IIR_Filter SPH0645LM4H_B_RB = {\n  gain: 1.00123377961525,\n  sos: {\n    {-1.0, 0.0, +0.9992, 0},\n    {-1.988897663539382, +0.988928479008099, +1.993853376183491, -0.993862821429572}\n  }\n};\n\nSOS_IIR_Filter A_weighting = {\n  gain: 0.169994948147430,\n  sos: {\n    {-2.00026996133106, +1.00027056142719, -1.060868438509278, -0.163987445885926},\n    {+4.35912384203144, +3.09120265783884, +1.208419926363593, -0.273166998428332},\n    {-0.70930303489759, -0.29071868393580, +1.982242159753048, -0.982298594928989}\n  }\n};\n\nSOS_IIR_Filter C_weighting = {\n  gain: -0.491647169337140,\n  sos: {\n    {+1.4604385758204708, +0.5275070373815286, +1.9946144559930252, -0.9946217070140883},\n    {+0.2376222404939509, +0.0140411206016894, -1.3396585608422749, -0.4421457807694559},\n    {-2.0000000000000000, +1.0000000000000000, +0.3775800047420818, -0.0356365756680430}\n  }\n};\n\nstruct sum_queue_t {\n  float sum_sqr_SPL;\n  float sum_sqr_weighted;\n  uint32_t proc_ticks;\n};\n';
+    Blockly.Arduino.setups_.setup_i2sMic_db='samples_queue = xQueueCreate(8, sizeof(sum_queue_t));';
+  }
+  return'';
+}
+
+Blockly.Arduino.i2sMic_db_start=function(){
+  var a=Blockly.Arduino.valueToCode(this,"PERIOD",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    Blockly.Arduino.definitions_.define_i2sMic_db_init_event='void mic_i2s_db_init(){\n  const i2s_config_t i2s_config = {\n    mode: i2s_mode_t(I2S_MODE_MASTER | I2S_MODE_RX),\n    sample_rate: SAMPLE_RATE,\n    bits_per_sample: i2s_bits_per_sample_t(SAMPLE_BITS),\n    channel_format: I2S_CHANNEL_FMT_ONLY_LEFT,\n    communication_format: i2s_comm_format_t(I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_MSB),\n    intr_alloc_flags: ESP_INTR_FLAG_LEVEL1,\n    dma_buf_count: DMA_BANKS,\n    dma_buf_len: DMA_BANK_SIZE,\n    use_apll: true,\n    tx_desc_auto_clear: false,\n    fixed_mclk: 0\n  };\n  const i2s_pin_config_t pin_config = {\n    bck_io_num:   I2S_DB_SCK,\n    ws_io_num:    I2S_DB_WS,\n     data_out_num: -1,\n    data_in_num:  I2S_DB_SD\n  };\n  i2s_driver_install(I2S_DB_PORT, &i2s_config, 0, NULL);\n  i2s_set_pin(I2S_DB_PORT, &pin_config);\n}\n';
+    Blockly.Arduino.definitions_.define_i2sMic_db_task_event='void mic_i2s_reader_task(void* parameter){\n  size_t bytes_read = 0;\n  i2s_read(I2S_DB_PORT, &samples, SAMPLES_SHORT * sizeof(int32_t), &bytes_read, portMAX_DELAY);\n  while (true) {\n    i2s_read(I2S_DB_PORT, &samples, SAMPLES_SHORT * sizeof(SAMPLE_T), &bytes_read, portMAX_DELAY);\n    TickType_t start_tick = xTaskGetTickCount();\n    SAMPLE_T* int_samples = (SAMPLE_T*)&samples;\n    for(int i=0; i<SAMPLES_SHORT; i++) samples[i] = MIC_CONVERT(int_samples[i]);\n    sum_queue_t q;\n    q.sum_sqr_SPL = MIC_EQUALIZER.filter(samples, samples, SAMPLES_SHORT);\n    q.sum_sqr_weighted = WEIGHTING.filter(samples, samples, SAMPLES_SHORT);\n    q.proc_ticks = xTaskGetTickCount() - start_tick;\n    xQueueSend(samples_queue, &q, portMAX_DELAY);\n  }\n}\n';
+    Blockly.Arduino.definitions_.define_i2sMic_db_checkLevel_event='double checkSoundLevel(){\n  if (dbTaskSuspended)\n    return 0.0;\n  sum_queue_t q;\n  uint32_t Leq_samples = 0;\n  double Leq_sum_sqr = 0;\n  double Leq_dB = 0;\n  while (xQueueReceive(samples_queue, &q, portMAX_DELAY)) {\n    double short_RMS = sqrt(double(q.sum_sqr_SPL) / SAMPLES_SHORT);\n    double short_SPL_dB = MIC_OFFSET_DB + MIC_REF_DB + 20 * log10(short_RMS / MIC_REF_AMPL);\n    if (short_SPL_dB > MIC_OVERLOAD_DB) {\n      Leq_sum_sqr = INFINITY;\n    } else if (isnan(short_SPL_dB) || (short_SPL_dB < MIC_NOISE_DB)) {\n      Leq_sum_sqr = -INFINITY;\n    }\n    Leq_sum_sqr += q.sum_sqr_weighted;\n    Leq_samples += SAMPLES_SHORT;\n    if (Leq_samples >= SAMPLE_RATE * LEQ_PERIOD) {\n      double Leq_RMS = sqrt(Leq_sum_sqr / Leq_samples);\n      Leq_dB = MIC_OFFSET_DB + MIC_REF_DB + 20 * log10(Leq_RMS / MIC_REF_AMPL);\n      Leq_sum_sqr = 0;\n      Leq_samples = 0;\n      break;\n    }\n  }\n  return Leq_dB;\n}\n';
+    //return'myDBperiod='+a+';\ncreateDBtask();\n';
+    return'myDBperiod='+a+';\nmic_i2s_db_init();\nxTaskCreatePinnedToCore(mic_i2s_reader_task, "mic_dba_task", I2S_TASK_STACK, NULL, I2S_TASK_PRI, &mic_dba_task,0);\ndbTaskSuspended=false;\n';
+  } else
+    return'';
+}
+
+Blockly.Arduino.i2sMic_db_stop=function(){
+  if (Blockly.Arduino.my_board_type=="ESP32")
+    return'dbTaskSuspended=true;\nvTaskDelete(mic_dba_task);\ni2s_driver_uninstall(I2S_DB_PORT);\n';
+  else
+    return'';
+}
+
+Blockly.Arduino.i2sMic_db_is_measuring=function(){
+  if (Blockly.Arduino.my_board_type=="ESP32")
+    return['(!dbTaskSuspended)',Blockly.Arduino.ORDER_ATOMIC];
+  else
+    return['',Blockly.Arduino.ORDER_ATOMIC];
+}
+
+Blockly.Arduino.i2sMic_db_value=function(){
+  if (Blockly.Arduino.my_board_type=="ESP32")
+    return['checkSoundLevel()',Blockly.Arduino.ORDER_ATOMIC];
+  else
+    return['',Blockly.Arduino.ORDER_ATOMIC];
+}
+
 //Keyboards
 Blockly.Arduino.keyboards={};
 Blockly.Arduino.keyboards_0_init=function(){

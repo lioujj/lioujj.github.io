@@ -58,4 +58,5 @@
 <category><name>KEYBOARDS</name><replace>Keypad鍵盤</replace></category>
 <category><name>7_segment_display</name><replace>七節顯示器</replace></category>
 <category><name>MPU6050_I2C</name><replace>MPU6050 6軸動作感應</replace></category>
+<category><name>I2S_MIC_DB</name><replace>I2S麥克風分貝計</replace></category>
 </xml>

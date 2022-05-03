@@ -869,6 +869,18 @@ Blockly.Msg.I2S_MIC_KEY = "API key";
 Blockly.Msg.I2S_MIC_POCKETCARD_INIT = "PocketCard initial";
 Blockly.Msg.I2S_MIC_PUNCTUATION = [["without punctuation","false"],["with punctuation","true"]];
 
+//I2S DB Meter
+Blockly.Msg.I2S_MIC_DB_HELPURL="https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/i2s麥克風分貝計";
+Blockly.Msg.I2S_MIC_DB_TITLE = "I2S DB meter";
+Blockly.Msg.I2S_MIC_DB_TOOLTIP = "DB meter";
+Blockly.Msg.I2S_MIC_DB_MODEL = "Model";
+Blockly.Msg.I2S_MIC_DB_MODEL_LIST = [["INMP441","INMP441"],["ICS43434","ICS43434"],["ICS43432","ICS43432"],["IM69D130","IM69D130"],["SPH0645LM4H_B_RB","SPH0645LM4H_B_RB"],["Unknown","None"]];
+Blockly.Msg.I2S_MIC_DB_START = "start to measure sound level(dBA)";
+Blockly.Msg.I2S_MIC_DB_PERIOD = "period(second)";
+Blockly.Msg.I2S_MIC_DB_STOP = 'stop measuring';
+Blockly.Msg.I2S_MIC_DB_VALUE = 'Sound Level(dBA)';
+Blockly.Msg.I2S_MIC_DB_MEASURING = "is measuring?";
+
 //Keyboards
 Blockly.Msg.KEYBOARDS_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/keypad鍵盤";
 Blockly.Msg.KEYBOARDS_TITLE = "keyboard";
