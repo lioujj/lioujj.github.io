@@ -861,6 +861,18 @@ Blockly.Msg.I2S_MIC_KEY = "金鑰";
 Blockly.Msg.I2S_MIC_POCKETCARD_INIT = "PocketCard音訊板初始化";
 Blockly.Msg.I2S_MIC_PUNCTUATION = [["不含標點","false"],["自動標點","true"]];
 
+//I2S DB Meter
+Blockly.Msg.I2S_MIC_DB_HELPURL="https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/i2s麥克風分貝計";
+Blockly.Msg.I2S_MIC_DB_TITLE = "I2S分貝計";
+Blockly.Msg.I2S_MIC_DB_TOOLTIP = "DB meter";
+Blockly.Msg.I2S_MIC_DB_MODEL = "型號";
+Blockly.Msg.I2S_MIC_DB_MODEL_LIST = [["INMP441","INMP441"],["ICS43434","ICS43434"],["ICS43432","ICS43432"],["IM69D130","IM69D130"],["SPH0645LM4H_B_RB","SPH0645LM4H_B_RB"],["未知","None"]];
+Blockly.Msg.I2S_MIC_DB_START = "開始量測環境音量";
+Blockly.Msg.I2S_MIC_DB_PERIOD = "量測週期(秒)";
+Blockly.Msg.I2S_MIC_DB_STOP = '停止量測';
+Blockly.Msg.I2S_MIC_DB_VALUE = '環境音量(dBA)';
+Blockly.Msg.I2S_MIC_DB_MEASURING = "正在量測中？";
+
 //Keyboards
 Blockly.Msg.KEYBOARDS_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/keypad鍵盤";
 Blockly.Msg.KEYBOARDS_TITLE = "鍵盤";

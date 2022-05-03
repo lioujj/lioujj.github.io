@@ -853,6 +853,36 @@
         </block>
         <block type="i2sMic_STT_result"></block>
       </category>
+      <category id="category_i2s_mic_db" name="I2S_MIC_DB">
+        <block type="i2sMic_db_init">
+          <value name="SCK_PIN">
+            <block type="math_number">
+              <field name="NUM">2</field>
+            </block>
+          </value>
+          <value name="WS_PIN">
+            <block type="math_number">
+              <field name="NUM">13</field>
+            </block>
+          </value>
+          <value name="SD_PIN">
+            <block type="math_number">
+              <field name="NUM">15</field>
+            </block>
+          </value>
+        </block>
+        <block type="i2sMic_pocket_db_init"></block>
+        <block type="i2sMic_db_start">
+          <value name="PERIOD">
+            <block type="math_number">
+              <field name="NUM">0.5</field>
+            </block>
+          </value>
+        </block>
+        <block type="i2sMic_db_stop"></block>
+        <block type="i2sMic_db_is_measuring"></block>
+        <block type="i2sMic_db_value"></block>
+      </category>
       <category id="category_pn532i2c" name="PN532_I2C">
         <block type="pn532i2c_init"></block>
         <block type="pn532i2c_loop"></block>

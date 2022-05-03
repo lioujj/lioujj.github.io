@@ -6710,6 +6710,94 @@ Blockly.Blocks.i2sMic_STT_result={init:function(){
   this.setTooltip(Blockly.Msg.I2S_MIC_TOOLTIP)}
 };
 
+//I2S DB Meter
+Blockly.Blocks.i2s_mic_db={};
+Blockly.Blocks.i2s_mic_db.HUE=53;
+Blockly.Blocks.i2sMic_db_init={init:function(){
+  this.setHelpUrl(Blockly.Msg.I2S_MIC_DB_HELPURL);
+  this.setColour(Blockly.Blocks.i2s_mic_db.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.I2S_MIC_DB_TITLE)
+      .appendField(Blockly.Msg.I2S_MIC_INIT);
+  this.appendValueInput("SCK_PIN")
+      .setCheck("Number")
+      .appendField("SCK "+Blockly.Msg.LIOU_ROBOT_PIN);
+  this.appendValueInput("WS_PIN")
+      .setCheck("Number")
+      .appendField("WS "+Blockly.Msg.LIOU_ROBOT_PIN);
+  this.appendValueInput("SD_PIN")
+      .setCheck("Number")
+      .appendField("SD "+Blockly.Msg.LIOU_ROBOT_PIN);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.I2S_MIC_DB_MODEL)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.I2S_MIC_DB_MODEL_LIST),"MODEL");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.I2S_MIC_DB_TOOLTIP)}
+};
+
+Blockly.Blocks.i2sMic_pocket_db_init={init:function(){
+  this.setHelpUrl(Blockly.Msg.I2S_MIC_DB_HELPURL);
+  this.setColour(Blockly.Blocks.i2s_mic_db.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.I2S_MIC_DB_TITLE)
+      .appendField(Blockly.Msg.I2S_MIC_POCKETCARD_INIT);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.I2S_MIC_DB_TOOLTIP)}
+};
+
+Blockly.Blocks.i2sMic_db_start={init:function(){
+  this.setHelpUrl(Blockly.Msg.I2S_MIC_DB_HELPURL);
+  this.setColour(Blockly.Blocks.i2s_mic_db.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.I2S_MIC_DB_TITLE)
+      .appendField(Blockly.Msg.I2S_MIC_DB_START);
+  this.appendValueInput("PERIOD")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.I2S_MIC_DB_PERIOD);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.I2S_MIC_DB_TOOLTIP)}
+};
+
+Blockly.Blocks.i2sMic_db_stop={init:function(){
+  this.setHelpUrl(Blockly.Msg.I2S_MIC_DB_HELPURL);
+  this.setColour(Blockly.Blocks.i2s_mic_db.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.I2S_MIC_DB_TITLE)
+      .appendField(Blockly.Msg.I2S_MIC_DB_STOP);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.I2S_MIC_DB_TOOLTIP)}
+};
+
+Blockly.Blocks.i2sMic_db_is_measuring={init:function(){
+  this.setHelpUrl(Blockly.Msg.I2S_MIC_DB_HELPURL);
+  this.setColour(Blockly.Blocks.i2s_mic_db.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.I2S_MIC_DB_TITLE)
+      .appendField(Blockly.Msg.I2S_MIC_DB_MEASURING);
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Boolean");
+  this.setTooltip(Blockly.Msg.I2S_MIC_DB_TOOLTIP)}
+};
+
+Blockly.Blocks.i2sMic_db_value={init:function(){
+  this.setHelpUrl(Blockly.Msg.I2S_MIC_DB_HELPURL);
+  this.setColour(Blockly.Blocks.i2s_mic_db.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.I2S_MIC_DB_TITLE)
+      .appendField(Blockly.Msg.I2S_MIC_DB_VALUE);
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Number");
+  this.setTooltip(Blockly.Msg.I2S_MIC_DB_TOOLTIP)}
+};
+
 //Keyboard
 Blockly.Blocks.keyboards={};
 Blockly.Blocks.keyboards.HUE=285;
