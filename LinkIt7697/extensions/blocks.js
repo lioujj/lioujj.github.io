@@ -3037,6 +3037,20 @@ Blockly.Blocks.custom_include={init:function(){
   this.setTooltip("")}
 };
 
+Blockly.Blocks.custom_declaire={init:function(){
+  this.setHelpUrl("");
+  this.setColour(Blockly.Blocks.custom_block.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.CUSTOM_BLOCK_TITLE);
+  this.appendValueInput("CODE")
+      .setCheck("String")
+      .appendField(Blockly.Msg.CUSTOM_BLOCK_DECLAIRE);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip("")}
+};
+
 Blockly.Blocks.custom_code={init:function(){
   this.setHelpUrl("");
   this.setColour(Blockly.Blocks.custom_block.HUE);
@@ -3453,6 +3467,50 @@ Blockly.Blocks.esp32_core_stop={init:function(){
   this.setInputsInline(!0);
   this.setTooltip(Blockly.Msg.BUILTIN_TOOLTIP)},onchange:function(){
       this.workspace&&(Blockly.Blocks.builtin.checkBlocks(this,"esp32_core_stop","esp32_core_task")?this.setWarningText(null):this.setWarningText(Blockly.Msg.CORE_WARNIG))}
+};
+
+Blockly.Blocks.esp32_core_suspend={init:function(){
+  this.setHelpUrl(Blockly.Msg.BUILTIN_HELPURL);
+  this.setColour(Blockly.Blocks.builtin.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.CORE_TITLE)
+      .appendField(Blockly.Msg.CORE_SUSPEND);
+  this.appendValueInput("TASK_NAME")
+      .setCheck("String")
+      .appendField(Blockly.Msg.CORE_TASK_NAME);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setInputsInline(!0);
+  this.setTooltip(Blockly.Msg.BUILTIN_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.builtin.checkBlocks(this,"esp32_core_suspend","esp32_core_task")?this.setWarningText(null):this.setWarningText(Blockly.Msg.CORE_WARNIG))}
+};
+
+Blockly.Blocks.esp32_core_resume={init:function(){
+  this.setHelpUrl(Blockly.Msg.BUILTIN_HELPURL);
+  this.setColour(Blockly.Blocks.builtin.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.CORE_TITLE)
+      .appendField(Blockly.Msg.CORE_RESUME);
+  this.appendValueInput("TASK_NAME")
+      .setCheck("String")
+      .appendField(Blockly.Msg.CORE_TASK_NAME);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setInputsInline(!0);
+  this.setTooltip(Blockly.Msg.BUILTIN_TOOLTIP)},onchange:function(){
+      this.workspace&&(Blockly.Blocks.builtin.checkBlocks(this,"esp32_core_resume","esp32_core_task")?this.setWarningText(null):this.setWarningText(Blockly.Msg.CORE_WARNIG))}
+};
+
+Blockly.Blocks.esp32_core_yield={init:function(){
+  this.setHelpUrl(Blockly.Msg.BUILTIN_HELPURL);
+  this.setColour(Blockly.Blocks.builtin.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.CORE_TITLE)
+      .appendField(Blockly.Msg.CORE_YIELD);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setInputsInline(!0);
+  this.setTooltip(Blockly.Msg.BUILTIN_TOOLTIP)}
 };
 
 Blockly.Blocks.esp32_core_num={init:function(){

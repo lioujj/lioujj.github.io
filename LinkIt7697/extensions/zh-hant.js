@@ -447,6 +447,7 @@ Blockly.Msg.LINKIT_SET_WIFI_UNTIL_READY_TYPE= "板子名稱";
 //Custom_block
 Blockly.Msg.CUSTOM_BLOCK_TITLE = "客製化積木";
 Blockly.Msg.CUSTOM_BLOCK_INCLUDE = "include檔名";
+Blockly.Msg.CUSTOM_BLOCK_DECLAIRE = "宣告全域變數";
 Blockly.Msg.CUSTOM_BLOCK_CODE = "程式碼";
 
 //Boards
@@ -491,6 +492,9 @@ Blockly.Msg.CORE_RUN = "執行";
 Blockly.Msg.CORE_STACK = "堆疊大小";
 Blockly.Msg.CORE_PRIORITY = "優先權";
 Blockly.Msg.CORE_STOP = "停止任務";
+Blockly.Msg.CORE_SUSPEND = "暫停任務";
+Blockly.Msg.CORE_RESUME = "重啟任務";
+Blockly.Msg.CORE_YIELD = "禮讓資源";
 Blockly.Msg.CORE_WARNIG ="必須先設定"+Blockly.Msg.CORE_TITLE+"任務內容";
 Blockly.Msg.CORE_NUM = "取得執行中的核心編號";
 
