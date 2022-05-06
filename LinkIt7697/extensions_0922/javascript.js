@@ -1930,6 +1930,18 @@ Blockly.Arduino.custom_include=function(){
   return'';
 };
 
+Blockly.Arduino.custom_declaire=function(){
+  var a=Blockly.Arduino.valueToCode(this,"CODE",Blockly.Arduino.ORDER_ATOMIC)||"";
+  a=a.replace("\"","");
+  a=a.replace(/\"*$/, "");
+  var words = a.split('\\\\n');
+  if (!Blockly.Arduino.definitions_.define_custom_declaire)
+    Blockly.Arduino.definitions_.define_custom_declaire='';
+  for(i=0;i<words.length;i++)
+    Blockly.Arduino.definitions_.define_custom_declaire+=(words[i]+'\n');
+  return '';
+};
+
 Blockly.Arduino.custom_code=function(){
   var a=Blockly.Arduino.valueToCode(this,"CODE",Blockly.Arduino.ORDER_ATOMIC)||"";
   a=a.replace("\"","");
@@ -2122,7 +2134,7 @@ Blockly.Arduino.esp32_core_task=function(){
     Blockly.Arduino.definitions_.define_dual_core_declaire='TaskHandle_t '+a+';\nbool '+a+'_Created=false;\n';
   if (c!=''){
     c='  '+c.replace(/\n  /g,"\n    ");
-    Blockly.Arduino.definitions_["define_dual_core_"+a]='void '+a+'_code( void * pvParameters )\n{\n'+b+'  while(true){\n'+c+'\n    taskYIELD();\n  }\n}\n';
+    Blockly.Arduino.definitions_["define_dual_core_"+a]='void '+a+'_code( void * pvParameters )\n{\n'+b+'  while(true){\n'+c+'  }\n}\n';
   } else {
     Blockly.Arduino.definitions_["define_dual_core_"+a]='void '+a+'_code( void * pvParameters )\n{\n'+b+'}\n';
   }
@@ -2142,6 +2154,22 @@ Blockly.Arduino.esp32_core_stop=function(){
   var a=Blockly.Arduino.valueToCode(this,"TASK_NAME",Blockly.Arduino.ORDER_ATOMIC)||"";
   a=a.replace(/\"/g,"");
   return'if ('+a+'_Created)\n{\n  vTaskDelete('+a+');\n  '+a+'_Created=false;\n}\n';
+}
+
+Blockly.Arduino.esp32_core_suspend=function(){
+  var a=Blockly.Arduino.valueToCode(this,"TASK_NAME",Blockly.Arduino.ORDER_ATOMIC)||"";
+  a=a.replace(/\"/g,"");
+  return'if ('+a+'_Created)\n{\n  vTaskSuspennd('+a+');\n}\n';
+}
+
+Blockly.Arduino.esp32_core_resume=function(){
+  var a=Blockly.Arduino.valueToCode(this,"TASK_NAME",Blockly.Arduino.ORDER_ATOMIC)||"";
+  a=a.replace(/\"/g,"");
+  return'if ('+a+'_Created)\n{\n  vTaskResume('+a+');\n}\n';
+}
+
+Blockly.Arduino.esp32_core_yield=function(){
+  return'taskYIELD();\n';
 }
 
 Blockly.Arduino.esp32_core_num=function(){

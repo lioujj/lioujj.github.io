@@ -454,6 +454,7 @@ Blockly.Msg.LINKIT_SET_WIFI_UNTIL_READY_TYPE= "board:";
 //Custom_block
 Blockly.Msg.CUSTOM_BLOCK_TITLE = "Custom Block";
 Blockly.Msg.CUSTOM_BLOCK_INCLUDE = "include file:";
+Blockly.Msg.CUSTOM_BLOCK_DECLAIRE = "declaire:";
 Blockly.Msg.CUSTOM_BLOCK_CODE = "Your code:";
 
 //BOARDS
@@ -498,6 +499,9 @@ Blockly.Msg.CORE_RUN = "run";
 Blockly.Msg.CORE_STACK = "stack size";
 Blockly.Msg.CORE_PRIORITY = "priority";
 Blockly.Msg.CORE_STOP = "stop task";
+Blockly.Msg.CORE_SUSPEND = "suspend task";
+Blockly.Msg.CORE_RESUME = "resume task";
+Blockly.Msg.CORE_YIELD = "task yield";
 Blockly.Msg.CORE_WARNIG ="You have to set \""+Blockly.Msg.CORE_TITLE+" function\" block first.";
 Blockly.Msg.CORE_NUM = "get core ID";
 

@@ -148,6 +148,21 @@
           </block>
         </value>
       </block>
+      <block type="esp32_core_suspend">
+        <value name="TASK_NAME">
+          <block type="text">
+            <field name="TEXT">Task0</field>
+          </block>
+        </value>
+      </block>
+      <block type="esp32_core_resume">
+        <value name="TASK_NAME">
+          <block type="text">
+            <field name="TEXT">Task0</field>
+          </block>
+        </value>
+      </block>
+      <block type="esp32_core_yield"></block>
       <block type="esp32_core_num"></block>
     </category>
     <category id="category_esp32_ntp" name="ESP32_NTP">
@@ -2722,6 +2737,13 @@
 	  <category id="category_custom_block" name="Custom_block">
 		  <block type="custom_include">
 			  <value name="FILE">
+				  <block type="text">
+					  <field name="TEXT"></field>
+				  </block>
+			  </value>
+		  </block>
+		  <block type="custom_declaire">
+			  <value name="CODE">
 				  <block type="text">
 					  <field name="TEXT"></field>
 				  </block>
