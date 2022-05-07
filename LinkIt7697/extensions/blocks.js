@@ -6816,6 +6816,9 @@ Blockly.Blocks.i2sMic_db_start={init:function(){
   this.appendValueInput("PERIOD")
       .setCheck("Number")
       .appendField(Blockly.Msg.I2S_MIC_DB_PERIOD);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.CORE_INDEX)
+      .appendField(new Blockly.FieldDropdown([["0","0"],["1","1"]]),"CORE");
   this.setInputsInline(!0);
   this.setPreviousStatement(!0,null);
   this.setNextStatement(!0,null);
