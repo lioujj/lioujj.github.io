@@ -6757,6 +6757,29 @@ Blockly.Blocks.i2sMic_STT_Azure={init:function(){
   this.setTooltip(Blockly.Msg.I2S_MIC_TOOLTIP)}
 };
 
+Blockly.Blocks.i2sMic_STT_Azure_direct={init:function(){
+  this.setHelpUrl(Blockly.Msg.I2S_MIC_HELPURL);
+  this.setColour(Blockly.Blocks.i2s_mic.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.I2S_MIC_TITLE)
+      .appendField(Blockly.Msg.I2S_MIC_DIRECT_UPLOAD);
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.I2S_MIC_PUNCTUATION),"PUNCTUATION");
+  this.appendValueInput("REC_TIME")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.I2S_MIC_REC_TIME);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.DAC_TTS_LANGUAGE)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.DAC_TTS_LANGUAGES),"L_CODE");
+  this.appendValueInput("KEY")
+      .setCheck("String")
+      .appendField(Blockly.Msg.I2S_MIC_KEY);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.I2S_MIC_TOOLTIP)}
+};
+
 Blockly.Blocks.i2sMic_STT_result={init:function(){
   this.setHelpUrl(Blockly.Msg.I2S_MIC_HELPURL);
   this.setColour(Blockly.Blocks.i2s_mic.HUE);
