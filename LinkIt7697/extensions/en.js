@@ -867,6 +867,7 @@ Blockly.Msg.I2S_MIC_SAVE_TO = "record WAV file to";
 Blockly.Msg.I2S_MIC_REC_TIME = "time(secs)";
 Blockly.Msg.I2S_MIC_STT = "upload WAV file(Google) to recognize";
 Blockly.Msg.I2S_MIC_STT_AZURE = "upload WAV file(Azure) to recognize";
+Blockly.Msg.I2S_MIC_DIRECT_UPLOAD = "direct upload voice to Azure to recognize";
 Blockly.Msg.I2S_MIC_STT_RESULT = "get the recognition text";
 Blockly.Msg.I2S_MIC_UPLOAD_FROM = "from";
 Blockly.Msg.I2S_MIC_KEY = "API key";
