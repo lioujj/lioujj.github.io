@@ -866,6 +866,7 @@
             </block>
 	  			</value>
         </block>
+        <block type="i2sMic_STT_result"></block>
         <block type="i2sMic_STT">
  			  	<value name="FILENAME">
 				  	<block type="text">
@@ -878,7 +879,6 @@
             </block>
 	  			</value>
         </block>
-        <block type="i2sMic_STT_result"></block>
       </category>
       <category id="category_i2s_mic_db" name="I2S_MIC_DB">
         <block type="i2sMic_db_init">
