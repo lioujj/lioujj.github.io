@@ -5125,9 +5125,8 @@ Blockly.Blocks.dac_tts={init:function(){
   this.appendValueInput("CONTENT")
       .setCheck("String")
       .appendField(Blockly.Msg.DAC_TTS_TITLE);
-  this.appendDummyInput()
-      .appendField(Blockly.Msg.DAC_TTS_LANGUAGE)
-      .appendField(new Blockly.FieldDropdown(Blockly.Msg.DAC_TTS_LANGUAGES),"L_CODE");
+  this.appendValueInput("L_CODE")
+      .appendField(Blockly.Msg.DAC_TTS_LANGUAGE);
   this.setInputsInline(!0);
   this.setPreviousStatement(!0,null);
   this.setNextStatement(!0,null);
@@ -5143,9 +5142,8 @@ Blockly.Blocks.dac_tts_file={init:function(){
   this.appendValueInput("CONTENT")
       .setCheck("String")
       .appendField(Blockly.Msg.DAC_TTS_FILE_TITLE);
-  this.appendDummyInput()
-      .appendField(Blockly.Msg.DAC_TTS_LANGUAGE)
-      .appendField(new Blockly.FieldDropdown(Blockly.Msg.DAC_TTS_LANGUAGES),"L_CODE");
+  this.appendValueInput("L_CODE")
+      .appendField(Blockly.Msg.DAC_TTS_LANGUAGE);
   this.appendDummyInput()
       .appendField(Blockly.Msg.DAC_TTS_SAVE_TO)
       .appendField(new Blockly.FieldDropdown(Blockly.Msg.DAC_FILE_SOURCE),"F_SOURCE");
@@ -6760,9 +6758,8 @@ Blockly.Blocks.i2sMic_STT={init:function(){
   this.appendValueInput("FILENAME")
       .setCheck("String")
       .appendField(Blockly.Msg.DAC_FILE_NAME);
-  this.appendDummyInput()
-      .appendField(Blockly.Msg.DAC_TTS_LANGUAGE)
-      .appendField(new Blockly.FieldDropdown(Blockly.Msg.DAC_TTS_LANGUAGES),"L_CODE");
+  this.appendValueInput("L_CODE")
+      .appendField(Blockly.Msg.DAC_TTS_LANGUAGE);
   this.appendValueInput("KEY")
       .setCheck("String")
       .appendField(Blockly.Msg.I2S_MIC_KEY);
@@ -6785,9 +6782,8 @@ Blockly.Blocks.i2sMic_STT_Azure={init:function(){
   this.appendValueInput("FILENAME")
       .setCheck("String")
       .appendField(Blockly.Msg.DAC_FILE_NAME);
-  this.appendDummyInput()
-      .appendField(Blockly.Msg.DAC_TTS_LANGUAGE)
-      .appendField(new Blockly.FieldDropdown(Blockly.Msg.DAC_TTS_LANGUAGES),"L_CODE");
+  this.appendValueInput("L_CODE")
+      .appendField(Blockly.Msg.DAC_TTS_LANGUAGE);
   this.appendValueInput("KEY")
       .setCheck("String")
       .appendField(Blockly.Msg.I2S_MIC_KEY);
@@ -6808,9 +6804,8 @@ Blockly.Blocks.i2sMic_STT_Azure_direct={init:function(){
   this.appendValueInput("REC_TIME")
       .setCheck("Number")
       .appendField(Blockly.Msg.I2S_MIC_REC_TIME);
-  this.appendDummyInput()
-      .appendField(Blockly.Msg.DAC_TTS_LANGUAGE)
-      .appendField(new Blockly.FieldDropdown(Blockly.Msg.DAC_TTS_LANGUAGES),"L_CODE");
+  this.appendValueInput("L_CODE")
+      .appendField(Blockly.Msg.DAC_TTS_LANGUAGE);
   this.appendValueInput("KEY")
       .setCheck("String")
       .appendField(Blockly.Msg.I2S_MIC_KEY);
