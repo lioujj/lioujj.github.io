@@ -2383,6 +2383,46 @@ Blockly.Blocks.stock_getValue={init:function(){
       this.workspace&&(Blockly.Blocks.stock.checkBlocks(this,"stock_getValue","stock_fetchData")?this.setWarningText(null):this.setWarningText(Blockly.Msg.STOCK_WARNING))}
 };
 
+
+//Google Translation
+Blockly.Blocks.translation={};
+//Blockly.Blocks.translation.HUE=300;
+Blockly.Blocks.translation.HUE=100;
+
+Blockly.Blocks.fetchTranslation={init:function(){
+  this.setHelpUrl(Blockly.Msg.TRANSLATION_HELPURL);
+  this.setColour(Blockly.Blocks.translation.HUE);
+  this.appendDummyInput().appendField(Blockly.Msg.TRANSLATION_TITLE);
+  this.appendValueInput("SOURCE_TEXT")
+      .appendField(Blockly.Msg.TRANSLATION_SOURCE);
+  this.appendValueInput("LANG_CODE")
+      .appendField(Blockly.Msg.TRANSLATION_TARGET_LANG);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.TRANSLATION_TOOLTIP)}
+};
+
+Blockly.Blocks.translation_result={init:function(){
+  this.setHelpUrl(Blockly.Msg.TRANSLATION_HELPURL);
+  this.setColour(Blockly.Blocks.translation.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.TRANSLATION_TITLE)
+      .appendField(Blockly.Msg.TRANSLATION_RESULT)
+  this.setOutput(!0,"String");
+  this.setTooltip(Blockly.Msg.TRANSLATION_TOOLTIP)}
+};
+
+Blockly.Blocks.language_code={init:function(){
+  this.setHelpUrl("https://cloud.google.com/speech-to-text/docs/languages");
+  this.setColour(Blockly.Blocks.translation.HUE);
+  this.appendDummyInput()  
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.DAC_TTS_LANGUAGES),"LANG_CODE");
+  this.setInputsInline(!0);
+  this.setOutput(!0,"String");
+  this.setTooltip("")}
+};
+
 //Probbie
 Blockly.Blocks.probbie={};
 Blockly.Blocks.probbie.HUE1=300;

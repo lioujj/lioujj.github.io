@@ -58,4 +58,6 @@
 <category><name>7_segment_display</name><replace>7 Segment Display</replace></category>
 <category><name>MPU6050_I2C</name><replace>MPU6050 6-axis</replace></category>
 <category><name>I2S_MIC_DB</name><replace>I2S MIC DB Meter</replace></category>
+<category><name>Web_Service</name><replace>Web Service</replace></category>
+<category><name>GoogleTranslation</name><replace>Google Translation</replace></category>
 </xml>

@@ -381,6 +381,13 @@ Blockly.Msg.STOCK_VALUE_DROPDOWN=[['Stock ID','docStock["msgArray"][0]["c"].as<c
                                   ];
 Blockly.Msg.STOCK_WARNING = "You have to fetch stock realtime information from web first.";
 
+//Google Translation
+Blockly.Msg.TRANSLATION_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/google翻譯積木";
+Blockly.Msg.TRANSLATION_TOOLTIP = "Google Translation";
+Blockly.Msg.TRANSLATION_TITLE = "Google Translation";
+Blockly.Msg.TRANSLATION_SOURCE = "Source text:";
+Blockly.Msg.TRANSLATION_TARGET_LANG = "translate to language";
+Blockly.Msg.TRANSLATION_RESULT = "translated text";
 
 
 //Probbie
@@ -655,7 +662,7 @@ Blockly.Msg.DAC_LOOP = "keep the DAC working";
 Blockly.Msg.DAC_INIT_WARNIG =  "You have to "+Blockly.Msg.DAC_INIT+" "+Blockly.Msg.DAC_TITLE+" first.";
 Blockly.Msg.DAC_TTS_TITLE = "Google text to speech(TTS)";
 Blockly.Msg.DAC_TTS_LANGUAGE = "language";
-Blockly.Msg.DAC_TTS_LANGUAGES = [["Taiwan","zh-TW"],["US","en-US"],["UK","en-GB"],["Japan","ja-JP"],["Korea","ko-KR"],["Frence","fr-FR"],["German","de-DE"],["Thailand","th"],["Vietnum","vi"]];
+Blockly.Msg.DAC_TTS_LANGUAGES = [["Taiwan","zh-TW"],["US","en-US"],["UK","en-GB"],["Japan","ja-JP"],["Korea","ko-KR"],["Frence","fr-FR"],["German","de-DE"],["Thailand","th-TH"],["Vietnum","vi-VN"]];
 Blockly.Msg.DAC_RADIO_TITLE = "listen to the internet radio";
 Blockly.Msg.DAC_TTS_END = "when TTS ends";
 Blockly.Msg.DAC_TTS_ENDS_WITH ="if TTS content equals";
