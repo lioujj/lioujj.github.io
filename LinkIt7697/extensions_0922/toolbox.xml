@@ -772,6 +772,9 @@
               <field name="TEXT">說出語音內容</field>
             </block>
           </value>
+          <value name="L_CODE">
+            <block type="language_code"></block>
+          </value>
         </block>
         <block type="dac_tts_file">
           <value name="CONTENT">
@@ -779,12 +782,16 @@
               <field name="TEXT">語音內容</field>
             </block>
           </value>
+          <value name="L_CODE">
+            <block type="language_code"></block>
+          </value>
           <value name="FILENAME">
             <block type="text">
               <field name="TEXT"></field>
             </block>
           </value>
         </block>
+        <block type="language_code"></block>
         <block type="dac_tts_end"></block>
         <block type="dac_tts_ends_with">
           <value name="CONTENT">
@@ -848,6 +855,9 @@
 					  	<field name="TEXT">/wav/recording.wav</field>
             </block>
 	  			</value>
+          <value name="L_CODE">
+            <block type="language_code"></block>
+          </value>
  			  	<value name="KEY">
 				  	<block type="text">
 					  	<field name="TEXT"></field>
@@ -860,12 +870,16 @@
               <field name="NUM">5</field>
             </block>
           </value>
+          <value name="L_CODE">
+            <block type="language_code"></block>
+          </value>
  			  	<value name="KEY">
 				  	<block type="text">
 					  	<field name="TEXT"></field>
             </block>
 	  			</value>
         </block>
+        <block type="language_code"></block>
         <block type="i2sMic_STT_result"></block>
         <block type="i2sMic_STT">
  			  	<value name="FILENAME">
@@ -873,6 +887,9 @@
 					  	<field name="TEXT">/wav/recording.wav</field>
             </block>
 	  			</value>
+          <value name="L_CODE">
+            <block type="language_code"></block>
+          </value>
  			  	<value name="KEY">
 				  	<block type="text">
 					  	<field name="TEXT"></field>

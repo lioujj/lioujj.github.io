@@ -2938,18 +2938,20 @@ Blockly.Arduino.dac_set_gain=function(){
 
 Blockly.Arduino.dac_tts=function(){
   var a=Blockly.Arduino.valueToCode(this,"CONTENT",Blockly.Arduino.ORDER_ATOMIC)||"",
-      b=this.getFieldValue("L_CODE");
-  return'getVoiceFromGoogle('+a+',"'+b+'");\n';
+      b=Blockly.Arduino.valueToCode(this,"L_CODE",Blockly.Arduino.ORDER_ATOMIC)||"";
+  return'getVoiceFromGoogle('+a+','+b+');\n';
 }
 
 Blockly.Arduino.dac_tts_file=function(){
   var a=Blockly.Arduino.valueToCode(this,"CONTENT",Blockly.Arduino.ORDER_ATOMIC)||"",
-      b=this.getFieldValue("L_CODE"),
+      b=Blockly.Arduino.valueToCode(this,"L_CODE",Blockly.Arduino.ORDER_ATOMIC)||"",
+//      b=this.getFieldValue("L_CODE"),
       c=Blockly.Arduino.valueToCode(this,"FILENAME",Blockly.Arduino.ORDER_ATOMIC)||"",
       d=this.getFieldValue("F_SOURCE");
-  //a=a.replace(/\"/g,"");
-  var myLink='http://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl='+b+'&q=';
-  return'saveTTStoFile(String()+"'+myLink+'"+URLEncode(String('+a+').c_str()),'+c+','+d+');\n';
+  //b=b.replace(/\"/g,"");
+  //var myLink='http://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl='+b+'&q=';
+  var myLink='http://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=';
+  return'saveTTStoFile(String()+"'+myLink+'"+'+b+'+"&q="+URLEncode(String('+a+').c_str()),'+c+','+d+');\n';
 }
 
 Blockly.Arduino.dac_radio=function(){
@@ -3903,7 +3905,8 @@ Blockly.Arduino.i2sMic_record=function(){
 
 Blockly.Arduino.i2sMic_STT_Azure=function(){
   var a=Blockly.Arduino.valueToCode(this,"FILENAME",Blockly.Arduino.ORDER_ATOMIC)||"",
-      b=this.getFieldValue("L_CODE"),
+      b=Blockly.Arduino.valueToCode(this,"L_CODE",Blockly.Arduino.ORDER_ATOMIC)||"",
+//      b=this.getFieldValue("L_CODE"),
       c=Blockly.Arduino.valueToCode(this,"KEY",Blockly.Arduino.ORDER_ATOMIC)||"",
       d=this.getFieldValue("F_TARGET"),
       e=this.getFieldValue("PUNCTUATION");
@@ -3911,14 +3914,14 @@ Blockly.Arduino.i2sMic_STT_Azure=function(){
     Blockly.Arduino.definitions_.define_secure_include="#include <WiFiClientSecure.h>";
     Blockly.Arduino.definitions_.define_i2sMic_RecgText_invoke='String myRecgText="";';
     Blockly.Arduino.definitions_.define_i2sMic_Azure_RecgText_event='void uploadWavFileAzure(String fileName,String lang_code,String api_key,int mediaType,bool punctuation){\n  File myWavFile;\n  if (mediaType==1){\n    if(!SD.begin(pinCS)){\n      myRecgText="SD error";\n      return;\n    }\n    myWavFile = SD.open(fileName.c_str(), FILE_READ);\n  } else if (mediaType==2){\n    if(!SPIFFS.begin(true)){\n      myRecgText="SPIFFS error";\n      return;\n    }\n    myWavFile = SPIFFS.open(fileName.c_str(), FILE_READ);\n  }\n  if(!myWavFile){\n    myRecgText="file error";\n    return;\n  }\n  myRecgText="error";\n  static WiFiClientSecure sttClient;\n  const char* host="eastasia.stt.speech.microsoft.com";\n  String url="/speech/recognition/conversation/cognitiveservices/v1?language="+lang_code+"&format=detailed";\n  sttClient.connect(host, 443);\n  while(!sttClient.connected());\n  sttClient.println("POST " + url + " HTTP/1.1\\r\\nHost: " + String(host)+ "\\r\\nOcp-Apim-Subscription-Key: "+api_key+"\\r\\nContent-Type: audio/wav\\r\\nContent-Length: " + String(myWavFile.size()));\n  sttClient.println();\n  while(myWavFile.available() && sttClient.connected()) {\n    int nextPacketSize = myWavFile.available();\n    if (nextPacketSize > 512) {\n      nextPacketSize = 512;\n    }\n    uint8_t buffer[nextPacketSize] = { 0 };\n    for(int i=0;i<nextPacketSize;i++) {\n      buffer[i]=myWavFile.read();\n    }\n    sttClient.write(buffer,nextPacketSize);\n  }\n  myWavFile.close();\n  while (!sttClient.available());\n  String resStr="";\n  while (sttClient.available()){\n    resStr=sttClient.readStringUntil(\'\\n\');\n    if (resStr.startsWith("{\\"RecognitionStatus")){\n      if (punctuation){\n        resStr.replace(resStr.substring(0,resStr.indexOf("Display")+10),"");\n        resStr=resStr.substring(0,resStr.indexOf("\\""));\n      } else {\n        resStr.replace(resStr.substring(0,resStr.indexOf("MaskedITN")+12),"");\n        resStr=resStr.substring(0,resStr.indexOf("\\",\\""));\n      }\n      myRecgText=resStr;\n      myRecgText.trim();\n      break;\n    }\n  }\n  sttClient.stop();\n  if (mediaType==1){\n    SD.end();\n  } else if (mediaType==2){\n    SPIFFS.end();\n  }\n}\n';
-    return'uploadWavFileAzure('+a+',"'+b+'",'+c+','+d+','+e+');\n';
+    return'uploadWavFileAzure('+a+','+b+','+c+','+d+','+e+');\n';
   } else {
     return'';
   }
 }
 
 Blockly.Arduino.i2sMic_STT_Azure_direct=function(){
-  var a=this.getFieldValue("L_CODE"),
+  var a=Blockly.Arduino.valueToCode(this,"L_CODE",Blockly.Arduino.ORDER_ATOMIC)||"",
       b=Blockly.Arduino.valueToCode(this,"KEY",Blockly.Arduino.ORDER_ATOMIC)||"",
       c=this.getFieldValue("PUNCTUATION"),
       d=Blockly.Arduino.valueToCode(this,"REC_TIME",Blockly.Arduino.ORDER_ATOMIC)||"0";
@@ -3928,7 +3931,7 @@ Blockly.Arduino.i2sMic_STT_Azure_direct=function(){
     Blockly.Arduino.definitions_.define_i2sMic_direct_load_event='void i2sMicAzureInit(){\n  i2s_config_t i2s_config = {\n    .mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_RX),\n    .sample_rate = MIC_SAMPLE_RATE,\n    .bits_per_sample = i2s_bits_per_sample_t(MIC_SAMPLE_BITS),\n    .channel_format = I2S_CHANNEL_FMT_ONLY_LEFT,\n    .communication_format = i2s_comm_format_t(I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_MSB),\n    .intr_alloc_flags = 0,\n    .dma_buf_count = 64,\n    .dma_buf_len = 512,\n    .use_apll = 1\n  };\n  i2s_driver_install(I2S_MIC_PORT, &i2s_config, 0, NULL);\n  const i2s_pin_config_t pin_config = {\n    .bck_io_num = MIC_SCK,\n    .ws_io_num = MIC_WS,\n    .data_out_num = -1,\n    .data_in_num = MIC_SD\n  };\n  i2s_set_pin(I2S_MIC_PORT, &pin_config);\n}\n';
     Blockly.Arduino.definitions_.define_i2sMic_tool_event='void i2s_adc_data_scale(uint8_t * d_buff, uint8_t* s_buff, uint32_t len){\n  uint32_t j = 0;\n  uint32_t dac_value = 0;\n  for (int i = 0; i < len; i += 2) {\n    dac_value = ((((uint16_t) (s_buff[i + 1] & 0xf) << 8) | ((s_buff[i + 0]))));\n    d_buff[j++] = 0;\n    d_buff[j++] = dac_value * 256 / 2048;\n  }\n}\n\nvoid wavHeader(byte* header, int wavSize){\n  header[0] = \'R\';\n  header[1] = \'I\';\n  header[2] = \'F\';\n  header[3] = \'F\';\n  unsigned int fileSize = wavSize + headerSize - 8;\n  header[4] = (byte)(fileSize & 0xFF);\n  header[6] = (byte)((fileSize >> 16) & 0xFF);\n  header[7] = (byte)((fileSize >> 24) & 0xFF);\n  header[8] = \'W\';\n  header[9] = \'A\';\n  header[10] = \'V\';\n  header[11] = \'E\';\n  header[12] = \'f\';\n  header[13] = \'m\';\n  header[14] = \'t\';\n  header[15] = \' \';\n  header[16] = 0x10;\n  header[17] = 0x00;\n  header[18] = 0x00;\n  header[19] = 0x00;\n  header[20] = 0x01;\n  header[21] = 0x00;\n  header[22] = 0x01;\n  header[23] = 0x00;\n  header[24] = 0x80;\n  header[25] = 0x3E;\n  header[26] = 0x00;\n  header[27] = 0x00;\n  header[28] = 0x00;\n  header[29] = 0x7D;\n  header[30] = 0x00;\n  header[31] = 0x00;\n  header[32] = 0x02;\n  header[33] = 0x00;\n  header[34] = 0x10;\n  header[35] = 0x00;\n  header[36] = \'d\';\n  header[37] = \'a\';\n  header[38] = \'t\';\n  header[39] = \'a\';\n  header[40] = (byte)(wavSize & 0xFF);\n  header[41] = (byte)((wavSize >> 8) & 0xFF);\n  header[42] = (byte)((wavSize >> 16) & 0xFF);\n  header[43] = (byte)((wavSize >> 24) & 0xFF);\n}\n';
     Blockly.Arduino.definitions_.define_i2sMic_Azure_RecgText_DIRECT_event='void i2sMic_adc_to_HTTPS(WiFiClientSecure *myHttpsClient){\n  byte header[headerSize];\n  wavHeader(header, FLASH_RECORD_SIZE);\n  myHttpsClient->write(header, headerSize);\n  int i2s_read_len = MIC_READ_LEN;\n  int flash_wr_size = 0;\n  size_t bytes_read;\n  char* i2s_read_buff = (char*) calloc(i2s_read_len, sizeof(char));\n  uint8_t* flash_write_buff = (uint8_t*) calloc(i2s_read_len, sizeof(char));\n  i2s_read(I2S_MIC_PORT, (void*) i2s_read_buff, i2s_read_len, &bytes_read, portMAX_DELAY);\n  i2s_read(I2S_MIC_PORT, (void*) i2s_read_buff, i2s_read_len, &bytes_read, portMAX_DELAY);\n  while (flash_wr_size < FLASH_RECORD_SIZE) {\n    i2s_read(I2S_MIC_PORT, (void*) i2s_read_buff, i2s_read_len, &bytes_read, portMAX_DELAY);\n    i2s_adc_data_scale(flash_write_buff, (uint8_t*)i2s_read_buff, i2s_read_len);\n    myHttpsClient->write((const byte*) flash_write_buff, i2s_read_len);\n    flash_wr_size += i2s_read_len;\n  };\n  free(i2s_read_buff);\n  i2s_read_buff = NULL;\n  free(flash_write_buff);\n  flash_write_buff = NULL;\n}\n\nvoid directUploadAzure(String lang_code,String api_key,bool punctuation){\n  i2sMicAzureInit();\n  myRecgText="error";\n  static WiFiClientSecure sttClient;\n  const char* host="eastasia.stt.speech.microsoft.com";\n  String url="/speech/recognition/conversation/cognitiveservices/v1?language="+lang_code+"&format=detailed";\n  sttClient.connect(host, 443);\n  while(!sttClient.connected());\n  sttClient.println("POST " + url + " HTTP/1.1\\r\\nHost: " + String(host)+ "\\r\\nOcp-Apim-Subscription-Key: "+api_key+"\\r\\nContent-Type: audio/wav\\r\\nContent-Length: " + String(FLASH_RECORD_SIZE +headerSize-8));\n  sttClient.println();\n  if (sttClient.connected())\n     i2sMic_adc_to_HTTPS(&sttClient);\n  while (!sttClient.available());\n  String resStr="";\n  while (sttClient.available()){\n    resStr=sttClient.readStringUntil(\'\\n\');\n    if (resStr.startsWith("{\\"RecognitionStatus")){\n      if (punctuation){\n        resStr.replace(resStr.substring(0,resStr.indexOf("Display")+10),"");\n        resStr=resStr.substring(0,resStr.indexOf("\\""));\n      } else {\n        resStr.replace(resStr.substring(0,resStr.indexOf("MaskedITN")+12),"");\n        resStr=resStr.substring(0,resStr.indexOf("\\",\\""));\n      }\n      myRecgText=resStr;\n      myRecgText.trim();\n      break;\n    }\n  }\n  sttClient.stop();\n  i2s_driver_uninstall(I2S_MIC_PORT);\n}\n';
-    return'recTime='+d+';\ndirectUploadAzure("'+a+'",'+b+','+c+');\n';
+    return'recTime='+d+';\ndirectUploadAzure('+a+','+b+','+c+');\n';
   } else {
     return'';
   }
@@ -3936,7 +3939,7 @@ Blockly.Arduino.i2sMic_STT_Azure_direct=function(){
 
 Blockly.Arduino.i2sMic_STT=function(){
   var a=Blockly.Arduino.valueToCode(this,"FILENAME",Blockly.Arduino.ORDER_ATOMIC)||"",
-      b=this.getFieldValue("L_CODE"),
+      b=Blockly.Arduino.valueToCode(this,"L_CODE",Blockly.Arduino.ORDER_ATOMIC)||"",
       c=Blockly.Arduino.valueToCode(this,"KEY",Blockly.Arduino.ORDER_ATOMIC)||"",
       d=this.getFieldValue("F_TARGET");
   if (Blockly.Arduino.my_board_type=="ESP32"){
@@ -3944,7 +3947,7 @@ Blockly.Arduino.i2sMic_STT=function(){
     Blockly.Arduino.definitions_.define_base64Mic_include="#include \"Base64_tool.h\"";
     Blockly.Arduino.definitions_.define_i2sMic_RecgText_invoke='String myRecgText="";';
     Blockly.Arduino.definitions_.define_i2sMic_RecgText_event='void uploadWavFile(String fileName,String lang_code,String api_key,int mediaType){\n  File myWavFile;\n  if (mediaType==1){\n    if(!SD.begin(pinCS)){\n      myRecgText="SD error";\n      return;\n    }\n    myWavFile = SD.open(fileName.c_str(), FILE_READ);\n  } else if (mediaType==2){\n    if(!SPIFFS.begin(true)){\n      myRecgText="SPIFFS error";\n      return;\n    }\n    myWavFile = SPIFFS.open(fileName.c_str(), FILE_READ);\n  }\n  if(!myWavFile){\n    myRecgText="file error";\n    return;\n  }\n  String wavString = "";\n  uint8_t *fileinput;\n  unsigned int fileSize = myWavFile.size();\n  unsigned int extendSize = 0;\n  unsigned int encodeSize = 0;\n  if ((fileSize%3)!=0)\n    extendSize=fileSize+(3-(fileSize % 3));\n  else\n    extendSize=fileSize;\n  encodeSize=extendSize/3*4;\n  String fixStr=String("")+"{\\"config\\":{\\"encoding\\":\\"LINEAR16\\",\\"sampleRateHertz\\":16000,\\"languageCode\\":\\""+lang_code+"\\"},\\"audio\\":{\\"content\\":\\"";\n  String postStr="\\"}}";\n  myRecgText="error";\n  static WiFiClientSecure sttClient;\n  const char* host="speech.googleapis.com";\n  String url="/v1/speech:recognize?key="+api_key;\n  sttClient.connect(host, 443);\n  while(!sttClient.connected());\n  sttClient.println("POST " + url + " HTTP/1.1");\n  sttClient.println("Host: " + String(host));\n  sttClient.println("Content-Type: application/json");\n  sttClient.println("Content-Length: " + String(fixStr.length()+postStr.length()+encodeSize));\n  sttClient.println();\n  sttClient.print(fixStr);\n  char input[3] ={\'\\0\'};\n  char output[base64_enc_len(3)];\n  for (int i = 0; i < extendSize; i+=3) {\n    for(int j=0;j<3;j++){\n      if (myWavFile.available())\n        input[j]=myWavFile.read();\n      else\n        input[j]=\'\\0\';\n    }\n    base64_encode(output, input, 3);\n    wavString+=String(output);\n    if ((i%3000)==0){\n      sttClient.print(wavString);\n      wavString="";\n    }\n  }\n  if (wavString.length()>0)\n    sttClient.print(wavString);\n  sttClient.print(postStr);\n  myWavFile.close();\n  while (!sttClient.available());\n  String resStr="";\n  while (sttClient.available()){\n    resStr=sttClient.readStringUntil(\'\\n\');\n    if (resStr.indexOf("transcript")>0){\n      resStr.replace(" ","");\n      resStr.replace("\\"transcript\\":","");\n      resStr.replace("\\"","");\n      resStr.replace(",","");\n      resStr.replace("\\r","");\n      myRecgText=resStr;\n      myRecgText.trim();\n      break;\n    }\n  }\n  sttClient.stop();\n  if (mediaType==1){\n    SD.end();\n  } else if (mediaType==2){\n    SPIFFS.end();\n  }\n}\n';
-    return'uploadWavFile('+a+',"'+b+'",'+c+','+d+');\n';
+    return'uploadWavFile('+a+','+b+','+c+','+d+');\n';
   } else {
     return'';
   }
