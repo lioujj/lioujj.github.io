@@ -1398,6 +1398,22 @@
       <block type="stock_getValue"></block>
      </category>
 	</category>
+  <category id="category_web_service" name="Web_Service">
+    <category id="category_translate" name="GoogleTranslation">
+      <block type="fetchTranslation">
+        <value name="SOURCE_TEXT">
+          <block type="text">
+            <field name="TEXT"></field>
+          </block>
+        </value>
+        <value name="LANG_CODE">
+          <block type="language_code"></block>
+        </value>
+      </block>
+      <block type="translation_result"></block>
+      <block type="language_code"></block>
+    </category>
+  </category>
 	<category id="category_liou_robot" name="Robot">
 		<category id="category_maqueen" name="Maqueen">
 			<block type="maqueen_head_light"></block>

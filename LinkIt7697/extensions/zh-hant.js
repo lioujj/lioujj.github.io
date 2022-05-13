@@ -376,6 +376,14 @@ Blockly.Msg.STOCK_VALUE_DROPDOWN=[['股票編號','docStock["msgArray"][0]["c"].
                                   ];
 Blockly.Msg.STOCK_WARNING = "必須先設定「"+Blockly.Msg.FETCH_STOCK_TITLE+"」積木";
 
+//Google Translation
+Blockly.Msg.TRANSLATION_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/google翻譯積木";
+Blockly.Msg.TRANSLATION_TOOLTIP = "Google Translation";
+Blockly.Msg.TRANSLATION_TITLE = "Google翻譯";
+Blockly.Msg.TRANSLATION_SOURCE = "來源文字";
+Blockly.Msg.TRANSLATION_TARGET_LANG = "翻譯成";
+Blockly.Msg.TRANSLATION_RESULT = "譯文";
+
 //Probbie
 Blockly.Msg.PROBBIE_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/寶比機器人積木";
 Blockly.Msg.PROBBIE_TITLE = "寶比";
@@ -648,7 +656,7 @@ Blockly.Msg.DAC_LOOP = "持續維持音訊播放的運作";
 Blockly.Msg.DAC_INIT_WARNIG =  "必須先設定「"+Blockly.Msg.DAC_TITLE+Blockly.Msg.DAC_INIT+"」積木，或是「"+Blockly.Msg.DAC_TITLE+" Pocketcard"+Blockly.Msg.POCKETCARD_DAC_INIT+"」積木";
 Blockly.Msg.DAC_TTS_TITLE = "Google語音唸出文字(TTS)";
 Blockly.Msg.DAC_TTS_LANGUAGE = "語音";
-Blockly.Msg.DAC_TTS_LANGUAGES = [["台灣","zh-TW"],["美式英語","en-US"],["英文","en-GB"],["日本","ja-JP"],["韓國","ko-KR"],["法國","fr-FR"],["德國","de-DE"],["泰國","th"],["越南","vi"]];
+Blockly.Msg.DAC_TTS_LANGUAGES = [["中文","zh-TW"],["美式英語","en-US"],["英文","en-GB"],["日文","ja-JP"],["韓文","ko-KR"],["法文","fr-FR"],["德文","de-DE"],["泰文","th-TH"],["越南文","vi-VN"]];
 Blockly.Msg.DAC_RADIO_TITLE = "播放網路電台聲音";
 Blockly.Msg.DAC_TTS_END = "當語音TTS播放結束";
 Blockly.Msg.DAC_TTS_ENDS_WITH ="如果TTS語音內容為";
