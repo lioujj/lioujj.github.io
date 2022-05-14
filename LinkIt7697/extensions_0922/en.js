@@ -382,7 +382,7 @@ Blockly.Msg.STOCK_VALUE_DROPDOWN=[['Stock ID','docStock["msgArray"][0]["c"].as<c
 Blockly.Msg.STOCK_WARNING = "You have to fetch stock realtime information from web first.";
 
 //Google Translation
-Blockly.Msg.TRANSLATION_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/google翻譯積木";
+Blockly.Msg.TRANSLATION_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/google翻譯積木";
 Blockly.Msg.TRANSLATION_TOOLTIP = "Google Translation";
 Blockly.Msg.TRANSLATION_TITLE = "Google Translation";
 Blockly.Msg.TRANSLATION_SOURCE = "Source text:";
