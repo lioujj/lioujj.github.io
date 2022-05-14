@@ -377,7 +377,7 @@ Blockly.Msg.STOCK_VALUE_DROPDOWN=[['股票編號','docStock["msgArray"][0]["c"].
 Blockly.Msg.STOCK_WARNING = "必須先設定「"+Blockly.Msg.FETCH_STOCK_TITLE+"」積木";
 
 //Google Translation
-Blockly.Msg.TRANSLATION_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/google翻譯積木";
+Blockly.Msg.TRANSLATION_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/google翻譯積木";
 Blockly.Msg.TRANSLATION_TOOLTIP = "Google Translation";
 Blockly.Msg.TRANSLATION_TITLE = "Google翻譯";
 Blockly.Msg.TRANSLATION_SOURCE = "來源文字";
