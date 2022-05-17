@@ -2428,6 +2428,18 @@ Blockly.Arduino.getLastRow=function(){
 Blockly.Arduino.fetchFromSheet=function(){
   var a=Blockly.Arduino.valueToCode(this,"beginCell",Blockly.Arduino.ORDER_ATOMIC)||"",
       b=Blockly.Arduino.valueToCode(this,"endCell",Blockly.Arduino.ORDER_ATOMIC)||"";
+  const CODE_PATTERN= /^[a-zA-Z]{1}[0-9]{1,4}$/;
+  var tempFieldName='';
+  if (a.startsWith('"')){
+    tempFieldName=a.replace(/\"/g,"");
+    if (!CODE_PATTERN.test(tempFieldName))
+     a='"A1"';
+  }
+  if (b.startsWith('"')){
+    tempFieldName=b.replace(/\"/g,"");
+    if (!CODE_PATTERN.test(tempFieldName))
+     b='"A1"';
+  }
   Blockly.Arduino.definitions_.define_json_include="#define ARDUINOJSON_DECODE_UNICODE 1\n#include <ArduinoJson.h>";
   Blockly.Arduino.definitions_.define_sheet_json_doc_invoke='DynamicJsonDocument docSheet(2048);\n';
   //Blockly.Arduino.definitions_.define_read_sheet_invoke='void fetchFromSheet(const String& begin, const String& end){\n  static WiFiClientSecure sheetClient;\n  const char* host="script.google.com";\n  if (!sheetClient.connect(host, 443)) {\n    return;\n  }\n  const String url = String() +"https://"+host+"/macros/s/"+asId+"/exec?type=read&sheetId="+sheetId+"&sheetTag="+sheetTag+"&begin="+begin+"&end="+end;\n  sheetClient.println("GET " + url + " HTTP/1.1");\n  sheetClient.println(String()+"Host: "+host);\n  sheetClient.println("Accept: */*");\n  sheetClient.println("Connection: close");\n  sheetClient.println();\n  sheetClient.println();\n  String newUrl="";\n  while (sheetClient.connected()) {\n    newUrl = sheetClient.readStringUntil(\'\\n\');\n    if (newUrl.startsWith("The document has moved <A HREF=\\"")) {\n      newUrl.replace("The document has moved <A HREF=\\"","");\n      newUrl.replace("\\">here</A>.","");\n      newUrl.replace("amp;","");\n      break;\n    }\n  }\n  sheetClient.stop();\n  if (!sheetClient.connect(host, 443)) {\n    return;\n  }\n  sheetClient.println("GET " + newUrl + " HTTP/1.1");\n  sheetClient.println(String()+"Host: "+host);\n  sheetClient.println("Accept: */*");\n  sheetClient.println("Connection: close");\n  sheetClient.println();\n  sheetClient.println();\n  while (sheetClient.connected()) {\n    String line = sheetClient.readStringUntil(\'\\n\');\n    if (line.startsWith("{")) {\n      DeserializationError error = deserializeJson(docSheet, line);\n      break;\n    }\n  }\n  sheetClient.stop();\n}\n';
@@ -2491,13 +2503,15 @@ Blockly.Arduino.deleteRow=function(){
 
 Blockly.Arduino.getCellValue=function(){
   var a=Blockly.Arduino.valueToCode(this,"cell",Blockly.Arduino.ORDER_ATOMIC)||"";
-  //return'docSheet['+a+'].as<char*>()'
+  if (a.startsWith('"'))
+    a=a.toUpperCase();
   return['docSheet['+a+'].as<String>()',Blockly.Arduino.ORDER_ATOMIC]
 };
 
 Blockly.Arduino.getFieldValue=function(){
   var a=Blockly.Arduino.valueToCode(this,"field",Blockly.Arduino.ORDER_ATOMIC)||"";
-  a=a.toUpperCase();
+  if (a.startsWith('"'))
+    a=a.toUpperCase();
   return['docSheet['+a+'].as<String>()',Blockly.Arduino.ORDER_ATOMIC]
 };
 

@@ -116,6 +116,7 @@ Blockly.Msg.LJJ_TOOLS_CONVERT_STR_INT = "Convert String to Int";
 Blockly.Msg.LJJ_TOOLS_CONVERT_STR_FLOAT = "Convert String to Float";
 Blockly.Msg.TOOLS_ARRAY_VALUE = "Convert String to Array Value";
 
+
 //Maqueen
 Blockly.Msg.CATEGORY_MAQUEEN = "Maqueen";
 Blockly.Msg.MAQUEEN_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/麥昆小車積木";
