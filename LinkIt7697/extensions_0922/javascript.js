@@ -2099,7 +2099,7 @@ Blockly.Arduino.esp32_tone=function(){
       c=Blockly.Arduino.valueToCode(this,"CHANNEL",Blockly.Arduino.ORDER_ATOMIC)||"0";
   if (Blockly.Arduino.my_board_type=="ESP32"){
     Blockly.Arduino.definitions_.define_tone="#include <Tone32.h>";
-    Blockly.Arduino.setups_["esp32_tone1"]="tone("+a+","+b+",0,"+c+");\n  delay(1);\n  noTone("+a+","+c+");\n";
+    Blockly.Arduino.setups_["esp32_tone1"]="tone("+a+",100,0,"+c+");\n  delay(1);\n  noTone("+a+","+c+");\n";
     return"tone("+a+","+b+",0,"+c+");\n"
   }
   else
@@ -2124,7 +2124,7 @@ Blockly.Arduino.esp32_custom_tone=function(){
       d=Blockly.Arduino.valueToCode(this,"CHANNEL",Blockly.Arduino.ORDER_ATOMIC)||"0";
   if (Blockly.Arduino.my_board_type=="ESP32"){
     Blockly.Arduino.definitions_.define_tone="#include <Tone32.h>";
-    Blockly.Arduino.setups_["esp32_tone1"]="tone("+a+","+b+",0,"+d+");\n  delay(1);\n  noTone("+a+","+d+");\n";
+    Blockly.Arduino.setups_["esp32_tone1"]="tone("+a+",100,0,"+d+");\n  delay(1);\n  noTone("+a+","+d+");\n";
     return"tone("+a+","+b+","+c+","+d+");\n"
   }
   else
