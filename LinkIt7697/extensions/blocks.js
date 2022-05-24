@@ -3503,6 +3503,18 @@ Blockly.Blocks.esp32_core_num={init:function(){
 //PocketCard
 Blockly.Blocks.pocketcard={};
 Blockly.Blocks.pocketcard.HUE=120;
+
+Blockly.Blocks.pocketcard_cam_init={init:function(){
+  this.setHelpUrl(Blockly.Msg.POCKETCARD_HELPURL);
+  this.setColour(Blockly.Blocks.pocketcard.HUE);
+  this.appendDummyInput()
+      .appendField("PocketCard CAM "+Blockly.Msg.DAC_INIT);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.POCKETCARD_TOOLTIP)}
+};
+
 Blockly.Blocks.pocketcard_button={init:function(){
   this.setHelpUrl(Blockly.Msg.POCKETCARD_HELPURL);
   this.setColour(Blockly.Blocks.pocketcard.HUE);

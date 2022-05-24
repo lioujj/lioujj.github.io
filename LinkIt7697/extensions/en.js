@@ -601,7 +601,7 @@ Blockly.Msg.ESP32NTP_SETUP_TITLE = "setup time from NTP";
 Blockly.Msg.ESP32NTP_TIMEZONE = "TimeZone";
 Blockly.Msg.ESP32NTP_GET_RTC_STR = "get string from RTC";
 Blockly.Msg.ESP32NTP_GET_RTC_FIELD = "get number from RTC";
-Blockly.Msg.ESP32NTP_RTC_FIELD_TYPE= [["year","0"],["month","1"],["day","2"],["hour","3"],["minute","4"],["second","5"],["weekday","6"]];
+Blockly.Msg.ESP32NTP_RTC_FIELD_TYPE= [["year","0"],["month","1"],["day","2"],["hour","3"],["minute","4"],["second","5"],["weekday","6"],["millis","7"]];
 Blockly.Msg.ESP32NTP_TIME_FORMAT = [["DateTime","0"],["Date","1"],["Time","2"]];
 Blockly.Msg.ESP32NTP_SET_TIME = "set DateTime to RTC";
 

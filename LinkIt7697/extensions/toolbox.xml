@@ -375,6 +375,7 @@
       <block type="esp32_board_i2c_reset"></block>
     </category>
     <category id="category_pocketcard" name="PocketCard">
+      <block type="pocketcard_cam_init"></block>
       <block type="pocketcard_button"></block>
       <block type="pocketcard_pinMap"></block>
       <block type="pocketcard_pinMap_ez"></block>
