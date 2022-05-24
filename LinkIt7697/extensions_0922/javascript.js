@@ -2205,6 +2205,27 @@ Blockly.Arduino.esp32_core_num=function(){
 
 //PocketCard
 Blockly.Arduino.pocketcard={};
+Blockly.Arduino.pocketcard_cam_init=function(){
+  Blockly.Arduino.definitions_.define_esp32_cam_gpio_include ='\n'+
+																'#define PWDN_GPIO_NUM     -1\n'+
+																'#define RESET_GPIO_NUM    -1\n'+
+																'#define XCLK_GPIO_NUM      2\n'+
+																'#define SIOD_GPIO_NUM     18\n'+
+																'#define SIOC_GPIO_NUM     23\n'+
+																'#define Y9_GPIO_NUM       35\n'+
+																'#define Y8_GPIO_NUM       33\n'+
+																'#define Y7_GPIO_NUM       32\n'+
+																'#define Y6_GPIO_NUM       19\n'+
+																'#define Y5_GPIO_NUM       15\n'+
+																'#define Y4_GPIO_NUM       13\n'+
+																'#define Y3_GPIO_NUM       5\n'+
+																'#define Y2_GPIO_NUM        4\n'+
+																'#define VSYNC_GPIO_NUM    14\n'+
+																'#define HREF_GPIO_NUM     27\n'+
+																'#define PCLK_GPIO_NUM     25\n';
+  return'';
+};
+
 Blockly.Arduino.pocketcard_button=function(){
     var a=this.getFieldValue("AB_BUTTON"),
 	    b=Blockly.Arduino.statementToCode(this,"MSG_BUTTON_CALL");
@@ -2558,9 +2579,13 @@ Blockly.Arduino.get_RTC_str=function(){
 Blockly.Arduino.get_RTC_field=function(){
   var a=this.getFieldValue("FIELDTYPE");
   if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
-    Blockly.Arduino.definitions_.define_ESP_time_include="#include <time.h>";
-    Blockly.Arduino.definitions_.define_getDataFromRTC_invoke="int get_data_from_RTC(byte dataType) {\n  int myResult=0;\n  time_t t = time(NULL);\n  struct tm *t_st;\n  t_st = localtime(&t);\n  switch(dataType){\n    case 0:\n      myResult=(1900 + t_st->tm_year);\n      break;\n    case 1:\n      myResult=( 1 + t_st->tm_mon);\n      break;\n    case 2:\n      myResult=t_st->tm_mday;\n      break;\n    case 3:\n      myResult=t_st->tm_hour;\n      break;\n    case 4:\n      myResult=t_st->tm_min;\n      break;\n    case 5:\n      myResult=t_st->tm_sec;\n      break;\n    case 6:\n      myResult=t_st->tm_wday;\n      break;\n  }\n  return myResult;\n}\n";
-    return['get_data_from_RTC('+a+')',Blockly.Arduino.ORDER_ATOMIC]
+    if (a=='7'){
+      return['millis()',Blockly.Arduino.ORDER_ATOMIC] 
+    } else {
+      Blockly.Arduino.definitions_.define_ESP_time_include="#include <time.h>";
+      Blockly.Arduino.definitions_.define_getDataFromRTC_invoke="int get_data_from_RTC(byte dataType) {\n  int myResult=0;\n  time_t t = time(NULL);\n  struct tm *t_st;\n  t_st = localtime(&t);\n  switch(dataType){\n    case 0:\n      myResult=(1900 + t_st->tm_year);\n      break;\n    case 1:\n      myResult=( 1 + t_st->tm_mon);\n      break;\n    case 2:\n      myResult=t_st->tm_mday;\n      break;\n    case 3:\n      myResult=t_st->tm_hour;\n      break;\n    case 4:\n      myResult=t_st->tm_min;\n      break;\n    case 5:\n      myResult=t_st->tm_sec;\n      break;\n    case 6:\n      myResult=t_st->tm_wday;\n      break;\n  }\n  return myResult;\n}\n";
+      return['get_data_from_RTC('+a+')',Blockly.Arduino.ORDER_ATOMIC]
+    }      
   }else{
     return['0',Blockly.Arduino.ORDER_ATOMIC]
   }

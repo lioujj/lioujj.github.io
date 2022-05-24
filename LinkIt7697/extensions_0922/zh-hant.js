@@ -594,7 +594,7 @@ Blockly.Msg.ESP32NTP_SETUP_TITLE = "由NTP伺服器校正時間";
 Blockly.Msg.ESP32NTP_TIMEZONE = "時區";
 Blockly.Msg.ESP32NTP_GET_RTC_STR = "由RTC取得字串";
 Blockly.Msg.ESP32NTP_GET_RTC_FIELD = "由RTC取得數字";
-Blockly.Msg.ESP32NTP_RTC_FIELD_TYPE= [["年","0"],["月","1"],["日","2"],["時","3"],["分","4"],["秒","5"],["星期","6"]];
+Blockly.Msg.ESP32NTP_RTC_FIELD_TYPE= [["年","0"],["月","1"],["日","2"],["時","3"],["分","4"],["秒","5"],["星期","6"],["系統時間","7"]];
 Blockly.Msg.ESP32NTP_TIME_FORMAT = [["日期時間","0"],["日期","1"],["時間","2"]];
 Blockly.Msg.ESP32NTP_SET_TIME = "手動設定RTC時間";
 
