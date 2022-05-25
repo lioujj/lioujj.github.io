@@ -611,9 +611,9 @@ Blockly.Msg.LINENOTIFY_LINE_BREAK = "換行";
 
 //TTGO TFT
 Blockly.Msg.TTGO_TFT_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/t-display";
-Blockly.Msg.TTGO_TFT_TITLE = "TTGO彩色TFT";
+Blockly.Msg.TTGO_TFT_TITLE = "TFT彩色螢幕";
 Blockly.Msg.TTGO_TFT_INIT = "初始化";
-Blockly.Msg.TTGO_TFT_TOOLTIP = "TTGO TFT";
+Blockly.Msg.TTGO_TFT_TOOLTIP = "TFT Display";
 Blockly.Msg.TTGO_TFT_ROTATION=[["縱向","0"],["橫向","1"]];
 Blockly.Msg.TTGO_TFT_FILL_COLOR = "填滿顏色";
 Blockly.Msg.TTGO_TFT_INIT_WARNIG = "必須先設定「"+Blockly.Msg.TTGO_TFT_TITLE+Blockly.Msg.TTGO_TFT_INIT+"」積木";
