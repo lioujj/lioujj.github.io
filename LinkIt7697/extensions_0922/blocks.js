@@ -4380,7 +4380,7 @@ Blockly.Blocks.ttgo_tft_init={init:function(){
   this.appendDummyInput()
       .appendField(Blockly.Msg.TTGO_TFT_TITLE)
       .appendField(Blockly.Msg.TTGO_TFT_INIT)
-      .appendField(new Blockly.FieldDropdown([["TTGO","TFT_ON_TTGO"],["I2S_GO","TFT_ON_I2SGO"]]),"TFT_TYPE");
+      .appendField(new Blockly.FieldDropdown([["TTGO","TFT_ON_TTGO"],["I2S_GO","TFT_ON_I2SGO"],["KSB065","TFT_ON_KSB065"]]),"TFT_TYPE");
   this.setInputsInline(!0);
   this.setPreviousStatement(!0,null);
   this.setNextStatement(!0,null);

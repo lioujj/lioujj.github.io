@@ -618,9 +618,9 @@ Blockly.Msg.LINENOTIFY_LINE_BREAK = "line feed";
 
 //TTGO TFT
 Blockly.Msg.TTGO_TFT_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/t-display";
-Blockly.Msg.TTGO_TFT_TITLE = "TTGO_TFT";
+Blockly.Msg.TTGO_TFT_TITLE = "TFT Display";
 Blockly.Msg.TTGO_TFT_INIT = "initial";
-Blockly.Msg.TTGO_TFT_TOOLTIP = "TTGO TFT";
+Blockly.Msg.TTGO_TFT_TOOLTIP = "TFT Display";
 Blockly.Msg.TTGO_TFT_ROTATION=[["Portrait","0"],["Landscape","1"]];
 Blockly.Msg.TTGO_TFT_FILL_COLOR = "fill color";
 Blockly.Msg.TTGO_TFT_INIT_WARNIG = "You have to "+Blockly.Msg.TTGO_TFT_INIT+" "+Blockly.Msg.TTGO_TFT_TITLE+" first.";

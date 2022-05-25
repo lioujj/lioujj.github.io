@@ -461,6 +461,250 @@
       <category id="category_ttgo_button" name="TTGO_BUTTON">
         <block type="ttgo_button"></block>
       </category>
+    </category>
+    <category id="category_esp32_modules" name="Modules">
+      <category id="category_i2sdac" name="I2SDAC">
+        <block type="dac_init">
+          <value name="LRC_PIN">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="BCLK_PIN">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="DATA_PIN">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+        </block>
+        <block type="pocketcard_dac_init"></block>
+        <block type="dac_set_gain">
+          <value name="GAIN">
+            <block type="math_number">
+              <field name="NUM">1.0</field>
+            </block>
+          </value>
+        </block>
+        <block type="dac_stop"></block>
+        <block type="dac_loop"></block>
+        <block type="dac_is_running"></block>
+        <block type="dac_radio">
+          <value name="CONTENT">
+            <block type="dac_radioList"></block>
+          </value>
+        </block>
+        <block type="dac_radioList"></block>
+        <block type="dac_http_mp3">
+          <value name="CONTENT">
+            <block type="text">
+              <field name="TEXT"></field>
+            </block>
+          </value>
+        </block>
+        <block type="dac_http_mp3_end"></block>
+        <block type="dac_http_mp3_ends_with">
+          <value name="CONTENT">
+            <block type="text">
+              <field name="TEXT"></field>
+            </block>
+          </value>
+        </block>
+        <block type="dac_tts">
+          <value name="CONTENT">
+            <block type="text">
+              <field name="TEXT">說出語音內容</field>
+            </block>
+          </value>
+          <value name="L_CODE">
+            <block type="language_code"></block>
+          </value>
+        </block>
+        <block type="dac_tts_file">
+          <value name="CONTENT">
+            <block type="text">
+              <field name="TEXT">語音內容</field>
+            </block>
+          </value>
+          <value name="L_CODE">
+            <block type="language_code"></block>
+          </value>
+          <value name="FILENAME">
+            <block type="text">
+              <field name="TEXT"></field>
+            </block>
+          </value>
+        </block>
+        <block type="language_code"></block>
+        <block type="dac_tts_end"></block>
+        <block type="dac_tts_ends_with">
+          <value name="CONTENT">
+            <block type="text">
+              <field name="TEXT"></field>
+            </block>
+          </value>
+        </block>
+        <block type="dac_file">
+          <value name="CONTENT">
+            <block type="text">
+              <field name="TEXT"></field>
+            </block>
+          </value>
+        </block>
+        <block type="dac_mp3_end"></block>
+        <block type="dac_mp3_ends_with">
+          <value name="CONTENT">
+            <block type="text">
+              <field name="TEXT"></field>
+            </block>
+          </value>
+        </block>       
+      </category>
+      <category id="category_i2s_mic" name="I2S_MIC">
+        <block type="i2sMic_init">
+          <value name="SCK_PIN">
+            <block type="math_number">
+              <field name="NUM">2</field>
+            </block>
+          </value>
+          <value name="WS_PIN">
+            <block type="math_number">
+              <field name="NUM">13</field>
+            </block>
+          </value>
+          <value name="SD_PIN">
+            <block type="math_number">
+              <field name="NUM">15</field>
+            </block>
+          </value>
+        </block>
+        <block type="PocketCard_i2sMic_init"></block>
+        <block type="i2sMic_start"></block>
+        <block type="i2sMic_stop"></block>
+        <block type="i2sMic_record">
+ 			  	<value name="FILENAME">
+				  	<block type="text">
+					  	<field name="TEXT">/wav/recording.wav</field>
+            </block>
+	  			</value>
+          <value name="REC_TIME">
+            <block type="math_number">
+              <field name="NUM">5</field>
+            </block>
+          </value>
+        </block>
+        <block type="i2sMic_STT_Azure">
+ 			  	<value name="FILENAME">
+				  	<block type="text">
+					  	<field name="TEXT">/wav/recording.wav</field>
+            </block>
+	  			</value>
+          <value name="L_CODE">
+            <block type="language_code"></block>
+          </value>
+ 			  	<value name="KEY">
+				  	<block type="text">
+					  	<field name="TEXT"></field>
+            </block>
+	  			</value>
+        </block>
+        <block type="i2sMic_STT_Azure_direct">
+          <value name="REC_TIME">
+            <block type="math_number">
+              <field name="NUM">5</field>
+            </block>
+          </value>
+          <value name="L_CODE">
+            <block type="language_code"></block>
+          </value>
+ 			  	<value name="KEY">
+				  	<block type="text">
+					  	<field name="TEXT"></field>
+            </block>
+	  			</value>
+        </block>
+        <block type="language_code"></block>
+        <block type="i2sMic_STT_result"></block>
+        <block type="i2sMic_STT">
+ 			  	<value name="FILENAME">
+				  	<block type="text">
+					  	<field name="TEXT">/wav/recording.wav</field>
+            </block>
+	  			</value>
+          <value name="L_CODE">
+            <block type="language_code"></block>
+          </value>
+ 			  	<value name="KEY">
+				  	<block type="text">
+					  	<field name="TEXT"></field>
+            </block>
+	  			</value>
+        </block>
+      </category>
+      <category id="category_i2s_mic_db" name="I2S_MIC_DB">
+        <block type="i2sMic_db_init">
+          <value name="SCK_PIN">
+            <block type="math_number">
+              <field name="NUM">2</field>
+            </block>
+          </value>
+          <value name="WS_PIN">
+            <block type="math_number">
+              <field name="NUM">13</field>
+            </block>
+          </value>
+          <value name="SD_PIN">
+            <block type="math_number">
+              <field name="NUM">15</field>
+            </block>
+          </value>
+        </block>
+        <block type="i2sMic_pocket_db_init"></block>
+        <block type="i2sMic_db_start">
+          <value name="PERIOD">
+            <block type="math_number">
+              <field name="NUM">0.5</field>
+            </block>
+          </value>
+        </block>
+        <block type="i2sMic_db_stop"></block>
+        <block type="i2sMic_db_is_measuring"></block>
+        <block type="i2sMic_db_value"></block>
+      </category>
+      <category id="category_pn532i2c" name="PN532_I2C">
+        <block type="pn532i2c_init"></block>
+        <block type="pn532i2c_loop"></block>
+        <block type="pn532i2c_checkUID"></block>
+        <block type="pn532i2c_getUID"></block>
+        <block type="pn532i2c_getType"></block>
+        <block type="pn532i2c_writeBlock">
+			  	<value name="MY_DATA">
+				  	<block type="text">
+					  	<field name="TEXT"></field>
+            </block>
+	  			</value>
+        </block>
+        <block type="pn532i2c_writeSector">
+				  <value name="MY_DATA">
+  					<block type="text">
+	  					<field name="TEXT"></field>
+            </block>
+			  	</value>
+        </block>
+        <block type="pn532i2c_readBlock"></block>
+        <block type="pn532i2c_readSector"></block>
+        <block type="pn532i2c_writePage">
+				  <value name="MY_DATA">
+  					<block type="text">
+	  					<field name="TEXT"></field>
+            </block>
+			  	</value>
+        </block>
+        <block type="pn532i2c_readPage"></block>
+      </category>
       <category id="category_ttgo_tft" name="TTGO_TFT">
         <block type="ttgo_tft_init"></block>
         <block type="ttgo_tft_rotation"></block>
@@ -714,250 +958,6 @@
             </block>
           </value>
         </block>
-      </category>
-    </category>
-    <category id="category_esp32_modules" name="Modules">
-      <category id="category_i2sdac" name="I2SDAC">
-        <block type="dac_init">
-          <value name="LRC_PIN">
-            <block type="math_number">
-              <field name="NUM">0</field>
-            </block>
-          </value>
-          <value name="BCLK_PIN">
-            <block type="math_number">
-              <field name="NUM">0</field>
-            </block>
-          </value>
-          <value name="DATA_PIN">
-            <block type="math_number">
-              <field name="NUM">0</field>
-            </block>
-          </value>
-        </block>
-        <block type="pocketcard_dac_init"></block>
-        <block type="dac_set_gain">
-          <value name="GAIN">
-            <block type="math_number">
-              <field name="NUM">1.0</field>
-            </block>
-          </value>
-        </block>
-        <block type="dac_stop"></block>
-        <block type="dac_loop"></block>
-        <block type="dac_is_running"></block>
-        <block type="dac_radio">
-          <value name="CONTENT">
-            <block type="dac_radioList"></block>
-          </value>
-        </block>
-        <block type="dac_radioList"></block>
-        <block type="dac_http_mp3">
-          <value name="CONTENT">
-            <block type="text">
-              <field name="TEXT"></field>
-            </block>
-          </value>
-        </block>
-        <block type="dac_http_mp3_end"></block>
-        <block type="dac_http_mp3_ends_with">
-          <value name="CONTENT">
-            <block type="text">
-              <field name="TEXT"></field>
-            </block>
-          </value>
-        </block>
-        <block type="dac_tts">
-          <value name="CONTENT">
-            <block type="text">
-              <field name="TEXT">說出語音內容</field>
-            </block>
-          </value>
-          <value name="L_CODE">
-            <block type="language_code"></block>
-          </value>
-        </block>
-        <block type="dac_tts_file">
-          <value name="CONTENT">
-            <block type="text">
-              <field name="TEXT">語音內容</field>
-            </block>
-          </value>
-          <value name="L_CODE">
-            <block type="language_code"></block>
-          </value>
-          <value name="FILENAME">
-            <block type="text">
-              <field name="TEXT"></field>
-            </block>
-          </value>
-        </block>
-        <block type="language_code"></block>
-        <block type="dac_tts_end"></block>
-        <block type="dac_tts_ends_with">
-          <value name="CONTENT">
-            <block type="text">
-              <field name="TEXT"></field>
-            </block>
-          </value>
-        </block>
-        <block type="dac_file">
-          <value name="CONTENT">
-            <block type="text">
-              <field name="TEXT"></field>
-            </block>
-          </value>
-        </block>
-        <block type="dac_mp3_end"></block>
-        <block type="dac_mp3_ends_with">
-          <value name="CONTENT">
-            <block type="text">
-              <field name="TEXT"></field>
-            </block>
-          </value>
-        </block>       
-      </category>
-      <category id="category_i2s_mic" name="I2S_MIC">
-        <block type="i2sMic_init">
-          <value name="SCK_PIN">
-            <block type="math_number">
-              <field name="NUM">2</field>
-            </block>
-          </value>
-          <value name="WS_PIN">
-            <block type="math_number">
-              <field name="NUM">13</field>
-            </block>
-          </value>
-          <value name="SD_PIN">
-            <block type="math_number">
-              <field name="NUM">15</field>
-            </block>
-          </value>
-        </block>
-        <block type="PocketCard_i2sMic_init"></block>
-        <block type="i2sMic_start"></block>
-        <block type="i2sMic_stop"></block>
-        <block type="i2sMic_record">
- 			  	<value name="FILENAME">
-				  	<block type="text">
-					  	<field name="TEXT">/wav/recording.wav</field>
-            </block>
-	  			</value>
-          <value name="REC_TIME">
-            <block type="math_number">
-              <field name="NUM">5</field>
-            </block>
-          </value>
-        </block>
-        <block type="i2sMic_STT_Azure">
- 			  	<value name="FILENAME">
-				  	<block type="text">
-					  	<field name="TEXT">/wav/recording.wav</field>
-            </block>
-	  			</value>
-          <value name="L_CODE">
-            <block type="language_code"></block>
-          </value>
- 			  	<value name="KEY">
-				  	<block type="text">
-					  	<field name="TEXT"></field>
-            </block>
-	  			</value>
-        </block>
-        <block type="i2sMic_STT_Azure_direct">
-          <value name="REC_TIME">
-            <block type="math_number">
-              <field name="NUM">5</field>
-            </block>
-          </value>
-          <value name="L_CODE">
-            <block type="language_code"></block>
-          </value>
- 			  	<value name="KEY">
-				  	<block type="text">
-					  	<field name="TEXT"></field>
-            </block>
-	  			</value>
-        </block>
-        <block type="language_code"></block>
-        <block type="i2sMic_STT_result"></block>
-        <block type="i2sMic_STT">
- 			  	<value name="FILENAME">
-				  	<block type="text">
-					  	<field name="TEXT">/wav/recording.wav</field>
-            </block>
-	  			</value>
-          <value name="L_CODE">
-            <block type="language_code"></block>
-          </value>
- 			  	<value name="KEY">
-				  	<block type="text">
-					  	<field name="TEXT"></field>
-            </block>
-	  			</value>
-        </block>
-      </category>
-      <category id="category_i2s_mic_db" name="I2S_MIC_DB">
-        <block type="i2sMic_db_init">
-          <value name="SCK_PIN">
-            <block type="math_number">
-              <field name="NUM">2</field>
-            </block>
-          </value>
-          <value name="WS_PIN">
-            <block type="math_number">
-              <field name="NUM">13</field>
-            </block>
-          </value>
-          <value name="SD_PIN">
-            <block type="math_number">
-              <field name="NUM">15</field>
-            </block>
-          </value>
-        </block>
-        <block type="i2sMic_pocket_db_init"></block>
-        <block type="i2sMic_db_start">
-          <value name="PERIOD">
-            <block type="math_number">
-              <field name="NUM">0.5</field>
-            </block>
-          </value>
-        </block>
-        <block type="i2sMic_db_stop"></block>
-        <block type="i2sMic_db_is_measuring"></block>
-        <block type="i2sMic_db_value"></block>
-      </category>
-      <category id="category_pn532i2c" name="PN532_I2C">
-        <block type="pn532i2c_init"></block>
-        <block type="pn532i2c_loop"></block>
-        <block type="pn532i2c_checkUID"></block>
-        <block type="pn532i2c_getUID"></block>
-        <block type="pn532i2c_getType"></block>
-        <block type="pn532i2c_writeBlock">
-			  	<value name="MY_DATA">
-				  	<block type="text">
-					  	<field name="TEXT"></field>
-            </block>
-	  			</value>
-        </block>
-        <block type="pn532i2c_writeSector">
-				  <value name="MY_DATA">
-  					<block type="text">
-	  					<field name="TEXT"></field>
-            </block>
-			  	</value>
-        </block>
-        <block type="pn532i2c_readBlock"></block>
-        <block type="pn532i2c_readSector"></block>
-        <block type="pn532i2c_writePage">
-				  <value name="MY_DATA">
-  					<block type="text">
-	  					<field name="TEXT"></field>
-            </block>
-			  	</value>
-        </block>
-        <block type="pn532i2c_readPage"></block>
       </category>
     </category>
   </category>
