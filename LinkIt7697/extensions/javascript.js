@@ -2287,6 +2287,122 @@ Blockly.Arduino.pocketcard_rgb_color=function(){
 };
 
 
+//KSB065
+Blockly.Arduino.KSB065={};
+Blockly.Arduino.KSB065_button=function(){
+    var a=this.getFieldValue("AB_BUTTON"),
+	    b=Blockly.Arduino.statementToCode(this,"MSG_BUTTON_CALL");
+    Blockly.Arduino.definitions_.define_m_button="byte A_Pin=14;\nbyte B_Pin=25;\nchar myBtnStatus;\nbool buttonPressed(char btnName)\n{\n  if (btnName=='A'){\n    if (digitalRead(A_Pin) == 1)\n      return false;\n    else\n      return true;\n  }\n  else if (btnName=='B'){\n    if (digitalRead(B_Pin) == 1)\n      return false;\n    else\n      return true;\n  } else {\n    if ((digitalRead(A_Pin) == 1) && (digitalRead(B_Pin) == 1))\n      return false;\n    else\n      return true;\n  }\n}\n"
+    Blockly.Arduino.definitions_.define_m_getBtnStatus="char getBtnStatus(){\n  char buttonStatus=' ';\n  int checkButtonDelay=200;\n  if (buttonPressed('A')){\n    delay(checkButtonDelay);\n    if (buttonPressed('A')){\n      buttonStatus='A';\n      if (buttonPressed('B'))\n        buttonStatus='C';\n    }\n  } else if (buttonPressed('B')){\n      delay(checkButtonDelay);\n      if (buttonPressed('B')){\n        buttonStatus='B';\n        if (buttonPressed('A'))\n          buttonStatus='C';\n      }\n  }\n  return buttonStatus;\n}\n";
+    Blockly.Arduino.setups_.setup_button='pinMode(A_Pin, INPUT);\n  pinMode(B_Pin, INPUT);\n';
+	  return"if (myBtnStatus=='"+a+"'){\n"+b+"  while(buttonPressed('"+a+"')){}\n}\n"
+};
+
+Blockly.Arduino.KSB065_analog=function(){
+  var a=this.getFieldValue("TYPE");
+  return["analogRead("+a+")",Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.KSB065_dht11=function(){
+  var a=this.getFieldValue("DHT"),
+      pin="13";
+  Blockly.Arduino.definitions_['define_dht_']="#include <DHT.h>";
+  Blockly.Arduino.definitions_['define_dht_set']="DHT dht11_p"+pin+"("+pin+", DHT11);";
+  Blockly.Arduino.setups_["setup_dht_"]="dht11_p"+pin+".begin();";
+  return["dht11_p"+pin+"."+a+"()",Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.KSB065_sonar=function(){
+  Blockly.Arduino.definitions_.define_ultrasonic='#include "Ultrasonic.h"\n';
+  Blockly.Arduino.definitions_["var_ultrasonic_19_19"]="Ultrasonic ultrasonic_19_19(19,19);\n";
+  return["ultrasonic_19_19.convert(ultrasonic_19_19.timing(), Ultrasonic::CM)",Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.KSB065_relay=function(){
+  var a=Blockly.Arduino.valueToCode(this,"ON_OFF",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      pin="17";
+  Blockly.Arduino.setups_["setup_relay_"+pin]="pinMode("+pin+", OUTPUT);";
+  return"digitalWrite("+pin+", "+a+");\n";
+};
+
+Blockly.Arduino.KSB065_motor=function(){
+  var a=Blockly.Arduino.valueToCode(this,"SPEED",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=this.getFieldValue("DIR");
+  Blockly.Arduino.definitions_.define_KSB065_motor_invoke='byte L9110S_1A=16;\nbyte L9110S_1B=33;\nbyte L9110S_1B_ch=10;\n';
+  Blockly.Arduino.setups_["setup_KSB065_L9110"]='pinMode(L9110S_1A, OUTPUT);\n  ledcSetup(L9110S_1B_ch, 5000, 8);\n  ledcAttachPin(L9110S_1B, L9110S_1B_ch);\n';
+  if (b=="1"){
+    return'digitalWrite(L9110S_1A , HIGH);\nledcWrite(L9110S_1B_ch, 255-'+a+');\n'
+  } else {
+    return'digitalWrite(L9110S_1A , LOW);\nledcWrite(L9110S_1B_ch, -'+a+');\n'
+  }
+};
+
+Blockly.Arduino.KSB065_motor_stop=function(){
+  Blockly.Arduino.definitions_.define_KSB065_motor_invoke='byte L9110S_1A=16;\nbyte L9110S_1B=33;\nbyte L9110S_1B_ch=10;\n';
+  Blockly.Arduino.setups_["setup_KSB065_L9110"]='pinMode(L9110S_1A, OUTPUT);\n  ledcSetup(L9110S_1B_ch, 5000, 8);\n  ledcAttachPin(L9110S_1B, L9110S_1B_ch);\n';
+  return'digitalWrite(L9110S_1A , LOW);\nledcWrite(L9110S_1B_ch, 0);\n'
+};
+
+Blockly.Arduino.KSB065_tone=function(){
+  var a=this.getFieldValue("FREQ");
+  Blockly.Arduino.definitions_.define_tone="#include <Tone32.h>";
+  Blockly.Arduino.definitions_.define_start_plus_tone_invoke="byte buzz_pin=26;\nbyte buzz_ch=0;\n";
+  Blockly.Arduino.setups_["esp32_tone1"]="tone(buzz_pin,262,0,buzz_ch);\n  delay(1);\n  noTone(buzz_pin,buzz_ch);";
+  return"tone(buzz_pin,"+a+",0,buzz_ch);\n";
+};
+
+Blockly.Arduino.KSB065_no_tone=function(){
+  Blockly.Arduino.definitions_.define_tone="#include <Tone32.h>";
+  Blockly.Arduino.definitions_.define_start_plus_tone_invoke="byte buzz_pin=26;\nbyte buzz_ch=0;\n";
+  Blockly.Arduino.setups_["esp32_tone1"]="tone(buzz_pin,262,0,buzz_ch);\n  delay(1);\n  noTone(buzz_pin,buzz_ch);";
+  return"noTone(buzz_pin,buzz_ch);\n";
+};
+
+Blockly.Arduino.KSB065_custom_tone=function(){
+  var a=Blockly.Arduino.valueToCode(this,"FREQ",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=Blockly.Arduino.valueToCode(this,"DURATION",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  Blockly.Arduino.definitions_.define_tone="#include <Tone32.h>";
+  Blockly.Arduino.definitions_.define_start_plus_tone_invoke="byte buzz_pin=26;\nbyte buzz_ch=0;\n";
+  Blockly.Arduino.setups_["esp32_tone1"]="tone(buzz_pin,262,0,buzz_ch);\n  delay(1);\n  noTone(buzz_pin,buzz_ch);";
+  return"tone(buzz_pin,"+a+","+b+",buzz_ch);\n";
+};
+
+Blockly.Arduino.KSB065_neopixel_begin=function(){
+  var a=Blockly.Arduino.valueToCode(this,"BRIGHTNESS",Blockly.Arduino.ORDER_ATOMIC)||"0";
+	  Blockly.Arduino.definitions_.define_include_neopixel="#include <Adafruit_NeoPixel.h>";
+    Blockly.Arduino.definitions_.define_plus_neopixel='Adafruit_NeoPixel ksb065Pixels = Adafruit_NeoPixel(4,2,NEO_GRB + NEO_KHZ800);\n';
+    Blockly.Arduino.setups_.setup_plus_neopixel="ksb065Pixels.begin();\n  ksb065Pixels.setBrightness("+a+");\n  ksb065Pixels.show();\n  ksb065Pixels.setPixelColor(0,ksb065Pixels.Color(0,0,0));\n  ksb065Pixels.setPixelColor(1,ksb065Pixels.Color(0,0,0));\n  ksb065Pixels.setPixelColor(2,ksb065Pixels.Color(0,0,0));\n  ksb065Pixels.show();";
+  return"";
+};
+
+Blockly.Arduino.KSB065_neopixel_set_color=function(){
+  var a=Blockly.Arduino.valueToCode(this,"INDEX",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=Blockly.Arduino.valueToCode(this,"COLOR",Blockly.Arduino.ORDER_ATOMIC)||"";
+  b=b.replace("tft.color565","ksb065Pixels.Color");
+  return"ksb065Pixels.setPixelColor("+a+","+b+");\n";
+};
+
+Blockly.Arduino.KSB065_neopixel_show=function(){
+  return"ksb065Pixels.show();\n";
+
+};
+
+Blockly.Arduino.KSB065_neopixel_set_colors=function(){
+  var a=Blockly.Arduino.valueToCode(this,"COLOR",Blockly.Arduino.ORDER_ATOMIC)||"";
+  a=a.replace("tft.color565","ksb065Pixels.Color");
+  return"ksb065Pixels.setPixelColor(0,"+a+");\nksb065Pixels.setPixelColor(1,"+a+");\nksb065Pixels.setPixelColor(2,"+a+");\nksb065Pixels.setPixelColor(3,"+a+");\nksb065Pixels.show();\n";
+};
+
+Blockly.Arduino.KSB065_ir_receive=function(){
+  var a="35";
+  Blockly.Arduino.definitions_.define_irremote="#include <IRremote.h>";
+  Blockly.Arduino.definitions_.define_irremote_init="IRrecv irrecv("+a+");";
+  Blockly.Arduino.definitions_.define_irremote_decode="decode_results results;\nString myCodeType;\nString myIRcode;";
+  Blockly.Arduino.definitions_.define_irremote_ir_type='String ir_type(int tip)\n{\n  if (tip == 1){\n    return "RC5";\n  } else if (tip == 2){\n    return "RC6";\n  } else if (tip == 3){\n    return "NEC";\n  } else if (tip == 4){\n    return "SONY";\n  } else if (tip == 5){\n    return "PANASONIC";\n  } else if (tip == 6){\n    return "JVC";\n  } else if (tip == 7){\n    return "SAMSUNG";\n  } else if (tip == 10){\n    return "LG";\n  } else if (tip == 14){\n    return "SHARP";\n  } else if (tip == 17){\n    return "LEGO_PF";\n  } else {\n    return "UNKNOWN";\n  }\n}\n';
+  //Blockly.Arduino.setups_["irremote_"]||(Blockly.Arduino.setups_["irremote_"]="irrecv.enableIRIn();\n");
+  return'irrecv.enableIRIn();\n';
+};
+
 //MPU9250
 Blockly.Arduino.mpu9250={};
 Blockly.Arduino.mpu9250_accel_begin=function(){
@@ -2655,13 +2771,10 @@ Blockly.Arduino.breakLine=function(){
 Blockly.Arduino.ttgo_tft={};
 Blockly.Arduino.ttgo_tft_init=function(){
   var a=this.getFieldValue("TFT_TYPE");
-  Blockly.Arduino.definitions_.define_spi="#include <SPI.h>";
-  Blockly.Arduino.definitions_.define_ttgo_tft="#include <TFT_eSPI.h>\n#include <U8g2_for_TFT_eSPI.h>";
-  if (a!="") {
-    Blockly.Arduino.definitions_.define_ttgo_tft="#define "+a+" 1\n"+Blockly.Arduino.definitions_.define_ttgo_tft;
-  }
-  Blockly.Arduino.definitions_.define_ttgo_tft_init_invoke="TFT_eSPI tft = TFT_eSPI();\nU8g2_for_TFT_eSPI u8g2;\nuint32_t tft_color=TFT_WHITE;\nbyte tftTextSize=1;\nbyte tftTextFont=1;\n";
-  Blockly.Arduino.setups_.ttgo_tft='tft.begin();\n  tft.fillScreen(TFT_BLACK);\n  u8g2.begin(tft);\n  tft.setTextColor(tft_color);\n  u8g2.setForegroundColor(tft_color);\n  u8g2.setFontMode(1);';
+  //Blockly.Arduino.definitions_.define_spi="#include <SPI.h>";
+  Blockly.Arduino.definitions_.define_ttgo_tft="#include <"+a+">\n#include <U8g2_for_TFT_eSPI.h>";
+  Blockly.Arduino.definitions_.define_ttgo_tft_init_invoke="TFT_eSPI tft = TFT_eSPI();\nU8g2_for_TFT_eSPI u8g2;\nuint32_t tft_color=TFT_WHITE;\nuint32_t tft_bg_color=TFT_BLACK;\nuint32_t tft_fg_color=TFT_WHITE;\nbyte tftTextSize=1;\nbyte tftTextFont=1;\n";
+  Blockly.Arduino.setups_.ttgo_tft='tft.begin();\n  tft.fillScreen(TFT_BLACK);\n  u8g2.begin(tft);\n  tft.setTextColor(tft_color);\n  u8g2.setForegroundColor(tft_color);';
   return'';
 };
 
@@ -2681,17 +2794,33 @@ Blockly.Arduino.ttgo_tft_fill=function(){
   return 'tft.fillScreen('+a+');\n';
 };
 
+Blockly.Arduino.ttgo_tft_wh=function(){
+  var a=this.getFieldValue("W_H");
+  return[a,Blockly.Arduino.ORDER_ATOMIC]
+};
+
+
+
 Blockly.Arduino.ttgo_tft_set_color=function(){
   var a=Blockly.Arduino.valueToCode(this,"COLOR",Blockly.Arduino.ORDER_ATOMIC)||"";
   a=a.replace(/\"/g,"");
-  return 'tft_color='+a+';\ntft.setTextColor(tft_color);\nu8g2.setForegroundColor(tft_color);\n';
+  return 'tft_color='+a+';\n';
+};
+
+Blockly.Arduino.ttgo_tft_set_font_color=function(){
+  var a=Blockly.Arduino.valueToCode(this,"FG_COLOR",Blockly.Arduino.ORDER_ATOMIC)||"",
+      b=Blockly.Arduino.valueToCode(this,"BG_COLOR",Blockly.Arduino.ORDER_ATOMIC)||"";
+  a=a.replace(/\"/g,"");
+  b=b.replace(/\"/g,"");
+//  return 'tft_fg_color='+a+';\ntft_bg_color='+b+';\ntft.setTextColor(tft_fg_color,tft_bg_color,'+c+');\nu8g2.setForegroundColor(tft_fg_color);\nu8g2.setBackgroundColor(tft_bg_color);\nu8g2.setFontMode('+c+');\n';
+  return 'tft_fg_color='+a+';\ntft_bg_color='+b+';\ntft.setTextColor(tft_fg_color,tft_bg_color,true);\nu8g2.setForegroundColor(tft_fg_color);\nu8g2.setBackgroundColor(tft_bg_color);\n';
 };
 
 Blockly.Arduino.ttgo_tft_draw_chinese_text=function(){
   var a=Blockly.Arduino.valueToCode(this,"START_X",Blockly.Arduino.ORDER_NONE)||"0",
   b=Blockly.Arduino.valueToCode(this,"START_Y",Blockly.Arduino.ORDER_NONE)||"0",
   c=Blockly.Arduino.valueToCode(this,"CONTENT",Blockly.Arduino.ORDER_NONE)||"";
-  return"u8g2.setFont(u8g2_font_unifont_t_chinese1);\nu8g2.setFontMode(1);\nu8g2.setCursor("+a+", "+(parseInt(b)+15)+");\nu8g2.print(String("+c+").c_str());\n"
+  return"u8g2.setFont(u8g2_font_unifont_t_chinese1);\nu8g2.setCursor("+a+", "+(parseInt(b)+15)+");\nu8g2.print(String("+c+").c_str());\n"
 };
 
 Blockly.Arduino.ttgo_tft_set_eng_font=function(){
@@ -2756,7 +2885,7 @@ Blockly.Arduino.ttgo_tft_draw_chart=function(){
   f=f.replace("  ","");
   f=f.replace(/\n  /g,"\n");
   f=f.replace(/tft\./g,"graph.");
-  Blockly.Arduino.definitions_.define_ttgo_tft_init_invoke="TFT_eSPI tft = TFT_eSPI();\nTFT_eSprite graph= TFT_eSprite(&tft);\nU8g2_for_TFT_eSPI u8g2;\nuint32_t tft_color=TFT_WHITE;\nbyte tftTextSize=1;\nbyte tftTextFont=1;\n";
+  Blockly.Arduino.definitions_.define_ttgo_tft_init_invoke="TFT_eSPI tft = TFT_eSPI();\nTFT_eSprite graph= TFT_eSprite(&tft);\nU8g2_for_TFT_eSPI u8g2;\nuint32_t tft_color=TFT_WHITE;\nuint32_t tft_bg_color=TFT_BLACK;\nuint32_t tft_fg_color=TFT_WHITE;\nbyte tftTextSize=1;\nbyte tftTextFont=1;\n";
   Blockly.Arduino.definitions_.define_ttgo_tft_charNumList_invoke="int chartNumList[TFT_HEIGHT]={-1};\n";
   Blockly.Arduino.definitions_.define_ttgo_tft_drawChart_invoke='void drawTFTchart(int myNumList[],byte chartType=0,byte dirType=0,uint16_t myColor=TFT_YELLOW)\n{\n  byte myWidth=tft.width(),myHeight=tft.height();\n  graph.fillSprite(TFT_BLACK);\n  for (int i = 0; i < ((chartType==0)?(myWidth-1):myWidth) ; i++) {\n    if ((myNumList[i]) >-1 && (myNumList[i + 1]) >-1) {\n      switch(chartType){\n        case 0:\n          if (dirType==0)\n            graph.drawLine(i, myNumList[i], i + 1, myNumList[i + 1], myColor);\n          else\n            graph.drawLine(myWidth-1-i, myNumList[i], myWidth-2 -i, myNumList[i + 1], myColor);\n          break;\n        case 1:\n          if (dirType==0)\n            graph.drawLine(i, myHeight-1, i, myNumList[i], myColor);\n          else\n            graph.drawLine(myWidth-1-i, myHeight-1, myWidth-1-i, myNumList[i], myColor);\n          break;\n      }\n    }\n  }\n  for (int i = 0; i < (myWidth-1); i++) {\n    myNumList[i] = (myNumList[i + 1]);\n  }\n}\nvoid clearTFTchart()\n{\n  for(int i=0;i<TFT_HEIGHT;i++)\n    chartNumList[i]=-1;\n}\n';
   Blockly.Arduino.setups_.ttgo_tft_clear_chart='clearTFTchart();\n';
@@ -2769,6 +2898,30 @@ Blockly.Arduino.ttgo_tft_draw_chart=function(){
 Blockly.Arduino.ttgo_tft_clear_chart=function(){
   return'clearTFTchart();\n';
 }
+
+Blockly.Arduino.ttgo_tft_create_sprite=function(){
+    var a="mySprite";
+      b=Blockly.Arduino.valueToCode(this,"WIDTH",Blockly.Arduino.ORDER_NONE)||"0",
+      c=Blockly.Arduino.valueToCode(this,"HEIGHT",Blockly.Arduino.ORDER_NONE)||"0",
+      d=Blockly.Arduino.statementToCode(this,"EXTRA");
+  //a=a.replace(/\"/g,"");
+  d=d.replace("  ","");
+  d=d.replace(/\n  /g,"\n");
+  d=d.replace(/tft\./g,a+".");
+  d=d.replace(/mySprite\.color565/g,"tft.color565");
+  Blockly.Arduino.definitions_.define_ttgo_tft_sprite_invoke='TFT_eSprite '+a+'= TFT_eSprite(&tft);\n';
+  return a+'.createSprite('+b+','+c+');\nu8g2.begin(mySprite);\n'+d+'u8g2.begin(tft);\n';
+};
+
+Blockly.Arduino.ttgo_tft_push_sprite=function(){
+    var a=Blockly.Arduino.valueToCode(this,"X",Blockly.Arduino.ORDER_NONE)||"0",
+        b=Blockly.Arduino.valueToCode(this,"Y",Blockly.Arduino.ORDER_NONE)||"0";
+    return'mySprite.pushSprite('+a+', '+b+');\n'
+};
+
+Blockly.Arduino.ttgo_tft_delete_sprite=function(){
+    return'mySprite.deleteSprite();\n'
+};
 
 Blockly.Arduino.ttgo_tft_draw_qr=function(){
   var a=Blockly.Arduino.valueToCode(this,"START_X",Blockly.Arduino.ORDER_NONE)||"0",

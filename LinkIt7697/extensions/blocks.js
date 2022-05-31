@@ -3620,6 +3620,220 @@ Blockly.Blocks.pocketcard_rgb_color={init:function(){
   this.setTooltip(Blockly.Msg.POCKETCARD_TOOLTIP)}
 };
 
+//KSB065
+Blockly.Blocks.KSB065={};
+Blockly.Blocks.KSB065.HUE=120;
+Blockly.Blocks.KSB065.HUE5=290;
+Blockly.Blocks.KSB065.HUE4=157;
+Blockly.Blocks.KSB065_button={init:function(){
+  this.setHelpUrl(Blockly.Msg.KSB065_HELPURL);
+  this.setColour(Blockly.Blocks.KSB065.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LIOU_ROBOT_WHEN+" KSB065 "+Blockly.Msg.LIOU_ROBOT_BUTTON)
+      .appendField(new Blockly.FieldDropdown([["A","A"],["B","B"],["A+B","C"]]),"AB_BUTTON");
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LIOU_ROBOT_BUTTON_CHECK);
+  this.setInputsInline(!0);
+  this.appendStatementInput("MSG_BUTTON_CALL");
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.KSB065_TOOLTIP)}
+};
+
+Blockly.Blocks.KSB065_analog={init:function(){
+  this.setHelpUrl(Blockly.Msg.KSB065_HELPURL);
+  this.setColour(Blockly.Blocks.KSB065.HUE);
+  this.appendDummyInput()
+      .appendField("KSB065")
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.KSB065_ANALOG_LIST),"TYPE");
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Number");
+  this.setTooltip(Blockly.Msg.KSB065_TOOLTIP)}
+};
+
+Blockly.Blocks.KSB065_dht11={init:function(){
+  this.setHelpUrl(Blockly.Msg.KSB065_HELPURL);
+  this.setColour(Blockly.Blocks.KSB065.HUE);
+  this.appendDummyInput()
+      .appendField("KSB065")
+      .appendField(Blockly.Msg.STARTPLUS_DHT)
+      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.EZ_DHT_TEMP,"readTemperature"],[Blockly.Msg.EZ_DHT_HUMID,"readHumidity"]]),"DHT");
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Number");
+  this.setTooltip(Blockly.Msg.KSB065_TOOLTIP)}
+};
+
+Blockly.Blocks.KSB065_sonar={init:function(){
+  this.setHelpUrl(Blockly.Msg.KSB065_HELPURL);
+  this.setColour(Blockly.Blocks.KSB065.HUE);
+  this.appendDummyInput()
+      .appendField("KSB065")
+      .appendField(Blockly.Msg.LIOU_ROBOT_SONAR);
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Number");
+  this.setTooltip(Blockly.Msg.KSB065_TOOLTIP)}
+};
+
+Blockly.Blocks.KSB065_relay={init:function(){
+  this.setHelpUrl(Blockly.Msg.KSB065_HELPURL);
+  this.setColour(Blockly.Blocks.KSB065.HUE);
+  this.appendDummyInput()
+      .appendField("KSB065")
+      .appendField(Blockly.Msg.EZ_RELAY)
+  this.appendValueInput("ON_OFF")
+      .setCheck("Boolean");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.KSB065_TOOLTIP)}
+};
+
+Blockly.Blocks.KSB065_motor={init:function(){
+  this.setHelpUrl(Blockly.Msg.KSB065_HELPURL);
+  this.setColour(Blockly.Blocks.KSB065.HUE);
+  this.appendDummyInput()
+      .appendField("KSB065")
+      .appendField(Blockly.Msg.L9110_MOTOR);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.L9110_ROTATE)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.L9110_DIRECTION),"DIR");
+  this.appendValueInput("SPEED")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LIOU_ROBOT_MOVE_SPEED);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.KSB065_TOOLTIP)}
+};
+
+Blockly.Blocks.KSB065_motor_stop={init:function(){
+  this.setHelpUrl(Blockly.Msg.KSB065_HELPURL);
+  this.setColour(Blockly.Blocks.KSB065.HUE);
+  this.appendDummyInput()
+      .appendField("KSB065")
+      .appendField(Blockly.Msg.L9110_MOTOR)
+      .appendField(Blockly.Msg.LIOU_ROBOT_STOP);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.KSB065_TOOLTIP)}
+};
+
+Blockly.Blocks.KSB065_tone={init:function(){
+  this.setHelpUrl(Blockly.Msg.KSB065_HELPURL);
+  this.setColour(Blockly.Blocks.KSB065.HUE4);
+  this.appendDummyInput()
+      .appendField("KSB065")
+      .appendField(Blockly.Msg.EZ_TONE)
+      .appendField(Blockly.Msg.INOUT_TONE_APPENDTEXT_FREQ)
+      .appendField(new Blockly.FieldDropdown(profile["default"].tone),"FREQ");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.STARTPLUS_TOOLTIP)}
+};
+
+Blockly.Blocks.KSB065_no_tone={init:function(){
+  this.setHelpUrl(Blockly.Msg.KSB065_HELPURL);
+  this.setColour(Blockly.Blocks.KSB065.HUE4);
+  this.appendDummyInput()
+      .appendField("KSB065")
+      .appendField(Blockly.Msg.EZ_noTONE)
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.STARTPLUS_TOOLTIP)}
+};
+
+Blockly.Blocks.KSB065_custom_tone={init:function(){
+  this.setHelpUrl(Blockly.Msg.KSB065_HELPURL);
+  this.setColour(Blockly.Blocks.KSB065.HUE4);
+  this.appendDummyInput()
+      .appendField("KSB065")
+      .appendField(Blockly.Msg.EZ_TONE);
+  this.appendValueInput("FREQ")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.INOUT_TONE_APPENDTEXT_FREQ);
+  this.appendValueInput("DURATION")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.INOUT_TONE_APPENDTEXT_DURATION);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.STARTPLUS_TOOLTIP)}
+};
+
+Blockly.Blocks.KSB065_neopixel_begin={init:function(){
+  this.setHelpUrl(Blockly.Msg.KSB065_HELPURL);
+  this.setColour(Blockly.Blocks.KSB065.HUE5);
+  this.appendDummyInput()
+      .appendField("KSB065")
+      .appendField(Blockly.Msg.EZ_NEOPIXEL_BEGIN_BRIGHTNESS)
+  this.appendValueInput("BRIGHTNESS")
+      .setCheck("Number");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.KSB065_TOOLTIP)}
+};
+
+Blockly.Blocks.KSB065_neopixel_set_color={init:function(){
+  this.setHelpUrl(Blockly.Msg.KSB065_HELPURL);
+  this.setColour(Blockly.Blocks.KSB065.HUE5);
+  this.appendDummyInput()
+      .appendField("KSB065");
+  this.appendValueInput("INDEX")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.EZ_NEOPIXEL_TITLE);
+  this.appendValueInput("COLOR")
+      .setCheck("String")
+      .appendField(Blockly.Msg.NEOPIXEL_CUSTOM_SETPIXELCOLOR);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.KSB065_TOOLTIP)}
+};
+
+Blockly.Blocks.KSB065_neopixel_set_colors={init:function(){
+  this.setHelpUrl(Blockly.Msg.KSB065_HELPURL);
+  this.setColour(Blockly.Blocks.KSB065.HUE5);
+  this.appendDummyInput()
+      .appendField("KSB065")
+      .appendField(Blockly.Msg.EZ_NEOPIXEL_TITLE)
+  this.appendValueInput("COLOR")
+      .setCheck("String")
+      .appendField(Blockly.Msg.startPlus_NEOPIXEL_SET_ALL_COLORS);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.KSB065_TOOLTIP)}
+};
+
+Blockly.Blocks.KSB065_neopixel_show={init:function(){
+  this.setHelpUrl(Blockly.Msg.KSB065_HELPURL);
+  this.setColour(Blockly.Blocks.KSB065.HUE5);
+  this.appendDummyInput()
+      .appendField("KSB065")
+      .appendField(Blockly.Msg.EZ_NEOPIXEL_TITLE)
+      .appendField(Blockly.Msg.NEOPIXEL_SHOW);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.KSB065_TOOLTIP)}
+};
+
+Blockly.Blocks.KSB065_ir_receive={init:function(){
+  this.setHelpUrl(Blockly.Msg.IR_HELPURL);
+  this.setColour(Blockly.Blocks.ir.HUE);
+  this.appendDummyInput()
+      .appendField("KSB065")
+      .appendField(Blockly.Msg.STARTPLUS_IR_TITLE);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.IR_TOOLTIP)}
+};
+
 //MPU9250
 Blockly.Blocks.mpu9250={};
 Blockly.Blocks.mpu9250.HUE=120;
@@ -4380,13 +4594,24 @@ Blockly.Blocks.ttgo_tft_init={init:function(){
   this.appendDummyInput()
       .appendField(Blockly.Msg.TTGO_TFT_TITLE)
       .appendField(Blockly.Msg.TTGO_TFT_INIT)
-      .appendField(new Blockly.FieldDropdown([["TTGO","TFT_ON_TTGO"],["I2S_GO","TFT_ON_I2SGO"],["KSB065","TFT_ON_KSB065"]]),"TFT_TYPE");
+      .appendField(new Blockly.FieldDropdown([["KSB065","TFT_eSPI_KSB065.h"],["PixelBit","TFT_eSPI_PIXELBIT.h"],["TTGO","TFT_eSPI_TTGO.h"],["I2S_GO","TFT_eSPI_I2SGO.h"]]),"TFT_TYPE");
   this.setInputsInline(!0);
   this.setPreviousStatement(!0,null);
   this.setNextStatement(!0,null);
   this.setTooltip(Blockly.Msg.TTGO_TFT_TOOLTIP)}
 };
 
+Blockly.Blocks.ttgo_tft_wh={init:function(){
+  this.setHelpUrl(Blockly.Msg.TTGO_TFT_HELPURL);
+  this.setColour(Blockly.Blocks.ttgo_tft.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.TTGO_TFT_TITLE)
+      .appendField(Blockly.Msg.TTGO_TFT_GET_WIDTH_HEIGHT)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.TTGO_TFT_WIDTH_HEIGHT_LIST),"W_H");
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Number");
+  this.setTooltip(Blockly.Msg.TTGO_TFT_TOOLTIP)}
+};
 
 Blockly.Blocks.ttgo_tft_rotation={init:function(){
   this.setHelpUrl(Blockly.Msg.TTGO_TFT_HELPURL);
@@ -4435,7 +4660,24 @@ Blockly.Blocks.ttgo_tft_set_color={init:function(){
       .appendField(Blockly.Msg.TTGO_TFT_TITLE);
   this.appendValueInput("COLOR")
       .setCheck("String")
-      .appendField(Blockly.Msg.OLED_DISPLAY_SET_COLOR);
+      .appendField(Blockly.Msg.TTGO_TFT_DRAW_COLOR);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.TTGO_TFT_TOOLTIP)}
+};
+
+Blockly.Blocks.ttgo_tft_set_font_color={init:function(){
+  this.setHelpUrl(Blockly.Msg.TTGO_TFT_HELPURL);
+  this.setColour(Blockly.Blocks.ttgo_tft.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.TTGO_TFT_TITLE);
+  this.appendValueInput("FG_COLOR")
+      .setCheck("String")
+      .appendField(Blockly.Msg.TTGO_TFT_SET_FONT_COLOR+" "+Blockly.Msg.TTGO_TFT_FG_COLOR);
+  this.appendValueInput("BG_COLOR")
+      .setCheck("String")
+      .appendField(Blockly.Msg.TTGO_TFT_BG_COLOR);
   this.setInputsInline(!0);
   this.setPreviousStatement(!0);
   this.setNextStatement(!0);
@@ -4633,6 +4875,59 @@ Blockly.Blocks.ttgo_tft_clear_chart={init:function(){
   this.appendDummyInput()
       .appendField(Blockly.Msg.TTGO_TFT_TITLE)
       .appendField(Blockly.Msg.OLED_DISPLAY_CHART_CLEAR);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.TTGO_TFT_TOOLTIP)}
+};
+
+Blockly.Blocks.ttgo_tft_create_sprite={init:function(){
+  this.setHelpUrl(Blockly.Msg.TTGO_TFT_HELPURL);
+  this.setColour(Blockly.Blocks.ttgo_tft.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.TTGO_TFT_TITLE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.TTGO_TFT_CRATE_SPRITE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.OLED_DISPLAY_DRAW_BOX_END_NEW);
+  this.appendValueInput("WIDTH")
+      .setCheck("Number")
+      .appendField("W");
+  this.appendValueInput("HEIGHT")
+      .setCheck("Number")
+      .appendField("H");
+  this.appendStatementInput("EXTRA");
+  this.setInputsInline(1);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.TTGO_TFT_TOOLTIP)}
+};
+
+Blockly.Blocks.ttgo_tft_delete_sprite={init:function(){
+  this.setHelpUrl(Blockly.Msg.TTGO_TFT_HELPURL);
+  this.setColour(Blockly.Blocks.ttgo_tft.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.TTGO_TFT_TITLE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.TTGO_TFT_DELETE_SPRITE);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.TTGO_TFT_TOOLTIP)}
+};
+
+Blockly.Blocks.ttgo_tft_push_sprite={init:function(){
+  this.setHelpUrl(Blockly.Msg.TTGO_TFT_HELPURL);
+  this.setColour(Blockly.Blocks.ttgo_tft.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.TTGO_TFT_TITLE)
+      .appendField(Blockly.Msg.TTGO_TFT_PUSH_SPRITE);
+  this.appendValueInput("X")
+      .setCheck("Number")
+      .appendField("X");
+  this.appendValueInput("Y")
+      .setCheck("Number")
+      .appendField("Y");
   this.setInputsInline(!0);
   this.setPreviousStatement(!0);
   this.setNextStatement(!0);

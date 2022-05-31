@@ -515,6 +515,11 @@ Blockly.Msg.POCKETCARD_PIXELS_BRIGHTNESS = "亮度";
 Blockly.Msg.POCKETCARD_PIXEL_FORMAT = "板載RGB規格設定";
 Blockly.Msg.POCKETCARD_PIXELS_COLOR = "板載RGB顏色";
 
+//KSB065
+Blockly.Msg.KSB065_HELPURL = "";
+Blockly.Msg.KSB065_TOOLTIP = "KSB065";
+Blockly.Msg.KSB065_ANALOG_LIST=[["滑桿值","33"],["TEMP6000光感值","4"]];
+
 //MPU9250
 Blockly.Msg.MPU9250_HELPURL= "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/mpu9250九軸感應器";
 Blockly.Msg.MPU9250_TITLE = "MPU9250";
@@ -615,6 +620,8 @@ Blockly.Msg.TTGO_TFT_TITLE = "TFT彩色螢幕";
 Blockly.Msg.TTGO_TFT_INIT = "初始化";
 Blockly.Msg.TTGO_TFT_TOOLTIP = "TFT Display";
 Blockly.Msg.TTGO_TFT_ROTATION=[["縱向","0"],["橫向","1"]];
+Blockly.Msg.TTGO_TFT_TRANSPARENT = "背景透明";
+Blockly.Msg.TTGO_TFT_DRAW_COLOR = "設定繪圖顏色";
 Blockly.Msg.TTGO_TFT_FILL_COLOR = "填滿顏色";
 Blockly.Msg.TTGO_TFT_INIT_WARNIG = "必須先設定「"+Blockly.Msg.TTGO_TFT_TITLE+Blockly.Msg.TTGO_TFT_INIT+"」積木";
 Blockly.Msg.TTGO_TFT_DRAW_CHINESE_TEXT ="顯示中文字";
@@ -636,6 +643,15 @@ Blockly.Msg.TTGO_TFT_COLOR_SCALE = "刻度";
 Blockly.Msg.TTGO_TFT_SET_CLOCK = "設定時鐘顏色";
 Blockly.Msg.TTGO_TFT_CLOCK_POSITION_TITLE = "時鐘位置";
 Blockly.Msg.TTGO_TFT_CLOCK_POSITION=[["中間","1"],["上(左)邊","0"],["下(右)邊","2"]];
+Blockly.Msg.TTGO_TFT_SET_FONT_COLOR = "設定文字顏色";
+Blockly.Msg.TTGO_TFT_FG_COLOR = "前景色";
+Blockly.Msg.TTGO_TFT_BG_COLOR = "背景色";
+Blockly.Msg.TTGO_TFT_GET_WIDTH_HEIGHT = "取得螢幕";
+Blockly.Msg.TTGO_TFT_WIDTH_HEIGHT_LIST =[["寬度","tft.width()"],["高度","tft.height()"]];
+Blockly.Msg.TTGO_TFT_CRATE_SPRITE = "建立繪圖精靈";
+Blockly.Msg.TTGO_TFT_SPRITE_NAME = "名稱";
+Blockly.Msg.TTGO_TFT_PUSH_SPRITE = "將繪圖精靈顯示在";
+Blockly.Msg.TTGO_TFT_DELETE_SPRITE = "清除繪圖精靈緩衝區資料";
 
 //S20
 Blockly.Msg.S20_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/s20智慧插座積木";

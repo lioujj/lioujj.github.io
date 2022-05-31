@@ -522,6 +522,11 @@ Blockly.Msg.POCKETCARD_PIXELS_BRIGHTNESS = "brightness";
 Blockly.Msg.POCKETCARD_PIXEL_FORMAT = "built-in RGB format";
 Blockly.Msg.POCKETCARD_PIXELS_COLOR = "built-in RGB color";
 
+//KSB065
+Blockly.Msg.KSB065_HELPURL = "";
+Blockly.Msg.KSB065_TOOLTIP = "KSB065";
+Blockly.Msg.KSB065_ANALOG_LIST=[["slider value","33"],["TEMP6000 value","4"]];
+
 //MPU9250
 Blockly.Msg.MPU9250_HELPURL= "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/mpu9250九軸感應器";
 Blockly.Msg.MPU9250_TITLE = "MPU9250";
@@ -622,6 +627,8 @@ Blockly.Msg.TTGO_TFT_TITLE = "TFT Display";
 Blockly.Msg.TTGO_TFT_INIT = "initial";
 Blockly.Msg.TTGO_TFT_TOOLTIP = "TFT Display";
 Blockly.Msg.TTGO_TFT_ROTATION=[["Portrait","0"],["Landscape","1"]];
+Blockly.Msg.TTGO_TFT_TRANSPARENT = "background transparent";
+Blockly.Msg.TTGO_TFT_DRAW_COLOR = "set draw color";
 Blockly.Msg.TTGO_TFT_FILL_COLOR = "fill color";
 Blockly.Msg.TTGO_TFT_INIT_WARNIG = "You have to "+Blockly.Msg.TTGO_TFT_INIT+" "+Blockly.Msg.TTGO_TFT_TITLE+" first.";
 Blockly.Msg.TTGO_TFT_DRAW_CHINESE_TEXT ="show Chinese text";
@@ -643,6 +650,15 @@ Blockly.Msg.TTGO_TFT_COLOR_SCALE = "scale";
 Blockly.Msg.TTGO_TFT_SET_CLOCK = "set clock color";
 Blockly.Msg.TTGO_TFT_CLOCK_POSITION_TITLE = "position:";
 Blockly.Msg.TTGO_TFT_CLOCK_POSITION=[["middle","1"],["top(left)","0"],["bottom(right)","2"]];
+Blockly.Msg.TTGO_TFT_SET_FONT_COLOR = "set font color";
+Blockly.Msg.TTGO_TFT_FG_COLOR = "foreground color";
+Blockly.Msg.TTGO_TFT_BG_COLOR = "background color";
+Blockly.Msg.TTGO_TFT_GET_WIDTH_HEIGHT = "get TFT";
+Blockly.Msg.TTGO_TFT_WIDTH_HEIGHT_LIST =[["width","tft.width()"],["height","tft.height()"]];
+Blockly.Msg.TTGO_TFT_CRATE_SPRITE = "create a sprite";
+Blockly.Msg.TTGO_TFT_SPRITE_NAME = "name";
+Blockly.Msg.TTGO_TFT_PUSH_SPRITE = "push sprite on";
+Blockly.Msg.TTGO_TFT_DELETE_SPRITE = "clear sprite";
 
 //S20
 Blockly.Msg.S20_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/s20智慧插座積木";
