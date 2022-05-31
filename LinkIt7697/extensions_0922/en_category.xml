@@ -31,6 +31,7 @@
 <category><name>Boards_Tool</name><replace>Setup</replace></category>
 <category><name>YuBoard</name><replace>ESP32 Board</replace></category>
 <category><name>PocketCard</name><replace>Pocket Card</replace></category>
+<category><name>KSB065</name><replace>KSB065</replace></category>
 <category><name>AnalogWrite</name><replace>AnalogWrite Tone</replace></category>
 <category><name>MPU9250_I2C</name><replace>MPU9250 9-axis</replace></category>
 <category><name>MSA301_I2C</name><replace>MSA301 3-axis</replace></category>

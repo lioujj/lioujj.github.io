@@ -32,6 +32,7 @@
 <category><name>Boards_Tool</name><replace>設定</replace></category>
 <category><name>YuBoard</name><replace>ESP32教學輔助板</replace></category>
 <category><name>PocketCard</name><replace>Pocket Card</replace></category>
+<category><name>KSB065</name><replace>KSB065</replace></category>
 <category><name>AnalogWrite</name><replace>類比寫入及音調</replace></category>
 <category><name>MPU9250_I2C</name><replace>MPU9250 9軸動作感應</replace></category>
 <category><name>MSA301_I2C</name><replace>MSA301 3軸加速度感應</replace></category>
