@@ -516,7 +516,7 @@ Blockly.Msg.POCKETCARD_PIXEL_FORMAT = "板載RGB規格設定";
 Blockly.Msg.POCKETCARD_PIXELS_COLOR = "板載RGB顏色";
 
 //KSB065
-Blockly.Msg.KSB065_HELPURL = "";
+Blockly.Msg.KSB065_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/ksb065擴展板積木";
 Blockly.Msg.KSB065_TOOLTIP = "KSB065";
 Blockly.Msg.KSB065_ANALOG_LIST=[["滑桿值","33"],["TEMP6000光感值","4"]];
 

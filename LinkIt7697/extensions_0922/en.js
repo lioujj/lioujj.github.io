@@ -523,7 +523,7 @@ Blockly.Msg.POCKETCARD_PIXEL_FORMAT = "built-in RGB format";
 Blockly.Msg.POCKETCARD_PIXELS_COLOR = "built-in RGB color";
 
 //KSB065
-Blockly.Msg.KSB065_HELPURL = "";
+Blockly.Msg.KSB065_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/ksb065擴展板積木";
 Blockly.Msg.KSB065_TOOLTIP = "KSB065";
 Blockly.Msg.KSB065_ANALOG_LIST=[["slider value","33"],["TEMP6000 value","4"]];
 
