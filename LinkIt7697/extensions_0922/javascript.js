@@ -2908,6 +2908,7 @@ Blockly.Arduino.ttgo_tft_create_sprite=function(){
   d=d.replace("  ","");
   d=d.replace(/\n  /g,"\n");
   d=d.replace(/tft\./g,a+".");
+  d=d.replace(/\.fillScreen/g,".fillSprite");
   d=d.replace(/mySprite\.color565/g,"tft.color565");
   Blockly.Arduino.definitions_.define_ttgo_tft_sprite_invoke='TFT_eSprite '+a+'= TFT_eSprite(&tft);\n';
   return a+'.createSprite('+b+','+c+');\nu8g2.begin(mySprite);\n'+d+'u8g2.begin(tft);\n';
