@@ -650,8 +650,9 @@ Blockly.Msg.TTGO_TFT_GET_WIDTH_HEIGHT = "取得螢幕";
 Blockly.Msg.TTGO_TFT_WIDTH_HEIGHT_LIST =[["寬度","tft.width()"],["高度","tft.height()"]];
 Blockly.Msg.TTGO_TFT_CRATE_SPRITE = "建立繪圖精靈";
 Blockly.Msg.TTGO_TFT_SPRITE_NAME = "名稱";
-Blockly.Msg.TTGO_TFT_PUSH_SPRITE = "將繪圖精靈顯示在";
-Blockly.Msg.TTGO_TFT_DELETE_SPRITE = "清除繪圖精靈緩衝區資料";
+Blockly.Msg.TTGO_TFT_PUSH_SPRITE = "顯示繪圖精靈";
+Blockly.Msg.TTGO_TFT_DELETE_SPRITE = "清除繪圖精靈緩衝區內容";
+Blockly.Msg.TTGO_TFT_TRANSPARENT_COLOR = "透明顏色";
 
 //S20
 Blockly.Msg.S20_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/s20智慧插座積木";

@@ -2900,28 +2900,42 @@ Blockly.Arduino.ttgo_tft_clear_chart=function(){
 }
 
 Blockly.Arduino.ttgo_tft_create_sprite=function(){
-    var a="mySprite";
+    var a=Blockly.Arduino.valueToCode(this,"SPRITE_NAME",Blockly.Arduino.ORDER_NONE)||"",
       b=Blockly.Arduino.valueToCode(this,"WIDTH",Blockly.Arduino.ORDER_NONE)||"0",
       c=Blockly.Arduino.valueToCode(this,"HEIGHT",Blockly.Arduino.ORDER_NONE)||"0",
       d=Blockly.Arduino.statementToCode(this,"EXTRA");
-  //a=a.replace(/\"/g,"");
+  a=a.replace(/\"/g,"");
   d=d.replace("  ","");
   d=d.replace(/\n  /g,"\n");
   d=d.replace(/tft\./g,a+".");
   d=d.replace(/\.fillScreen/g,".fillSprite");
-  d=d.replace(/mySprite\.color565/g,"tft.color565");
+  //d=d.replace(/mySprite\.color565/g,"tft.color565");
+  d=d.replace(new RegExp(a+".color565","gm"),"tft.color565");
   Blockly.Arduino.definitions_.define_ttgo_tft_sprite_invoke='TFT_eSprite '+a+'= TFT_eSprite(&tft);\n';
-  return a+'.createSprite('+b+','+c+');\nu8g2.begin(mySprite);\n'+d+'u8g2.begin(tft);\n';
+  return a+'.createSprite('+b+','+c+');\nu8g2.begin('+a+');\n'+d+'u8g2.begin(tft);\n';
 };
 
 Blockly.Arduino.ttgo_tft_push_sprite=function(){
-    var a=Blockly.Arduino.valueToCode(this,"X",Blockly.Arduino.ORDER_NONE)||"0",
-        b=Blockly.Arduino.valueToCode(this,"Y",Blockly.Arduino.ORDER_NONE)||"0";
-    return'mySprite.pushSprite('+a+', '+b+');\n'
+  var a=Blockly.Arduino.valueToCode(this,"SPRITE_NAME",Blockly.Arduino.ORDER_NONE)||"",
+      b=Blockly.Arduino.valueToCode(this,"X",Blockly.Arduino.ORDER_NONE)||"0",
+      c=Blockly.Arduino.valueToCode(this,"Y",Blockly.Arduino.ORDER_NONE)||"0";
+  a=a.replace(/\"/g,"");
+  return a+'.pushSprite('+b+', '+c+');\n'
+};
+
+Blockly.Arduino.ttgo_tft_push_sprite_trans=function(){
+  var a=Blockly.Arduino.valueToCode(this,"SPRITE_NAME",Blockly.Arduino.ORDER_NONE)||"",
+      b=Blockly.Arduino.valueToCode(this,"X",Blockly.Arduino.ORDER_NONE)||"0",
+      c=Blockly.Arduino.valueToCode(this,"Y",Blockly.Arduino.ORDER_NONE)||"0",
+      d=Blockly.Arduino.valueToCode(this,"COLOR",Blockly.Arduino.ORDER_ATOMIC)||"";
+  a=a.replace(/\"/g,"");
+  return a+'.pushSprite('+b+', '+c+','+d+');\n'
 };
 
 Blockly.Arduino.ttgo_tft_delete_sprite=function(){
-    return'mySprite.deleteSprite();\n'
+  var a=Blockly.Arduino.valueToCode(this,"SPRITE_NAME",Blockly.Arduino.ORDER_NONE)||"";
+  a=a.replace(/\"/g,"");
+  return a+'.deleteSprite();\n'
 };
 
 Blockly.Arduino.ttgo_tft_draw_qr=function(){
@@ -3217,6 +3231,17 @@ Blockly.Arduino.sd_init=function(){
   Blockly.Arduino.definitions_.define_SDFAT_include='#include "SdFat.h"';
   Blockly.Arduino.definitions_.define_SDFAT_variable_invoke='SdFat mySD;\nbool SD_exists=false;\n';
   Blockly.Arduino.definitions_.define_SD_CS_invoke='int pinCS=SS;';
+  if (Blockly.Arduino.my_board_type=="7697"){
+    return'SD_exists=mySD.begin();\n';
+  } else {
+    return'SD_exists=mySD.begin(pinCS, SD_SCK_MHZ(10));\n';
+  }
+}
+
+Blockly.Arduino.sd_KSB065_init=function(){
+  Blockly.Arduino.definitions_.define_SDFAT_include='#include "SdFat.h"';
+  Blockly.Arduino.definitions_.define_SDFAT_variable_invoke='SdFat mySD;\nbool SD_exists=false;\n';
+  Blockly.Arduino.definitions_.define_SD_CS_invoke='int pinCS=4;';
   if (Blockly.Arduino.my_board_type=="7697"){
     return'SD_exists=mySD.begin();\n';
   } else {

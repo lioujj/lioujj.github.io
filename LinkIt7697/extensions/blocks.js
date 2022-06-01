@@ -4885,9 +4885,10 @@ Blockly.Blocks.ttgo_tft_create_sprite={init:function(){
   this.setHelpUrl(Blockly.Msg.TTGO_TFT_HELPURL);
   this.setColour(Blockly.Blocks.ttgo_tft.HUE);
   this.appendDummyInput()
-      .appendField(Blockly.Msg.TTGO_TFT_TITLE);
-  this.appendDummyInput()
+      .appendField(Blockly.Msg.TTGO_TFT_TITLE)
       .appendField(Blockly.Msg.TTGO_TFT_CRATE_SPRITE);
+  this.appendValueInput("SPRITE_NAME")
+      .appendField(Blockly.Msg.TTGO_TFT_SPRITE_NAME);
   this.appendDummyInput()
       .appendField(Blockly.Msg.OLED_DISPLAY_DRAW_BOX_END_NEW);
   this.appendValueInput("WIDTH")
@@ -4907,9 +4908,10 @@ Blockly.Blocks.ttgo_tft_delete_sprite={init:function(){
   this.setHelpUrl(Blockly.Msg.TTGO_TFT_HELPURL);
   this.setColour(Blockly.Blocks.ttgo_tft.HUE);
   this.appendDummyInput()
-      .appendField(Blockly.Msg.TTGO_TFT_TITLE);
-  this.appendDummyInput()
+      .appendField(Blockly.Msg.TTGO_TFT_TITLE)
       .appendField(Blockly.Msg.TTGO_TFT_DELETE_SPRITE);
+  this.appendValueInput("SPRITE_NAME")
+      .appendField(Blockly.Msg.TTGO_TFT_SPRITE_NAME);
   this.setInputsInline(!0);
   this.setPreviousStatement(!0);
   this.setNextStatement(!0);
@@ -4922,12 +4924,39 @@ Blockly.Blocks.ttgo_tft_push_sprite={init:function(){
   this.appendDummyInput()
       .appendField(Blockly.Msg.TTGO_TFT_TITLE)
       .appendField(Blockly.Msg.TTGO_TFT_PUSH_SPRITE);
+  this.appendValueInput("SPRITE_NAME")
+      .appendField(Blockly.Msg.TTGO_TFT_SPRITE_NAME);
+  this.appendDummyInput()
   this.appendValueInput("X")
       .setCheck("Number")
       .appendField("X");
   this.appendValueInput("Y")
       .setCheck("Number")
       .appendField("Y");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.TTGO_TFT_TOOLTIP)}
+};
+
+Blockly.Blocks.ttgo_tft_push_sprite_trans={init:function(){
+  this.setHelpUrl(Blockly.Msg.TTGO_TFT_HELPURL);
+  this.setColour(Blockly.Blocks.ttgo_tft.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.TTGO_TFT_TITLE)
+      .appendField(Blockly.Msg.TTGO_TFT_PUSH_SPRITE);
+  this.appendValueInput("SPRITE_NAME")
+      .appendField(Blockly.Msg.TTGO_TFT_SPRITE_NAME);
+  this.appendDummyInput()
+  this.appendValueInput("X")
+      .setCheck("Number")
+      .appendField("X");
+  this.appendValueInput("Y")
+      .setCheck("Number")
+      .appendField("Y");
+  this.appendValueInput("COLOR")
+      .setCheck("String")
+      .appendField(Blockly.Msg.TTGO_TFT_TRANSPARENT_COLOR);
   this.setInputsInline(!0);
   this.setPreviousStatement(!0);
   this.setNextStatement(!0);
@@ -5518,6 +5547,19 @@ Blockly.Blocks.sd_init={init:function(){
   this.setHelpUrl(Blockly.Msg.SD_HELPURL);
   this.setColour(Blockly.Blocks.sd.HUE);
   this.appendDummyInput()
+      .appendField(Blockly.Msg.SD_TITLE)
+      .appendField(Blockly.Msg.SD_INIT);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.SD_TOOLTIP)}
+};
+
+Blockly.Blocks.sd_KSB065_init={init:function(){
+  this.setHelpUrl(Blockly.Msg.SD_HELPURL);
+  this.setColour(Blockly.Blocks.sd.HUE);
+  this.appendDummyInput()
+      .appendField("KSB065 & PocketCard")
       .appendField(Blockly.Msg.SD_TITLE)
       .appendField(Blockly.Msg.SD_INIT);
   this.setInputsInline(!0);
