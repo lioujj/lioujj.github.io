@@ -812,6 +812,11 @@
           </value>
         </block>
         <block type="ttgo_tft_create_sprite">
+				  <value name="SPRITE_NAME">
+  					<block type="text">
+	  					<field name="TEXT">mySprite</field>
+            </block>
+			  	</value>
           <value name="WIDTH">
             <block type="math_number">
               <field name="NUM">0</field>
@@ -824,6 +829,11 @@
           </value>       
         </block>
         <block type="ttgo_tft_push_sprite">
+				  <value name="SPRITE_NAME">
+  					<block type="text">
+	  					<field name="TEXT">mySprite</field>
+            </block>
+			  	</value>
           <value name="X">
             <block type="math_number">
               <field name="NUM">0</field>
@@ -835,7 +845,33 @@
             </block>
           </value>       
         </block>
-        <block type="ttgo_tft_delete_sprite"></block>
+        <block type="ttgo_tft_push_sprite_trans">
+				  <value name="SPRITE_NAME">
+  					<block type="text">
+	  					<field name="TEXT">mySprite</field>
+            </block>
+			  	</value>
+          <value name="X">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="Y">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="COLOR">
+            <block type="ttgo_getFromColorPicker"></block>
+          </value>            
+        </block>
+        <block type="ttgo_tft_delete_sprite">
+				  <value name="SPRITE_NAME">
+  					<block type="text">
+	  					<field name="TEXT">mySprite</field>
+            </block>
+			  	</value>
+        </block>
         <block type="ttgo_getRGBcolor">
           <value name="RED">
             <block type="math_number">
@@ -2100,6 +2136,7 @@
     </category>
     <category id="category_sd" name="SD_CARD">
       <block type="sd_init"></block>
+      <block type="sd_KSB065_init"></block>
       <block type="sd_set_cs">
         <value name="CS_PIN">
           <block type="math_number">

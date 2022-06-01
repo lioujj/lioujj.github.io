@@ -657,8 +657,9 @@ Blockly.Msg.TTGO_TFT_GET_WIDTH_HEIGHT = "get TFT";
 Blockly.Msg.TTGO_TFT_WIDTH_HEIGHT_LIST =[["width","tft.width()"],["height","tft.height()"]];
 Blockly.Msg.TTGO_TFT_CRATE_SPRITE = "create a sprite";
 Blockly.Msg.TTGO_TFT_SPRITE_NAME = "name";
-Blockly.Msg.TTGO_TFT_PUSH_SPRITE = "push sprite on";
+Blockly.Msg.TTGO_TFT_PUSH_SPRITE = "push sprite";
 Blockly.Msg.TTGO_TFT_DELETE_SPRITE = "clear sprite";
+Blockly.Msg.TTGO_TFT_TRANSPARENT_COLOR = "transparent color";
 
 //S20
 Blockly.Msg.S20_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/s20智慧插座積木";
