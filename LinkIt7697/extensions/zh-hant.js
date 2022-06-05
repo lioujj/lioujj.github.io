@@ -653,6 +653,7 @@ Blockly.Msg.TTGO_TFT_SPRITE_NAME = "名稱";
 Blockly.Msg.TTGO_TFT_PUSH_SPRITE = "顯示繪圖精靈";
 Blockly.Msg.TTGO_TFT_DELETE_SPRITE = "清除繪圖精靈緩衝區內容";
 Blockly.Msg.TTGO_TFT_TRANSPARENT_COLOR = "透明顏色";
+Blockly.Msg.TTGO_TFT_PUSH_IMAGE = "顯示jpeg圖檔";
 
 //S20
 Blockly.Msg.S20_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/s20智慧插座積木";

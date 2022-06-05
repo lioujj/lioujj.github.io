@@ -843,7 +843,7 @@
             <block type="math_number">
               <field name="NUM">0</field>
             </block>
-          </value>       
+          </value>     
         </block>
         <block type="ttgo_tft_push_sprite_trans">
 				  <value name="SPRITE_NAME">
@@ -890,6 +890,23 @@
           </value>
         </block>
         <block type="ttgo_getFromColorPicker"></block>
+        <block type="ttgo_tft_push_image">
+				  <value name="FILE_NAME">
+  					<block type="text">
+	  					<field name="TEXT">/jpg/123.jpg</field>
+            </block>
+			  	</value>
+          <value name="X">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="Y">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value> 
+        </block>
         <block type="ttgo_tft_set_clock">
           <value name="COLOR_HOUR">
             <block type="ttgo_getFromColorPicker"></block>

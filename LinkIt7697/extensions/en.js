@@ -660,6 +660,7 @@ Blockly.Msg.TTGO_TFT_SPRITE_NAME = "name";
 Blockly.Msg.TTGO_TFT_PUSH_SPRITE = "push sprite";
 Blockly.Msg.TTGO_TFT_DELETE_SPRITE = "clear sprite";
 Blockly.Msg.TTGO_TFT_TRANSPARENT_COLOR = "transparent color";
+Blockly.Msg.TTGO_TFT_PUSH_IMAGE = "push jpeg image";
 
 //S20
 Blockly.Msg.S20_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/s20智慧插座積木";

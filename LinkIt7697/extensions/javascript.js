@@ -2771,9 +2771,11 @@ Blockly.Arduino.breakLine=function(){
 Blockly.Arduino.ttgo_tft={};
 Blockly.Arduino.ttgo_tft_init=function(){
   var a=this.getFieldValue("TFT_TYPE");
+  Blockly.Arduino.ttgo_tft.my_type=a;
   //Blockly.Arduino.definitions_.define_spi="#include <SPI.h>";
-  Blockly.Arduino.definitions_.define_ttgo_tft="#include <"+a+">\n#include <U8g2_for_TFT_eSPI.h>";
+  Blockly.Arduino.definitions_.define_ttgo_tft_include="#include <TFT_eSPI_"+a+".h>\n#include <U8g2_for_TFT_eSPI.h>";
   Blockly.Arduino.definitions_.define_ttgo_tft_init_invoke="TFT_eSPI tft = TFT_eSPI();\nU8g2_for_TFT_eSPI u8g2;\nuint32_t tft_color=TFT_WHITE;\nuint32_t tft_bg_color=TFT_BLACK;\nuint32_t tft_fg_color=TFT_WHITE;\nbyte tftTextSize=1;\nbyte tftTextFont=1;\n";
+  Blockly.Arduino.definitions_.define_SD_CS_invoke='int pinCS=SS;';
   Blockly.Arduino.setups_.ttgo_tft='tft.begin();\n  tft.fillScreen(TFT_BLACK);\n  u8g2.begin(tft);\n  tft.setTextColor(tft_color);\n  u8g2.setForegroundColor(tft_color);';
   return'';
 };
@@ -2819,8 +2821,9 @@ Blockly.Arduino.ttgo_tft_set_font_color=function(){
 Blockly.Arduino.ttgo_tft_draw_chinese_text=function(){
   var a=Blockly.Arduino.valueToCode(this,"START_X",Blockly.Arduino.ORDER_NONE)||"0",
   b=Blockly.Arduino.valueToCode(this,"START_Y",Blockly.Arduino.ORDER_NONE)||"0",
-  c=Blockly.Arduino.valueToCode(this,"CONTENT",Blockly.Arduino.ORDER_NONE)||"";
-  return"u8g2.setFont(u8g2_font_unifont_t_chinese1);\nu8g2.setCursor("+a+", "+(parseInt(b)+15)+");\nu8g2.print(String("+c+").c_str());\n"
+  c=Blockly.Arduino.valueToCode(this,"CONTENT",Blockly.Arduino.ORDER_NONE)||"",
+  d=this.getFieldValue("TRANSPARENT");
+  return"u8g2.setFont(u8g2_font_unifont_t_chinese1);\nu8g2.setFontMode("+d+");\nu8g2.setCursor("+a+", "+(parseInt(b)+15)+");\nu8g2.print(String("+c+").c_str());\n"
 };
 
 Blockly.Arduino.ttgo_tft_set_eng_font=function(){
@@ -2864,14 +2867,15 @@ Blockly.Arduino.ttgo_set_font=function(){
   if (!a.endsWith('_t')){
     a=a+'_t';
   }
-  return"u8g2.setFont("+a+");\nu8g2.setFontMode(1);\n";
+  return"u8g2.setFont("+a+");\n";
 };
 
 Blockly.Arduino.ttgo_tft_draw_symbol=function(){
   var a=Blockly.Arduino.valueToCode(this,"START_X",Blockly.Arduino.ORDER_NONE)||"0",
   b=Blockly.Arduino.valueToCode(this,"START_Y",Blockly.Arduino.ORDER_NONE)||"0",
-  c=Blockly.Arduino.valueToCode(this,"SYMBOL_NUM",Blockly.Arduino.ORDER_NONE)||"0";
-  return'u8g2.drawGlyph('+a+','+b+','+c+');\n';
+  c=Blockly.Arduino.valueToCode(this,"SYMBOL_NUM",Blockly.Arduino.ORDER_NONE)||"0",
+  d=this.getFieldValue("TRANSPARENT");
+  return'u8g2.setFontMode('+d+');\nu8g2.drawGlyph('+a+','+b+','+c+');\n';
 };
 
 Blockly.Arduino.ttgo_tft_draw_chart=function(){
@@ -2909,8 +2913,8 @@ Blockly.Arduino.ttgo_tft_create_sprite=function(){
   d=d.replace(/\n  /g,"\n");
   d=d.replace(/tft\./g,a+".");
   d=d.replace(/\.fillScreen/g,".fillSprite");
-  //d=d.replace(/mySprite\.color565/g,"tft.color565");
   d=d.replace(new RegExp(a+".color565","gm"),"tft.color565");
+  d=d.replace(new RegExp(",1,&tft","gm"),",2,&"+a);
   Blockly.Arduino.definitions_.define_ttgo_tft_sprite_invoke='TFT_eSprite '+a+'= TFT_eSprite(&tft);\n';
   return a+'.createSprite('+b+','+c+');\nu8g2.begin('+a+');\n'+d+'u8g2.begin(tft);\n';
 };
@@ -2938,6 +2942,38 @@ Blockly.Arduino.ttgo_tft_delete_sprite=function(){
   return a+'.deleteSprite();\n'
 };
 
+
+Blockly.Arduino.ttgo_tft_push_image=function(){
+  var a=Blockly.Arduino.valueToCode(this,"FILE_NAME",Blockly.Arduino.ORDER_NONE)||"",
+      b=Blockly.Arduino.valueToCode(this,"X",Blockly.Arduino.ORDER_NONE)||"0",
+      c=Blockly.Arduino.valueToCode(this,"Y",Blockly.Arduino.ORDER_NONE)||"0",
+      d=d=this.getFieldValue("F_SOURCE");
+  Blockly.Arduino.definitions_.define_ttgo_tft_include+="\n#include <JPEGDecoder.h>\n#define minimum(a,b)     (((a) < (b)) ? (a) : (b))";
+  Blockly.Arduino.definitions_.define_ttgo_tft_draw_jpeg_event='void drawJpegFile(const char *filename, int xpos, int ypos,byte mediaType,byte tftType,TFT_eSPI *myTFTaddr) {\n  File jpegFile;\n  boolean decoded=false;\n  if (mediaType==1){\n    SD.begin(pinCS);\n    jpegFile = SD.open( filename, FILE_READ);\n    if ( !jpegFile )  return;\n    decoded = JpegDec.decodeSdFile(jpegFile);\n  } else if (mediaType==2){\n    SPIFFS.begin();\n    jpegFile = SPIFFS.open( filename, FILE_READ);\n    if ( !jpegFile )  return;\n    decoded = JpegDec.decodeFsFile(jpegFile);\n  }\n  if ( !jpegFile )  return;\n  if (decoded) {\n    renderJPEG(xpos, ypos,tftType,myTFTaddr);\n  }\n  jpegFile.close();\n  if (mediaType==1)\n    SD.end();\n  else if (mediaType==2)\n    SPIFFS.end();\n}\n';
+  Blockly.Arduino.definitions_.define_ttgo_tft_render_jpeg_event='void renderJPEG(int xpos, int ypos,byte tftType,TFT_eSPI *myTarget) {\n  TFT_eSprite* myTempSprite;\n  if (tftType==2)\n    myTempSprite=(TFT_eSprite*)myTarget;\n  uint16_t *pImg;\n  uint16_t mcu_w = JpegDec.MCUWidth;\n  uint16_t mcu_h = JpegDec.MCUHeight;\n  uint32_t max_x = JpegDec.width;\n  uint32_t max_y = JpegDec.height;\n  uint32_t min_w = minimum(mcu_w, max_x % mcu_w);\n  uint32_t min_h = minimum(mcu_h, max_y % mcu_h);\n  uint32_t win_w = mcu_w;\n  uint32_t win_h = mcu_h;\n  uint32_t drawTime = millis();\n  max_x += xpos;\n  max_y += ypos;\n  while (JpegDec.readSwappedBytes()) {\n    pImg = JpegDec.pImage ;\n    int mcu_x = JpegDec.MCUx * mcu_w + xpos;\n    int mcu_y = JpegDec.MCUy * mcu_h + ypos;\n    if (mcu_x + mcu_w <= max_x) win_w = mcu_w;\n    else win_w = min_w;\n    if (mcu_y + mcu_h <= max_y) win_h = mcu_h;\n    else win_h = min_h;\n    if (win_w != mcu_w)\n    {\n      uint16_t *cImg;\n      int p = 0;\n      cImg = pImg + win_w;\n      for (int h = 1; h < win_h; h++)\n      {\n        p += mcu_w;\n        for (int w = 0; w < win_w; w++)\n        {\n          *cImg = *(pImg + w + p);\n          cImg++;\n        }\n      }\n    }\n    if (tftType==1){\n      if (( mcu_x + win_w ) <= myTarget->width() && ( mcu_y + win_h ) <= myTarget->height())\n        myTarget->pushImage(mcu_x, mcu_y, win_w, win_h, pImg);\n      else if ( (mcu_y + win_h) >= myTarget->height()) JpegDec.abort();\n    } else if (tftType==2){\n      if (( mcu_x + win_w ) <= myTempSprite->width() && ( mcu_y + win_h ) <= myTempSprite->height())\n        myTempSprite->pushImage(mcu_x, mcu_y, win_w, win_h, pImg);\n      else if ( (mcu_y + win_h) >= myTempSprite->height()) JpegDec.abort();\n    }\n  }\n  drawTime = millis() - drawTime;\n}\n';
+  if (Blockly.Arduino.ttgo_tft.my_type=='KSB065'){
+      Blockly.Arduino.definitions_.define_SD_CS_invoke='int pinCS=4;';
+  }
+  if (d=='1'){
+    if (Blockly.Arduino.ttgo_tft.my_type=='KSB065'){
+      if (Blockly.Arduino.setups_.ttgo_tft.indexOf('SD.begin(pinCS)')<0)
+        Blockly.Arduino.setups_.ttgo_tft='SD.begin(pinCS);\n  SD.end();\n  '+Blockly.Arduino.setups_.ttgo_tft;
+    }
+    else if (Blockly.Arduino.ttgo_tft.my_type=='PIXELBIT'){
+      if (Blockly.Arduino.setups_.ttgo_tft.indexOf('SD_MMC.begin()')<0)
+        Blockly.Arduino.setups_.ttgo_tft='SD_MMC.begin();\n  SD_MMC.end();\n  '+Blockly.Arduino.setups_.ttgo_tft;
+      Blockly.Arduino.definitions_.define_ttgo_tft_include+="\n#include <SD_MMC.h>";
+      Blockly.Arduino.definitions_.define_ttgo_tft_draw_jpeg_event=Blockly.Arduino.definitions_.define_ttgo_tft_draw_jpeg_event.replace(new RegExp("SD.","gm"),"SD_MMC.");
+      Blockly.Arduino.definitions_.define_ttgo_tft_draw_jpeg_event=Blockly.Arduino.definitions_.define_ttgo_tft_draw_jpeg_event.replace("pinCS","");
+    }
+    else
+      Blockly.Arduino.setups_.ttgo_tft='SD.begin();\n  SD.end();\n  '+Blockly.Arduino.setups_.ttgo_tft;
+  }
+  else if (d=='2')
+    Blockly.Arduino.setups_.ttgo_tft='SPIFFS.begin();\n  SPIFFS.end();\n  '+Blockly.Arduino.setups_.ttgo_tft;
+  return 'drawJpegFile(String('+a+').c_str(),'+b+','+c+','+d+',1,&tft);\n'
+};
+
 Blockly.Arduino.ttgo_tft_draw_qr=function(){
   var a=Blockly.Arduino.valueToCode(this,"START_X",Blockly.Arduino.ORDER_NONE)||"0",
   b=Blockly.Arduino.valueToCode(this,"START_Y",Blockly.Arduino.ORDER_NONE)||"0",
@@ -2945,7 +2981,7 @@ Blockly.Arduino.ttgo_tft_draw_qr=function(){
   d=Blockly.Arduino.valueToCode(this,"COLOR",Blockly.Arduino.ORDER_ATOMIC)||"",
   e=Blockly.Arduino.valueToCode(this,"CONTENT",Blockly.Arduino.ORDER_NONE)||'""';
   if (Blockly.Arduino.definitions_.define_ttgo_tft)
-    Blockly.Arduino.definitions_.define_ttgo_tft+='\n#include \"qrcode.h\"';
+    Blockly.Arduino.definitions_.define_ttgo_tft_include+='\n#include \"qrcode.h\"';
   Blockly.Arduino.definitions_.define_ttgo_tft_draw_QR_invoke='void drawQRcode(TFT_eSPI *myTft,int myX,int myY, byte myVersion,String myData,byte border,uint16_t myColor)\n{\n    QRCode qrcode;\n    uint8_t qrcodeData[qrcode_getBufferSize(myVersion)];\n    qrcode_initText(&qrcode, qrcodeData,myVersion , 0, myData.c_str());\n    TFT_eSprite graphQR= TFT_eSprite(myTft);\n    graphQR.createSprite((qrcode.size+border)*2,(qrcode.size+border)*2);\n    graphQR.fillRect(0, 0, (qrcode.size+border)*2,(qrcode.size+border)*2, myColor);\n    graphQR.fillRect(border, border, qrcode.size*2, qrcode.size*2, TFT_BLACK);\n    for (uint8_t y = 0; y < qrcode.size; y++) {\n        for (uint8_t x = 0; x < qrcode.size; x++) {\n          if (!qrcode_getModule(&qrcode, x, y))\n            graphQR.fillRect(x*2+border, y*2+border, 2,2, myColor);\n        }\n    }\n    graphQR.pushSprite(myX, myY);\n    graphQR.deleteSprite();\n}\n';
   return'drawQRcode(&tft,'+a+','+b+','+c+','+e+',5,'+d+');\n';
 };

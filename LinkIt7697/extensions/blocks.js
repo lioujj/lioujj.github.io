@@ -4594,12 +4594,12 @@ Blockly.Blocks.ttgo_tft_init={init:function(){
   this.appendDummyInput()
       .appendField(Blockly.Msg.TTGO_TFT_TITLE)
       .appendField(Blockly.Msg.TTGO_TFT_INIT)
-      .appendField(new Blockly.FieldDropdown([["KSB065","TFT_eSPI_KSB065.h"],["PixelBit","TFT_eSPI_PIXELBIT.h"],["TTGO","TFT_eSPI_TTGO.h"],["I2S_GO","TFT_eSPI_I2SGO.h"]]),"TFT_TYPE");
+      .appendField(new Blockly.FieldDropdown([["KSB065","KSB065"],["PixelBit","PIXELBIT"],["TTGO","TTGO"],["I2S_GO","I2SGO"]]),"TFT_TYPE");
   this.setInputsInline(!0);
   this.setPreviousStatement(!0,null);
   this.setNextStatement(!0,null);
   this.setTooltip(Blockly.Msg.TTGO_TFT_TOOLTIP)}
-};
+}
 
 Blockly.Blocks.ttgo_tft_wh={init:function(){
   this.setHelpUrl(Blockly.Msg.TTGO_TFT_HELPURL);
@@ -4700,6 +4700,9 @@ Blockly.Blocks.ttgo_tft_draw_chinese_text={init:function(){
       .appendField(Blockly.Msg.OLED_DISPLAY_DRAW_TEXT_CONTENT);
   this.appendValueInput("CONTENT")
       .setCheck("String");
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.TTGO_TFT_TRANSPARENT)
+      .appendField(new Blockly.FieldDropdown([["Yes","1"],["No","0"]]),"TRANSPARENT");
   this.setInputsInline(!0);
   this.setPreviousStatement(!0);
   this.setNextStatement(!0);
@@ -4824,6 +4827,9 @@ Blockly.Blocks.ttgo_tft_draw_symbol={init:function(){
       .appendField(Blockly.Msg.TTGO_TFT_DRAW_SYMBOL_NUMBER);
   this.appendValueInput("SYMBOL_NUM")
       .setCheck("Number");
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.TTGO_TFT_TRANSPARENT)
+      .appendField(new Blockly.FieldDropdown([["Yes","1"],["No","0"]]),"TRANSPARENT");
   this.setInputsInline(!0);
   this.setPreviousStatement(!0);
   this.setNextStatement(!0);
@@ -4957,6 +4963,30 @@ Blockly.Blocks.ttgo_tft_push_sprite_trans={init:function(){
   this.appendValueInput("COLOR")
       .setCheck("String")
       .appendField(Blockly.Msg.TTGO_TFT_TRANSPARENT_COLOR);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.TTGO_TFT_TOOLTIP)}
+};
+
+Blockly.Blocks.ttgo_tft_push_image={init:function(){
+  this.setHelpUrl(Blockly.Msg.TTGO_TFT_HELPURL);
+  this.setColour(Blockly.Blocks.ttgo_tft.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.TTGO_TFT_TITLE)
+      .appendField(Blockly.Msg.TTGO_TFT_PUSH_IMAGE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.I2S_MIC_UPLOAD_FROM)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.DAC_FILE_SOURCE),"F_SOURCE");
+  this.appendValueInput("FILE_NAME")
+      .setCheck("String")
+      .appendField(Blockly.Msg.DAC_FILE_NAME);
+  this.appendValueInput("X")
+      .setCheck("Number")
+      .appendField("X");
+  this.appendValueInput("Y")
+      .setCheck("Number")
+      .appendField("Y");
   this.setInputsInline(!0);
   this.setPreviousStatement(!0);
   this.setNextStatement(!0);
