@@ -3716,7 +3716,7 @@ Blockly.Arduino.startPlus_custom_tone=function(){
     return"tone(buzz_pin, "+a+","+b+");\n";
   } else if (Blockly.Arduino.my_board_type=="Arduino"){
     Blockly.Arduino.definitions_.define_start_plus_tone_invoke="byte buzz_pin=3;";
-    return"tone(buzz_pin, "+a+","+b+");\n";
+    return"tone(buzz_pin, "+a+");\ndelay("+b+");\nnoTone(buzz_pin);\n";
   }
   else {
     return"";
