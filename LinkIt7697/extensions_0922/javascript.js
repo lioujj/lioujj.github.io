@@ -3772,11 +3772,13 @@ Blockly.Arduino.startPlus_neopixel_set_colors=function(){
 
 Blockly.Arduino.startPlus_ir_receive=function(){
   var a="";
-  if ((Blockly.Arduino.my_board_type=="ESP32")||(Blockly.Arduino.my_board_type=="7697")){
+  if ((Blockly.Arduino.my_board_type=="ESP32")||(Blockly.Arduino.my_board_type=="7697")||(Blockly.Arduino.my_board_type=="Arduino")){
     if (Blockly.Arduino.my_board_type=="ESP32"){
       a="33";
     } else if (Blockly.Arduino.my_board_type=="7697"){
       a="17";
+    } else if (Blockly.Arduino.my_board_type=="Arduino"){
+      a="2";
     }
     Blockly.Arduino.definitions_.define_irremote="#include <IRremote.h>";
     Blockly.Arduino.definitions_.define_irremote_init="IRrecv irrecv("+a+");";
