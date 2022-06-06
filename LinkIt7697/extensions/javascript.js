@@ -2823,7 +2823,7 @@ Blockly.Arduino.ttgo_tft_draw_chinese_text=function(){
   b=Blockly.Arduino.valueToCode(this,"START_Y",Blockly.Arduino.ORDER_NONE)||"0",
   c=Blockly.Arduino.valueToCode(this,"CONTENT",Blockly.Arduino.ORDER_NONE)||"",
   d=this.getFieldValue("TRANSPARENT");
-  return"u8g2.setFont(u8g2_font_unifont_t_chinese1);\nu8g2.setFontMode("+d+");\nu8g2.setCursor("+a+", "+(parseInt(b)+15)+");\nu8g2.print(String("+c+").c_str());\n"
+  return"u8g2.setFont(u8g2_font_unifont_t_chinese1);\nu8g2.setFontMode("+d+");\nu8g2.setCursor("+a+", ("+b+"+16));\nu8g2.print(String("+c+").c_str());\n"
 };
 
 Blockly.Arduino.ttgo_tft_set_eng_font=function(){
