@@ -228,7 +228,9 @@ Blockly.Blocks.mp3_set_pins1={init:function(){
 Blockly.Blocks.mp3_set_pins_esp32={init:function(){
   this.setHelpUrl(Blockly.Msg.MP3_HELPURL);
   this.setColour(Blockly.Blocks.mp3.HUE);
-  this.appendDummyInput().appendField(Blockly.Msg.MP3_SET_PINS_TITLE+"  ESP32(Serial2)");
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.MP3_SET_PINS_TITLE+"  ESP32")
+      .appendField(new Blockly.FieldDropdown([["Serial1","1"],["Serial2","2"],["Serial","0"]]),"UART_NO");
   this.appendValueInput("RX_PIN")
       .setCheck("Number")
 	  .setAlign(Blockly.ALIGN_RIGHT)
@@ -352,6 +354,17 @@ Blockly.Blocks.create_custom_array={init:function(){
       .setCheck("String");
   this.setInputsInline(!0);
   this.setOutput(!0, ["Array","Array1","Array2"]);
+  this.setTooltip(Blockly.Msg.LJJ_TOOLS_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_serial_readuntil_n={init:function(){
+  this.setHelpUrl(Blockly.Msg.TOOLS_HELPURL);
+  this.setColour(Blockly.Blocks.math.HUE);
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown([["Serial","Serial"],["Serial1","Serial1"],["Serial2","Serial2"]]),"UART_NO")
+      .appendField(Blockly.Msg.LJJ_TOOLS_SERIAL_READUNTIL_N)
+  this.setInputsInline(!0);
+  this.setOutput(!0,String);
   this.setTooltip(Blockly.Msg.LJJ_TOOLS_TOOLTIP)}
 };
 

@@ -197,9 +197,10 @@ Blockly.Arduino.mp3_set_pins1=function(){
 
 Blockly.Arduino.mp3_set_pins_esp32=function(){
 	var a=Blockly.Arduino.valueToCode(this,"RX_PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
-	    b=Blockly.Arduino.valueToCode(this,"TX_PIN",Blockly.Arduino.ORDER_ATOMIC)||"0";
+	    b=Blockly.Arduino.valueToCode(this,"TX_PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      c=this.getFieldValue("UART_NO");
   Blockly.Arduino.definitions_.define_mp3_include='#include <DFRobotDFPlayerMini.h>\n';
-  Blockly.Arduino.definitions_["mp3_serial"]='HardwareSerial mp3Serial(2);';
+  Blockly.Arduino.definitions_["mp3_serial"]='HardwareSerial mp3Serial('+c+');';
 	Blockly.Arduino.definitions_["mp3_dfplayer"]='DFRobotDFPlayerMini myDFPlayer;';
 	Blockly.Arduino.setups_["setup_mp3_"]="mp3Serial.begin(9600,SERIAL_8N1,"+a+","+b+");\n  myDFPlayer.begin(mp3Serial);\n";
 	return''
@@ -273,6 +274,10 @@ Blockly.Arduino.create_custom_array=function(){
 	return[a,Blockly.Arduino.ORDER_ATOMIC]
 };
 
+Blockly.Arduino.ljj_serial_readuntil_n=function(){
+	var a=this.getFieldValue("UART_NO");
+	return[a+".readStringUntil('\\n')",Blockly.Arduino.ORDER_ATOMIC]
+};
 
 //KSB045
 Blockly.Arduino.ksb045={};
