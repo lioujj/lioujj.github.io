@@ -2950,6 +2950,7 @@
 				  </block>
 			  </value>
 		  </block>
+		  <block type="ljj_serial_readuntil_n"></block>
     </category>
 	  <category id="category_custom_block" name="Custom_block">
 		  <block type="custom_include">

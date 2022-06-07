@@ -115,7 +115,7 @@ Blockly.Msg.LJJ_TOOLS_TOOLTIP = "TOOLS";
 Blockly.Msg.LJJ_TOOLS_CONVERT_STR_INT = "Convert String to Int";
 Blockly.Msg.LJJ_TOOLS_CONVERT_STR_FLOAT = "Convert String to Float";
 Blockly.Msg.TOOLS_ARRAY_VALUE = "Convert String to Array Value";
-
+Blockly.Msg.LJJ_TOOLS_SERIAL_READUNTIL_N = "read String until '\\n'";
 
 //Maqueen
 Blockly.Msg.CATEGORY_MAQUEEN = "Maqueen";
