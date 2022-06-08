@@ -661,6 +661,7 @@ Blockly.Msg.TTGO_TFT_PUSH_SPRITE = "push sprite";
 Blockly.Msg.TTGO_TFT_DELETE_SPRITE = "clear sprite";
 Blockly.Msg.TTGO_TFT_TRANSPARENT_COLOR = "transparent color";
 Blockly.Msg.TTGO_TFT_PUSH_IMAGE = "push jpeg image";
+Blockly.Msg.TTGO_TFT_GET_CAMERA = "show camera image";
 
 //S20
 Blockly.Msg.S20_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/s20智慧插座積木";
@@ -953,3 +954,12 @@ Blockly.Msg.LMX_7SEG_RX_PIN = "TX connect to";
 Blockly.Msg.MPU6050_HELPURL = "";
 Blockly.Msg.MPU6050_TITLE = "MPU6050";
 Blockly.Msg.MPU6050_TOOLTIP = "MPU6050";
+
+//CAMERA
+Blockly.Msg.LJJ_CAMERA_HELPURL = "";
+Blockly.Msg.LJJ_CAMERA_TITLE ="CAMERA"
+Blockly.Msg.LJJ_CAMERA_INIT = "initial";
+Blockly.Msg.LJJ_CAMERA_TYPE = "board type";
+Blockly.Msg.LJJ_CAMERA_TOOLTIP = "CAMERA";
+Blockly.Msg.LJJ_CAMERA_GET = "start capturing";
+Blockly.Msg.LJJ_CAMERA_FB_FREE = "delete image";

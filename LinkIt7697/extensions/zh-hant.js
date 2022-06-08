@@ -655,6 +655,7 @@ Blockly.Msg.TTGO_TFT_PUSH_SPRITE = "顯示繪圖精靈";
 Blockly.Msg.TTGO_TFT_DELETE_SPRITE = "清除繪圖精靈緩衝區內容";
 Blockly.Msg.TTGO_TFT_TRANSPARENT_COLOR = "透明顏色";
 Blockly.Msg.TTGO_TFT_PUSH_IMAGE = "顯示jpeg圖檔";
+Blockly.Msg.TTGO_TFT_GET_CAMERA = "顯示相機影像";
 
 //S20
 Blockly.Msg.S20_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/s20智慧插座積木";
@@ -946,3 +947,12 @@ Blockly.Msg.LMX_7SEG_RX_PIN = "TX連接到";
 Blockly.Msg.MPU6050_HELPURL = "";
 Blockly.Msg.MPU6050_TITLE = "MPU6050";
 Blockly.Msg.MPU6050_TOOLTIP = "MPU6050";
+
+//CAMERA
+Blockly.Msg.LJJ_CAMERA_HELPURL = "";
+Blockly.Msg.LJJ_CAMERA_TITLE ="相機"
+Blockly.Msg.LJJ_CAMERA_INIT = "初始化";
+Blockly.Msg.LJJ_CAMERA_TYPE = "板子";
+Blockly.Msg.LJJ_CAMERA_TOOLTIP = "CAMERA";
+Blockly.Msg.LJJ_CAMERA_GET = "開始擷取畫面";
+Blockly.Msg.LJJ_CAMERA_FB_FREE = "清除擷取畫面";

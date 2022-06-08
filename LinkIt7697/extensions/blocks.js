@@ -4766,6 +4766,9 @@ Blockly.Blocks.ttgo_tft_print_eng_text={init:function(){
       .appendField(Blockly.Msg.OLED_DISPLAY_DRAW_TEXT_CONTENT);
   this.appendValueInput("CONTENT")
       .setCheck("String");
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.TTGO_TFT_TRANSPARENT)
+      .appendField(new Blockly.FieldDropdown([["Yes","1"],["No","0"]]),"TRANSPARENT");
   this.setInputsInline(!0);
   this.setPreviousStatement(!0);
   this.setNextStatement(!0);
@@ -4788,6 +4791,9 @@ Blockly.Blocks.ttgo_tft_draw_eng_text={init:function(){
       .appendField(Blockly.Msg.OLED_DISPLAY_DRAW_TEXT_CONTENT);
   this.appendValueInput("CONTENT")
       .setCheck("String");
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.TTGO_TFT_TRANSPARENT)
+      .appendField(new Blockly.FieldDropdown([["Yes","1"],["No","0"]]),"TRANSPARENT");
   this.setInputsInline(!0);
   this.setPreviousStatement(!0);
   this.setNextStatement(!0);
@@ -5000,6 +5006,18 @@ Blockly.Blocks.ttgo_tft_push_image={init:function(){
   this.appendValueInput("Y")
       .setCheck("Number")
       .appendField("Y");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.TTGO_TFT_TOOLTIP)}
+};
+
+Blockly.Blocks.ttgo_tft_get_camera={init:function(){
+  this.setHelpUrl(Blockly.Msg.TTGO_TFT_HELPURL);
+  this.setColour(Blockly.Blocks.ttgo_tft.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.TTGO_TFT_TITLE)
+      .appendField(Blockly.Msg.TTGO_TFT_GET_CAMERA);
   this.setInputsInline(!0);
   this.setPreviousStatement(!0);
   this.setNextStatement(!0);
@@ -7338,3 +7356,45 @@ Blockly.Blocks.mpu6050_temperature={init:function(){
   this.setOutput(!0,"Number");
   this.setTooltip(Blockly.Msg.MPU6050_TOOLTIP)}
 };
+
+//camera
+Blockly.Blocks.ljj_camera={};
+Blockly.Blocks.ljj_camera.HUE=120;
+
+Blockly.Blocks.ljj_camera_init={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_CAMERA_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_camera.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_CAMERA_TITLE)
+      .appendField(Blockly.Msg.LJJ_CAMERA_INIT)
+      .appendField(Blockly.Msg.LJJ_CAMERA_TYPE)
+      .appendField(new Blockly.FieldDropdown([["KSB065","KSB065"],["PocketCard","POCKETCARD"],["PixelBit","PIXELBIT"],["ESP32-CAM","ESP32-CAM"]]),"CAM_TYPE");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.LJJ_CAMERA_TOOLTIP)}
+}
+
+Blockly.Blocks.ljj_camera_fb_get={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_CAMERA_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_camera.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_CAMERA_TITLE)
+      .appendField(Blockly.Msg.LJJ_CAMERA_GET);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.LJJ_CAMERA_TOOLTIP)}
+}
+
+Blockly.Blocks.ljj_camera_fb_free={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_CAMERA_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_camera.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_CAMERA_TITLE)
+      .appendField(Blockly.Msg.LJJ_CAMERA_FB_FREE);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.LJJ_CAMERA_TOOLTIP)}
+}
