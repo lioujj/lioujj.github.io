@@ -2781,7 +2781,7 @@ Blockly.Arduino.ttgo_tft_init=function(){
   Blockly.Arduino.definitions_.define_ttgo_tft_include="#include <TFT_eSPI_"+a+".h>\n#include <U8g2_for_TFT_eSPI.h>";
   Blockly.Arduino.definitions_.define_ttgo_tft_init_invoke="TFT_eSPI tft = TFT_eSPI();\nU8g2_for_TFT_eSPI u8g2;\nuint32_t tft_color=TFT_WHITE;\nuint32_t tft_bg_color=TFT_BLACK;\nuint32_t tft_fg_color=TFT_WHITE;\nbyte tftTextSize=1;\nbyte tftTextFont=1;\n";
   Blockly.Arduino.definitions_.define_SD_CS_invoke='int pinCS=SS;';
-  Blockly.Arduino.setups_.ttgo_tft='tft.begin();\n  tft.fillScreen(TFT_BLACK);\n  u8g2.begin(tft);\n  tft.setTextColor(tft_color);\n  u8g2.setForegroundColor(tft_color);';
+  Blockly.Arduino.setups_.ttgo_tft='tft.begin();\n  tft.fillScreen(TFT_BLACK);\n  u8g2.begin(tft);\n  tft.setTextColor(tft_color);\n  u8g2.setForegroundColor(tft_color);\n  tft.initDMA();\n  tft.setSwapBytes(true);\n';
   return'';
 };
 
@@ -2844,14 +2844,24 @@ Blockly.Arduino.ttgo_tft_set_eng_font_num=function(){
 Blockly.Arduino.ttgo_tft_print_eng_text=function(){
   var a=Blockly.Arduino.valueToCode(this,"START_X",Blockly.Arduino.ORDER_NONE)||"0",
   b=Blockly.Arduino.valueToCode(this,"START_Y",Blockly.Arduino.ORDER_NONE)||"0",
-  c=Blockly.Arduino.valueToCode(this,"CONTENT",Blockly.Arduino.ORDER_NONE)||"";
-  return"tft.setCursor("+a+", "+b+");\ntft.printf(String("+c+").c_str());\n"
+  c=Blockly.Arduino.valueToCode(this,"CONTENT",Blockly.Arduino.ORDER_NONE)||"",
+  d=this.getFieldValue("TRANSPARENT");
+  var myReturnStr="tft.setCursor("+a+", "+b+");\ntft.printf(String("+c+").c_str());\n";
+  if (d=="1")
+    myReturnStr="tft.setTextColor(tft_fg_color,tft_fg_color,true);\n"+myReturnStr+"tft.setTextColor(tft_fg_color,tft_bg_color,true);\n"
+  return myReturnStr;
 };
 Blockly.Arduino.ttgo_tft_draw_eng_text=function(){
   var a=Blockly.Arduino.valueToCode(this,"START_X",Blockly.Arduino.ORDER_NONE)||"0",
   b=Blockly.Arduino.valueToCode(this,"START_Y",Blockly.Arduino.ORDER_NONE)||"0",
-  c=Blockly.Arduino.valueToCode(this,"CONTENT",Blockly.Arduino.ORDER_NONE)||"";
-  return'tft.drawString(String('+c+').c_str(),'+a+','+b+');\n';
+  c=Blockly.Arduino.valueToCode(this,"CONTENT",Blockly.Arduino.ORDER_NONE)||"",
+  d=this.getFieldValue("TRANSPARENT");
+  var myReturnStr='tft.drawString(String('+c+').c_str(),'+a+','+b+');\n';
+  if (d=="1")
+    myReturnStr="tft.setTextColor(tft_fg_color,tft_fg_color,true);\n"+myReturnStr;
+  else
+    myReturnStr="tft.setTextColor(tft_fg_color,tft_bg_color,true);\n"+myReturnStr;
+  return myReturnStr;
 };
 
 Blockly.Arduino.ttgo_button=function(){
@@ -2920,7 +2930,10 @@ Blockly.Arduino.ttgo_tft_create_sprite=function(){
   d=d.replace(/\.fillScreen/g,".fillSprite");
   d=d.replace(new RegExp(a+".color565","gm"),"tft.color565");
   d=d.replace(new RegExp(",1,&tft","gm"),",2,&"+a);
-  Blockly.Arduino.definitions_.define_ttgo_tft_sprite_invoke='TFT_eSprite '+a+'= TFT_eSprite(&tft);\n';
+  if (!Blockly.Arduino.definitions_.define_ttgo_tft_sprite_invoke)
+    Blockly.Arduino.definitions_.define_ttgo_tft_sprite_invoke='TFT_eSprite '+a+'= TFT_eSprite(&tft);\n';
+  else
+    Blockly.Arduino.definitions_.define_ttgo_tft_sprite_invoke+='TFT_eSprite '+a+'= TFT_eSprite(&tft);\n';
   return a+'.createSprite('+b+','+c+');\nu8g2.begin('+a+');\n'+d+'u8g2.begin(tft);\n';
 };
 
@@ -2979,6 +2992,14 @@ Blockly.Arduino.ttgo_tft_push_image=function(){
     Blockly.Arduino.setups_.ttgo_tft='SPIFFS.begin();\n  SPIFFS.end();\n  '+Blockly.Arduino.setups_.ttgo_tft;
   return 'drawJpegFile(String('+a+').c_str(),'+b+','+c+','+d+',1,&tft);\n'
 };
+
+Blockly.Arduino.ttgo_tft_get_camera=function(){
+  Blockly.Arduino.definitions_.define_ttgo_tft_TJPG_include='#include <TJpg_Decoder.h>';
+  Blockly.Arduino.definitions_.define_ttgo_tft_TJPG_invoke='uint16_t dmaBuffer1[16 * 16];\nuint16_t dmaBuffer2[16 * 16];\nuint16_t *dmaBufferPtr = dmaBuffer1;\nbool dmaBufferSel = 0;\n';
+  Blockly.Arduino.definitions_.define_ttgo_tft_TJPG_event='bool cameraToTft(int16_t x, int16_t y, uint16_t w, uint16_t h, uint16_t *bitmap)\n{\n  if (y >= tft.height())\n    return false;\n  if (dmaBufferSel)\n    dmaBufferPtr = dmaBuffer2;\n  else\n    dmaBufferPtr = dmaBuffer1;\n  dmaBufferSel = !dmaBufferSel;\n  tft.pushImageDMA(x, y, w, h, bitmap, dmaBufferPtr);\n  return true;\n}\n';
+  Blockly.Arduino.setups_.ttgo_tft_TJPG_callback='TJpgDec.setCallback(cameraToTft);\n'
+  return'TJpgDec.setJpgScale(2);\ntft.startWrite();\nTJpgDec.drawJpg(0, 0, fb->buf, fb->len);\ntft.endWrite();\n'
+}
 
 Blockly.Arduino.ttgo_tft_draw_qr=function(){
   var a=Blockly.Arduino.valueToCode(this,"START_X",Blockly.Arduino.ORDER_NONE)||"0",
@@ -4419,7 +4440,32 @@ Blockly.Arduino.mpu6050_temperature=function(){
   return['myMPU6050.readTemperature()',Blockly.Arduino.ORDER_ATOMIC];
 };
 
+//CAMERA
+Blockly.Arduino.ljj_camera={};
+Blockly.Arduino.ljj_camera_init=function(){
+  var a=this.getFieldValue("CAM_TYPE");
+  Blockly.Arduino.ljj_camera.cam_type=a;
+  Blockly.Arduino.definitions_.define_ljj_cam_include='#include "esp_camera.h"\n#include "'+a+'_pins.h"';
+  if (a=="PIXELBIT"){
+    Blockly.Arduino.definitions_.define_ljj_cam_pixelbit_include='#include <tca5405.h>';
+    Blockly.Arduino.definitions_.define_ljj_cam_pixelbit_tca_invoke='TCA5405 tca5405;';
+    Blockly.Arduino.setups_.setup_ljj_camera_pixelbit_tca='tca5405.init(21);\n  tca5405.set_gpo(PIXELBIT_CAMERA_POWER, 0);\n  tca5405.transmit();\n  delay(100);\n  tca5405.set_gpo(PIXELBIT_CAMERA_POWER, 1);\n  tca5405.transmit();\n  delay(100);\n';
+  }
+  Blockly.Arduino.setups_.setup_ljj_camera='camera_config_t config;\n  config.ledc_channel=LEDC_CHANNEL_0;\n  config.ledc_timer=LEDC_TIMER_0;\n  config.pin_d0=Y2_GPIO_NUM;\n  config.pin_d1=Y3_GPIO_NUM;\n  config.pin_d2=Y4_GPIO_NUM;\n  config.pin_d3=Y5_GPIO_NUM;\n  config.pin_d4=Y6_GPIO_NUM;\n  config.pin_d5=Y7_GPIO_NUM;\n  config.pin_d6=Y8_GPIO_NUM;\n  config.pin_d7=Y9_GPIO_NUM;\n  config.pin_xclk=XCLK_GPIO_NUM;\n  config.pin_pclk=PCLK_GPIO_NUM;\n  config.pin_vsync=VSYNC_GPIO_NUM;\n  config.pin_href=HREF_GPIO_NUM;\n  config.pin_sscb_sda=SIOD_GPIO_NUM;\n  config.pin_sscb_scl=SIOC_GPIO_NUM;\n  config.pin_pwdn=PWDN_GPIO_NUM;\n  config.pin_reset=RESET_GPIO_NUM;\n  config.xclk_freq_hz=20000000;\n  config.pixel_format=PIXFORMAT_JPEG;\n  config.frame_size=FRAMESIZE_QVGA;\n  config.fb_count=2;\n  config.jpeg_quality=10;\n  esp_err_t err = esp_camera_init(&config);\n  if (err != ESP_OK) {\n    Serial.printf("Camera init failed with error 0x%x", err);\n    return;\n  }\n  sensor_t *myCamera = esp_camera_sensor_get();\n  myCamera->set_brightness(myCamera, -1);\n  myCamera->set_contrast(myCamera, 1);\n  myCamera->set_saturation(myCamera, 1);\n';
+  if (a=="KSB065")
+    Blockly.Arduino.setups_.setup_ljj_camera+='  myCamera->set_vflip(myCamera, 1);\n  myCamera->set_hmirror(myCamera, 1);\n';
+  else if (a=="PIXELBIT")
+    Blockly.Arduino.setups_.setup_ljj_camera=Blockly.Arduino.setups_.setup_ljj_camera.replace("_QVGA","_240X240");
+	return'';
+};
 
+Blockly.Arduino.ljj_camera_fb_get=function(){
+  return'camera_fb_t *fb = NULL;\nfb = esp_camera_fb_get();\nif (!fb) {\n  Serial.println("Camera capture failed");\n  esp_camera_fb_return(fb);\n  return;\n}\nif (fb->format != PIXFORMAT_JPEG) {\n  Serial.println("Non-JPEG data not implemented");\n  return;\n}\n';
+}
+
+Blockly.Arduino.ljj_camera_fb_free=function(){
+  return'esp_camera_fb_return(fb);\n';
+}
 
 setTimeout(function(){
 	if (Blockly.Blocks.board_initializes_setup)

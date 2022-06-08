@@ -61,4 +61,5 @@
 <category><name>I2S_MIC_DB</name><replace>I2S MIC DB Meter</replace></category>
 <category><name>Web_Service</name><replace>Web Service</replace></category>
 <category><name>GoogleTranslation</name><replace>Google Translation</replace></category>
+<category><name>CAMERA</name><replace>CAMERA</replace></category>
 </xml>

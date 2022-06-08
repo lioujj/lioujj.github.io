@@ -907,6 +907,9 @@
             </block>
           </value> 
         </block>
+<!--
+        <block type="ttgo_tft_get_camera"></block>
+-->
         <block type="ttgo_tft_set_clock">
           <value name="COLOR_HOUR">
             <block type="ttgo_getFromColorPicker"></block>
@@ -1129,6 +1132,13 @@
           </value>
         </block>
       </category>
+<!--
+      <category id="category_ljj_camera" name="CAMERA">
+        <block type="ljj_camera_init"></block>
+        <block type="ljj_camera_fb_get"></block>
+        <block type="ljj_camera_fb_free"></block>
+      </category>
+-->
     </category>
   </category>
   <category id="category_esp8266" name="ESP8266">

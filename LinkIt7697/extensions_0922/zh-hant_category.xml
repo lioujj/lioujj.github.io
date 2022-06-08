@@ -62,4 +62,5 @@
 <category><name>I2S_MIC_DB</name><replace>I2S麥克風分貝計</replace></category>
 <category><name>Web_Service</name><replace>網路應用服務</replace></category>
 <category><name>GoogleTranslation</name><replace>Google翻譯</replace></category>
+<category><name>CAMERA</name><replace>CAMERA相機</replace></category>
 </xml>
