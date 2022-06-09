@@ -1135,6 +1135,7 @@
 <!--
       <category id="category_ljj_camera" name="CAMERA">
         <block type="ljj_camera_init"></block>
+        <block type="ljj_camera_rotation"></block>
         <block type="ljj_camera_fb_get"></block>
         <block type="ljj_camera_fb_free"></block>
       </category>

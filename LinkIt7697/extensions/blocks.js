@@ -5018,6 +5018,9 @@ Blockly.Blocks.ttgo_tft_get_camera={init:function(){
   this.appendDummyInput()
       .appendField(Blockly.Msg.TTGO_TFT_TITLE)
       .appendField(Blockly.Msg.TTGO_TFT_GET_CAMERA);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.TTGO_TFT_GET_CAMERA_SCALE)
+      .appendField(new Blockly.FieldDropdown([["1","1"],["1/2","2"],["1/4","4"],["1/8","8"]]),"SCALE");
   this.setInputsInline(!0);
   this.setPreviousStatement(!0);
   this.setNextStatement(!0);
@@ -7359,7 +7362,7 @@ Blockly.Blocks.mpu6050_temperature={init:function(){
 
 //camera
 Blockly.Blocks.ljj_camera={};
-Blockly.Blocks.ljj_camera.HUE=120;
+Blockly.Blocks.ljj_camera.HUE=270;
 
 Blockly.Blocks.ljj_camera_init={init:function(){
   this.setHelpUrl(Blockly.Msg.LJJ_CAMERA_HELPURL);
@@ -7369,6 +7372,23 @@ Blockly.Blocks.ljj_camera_init={init:function(){
       .appendField(Blockly.Msg.LJJ_CAMERA_INIT)
       .appendField(Blockly.Msg.LJJ_CAMERA_TYPE)
       .appendField(new Blockly.FieldDropdown([["KSB065","KSB065"],["PocketCard","POCKETCARD"],["PixelBit","PIXELBIT"],["ESP32-CAM","ESP32-CAM"]]),"CAM_TYPE");
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_CAMERA_RESOLUTION)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_CAMERA_RES_TYPE),"RES_TYPE");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.LJJ_CAMERA_TOOLTIP)}
+}
+
+Blockly.Blocks.ljj_camera_rotation={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_CAMERA_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_camera.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_CAMERA_TITLE)
+      .appendField(Blockly.Msg.LJJ_CAMERA_ROTATION)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_CAMERA_ROTATION_LIST),"ROTATION_TYPE")
+      .appendField(new Blockly.FieldDropdown([["Yes","1"],["No","0"]]),"VALUE");
   this.setInputsInline(!0);
   this.setPreviousStatement(!0,null);
   this.setNextStatement(!0,null);

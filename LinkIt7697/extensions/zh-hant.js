@@ -656,6 +656,7 @@ Blockly.Msg.TTGO_TFT_DELETE_SPRITE = "清除繪圖精靈緩衝區內容";
 Blockly.Msg.TTGO_TFT_TRANSPARENT_COLOR = "透明顏色";
 Blockly.Msg.TTGO_TFT_PUSH_IMAGE = "顯示jpeg圖檔";
 Blockly.Msg.TTGO_TFT_GET_CAMERA = "顯示相機影像";
+Blockly.Msg.TTGO_TFT_GET_CAMERA_SCALE= "縮放";
 
 //S20
 Blockly.Msg.S20_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/s20智慧插座積木";
@@ -950,9 +951,24 @@ Blockly.Msg.MPU6050_TOOLTIP = "MPU6050";
 
 //CAMERA
 Blockly.Msg.LJJ_CAMERA_HELPURL = "";
-Blockly.Msg.LJJ_CAMERA_TITLE ="相機"
+Blockly.Msg.LJJ_CAMERA_TITLE ="CAMERA相機"
 Blockly.Msg.LJJ_CAMERA_INIT = "初始化";
 Blockly.Msg.LJJ_CAMERA_TYPE = "板子";
 Blockly.Msg.LJJ_CAMERA_TOOLTIP = "CAMERA";
 Blockly.Msg.LJJ_CAMERA_GET = "開始擷取畫面";
 Blockly.Msg.LJJ_CAMERA_FB_FREE = "清除擷取畫面";
+Blockly.Msg.LJJ_CAMERA_RESOLUTION = "解析度";
+Blockly.Msg.LJJ_CAMERA_RES_TYPE=[
+			["UXGA(1600x1200)","UXGA"],
+			["SXGA(1280x1024)","SXGA"], 
+			["XGA(1024x768)","XGA"],
+			["SVGA(800x600)","SVGA"],
+			["VGA(640x480)","VGA"],
+			["CIF(400x296)","CIF"],
+			["QVGA(320x240)","QVGA"],
+      ["240(240x240)","240X240"],
+			["HQVGA(240x176)","HQVGA"],
+			["QQVGA(160x120)","QQVGA"],
+			["QXGA(2048x1564)","QXGA"]];
+Blockly.Msg.LJJ_CAMERA_ROTATION = "設定影像方向";
+Blockly.Msg.LJJ_CAMERA_ROTATION_LIST = [["上下翻轉","vflip"],["左右鏡射","hmirror"]];
