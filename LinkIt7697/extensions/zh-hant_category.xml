@@ -1,0 +1,66 @@
+<xml>
+<category><name>Liou</name><replace>吉哥積木</replace></category>
+<category><name>Tools</name><replace>工具</replace></category>
+<category><name>String_tool</name><replace>字串處理</replace></category>
+<category><name>Custom_block</name><replace>客製化程式碼</replace></category>
+<category><name>Lumex</name><replace>Lumex</replace></category>
+<category><name>LDM6432MQTT</name><replace>LDM6432燈板</replace></category>
+<category><name>Modules</name><replace>模組</replace></category>
+<category><name>Modules</name><replace>模組</replace></category>
+<category><name>OLED128*64</name><replace>OLED 128*64</replace></category>
+<category><name>7697:bit</name><replace>7697:bit</replace></category>
+<category><name>MP3</name><replace>MP3播放模組</replace></category>
+<category><name>InfraRed</name><replace>紅外線</replace></category>
+<category><name>GamePad</name><replace>遊戲手把</replace></category>
+<category><name>BME280I2C</name><replace>BME280 I2C</replace></category>
+<category><name>Robot</name><replace>機器人</replace></category>
+<category><name>Maqueen</name><replace>麥昆小車</replace></category>
+<category><name>JetMole</name><replace>鑽地鼴鼠</replace></category>
+<category><name>Probbie</name><replace>寶比</replace></category>
+<category><name>WebCrawler</name><replace>網路爬蟲</replace></category>
+<category><name>WorldWeather</name><replace>世界天氣</replace></category>
+<category><name>TaiwanAQI</name><replace>台灣空氣品質AQI</replace></category>
+<category><name>Airbox</name><replace>空氣盒子</replace></category>
+<category><name>TW_Stock</name><replace>台灣上市股票</replace></category>
+<category><name>IoT</name><replace>物聯網</replace></category>
+<category><name>MQTT</name><replace>MQTT</replace></category>
+<category><name>ThingSpeak</name><replace>ThingSpeak</replace></category>
+<category><name>Broadcast</name><replace>網路廣播</replace></category>
+<category><name>WebServer</name><replace>網頁伺服器</replace></category>
+<category><name>Boards</name><replace>開發板</replace></category>
+<category><name>ESP32</name><replace>ESP32</replace></category>
+<category><name>Boards_Tool</name><replace>設定</replace></category>
+<category><name>YuBoard</name><replace>ESP32教學輔助板</replace></category>
+<category><name>PocketCard</name><replace>Pocket Card</replace></category>
+<category><name>KSB065</name><replace>KSB065</replace></category>
+<category><name>AnalogWrite</name><replace>類比寫入及音調</replace></category>
+<category><name>MPU9250_I2C</name><replace>MPU9250 9軸動作感應</replace></category>
+<category><name>MSA301_I2C</name><replace>MSA301 3軸加速度感應</replace></category>
+<category><name>GoogleSheets</name><replace>Google試算表</replace></category>
+<category><name>ESP32_NTP</name><replace>RTC網路校時</replace></category>
+<category><name>LineNotify</name><replace>Line通知</replace></category>
+<category><name>TTGO</name><replace>TTGO</replace></category>
+<category><name>TTGO_TFT</name><replace>TFT彩色螢幕</replace></category>
+<category><name>TTGO_BUTTON</name><replace>TTGO按鈕</replace></category>
+<category><name>S20</name><replace>S20智慧插座</replace></category>
+<category><name>I2SDAC</name><replace>I2S音訊模組DAC</replace></category>
+<category><name>ESP32_BUILTIN</name><replace>雙核心及內建感測</replace></category>
+<category><name>SD_CARD</name><replace>SD記憶卡</replace></category>
+<category><name>ESP32_IRQ</name><replace>中斷處理</replace></category>
+<category><name>L9110</name><replace>L9110馬達驅動</replace></category>
+<category><name>StartPlus</name><replace>EZ Start Kit +</replace></category>
+<category><name>MAX30105</name><replace>MAX30102血氧濃度</replace></category>
+<category><name>SPIFFS</name><replace>SPIFFS檔案系統</replace></category>
+<category><name>ASR</name><replace>ASR語音辨識</replace></category>
+<category><name>PN532_I2C</name><replace>PN532 NFC讀卡</replace></category>
+<category><name>CCS811</name><replace>CCS811空氣品質</replace></category>
+<category><name>pin_map</name><replace>腳位轉換</replace></category>
+<category><name>I2S_MIC</name><replace>I2S麥克風</replace></category>
+<category><name>KEYBOARDS</name><replace>Keypad鍵盤</replace></category>
+<category><name>7_segment_display</name><replace>七節顯示器</replace></category>
+<category><name>MPU6050_I2C</name><replace>MPU6050 6軸動作感應</replace></category>
+<category><name>I2S_MIC_DB</name><replace>I2S麥克風分貝計</replace></category>
+<category><name>Web_Service</name><replace>網路應用服務</replace></category>
+<category><name>GoogleTranslation</name><replace>Google翻譯</replace></category>
+<category><name>CAMERA</name><replace>CAMERA相機</replace></category>
+</xml>

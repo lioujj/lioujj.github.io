@@ -1,0 +1,65 @@
+<xml>
+<category><name>Liou</name><replace>Liou's Blocks</replace></category>
+<category><name>Tools</name><replace>Tools</replace></category>
+<category><name>String_tool</name><replace>String tools</replace></category>
+<category><name>Custom_block</name><replace>Custom blocks</replace></category>
+<category><name>Lumex</name><replace>Lumex</replace></category>
+<category><name>LDM6432MQTT</name><replace>LDM6432</replace></category>
+<category><name>Modules</name><replace>Modules</replace></category>
+<category><name>OLED128*64</name><replace>OLED 128*64</replace></category>
+<category><name>7697:bit</name><replace>7697:bit</replace></category>
+<category><name>MP3</name><replace>MP3 Player</replace></category>
+<category><name>InfraRed</name><replace>InfraRed</replace></category>
+<category><name>GamePad</name><replace>GamePad</replace></category>
+<category><name>BME280I2C</name><replace>BME280 I2C</replace></category>
+<category><name>Robot</name><replace>Robot</replace></category>
+<category><name>Maqueen</name><replace>Maqueen</replace></category>
+<category><name>JetMole</name><replace>Jet Mole</replace></category>
+<category><name>Probbie</name><replace>Probbie</replace></category>
+<category><name>WebCrawler</name><replace>Web Crawler</replace></category>
+<category><name>WorldWeather</name><replace>World Weather</replace></category>
+<category><name>TaiwanAQI</name><replace>Taiwan AQI</replace></category>
+<category><name>Airbox</name><replace>Airbox</replace></category>
+<category><name>TW_Stock</name><replace>Taiwan Stock</replace></category>
+<category><name>IoT</name><replace>IoT</replace></category>
+<category><name>MQTT</name><replace>MQTT</replace></category>
+<category><name>ThingSpeak</name><replace>ThingSpeak</replace></category>
+<category><name>Broadcast</name><replace>Broadcast</replace></category>
+<category><name>WebServer</name><replace>Web Server</replace></category>
+<category><name>Boards</name><replace>Boards</replace></category>
+<category><name>ESP32</name><replace>ESP32</replace></category>
+<category><name>Boards_Tool</name><replace>Setup</replace></category>
+<category><name>YuBoard</name><replace>ESP32 Board</replace></category>
+<category><name>PocketCard</name><replace>Pocket Card</replace></category>
+<category><name>KSB065</name><replace>KSB065</replace></category>
+<category><name>AnalogWrite</name><replace>AnalogWrite Tone</replace></category>
+<category><name>MPU9250_I2C</name><replace>MPU9250 9-axis</replace></category>
+<category><name>MSA301_I2C</name><replace>MSA301 3-axis</replace></category>
+<category><name>GoogleSheets</name><replace>Google Sheets</replace></category>
+<category><name>ESP32_NTP</name><replace>NTP Time</replace></category>
+<category><name>LineNotify</name><replace>Line Notify</replace></category>
+<category><name>TTGO</name><replace>TTGO</replace></category>
+<category><name>TTGO_TFT</name><replace>TFT Display</replace></category>
+<category><name>TTGO_BUTTON</name><replace>TTGO BUTTON</replace></category>
+<category><name>S20</name><replace>S20 Smart Socket</replace></category>
+<category><name>I2SDAC</name><replace>I2S DAC</replace></category>
+<category><name>ESP32_BUILTIN</name><replace>Dual-Core and BuiltIn Sensor</replace></category>
+<category><name>SD_CARD</name><replace>SD Card</replace></category>
+<category><name>ESP32_IRQ</name><replace>Interrupts</replace></category>
+<category><name>L9110</name><replace>L9110 motor driver</replace></category>
+<category><name>StartPlus</name><replace>EZ Start Kit +</replace></category>
+<category><name>MAX30105</name><replace>MAX30102</replace></category>
+<category><name>SPIFFS</name><replace>SPIFFS</replace></category>
+<category><name>ASR</name><replace>ASR</replace></category>
+<category><name>PN532_I2C</name><replace>PN532 I2c</replace></category>
+<category><name>CCS811</name><replace>CCS811</replace></category>
+<category><name>pin_map</name><replace>Pin Map</replace></category>
+<category><name>I2S_MIC</name><replace>I2S MIC</replace></category>
+<category><name>KEYBOARDS</name><replace>Keyboard</replace></category>
+<category><name>7_segment_display</name><replace>7 Segment Display</replace></category>
+<category><name>MPU6050_I2C</name><replace>MPU6050 6-axis</replace></category>
+<category><name>I2S_MIC_DB</name><replace>I2S MIC DB Meter</replace></category>
+<category><name>Web_Service</name><replace>Web Service</replace></category>
+<category><name>GoogleTranslation</name><replace>Google Translation</replace></category>
+<category><name>CAMERA</name><replace>CAMERA</replace></category>
+</xml>

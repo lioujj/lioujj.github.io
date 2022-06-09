@@ -5018,6 +5018,12 @@ Blockly.Blocks.ttgo_tft_get_camera={init:function(){
   this.appendDummyInput()
       .appendField(Blockly.Msg.TTGO_TFT_TITLE)
       .appendField(Blockly.Msg.TTGO_TFT_GET_CAMERA);
+  this.appendValueInput("X")
+      .setCheck("Number")
+      .appendField("X");
+  this.appendValueInput("Y")
+      .setCheck("Number")
+      .appendField("Y");
   this.appendDummyInput()
       .appendField(Blockly.Msg.TTGO_TFT_GET_CAMERA_SCALE)
       .appendField(new Blockly.FieldDropdown([["1","1"],["1/2","2"],["1/4","4"],["1/8","8"]]),"SCALE");
