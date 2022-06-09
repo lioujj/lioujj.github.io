@@ -2781,7 +2781,7 @@ Blockly.Arduino.ttgo_tft_init=function(){
   Blockly.Arduino.definitions_.define_ttgo_tft_include="#include <TFT_eSPI_"+a+".h>\n#include <U8g2_for_TFT_eSPI.h>";
   Blockly.Arduino.definitions_.define_ttgo_tft_init_invoke="TFT_eSPI tft = TFT_eSPI();\nU8g2_for_TFT_eSPI u8g2;\nuint32_t tft_color=TFT_WHITE;\nuint32_t tft_bg_color=TFT_BLACK;\nuint32_t tft_fg_color=TFT_WHITE;\nbyte tftTextSize=1;\nbyte tftTextFont=1;\n";
   Blockly.Arduino.definitions_.define_SD_CS_invoke='int pinCS=SS;';
-  Blockly.Arduino.setups_.ttgo_tft='tft.begin();\n  tft.fillScreen(TFT_BLACK);\n  u8g2.begin(tft);\n  tft.setTextColor(tft_color);\n  u8g2.setForegroundColor(tft_color);\n  tft.initDMA();\n  tft.setSwapBytes(true);\n';
+  Blockly.Arduino.setups_.ttgo_tft='tft.begin();\n  tft.fillScreen(TFT_BLACK);\n  u8g2.begin(tft);\n  tft.setTextColor(tft_color);\n  u8g2.setForegroundColor(tft_color);\n';
   return'';
 };
 
@@ -2929,7 +2929,7 @@ Blockly.Arduino.ttgo_tft_create_sprite=function(){
   d=d.replace(/tft\./g,a+".");
   d=d.replace(/\.fillScreen/g,".fillSprite");
   d=d.replace(new RegExp(a+".color565","gm"),"tft.color565");
-  d=d.replace(new RegExp(",1,&tft","gm"),",2,&"+a);
+  d=d.replace(new RegExp("1,&tft","gm"),"2,&"+a);
   if (!Blockly.Arduino.definitions_.define_ttgo_tft_sprite_invoke)
     Blockly.Arduino.definitions_.define_ttgo_tft_sprite_invoke='TFT_eSprite '+a+'= TFT_eSprite(&tft);\n';
   else
@@ -2998,6 +2998,8 @@ Blockly.Arduino.ttgo_tft_get_camera=function(){
   Blockly.Arduino.definitions_.define_ttgo_tft_TJPG_invoke='uint16_t dmaBuffer1[16 * 16];\nuint16_t dmaBuffer2[16 * 16];\nuint16_t *dmaBufferPtr = dmaBuffer1;\nbool dmaBufferSel = 0;\n';
   Blockly.Arduino.definitions_.define_ttgo_tft_TJPG_event='bool cameraToTft(int16_t x, int16_t y, uint16_t w, uint16_t h, uint16_t *bitmap)\n{\n  if (y >= tft.height())\n    return false;\n  if (dmaBufferSel)\n    dmaBufferPtr = dmaBuffer2;\n  else\n    dmaBufferPtr = dmaBuffer1;\n  dmaBufferSel = !dmaBufferSel;\n  tft.pushImageDMA(x, y, w, h, bitmap, dmaBufferPtr);\n  return true;\n}\n';
   Blockly.Arduino.setups_.ttgo_tft_TJPG_callback='TJpgDec.setCallback(cameraToTft);\n'
+  if (Blockly.Arduino.setups_.ttgo_tft.indexOf('tft.initDMA')<0)
+    Blockly.Arduino.setups_.ttgo_tft+='  tft.initDMA();\n  tft.setSwapBytes(true);\n';
   return'TJpgDec.setJpgScale(2);\ntft.startWrite();\nTJpgDec.drawJpg(0, 0, fb->buf, fb->len);\ntft.endWrite();\n'
 }
 
@@ -3007,10 +3009,11 @@ Blockly.Arduino.ttgo_tft_draw_qr=function(){
   c=this.getFieldValue("SIZE"),
   d=Blockly.Arduino.valueToCode(this,"COLOR",Blockly.Arduino.ORDER_ATOMIC)||"",
   e=Blockly.Arduino.valueToCode(this,"CONTENT",Blockly.Arduino.ORDER_NONE)||'""';
-  if (Blockly.Arduino.definitions_.define_ttgo_tft)
+  if (Blockly.Arduino.definitions_.define_ttgo_tft_include)
     Blockly.Arduino.definitions_.define_ttgo_tft_include+='\n#include \"qrcode.h\"';
-  Blockly.Arduino.definitions_.define_ttgo_tft_draw_QR_invoke='void drawQRcode(TFT_eSPI *myTft,int myX,int myY, byte myVersion,String myData,byte border,uint16_t myColor)\n{\n    QRCode qrcode;\n    uint8_t qrcodeData[qrcode_getBufferSize(myVersion)];\n    qrcode_initText(&qrcode, qrcodeData,myVersion , 0, myData.c_str());\n    TFT_eSprite graphQR= TFT_eSprite(myTft);\n    graphQR.createSprite((qrcode.size+border)*2,(qrcode.size+border)*2);\n    graphQR.fillRect(0, 0, (qrcode.size+border)*2,(qrcode.size+border)*2, myColor);\n    graphQR.fillRect(border, border, qrcode.size*2, qrcode.size*2, TFT_BLACK);\n    for (uint8_t y = 0; y < qrcode.size; y++) {\n        for (uint8_t x = 0; x < qrcode.size; x++) {\n          if (!qrcode_getModule(&qrcode, x, y))\n            graphQR.fillRect(x*2+border, y*2+border, 2,2, myColor);\n        }\n    }\n    graphQR.pushSprite(myX, myY);\n    graphQR.deleteSprite();\n}\n';
-  return'drawQRcode(&tft,'+a+','+b+','+c+','+e+',5,'+d+');\n';
+  //Blockly.Arduino.definitions_.define_ttgo_tft_draw_QR_event='void drawQRcode(TFT_eSPI *myTft,int myX,int myY, byte myVersion,String myData,byte border,uint16_t myColor)\n{\n    QRCode qrcode;\n    uint8_t qrcodeData[qrcode_getBufferSize(myVersion)];\n    qrcode_initText(&qrcode, qrcodeData,myVersion , 0, myData.c_str());\n    TFT_eSprite graphQR= TFT_eSprite(myTft);\n    graphQR.createSprite((qrcode.size+border)*2,(qrcode.size+border)*2);\n    graphQR.fillRect(0, 0, (qrcode.size+border)*2,(qrcode.size+border)*2, myColor);\n    graphQR.fillRect(border, border, qrcode.size*2, qrcode.size*2, TFT_BLACK);\n    for (uint8_t y = 0; y < qrcode.size; y++) {\n        for (uint8_t x = 0; x < qrcode.size; x++) {\n          if (!qrcode_getModule(&qrcode, x, y))\n            graphQR.fillRect(x*2+border, y*2+border, 2,2, myColor);\n        }\n    }\n    graphQR.pushSprite(myX, myY);\n    graphQR.deleteSprite();\n}\n';
+  Blockly.Arduino.definitions_.define_ttgo_tft_draw_QR_event='void drawQRcode(byte tftType,TFT_eSPI *myTft,int myX,int myY, byte myVersion,String myData,byte border,uint16_t myColor)\n{\n  TFT_eSprite* graphQR;\n  if (tftType==2)\n    graphQR=(TFT_eSprite*)myTft;\n  QRCode qrcode;\n  uint8_t qrcodeData[qrcode_getBufferSize(myVersion)];\n  qrcode_initText(&qrcode, qrcodeData,myVersion , 0, myData.c_str());\n  if(tftType==1){\n    myTft->fillRect(myX, myY, (qrcode.size+border)*2,(qrcode.size+border)*2, myColor);\n    myTft->fillRect(myX+border, myY+border, qrcode.size*2, qrcode.size*2, TFT_BLACK);\n    for (uint8_t y = 0; y < qrcode.size; y++) {\n      for (uint8_t x = 0; x < qrcode.size; x++) {\n        if (!qrcode_getModule(&qrcode, x, y))\n          myTft->fillRect(myX+x*2+border, myY+y*2+border, 2,2, myColor);\n      }\n    }\n  } else if (tftType==2){\n    graphQR->fillRect(myX, myY, (qrcode.size+border)*2,(qrcode.size+border)*2, myColor);\n    graphQR->fillRect(myX+border, myY+border, qrcode.size*2, qrcode.size*2, TFT_BLACK);\n    for (uint8_t y = 0; y < qrcode.size; y++) {\n      for (uint8_t x = 0; x < qrcode.size; x++) {\n        if (!qrcode_getModule(&qrcode, x, y))\n          graphQR->fillRect(myX+x*2+border, myY+y*2+border, 2,2, myColor);\n      }\n    }\n  }\n}\n';
+  return'drawQRcode(1,&tft,'+a+','+b+','+c+','+e+',5,'+d+');\n';
 };
 
 Blockly.Arduino.ttgo_tft_draw_line=function(){
