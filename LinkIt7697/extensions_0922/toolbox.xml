@@ -1,4 +1,30 @@
 <category id="category_ljj" name="Liou" colour="30">
+  <category id="category_ljj_serial" name="LJJ_SERIAL">
+    <block type="ljj_serial_begin"></block>
+    <block type="ljj_serial_print">
+      <value name="TEXT">
+        <block type="text">
+          <field name="TEXT"></field>
+        </block>
+      </value>
+    </block>
+    <block type="ljj_serial_println">
+      <value name="TEXT">
+        <block type="text">
+          <field name="TEXT"></field>
+        </block>
+      </value>
+    </block>
+    <block type="ljj_serial_readuntil">
+      <value name="TEXT">
+        <block type="text">
+          <field name="TEXT"></field>
+        </block>
+      </value>
+    </block>
+    <block type="ljj_serial_read_result"></block>
+    <block type="breakLine"></block>
+  </category>
   <category id="category_boards" name="Boards">
     <category id="category_boards_tool" name="Boards_Tool">
       <block type="board_initializes_setup"></block>

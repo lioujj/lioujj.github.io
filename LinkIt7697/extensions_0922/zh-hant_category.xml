@@ -63,4 +63,5 @@
 <category><name>Web_Service</name><replace>網路應用服務</replace></category>
 <category><name>GoogleTranslation</name><replace>Google翻譯</replace></category>
 <category><name>CAMERA</name><replace>CAMERA相機</replace></category>
+<category><name>LJJ_SERIAL</name><replace>序列埠</replace></category>
 </xml>
