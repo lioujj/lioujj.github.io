@@ -3573,6 +3573,8 @@ Blockly.Arduino.startPlus_button=function(){
     Blockly.Arduino.definitions_.define_m_button=pinStr+"char myBtnStatus;\nbool buttonPressed(char btnName)\n{\n  if (btnName=='A'){\n    if (digitalRead(A_Pin) == 1)\n      return false;\n    else\n      return true;\n  }\n  else if (btnName=='B'){\n    if (digitalRead(B_Pin) == 1)\n      return false;\n    else\n      return true;\n  } else {\n    if ((digitalRead(A_Pin) == 1) && (digitalRead(B_Pin) == 1))\n      return false;\n    else\n      return true;\n  }\n}\n"
     Blockly.Arduino.definitions_.define_m_getBtnStatus="char getBtnStatus(){\n  char buttonStatus=' ';\n  int checkButtonDelay=200;\n  if (buttonPressed('A')){\n    delay(checkButtonDelay);\n    if (buttonPressed('A')){\n      buttonStatus='A';\n      if (buttonPressed('B'))\n        buttonStatus='C';\n    }\n  } else if (buttonPressed('B')){\n      delay(checkButtonDelay);\n      if (buttonPressed('B')){\n        buttonStatus='B';\n        if (buttonPressed('A'))\n          buttonStatus='C';\n      }\n  }\n  return buttonStatus;\n}\n";
     Blockly.Arduino.setups_.setup_button='pinMode(A_Pin, INPUT);\n  pinMode(B_Pin, INPUT);';
+    if (Blockly.Arduino.my_board_type=="Arduino")
+      Blockly.Arduino.setups_.setup_button='pinMode(A_Pin, INPUT_PULLUP);\n  pinMode(B_Pin, INPUT_PULLUP);';
 	  return"if (myBtnStatus=='"+a+"'){\n"+b+"  while(buttonPressed('"+a+"')){}\n}\n";
   } else {
     return"";
@@ -4478,6 +4480,42 @@ Blockly.Arduino.ljj_camera_fb_get=function(){
 
 Blockly.Arduino.ljj_camera_fb_free=function(){
   return'esp_camera_fb_return(fb);\n';
+}
+
+//Serial
+Blockly.Arduino.ljj_serial={};
+Blockly.Arduino.ljj_serial_begin=function(){
+  var a=this.getFieldValue("SERIAL_PORT"),
+      b=this.getFieldValue("BOUND_RATE");
+  return a+'.begin('+b+');\n';
+}
+
+Blockly.Arduino.ljj_serial_print=function(){
+  var a=this.getFieldValue("SERIAL_PORT"),
+      b=Blockly.Arduino.valueToCode(this,"TEXT",Blockly.Arduino.ORDER_ATOMIC)||"";
+  return a+'.print(String('+b+'));\n';
+}
+
+Blockly.Arduino.ljj_serial_println=function(){
+  var a=this.getFieldValue("SERIAL_PORT"),
+      b=Blockly.Arduino.valueToCode(this,"TEXT",Blockly.Arduino.ORDER_ATOMIC)||"";
+  return a+'.println(String('+b+'));\n';
+}
+
+Blockly.Arduino.ljj_serial_readuntil=function(){
+  var a=this.getFieldValue("SERIAL_PORT"),
+      b=Blockly.Arduino.valueToCode(this,"TEXT",Blockly.Arduino.ORDER_ATOMIC)||"",
+      c=Blockly.Arduino.statementToCode(this,"STATEMENT");
+  Blockly.Arduino.definitions_.define_ljj_serial_invoke='String serialStr="";';
+  b=b.replace(/\"/g,"\'");
+  b=b.replace(/\\\\/g,"\\");
+  c=c.replace(new RegExp("\n  ","gm"),"\n    ");
+  var returnStr='if ('+a+'.available()) {\n  serialStr = "";\n  while ('+a+'.available()) {\n    serialStr='+a+'.readStringUntil('+b+');\n    serialStr.replace("\\r","");\n  '+c+'  }\n}\n';
+  return returnStr;
+}
+
+Blockly.Arduino.ljj_serial_read_result=function(){
+  return['serialStr',Blockly.Arduino.ORDER_ATOMIC];
 }
 
 setTimeout(function(){

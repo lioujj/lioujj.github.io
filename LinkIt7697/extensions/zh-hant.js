@@ -1,3 +1,14 @@
+//Serial
+Blockly.Msg.LJJ_SERIAL_HELPURL = "";
+Blockly.Msg.LJJ_SERIAL_TITLE= "序列埠";
+Blockly.Msg.LJJ_SERIAL_TOOLTIP = "Serial";
+Blockly.Msg.LJJ_SERIAL_BAUDRATE = "鮑率";
+Blockly.Msg.LJJ_SERIAL_INIT = "初始化";
+Blockly.Msg.LJJ_SERIAL_PRINT = "印出文字";
+Blockly.Msg.LJJ_SERIAL_PRINTLN = "印出文字(換行)";
+Blockly.Msg.LJJ_SERIAL_READUNTIL = "讀取字串直到出現字元";
+Blockly.Msg.LJJ_SERIAL_READ_RESULT = "讀取到的字串";
+
 //robot car
 Blockly.Msg.LIOU_ROBOT_FORWARD = "前進";
 Blockly.Msg.LIOU_ROBOT_BACKWARD = "後退";

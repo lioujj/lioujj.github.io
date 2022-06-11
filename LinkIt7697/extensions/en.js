@@ -1,3 +1,14 @@
+//Serial
+Blockly.Msg.LJJ_SERIAL_HELPURL = "";
+Blockly.Msg.LJJ_SERIAL_TITLE= "Serial";
+Blockly.Msg.LJJ_SERIAL_TOOLTIP = "Serial";
+Blockly.Msg.LJJ_SERIAL_BAUDRATE = "baud rate";
+Blockly.Msg.LJJ_SERIAL_INIT = "initial";
+Blockly.Msg.LJJ_SERIAL_PRINT = "print";
+Blockly.Msg.LJJ_SERIAL_PRINTLN = "print(new line)";
+Blockly.Msg.LJJ_SERIAL_READUNTIL = "read string until character";
+Blockly.Msg.LJJ_SERIAL_READ_RESULT = "get string";
+
 //robot car
 Blockly.Msg.LIOU_ROBOT_FORWARD = "FORWARD";
 Blockly.Msg.LIOU_ROBOT_BACKWARD = "BACKWARD";

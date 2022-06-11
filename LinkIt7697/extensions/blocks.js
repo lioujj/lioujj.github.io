@@ -1,3 +1,82 @@
+//Serial
+Blockly.Blocks.ljj_serial={};
+Blockly.Blocks.ljj_serial.HUE=290;
+Blockly.Blocks.ljj_serial_begin={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_SERIAL_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_serial.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_SERIAL_TITLE)
+      .appendField(Blockly.Msg.LJJ_SERIAL_INIT);
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown([["Serial","Serial"],["Serial1","Serial1"],["Seria2","Seria2"]]),"SERIAL_PORT");
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_SERIAL_BAUDRATE)
+      .appendField(new Blockly.FieldDropdown([["4800","4800"],["9600","9600"],["19200","19200"],["38400","38400"],["57600","57600"],["115200","115200"],["230400","230400"]]),"BOUND_RATE");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.LJJ_SERIAL_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_serial_print={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_SERIAL_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_serial.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_SERIAL_TITLE);
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown([["Serial","Serial"],["Serial1","Serial1"],["Seria2","Seria2"]]),"SERIAL_PORT");
+  this.appendValueInput("TEXT")
+      .setCheck("String")
+      .appendField(Blockly.Msg.LJJ_SERIAL_PRINT);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.LJJ_SERIAL_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_serial_println={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_SERIAL_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_serial.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_SERIAL_TITLE);
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown([["Serial","Serial"],["Serial1","Serial1"],["Seria2","Seria2"]]),"SERIAL_PORT");
+  this.appendValueInput("TEXT")
+      .setCheck("String")
+      .appendField(Blockly.Msg.LJJ_SERIAL_PRINTLN);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.LJJ_SERIAL_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_serial_readuntil={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_SERIAL_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_serial.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_SERIAL_TITLE);
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown([["Serial","Serial"],["Serial1","Serial1"],["Seria2","Seria2"]]),"SERIAL_PORT");
+  this.appendValueInput("TEXT")
+      .setCheck("String")
+      .appendField(Blockly.Msg.LJJ_SERIAL_READUNTIL);
+  this.appendStatementInput("STATEMENT");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.LJJ_SERIAL_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_serial_read_result={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_SERIAL_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_serial.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_SERIAL_TITLE)
+      .appendField(Blockly.Msg.LJJ_SERIAL_READ_RESULT);
+  this.setOutput(!0,"String")
+  this.setTooltip(Blockly.Msg.LJJ_SERIAL_TOOLTIP)}
+};
+
 //mqtt
 Blockly.Blocks.mqtt={};
 Blockly.Blocks.mqtt.HUE=290;
