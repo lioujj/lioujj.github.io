@@ -1481,9 +1481,7 @@ Blockly.Arduino.airbox_fetchData=function(){
   if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
     Blockly.Arduino.definitions_.define_secure_include="#include <WiFiClientSecure.h>";
     Blockly.Arduino.definitions_.define_fetch_airbox_invoke=Blockly.Arduino.definitions_.define_fetch_airbox_invoke.replace("TLSClient","WiFiClientSecure");
-    if (Blockly.Arduino.my_board_type=="ESP8266"){
-      Blockly.Arduino.definitions_.define_fetch_airbox_invoke=Blockly.Arduino.definitions_.define_fetch_airbox_invoke.replace(" client;\n"," client;\n  client.setFingerprint(fingerPrint);\n");
-    }  
+    Blockly.Arduino.definitions_.define_fetch_airbox_invoke=Blockly.Arduino.definitions_.define_fetch_airbox_invoke.replace(" client;\n"," client;\n  client.setInsecure();\n");
   }
   var a=Blockly.Arduino.valueToCode(this,"DEVICEID",Blockly.Arduino.ORDER_ATOMIC)||"";
 	return'fetchAirboxInfo(String('+a+').c_str());\n'
@@ -1505,9 +1503,7 @@ Blockly.Arduino.stock_fetchData=function(){
   if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
     Blockly.Arduino.definitions_.define_secure_include="#include <WiFiClientSecure.h>";
     Blockly.Arduino.definitions_.define_fetch_stock_invoke=Blockly.Arduino.definitions_.define_fetch_stock_invoke.replace("TLSClient","WiFiClientSecure");
-    if (Blockly.Arduino.my_board_type=="ESP8266"){
-      Blockly.Arduino.definitions_.define_fetch_stock_invoke=Blockly.Arduino.definitions_.define_fetch_stock_invoke.replace(" stockClient;\n"," stockClient;\n  stockClient.setInsecure();\n");
-    }  
+    Blockly.Arduino.definitions_.define_fetch_stock_invoke=Blockly.Arduino.definitions_.define_fetch_stock_invoke.replace(" stockClient;\n"," stockClient;\n  stockClient.setInsecure();\n");
   }
   var a=Blockly.Arduino.valueToCode(this,"STOCKID",Blockly.Arduino.ORDER_ATOMIC)||"";
 	return'fetchStockInfo(String('+a+').c_str());\n'
@@ -1529,9 +1525,7 @@ Blockly.Arduino.fetchTranslation=function(){
   if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
     Blockly.Arduino.definitions_.define_secure_include="#include <WiFiClientSecure.h>";
     Blockly.Arduino.definitions_.define_fetch_translation_invoke=Blockly.Arduino.definitions_.define_fetch_translation_invoke.replace("TLSClient","WiFiClientSecure");
-    if (Blockly.Arduino.my_board_type=="ESP8266"){
-      Blockly.Arduino.definitions_.define_fetch_translation_invoke=Blockly.Arduino.definitions_.define_fetch_translation_invoke.replace(" translateClient;\n"," translateClient;\n  translateClient.setInsecure();\n");
-    }  
+    Blockly.Arduino.definitions_.define_fetch_translation_invoke=Blockly.Arduino.definitions_.define_fetch_translation_invoke.replace(" translateClient;\n"," translateClient;\n  translateClient.setInsecure();\n");
   }
 	return'translateText('+b+',URLEncode(String('+a+').c_str()));\n'
 };
@@ -2545,9 +2539,7 @@ Blockly.Arduino.sendToGoogle=function(){
   if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
     Blockly.Arduino.definitions_.define_secure_include="#include <WiFiClientSecure.h>";
     Blockly.Arduino.definitions_.define_send_sheet_event=Blockly.Arduino.definitions_.define_send_sheet_event.replace("TLSClient","WiFiClientSecure");
-    if (Blockly.Arduino.my_board_type=="ESP8266"){
-      Blockly.Arduino.definitions_.define_send_sheet_event=Blockly.Arduino.definitions_.define_send_sheet_event.replace(" sheetClient;\n"," sheetClient;\n  sheetClient.setInsecure();\n");
-    }  
+    Blockly.Arduino.definitions_.define_send_sheet_event=Blockly.Arduino.definitions_.define_send_sheet_event.replace(" sheetClient;\n"," sheetClient;\n  sheetClient.setInsecure();\n");
   }
   var c=Blockly.Arduino.valueToCode(this,"data",Blockly.Arduino.ORDER_ATOMIC)||"";
   return'sendToGoogleSheets("'+a+'",URLEncode(('+c+').c_str()));\n'
@@ -2559,9 +2551,7 @@ Blockly.Arduino.getLastRow=function(){
   if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
     Blockly.Arduino.definitions_.define_secure_include="#include <WiFiClientSecure.h>";
     Blockly.Arduino.definitions_.define_read_sheet_last_row_event=Blockly.Arduino.definitions_.define_read_sheet_last_row_event.replace("TLSClient","WiFiClientSecure");
-    if (Blockly.Arduino.my_board_type=="ESP8266"){
-      Blockly.Arduino.definitions_.define_read_sheet_last_row_event=Blockly.Arduino.definitions_.define_read_sheet_last_row_event.replace(" sheetClient;\n"," sheetClient;\n  sheetClient.setInsecure();\n");
-    }  
+    Blockly.Arduino.definitions_.define_read_sheet_last_row_event=Blockly.Arduino.definitions_.define_read_sheet_last_row_event.replace(" sheetClient;\n"," sheetClient;\n  sheetClient.setInsecure();\n");
   }
   return['getSheetLastRow()',Blockly.Arduino.ORDER_ATOMIC];
 };
@@ -2590,9 +2580,7 @@ Blockly.Arduino.fetchFromSheet=function(){
   if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
     Blockly.Arduino.definitions_.define_secure_include="#include <WiFiClientSecure.h>";
     Blockly.Arduino.definitions_.define_read_sheet_event=Blockly.Arduino.definitions_.define_read_sheet_event.replace("TLSClient","WiFiClientSecure");
-    if (Blockly.Arduino.my_board_type=="ESP8266"){
-      Blockly.Arduino.definitions_.define_read_sheet_event=Blockly.Arduino.definitions_.define_read_sheet_event.replace(" sheetClient;\n"," sheetClient;\n  sheetClient.setInsecure();\n");
-    }  
+    Blockly.Arduino.definitions_.define_read_sheet_event=Blockly.Arduino.definitions_.define_read_sheet_event.replace(" sheetClient;\n"," sheetClient;\n  sheetClient.setInsecure();\n");
   }
   return'fetchFromSheet('+a+','+b+');\n';
 };
@@ -2608,9 +2596,7 @@ Blockly.Arduino.searchSheet=function(){
   if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
     Blockly.Arduino.definitions_.define_secure_include="#include <WiFiClientSecure.h>";
     Blockly.Arduino.definitions_.define_search_sheet_event=Blockly.Arduino.definitions_.define_search_sheet_event.replace("TLSClient","WiFiClientSecure");
-    if (Blockly.Arduino.my_board_type=="ESP8266"){
-      Blockly.Arduino.definitions_.define_search_sheet_event=Blockly.Arduino.definitions_.define_search_sheet_event.replace(" sheetClient;\n"," sheetClient;\n  sheetClient.setInsecure();\n");
-    }  
+    Blockly.Arduino.definitions_.define_search_sheet_event=Blockly.Arduino.definitions_.define_search_sheet_event.replace(" sheetClient;\n"," sheetClient;\n  sheetClient.setInsecure();\n");
   }
   return'searchSheet('+a+',URLEncode(String('+b+').c_str()).c_str());\n'
 };
@@ -2623,9 +2609,7 @@ Blockly.Arduino.deleteSearch=function(){
   if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
     Blockly.Arduino.definitions_.define_secure_include="#include <WiFiClientSecure.h>";
     Blockly.Arduino.definitions_.define_delete_search_sheet_event=Blockly.Arduino.definitions_.define_delete_search_sheet_event.replace("TLSClient","WiFiClientSecure");
-    if (Blockly.Arduino.my_board_type=="ESP8266"){
-      Blockly.Arduino.definitions_.define_delete_search_sheet_event=Blockly.Arduino.definitions_.define_delete_search_sheet_event.replace(" sheetClient;\n"," sheetClient;\n  sheetClient.setInsecure();\n");
-    }  
+    Blockly.Arduino.definitions_.define_delete_search_sheet_event=Blockly.Arduino.definitions_.define_delete_search_sheet_event.replace(" sheetClient;\n"," sheetClient;\n  sheetClient.setInsecure();\n");
   }
   return'deleteSearch('+a+',URLEncode(String('+b+').c_str()).c_str());\n'
 };
@@ -2636,9 +2620,7 @@ Blockly.Arduino.deleteRow=function(){
   if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
     Blockly.Arduino.definitions_.define_secure_include="#include <WiFiClientSecure.h>";
     Blockly.Arduino.definitions_.define_delete_rows_sheet_event=Blockly.Arduino.definitions_.define_delete_rows_sheet_event.replace("TLSClient","WiFiClientSecure");
-    if (Blockly.Arduino.my_board_type=="ESP8266"){
-      Blockly.Arduino.definitions_.define_delete_rows_sheet_event=Blockly.Arduino.definitions_.define_delete_rows_sheet_event.replace(" sheetClient;\n"," sheetClient;\n  sheetClient.setInsecure();\n");
-    }  
+    Blockly.Arduino.definitions_.define_delete_rows_sheet_event=Blockly.Arduino.definitions_.define_delete_rows_sheet_event.replace(" sheetClient;\n"," sheetClient;\n  sheetClient.setInsecure();\n");
   }
   return'deleteRows('+a+',-1);\n'
 };
@@ -2664,9 +2646,7 @@ Blockly.Arduino.updateCellValue=function(){
   if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
     Blockly.Arduino.definitions_.define_secure_include="#include <WiFiClientSecure.h>";
     Blockly.Arduino.definitions_.define_update_sheet_event=Blockly.Arduino.definitions_.define_update_sheet_event.replace("TLSClient","WiFiClientSecure");
-    if (Blockly.Arduino.my_board_type=="ESP8266"){
-      Blockly.Arduino.definitions_.define_update_sheet_event=Blockly.Arduino.definitions_.define_update_sheet_event.replace(" sheetClient;\n"," sheetClient;\n  sheetClient.setInsecure();\n");
-    }  
+    Blockly.Arduino.definitions_.define_update_sheet_event=Blockly.Arduino.definitions_.define_update_sheet_event.replace(" sheetClient;\n"," sheetClient;\n  sheetClient.setInsecure();\n");
   }
   var c=Blockly.Arduino.valueToCode(this,"data",Blockly.Arduino.ORDER_ATOMIC)||"";
   return'updateCellValue('+a+',URLEncode(String(String()+'+b+').c_str()));\n'
@@ -2746,9 +2726,7 @@ Blockly.Arduino.sendLineMsg=function(){
   if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
     Blockly.Arduino.definitions_.define_secure_include="#include <WiFiClientSecure.h>";
     Blockly.Arduino.definitions_.define_send_line_notify_invoke=Blockly.Arduino.definitions_.define_send_line_notify_invoke.replace("TLSClient","WiFiClientSecure");
-    if (Blockly.Arduino.my_board_type=="ESP8266"){
-      Blockly.Arduino.definitions_.define_send_line_notify_invoke=Blockly.Arduino.definitions_.define_send_line_notify_invoke.replace(" line_client;\n"," line_client;\n  line_client.setInsecure();\n");
-    }  
+    Blockly.Arduino.definitions_.define_send_line_notify_invoke=Blockly.Arduino.definitions_.define_send_line_notify_invoke.replace(" line_client;\n"," line_client;\n  line_client.setInsecure();\n");
   }
   return'sendLineMsg(String("message=\\n")+'+a+');\n';
 };
@@ -2761,9 +2739,7 @@ Blockly.Arduino.sendSticker=function(){
   if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
     Blockly.Arduino.definitions_.define_secure_include="#include <WiFiClientSecure.h>";
     Blockly.Arduino.definitions_.define_send_line_notify_invoke=Blockly.Arduino.definitions_.define_send_line_notify_invoke.replace("TLSClient","WiFiClientSecure");
-    if (Blockly.Arduino.my_board_type=="ESP8266"){
-      Blockly.Arduino.definitions_.define_send_line_notify_invoke=Blockly.Arduino.definitions_.define_send_line_notify_invoke.replace(" line_client;\n"," line_client;\n  line_client.setInsecure();\n");
-    }  
+    Blockly.Arduino.definitions_.define_send_line_notify_invoke=Blockly.Arduino.definitions_.define_send_line_notify_invoke.replace(" line_client;\n"," line_client;\n  line_client.setInsecure();\n");
   }
   return'sendLineMsg(String("message=\\n")+'+a+'+"§stickerPackageId="+'+b+'+"§stickerId="+'+c+');\n';
 };
@@ -3350,7 +3326,7 @@ Blockly.Arduino.sd_file_download=function(){
         b=Blockly.Arduino.valueToCode(this,"URL",Blockly.Arduino.ORDER_ATOMIC)||"";
     Blockly.Arduino.definitions_.define_HTTPCLIENT_include='#include <HTTPClient.h>';
     Blockly.Arduino.definitions_.define_SDFAT_download_event = 'void saveToSD(String myLink,String fileName)\n{\n  myLink.replace("www.dropbox","dl.dropboxusercontent");\n  myLink.replace("?dl=0","");\n  myLink.replace(" ","%20");\n  File mySDFile;\n  if(fileName.indexOf("/")!=0)\n    fileName="/"+fileName;\n  if(!SD_exists){\n    return;\n  }\n  mySDFile = mySD.open(fileName, O_CREAT | O_WRITE);\n  if (!mySDFile) {\n    return;\n  }\n  WiFiClientSecure sslClient;\n  HTTPClient http;\n  http.begin(sslClient,myLink);\n  int httpCode = http.GET();\n  if (httpCode == HTTP_CODE_OK) {\n      http.writeToStream(&mySDFile);\n  }\n  mySDFile.close();\n  http.end();\n}\n';
-    if (Blockly.Arduino.my_board_type=="ESP8266")
+    if ((Blockly.Arduino.my_board_type=="ESP8266") || (Blockly.Arduino.my_board_type=="ESP32"))
       Blockly.Arduino.definitions_.define_SDFAT_download_event=Blockly.Arduino.definitions_.define_SDFAT_download_event.replace("WiFiClientSecure sslClient;\n","WiFiClientSecure sslClient;\n  sslClient.setInsecure();\n");
     else if (Blockly.Arduino.my_board_type=="7697")
       Blockly.Arduino.definitions_.define_SDFAT_download_event=Blockly.Arduino.definitions_.define_SDFAT_download_event.replace("WiFiClientSecure","TLSClient");
