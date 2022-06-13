@@ -1,4 +1,4 @@
 <xml>
-<category><name>YCSH_</name><replace>YCSH Blocks</replace></category>
-<category><name>YCSH_Broadcast</name><replace>YCSH UDP</replace></category>
+<category><name>YCSH_</name><replace>YCSH Cloud</replace></category>
+<category><name>YCSH_Broadcast</name><replace>YCSH IoT</replace></category>
 </xml>

@@ -1,6 +1,6 @@
 //Broadcast UDP
 Blockly.Msg.YCSH_UDP_HELPURL= "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/udp廣播積木";
-Blockly.Msg.YCSH_UDP_TITLE = "YCIoT";
+Blockly.Msg.YCSH_UDP_TITLE = "YCSH IoT";
 Blockly.Msg.YCSH_UDP_INIT = "初始化";
 Blockly.Msg.YCSH_UDP_SET_PORT = "設定連接埠";
 Blockly.Msg.YCSH_UDP_BEGIN = "開始連線";
