@@ -3145,7 +3145,7 @@ Blockly.Blocks.board_initializes_setup={init:function(){
   this.setColour(Blockly.Blocks.initializes.HUE);
   this.appendDummyInput()
       .appendField(Blockly.Msg.BOARDS_TITLE)
-      .appendField(new Blockly.FieldDropdown([["7697","7697"],["Arduino","Arduino"],["ESP32","ESP32"],["ESP8266","ESP8266"],["ATtiny85","ATtiny85"]]),"BOARD_TYPE")
+      .appendField(new Blockly.FieldDropdown([["7697","7697"],["Arduino","Arduino"],["ESP32","ESP32"],["ESP8266","ESP8266"],["ATtiny85","ATtiny85"],["micro:bit","micro:bit"]]),"BOARD_TYPE")
       .appendField(Blockly.Msg.INITIALIZES_SETUP_APPENDTEXT);
   this.appendStatementInput("CONTENT");
   this.setInputsInline(!0);
@@ -3160,7 +3160,7 @@ Blockly.Blocks.board_setup={init:function(){
   this.appendDummyInput()
       .appendField(Blockly.Msg.BOARDS_TITLE)
       .appendField(Blockly.Msg.BOARDS_SETUP)
-      .appendField(new Blockly.FieldDropdown([["7697","7697"],["Arduino","Arduino"],["ESP32","ESP32"],["ESP8266","ESP8266"]]),"BOARD_TYPE");
+      .appendField(new Blockly.FieldDropdown([["7697","7697"],["Arduino","Arduino"],["ESP32","ESP32"],["ESP8266","ESP8266"],["ATtiny85","ATtiny85"],["micro:bit","micro:bit"]]),"BOARD_TYPE");
   this.setInputsInline(!0);
   this.setPreviousStatement(!0,null);
   this.setNextStatement(!0);
