@@ -484,6 +484,8 @@
       </block>
     </category>
     <category id="category_KSB065" name="KSB065">
+      <block type="KSB065_camera_pins"></block>
+      <block type="KSB065_camera_pins_clear"></block>
       <block type="KSB065_button"></block>
       <block type="KSB065_analog"></block>
       <block type="KSB065_dht11"></block>

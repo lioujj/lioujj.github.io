@@ -3717,6 +3717,41 @@ Blockly.Blocks.KSB065={};
 Blockly.Blocks.KSB065.HUE=120;
 Blockly.Blocks.KSB065.HUE5=290;
 Blockly.Blocks.KSB065.HUE4=157;
+
+Blockly.Blocks.KSB065_camera_pins={init:function(){
+  this.setHelpUrl(Blockly.Msg.KSB065_HELPURL);
+  this.setColour(Blockly.Blocks.KSB065.HUE);
+  this.appendDummyInput()
+      .appendField("KSB065")
+      .appendField(Blockly.Msg.KSB065_CAMERA_PINS);
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown([["ESP32-S","1"],["PocketCard","2"]]),"CAM_TYPE");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.KSB065_TOOLTIP)}
+};
+
+Blockly.Blocks.KSB065_camera_pins_clear={init:function(){
+  this.setHelpUrl(Blockly.Msg.KSB065_HELPURL);
+  this.setColour(Blockly.Blocks.KSB065.HUE);
+  this.appendDummyInput()
+      .appendField("KSB065")
+      .appendField(Blockly.Msg.KSB065_CAMERA_PINS_CLEAR);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_CAMERA_ROTATION)
+      .appendField(Blockly.Msg.LJJ_CAMERA_ROTATION_LIST[0][0])
+      .appendField(new Blockly.FieldDropdown([["Yes","1"],["No","0"]]),"VFLIP_VALUE");
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_CAMERA_ROTATION_LIST[1][0])
+      .appendField(new Blockly.FieldDropdown([["Yes","1"],["No","0"]]),"HMIRROR_VALUE");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.KSB065_TOOLTIP)}
+};
+
+
 Blockly.Blocks.KSB065_button={init:function(){
   this.setHelpUrl(Blockly.Msg.KSB065_HELPURL);
   this.setColour(Blockly.Blocks.KSB065.HUE);

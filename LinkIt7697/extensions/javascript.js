@@ -2208,23 +2208,8 @@ Blockly.Arduino.esp32_core_num=function(){
 //PocketCard
 Blockly.Arduino.pocketcard={};
 Blockly.Arduino.pocketcard_cam_init=function(){
-  Blockly.Arduino.definitions_.define_esp32_cam_gpio_include ='\n'+
-																'#define PWDN_GPIO_NUM     -1\n'+
-																'#define RESET_GPIO_NUM    -1\n'+
-																'#define XCLK_GPIO_NUM      2\n'+
-																'#define SIOD_GPIO_NUM     18\n'+
-																'#define SIOC_GPIO_NUM     23\n'+
-																'#define Y9_GPIO_NUM       35\n'+
-																'#define Y8_GPIO_NUM       33\n'+
-																'#define Y7_GPIO_NUM       32\n'+
-																'#define Y6_GPIO_NUM       19\n'+
-																'#define Y5_GPIO_NUM       15\n'+
-																'#define Y4_GPIO_NUM       13\n'+
-																'#define Y3_GPIO_NUM       5\n'+
-																'#define Y2_GPIO_NUM        4\n'+
-																'#define VSYNC_GPIO_NUM    14\n'+
-																'#define HREF_GPIO_NUM     27\n'+
-																'#define PCLK_GPIO_NUM     25\n';
+  Blockly.Arduino.definitions_.define_ksb065_cam_include='#include "KSB065_pins.h"';
+  Blockly.Arduino.definitions_.define_esp32_cam_gpio_include ='';
   return'';
 };
 
@@ -2291,13 +2276,51 @@ Blockly.Arduino.pocketcard_rgb_color=function(){
 
 //KSB065
 Blockly.Arduino.KSB065={};
+Blockly.Arduino.KSB065_camera_pins=function(){
+  var a=this.getFieldValue("CAM_TYPE");
+  Blockly.Arduino.KSB065.cam_type=a;
+  if (a=='1'){
+    Blockly.Arduino.definitions_.define_ksb065_cam_include='#include "KSB065_pins.h"';
+    return'';
+  }
+  else if (a=='2'){
+    Blockly.Arduino.definitions_.define_ksb065_cam_include='#include "POCKETCARD_pins.h"';
+    return''
+  }
+  else
+    return'';
+};
+
+Blockly.Arduino.KSB065_camera_pins_clear=function(){
+  var a=this.getFieldValue("VFLIP_VALUE"),
+      b=this.getFieldValue("HMIRROR_VALUE");
+  if (Blockly.Arduino.definitions_.define_esp32_cam_gpio_include)
+    delete Blockly.Arduino.definitions_.define_esp32_cam_gpio_include;
+  if (Blockly.Arduino.definitions_['define_linkit_wifi_include']){
+      var tempIndex=Blockly.Arduino.definitions_['define_linkit_wifi_include'].indexOf('#define PWDN_GPIO_NUM');
+      if (tempIndex>-1)
+        Blockly.Arduino.definitions_['define_linkit_wifi_include']=Blockly.Arduino.definitions_['define_linkit_wifi_include'].substring(0,tempIndex);
+  }
+
+  if (Blockly.Arduino.KSB065.cam_type=='2'){
+    if (Blockly.Arduino.setups_.setup_cam_initial){
+      var tempIndex=Blockly.Arduino.setups_.setup_cam_initial.indexOf('esp_err_t err = esp_camera_init(&config);');
+      if (tempIndex>-1){
+        Blockly.Arduino.setups_.setup_cam_initial=(Blockly.Arduino.setups_.setup_cam_initial.substring(0,tempIndex)+'pinMode(13, INPUT_PULLUP);\n  pinMode(14, INPUT_PULLUP);\n  '+Blockly.Arduino.setups_.setup_cam_initial.substring(tempIndex));
+      }
+    }
+  }
+
+  return's->set_vflip(s, '+a+');\ns->set_hmirror(s, '+b+');\n'
+};
+
 Blockly.Arduino.KSB065_button=function(){
-    var a=this.getFieldValue("AB_BUTTON"),
-	    b=Blockly.Arduino.statementToCode(this,"MSG_BUTTON_CALL");
-    Blockly.Arduino.definitions_.define_m_button="byte A_Pin=14;\nbyte B_Pin=25;\nchar myBtnStatus;\nbool buttonPressed(char btnName)\n{\n  if (btnName=='A'){\n    if (digitalRead(A_Pin) == 1)\n      return false;\n    else\n      return true;\n  }\n  else if (btnName=='B'){\n    if (digitalRead(B_Pin) == 1)\n      return false;\n    else\n      return true;\n  } else {\n    if ((digitalRead(A_Pin) == 1) && (digitalRead(B_Pin) == 1))\n      return false;\n    else\n      return true;\n  }\n}\n"
-    Blockly.Arduino.definitions_.define_m_getBtnStatus="char getBtnStatus(){\n  char buttonStatus=' ';\n  int checkButtonDelay=200;\n  if (buttonPressed('A')){\n    delay(checkButtonDelay);\n    if (buttonPressed('A')){\n      buttonStatus='A';\n      if (buttonPressed('B'))\n        buttonStatus='C';\n    }\n  } else if (buttonPressed('B')){\n      delay(checkButtonDelay);\n      if (buttonPressed('B')){\n        buttonStatus='B';\n        if (buttonPressed('A'))\n          buttonStatus='C';\n      }\n  }\n  return buttonStatus;\n}\n";
-    Blockly.Arduino.setups_.setup_button='pinMode(A_Pin, INPUT);\n  pinMode(B_Pin, INPUT);\n';
-	  return"if (myBtnStatus=='"+a+"'){\n"+b+"  while(buttonPressed('"+a+"')){}\n}\n"
+  var a=this.getFieldValue("AB_BUTTON"),
+	  b=Blockly.Arduino.statementToCode(this,"MSG_BUTTON_CALL");
+  Blockly.Arduino.definitions_.define_m_button="byte A_Pin=14;\nbyte B_Pin=25;\nchar myBtnStatus;\nbool buttonPressed(char btnName)\n{\n  if (btnName=='A'){\n    if (digitalRead(A_Pin) == 1)\n      return false;\n    else\n      return true;\n  }\n  else if (btnName=='B'){\n    if (digitalRead(B_Pin) == 1)\n      return false;\n    else\n      return true;\n  } else {\n    if ((digitalRead(A_Pin) == 1) && (digitalRead(B_Pin) == 1))\n      return false;\n    else\n      return true;\n  }\n}\n"
+  Blockly.Arduino.definitions_.define_m_getBtnStatus="char getBtnStatus(){\n  char buttonStatus=' ';\n  int checkButtonDelay=200;\n  if (buttonPressed('A')){\n    delay(checkButtonDelay);\n    if (buttonPressed('A')){\n      buttonStatus='A';\n      if (buttonPressed('B'))\n        buttonStatus='C';\n    }\n  } else if (buttonPressed('B')){\n      delay(checkButtonDelay);\n      if (buttonPressed('B')){\n        buttonStatus='B';\n        if (buttonPressed('A'))\n          buttonStatus='C';\n      }\n  }\n  return buttonStatus;\n}\n";
+  Blockly.Arduino.setups_.setup_button='pinMode(A_Pin, INPUT);\n  pinMode(B_Pin, INPUT);\n';
+	return"if (myBtnStatus=='"+a+"'){\n"+b+"  while(buttonPressed('"+a+"')){}\n}\n"
 };
 
 Blockly.Arduino.KSB065_analog=function(){
