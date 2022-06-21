@@ -28,15 +28,31 @@ Blockly.Arduino.finish=function(a){
 		Blockly.Arduino.setups_[e]=Blockly.Arduino.setups_[e].replace("if (myBtnStatus=='","myBtnStatus=getBtnStatus();\n  if (myBtnStatus=='");
 		d.push(Blockly.Arduino.setups_[e]);
 	}
+
+//--------------------
+	var g=[];
+	for(e in Blockly.Arduino.functions_)
+		g.push(Blockly.Arduino.functions_[e]);
+//--------------------
+
 	var e=new Date((new Date).getTime());
 	b=b.join("\n")+"\n\n"+c.join("\n")+"\n"+f.join("\n")+"\n\nvoid setup() \n{\n  "+d.join("\n  ")+"\n}\n\n";
-	b=b.replace(/\n\n+/g,"\n\n").replace(/\n*$/,"\n\n\n")+a;
+//------------------------
+	b=b.replace(/\n\n+/g,"\n\n").replace(/\n*$/,"\n\n")+a+"\n\n"+g.join("\n\n");
+	b=b.replace(/\n\n+/g,"\n\n").replace(/\n*$/,"\n\n");
+//------------------------
+
 	Blockly.Arduino.mqtt_exist="no";
 	b="/*\n * Generated using BlocklyDuino:\n *\n * https://github.com/MediaTek-Labs/BlocklyDuino-for-LinkIt\n *\n * Date: "+e.toUTCString()+"\n */\n"+b
   if (Blockly.Arduino.webserver.webserver_exist=="yes"){
     b=b+Blockly.Arduino.webserver.webserver_header+Blockly.Arduino.webserver.webserver_body+Blockly.Arduino.webserver.webserver_footer;
     Blockly.Arduino.webserver.webserver_exist="no";
   }
+//------------------------
+	this.isInitialized=!1;
+	this.nameDB_.reset();
+	this.variableDB_.reset();
+//-------------------------
   return b
 };
 
@@ -1914,12 +1930,41 @@ Blockly.Arduino.neopixel_begin2=function(){
   return""
 };
 
+Blockly.Arduino.dht_read=function(){
+  var a=this.getFieldValue("SENSOR"),
+      b=this.getFieldValue("PIN"),
+      c=this.getFieldValue("TYPE"),
+      d=a.toLowerCase()+"_p"+b;
+  if (Blockly.Arduino.my_board_type=="Arduino")
+    Blockly.Arduino.definitions_.define_dht_include="#include <DHT_mini.h>";
+  else
+    Blockly.Arduino.definitions_.define_dht_include="#include <DHT.h>";
+  Blockly.Arduino.definitions_["define_dht_"+d]="DHT "+d+"("+b+", "+a+");";
+  Blockly.Arduino.setups_["setup_dht_"+b+"_"+a]=d+".begin();";
+  a="";
+  switch(c){
+    case "h":
+      a+=d+".readHumidity()";
+      break;
+    case "C":
+      a+=d+".readTemperature()";
+      break;
+    case "F":
+      a+=d+".readTemperature(true)"
+  }
+  return[a,Blockly.Arduino.ORDER_ATOMIC]
+};
+
+
 Blockly.Arduino.dht_read_pin=function(){
   var a=this.getFieldValue("SENSOR"),
   b=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
   c=this.getFieldValue("TYPE"),
   d=a.toLowerCase()+"_p"+b;
-  Blockly.Arduino.definitions_.define_dht_include="#include <DHT.h>";
+  if (Blockly.Arduino.my_board_type=="Arduino")
+    Blockly.Arduino.definitions_.define_dht_include="#include <DHT_mini.h>";
+  else
+    Blockly.Arduino.definitions_.define_dht_include="#include <DHT.h>";
   Blockly.Arduino.definitions_["define_dht_"+d]="DHT "+d+"("+b+", "+a+");";
   Blockly.Arduino.setups_["setup_dht_"+b+"_"+a]=d+".begin();";
   a="";
@@ -3617,27 +3662,31 @@ Blockly.Arduino.startPlus_vr=function(){
      Blockly.Arduino.setups_["setup_"+a+"_"]="pinMode("+pin+", INPUT);";
      return["analogRead("+pin+")",Blockly.Arduino.ORDER_ATOMIC];
   } else {
-    return"";
+    return["",Blockly.Arduino.ORDER_ATOMIC];
   }
 };
 
 Blockly.Arduino.startPlus_dht11=function(){
   var a=this.getFieldValue("DHT"),
-      pin="";
+      pin="",
+      checkOK=false;
   if (Blockly.Arduino.my_board_type=="ESP32"){
      pin="15";
-     Blockly.Arduino.definitions_['define_dht_']="#include <DHT.h>";
-     Blockly.Arduino.definitions_['define_dht_set']="DHT dht11_p"+pin+"("+pin+", DHT11);";
-     Blockly.Arduino.setups_["setup_dht_"]="dht11_p"+pin+".begin();";
-     return["dht11_p"+pin+"."+a+"()",Blockly.Arduino.ORDER_ATOMIC];
+     checkOK=true;
   } else if ((Blockly.Arduino.my_board_type=="7697") || (Blockly.Arduino.my_board_type=="Arduino")){
      pin="10";
-     Blockly.Arduino.definitions_['define_dht_']="#include <DHT.h>";
-     Blockly.Arduino.definitions_['define_dht_set']="DHT dht11_p"+pin+"("+pin+", DHT11);";
-     Blockly.Arduino.setups_["setup_dht_"]="dht11_p"+pin+".begin();";
-     return["dht11_p"+pin+"."+a+"()",Blockly.Arduino.ORDER_ATOMIC];
+     checkOK=true;
+  }
+  if (checkOK){
+    if (Blockly.Arduino.my_board_type=="Arduino")
+      Blockly.Arduino.definitions_['define_dht_']="#include <DHT_mini.h>";
+    else
+      Blockly.Arduino.definitions_['define_dht_']="#include <DHT.h>";
+    Blockly.Arduino.definitions_['define_dht_set']="DHT dht11_p"+pin+"("+pin+", DHT11);";
+    Blockly.Arduino.setups_["setup_dht_"]="dht11_p"+pin+".begin();";
+    return["dht11_p"+pin+"."+a+"()",Blockly.Arduino.ORDER_ATOMIC];
   } else {
-    return"";
+    return["",Blockly.Arduino.ORDER_ATOMIC];
   }
 };
 
