@@ -536,7 +536,7 @@ Blockly.Msg.POCKETCARD_PIXELS_COLOR = "built-in RGB color";
 //KSB065
 Blockly.Msg.KSB065_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/ksb065擴展板積木";
 Blockly.Msg.KSB065_TOOLTIP = "KSB065";
-Blockly.Msg.KSB065_ANALOG_LIST=[["slider value","33"],["TEMP6000 value","4"]];
+Blockly.Msg.KSB065_ANALOG_LIST=[["slider value","33"],["light sensor value","4"]];
 Blockly.Msg.KSB065_CAMERA_PINS = "CAMERA setup default pins";
 Blockly.Msg.KSB065_CAMERA_PINS_CLEAR = "clear other CAMERA module pins";
 
@@ -970,7 +970,7 @@ Blockly.Msg.MPU6050_TITLE = "MPU6050";
 Blockly.Msg.MPU6050_TOOLTIP = "MPU6050";
 
 //CAMERA
-Blockly.Msg.LJJ_CAMERA_HELPURL = "";
+Blockly.Msg.LJJ_CAMERA_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/camera相機積木";
 Blockly.Msg.LJJ_CAMERA_TITLE ="CAMERA"
 Blockly.Msg.LJJ_CAMERA_INIT = "initial";
 Blockly.Msg.LJJ_CAMERA_TYPE = "board type";

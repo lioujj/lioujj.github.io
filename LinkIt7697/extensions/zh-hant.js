@@ -530,7 +530,7 @@ Blockly.Msg.POCKETCARD_PIXELS_COLOR = "板載RGB顏色";
 //KSB065
 Blockly.Msg.KSB065_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/ksb065擴展板積木";
 Blockly.Msg.KSB065_TOOLTIP = "KSB065";
-Blockly.Msg.KSB065_ANALOG_LIST=[["滑桿值","33"],["TEMP6000光感值","4"]];
+Blockly.Msg.KSB065_ANALOG_LIST=[["滑桿值","33"],["光感值","4"]];
 Blockly.Msg.KSB065_CAMERA_PINS = "CAMERA設定成KSB065預設腳位";
 Blockly.Msg.KSB065_CAMERA_PINS_CLEAR = "清除其他CAMERA模組的設定";
 
@@ -963,7 +963,7 @@ Blockly.Msg.MPU6050_TITLE = "MPU6050";
 Blockly.Msg.MPU6050_TOOLTIP = "MPU6050";
 
 //CAMERA
-Blockly.Msg.LJJ_CAMERA_HELPURL = "";
+Blockly.Msg.LJJ_CAMERA_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/camera相機積木";
 Blockly.Msg.LJJ_CAMERA_TITLE ="CAMERA相機"
 Blockly.Msg.LJJ_CAMERA_INIT = "初始化";
 Blockly.Msg.LJJ_CAMERA_TYPE = "板子";
