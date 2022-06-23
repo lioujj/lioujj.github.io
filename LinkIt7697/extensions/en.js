@@ -992,3 +992,5 @@ Blockly.Msg.LJJ_CAMERA_RES_TYPE=[
 			["QXGA(2048x1564)","QXGA"]];
 Blockly.Msg.LJJ_CAMERA_ROTATION = "set camera direction";
 Blockly.Msg.LJJ_CAMERA_ROTATION_LIST = [["flip","vflip"],["mirror","hmirror"]];
+Blockly.Msg.LJJ_CAMERA_SAVE_TO = "save photo(jpg) to";
+Blockly.Msg.LJJ_CAMERA_RESET_RESOLUTION = "reset resolution";

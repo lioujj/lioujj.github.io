@@ -4540,12 +4540,34 @@ Blockly.Arduino.ljj_camera_rotation=function(){
 	return'myCamera->set_'+a+'(myCamera, '+b+');\n'
 };
 
+Blockly.Arduino.ljj_camera_resolution=function(){
+  var a=this.getFieldValue("RES_TYPE");
+	return'myCamera->set_framesize(myCamera, FRAMESIZE_'+a+');\n'
+};
+
 Blockly.Arduino.ljj_camera_fb_get=function(){
   return'camera_fb_t *fb = NULL;\nfb = esp_camera_fb_get();\nif (!fb) {\n  Serial.println("Camera capture failed");\n  esp_camera_fb_return(fb);\n  return;\n}\nif (fb->format != PIXFORMAT_JPEG) {\n  Serial.println("Non-JPEG data not implemented");\n  return;\n}\n';
 }
 
 Blockly.Arduino.ljj_camera_fb_free=function(){
   return'esp_camera_fb_return(fb);\n';
+}
+
+Blockly.Arduino.ljj_camera_fb_save=function(){
+  var a=Blockly.Arduino.ljj_camera.cam_type,
+      b=this.getFieldValue("F_SOURCE"),
+      c=Blockly.Arduino.valueToCode(this,"FILE_NAME",Blockly.Arduino.ORDER_ATOMIC)||"";
+  Blockly.Arduino.definitions_.define_ljj_cam_save_event=' void cameraSaveTo(byte mediaType,String filename,camera_fb_t *myFB)\n{\n  File jpegFile;\n  if (mediaType==1){\n    if (!SD.begin(pinCS)) return;\n    jpegFile = SD.open(filename.c_str(),"w");\n    if ( !jpegFile )  return;\n  } else if (mediaType==2){\n    SPIFFS.begin();\n    jpegFile = SPIFFS.open(filename.c_str(),"w");\n    if ( !jpegFile )  return;\n  }\n  jpegFile.write(myFB->buf, myFB->len);\n  jpegFile.close();\n  if (mediaType==1)\n    SD.end();\n  else if (mediaType==2)\n    SPIFFS.end();\n}\n';
+  if ((a=="PIXELBIT")||(a=="ESP32-CAM")){
+    Blockly.Arduino.definitions_.define_ljj_cam_include+="\n#include <SD_MMC.h>";
+    Blockly.Arduino.definitions_.define_ljj_cam_save_event=Blockly.Arduino.definitions_.define_ljj_cam_save_event.replace(new RegExp("SD.","gm"),"SD_MMC.");
+    Blockly.Arduino.definitions_.define_ljj_cam_save_event=Blockly.Arduino.definitions_.define_ljj_cam_save_event.replace("pinCS","");
+  } else {
+    Blockly.Arduino.definitions_.define_ljj_cam_include+="\n#include <SD.h>";
+    if ((a=="KSB065")||(a=="POCKETCARD"))
+       Blockly.Arduino.definitions_.define_SD_CS_invoke='int pinCS=4;';
+  }
+  return'cameraSaveTo('+b+','+c+',fb);\n';
 }
 
 //Serial

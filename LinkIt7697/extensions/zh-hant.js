@@ -985,3 +985,5 @@ Blockly.Msg.LJJ_CAMERA_RES_TYPE=[
 			["QXGA(2048x1564)","QXGA"]];
 Blockly.Msg.LJJ_CAMERA_ROTATION = "設定影像方向";
 Blockly.Msg.LJJ_CAMERA_ROTATION_LIST = [["上下翻轉","vflip"],["左右鏡射","hmirror"]];
+Blockly.Msg.LJJ_CAMERA_SAVE_TO = "將擷取畫面(jpg)儲存到";
+Blockly.Msg.LJJ_CAMERA_RESET_RESOLUTION = "重設解析度";
