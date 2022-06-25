@@ -7508,7 +7508,7 @@ Blockly.Blocks.ljj_camera_rotation={init:function(){
       .appendField(Blockly.Msg.LJJ_CAMERA_TITLE)
       .appendField(Blockly.Msg.LJJ_CAMERA_ROTATION)
       .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_CAMERA_ROTATION_LIST),"ROTATION_TYPE")
-      .appendField(new Blockly.FieldDropdown([["Yes","1"],["No","0"]]),"VALUE");
+      .appendField(new Blockly.FieldDropdown([["Enable","1"],["Disable","0"]]),"VALUE");
   this.setInputsInline(!0);
   this.setPreviousStatement(!0,null);
   this.setNextStatement(!0,null);
@@ -7522,6 +7522,51 @@ Blockly.Blocks.ljj_camera_resolution={init:function(){
       .appendField(Blockly.Msg.LJJ_CAMERA_TITLE)
       .appendField(Blockly.Msg.LJJ_CAMERA_RESET_RESOLUTION)
       .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_CAMERA_RES_TYPE),"RES_TYPE");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.LJJ_CAMERA_TOOLTIP)}
+}
+
+Blockly.Blocks.ljj_camera_image={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_CAMERA_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_camera.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_CAMERA_TITLE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_CAMERA_SET)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_CAMERA_SET_IMAGE_LIST),"TYPE");
+  this.appendValueInput("VALUE")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LJJ_CAMERA_VALUE_HINT);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.LJJ_CAMERA_TOOLTIP)}
+}
+
+Blockly.Blocks.ljj_camera_effect1={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_CAMERA_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_camera.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_CAMERA_TITLE)
+      .appendField(Blockly.Msg.LJJ_CAMERA_EFFECT)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_CAMERA_EFFECT_TYPE),"EFFECT_TYPE");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.LJJ_CAMERA_TOOLTIP)}
+}
+
+Blockly.Blocks.ljj_camera_effect2={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_CAMERA_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_camera.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_CAMERA_TITLE)
+      .appendField(Blockly.Msg.LJJ_CAMERA_EFFECT)
+  this.appendValueInput("VALUE")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LJJ_CAMERA_EFFECT_VALUE);
   this.setInputsInline(!0);
   this.setPreviousStatement(!0,null);
   this.setNextStatement(!0,null);
@@ -7566,5 +7611,16 @@ Blockly.Blocks.ljj_camera_fb_save={init:function(){
   this.setInputsInline(!0);
   this.setPreviousStatement(!0,null);
   this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.LJJ_CAMERA_TOOLTIP)}
+}
+
+Blockly.Blocks.ljj_camera_fb_detected_face={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_CAMERA_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_camera.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_CAMERA_TITLE)
+      .appendField(Blockly.Msg.LJJ_CAMERA_FACE_DETECTED);
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Boolean");
   this.setTooltip(Blockly.Msg.LJJ_CAMERA_TOOLTIP)}
 }

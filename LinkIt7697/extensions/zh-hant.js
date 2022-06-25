@@ -984,6 +984,13 @@ Blockly.Msg.LJJ_CAMERA_RES_TYPE=[
 			["QQVGA(160x120)","QQVGA"],
 			["QXGA(2048x1564)","QXGA"]];
 Blockly.Msg.LJJ_CAMERA_ROTATION = "設定影像方向";
-Blockly.Msg.LJJ_CAMERA_ROTATION_LIST = [["上下翻轉","vflip"],["左右鏡射","hmirror"]];
+Blockly.Msg.LJJ_CAMERA_ROTATION_LIST = [["上下翻轉","vflip"],["左右鏡射","hmirror"],["白平衡","whitebal"],["白平衡增益","awb_gain"],["曝光控制","exposure_ctrl"],["鏡頭校正","lenc"]];
 Blockly.Msg.LJJ_CAMERA_SAVE_TO = "將擷取畫面(jpg)儲存到";
 Blockly.Msg.LJJ_CAMERA_RESET_RESOLUTION = "重設解析度";
+Blockly.Msg.LJJ_CAMERA_EFFECT = "設定特效";
+Blockly.Msg.LJJ_CAMERA_EFFECT_TYPE = [["無特效","0"],["負相","1"],["灰階","2"],["紅色色調","3"],["綠色色調","4"],["藍色色調","5"],["老照片","6"]];
+Blockly.Msg.LJJ_CAMERA_SET = "設定";
+Blockly.Msg.LJJ_CAMERA_SET_IMAGE_LIST = [["亮度","brightness"],["對比","contrast"],["飽和度","saturation"]];
+Blockly.Msg.LJJ_CAMERA_VALUE_HINT = "值(-2到2)";
+Blockly.Msg.LJJ_CAMERA_EFFECT_VALUE = "值(0到6)";
+Blockly.Msg.LJJ_CAMERA_FACE_DETECTED = "擷取畫面中偵測到人臉";

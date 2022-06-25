@@ -1173,7 +1173,23 @@
         <block type="ljj_camera_init"></block>
         <block type="ljj_camera_rotation"></block>
         <block type="ljj_camera_resolution"></block>
+        <block type="ljj_camera_image">
+          <value name="VALUE">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+        </block>
+        <block type="ljj_camera_effect1"></block>
+        <block type="ljj_camera_effect2">
+          <value name="VALUE">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+        </block>
         <block type="ljj_camera_fb_get"></block>
+        <block type="ljj_camera_fb_detected_face"></block>
         <block type="ljj_camera_fb_save">
           <value name="FILE_NAME">
             <block type="text">

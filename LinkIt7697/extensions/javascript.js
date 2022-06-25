@@ -2147,7 +2147,7 @@ Blockly.Arduino.esp32_tone=function(){
   if (Blockly.Arduino.my_board_type=="ESP32"){
     Blockly.Arduino.definitions_.define_tone="#include <Tone32.h>";
     Blockly.Arduino.setups_["esp32_tone1"]="tone("+a+",100,0,"+c+");\n  delay(1);\n  noTone("+a+","+c+");\n";
-    return"tone("+a+","+b+",0,"+c+");\n"
+    return"noTone("+a+","+c+");\ntone("+a+","+b+",0,"+c+");\n"
   }
   else
     return'';
@@ -2418,7 +2418,7 @@ Blockly.Arduino.KSB065_tone=function(){
   Blockly.Arduino.definitions_.define_tone="#include <Tone32.h>";
   Blockly.Arduino.definitions_.define_start_plus_tone_invoke="byte buzz_pin=26;\nbyte buzz_ch=0;\n";
   Blockly.Arduino.setups_["esp32_tone1"]="tone(buzz_pin,262,0,buzz_ch);\n  delay(1);\n  noTone(buzz_pin,buzz_ch);";
-  return"tone(buzz_pin,"+a+",0,buzz_ch);\n";
+  return"noTone(buzz_pin,buzz_ch);\ntone(buzz_pin,"+a+",0,buzz_ch);\n";
 };
 
 Blockly.Arduino.KSB065_no_tone=function(){
@@ -3769,7 +3769,7 @@ Blockly.Arduino.startPlus_tone=function(){
     Blockly.Arduino.definitions_.define_tone="#include <Tone32.h>";
     Blockly.Arduino.definitions_.define_start_plus_tone_invoke="byte buzz_pin=14;\nbyte buzz_ch=0;\n";
     Blockly.Arduino.setups_["esp32_tone1"]="tone(buzz_pin,262,0,buzz_ch);\n  delay(1);\n  noTone(buzz_pin,buzz_ch);";
-    return"tone(buzz_pin,"+a+",0,buzz_ch);\n";
+    return"noTone(buzz_pin,buzz_ch);\ntone(buzz_pin,"+a+",0,buzz_ch);\n";
   } else if (Blockly.Arduino.my_board_type=="7697"){
     Blockly.Arduino.definitions_.define_start_plus_tone_invoke="byte buzz_pin=14;";
     return"tone(buzz_pin, "+a+");\n";
@@ -4545,12 +4545,39 @@ Blockly.Arduino.ljj_camera_resolution=function(){
 	return'myCamera->set_framesize(myCamera, FRAMESIZE_'+a+');\n'
 };
 
+Blockly.Arduino.ljj_camera_effect1=function(){
+  var a=this.getFieldValue("EFFECT_TYPE");
+	return'myCamera->set_special_effect(myCamera, '+a+');\n'
+};
+
+Blockly.Arduino.ljj_camera_effect2=function(){
+  var a=Blockly.Arduino.valueToCode(this,"VALUE",Blockly.Arduino.ORDER_ATOMIC)||"0";
+	return'myCamera->set_special_effect(myCamera, '+a+');\n'
+};
+
+Blockly.Arduino.ljj_camera_image=function(){
+  var a=this.getFieldValue("TYPE"),
+      b=Blockly.Arduino.valueToCode(this,"VALUE",Blockly.Arduino.ORDER_ATOMIC)||"0";
+	return'myCamera->set_'+a+'(myCamera, '+b+');\n'
+};
+
 Blockly.Arduino.ljj_camera_fb_get=function(){
   return'camera_fb_t *fb = NULL;\nfb = esp_camera_fb_get();\nif (!fb) {\n  Serial.println("Camera capture failed");\n  esp_camera_fb_return(fb);\n  return;\n}\nif (fb->format != PIXFORMAT_JPEG) {\n  Serial.println("Non-JPEG data not implemented");\n  return;\n}\n';
 }
 
 Blockly.Arduino.ljj_camera_fb_free=function(){
   return'esp_camera_fb_return(fb);\n';
+}
+
+Blockly.Arduino.ljj_camera_fb_detected_face=function(){
+  if (Blockly.Arduino.definitions_.define_ljj_cam_include){
+    if (Blockly.Arduino.definitions_.define_ljj_cam_include.indexOf()<0)
+      Blockly.Arduino.definitions_.define_ljj_cam_include+='\n#include "fd_forward.h"';
+    Blockly.Arduino.definitions_.define_ljj_cam_face_invoke="mtmn_config_t mtmn_config = {0};";
+    Blockly.Arduino.setups_.setup_face_data="mtmn_config = mtmn_init_config();";
+    Blockly.Arduino.definitions_.define_ljj_cam_face_event='bool camDetectedFace(camera_fb_t * frame)\n{\n  dl_matrix3du_t *image_matrix = dl_matrix3du_alloc(1, frame->width, frame->height, 3);\n  fmt2rgb888(frame->buf, frame->len, frame->format, image_matrix->item);\n  box_array_t *boxes = face_detect(image_matrix, &mtmn_config);\n  dl_matrix3du_free(image_matrix);\n  if (boxes != NULL) {\n    dl_lib_free(boxes->score);\n    dl_lib_free(boxes->box);\n    dl_lib_free(boxes->landmark);\n    dl_lib_free(boxes);\n    return true;\n  } else\n    return false;\n}\n';
+  }
+  return['(camDetectedFace(fb))',Blockly.Arduino.ORDER_ATOMIC];
 }
 
 Blockly.Arduino.ljj_camera_fb_save=function(){

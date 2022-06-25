@@ -991,6 +991,13 @@ Blockly.Msg.LJJ_CAMERA_RES_TYPE=[
 			["QQVGA(160x120)","QQVGA"],
 			["QXGA(2048x1564)","QXGA"]];
 Blockly.Msg.LJJ_CAMERA_ROTATION = "set camera direction";
-Blockly.Msg.LJJ_CAMERA_ROTATION_LIST = [["flip","vflip"],["mirror","hmirror"]];
+Blockly.Msg.LJJ_CAMERA_ROTATION_LIST = [["flip","vflip"],["mirror","hmirror"],["white ballance","whitebal"],["white ballance gain","awb_gain"],["exposure control","exposure_ctrl"],["lens correction","lenc"]];
 Blockly.Msg.LJJ_CAMERA_SAVE_TO = "save photo(jpg) to";
 Blockly.Msg.LJJ_CAMERA_RESET_RESOLUTION = "reset resolution";
+Blockly.Msg.LJJ_CAMERA_EFFECT = "set effect";
+Blockly.Msg.LJJ_CAMERA_EFFECT_TYPE = [["No Effect","0"],["Negative","1"],["Grayscale","2"],["Red Tint","3"],["Green Tint","4"],["Blue Tint","5"],["Sepia","6"]];
+Blockly.Msg.LJJ_CAMERA_SET = "set";
+Blockly.Msg.LJJ_CAMERA_SET_IMAGE_LIST = [["brightness","brightness"],["contrast","contrast"],["saturation","saturation"]];
+Blockly.Msg.LJJ_CAMERA_VALUE_HINT = "value(-2 to 2)";
+Blockly.Msg.LJJ_CAMERA_EFFECT_VALUE = "value(0 to 6)";
+Blockly.Msg.LJJ_CAMERA_FACE_DETECTED = "detected face";
