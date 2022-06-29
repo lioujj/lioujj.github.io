@@ -2253,9 +2253,28 @@ Blockly.Arduino.esp32_core_num=function(){
 //PocketCard
 Blockly.Arduino.pocketcard={};
 Blockly.Arduino.pocketcard_cam_init=function(){
-  Blockly.Arduino.definitions_.define_ksb065_cam_include='#include "KSB065_pins.h"';
+  Blockly.Arduino.definitions_.define_ksb065_cam_include='#include "POCKETCARD_pins.h"';
   Blockly.Arduino.definitions_.define_esp32_cam_gpio_include ='';
   return'';
+};
+
+Blockly.Arduino.pocketcard_cam_pins_clear=function(){
+  var a=this.getFieldValue("VFLIP_VALUE"),
+      b=this.getFieldValue("HMIRROR_VALUE");
+  if (Blockly.Arduino.definitions_.define_esp32_cam_gpio_include)
+    delete Blockly.Arduino.definitions_.define_esp32_cam_gpio_include;
+  if (Blockly.Arduino.definitions_['define_linkit_wifi_include']){
+      var tempIndex=Blockly.Arduino.definitions_['define_linkit_wifi_include'].indexOf('#define PWDN_GPIO_NUM');
+      if (tempIndex>-1)
+        Blockly.Arduino.definitions_['define_linkit_wifi_include']=Blockly.Arduino.definitions_['define_linkit_wifi_include'].substring(0,tempIndex);
+  }
+  if (Blockly.Arduino.setups_.setup_cam_initial){
+    var tempIndex=Blockly.Arduino.setups_.setup_cam_initial.indexOf('esp_err_t err = esp_camera_init(&config);');
+    if (tempIndex>-1){
+      Blockly.Arduino.setups_.setup_cam_initial=(Blockly.Arduino.setups_.setup_cam_initial.substring(0,tempIndex)+'pinMode(13, INPUT_PULLUP);\n  pinMode(14, INPUT_PULLUP);\n  '+Blockly.Arduino.setups_.setup_cam_initial.substring(tempIndex));
+    }
+  }
+  return's->set_vflip(s, '+a+');\ns->set_hmirror(s, '+b+');\n'
 };
 
 Blockly.Arduino.pocketcard_button=function(){
@@ -2403,7 +2422,7 @@ Blockly.Arduino.KSB065_motor=function(){
   if (b=="1"){
     return'digitalWrite(L9110S_1A , HIGH);\nledcWrite(L9110S_1B_ch, 255-'+a+');\n'
   } else {
-    return'digitalWrite(L9110S_1A , LOW);\nledcWrite(L9110S_1B_ch, -'+a+');\n'
+    return'digitalWrite(L9110S_1A , LOW);\nledcWrite(L9110S_1B_ch, '+a+');\n'
   }
 };
 
@@ -2837,7 +2856,13 @@ Blockly.Arduino.ttgo_tft_init=function(){
   Blockly.Arduino.definitions_.define_ttgo_tft_include="#include <TFT_eSPI_"+a+".h>\n#include <U8g2_for_TFT_eSPI.h>";
   Blockly.Arduino.definitions_.define_ttgo_tft_init_invoke="TFT_eSPI tft = TFT_eSPI();\nU8g2_for_TFT_eSPI u8g2;\nuint32_t tft_color=TFT_WHITE;\nuint32_t tft_bg_color=TFT_BLACK;\nuint32_t tft_fg_color=TFT_WHITE;\nbyte tftTextSize=1;\nbyte tftTextFont=1;\n";
   Blockly.Arduino.definitions_.define_SD_CS_invoke='int pinCS=SS;';
-  Blockly.Arduino.setups_.ttgo_tft='tft.begin();\n  tft.fillScreen(TFT_BLACK);\n  u8g2.begin(tft);\n  tft.setTextColor(tft_color);\n  u8g2.setForegroundColor(tft_color);\n';
+  if (a=="KSB065" || a=="KSB064")
+    Blockly.Arduino.setups_.ttgo_tft='tft.begin();\n  tft.setRotation(1);\n';
+  else if (a=="PIXELBIT")
+    Blockly.Arduino.setups_.ttgo_tft='tft.begin();\n  tft.setRotation(3);\n';
+  else
+    Blockly.Arduino.setups_.ttgo_tft='tft.begin();\n';
+  Blockly.Arduino.setups_.ttgo_tft+='  tft.fillScreen(TFT_BLACK);\n  u8g2.begin(tft);\n  tft.setTextColor(tft_color);\n  u8g2.setForegroundColor(tft_color);\n';
   return'';
 };
 
@@ -4594,6 +4619,22 @@ Blockly.Arduino.ljj_camera_fb_save=function(){
     if ((a=="KSB065")||(a=="POCKETCARD"))
        Blockly.Arduino.definitions_.define_SD_CS_invoke='int pinCS=4;';
   }
+  if (b=='1'){
+    if (a=='KSB065'){
+      if (Blockly.Arduino.setups_.ttgo_tft)
+        if (Blockly.Arduino.setups_.ttgo_tft.indexOf("SD.begin(pinCS)")<0)
+          Blockly.Arduino.setups_.ttgo_tft='SD.begin(pinCS);\n  SD.end();\n  '+Blockly.Arduino.setups_.ttgo_tft;  
+    }
+    else if (a=='PIXELBIT' || a=='ESP32-CAM'){
+      if (Blockly.Arduino.setups_.ttgo_tft)
+        if (Blockly.Arduino.setups_.ttgo_tft.indexOf('SD_MMC.begin()')<0)
+          Blockly.Arduino.setups_.ttgo_tft='SD_MMC.begin();\n  SD_MMC.end();\n  '+Blockly.Arduino.setups_.ttgo_tft;
+    }
+    else
+      Blockly.Arduino.setups_.ttgo_tft='SD.begin();\n  SD.end();\n  '+Blockly.Arduino.setups_.ttgo_tft;
+  }
+  else if (b=='2')
+    Blockly.Arduino.setups_.ttgo_tft='SPIFFS.begin();\n  SPIFFS.end();\n  '+Blockly.Arduino.setups_.ttgo_tft;
   return'cameraSaveTo('+b+','+c+',fb);\n';
 }
 
