@@ -3080,10 +3080,10 @@ Blockly.Arduino.ttgo_tft_get_camera=function(){
       c=Blockly.Arduino.valueToCode(this,"Y",Blockly.Arduino.ORDER_NONE)||"0";
   Blockly.Arduino.definitions_.define_ttgo_tft_TJPG_include='#include <TJpg_Decoder.h>';
   Blockly.Arduino.definitions_.define_ttgo_tft_TJPG_invoke='uint16_t dmaBuffer1[16 * 16];\nuint16_t dmaBuffer2[16 * 16];\nuint16_t *dmaBufferPtr = dmaBuffer1;\nbool dmaBufferSel = 0;\n';
-  Blockly.Arduino.definitions_.define_ttgo_tft_TJPG_event='bool cameraToTft(int16_t x, int16_t y, uint16_t w, uint16_t h, uint16_t *bitmap)\n{\n  if (y >= tft.height())\n    return false;\n  if (dmaBufferSel)\n    dmaBufferPtr = dmaBuffer2;\n  else\n    dmaBufferPtr = dmaBuffer1;\n  dmaBufferSel = !dmaBufferSel;\n  tft.pushImageDMA(x, y, w, h, bitmap, dmaBufferPtr);\n  return true;\n}\n';
+  Blockly.Arduino.definitions_.define_ttgo_tft_TJPG_event='bool cameraToTft(int16_t x, int16_t y, uint16_t w, uint16_t h, uint16_t *bitmap)\n{\n  if (y >= tft.height())\n    return false;\n  if (dmaBufferSel)\n    dmaBufferPtr = dmaBuffer2;\n  else\n    dmaBufferPtr = dmaBuffer1;\n  dmaBufferSel = !dmaBufferSel;\n  tft.dmaWait();\n  tft.pushImageDMA(x, y, w, h, bitmap, dmaBufferPtr);\n  tft.dmaWait();\n  return true;\n}\n';
   Blockly.Arduino.setups_.ttgo_tft_TJPG_callback='TJpgDec.setCallback(cameraToTft);\n'
   if (Blockly.Arduino.setups_.ttgo_tft.indexOf('tft.initDMA')<0)
-    Blockly.Arduino.setups_.ttgo_tft+='  tft.initDMA();\n  tft.setSwapBytes(true);\n';
+    Blockly.Arduino.setups_.ttgo_tft+='  tft.initDMA(true);\n  tft.setSwapBytes(true);\n';
   return'TJpgDec.setJpgScale('+a+');\ntft.startWrite();\nTJpgDec.drawJpg('+b+','+c+', fb->buf, fb->len);\ntft.endWrite();\n'
 }
 
