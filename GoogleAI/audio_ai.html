@@ -78,7 +78,7 @@ Password：<input type="text" id="myPassword" size="30"></input><br><br>
       if (tempScore>=threshold){ 
         mqtt_client.publish(mqttTopic, tempClass);
         labelContainer.childNodes[classLabels.length+1].innerHTML='<hr><font color=green><b>辨識概率大於設定數值，已傳送MQTT訊息</b></font>';
-        await delayTime(2000);
+        //delayTime(2000);
       } else {
         labelContainer.childNodes[classLabels.length+1].innerHTML='<hr><font color=red><b>辨識概率小於設定數值，不傳送MQTT訊息</b></font>';
       }
