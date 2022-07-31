@@ -2857,8 +2857,11 @@ Blockly.Arduino.ttgo_tft_init=function(){
   Blockly.Arduino.definitions_.define_ttgo_tft_include="#include <TFT_eSPI_"+a+".h>\n#include <U8g2_for_TFT_eSPI.h>";
   Blockly.Arduino.definitions_.define_ttgo_tft_init_invoke="TFT_eSPI tft = TFT_eSPI();\nU8g2_for_TFT_eSPI u8g2;\nuint32_t tft_color=TFT_WHITE;\nuint32_t tft_bg_color=TFT_BLACK;\nuint32_t tft_fg_color=TFT_WHITE;\nbyte tftTextSize=1;\nbyte tftTextFont=1;\n";
   Blockly.Arduino.definitions_.define_SD_CS_invoke='int pinCS=SS;';
-  if (a=="KSB065" || a=="KSB064")
+  if (a=="KSB065" || a=="KSB064"){
     Blockly.Arduino.setups_.ttgo_tft='tft.begin();\n  tft.setRotation(1);\n';
+    if (a=="KSB064")
+      Blockly.Arduino.definitions_.define_SD_CS_invoke='int pinCS=33;';
+  }
   else if (a=="PIXELBIT")
     Blockly.Arduino.setups_.ttgo_tft='tft.begin();\n  tft.setRotation(3);\n';
   else
