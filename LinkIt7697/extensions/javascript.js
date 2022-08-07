@@ -3603,10 +3603,11 @@ Blockly.Arduino.l9110_init=function(){
       b=Blockly.Arduino.valueToCode(this,"M1B",Blockly.Arduino.ORDER_ATOMIC)||"0",
       c=Blockly.Arduino.valueToCode(this,"M2A",Blockly.Arduino.ORDER_ATOMIC)||"0",
       d=Blockly.Arduino.valueToCode(this,"M2B",Blockly.Arduino.ORDER_ATOMIC)||"0";
-  Blockly.Arduino.definitions_.define_L9110_invoke='byte m1aL9110='+a+';\nbyte m1bL9110='+b+';\nbyte m2aL9110='+c+';\nbyte m2bL9110='+d+';\nbyte m1aCH=11;\nbyte m1bCH=12;\nbyte m2aCH=13;\nbyte m2bCH=14;\n';
   if (Blockly.Arduino.my_board_type=="ESP32"){
+    Blockly.Arduino.definitions_.define_L9110_invoke='byte m1aL9110='+a+';\nbyte m1bL9110='+b+';\nbyte m2aL9110='+c+';\nbyte m2bL9110='+d+';\nbyte m1aCH=11;\nbyte m1bCH=12;\nbyte m2aCH=13;\nbyte m2bCH=14;\n';
     Blockly.Arduino.setups_["setup_L9110"]='ledcSetup(m1aCH, 5000, 8);\n  ledcAttachPin(m1aL9110,m1aCH);\n  ledcSetup(m1bCH, 5000, 8);\n  ledcAttachPin(m1bL9110,m1bCH);\n  ledcSetup(m2aCH, 5000, 8);\n  ledcAttachPin(m2aL9110,m2aCH);\n  ledcSetup(m2bCH, 5000, 8);\n  ledcAttachPin(m2bL9110,m2bCH);\n';   
   } else {
+    Blockly.Arduino.definitions_.define_L9110_invoke='byte m1aL9110='+a+';\nbyte m1bL9110='+b+';\nbyte m2aL9110='+c+';\nbyte m2bL9110='+d+';\n';
     Blockly.Arduino.setups_["setup_L9110"]='pinMode(m1aL9110,OUTPUT);\n  pinMode(m1bL9110,OUTPUT);\n  pinMode(m2aL9110,OUTPUT);\n  pinMode(m2bL9110,OUTPUT);\n';
   }
   return'';
@@ -3620,14 +3621,14 @@ Blockly.Arduino.l9110_run=function(){
 
     if (a=="both"){
       if (b=="1")
-        returnValue='analogWrite(m1aL9110,0);\nanalogWrite(m1bL9110,'+c+');\nanalogWrite(m2aL9110,0);\nanalogWrite(m2bL9110,'+c+');\n';
+        returnValue='digitalWrite(m1aL9110,1);\nanalogWrite(m1bL9110,255-'+c+');\ndigitalWrite(m2aL9110,1);\nanalogWrite(m2bL9110,255-'+c+');\n';
       else
-        returnValue='analogWrite(m1aL9110,'+c+');\nanalogWrite(m1bL9110,0);\nanalogWrite(m2aL9110,'+c+');\nanalogWrite(m2bL9110,0);\n';
+        returnValue='digitalWrite(m1aL9110,0);\nanalogWrite(m1bL9110,'+c+');\ndigitalWrite(m2aL9110,0);\nanalogWrite(m2bL9110,'+c+');\n';
     } else {
       if (b=="1")
-        returnValue='analogWrite('+a+'aL9110,0);\nanalogWrite('+a+'bL9110,'+c+');\n';
+        returnValue='digitalWrite('+a+'aL9110,1);\nanalogWrite('+a+'bL9110,255-'+c+');\n';
       else
-        returnValue='analogWrite('+a+'aL9110,'+c+');\nanalogWrite('+a+'bL9110,0);\n';
+        returnValue='digitalWrite('+a+'aL9110,0);\nanalogWrite('+a+'bL9110,'+c+');\n';
     }
   if (Blockly.Arduino.my_board_type=="ESP32"){
     returnValue=returnValue.replace(/analogWrite/g,"ledcWrite");
@@ -3643,9 +3644,9 @@ Blockly.Arduino.l9110_stop=function(){
   var a=this.getFieldValue("MOTOR"),
       returnValue="";
     if (a=="both"){
-      returnValue='analogWrite(m1aL9110,0);\nanalogWrite(m1bL9110,0);\nanalogWrite(m2aL9110,0);\nanalogWrite(m2bL9110,0);\n';
+      returnValue='digitalWrite(m1aL9110,0);\nanalogWrite(m1bL9110,0);\ndigitalWrite(m2aL9110,0);\nanalogWrite(m2bL9110,0);\n';
     } else {
-      returnValue='analogWrite('+a+'aL9110,0);\nanalogWrite('+a+'bL9110,0);\n';
+      returnValue='digitalWrite('+a+'aL9110,0);\nanalogWrite('+a+'bL9110,0);\n';
     }
   if (Blockly.Arduino.my_board_type=="ESP32"){
     returnValue=returnValue.replace(/analogWrite/g,"ledcWrite");
@@ -4693,6 +4694,93 @@ Blockly.Arduino.ljj_serial_readuntil=function(){
 Blockly.Arduino.ljj_serial_read_result=function(){
   return['serialStr',Blockly.Arduino.ORDER_ATOMIC];
 }
+
+//Quno
+Blockly.Arduino.ljj_quno={};
+Blockly.Arduino.ljj_quno_rgb=function(){
+  var a=Blockly.Arduino.valueToCode(this,"COLOR",Blockly.Arduino.ORDER_ATOMIC)||"";
+  a=a.replace("tft.color565","QunoLedColor");
+  Blockly.Arduino.definitions_.define_ljj_quno_rgb_event='void QunoLedColor(byte red,byte green,byte blue)\n{\n  analogWrite(10,red);\n  analogWrite(9,green);\n  analogWrite(11,blue);\n}\n';
+  Blockly.Arduino.setups_.setup_ljj_quno_rgb='pinMode(9,OUTPUT);\n  pinMode(10,OUTPUT);\n  pinMode(11,OUTPUT);\n';
+	return a+";\n";
+};
+Blockly.Arduino.ljj_quno_button=function(){
+  var a=this.getFieldValue("AB_BUTTON"),
+	  b=Blockly.Arduino.statementToCode(this,"MSG_BUTTON_CALL");
+  Blockly.Arduino.definitions_.define_m_button="byte A_Pin=2;\nbyte B_Pin=4;\nchar myBtnStatus;\nbool buttonPressed(char btnName)\n{\n  if (btnName=='A'){\n    if (digitalRead(A_Pin) == 0)\n      return false;\n    else\n      return true;\n  }\n  else if (btnName=='B'){\n    if (digitalRead(B_Pin) == 0)\n      return false;\n    else\n      return true;\n  } else {\n    if ((digitalRead(A_Pin) == 0) && (digitalRead(B_Pin) == 0))\n      return false;\n    else\n      return true;\n  }\n}\n"
+  Blockly.Arduino.definitions_.define_m_getBtnStatus="char getBtnStatus(){\n  char buttonStatus=' ';\n  int checkButtonDelay=200;\n  if (buttonPressed('A')){\n    delay(checkButtonDelay);\n    if (buttonPressed('A')){\n      buttonStatus='A';\n      if (buttonPressed('B'))\n        buttonStatus='C';\n    }\n  } else if (buttonPressed('B')){\n      delay(checkButtonDelay);\n      if (buttonPressed('B')){\n        buttonStatus='B';\n        if (buttonPressed('A'))\n          buttonStatus='C';\n      }\n  }\n  return buttonStatus;\n}\n";
+  Blockly.Arduino.setups_.setup_button='pinMode(A_Pin, INPUT);\n  pinMode(B_Pin, INPUT);\n';
+	return"if (myBtnStatus=='"+a+"'){\n"+b+"  while(buttonPressed('"+a+"')){}\n}\n"
+};
+
+Blockly.Arduino.ljj_quno_led=function(){
+  var a=Blockly.Arduino.valueToCode(this,"ON_OFF",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=this.getFieldValue("LED");
+  if(!Blockly.Arduino.setups_.setup_ljj_quno_led)
+    Blockly.Arduino.setups_.setup_ljj_quno_led="pinMode("+b+", OUTPUT);";
+  else if (!(Blockly.Arduino.setups_.setup_ljj_quno_led.indexOf("("+b+",")>0))
+    Blockly.Arduino.setups_.setup_ljj_quno_led+="\n  pinMode("+b+", OUTPUT);";
+  return"digitalWrite("+b+", "+a+");\n";
+};
+
+Blockly.Arduino.ljj_quno_led_analog=function(){
+  var a=this.getFieldValue("LED"),
+      b=Blockly.Arduino.valueToCode(this,"NUM",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  if(!Blockly.Arduino.setups_.setup_ljj_quno_led)
+    Blockly.Arduino.setups_.setup_ljj_quno_led="pinMode("+a+", OUTPUT);";
+  else if (!(Blockly.Arduino.setups_.setup_ljj_quno_led.indexOf("("+a+",")>0))
+    Blockly.Arduino.setups_.setup_ljj_quno_led+="\n  pinMode("+a+", OUTPUT);";
+  return"analogWrite("+a+", "+b+");\n";
+};
+
+Blockly.Arduino.ljj_quno_tone=function(){
+  var a=this.getFieldValue("FREQ");
+  Blockly.Arduino.definitions_.define_ljj_quno_tone_invoke="byte buzz_pin=3;";
+  return"tone(buzz_pin, "+a+");\n";
+};
+
+Blockly.Arduino.ljj_quno_no_tone=function(){
+  Blockly.Arduino.definitions_.define_ljj_quno_tone_invoke="byte buzz_pin=3;";
+  return"noTone(buzz_pin);\n";
+};
+
+Blockly.Arduino.ljj_quno_custom_tone=function(){
+  var a=Blockly.Arduino.valueToCode(this,"FREQ",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=Blockly.Arduino.valueToCode(this,"DURATION",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  Blockly.Arduino.definitions_.define_ljj_quno_tone_invoke="byte buzz_pin=3;";
+  return"tone(buzz_pin, "+a+");\ndelay("+b+");\nnoTone(buzz_pin);\n";
+};
+
+Blockly.Arduino.ljj_quno_sonar=function(){
+  Blockly.Arduino.definitions_.define_ljj_quno_sonar_include="#include <Ultrasonic.h>";
+  Blockly.Arduino.definitions_.define_ljj_quno_sonar_invoke="Ultrasonic ultrasonic_(A0, A1);";
+  return['ultrasonic_.convert(ultrasonic_.timing(), Ultrasonic::CM)',Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.ljj_quno_pir_init=function(){
+  var a=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"";
+  Blockly.Arduino.definitions_.define_ljj_quno_pir_invoke="byte pir_pin="+a+";";
+  Blockly.Arduino.setups_.setup_ljj_quno_ir="pinMode(pir_pin, INPUT);";
+  return"";
+};
+
+Blockly.Arduino.ljj_quno_pir_detected=function(){
+  return['(digitalRead(pir_pin)==1)',Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.ljj_quno_servo_write_pin=function(){
+  var a=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
+  b=Blockly.Arduino.valueToCode(this,"ANGLE",Blockly.Arduino.ORDER_ATOMIC)||"90";
+  Blockly.Arduino.definitions_.define_servo="#include <Servo.h>";
+  Blockly.Arduino.definitions_["define_class_servo_"+a]="Servo __myservo"+a+";";
+  Blockly.Arduino.setups_["servo_"+a]||(Blockly.Arduino.setups_["servo_"+a]="__myservo"+a+".attach("+a+");");
+  return"__myservo"+a+".write("+b+");\n"
+};
+
+Blockly.Arduino.ljj_quno_pins=function(){
+  var a=this.getFieldValue("QUNO_PIN");
+  return[a,Blockly.Arduino.ORDER_ATOMIC];
+};
 
 setTimeout(function(){
 	if (Blockly.Blocks.board_initializes_setup)

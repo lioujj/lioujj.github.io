@@ -64,4 +64,6 @@
 <category><name>GoogleTranslation</name><replace>Google翻譯</replace></category>
 <category><name>CAMERA</name><replace>CAMERA相機</replace></category>
 <category><name>LJJ_SERIAL</name><replace>序列埠</replace></category>
+<category><name>Arduino</name><replace>Arduino</replace></category>
+<category><name>Quno</name><replace>游於智Quno</replace></category>
 </xml>

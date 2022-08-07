@@ -788,7 +788,7 @@ Blockly.Msg.L9110_TITLE = "L9110馬達驅動板";
 Blockly.Msg.L9110_INIT = "初始化";
 Blockly.Msg.L9110_TOOLTIP = "L9110";
 Blockly.Msg.L9110_MOTOR = "馬達";
-Blockly.Msg.L9110_MOTOR_LIST = [["M1","m1"],["M2","m2"],["全部","both"]];
+Blockly.Msg.L9110_MOTOR_LIST = [["A","m1"],["B","m2"],["全部","both"]];
 Blockly.Msg.L9110_ROTATE = "轉動";
 Blockly.Msg.L9110_DIRECTION = [["正轉","1"],["反轉","2"]];
 Blockly.Msg.L9110_WARNING = "必須先設定「"+Blockly.Msg.L9110_TITLE+" "+Blockly.Msg.L9110_INIT+"」積木";
@@ -994,3 +994,12 @@ Blockly.Msg.LJJ_CAMERA_SET_IMAGE_LIST = [["亮度","brightness"],["對比","cont
 Blockly.Msg.LJJ_CAMERA_VALUE_HINT = "值(-2到2)";
 Blockly.Msg.LJJ_CAMERA_EFFECT_VALUE = "值(0到6)";
 Blockly.Msg.LJJ_CAMERA_FACE_DETECTED = "擷取畫面中偵測到人臉";
+
+//Quno
+Blockly.Msg.LJJ_QUNO_HELPURL = "";
+Blockly.Msg.LJJ_QUNO_TOOLTIP = "Quno";
+Blockly.Msg.LJJ_QUNO_RGB_COLOR = "設定RGB LED顏色";
+Blockly.Msg.LJJ_QUNO_SONAR = "超音波感測距離(cm)";
+Blockly.Msg.EZ_LED_BLUE = "藍色";
+Blockly.Msg.LJJ_QUNO_IR = "人體紅外線感測器";
+Blockly.Msg.LJJ_QUNO_WHEN_DETECT_IR = "偵測到紅外線位移？";

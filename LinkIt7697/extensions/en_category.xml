@@ -63,4 +63,6 @@
 <category><name>GoogleTranslation</name><replace>Google Translation</replace></category>
 <category><name>CAMERA</name><replace>CAMERA</replace></category>
 <category><name>LJJ_SERIAL</name><replace>Serial</replace></category>
+<category><name>Arduino</name><replace>Arduino</replace></category>
+<category><name>Quno</name><replace>Quno</replace></category>
 </xml>

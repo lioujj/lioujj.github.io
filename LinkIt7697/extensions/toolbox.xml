@@ -73,6 +73,117 @@
       <block type="board_esp8266_analog"></block>
     </category>
   </category>
+  <category id="category_ljj_arduino" name="Arduino">
+    <category id="category_ljj_quno" name="Quno">
+      <block type="ljj_quno_button"></block>
+      <block type="ljj_quno_led">
+        <value name="ON_OFF">
+          <block type="inout_highlow">
+            <field name="BOOL">HIGH</field>
+          </block>
+        </value>
+      </block>
+      <block type="ljj_quno_led_analog">
+        <value name="NUM">
+            <block type="math_number">
+                <field name="NUM">255</field>
+            </block>
+        </value>
+      </block>
+      <block type="ljj_quno_rgb">
+        <value name="COLOR">
+          <block type="ttgo_getFromColorPicker"></block>
+        </value>
+      </block>
+      <block type="ttgo_getRGBcolor">
+        <value name="RED">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="GREEN">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="BLUE">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
+      <block type="ttgo_getFromColorPicker"></block>
+      <block type="ljj_quno_tone"></block>
+      <block type="ljj_quno_no_tone"></block>
+      <block type="ljj_quno_custom_tone">
+        <value name="FREQ">
+          <block type="math_number">
+            <field name="NUM">255</field>
+          </block>
+        </value>
+        <value name="DURATION">
+          <block type="math_number">
+            <field name="NUM">300</field>
+          </block>
+        </value>
+      </block>
+      <block type="ljj_quno_sonar"></block>
+      <block type="ljj_quno_servo_write_pin">
+        <value name="PIN">
+          <block type="ljj_quno_pins">
+            <field name="QUNO_PIN">7</field>
+          </block>
+        </value>
+        <value name="ANGLE">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
+      <block type="ljj_quno_pir_init">
+        <value name="PIN">
+          <block type="ljj_quno_pins">
+            <field name="QUNO_PIN">8</field>
+          </block>
+        </value>
+      </block>
+      <block type="controls_if">
+        <value name="IF0">
+          <block type="ljj_quno_pir_detected"></block>
+        </value>
+      </block>
+      <block type="l9110_init">
+        <value name="M1A">
+          <block type="ljj_quno_pins">
+            <field name="QUNO_PIN">0</field>
+          </block>
+        </value>
+        <value name="M1B">
+          <block type="ljj_quno_pins">
+            <field name="QUNO_PIN">5</field>
+          </block>
+        </value>
+        <value name="M2A">
+          <block type="ljj_quno_pins">
+            <field name="QUNO_PIN">0</field>
+          </block>
+        </value>
+        <value name="M2B">
+          <block type="ljj_quno_pins">
+            <field name="QUNO_PIN">6</field>
+          </block>
+        </value>
+      </block>
+      <block type="l9110_run">
+        <value name="SPEED">
+          <block type="math_number">
+            <field name="NUM">255</field>
+          </block>
+        </value>
+      </block>
+      <block type="l9110_stop"></block>
+    </category>
+  </category>
   <category id="category_esp32" name="ESP32">
     <category id="category_esp32_analogwrite" name="AnalogWrite">
       <block type="esp32_analog_write">

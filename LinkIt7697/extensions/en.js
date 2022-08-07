@@ -795,7 +795,7 @@ Blockly.Msg.L9110_TITLE = "L9110 motor board";
 Blockly.Msg.L9110_INIT = "init";
 Blockly.Msg.L9110_TOOLTIP = "L9110";
 Blockly.Msg.L9110_MOTOR = "motor";
-Blockly.Msg.L9110_MOTOR_LIST = [["M1","m1"],["M2","m2"],["both","both"]];
+Blockly.Msg.L9110_MOTOR_LIST = [["A","m1"],["B","m2"],["both","both"]];
 Blockly.Msg.L9110_ROTATE = "rotate";
 Blockly.Msg.L9110_DIRECTION = [["clockWise","1"],["counterClockWise","2"]];
 Blockly.Msg.L9110_WARNING = "You have to set \""+Blockly.Msg.L9110_TITLE+" "+Blockly.Msg.L9110_INIT+"\" first.";
@@ -1001,3 +1001,12 @@ Blockly.Msg.LJJ_CAMERA_SET_IMAGE_LIST = [["brightness","brightness"],["contrast"
 Blockly.Msg.LJJ_CAMERA_VALUE_HINT = "value(-2 to 2)";
 Blockly.Msg.LJJ_CAMERA_EFFECT_VALUE = "value(0 to 6)";
 Blockly.Msg.LJJ_CAMERA_FACE_DETECTED = "detected face";
+
+//Quno
+Blockly.Msg.LJJ_QUNO_HELPURL = "";
+Blockly.Msg.LJJ_QUNO_TOOLTIP = "Quno";
+Blockly.Msg.LJJ_QUNO_RGB_COLOR = "set RGB LED color";
+Blockly.Msg.LJJ_QUNO_SONAR = "get sonar distance";
+Blockly.Msg.EZ_LED_BLUE = "Blue";
+Blockly.Msg.LJJ_QUNO_IR = "PIR";
+Blockly.Msg.LJJ_QUNO_WHEN_DETECT_IR = "IR is detected?";
