@@ -534,13 +534,15 @@ Blockly.Arduino.maqueen_button=function(){
 };
 
 Blockly.Arduino.maqueen_ir_event=function(){
-  var a=this.getFieldValue("IR_EVENT");
-  Blockly.Arduino.definitions_.define_irremote="#include <IRremote.h>";
-  Blockly.Arduino.definitions_.define_irremote_init="IRrecv irrecv(10);";
-  Blockly.Arduino.definitions_.define_irremote_decode="decode_results results;";
-  Blockly.Arduino.definitions_.define_irremote_ir_type='String ir_type(int tip)\n{\n  if (tip == 1) {\n    return "RC5";\n  } else if (tip == 2){\n    return "RC6";\n  } else if (tip == 3){\n    return "NEC";\n  } else {\n    return "Sony";\n  }\n}\n';
-  Blockly.Arduino.setups_["irremote_"]||(Blockly.Arduino.setups_["irremote_"]="irrecv.enableIRIn();\n");
-  return'  if (irrecv.decode(&results)) {\n'+Blockly.Arduino.statementToCode(this,"IR_EVENT")+'  irrecv.resume();\n}\n'
+//  var a=this.getFieldValue("IR_EVENT");
+  var a=10;
+  Blockly.Arduino.definitions_.ljj_define_irremote_include="#include <IRremote.h>";
+  Blockly.Arduino.definitions_.ljj_define_irremote_init="IRrecv IrReceiver("+a+");";
+  Blockly.Arduino.definitions_.define_irremote_decode="decode_results results;\nString myCodeType;\nString myIRcode;";
+  Blockly.Arduino.definitions_.define_irremote_ir_type_event='String ir_type(int tip)\n{\n  if (tip == 1){\n    return "RC5";\n  } else if (tip == 2){\n    return "RC6";\n  } else if (tip == 3){\n    return "NEC";\n  } else if (tip == 4){\n    return "SONY";\n  } else if (tip == 5){\n    return "PANASONIC";\n  } else if (tip == 6){\n    return "JVC";\n  } else if (tip == 7){\n    return "SAMSUNG";\n  } else if (tip == 10){\n    return "LG";\n  } else if (tip == 14){\n    return "SHARP";\n  } else if (tip == 17){\n    return "LEGO_PF";\n  } else {\n    return "UNKNOWN";\n  }\n}\n';
+  Blockly.Arduino.setups_["ljj_irremote_"]||(Blockly.Arduino.setups_["ljj_irremote_"]="IrReceiver.enableIRIn();\n");
+  return'if (IrReceiver.decode(&results)) {\n  if (results.decode_type>0){\n    myCodeType=ir_type(results.decode_type);\n    if (String(results.value, HEX)!="ffffffff"){\n      myIRcode=String(results.value, HEX);\n'+Blockly.Arduino.statementToCode(this,"IR_EVENT")+'}\n  }\n  IrReceiver.resume();\n}\n'
+//  return'  if (IrReceiver.decode(&results)) {\n'+Blockly.Arduino.statementToCode(this,"IR_EVENT")+'  IrReceiver.resume();\n}\n'
 };
 
 Blockly.Arduino.maqueen_ir_remote_received1=function(){
@@ -564,104 +566,124 @@ Blockly.Arduino.maqueen_ir_received_code=function(){
 //ir
 Blockly.Arduino.ir_receiver_pin=function(){
   var a=this.getFieldValue("PIN");
-  if (Blockly.Arduino.my_board_type=="ESP8266"){
-    Blockly.Arduino.definitions_.define_irremote="#include <IRremoteESP8266.h>";
-    Blockly.Arduino.definitions_.define_irreceive="#include <IRrecv.h>\n#include <IRutils.h>";
-  } else { 
-    Blockly.Arduino.definitions_.define_irremote="#include <IRremote.h>";
-    delete Blockly.Arduino.definitions_.define_irreceive;
+  if (Blockly.Arduino.my_board_type=="7697"){
+    Blockly.Arduino.definitions_.ljj_define_irremote_include="#include <IRremote.h>";
+    Blockly.Arduino.definitions_.ljj_define_irremote_init="IRrecv IrReceiver("+a+");";
+    Blockly.Arduino.definitions_.define_irremote_decode="decode_results results;\nString myCodeType;\nString myIRcode;";
+    Blockly.Arduino.definitions_.define_irremote_ir_type_event='String ir_type(int tip)\n{\n  if (tip == 1){\n    return "RC5";\n  } else if (tip == 2){\n    return "RC6";\n  } else if (tip == 3){\n    return "NEC";\n  } else if (tip == 4){\n    return "SONY";\n  } else if (tip == 5){\n    return "PANASONIC";\n  } else if (tip == 6){\n    return "JVC";\n  } else if (tip == 7){\n    return "SAMSUNG";\n  } else if (tip == 10){\n    return "LG";\n  } else if (tip == 14){\n    return "SHARP";\n  } else if (tip == 17){\n    return "LEGO_PF";\n  } else {\n    return "UNKNOWN";\n  }\n}\n';
+    Blockly.Arduino.setups_["ljj_irremote_"]||(Blockly.Arduino.setups_["ljj_irremote_"]="IrReceiver.enableIRIn();\n");
+  } else {
+    Blockly.Arduino.definitions_.ljj_define_irremote_include="#include <IRremote.hpp>";
+    Blockly.Arduino.definitions_.ljj_define_irremote_decode="#define MY_IR_RECEIVE_PIN "+a+"\ndecode_results results;\nString myCodeType;\nString myIRcode;";
+    Blockly.Arduino.definitions_.ljj_define_irremote_ir_type_event='String ir_type(int tip)\n{\n  if (tip == 14){\n    return "RC5";\n  } else if (tip == 15){\n    return "RC6";\n  } else if (tip == 7){\n    return "NEC";\n  } else if (tip == 18){\n    return "SONY";\n  } else if (tip == 8){\n    return "PANASONIC";\n  } else if (tip == 4){\n    return "JVC";\n  } else if (tip == 16){\n    return "SAMSUNG";\n  } else if (tip == 5){\n    return "LG";\n  } else if (tip == 3){\n    return "SHARP";\n  } else if (tip == 22){\n    return "LEGO_PF";\n  } else {\n    return String(tip);\n  }\n}\n';
+    Blockly.Arduino.setups_["ljj_irremote_"]||(Blockly.Arduino.setups_["ljj_irremote_"]="IrReceiver.begin(MY_IR_RECEIVE_PIN);\n");
   }
-  Blockly.Arduino.definitions_.define_irremote_init="IRrecv irrecv("+a+");";
-  Blockly.Arduino.definitions_.define_irremote_decode="decode_results results;\nString myCodeType;\nString myIRcode;";
-  Blockly.Arduino.definitions_.define_irremote_ir_type='String ir_type(int tip)\n{\n  if (tip == 1){\n    return "RC5";\n  } else if (tip == 2){\n    return "RC6";\n  } else if (tip == 3){\n    return "NEC";\n  } else if (tip == 4){\n    return "SONY";\n  } else if (tip == 5){\n    return "PANASONIC";\n  } else if (tip == 6){\n    return "JVC";\n  } else if (tip == 7){\n    return "SAMSUNG";\n  } else if (tip == 10){\n    return "LG";\n  } else if (tip == 14){\n    return "SHARP";\n  } else if (tip == 17){\n    return "LEGO_PF";\n  } else {\n    return "UNKNOWN";\n  }\n}\n';
-  Blockly.Arduino.setups_["irremote_"]||(Blockly.Arduino.setups_["irremote_"]="irrecv.enableIRIn();\n");
   return''
 };
 
 Blockly.Arduino.ir_receiver_pin1=function(){
   var a=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"0";
-  if (Blockly.Arduino.my_board_type=="ESP8266"){
-    Blockly.Arduino.definitions_.define_irremote="#include <IRremoteESP8266.h>";
-    Blockly.Arduino.definitions_.define_irreceive="#include <IRrecv.h>\n#include <IRutils.h>";
-  } else { 
-    Blockly.Arduino.definitions_.define_irremote="#include <IRremote.h>";
-    delete Blockly.Arduino.definitions_.define_irreceive;
+  if (Blockly.Arduino.my_board_type=="7697"){
+    Blockly.Arduino.definitions_.ljj_define_irremote_include="#include <IRremote.h>";
+    Blockly.Arduino.definitions_.ljj_define_irremote_init="IRrecv IrReceiver("+a+");";
+    Blockly.Arduino.definitions_.define_irremote_decode="decode_results results;\nString myCodeType;\nString myIRcode;";
+    Blockly.Arduino.definitions_.define_irremote_ir_type_event='String ir_type(int tip)\n{\n  if (tip == 1){\n    return "RC5";\n  } else if (tip == 2){\n    return "RC6";\n  } else if (tip == 3){\n    return "NEC";\n  } else if (tip == 4){\n    return "SONY";\n  } else if (tip == 5){\n    return "PANASONIC";\n  } else if (tip == 6){\n    return "JVC";\n  } else if (tip == 7){\n    return "SAMSUNG";\n  } else if (tip == 10){\n    return "LG";\n  } else if (tip == 14){\n    return "SHARP";\n  } else if (tip == 17){\n    return "LEGO_PF";\n  } else {\n    return "UNKNOWN";\n  }\n}\n';
+    Blockly.Arduino.setups_["ljj_irremote_"]||(Blockly.Arduino.setups_["ljj_irremote_"]="IrReceiver.enableIRIn();\n");
+  } else {
+    Blockly.Arduino.definitions_.ljj_define_irremote_include="#include <IRremote.hpp>";
+    Blockly.Arduino.definitions_.ljj_define_irremote_decode="#define MY_IR_RECEIVE_PIN "+a+"\ndecode_results results;\nString myCodeType;\nString myIRcode;";
+    Blockly.Arduino.definitions_.ljj_define_irremote_ir_type_event='String ir_type(int tip)\n{\n  if (tip == 14){\n    return "RC5";\n  } else if (tip == 15){\n    return "RC6";\n  } else if (tip == 7){\n    return "NEC";\n  } else if (tip == 18){\n    return "SONY";\n  } else if (tip == 8){\n    return "PANASONIC";\n  } else if (tip == 4){\n    return "JVC";\n  } else if (tip == 16){\n    return "SAMSUNG";\n  } else if (tip == 5){\n    return "LG";\n  } else if (tip == 3){\n    return "SHARP";\n  } else if (tip == 22){\n    return "LEGO_PF";\n  } else {\n    return String(tip);\n  }\n}\n';
+    Blockly.Arduino.setups_["ljj_irremote_"]||(Blockly.Arduino.setups_["ljj_irremote_"]="IrReceiver.begin(MY_IR_RECEIVE_PIN);\n");
   }
-  Blockly.Arduino.definitions_.define_irremote_init="IRrecv irrecv("+a+");";
+  return''
+};
+
+Blockly.Arduino.ir_receiver_7697_pin=function(){
+  var a=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  Blockly.Arduino.definitions_.ljj_define_irremote_include="#include <IRremote.h>";
+  Blockly.Arduino.definitions_.ljj_define_irremote_init="IRrecv irrecv("+a+");";
   Blockly.Arduino.definitions_.define_irremote_decode="decode_results results;\nString myCodeType;\nString myIRcode;";
-  Blockly.Arduino.definitions_.define_irremote_ir_type='String ir_type(int tip)\n{\n  if (tip == 1){\n    return "RC5";\n  } else if (tip == 2){\n    return "RC6";\n  } else if (tip == 3){\n    return "NEC";\n  } else if (tip == 4){\n    return "SONY";\n  } else if (tip == 5){\n    return "PANASONIC";\n  } else if (tip == 6){\n    return "JVC";\n  } else if (tip == 7){\n    return "SAMSUNG";\n  } else if (tip == 10){\n    return "LG";\n  } else if (tip == 14){\n    return "SHARP";\n  } else if (tip == 17){\n    return "LEGO_PF";\n  } else {\n    return "UNKNOWN";\n  }\n}\n';
-  Blockly.Arduino.setups_["irremote_"]||(Blockly.Arduino.setups_["irremote_"]="irrecv.enableIRIn();\n");
+  Blockly.Arduino.definitions_.define_irremote_ir_type_event='String ir_type(int tip)\n{\n  if (tip == 1){\n    return "RC5";\n  } else if (tip == 2){\n    return "RC6";\n  } else if (tip == 3){\n    return "NEC";\n  } else if (tip == 4){\n    return "SONY";\n  } else if (tip == 5){\n    return "PANASONIC";\n  } else if (tip == 6){\n    return "JVC";\n  } else if (tip == 7){\n    return "SAMSUNG";\n  } else if (tip == 10){\n    return "LG";\n  } else if (tip == 14){\n    return "SHARP";\n  } else if (tip == 17){\n    return "LEGO_PF";\n  } else {\n    return "UNKNOWN";\n  }\n}\n';
+  Blockly.Arduino.setups_["ljj_irremote_"]||(Blockly.Arduino.setups_["ljj_irremote_"]="irrecv.enableIRIn();\n");
   return''
 };
 
 Blockly.Arduino.ir_sender_8266_pin=function(){
   var a=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"";
-  Blockly.Arduino.definitions_.define_irremote="#include <IRremoteESP8266.h>";
+  Blockly.Arduino.definitions_.ljj_define_irremote_include="#include <IRremoteESP8266.h>";
   Blockly.Arduino.definitions_.define_irsend_esp8266="#include <IRsend.h>";
-  Blockly.Arduino.definitions_.define_irremote_init="IRsend irsend("+a+");";
+  Blockly.Arduino.definitions_.ljj_define_irremote_init="IRsend irsend("+a+");";
   Blockly.Arduino.setups_.setup_esp8266_ir_send="irsend.begin();\n";
   return'';
 };
 
-Blockly.Arduino.ir_send=function(){
+Blockly.Arduino.ljj_ir_sender_pin=function(){
+  var a=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"";
+  if (Blockly.Arduino.my_board_type=="7697"){
+    Blockly.Arduino.definitions_.ljj_define_irremote_include="#include <IRremote.h>";
+    Blockly.Arduino.definitions_.ljj_define_irremote_send_init="IRsend IrSender;";
+  } else {
+    Blockly.Arduino.definitions_.ljj_define_irremote_include="#define NO_LED_FEEDBACK_CODE\n#include <PinDefinitionsAndMore.h>\n#define IR_SEND_PIN "+a+"\n#include <IRremote.hpp>";
+    Blockly.Arduino.setups_.setup_ljj_ir_send='IrSender.begin();';
+  }
+  return'';
+};
+
+Blockly.Arduino.ljj_ir_send=function(){
   var a=this.getFieldValue("IR_TYPE"),
       b=Blockly.Arduino.valueToCode(this,"CODE",Blockly.Arduino.ORDER_ATOMIC)||"";
-  if (Blockly.Arduino.my_board_type!="ESP8266"){
-    Blockly.Arduino.definitions_.define_irremote="#include <IRremote.h>";
-    Blockly.Arduino.definitions_.define_irremote_init="IRsend irsend;";
-    delete Blockly.Arduino.setups_.setup_esp8266_ir_send;
-    delete Blockly.Arduino.definitions_.define_irsend_esp8266;
+  if (Blockly.Arduino.my_board_type=="7697"){
+    Blockly.Arduino.definitions_.ljj_define_irremote_include="#include <IRremote.h>";
+    Blockly.Arduino.definitions_.ljj_define_irremote_send_init="IRsend IrSender;";
   }
-  Blockly.Arduino.definitions_.define_ir_type="int x2i(const char *s)\n{\n  int x = 0;\n  for(;;) {\n    char c = *s;\n    if (c >= '0' && c <= '9') {\n      x *= 16;\n      x += c - '0';\n    }  else if (c >= 'a' && c <= 'f') {\n      x *= 16;\n      x += (c - 'a') + 10;\n    }\n    else break;\n    s++;\n  }\n  return x;\n}";
+  Blockly.Arduino.definitions_.ljj_define_send_ir_event="int x2i(const char *s)\n{\n  int x = 0;\n  for(;;) {\n    char c = *s;\n    if (c >= '0' && c <= '9') {\n      x *= 16;\n      x += c - '0';\n    }  else if (c >= 'a' && c <= 'f') {\n      x *= 16;\n      x += (c - 'a') + 10;\n    }\n    else break;\n    s++;\n  }\n  return x;\n}";
   if (a == "NEC") {
-    return"irsend.sendNEC(x2i(String("+b+").c_str()), 32);\n"
+    return"IrSender.sendNEC(x2i(String("+b+").c_str()), 32);\n"
   } else if (a == "SONY"){
-    return"irsend.sendSony(x2i(String("+b+").c_str()), 12);\n"
+    return"IrSender.sendSony(x2i(String("+b+").c_str()), 12);\n"
   } else if (a == "RC5") {
-    return"irsend.sendRC5(x2i(String("+b+").c_str()), 12);\n"
+    return"IrSender.sendRC5(x2i(String("+b+").c_str()), 12);\n"
   } else if (a == "RC6") {
-    return"irsend.sendRC6(x2i(String("+b+").c_str()), 20);\n"
+    return"IrSender.sendRC6(x2i(String("+b+").c_str()), 20);\n"
   } else if (a == "JVC") {
-    return"irsend.sendJVC(x2i(String("+b+").c_str()),16, false);\n"
+    return"IrSender.sendJVC(x2i(String("+b+").c_str()),16, false);\n"
   } else if (a == "SAMSUNG") {
-    return"irsend.sendSAMSUNG(x2i(String("+b+").c_str()), 32);\n"
+    return"IrSender.sendSAMSUNG(x2i(String("+b+").c_str()), 32);\n"
   } else if (a == "LG") {
-    return"irsend.sendLG(x2i(String("+b+").c_str()), 32);\n"
+    return"IrSender.sendLG(x2i(String("+b+").c_str()), 32);\n"
   } else if (a == "LEGO_PF") {
-    return"irsend.sendLegoPowerFunctions(x2i(String("+b+").c_str()), true);\n"
+    return"IrSender.sendLegoPowerFunctions(x2i(String("+b+").c_str()), true);\n"
   } else {
     return'';
   }
 };
 
-Blockly.Arduino.ir_send2=function(){
+Blockly.Arduino.ljj_ir_send2=function(){
   var a=Blockly.Arduino.valueToCode(this,"IR_TYPE",Blockly.Arduino.ORDER_ATOMIC)||"",
       b=Blockly.Arduino.valueToCode(this,"CODE",Blockly.Arduino.ORDER_ATOMIC)||"";
+  if (Blockly.Arduino.my_board_type=="7697"){
+    Blockly.Arduino.definitions_.ljj_define_irremote_include="#include <IRremote.h>";
+    Blockly.Arduino.definitions_.ljj_define_irremote_send_init="IRsend IrSender;";
+  }
   a=a.replace(/\"/g,'');
   a=a.toUpperCase();
-  if (Blockly.Arduino.my_board_type!="ESP8266"){
-    Blockly.Arduino.definitions_.define_irremote="#include <IRremote.h>";
-    Blockly.Arduino.definitions_.define_irremote_init="IRsend irsend;";
-    delete Blockly.Arduino.setups_.setup_esp8266_ir_send;
-    delete Blockly.Arduino.definitions_.define_irsend_esp8266;
-  }
-  Blockly.Arduino.definitions_.define_ir_type="int x2i(const char *s)\n{\n  int x = 0;\n  for(;;) {\n    char c = *s;\n    if (c >= '0' && c <= '9') {\n      x *= 16;\n      x += c - '0';\n    }  else if (c >= 'a' && c <= 'f') {\n      x *= 16;\n      x += (c - 'a') + 10;\n    }\n    else break;\n    s++;\n  }\n  return x;\n}";
+  Blockly.Arduino.definitions_.ljj_define_send_ir_event="int x2i(const char *s)\n{\n  int x = 0;\n  for(;;) {\n    char c = *s;\n    if (c >= '0' && c <= '9') {\n      x *= 16;\n      x += c - '0';\n    }  else if (c >= 'a' && c <= 'f') {\n      x *= 16;\n      x += (c - 'a') + 10;\n    }\n    else break;\n    s++;\n  }\n  return x;\n}";
   if (a == "NEC") {
-    return"irsend.sendNEC(x2i(String("+b+").c_str()), 32);\n"
+    return"IrSender.sendNEC(x2i(String("+b+").c_str()), 32);\n"
   } else if (a == "SONY"){
-    return"irsend.sendSony(x2i(String("+b+").c_str()), 12);\n"
+    return"IrSender.sendSony(x2i(String("+b+").c_str()), 12);\n"
   } else if (a == "RC5") {
-    return"irsend.sendRC5(x2i(String("+b+").c_str()), 12);\n"
+    return"IrSender.sendRC5(x2i(String("+b+").c_str()), 12);\n"
   } else if (a == "RC6") {
-    return"irsend.sendRC6(x2i(String("+b+").c_str()), 20);\n"
+    return"IrSender.sendRC6(x2i(String("+b+").c_str()), 20);\n"
   } else if (a == "JVC") {
-    return"irsend.sendJVC(x2i(String("+b+").c_str()),16, false);\n"
+    return"IrSender.sendJVC(x2i(String("+b+").c_str()),16, false);\n"
   } else if (a == "SAMSUNG") {
-    return"irsend.sendSAMSUNG(x2i(String("+b+").c_str()), 32);\n"
+    return"IrSender.sendSAMSUNG(x2i(String("+b+").c_str()), 32);\n"
   } else if (a == "LG") {
-    return"irsend.sendLG(x2i(String("+b+").c_str()), 32);\n"
+    return"IrSender.sendLG(x2i(String("+b+").c_str()), 32);\n"
   } else if (a == "LEGO_PF") {
-    return"irsend.sendLegoPowerFunctions(x2i(String("+b+").c_str()), true);\n"
+    return"IrSender.sendLegoPowerFunctions(x2i(String("+b+").c_str()), true);\n"
   } else {
     return'';
   }
@@ -670,12 +692,8 @@ Blockly.Arduino.ir_send2=function(){
 
 Blockly.Arduino.ir_event=function(){
   var a=Blockly.Arduino.statementToCode(this,"IR_EVENT");
-  a="  "+a.replace(/\n/g,'\n  ');
-  if (Blockly.Arduino.my_board_type=="ESP8266"){
-    return'if (irrecv.decode(&results)) {\n  if (results.decode_type>0){\n    myCodeType=ir_type(results.decode_type);\n    myIRcode=resultToHexidecimal(&results);\n    myIRcode.replace("0x","");\n    myIRcode.toLowerCase();\n'+a+'}\n  irrecv.resume();\n}\n'
-  }
-  else
-    return'if (irrecv.decode(&results)) {\n  if (results.decode_type>0){\n    myCodeType=ir_type(results.decode_type);\n    myIRcode=String(results.value, HEX);\n'+a+'}\n  irrecv.resume();\n}\n'
+  a="    "+a.replace(/\n/g,'\n    ');
+  return'if (IrReceiver.decode(&results)) {\n  if (results.decode_type>0){\n    myCodeType=ir_type(results.decode_type);\n    if (String(results.value, HEX)!="ffffffff"){\n      myIRcode=String(results.value, HEX);\n'+a+'}\n  }\n  IrReceiver.resume();\n}\n'
 };
 
 Blockly.Arduino.ir_remote_received=function(){
@@ -2484,13 +2502,12 @@ Blockly.Arduino.KSB065_neopixel_set_colors=function(){
 };
 
 Blockly.Arduino.KSB065_ir_receive=function(){
-  var a="35";
-  Blockly.Arduino.definitions_.define_irremote="#include <IRremote.h>";
-  Blockly.Arduino.definitions_.define_irremote_init="IRrecv irrecv("+a+");";
-  Blockly.Arduino.definitions_.define_irremote_decode="decode_results results;\nString myCodeType;\nString myIRcode;";
-  Blockly.Arduino.definitions_.define_irremote_ir_type='String ir_type(int tip)\n{\n  if (tip == 1){\n    return "RC5";\n  } else if (tip == 2){\n    return "RC6";\n  } else if (tip == 3){\n    return "NEC";\n  } else if (tip == 4){\n    return "SONY";\n  } else if (tip == 5){\n    return "PANASONIC";\n  } else if (tip == 6){\n    return "JVC";\n  } else if (tip == 7){\n    return "SAMSUNG";\n  } else if (tip == 10){\n    return "LG";\n  } else if (tip == 14){\n    return "SHARP";\n  } else if (tip == 17){\n    return "LEGO_PF";\n  } else {\n    return "UNKNOWN";\n  }\n}\n';
-  //Blockly.Arduino.setups_["irremote_"]||(Blockly.Arduino.setups_["irremote_"]="irrecv.enableIRIn();\n");
-  return'irrecv.enableIRIn();\n';
+  var a=35;
+  Blockly.Arduino.definitions_.ljj_define_irremote_include="#include <IRremote.hpp>";
+  Blockly.Arduino.definitions_.ljj_define_irremote_decode="#define MY_IR_RECEIVE_PIN "+a+"\ndecode_results results;\nString myCodeType;\nString myIRcode;";
+  Blockly.Arduino.definitions_.ljj_define_irremote_ir_type_event='String ir_type(int tip)\n{\n  if (tip == 14){\n    return "RC5";\n  } else if (tip == 15){\n    return "RC6";\n  } else if (tip == 7){\n    return "NEC";\n  } else if (tip == 18){\n    return "SONY";\n  } else if (tip == 8){\n    return "PANASONIC";\n  } else if (tip == 4){\n    return "JVC";\n  } else if (tip == 16){\n    return "SAMSUNG";\n  } else if (tip == 5){\n    return "LG";\n  } else if (tip == 3){\n    return "SHARP";\n  } else if (tip == 22){\n    return "LEGO_PF";\n  } else {\n    return String(tip);\n  }\n}\n';
+  Blockly.Arduino.setups_["ljj_irremote_"]||(Blockly.Arduino.setups_["ljj_irremote_"]="IrReceiver.begin(MY_IR_RECEIVE_PIN);\n");
+  return''
 };
 
 //MPU9250
@@ -3923,13 +3940,20 @@ Blockly.Arduino.startPlus_ir_receive=function(){
     } else if (Blockly.Arduino.my_board_type=="Arduino"){
       a="2";
     }
-    Blockly.Arduino.definitions_.define_irremote="#include <IRremote.h>";
-    Blockly.Arduino.definitions_.define_irremote_init="IRrecv irrecv("+a+");";
-    Blockly.Arduino.definitions_.define_irremote_decode="decode_results results;\nString myCodeType;\nString myIRcode;";
-    Blockly.Arduino.definitions_.define_irremote_ir_type='String ir_type(int tip)\n{\n  if (tip == 1){\n    return "RC5";\n  } else if (tip == 2){\n    return "RC6";\n  } else if (tip == 3){\n    return "NEC";\n  } else if (tip == 4){\n    return "SONY";\n  } else if (tip == 5){\n    return "PANASONIC";\n  } else if (tip == 6){\n    return "JVC";\n  } else if (tip == 7){\n    return "SAMSUNG";\n  } else if (tip == 10){\n    return "LG";\n  } else if (tip == 14){\n    return "SHARP";\n  } else if (tip == 17){\n    return "LEGO_PF";\n  } else {\n    return "UNKNOWN";\n  }\n}\n';
-    //Blockly.Arduino.setups_["irremote_"]||(Blockly.Arduino.setups_["irremote_"]="irrecv.enableIRIn();\n");
+    if (Blockly.Arduino.my_board_type=="7697"){
+      Blockly.Arduino.definitions_.ljj_define_irremote_include="#include <IRremote.h>";
+      Blockly.Arduino.definitions_.ljj_define_irremote_init="IRrecv IrReceiver("+a+");";
+      Blockly.Arduino.definitions_.define_irremote_decode="decode_results results;\nString myCodeType;\nString myIRcode;";
+      Blockly.Arduino.definitions_.define_irremote_ir_type_event='String ir_type(int tip)\n{\n  if (tip == 1){\n    return "RC5";\n  } else if (tip == 2){\n    return "RC6";\n  } else if (tip == 3){\n    return "NEC";\n  } else if (tip == 4){\n    return "SONY";\n  } else if (tip == 5){\n    return "PANASONIC";\n  } else if (tip == 6){\n    return "JVC";\n  } else if (tip == 7){\n    return "SAMSUNG";\n  } else if (tip == 10){\n    return "LG";\n  } else if (tip == 14){\n    return "SHARP";\n  } else if (tip == 17){\n    return "LEGO_PF";\n  } else {\n    return "UNKNOWN";\n  }\n}\n';
+      Blockly.Arduino.setups_["ljj_irremote_"]||(Blockly.Arduino.setups_["ljj_irremote_"]="IrReceiver.enableIRIn();\n");
+    } else {
+      Blockly.Arduino.definitions_.ljj_define_irremote_include="#include <IRremote.hpp>";
+      Blockly.Arduino.definitions_.ljj_define_irremote_decode="#define MY_IR_RECEIVE_PIN "+a+"\ndecode_results results;\nString myCodeType;\nString myIRcode;";
+      Blockly.Arduino.definitions_.ljj_define_irremote_ir_type_event='String ir_type(int tip)\n{\n  if (tip == 14){\n    return "RC5";\n  } else if (tip == 15){\n    return "RC6";\n  } else if (tip == 7){\n    return "NEC";\n  } else if (tip == 18){\n    return "SONY";\n  } else if (tip == 8){\n    return "PANASONIC";\n  } else if (tip == 4){\n    return "JVC";\n  } else if (tip == 16){\n    return "SAMSUNG";\n  } else if (tip == 5){\n    return "LG";\n  } else if (tip == 3){\n    return "SHARP";\n  } else if (tip == 22){\n    return "LEGO_PF";\n  } else {\n    return String(tip);\n  }\n}\n';
+      Blockly.Arduino.setups_["ljj_irremote_"]||(Blockly.Arduino.setups_["ljj_irremote_"]="IrReceiver.begin(MY_IR_RECEIVE_PIN);\n");
+    }
   }
-  return'irrecv.enableIRIn();\n';
+  return'';
 };
 
 //MAX30105

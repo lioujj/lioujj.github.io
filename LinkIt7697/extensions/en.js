@@ -150,6 +150,7 @@ Blockly.Msg.IR_PIN_WARNING = "You have to set IR receiver pin first.";
 Blockly.Msg.IR_SENDER_PIN_TITLE = "Set IR sender pin:";
 Blockly.Msg.IR_REMOTE = "MakeBlock & KSRobot";
 Blockly.Msg.IR_SENDER_8266_PIN_TITLE = "Set ESP8266 IR transmitter pin:";
+Blockly.Msg.IR_SENDER_PIN_TITLE = "Set IR transmitter pin:";
 Blockly.Msg.IR_ESP8266_WARNING = "You have set the board to be ESP8266 first;";
 Blockly.Msg.IR_ESP8266_BOARD_WARNING = "If your board is ESP8266, you have to \""+Blockly.Msg.IR_SENDER_8266_PIN_TITLE +"\" first.";
 

@@ -2256,21 +2256,21 @@
           </block>
 				</value>
 			</block>
-			<block type="ir_sender_8266_pin">
+			<block type="ljj_ir_sender_pin">
 				<value name="PIN">
 					<block type="math_number">
 						<field name="NUM">0</field>
-                    </block>
+          </block>
 				</value>
 			</block>
-			<block type="ir_send">
+			<block type="ljj_ir_send">
 				<value name="CODE">
 					<block type="text">
 						<field name="TEXT"></field>
           </block>
 				</value>
 			</block>
-			<block type="ir_send2">
+			<block type="ljj_ir_send2">
 				<value name="IR_TYPE">
 					<block type="text">
 						<field name="TEXT"></field>

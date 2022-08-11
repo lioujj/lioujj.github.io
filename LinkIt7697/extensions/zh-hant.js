@@ -149,6 +149,7 @@ Blockly.Msg.IR_SENDER_PIN_TITLE = "設定紅外線發送器腳位";
 Blockly.Msg.IR_PIN_WARNING = "需先設定紅外線接收器腳位";
 Blockly.Msg.IR_REMOTE = "MakeBlock & KSRobot";
 Blockly.Msg.IR_SENDER_8266_PIN_TITLE = "設定 ESP8266 紅外線發射器腳位";
+Blockly.Msg.IR_SENDER_PIN_TITLE = "設定紅外線發射器腳位";
 Blockly.Msg.IR_ESP8266_WARNING = "這個積木只適用在ESP8266上，開發板請設定為ESP8266";
 Blockly.Msg.IR_ESP8266_BOARD_WARNING = "如果開發板設為ESP8266，必須先「"+Blockly.Msg.IR_SENDER_8266_PIN_TITLE +"」積木";
 

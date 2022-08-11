@@ -895,6 +895,19 @@ Blockly.Blocks.ir_receiver_pin1={init:function(){
   this.setTooltip(Blockly.Msg.IR_TOOLTIP)}
 };
 
+Blockly.Blocks.ir_receiver_7697_pin={init:function(){
+  this.setHelpUrl(Blockly.Msg.IR_HELPURL);
+  this.setColour(Blockly.Blocks.ir.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.IR_RECEIVE_PIN_TITLE+"(7697)");
+  this.appendValueInput("PIN")
+      .setCheck("Number");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.IR_TOOLTIP)}
+};
+
 Blockly.Blocks.ir_sender_8266_pin={init:function(){
   this.setHelpUrl(Blockly.Msg.IR_HELPURL);
   this.setColour(Blockly.Blocks.ir.HUE);
@@ -908,7 +921,20 @@ Blockly.Blocks.ir_sender_8266_pin={init:function(){
   this.setTooltip(Blockly.Msg.IR_TOOLTIP)}
 };
 
-Blockly.Blocks.ir_send={init:function(){
+Blockly.Blocks.ljj_ir_sender_pin={init:function(){
+  this.setHelpUrl(Blockly.Msg.IR_HELPURL);
+  this.setColour(Blockly.Blocks.ir.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.IR_SENDER_PIN_TITLE);
+  this.appendValueInput("PIN")
+      .setCheck("Number");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.IR_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_ir_send={init:function(){
   this.setHelpUrl(Blockly.Msg.IR_HELPURL);
   this.setColour(Blockly.Blocks.ir.HUE);
   this.appendValueInput("CODE")
@@ -923,8 +949,7 @@ Blockly.Blocks.ir_send={init:function(){
   this.setTooltip(Blockly.Msg.IR_TOOLTIP)}
 };
 
-
-Blockly.Blocks.ir_send2={init:function(){
+Blockly.Blocks.ljj_ir_send2={init:function(){
   this.setHelpUrl(Blockly.Msg.IR_HELPURL);
   this.setColour(Blockly.Blocks.ir.HUE);
   this.appendValueInput("CODE")
