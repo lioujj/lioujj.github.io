@@ -8,6 +8,7 @@ Blockly.Msg.LJJ_SERIAL_PRINT = "print";
 Blockly.Msg.LJJ_SERIAL_PRINTLN = "print(new line)";
 Blockly.Msg.LJJ_SERIAL_READUNTIL = "read string until character";
 Blockly.Msg.LJJ_SERIAL_READ_RESULT = "get string";
+Blockly.Msg.LJJ_SERIAL_READ_STRING = "read available string";
 
 //robot car
 Blockly.Msg.LIOU_ROBOT_FORWARD = "FORWARD";

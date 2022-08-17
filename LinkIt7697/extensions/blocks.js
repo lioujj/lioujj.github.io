@@ -50,6 +50,21 @@ Blockly.Blocks.ljj_serial_println={init:function(){
   this.setTooltip(Blockly.Msg.LJJ_SERIAL_TOOLTIP)}
 };
 
+Blockly.Blocks.ljj_serial_readString={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_SERIAL_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_serial.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_SERIAL_TITLE);
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown([["Serial","Serial"],["Serial1","Serial1"],["Seria2","Seria2"]]),"SERIAL_PORT")
+      .appendField(Blockly.Msg.LJJ_SERIAL_READ_STRING);
+  this.appendStatementInput("STATEMENT");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.LJJ_SERIAL_TOOLTIP)}
+};
+
 Blockly.Blocks.ljj_serial_readuntil={init:function(){
   this.setHelpUrl(Blockly.Msg.LJJ_SERIAL_HELPURL);
   this.setColour(Blockly.Blocks.ljj_serial.HUE);
@@ -7700,6 +7715,19 @@ Blockly.Blocks.ljj_quno_button={init:function(){
   this.appendStatementInput("MSG_BUTTON_CALL");
   this.setPreviousStatement(!0);
   this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_QUNO_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_quno_button_boolean={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_QUNO_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_quno.HUE1);
+  this.appendDummyInput()
+      .appendField("Quno "+Blockly.Msg.LIOU_ROBOT_BUTTON)
+      .appendField(new Blockly.FieldDropdown([["1","A"],["2","B"]]),"AB_BUTTON");
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LIOU_ROBOT_BUTTON_CHECK+"?");
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Boolean");
   this.setTooltip(Blockly.Msg.LJJ_QUNO_TOOLTIP)}
 };
 

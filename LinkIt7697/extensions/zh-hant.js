@@ -8,6 +8,7 @@ Blockly.Msg.LJJ_SERIAL_PRINT = "印出文字";
 Blockly.Msg.LJJ_SERIAL_PRINTLN = "印出文字(換行)";
 Blockly.Msg.LJJ_SERIAL_READUNTIL = "讀取字串直到出現字元";
 Blockly.Msg.LJJ_SERIAL_READ_RESULT = "讀取到的字串";
+Blockly.Msg.LJJ_SERIAL_READ_STRING = "讀取可用字串";
 
 //robot car
 Blockly.Msg.LIOU_ROBOT_FORWARD = "前進";

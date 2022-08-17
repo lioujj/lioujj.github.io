@@ -4703,6 +4703,15 @@ Blockly.Arduino.ljj_serial_println=function(){
   return a+'.println(String('+b+'));\n';
 }
 
+Blockly.Arduino.ljj_serial_readString=function(){
+  var a=this.getFieldValue("SERIAL_PORT"),
+      c=Blockly.Arduino.statementToCode(this,"STATEMENT");
+  Blockly.Arduino.definitions_.define_ljj_serial_invoke='String serialStr="";';
+  //var returnStr='if ('+a+'.available()) {\n  serialStr = "";\n  while ('+a+'.available()) {\n    serialStr='+a+'.readStringUntil('+b+');\n    serialStr.replace("\\r","");\n'+c+'  }\n}\n';
+  var returnStr='if ('+a+'.available()) {\n  serialStr = "";\n  while ('+a+'.available()) {\n    char tempChar='+a+'.read();\n    if (tempChar!=\'\\n\'&& tempChar!=\'\\r\')\n    serialStr+=String(tempChar);\n    delay(1);\n  }\n'+c+'}\n'
+  return returnStr;
+}
+
 Blockly.Arduino.ljj_serial_readuntil=function(){
   var a=this.getFieldValue("SERIAL_PORT"),
       b=Blockly.Arduino.valueToCode(this,"TEXT",Blockly.Arduino.ORDER_ATOMIC)||"",
@@ -4710,8 +4719,11 @@ Blockly.Arduino.ljj_serial_readuntil=function(){
   Blockly.Arduino.definitions_.define_ljj_serial_invoke='String serialStr="";';
   b=b.replace(/\"/g,"\'");
   b=b.replace(/\\\\/g,"\\");
-  c=c.replace(new RegExp("\n  ","gm"),"\n    ");
-  var returnStr='if ('+a+'.available()) {\n  serialStr = "";\n  while ('+a+'.available()) {\n    serialStr='+a+'.readStringUntil('+b+');\n    serialStr.replace("\\r","");\n  '+c+'  }\n}\n';
+  if (c!=''){
+    c=c.replace(new RegExp("\n  ","gm"),"\n    ");
+    c='  '+c;
+  }
+  var returnStr='if ('+a+'.available()) {\n  serialStr = "";\n  while ('+a+'.available()) {\n    serialStr='+a+'.readStringUntil('+b+');\n    serialStr.replace("\\r","");\n'+c+'  }\n}\n';
   return returnStr;
 }
 
@@ -4731,10 +4743,18 @@ Blockly.Arduino.ljj_quno_rgb=function(){
 Blockly.Arduino.ljj_quno_button=function(){
   var a=this.getFieldValue("AB_BUTTON"),
 	  b=Blockly.Arduino.statementToCode(this,"MSG_BUTTON_CALL");
-  Blockly.Arduino.definitions_.define_m_button="byte A_Pin=2;\nbyte B_Pin=4;\nchar myBtnStatus;\nbool buttonPressed(char btnName)\n{\n  if (btnName=='A'){\n    if (digitalRead(A_Pin) == 0)\n      return false;\n    else\n      return true;\n  }\n  else if (btnName=='B'){\n    if (digitalRead(B_Pin) == 0)\n      return false;\n    else\n      return true;\n  } else {\n    if ((digitalRead(A_Pin) == 0) && (digitalRead(B_Pin) == 0))\n      return false;\n    else\n      return true;\n  }\n}\n"
-  Blockly.Arduino.definitions_.define_m_getBtnStatus="char getBtnStatus(){\n  char buttonStatus=' ';\n  int checkButtonDelay=200;\n  if (buttonPressed('A')){\n    delay(checkButtonDelay);\n    if (buttonPressed('A')){\n      buttonStatus='A';\n      if (buttonPressed('B'))\n        buttonStatus='C';\n    }\n  } else if (buttonPressed('B')){\n      delay(checkButtonDelay);\n      if (buttonPressed('B')){\n        buttonStatus='B';\n        if (buttonPressed('A'))\n          buttonStatus='C';\n      }\n  }\n  return buttonStatus;\n}\n";
+  Blockly.Arduino.definitions_.define_m_button="byte A_Pin=2;\nbyte B_Pin=4;\nchar myBtnStatus;\n";
+  Blockly.Arduino.definitions_.define_m_button_event="bool buttonPressed(char btnName)\n{\n  if (btnName=='A'){\n    if (digitalRead(A_Pin) == 0)\n      return false;\n    else\n      return true;\n  }\n  else if (btnName=='B'){\n    if (digitalRead(B_Pin) == 0)\n      return false;\n    else\n      return true;\n  } else {\n    if ((digitalRead(A_Pin) == 0) && (digitalRead(B_Pin) == 0))\n      return false;\n    else\n      return true;\n  }\n}\n"
+  Blockly.Arduino.definitions_.define_m_getBtnStatus_event="char getBtnStatus(){\n  char buttonStatus=' ';\n  int checkButtonDelay=200;\n  if (buttonPressed('A')){\n    delay(checkButtonDelay);\n    if (buttonPressed('A')){\n      buttonStatus='A';\n      if (buttonPressed('B'))\n        buttonStatus='C';\n    }\n  } else if (buttonPressed('B')){\n      delay(checkButtonDelay);\n      if (buttonPressed('B')){\n        buttonStatus='B';\n        if (buttonPressed('A'))\n          buttonStatus='C';\n      }\n  }\n  return buttonStatus;\n}\n";
   Blockly.Arduino.setups_.setup_button='pinMode(A_Pin, INPUT);\n  pinMode(B_Pin, INPUT);\n';
 	return"if (myBtnStatus=='"+a+"'){\n"+b+"  while(buttonPressed('"+a+"')){}\n}\n"
+};
+
+Blockly.Arduino.ljj_quno_button_boolean=function(){
+  var a=this.getFieldValue("AB_BUTTON");
+  Blockly.Arduino.definitions_.define_m_button="byte A_Pin=2;\nbyte B_Pin=4;\n";
+  Blockly.Arduino.setups_.setup_button='pinMode(A_Pin, INPUT);\n  pinMode(B_Pin, INPUT);\n';
+	return['(digitalRead('+a+'_Pin)==1)',Blockly.Arduino.ORDER_ATOMIC];
 };
 
 Blockly.Arduino.ljj_quno_led=function(){
