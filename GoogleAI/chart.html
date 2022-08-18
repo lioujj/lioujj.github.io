@@ -1,0 +1,203 @@
+<!DOCTYPE html><html><head><meta charset='utf-8'><meta http-equiv='Access-Control-Allow-Origin' content='*'><meta http-equiv='Access-Control-Allow-Credentials' content='true'><script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/GameElements_20190131/gameelements.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/MQTT_20220324/mqtt.min.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/chart_20220723/jquery.tempgauge.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/chart_20220723/Chart.min.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/chart_20220723/linechart.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/chart_20220723/Chart.min.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/chart_20220723/jquery.simplegauge.js'></script><link href='https://fustyles.github.io/webduino/SpBlocklyJS/chart_20220723/jquery.simplegauge.css' type='text/css' rel='stylesheet'></script></head><body><script>const delay=(seconds)=>{return new Promise((resolve)=>{setTimeout(resolve,seconds*1000);});};const main=async()=>{var temp, humi;
+
+
+temp = 0;
+humi = 0;
+simpleGauge({
+	id:  'chartSlide',
+   value: 0,
+   min: 0,
+   max: 4095,
+	width: 300,
+	height: 300,
+	left: 0,
+	top: 0,
+	decimal: 0,
+	unit: '',
+    template: [
+        "<div class='simpleGauge_container'>",
+        "<div class='simpleGauge'>",
+        "<div class='simpleGauge_title'></div>",
+        "<svg class='simpleGauge_bars simpleGauge_block' version='1.1' xmlns='http://www.w3.org/2000/svg'></svg>",
+        "<div class='simpleGauge_labels simpleGauge_block'></div>",
+        "<div class='simpleGauge_ticks simpleGauge_block'></div>",
+        "<svg class='simpleGauge_pointers simpleGauge_block' version='1.1' xmlns='http://www.w3.org/2000/svg'></svg>",
+        "<div class='simpleGauge_digital'></div>",
+        "</div>",
+        "</div>"
+    ].join(""),
+    type:   "analog digital",
+    container: {
+        scale: 90,
+        style: {}
+    },
+    title: {
+        text: '滑桿值',
+        style: {}
+    },
+    digital: {
+        text: "{value.1}",
+        style: {
+            color: "auto"
+        }
+    },
+    analog: {
+        minAngle: -120,
+        maxAngle: 120
+    },
+    labels: {
+        text:   "{value}",
+        count:  10,
+        scale:  95,
+        style:  ""
+    },
+    ticks: {
+        count:  10,
+        scale1: 77,
+        scale2: 83,
+        style:  ""
+    },
+    subTicks: {
+        count:  0,
+        scale1: 80,
+        scale2: 83,
+        style:  ""
+    },
+    bars: {
+        scale1: 75,
+        scale2: 80,
+        style:  "",
+        colors:
+            [[ 0, '#000099', 0, 0 ], [ 1023, '#33ff33', 0, 0 ], [ 3071, '#ff0000', 0, 0 ]]
+    },
+    pointer: {
+        scale: 85,
+        shape: [
+            "-2,-10",
+            "2,-10",
+            "2.1,-5.3",
+            "4,-4",
+            "5.3,-2.1",
+            "5.7,0",
+            "5.3,2.1",
+            "4,4",
+            "2.1,5.3",
+            "2,50",
+            "1.5,96",
+            "0,100",
+            "-1,96",
+            "-2,50",
+            "-2.1,5.3",
+            "-4,4",
+            "-5.3,2.1",
+            "-5.7,0",
+            "-5.3,-2.1",
+            "-4,-4",
+            "-2.1,-5.3",
+            "-2,-10"
+        ].join(" "),
+        style: {
+            color: "#8778",
+            borderWidth: 0,
+            borderColor: "#8778"
+        }
+    }
+});temperatureGauge({
+	id: 'chartTemp',
+	name: '溫度',
+	width: 150,
+	left: 310,
+	top: 0,
+	val: 0,
+	min: 10,
+	max: 50,
+	fillColor: '#ff0000',
+	borderWidth: 4,
+	unit: " "+'°C',
+	decimal: 0,
+	showLabel: true,
+	labelSize: 14,
+});
+var config = {
+	  id: 'chartOK',
+	  type: "line",
+	  data: {
+			  labels: [],
+			  datasets: [
+				{  label: '溫度',  data: [],
+  borderColor: '#ff0000',  backgroundColor: '#000000'}, {  label: '濕度',  data: [],
+  borderColor: '#0000ff',  backgroundColor: '#000000'}
+			  ]
+	  },
+	  options: {
+		responsive: true,
+		maintainAspectRatio: false,
+		plugins: {
+		  legend: {
+			position: "top",
+		  },
+		  title: {
+			display: true,
+			text: '溫濕度圖表'
+		  }
+		},
+		scales: {
+				yAxes: {
+					title: {
+						display: true,
+						text: '數值',
+					},
+					ticks: {
+						precision: 0
+					}
+				},
+				xAxes: {
+					title: {
+						display: true,
+						text: '時間',
+					}
+				}
+			}
+	  },
+	  width: 600,
+	  height: 400,
+	  left: 0,
+	  top: 350,
+	  count: 20
+	};
+	linechart(config);
+const clientId = "mqtt_" + Math.random().toString(16).substr(2, 8);
+const options = {
+	username: '',
+	password: '',
+	keepalive: 60,
+	clientId: clientId,
+	protocolId: "MQTT",
+	protocolVersion: 4,
+	clean: true,
+	reconnectPeriod: 1000,
+	connectTimeout: 30 * 1000
+}
+
+var mqtt_client = mqtt.connect('ws://mqttgo.io:8000/mqtt',options);
+mqtt_client.on("connect", ()=>{
+	console.log("connected");
+  mqtt_client.subscribe('ljj/slider');
+  mqtt_client.subscribe('ljj/temp');
+  mqtt_client.subscribe('ljj/humi');
+	mqtt_client.on("message", async function (topic, payload) {
+  if (topic=='ljj/slider') {
+    simpleGauge({id:'chartSlide', value: (Number(payload))});
+  }
+  if (topic=='ljj/temp') {
+    temp = (Number(payload));
+    temperatureGauge({id: 'chartTemp',val: temp});
+  }
+  if (topic=='ljj/humi') {
+    humi = (Number(payload));
+    linechart({id: 'chartOK', data: [(getDatetime("time")), temp, humi]});
+  }
+   })
+  }
+)
+};main();</script></body></html>
