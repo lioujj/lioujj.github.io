@@ -930,7 +930,7 @@ Blockly.Msg.KEYBOARDS_TOOLTIP = "keyboard";
 Blockly.Msg.KEYBOARDS_VALUE = "按鍵值(字串)";
 Blockly.Msg.KEYBOARDS_CHECK = "檢查按鍵狀況";
 Blockly.Msg.KEYBOARDS_EVENT = "當被";
-Blockly.Msg.KEYBOARDS_EVENT_LIST=[["按下","1"],["鬆開","0"]];
+Blockly.Msg.KEYBOARDS_EVENT_LIST=[["按下時","1"],["鬆開時","0"]];
 
 //Lumex 7-seg
 Blockly.Msg.LMX_7SEG_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/七節顯示器";
@@ -1005,3 +1005,32 @@ Blockly.Msg.LJJ_QUNO_SONAR = "超音波感測距離(cm)";
 Blockly.Msg.EZ_LED_BLUE = "藍色";
 Blockly.Msg.LJJ_QUNO_IR = "人體紅外線感測器";
 Blockly.Msg.LJJ_QUNO_WHEN_DETECT_IR = "偵測到紅外線位移？";
+
+//Basic
+Blockly.Msg.LJJ_BASIC_HELPURL = "";
+Blockly.Msg.LJJ_BASIC_TOOLTIP = "";
+Blockly.Msg.LJJ_BASIC_PIN_MODE = [["高電位","HIGH"],["低電位","LOW"]];
+Blockly.Msg.LJJ_BASIC_BUTTON_EVENT = "被";
+Blockly.Msg.LJJ_BASIC_DHT11 = "DHT11 取得";
+Blockly.Msg.LJJ_BASIC_DHT11_MODE = [["溫度(C)","temperature"],["濕度(%)","humidity"]];
+
+//MAX7219
+Blockly.Msg.LJJ_MAX7219_HELPURL = "";
+Blockly.Msg.LJJ_MAX7219_TOOLTIP = "";
+Blockly.Msg.LJJ_MAX7219_TITLE = "MAX7219";
+Blockly.Msg.LJJ_MAX7219_INIT = "初始化";
+Blockly.Msg.LJJ_MAX7219_DEV_MAX = "連接數量";
+Blockly.Msg.LJJ_MAX7219_PLOT_TYPE = [["點亮","true"],["不點亮","false"],["反相","toggle"]];
+Blockly.Msg.LJJ_MAX7219_GETPOINT = "單一LED狀態";
+Blockly.Msg.LJJ_MAX7219_PRINT = "顯示文字";
+Blockly.Msg.LJJ_MAX7219_POSITION = "字元對齊";
+Blockly.Msg.LJJ_MAX7219_POSITION_TYPE = [["螢幕左側","PA_LEFT"],["螢幕中央","PA_CENTER"],["螢幕右側","PA_RIGHT"]];
+Blockly.Msg.LJJ_MAX7219_CLEAR = "清除畫面";
+Blockly.Msg.LJJ_MAX7219_TEXT_INVERSE = "設定文字反相";
+Blockly.Msg.LJJ_MAX7219_SCROLL = "捲動文字";
+Blockly.Msg.LJJ_MAX7219_EFFECT = "特效";
+Blockly.Msg.LJJ_MAX7219_SPEED = "速度(ms)";
+Blockly.Msg.LJJ_MAX7219_EFFECT_TYPE = [["向上捲動","PA_SCROLL_UP"],["向下捲動","PA_SCROLL_DOWN"],["向左捲動","PA_SCROLL_LEFT"],["向右捲動","PA_SCROLL_RIGHT"]];
+Blockly.Msg.LJJ_MAX7219_ANIMATE = "持續捲動運作";
+Blockly.Msg.LJJ_MAX7219_ANIMATE_STOP = "停止捲動特效";
+Blockly.Msg.LJJ_MAX7219_BEGIN = "重啟";

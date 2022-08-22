@@ -66,6 +66,7 @@
       <block type="board_7697_analog"></block>
       <block type="board_arduino_digital"></block>
       <block type="board_arduino_analog"></block>
+      <block type="board_nano_pins"></block>
       <block type="board_esp32_digital"></block>
       <block type="board_esp32_analog"></block>
       <block type="board_esp8266_digital"></block>
@@ -73,6 +74,126 @@
     </category>
   </category>
   <category id="category_ljj_arduino" name="Arduino">
+    <category id="category_ljj_basic" name="Basic">
+      <block type="ljj_basic_button">
+        <value name="PIN">
+          <block type="board_nano_pins">
+            <field name="MY_PIN">2</field>
+          </block>
+        </value>
+      </block>
+      <block type="ljj_basic_led">
+        <value name="PIN">
+          <block type="board_nano_pins">
+            <field name="MY_PIN">2</field>
+          </block>
+        </value>
+        <value name="ON_OFF">
+          <block type="inout_highlow">
+            <field name="BOOL">HIGH</field>
+          </block>
+        </value>
+      </block>
+      <block type="ljj_basic_led_analog">
+        <value name="PIN">
+          <block type="board_nano_pins">
+            <field name="MY_PIN">3</field>
+          </block>
+        </value>
+        <value name="NUM">
+            <block type="math_number">
+                <field name="NUM">255</field>
+            </block>
+        </value>
+      </block>
+      <block type="ljj_basic_rgb_init">
+        <value name="PIN_RED">
+          <block type="board_nano_pins">
+            <field name="MY_PIN">3</field>
+          </block>
+        </value>
+        <value name="PIN_GREEN">
+          <block type="board_nano_pins">
+            <field name="MY_PIN">5</field>
+          </block>
+        </value>
+        <value name="PIN_BLUE">
+          <block type="board_nano_pins">
+            <field name="MY_PIN">6</field>
+          </block>
+        </value>
+      </block>
+      <block type="ljj_basic_rgb_led">
+        <value name="ON_OFF">
+          <block type="inout_highlow">
+            <field name="BOOL">HIGH</field>
+          </block>
+        </value>
+      </block>
+      <block type="ljj_basic_rgb_analog">
+        <value name="NUM">
+            <block type="math_number">
+                <field name="NUM">255</field>
+            </block>
+        </value>
+      </block>
+      <block type="ljj_basic_rgb">
+        <value name="COLOR">
+          <block type="ttgo_getFromColorPicker"></block>
+        </value>
+      </block>
+      <block type="ttgo_getFromColorPicker"></block>
+      <block type="ljj_basic_tone">
+        <value name="PIN">
+          <block type="board_nano_pins">
+            <field name="MY_PIN">2</field>
+          </block>
+        </value>
+      </block>
+      <block type="ljj_basic_no_tone">
+        <value name="PIN">
+          <block type="board_nano_pins">
+            <field name="MY_PIN">2</field>
+          </block>
+        </value>
+      </block>
+      <block type="ljj_basic_custom_tone">
+        <value name="PIN">
+          <block type="board_nano_pins">
+            <field name="MY_PIN">2</field>
+          </block>
+        </value>
+        <value name="FREQ">
+          <block type="math_number">
+            <field name="NUM">255</field>
+          </block>
+        </value>
+        <value name="DURATION">
+          <block type="math_number">
+            <field name="NUM">300</field>
+          </block>
+        </value>
+      </block>
+      <block type="ljj_basic_sonar">
+        <value name="TRIG_PIN">
+          <block type="board_nano_pins">
+            <field name="MY_PIN">2</field>
+          </block>
+        </value>
+        <value name="ECHO_PIN">
+          <block type="board_nano_pins">
+            <field name="MY_PIN">3</field>
+          </block>
+        </value>
+      </block>
+      <block type="ljj_basic_dht11">
+        <value name="PIN">
+          <block type="board_nano_pins">
+            <field name="MY_PIN">2</field>
+          </block>
+        </value>
+      </block>
+    </category>
     <category id="category_ljj_quno" name="Quno">
       <block type="ljj_quno_button"></block>
       <block type="ljj_quno_button_boolean"></block>
@@ -124,6 +245,13 @@
         <value name="DURATION">
           <block type="math_number">
             <field name="NUM">300</field>
+          </block>
+        </value>
+      </block>
+      <block type="ljj_quno_dht11">
+        <value name="PIN">
+          <block type="ljj_quno_pins">
+            <field name="QUNO_PIN">7</field>
           </block>
         </value>
       </block>
@@ -2689,6 +2817,83 @@
           </block>
         </value>
       </block>
+    </category>
+    <category id="category_ljj_max7219" name="MAX7219">
+      <block type="ljj_max7219_init">
+        <value name="PIN_DIN">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="PIN_DIN">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="PIN_CS">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="PIN_CLK">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="DEV_NUM">
+          <block type="math_number">
+            <field name="NUM">1</field>
+          </block>
+        </value>
+      </block>
+      <block type="ljj_max7219_clear"></block>
+      <block type="ljj_max7219_setpoint">
+        <value name="X">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="Y">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>     
+      </block>
+      <block type="ljj_max7219_getpoint">
+        <value name="X">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="Y">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>     
+      </block>
+      <block type="ljj_max7219_inverse"></block>
+      <block type="ljj_max7219_print">
+				<value name="TEXT">
+					<block type="text">
+						<field name="TEXT"></field>
+          </block>
+				</value>
+      </block>
+      <block type="ljj_max7219_scroll">
+				<value name="TEXT">
+					<block type="text">
+						<field name="TEXT"></field>
+          </block>
+				</value>
+        <value name="SPEED">
+          <block type="math_number">
+            <field name="NUM">200</field>
+          </block>
+        </value>
+      </block>
+      <block type="ljj_max7219_animate"></block>
+      <block type="ljj_max7219_animate_stop"></block>
+      <block type="ljj_max7219_begin"></block>
     </category>
 <!--
     <category id="category_mpu6050" name="MPU6050_I2C">

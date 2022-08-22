@@ -2101,6 +2101,10 @@ Blockly.Arduino.board_arduino_analog=function(){
   return[this.getFieldValue("MY_PIN"),Blockly.Arduino.ORDER_ATOMIC];
 }
 
+Blockly.Arduino.board_nano_pins=function(){
+  return[this.getFieldValue("MY_PIN"),Blockly.Arduino.ORDER_ATOMIC];
+}
+
 Blockly.Arduino.board_esp32_analog=function(){
   return[this.getFieldValue("MY_PIN"),Blockly.Arduino.ORDER_ATOMIC];
 }
@@ -4737,7 +4741,7 @@ Blockly.Arduino.ljj_quno_rgb=function(){
   var a=Blockly.Arduino.valueToCode(this,"COLOR",Blockly.Arduino.ORDER_ATOMIC)||"";
   a=a.replace("tft.color565","QunoLedColor");
   Blockly.Arduino.definitions_.define_ljj_quno_rgb_event='void QunoLedColor(byte red,byte green,byte blue)\n{\n  analogWrite(10,red);\n  analogWrite(9,green);\n  analogWrite(11,blue);\n}\n';
-  Blockly.Arduino.setups_.setup_ljj_quno_rgb='pinMode(9,OUTPUT);\n  pinMode(10,OUTPUT);\n  pinMode(11,OUTPUT);\n';
+  Blockly.Arduino.setups_.setup_ljj_quno_rgb='pinMode(9,OUTPUT);\n  pinMode(10,OUTPUT);\n  pinMode(11,OUTPUT);';
 	return a+";\n";
 };
 Blockly.Arduino.ljj_quno_button=function(){
@@ -4825,6 +4829,184 @@ Blockly.Arduino.ljj_quno_pins=function(){
   var a=this.getFieldValue("QUNO_PIN");
   return[a,Blockly.Arduino.ORDER_ATOMIC];
 };
+
+Blockly.Arduino.ljj_quno_dht11=function(){
+  var a=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=this.getFieldValue("DHT11_TYPE"),
+      myType='';
+  if (b=='temperature')
+    myType='readTemperature';
+  else if (b=='humidity')
+    myType='readHumidity';
+  Blockly.Arduino.definitions_['define_dht_']="#include <DHT.h>";
+  Blockly.Arduino.definitions_['define_dht_set']="DHT dht11_p"+a+"("+a+", DHT11);";
+  Blockly.Arduino.setups_["setup_dht_"]="dht11_p"+a+".begin();";
+  return["dht11_p"+a+"."+myType+"()",Blockly.Arduino.ORDER_ATOMIC];
+};
+
+//Basic
+Blockly.Arduino.ljj_basic={};
+Blockly.Arduino.ljj_basic_button=function(){
+  var a=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"",
+      b=this.getFieldValue("PIN_MODE"),
+      c=Blockly.Arduino.statementToCode(this,"MSG_BUTTON_CALL_PRESSED"),
+      d=Blockly.Arduino.statementToCode(this,"MSG_BUTTON_CALL_RELEASED")
+  Blockly.Arduino.setups_["button_"+a]='pinMode('+a+', INPUT);';
+	return'if (digitalRead('+a+')=='+b+'){\n'+c+'  while(digitalRead('+a+')=='+b+'){}\n'+d+'}\n'
+};
+
+Blockly.Arduino.ljj_basic_led=function(){
+  var a=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"",
+      b=Blockly.Arduino.valueToCode(this,"ON_OFF",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  Blockly.Arduino.setups_["led_"+a]="pinMode("+a+", OUTPUT);";
+  return"digitalWrite("+a+", "+b+");\n";
+};
+
+Blockly.Arduino.ljj_basic_led_analog=function(){
+  var a=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"",
+      b=Blockly.Arduino.valueToCode(this,"NUM",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  Blockly.Arduino.setups_["led_"+a]="pinMode("+a+", OUTPUT);";
+  return"analogWrite("+a+", "+b+");\n";
+};
+
+Blockly.Arduino.ljj_basic_rgb_init=function(){
+  var a=Blockly.Arduino.valueToCode(this,"PIN_RED",Blockly.Arduino.ORDER_ATOMIC)||"",
+      b=Blockly.Arduino.valueToCode(this,"PIN_GREEN",Blockly.Arduino.ORDER_ATOMIC)||"",
+      c=Blockly.Arduino.valueToCode(this,"PIN_BLUE",Blockly.Arduino.ORDER_ATOMIC)||"";
+  Blockly.Arduino.definitions_.define_ljj_basic_rgb_invoke='int rgbRedPin='+a+';\nint rgbGreenPin='+b+';\nint rgbBluePin='+c+';';
+  Blockly.Arduino.definitions_.define_ljj_quno_rgb_event='void QunoLedColor(byte red,byte green,byte blue)\n{\n  analogWrite(rgbRedPin,red);\n  analogWrite(rgbGreenPin,green);\n  analogWrite(rgbBluePin,blue);\n}\n';
+  Blockly.Arduino.setups_.setup_ljj_quno_rgb='pinMode(rgbRedPin,OUTPUT);\n  pinMode(rgbGreenPin,OUTPUT);\n  pinMode(rgbBluePin,OUTPUT);';
+	return'';
+};
+
+Blockly.Arduino.ljj_basic_rgb_led=function(){
+  var a=this.getFieldValue("PIN"),
+      b=Blockly.Arduino.valueToCode(this,"ON_OFF",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  return"digitalWrite("+a+", "+b+");\n";
+};
+
+Blockly.Arduino.ljj_basic_rgb_analog=function(){
+  var a=this.getFieldValue("PIN"),
+      b=Blockly.Arduino.valueToCode(this,"NUM",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  return"analogWrite("+a+", "+b+");\n";
+};
+
+Blockly.Arduino.ljj_basic_rgb=function(){
+  var a=Blockly.Arduino.valueToCode(this,"COLOR",Blockly.Arduino.ORDER_ATOMIC)||"";
+  a=a.replace("tft.color565","QunoLedColor");
+	return a+";\n";
+};
+
+Blockly.Arduino.ljj_basic_tone=function(){
+  var a=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=this.getFieldValue("FREQ");
+  Blockly.Arduino.definitions_.define_ljj_basic_tone_invoke='byte buzzPin='+a+';';
+  return"tone(buzzPin, "+b+");\n";
+};
+
+Blockly.Arduino.ljj_basic_no_tone=function(){
+  var a=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  Blockly.Arduino.definitions_.define_ljj_basic_tone_invoke='byte buzzPin='+a+';';
+  return"noTone(buzzPin);\n";
+};
+
+Blockly.Arduino.ljj_basic_custom_tone=function(){
+  var a=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=Blockly.Arduino.valueToCode(this,"FREQ",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      c=Blockly.Arduino.valueToCode(this,"DURATION",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  Blockly.Arduino.definitions_.define_ljj_basic_tone_invoke='byte buzzPin='+a+';';
+  return"tone(buzzPin, "+b+");\ndelay("+c+");\nnoTone(buzzPin);\n";
+};
+
+Blockly.Arduino.ljj_basic_sonar=function(){
+  var a=Blockly.Arduino.valueToCode(this,"TRIG_PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=Blockly.Arduino.valueToCode(this,"ECHO_PIN",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  Blockly.Arduino.definitions_.define_ljj_quno_sonar_include="#include <Ultrasonic.h>";
+  Blockly.Arduino.definitions_.define_ljj_quno_sonar_invoke="Ultrasonic ultrasonic_("+a+", "+b+");";
+  return['ultrasonic_.convert(ultrasonic_.timing(), Ultrasonic::CM)',Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.ljj_basic_dht11=function(){
+  var a=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=this.getFieldValue("DHT11_TYPE"),
+      myType='';
+  if (b=='temperature')
+    myType='readTemperature';
+  else if (b=='humidity')
+    myType='readHumidity';
+  Blockly.Arduino.definitions_['define_dht_']="#include <DHT.h>";
+  Blockly.Arduino.definitions_['define_dht_set']="DHT dht11_p"+a+"("+a+", DHT11);";
+  Blockly.Arduino.setups_["setup_dht_"]="dht11_p"+a+".begin();";
+  return["dht11_p"+a+"."+myType+"()",Blockly.Arduino.ORDER_ATOMIC];
+};
+
+//MAX7219
+Blockly.Arduino.ljj_max7219={};
+Blockly.Arduino.ljj_max7219_init=function(){
+  var a=Blockly.Arduino.valueToCode(this,"PIN_DIN",Blockly.Arduino.ORDER_ATOMIC)||"",
+      b=Blockly.Arduino.valueToCode(this,"PIN_CS",Blockly.Arduino.ORDER_ATOMIC)||"",
+      c=Blockly.Arduino.valueToCode(this,"PIN_CLK",Blockly.Arduino.ORDER_ATOMIC)||"",
+      d=Blockly.Arduino.valueToCode(this,"DEV_NUM",Blockly.Arduino.ORDER_ATOMIC)||"";
+  Blockly.Arduino.definitions_.define_ljj_max7219_include="#include <MD_Parola.h>\n#include <MD_MAX72xx.h>\n#define HARDWARE_TYPE MD_MAX72XX::GENERIC_HW\n#define DEVICE_NUMBER "+d;
+  Blockly.Arduino.definitions_.define_ljj_max7219_invoke='char *max7219Char;\nString max7219Str="";\nMD_Parola myDisplay = MD_Parola(HARDWARE_TYPE,'+a+','+c+','+b+',DEVICE_NUMBER);\nMD_MAX72XX mx = MD_MAX72XX(HARDWARE_TYPE,'+a+','+c+','+b+','+d+');\n';
+  Blockly.Arduino.setups_["ljj_max7219"]='myDisplay.begin();\n  myDisplay.displayClear();\n  mx.begin();';
+	return''
+};
+
+Blockly.Arduino.ljj_max7219_clear=function(){
+  return 'myDisplay.displayClear();\nmx.clear();\n';
+}
+
+Blockly.Arduino.ljj_max7219_setpoint=function(){
+  var b=Blockly.Arduino.valueToCode(this,"X",Blockly.Arduino.ORDER_ATOMIC)||"",
+      a=Blockly.Arduino.valueToCode(this,"Y",Blockly.Arduino.ORDER_ATOMIC)||"",
+      c=this.getFieldValue("PLOT_TYPE");
+  b='8*DEVICE_NUMBER-1-'+b;
+  if (c=='toggle'){
+    return 'mx.setPoint('+a+', '+b+',!mx.getPoint('+a+','+b+'));\n';
+  } else {
+    return 'mx.setPoint('+a+', '+b+', '+c+');\n';
+  }
+}
+
+Blockly.Arduino.ljj_max7219_getpoint=function(){
+  var b=Blockly.Arduino.valueToCode(this,"X",Blockly.Arduino.ORDER_ATOMIC)||"",
+      a=Blockly.Arduino.valueToCode(this,"Y",Blockly.Arduino.ORDER_ATOMIC)||"";
+  b='8*DEVICE_NUMBER-1-'+b;
+  return['mx.getPoint('+a+','+b+')',Blockly.Arduino.ORDER_ATOMIC];
+}
+
+
+Blockly.Arduino.ljj_max7219_inverse=function(){
+  var a=this.getFieldValue("INVERSE_TYPE");
+  return'myDisplay.setInvert('+a+');\n'
+}
+
+Blockly.Arduino.ljj_max7219_print=function(){
+  var a=Blockly.Arduino.valueToCode(this,"TEXT",Blockly.Arduino.ORDER_ATOMIC)||"",
+      b=this.getFieldValue("POSITION_TYPE");
+  return'max7219Str='+a+';\nmax7219Char = new char [max7219Str.length()+1];\nstrcpy (max7219Char, max7219Str.c_str());\nmyDisplay.displayReset();\nmyDisplay.displayText(max7219Char,'+b+',0,0,PA_NO_EFFECT,PA_NO_EFFECT);\n';
+}
+
+Blockly.Arduino.ljj_max7219_scroll=function(){
+  var a=Blockly.Arduino.valueToCode(this,"TEXT",Blockly.Arduino.ORDER_ATOMIC)||"",
+      b=this.getFieldValue("POSITION_TYPE"),
+      c=this.getFieldValue("EFFECT_TYPE"),
+      d=Blockly.Arduino.valueToCode(this,"SPEED",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  return'max7219Str='+a+';\nmax7219Char = new char [max7219Str.length()+1];\nstrcpy (max7219Char, max7219Str.c_str());\nmyDisplay.displayReset();\nmyDisplay.displayScroll(max7219Char,'+b+','+c+','+d+');\n'
+}
+
+Blockly.Arduino.ljj_max7219_animate=function(){
+  return'if (myDisplay.displayAnimate()) {myDisplay.displayReset();}\n';
+}
+
+Blockly.Arduino.ljj_max7219_animate_stop=function(){
+  return'myDisplay.displaySuspend(true);\n';
+}
+
+Blockly.Arduino.ljj_max7219_begin=function(){
+  return'myDisplay.begin();\n';
+}
 
 setTimeout(function(){
 	if (Blockly.Blocks.board_initializes_setup)

@@ -1012,3 +1012,32 @@ Blockly.Msg.LJJ_QUNO_SONAR = "get sonar distance";
 Blockly.Msg.EZ_LED_BLUE = "Blue";
 Blockly.Msg.LJJ_QUNO_IR = "PIR";
 Blockly.Msg.LJJ_QUNO_WHEN_DETECT_IR = "IR is detected?";
+
+//Basic
+Blockly.Msg.LJJ_BASIC_HELPURL = "";
+Blockly.Msg.LJJ_BASIC_TOOLTIP = "";
+Blockly.Msg.LJJ_BASIC_PIN_MODE = [["HIGH","HIGH"],["LOW","LOW"]];
+Blockly.Msg.LJJ_BASIC_BUTTON_EVENT = "is";
+Blockly.Msg.LJJ_BASIC_DHT11 = "DHT11 get";
+Blockly.Msg.LJJ_BASIC_DHT11_MODE = [["temperature(C)","temperature"],["humidity(%)","humidity"]];
+
+//MAX7219
+Blockly.Msg.LJJ_MAX7219_HELPURL = "";
+Blockly.Msg.LJJ_MAX7219_TOOLTIP = "";
+Blockly.Msg.LJJ_MAX7219_TITLE = "MAX7219";
+Blockly.Msg.LJJ_MAX7219_INIT = "initial";
+Blockly.Msg.LJJ_MAX7219_DEV_MAX = "device number";
+Blockly.Msg.LJJ_MAX7219_PLOT_TYPE = [["plot","true"],["unplot","false"],["toggle","toggle"]];
+Blockly.Msg.LJJ_MAX7219_GETPOINT = "status of a single LED";
+Blockly.Msg.LJJ_MAX7219_PRINT = "show string";
+Blockly.Msg.LJJ_MAX7219_POSITION = "align";
+Blockly.Msg.LJJ_MAX7219_POSITION_TYPE = [["left","PA_LEFT"],["center","PA_CENTER"],["right","PA_RIGHT"]];
+Blockly.Msg.LJJ_MAX7219_CLEAR = "clear display";
+Blockly.Msg.LJJ_MAX7219_TEXT_INVERSE = "set the display to inverted";
+Blockly.Msg.LJJ_MAX7219_SCROLL = "scroll text";
+Blockly.Msg.LJJ_MAX7219_EFFECT = "effect";
+Blockly.Msg.LJJ_MAX7219_SPEED = "speed(ms)";
+Blockly.Msg.LJJ_MAX7219_EFFECT_TYPE = [["scroll up","PA_SCROLL_UP"],["scroll down","PA_SCROLL_DOWN"],["scroll left","PA_SCROLL_LEFT"],["scroll right","PA_SCROLL_RIGHT"]];
+Blockly.Msg.LJJ_MAX7219_ANIMATE = "continue scrolling";
+Blockly.Msg.LJJ_MAX7219_ANIMATE_STOP = "stop scrolling";
+Blockly.Msg.LJJ_MAX7219_BEGIN = "reset";
