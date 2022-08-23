@@ -5014,7 +5014,7 @@ Blockly.Arduino.ljj_5012_sonar=function(){
 };
 
 Blockly.Arduino.ljj_5012_dht11=function(){
-  var a=this.getFieldValue("PIN"),
+  var a=2,
       b=this.getFieldValue("DHT11_TYPE"),
       myType='';
   if (b=='temperature')

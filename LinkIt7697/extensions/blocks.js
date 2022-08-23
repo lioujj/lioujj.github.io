@@ -8317,9 +8317,6 @@ Blockly.Blocks.ljj_5012_dht11={init:function(){
       .appendField(Blockly.Msg.LJJ_5012_TITLE)
       .appendField(Blockly.Msg.LJJ_BASIC_DHT11)
       .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_BASIC_DHT11_MODE),"DHT11_TYPE")
-  this.appendDummyInput()
-       .appendField(Blockly.Msg.LIOU_ROBOT_PIN)
-      .appendField(new Blockly.FieldDropdown([["D2","2"],["D5","5"]]),"PIN");
   this.setInputsInline(!0);
   this.setOutput(!0,"Number");
   this.setTooltip(Blockly.Msg.LJJ_5012_TOOLTIP)}
