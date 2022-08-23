@@ -1041,3 +1041,4 @@ Blockly.Msg.LJJ_5012_TOOLTIP = "";
 Blockly.Msg.LJJ_5012_FAN = "風扇";
 Blockly.Msg.LJJ_5012_HALL = "霍爾感應器磁力值";
 Blockly.Msg.LJJ_5012_JOYSTICK = "搖桿";
+Blockly.Msg.LJJ_5012_TITLE="Fablab-NKNU";

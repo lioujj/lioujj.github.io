@@ -5014,14 +5014,14 @@ Blockly.Arduino.ljj_5012_sonar=function(){
 };
 
 Blockly.Arduino.ljj_5012_dht11=function(){
-  var a=2,
+  var a=this.getFieldValue("PIN"),
       b=this.getFieldValue("DHT11_TYPE"),
       myType='';
   if (b=='temperature')
     myType='readTemperature';
   else if (b=='humidity')
     myType='readHumidity';
-  Blockly.Arduino.definitions_['define_dht_']="#include <DHT.h>";
+  Blockly.Arduino.definitions_['define_dht_']="#include <DHT_mini.h>";
   Blockly.Arduino.definitions_['define_dht_set']="DHT dht11_p"+a+"("+a+", DHT11);";
   Blockly.Arduino.setups_["setup_dht_"]="dht11_p"+a+".begin();";
   return["dht11_p"+a+"."+myType+"()",Blockly.Arduino.ORDER_ATOMIC];
@@ -5043,6 +5043,15 @@ Blockly.Arduino.ljj_5012_fan=function(){
       b=13;
   Blockly.Arduino.setups_.setup_ljj_5012_fan="pinMode("+b+", OUTPUT);";
   return"digitalWrite("+b+", "+a+");\n";
+};
+
+Blockly.Arduino.ljj_5012_servo_write_pin=function(){
+  var a=6,
+  b=Blockly.Arduino.valueToCode(this,"ANGLE",Blockly.Arduino.ORDER_ATOMIC)||"90";
+  Blockly.Arduino.definitions_.define_servo="#include <Servo.h>";
+  Blockly.Arduino.definitions_["define_class_servo_"+a]="Servo __myservo"+a+";";
+  Blockly.Arduino.setups_["servo_"+a]||(Blockly.Arduino.setups_["servo_"+a]="__myservo"+a+".attach("+a+");");
+  return"__myservo"+a+".write("+b+");\n"
 };
 
 Blockly.Arduino.ljj_5012_stickXY=function(){

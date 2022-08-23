@@ -1048,3 +1048,4 @@ Blockly.Msg.LJJ_5012_TOOLTIP = "";
 Blockly.Msg.LJJ_5012_FAN = "fan";
 Blockly.Msg.LJJ_5012_HALL = "value of Hall sensor";
 Blockly.Msg.LJJ_5012_JOYSTICK = "joystick";
+Blockly.Msg.LJJ_5012_TITLE="Fablab-NKNU";

@@ -380,6 +380,13 @@
           </block>
         </value>
       </block>
+      <block type="ljj_5012_servo_write_pin">
+        <value name="ANGLE">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
       <block type="ljj_5012_stickButton"></block>
       <block type="ljj_5012_stickXY"></block>
       <block type="ljj_5012_tone"></block>
