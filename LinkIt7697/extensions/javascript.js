@@ -2,17 +2,17 @@ Blockly.Arduino.finish=function(a){
   if (Blockly.Arduino.probbie_type=="Tobbie")
     if (Blockly.Arduino.definitions_.define_linkit_wifi_include!=null)
      Blockly.Arduino.definitions_.define_linkit_wifi_include="#include <WiFi.h>";
-	var myStr="";
-	if (Blockly.Arduino.definitions_.define_mqtt_include=="#include <PubSubClient.h>")
-		myStr="  myClient.loop();\n";
 	if (Blockly.Arduino.webserver.webserver_exist=="yes"){
     Blockly.Arduino.webserver.webserver_header=Blockly.Arduino.webserver.webserver_header.replace("#title#",Blockly.Arduino.webserver.webserver_myTitle);
     Blockly.Arduino.webserver.webserver_header=Blockly.Arduino.webserver.webserver_header.replace("#color#",Blockly.Arduino.webserver.webserver_myColor);
-		myStr=myStr+"  checkWebClient();\n";
   }
-	a="  "+a.replace(/\n/g,"\n");
+  
+	var h=[];
+	for(e in Blockly.Arduino.loops_)
+		h.push("  "+Blockly.Arduino.loops_[e]);	
+  a="  "+a.replace(/\n/g,"\n");
 	a=a.replace(/\n\s+$/,"\n");
-	a="void loop() \n{\n"+myStr+a+"\n}";
+	a="void loop() \n{\n"+h.join("\n\n")+a+"\n}";
 	a=a.replace("  if (myBtnStatus=='","  myBtnStatus=getBtnStatus();\n  if (myBtnStatus=='");
 	var b=[],c=[],f=[];
 	for(e in Blockly.Arduino.definitions_){
@@ -76,13 +76,14 @@ Blockly.Arduino.connect_mqtt=function(){
 	Blockly.Arduino.definitions_.define_mqtt_received_msg='String receivedMsg="";\nbool waitForE=true;\nbool ended=true;\nbool pubCtrl=false;\n';
 	Blockly.Arduino.definitions_.define_mqtt_client='WiFiClient mqttClient;';
 	Blockly.Arduino.definitions_.define_mqtt_pubclient='PubSubClient myClient(mqttClient);\n';
-	Blockly.Arduino.mqtt_callback_header='void mqttCallback(char* topic, byte* payload, unsigned int length){\n  receivedTopic=String(topic);\n  receivedMsg="";\n  for (unsigned int myIndex = 0; myIndex < length; myIndex++)\n  {\n      receivedMsg += (char)payload[myIndex];\n  }\n  receivedMsg.trim();\n';
+	Blockly.Arduino.mqtt_callback_header='void mqttCallback(char* topic, byte* payload, unsigned int length){\n  receivedTopic=String(topic);\n  receivedMsg="";\n  for (unsigned int myIndex = 0; myIndex < length; myIndex++)\n  {\n    receivedMsg += (char)payload[myIndex];\n  }\n  receivedMsg.trim();\n';
 	Blockly.Arduino.mqtt_callback_body='';
 	Blockly.Arduino.mqtt_callback_footer='\n}\n';
 	Blockly.Arduino.definitions_.define_mqtt_connect_mqtt_event='void connectMQTT(){\n  while (!myClient.connected()){\n    if (!myClient.connect(MQTT_ID,MQTT_USERNAME,MQTT_PASSWORD))\n    {\n      delay(5000);\n    }\n  }\n}\n';
   Blockly.Arduino.definitions_.define_mqtt_receivedMsg_event=Blockly.Arduino.mqtt_callback_header+Blockly.Arduino.mqtt_callback_body+Blockly.Arduino.mqtt_callback_footer;
   Blockly.Arduino.setups_["setup_mqtt_"]="myClient.setServer(MQTT_SERVER_IP, MQTT_SERVER_PORT);\n  myClient.setCallback(mqttCallback);\n";
-	return"connectMQTT();\n"
+	Blockly.Arduino.loops_.ljj_mqtt_loop = "myClient.loop();\n"
+  return"connectMQTT();\n"
 };
 
 Blockly.Arduino.publish_mqtt=function(){
@@ -1779,12 +1780,9 @@ Blockly.Arduino.webserver_prepare_body=function(){
   Blockly.Arduino.webserver.webserver_header="\n\nvoid checkWebClient(){\n  WiFiClient WebClient = WebServer.available();\n  if (WebClient) {\n    webPara=\"\";\n    boolean currentLineIsBlank = true;\n    while (WebClient.connected()) {\n      if (WebClient.available()) {\n        char c = WebClient.read();\n        if (c == '\\n' && currentLineIsBlank) {\n          WebClient.println(\"HTTP/1.1 200 OK\");\n          WebClient.println(\"Content-Type: text/html\");\n          WebClient.println(\"Connection: close\");\n"+Blockly.Arduino.webserver.webserver_refresh+"          WebClient.println();\n          WebClient.println(\"<!DOCTYPE HTML>\");\n          WebClient.println(\"<html><head><meta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=utf-8\\\"><title>#title#</title></head><body#color#>\");\n";
   Blockly.Arduino.webserver.webserver_body=Blockly.Arduino.statementToCode(this,"WEBSERVER_BODY");
   Blockly.Arduino.webserver.webserver_footer="          WebClient.println(\"</body></html>\");\n          break;\n        }\n        if (c == '\\n') {\n          currentLineIsBlank = true;\n        } else if (c != '\\r') {\n          webPara=webPara+c;\n         currentLineIsBlank = false;\n        }\n      }\n    }\n    delay(1);\n    WebClient.stop();\n  }\n}";
-
-
   Blockly.Arduino.webserver.webserver_header=Blockly.Arduino.webserver.webserver_header.replace("#color#",Blockly.Arduino.webserver_myColor);
   Blockly.Arduino.webserver.webserver_header=Blockly.Arduino.webserver.webserver_header.replace("#title#",Blockly.Arduino.webserver_myTitle);
-
-
+  Blockly.Arduino.loops_.ljj_webserver_loop = "checkWebClient();\n";
   return '';
 };
 
@@ -5007,6 +5005,70 @@ Blockly.Arduino.ljj_max7219_animate_stop=function(){
 Blockly.Arduino.ljj_max7219_begin=function(){
   return'myDisplay.begin();\n';
 }
+
+//NKNU5012
+Blockly.Arduino.ljj_5012_sonar=function(){
+  Blockly.Arduino.definitions_.define_ljj_5012_sonar_include="#include <Ultrasonic.h>";
+  Blockly.Arduino.definitions_.define_ljj_5012_sonar_invoke="Ultrasonic ultrasonic_(A2, A3);";
+  return['ultrasonic_.convert(ultrasonic_.timing(), Ultrasonic::CM)',Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.ljj_5012_dht11=function(){
+  var a=2,
+      b=this.getFieldValue("DHT11_TYPE"),
+      myType='';
+  if (b=='temperature')
+    myType='readTemperature';
+  else if (b=='humidity')
+    myType='readHumidity';
+  Blockly.Arduino.definitions_['define_dht_']="#include <DHT.h>";
+  Blockly.Arduino.definitions_['define_dht_set']="DHT dht11_p"+a+"("+a+", DHT11);";
+  Blockly.Arduino.setups_["setup_dht_"]="dht11_p"+a+".begin();";
+  return["dht11_p"+a+"."+myType+"()",Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.ljj_5012_hall=function(){
+  return['analogRead(A6)',Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.ljj_5012_fan=function(){
+  var a=Blockly.Arduino.valueToCode(this,"ON_OFF",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=13;
+  Blockly.Arduino.setups_.setup_ljj_5012_fan="pinMode("+b+", OUTPUT);";
+  return"digitalWrite("+b+", "+a+");\n";
+};
+
+Blockly.Arduino.ljj_5012_stickXY=function(){
+  var a=this.getFieldValue("XY_TYPE");
+  return['analogRead('+a+')',Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.ljj_5012_stickButton=function(){
+  var a=7,
+      b=this.getFieldValue("PIN_MODE"),
+      c=Blockly.Arduino.statementToCode(this,"MSG_BUTTON_CALL_PRESSED"),
+      d=Blockly.Arduino.statementToCode(this,"MSG_BUTTON_CALL_RELEASED")
+  Blockly.Arduino.setups_["button_"+a]='pinMode('+a+', INPUT);';
+	return'if (digitalRead('+a+')=='+b+'){\n'+c+'  while(digitalRead('+a+')=='+b+'){}\n'+d+'}\n'
+};
+
+Blockly.Arduino.ljj_5012_tone=function(){
+  var a=this.getFieldValue("FREQ");
+  Blockly.Arduino.definitions_.define_ljj_quno_tone_invoke="byte buzz_pin=8;";
+  return"tone(buzz_pin, "+a+");\n";
+};
+
+Blockly.Arduino.ljj_5012_no_tone=function(){
+  Blockly.Arduino.definitions_.define_ljj_quno_tone_invoke="byte buzz_pin=8;";
+  return"noTone(buzz_pin);\n";
+};
+
+Blockly.Arduino.ljj_5012_custom_tone=function(){
+  var a=Blockly.Arduino.valueToCode(this,"FREQ",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=Blockly.Arduino.valueToCode(this,"DURATION",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  Blockly.Arduino.definitions_.define_ljj_quno_tone_invoke="byte buzz_pin=8;";
+  return"tone(buzz_pin, "+a+");\ndelay("+b+");\nnoTone(buzz_pin);\n";
+};
 
 setTimeout(function(){
 	if (Blockly.Blocks.board_initializes_setup)
