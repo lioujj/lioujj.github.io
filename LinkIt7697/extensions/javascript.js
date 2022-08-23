@@ -5014,7 +5014,7 @@ Blockly.Arduino.ljj_5012_sonar=function(){
 };
 
 Blockly.Arduino.ljj_5012_dht11=function(){
-  var a=2,
+  var a=this.getFieldValue("PIN"),
       b=this.getFieldValue("DHT11_TYPE"),
       myType='';
   if (b=='temperature')
@@ -5122,6 +5122,37 @@ Blockly.Arduino.ljj_5012_neopixel_set_colors=function(){
   a=a.replace("tft.color565","nknuPixels.Color");
   return"nknuPixels.setPixelColor(0,"+a+");\nnknuPixels.setPixelColor(1,"+a+");\nnknuPixels.setPixelColor(2,"+a+");\nnknuPixels.setPixelColor(3,"+a+");\nnknuPixels.show();\n";
 };
+
+Blockly.Arduino.ljj_5012_l9110_init=function(){
+  var a=Blockly.Arduino.valueToCode(this,"M1A",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=Blockly.Arduino.valueToCode(this,"M1B",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      e=this.getFieldValue("PIN_TYPE");
+  if (e=="A"){
+    a=3;
+    b=5;
+  } else if (e=="B"){
+    a=2;
+    b=3;
+  }
+  Blockly.Arduino.definitions_.define_ljj_5012_L9110_invoke='byte mA_1A='+a+';\nbyte mA_1B='+b+';\n';
+  Blockly.Arduino.setups_["setup_ljj_L9110"]='pinMode(mA_1A,OUTPUT);\n  pinMode(mA_1B,OUTPUT);\n';
+  return'';
+}
+
+Blockly.Arduino.ljj_5012_l9110_run=function(){
+  var b=this.getFieldValue("DIR"),
+      c=Blockly.Arduino.valueToCode(this,"SPEED",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      returnValue="";
+  if (b=="1")
+    returnValue='digitalWrite(mA_1A,1);\nanalogWrite(mA_1B,255-'+c+');\n';
+  else
+    returnValue='digitalWrite(mA_1A,0);\nanalogWrite(mA_1B,'+c+');\n';
+  return returnValue;
+}
+
+Blockly.Arduino.ljj_5012_l9110_stop=function(){
+  return'digitalWrite(mA_1A,0);\nanalogWrite(mA_1B,0);\n';
+}
 
 setTimeout(function(){
 	if (Blockly.Blocks.board_initializes_setup)

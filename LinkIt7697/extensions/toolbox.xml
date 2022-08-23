@@ -444,6 +444,15 @@
         </value>
       </block>
       <block type="ttgo_getFromColorPicker"></block>
+      <block type="ljj_5012_l9110_init"></block>
+      <block type="ljj_5012_l9110_run">
+        <value name="SPEED">
+          <block type="math_number">
+            <field name="NUM">255</field>
+          </block>
+        </value>
+      </block>
+      <block type="ljj_5012_l9110_stop"></block>
     </category>
   </category>
   <category id="category_esp32" name="ESP32">
