@@ -5088,6 +5088,32 @@ Blockly.Arduino.ljj_5012_max7219=function(){
 	return''
 };
 
+Blockly.Arduino.ljj_5012_neopixel_begin=function(){
+  var a=Blockly.Arduino.valueToCode(this,"BRIGHTNESS",Blockly.Arduino.ORDER_ATOMIC)||"0";
+	  Blockly.Arduino.definitions_.define_include_neopixel="#include <Adafruit_NeoPixel.h>";
+    Blockly.Arduino.definitions_.define_plus_neopixel='Adafruit_NeoPixel nknuPixels = Adafruit_NeoPixel(8,4,NEO_GRB + NEO_KHZ800);\n';
+    Blockly.Arduino.setups_.setup_plus_neopixel="nknuPixels.begin();\n  nknuPixels.setBrightness("+a+");\n  nknuPixels.show();\n  nknuPixels.setPixelColor(0,nknuPixels.Color(0,0,0));\n  nknuPixels.setPixelColor(1,nknuPixels.Color(0,0,0));\n  nknuPixels.setPixelColor(2,nknuPixels.Color(0,0,0));\n  nknuPixels.show();";
+  return"";
+};
+
+Blockly.Arduino.ljj_5012_neopixel_set_color=function(){
+  var a=Blockly.Arduino.valueToCode(this,"INDEX",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=Blockly.Arduino.valueToCode(this,"COLOR",Blockly.Arduino.ORDER_ATOMIC)||"";
+  b=b.replace("tft.color565","nknuPixels.Color");
+  return"nknuPixels.setPixelColor("+a+","+b+");\n";
+};
+
+Blockly.Arduino.ljj_5012_neopixel_show=function(){
+  return"nknuPixels.show();\n";
+
+};
+
+Blockly.Arduino.ljj_5012_neopixel_set_colors=function(){
+  var a=Blockly.Arduino.valueToCode(this,"COLOR",Blockly.Arduino.ORDER_ATOMIC)||"";
+  a=a.replace("tft.color565","nknuPixels.Color");
+  return"nknuPixels.setPixelColor(0,"+a+");\nnknuPixels.setPixelColor(1,"+a+");\nnknuPixels.setPixelColor(2,"+a+");\nnknuPixels.setPixelColor(3,"+a+");\nnknuPixels.show();\n";
+};
+
 setTimeout(function(){
 	if (Blockly.Blocks.board_initializes_setup)
 		var xmlDoc = Blockly.Xml.textToDom('<xml xmlns="https://developers.google.com/blockly/xml"><block type="board_initializes_setup" id="0" x="100" y="50"><next><block type="initializes_loop" id="1"></block></next></block></xml>');
