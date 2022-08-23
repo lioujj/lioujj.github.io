@@ -1031,6 +1031,13 @@ Blockly.Msg.LJJ_MAX7219_SCROLL = "捲動文字";
 Blockly.Msg.LJJ_MAX7219_EFFECT = "特效";
 Blockly.Msg.LJJ_MAX7219_SPEED = "速度(ms)";
 Blockly.Msg.LJJ_MAX7219_EFFECT_TYPE = [["向上捲動","PA_SCROLL_UP"],["向下捲動","PA_SCROLL_DOWN"],["向左捲動","PA_SCROLL_LEFT"],["向右捲動","PA_SCROLL_RIGHT"]];
-Blockly.Msg.LJJ_MAX7219_ANIMATE = "持續捲動運作";
+Blockly.Msg.LJJ_MAX7219_ANIMATE = "持續運作";
 Blockly.Msg.LJJ_MAX7219_ANIMATE_STOP = "停止捲動特效";
-Blockly.Msg.LJJ_MAX7219_BEGIN = "重啟";
+Blockly.Msg.LJJ_MAX7219_BEGIN = "文字模式重啟";
+
+//NKNU5012
+Blockly.Msg.LJJ_5012_HELPURL = "";
+Blockly.Msg.LJJ_5012_TOOLTIP = "";
+Blockly.Msg.LJJ_5012_FAN = "風扇";
+Blockly.Msg.LJJ_5012_HALL = "霍爾感應器磁力值";
+Blockly.Msg.LJJ_5012_JOYSTICK = "搖桿";

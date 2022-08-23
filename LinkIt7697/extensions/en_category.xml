@@ -67,4 +67,6 @@
 <category><name>Basic</name><replace>Basic Modules</replace></category>
 <category><name>Quno</name><replace>Quno</replace></category>
 <category><name>MAX7219</name><replace>MAX7219</replace></category>
+<category><name>MAX7219</name><replace>MAX7219</replace></category>
+<category><name>NKNU5012</name><replace>NKNU5012</replace></category>
 </xml>

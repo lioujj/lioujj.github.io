@@ -4946,7 +4946,7 @@ Blockly.Arduino.ljj_max7219_init=function(){
       c=Blockly.Arduino.valueToCode(this,"PIN_CLK",Blockly.Arduino.ORDER_ATOMIC)||"",
       d=Blockly.Arduino.valueToCode(this,"DEV_NUM",Blockly.Arduino.ORDER_ATOMIC)||"";
   Blockly.Arduino.definitions_.define_ljj_max7219_include="#include <MD_Parola.h>\n#include <MD_MAX72xx.h>\n#define HARDWARE_TYPE MD_MAX72XX::GENERIC_HW\n#define DEVICE_NUMBER "+d;
-  Blockly.Arduino.definitions_.define_ljj_max7219_invoke='char *max7219Char;\nString max7219Str="";\nMD_Parola myDisplay = MD_Parola(HARDWARE_TYPE,'+a+','+c+','+b+',DEVICE_NUMBER);\nMD_MAX72XX mx = MD_MAX72XX(HARDWARE_TYPE,'+a+','+c+','+b+','+d+');\n';
+  Blockly.Arduino.definitions_.define_ljj_max7219_invoke='char *max7219Char;\nString max7219Str="";\nMD_Parola myDisplay = MD_Parola(HARDWARE_TYPE,'+a+','+c+','+b+',DEVICE_NUMBER);\nMD_MAX72XX mx = MD_MAX72XX(HARDWARE_TYPE,'+a+','+c+','+b+',DEVICE_NUMBER);\n';
   Blockly.Arduino.setups_["ljj_max7219"]='myDisplay.begin();\n  myDisplay.displayClear();\n  mx.begin();';
 	return''
 };
@@ -4983,7 +4983,7 @@ Blockly.Arduino.ljj_max7219_inverse=function(){
 Blockly.Arduino.ljj_max7219_print=function(){
   var a=Blockly.Arduino.valueToCode(this,"TEXT",Blockly.Arduino.ORDER_ATOMIC)||"",
       b=this.getFieldValue("POSITION_TYPE");
-  return'max7219Str='+a+';\nmax7219Char = new char [max7219Str.length()+1];\nstrcpy (max7219Char, max7219Str.c_str());\nmyDisplay.displayReset();\nmyDisplay.displayText(max7219Char,'+b+',0,0,PA_NO_EFFECT,PA_NO_EFFECT);\n';
+  return'max7219Str='+a+';\nmax7219Char = new char [max7219Str.length()+1];\nstrcpy (max7219Char, max7219Str.c_str());\nmyDisplay.begin();\nmyDisplay.displayText(max7219Char,'+b+',0,0,PA_NO_EFFECT,PA_NO_EFFECT);\nif (myDisplay.displayAnimate()) {myDisplay.displayReset();}\n';
 }
 
 Blockly.Arduino.ljj_max7219_scroll=function(){
@@ -4991,7 +4991,7 @@ Blockly.Arduino.ljj_max7219_scroll=function(){
       b=this.getFieldValue("POSITION_TYPE"),
       c=this.getFieldValue("EFFECT_TYPE"),
       d=Blockly.Arduino.valueToCode(this,"SPEED",Blockly.Arduino.ORDER_ATOMIC)||"0";
-  return'max7219Str='+a+';\nmax7219Char = new char [max7219Str.length()+1];\nstrcpy (max7219Char, max7219Str.c_str());\nmyDisplay.displayReset();\nmyDisplay.displayScroll(max7219Char,'+b+','+c+','+d+');\n'
+  return'max7219Str='+a+';\nmax7219Char = new char [max7219Str.length()+1];\nstrcpy (max7219Char, max7219Str.c_str());\nmyDisplay.begin();\nmyDisplay.displayScroll(max7219Char,'+b+','+c+','+d+');\n'
 }
 
 Blockly.Arduino.ljj_max7219_animate=function(){
@@ -5031,6 +5031,13 @@ Blockly.Arduino.ljj_5012_hall=function(){
   return['analogRead(A6)',Blockly.Arduino.ORDER_ATOMIC];
 };
 
+Blockly.Arduino.ljj_5012_bh1750=function(){
+  Blockly.Arduino.definitions_.define_bh1750_include='#include <BH1750.h>\n#include <Wire.h>';
+  Blockly.Arduino.definitions_.define_bh1750_invoke='BH1750 lightMeter;';
+  Blockly.Arduino.setups_.setup_wire_lib="Wire.begin();\n  lightMeter.begin();";
+  return['lightMeter.readLightLevel()',Blockly.Arduino.ORDER_ATOMIC];
+};
+
 Blockly.Arduino.ljj_5012_fan=function(){
   var a=Blockly.Arduino.valueToCode(this,"ON_OFF",Blockly.Arduino.ORDER_ATOMIC)||"0",
       b=13;
@@ -5068,6 +5075,17 @@ Blockly.Arduino.ljj_5012_custom_tone=function(){
       b=Blockly.Arduino.valueToCode(this,"DURATION",Blockly.Arduino.ORDER_ATOMIC)||"0";
   Blockly.Arduino.definitions_.define_ljj_quno_tone_invoke="byte buzz_pin=8;";
   return"tone(buzz_pin, "+a+");\ndelay("+b+");\nnoTone(buzz_pin);\n";
+};
+
+Blockly.Arduino.ljj_5012_max7219=function(){
+  var a=12,
+      b=10,
+      c=11,
+      d=Blockly.Arduino.valueToCode(this,"DEV_NUM",Blockly.Arduino.ORDER_ATOMIC)||"";
+  Blockly.Arduino.definitions_.define_ljj_max7219_include="#include <MD_Parola.h>\n#include <MD_MAX72xx.h>\n#define HARDWARE_TYPE MD_MAX72XX::GENERIC_HW\n#define DEVICE_NUMBER "+d;
+  Blockly.Arduino.definitions_.define_ljj_max7219_invoke='char *max7219Char;\nString max7219Str="";\nMD_Parola myDisplay = MD_Parola(HARDWARE_TYPE,'+a+','+c+','+b+',DEVICE_NUMBER);\nMD_MAX72XX mx = MD_MAX72XX(HARDWARE_TYPE,'+a+','+c+','+b+',DEVICE_NUMBER);\n';
+  Blockly.Arduino.setups_["ljj_max7219"]='myDisplay.begin();\n  myDisplay.displayClear();\n  mx.begin();';
+	return''
 };
 
 setTimeout(function(){

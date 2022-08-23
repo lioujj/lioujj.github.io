@@ -1041,3 +1041,10 @@ Blockly.Msg.LJJ_MAX7219_EFFECT_TYPE = [["scroll up","PA_SCROLL_UP"],["scroll dow
 Blockly.Msg.LJJ_MAX7219_ANIMATE = "continue scrolling";
 Blockly.Msg.LJJ_MAX7219_ANIMATE_STOP = "stop scrolling";
 Blockly.Msg.LJJ_MAX7219_BEGIN = "reset";
+
+//NKNU5012
+Blockly.Msg.LJJ_5012_HELPURL = "";
+Blockly.Msg.LJJ_5012_TOOLTIP = "";
+Blockly.Msg.LJJ_5012_FAN = "fan";
+Blockly.Msg.LJJ_5012_HALL = "value of Hall sensor";
+Blockly.Msg.LJJ_5012_JOYSTICK = "joystick";

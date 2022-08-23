@@ -68,4 +68,6 @@
 <category><name>Basic</name><replace>基礎感測器</replace></category>
 <category><name>Quno</name><replace>游於智Quno</replace></category>
 <category><name>MAX7219</name><replace>MAX7219(8x8 LED)</replace></category>
+<category><name>MAX7219</name><replace>MAX7219(8x8 LED)</replace></category>
+<category><name>NKNU5012</name><replace>NKNU5012</replace></category>
 </xml>
