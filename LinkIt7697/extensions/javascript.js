@@ -4932,7 +4932,11 @@ Blockly.Arduino.ljj_basic_dht11=function(){
     myType='readTemperature';
   else if (b=='humidity')
     myType='readHumidity';
-  Blockly.Arduino.definitions_['define_dht_']="#include <DHT.h>";
+  var tempBoardName=getBoardFullName();
+  if (tempBoardName=='arduino:avr:pro' || tempBoardName=='arduino:avr:nano')
+    Blockly.Arduino.definitions_['define_dht_']="#include <DHT_mini.h>";
+  else
+    Blockly.Arduino.definitions_['define_dht_']="#include <DHT.h>";
   Blockly.Arduino.definitions_['define_dht_set']="DHT dht11_p"+a+"("+a+", DHT11);";
   Blockly.Arduino.setups_["setup_dht_"]="dht11_p"+a+".begin();";
   return["dht11_p"+a+"."+myType+"()",Blockly.Arduino.ORDER_ATOMIC];
@@ -5152,6 +5156,43 @@ Blockly.Arduino.ljj_5012_l9110_run=function(){
 
 Blockly.Arduino.ljj_5012_l9110_stop=function(){
   return'digitalWrite(mA_1A,0);\nanalogWrite(mA_1B,0);\n';
+}
+
+//PixelBit
+Blockly.Arduino.ljj_pixelbit={};
+Blockly.Arduino.ljj_pixelbit_button=function(){
+  var a=this.getFieldValue("AB_BUTTON"),
+      b="LOW",
+      c=Blockly.Arduino.statementToCode(this,"MSG_BUTTON_CALL_PRESSED"),
+      d=Blockly.Arduino.statementToCode(this,"MSG_BUTTON_CALL_RELEASED")
+  Blockly.Arduino.setups_["button_"+a]='pinMode('+a+', INPUT_PULLUP);';
+	return'if (digitalRead('+a+')=='+b+'){\n'+c+'  while(digitalRead('+a+')=='+b+'){}\n'+d+'}\n'
+};
+
+Blockly.Arduino.ljj_pixelbit_arduino_pins=function(){
+  var a=this.getFieldValue("ARDUINO_PIN");
+  return[a,Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.ljj_pixelbit_microbit_pins=function(){
+  var a=this.getFieldValue("ARDUINO_PIN");
+  return[a,Blockly.Arduino.ORDER_ATOMIC];
+};
+
+function getBoardFullName() {
+	var sel = document.getElementById('board-selector');
+  if(sel.value) 
+    return sel.value;
+  else
+    return "";
+}
+
+function getBoardShortName() {
+	var sel = document.getElementById('board-selector');
+	if (sel.value)
+		return sel.value.split(":")[0];
+	else
+		return "";
 }
 
 setTimeout(function(){

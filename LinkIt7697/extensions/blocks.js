@@ -8560,3 +8560,51 @@ Blockly.Blocks.ljj_5012_l9110_stop={init:function(){
   this.setNextStatement(!0,null);
   this.setTooltip(Blockly.Msg.ljj_5012_TOOLTIP)}
 };
+
+//PixelBit
+Blockly.Blocks.ljj_pixelbit={};
+Blockly.Blocks.ljj_pixelbit.HUE=320;
+Blockly.Blocks.ljj_pixelbit.HUE1=97;
+Blockly.Blocks.ljj_pixelbit_button={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_PIXELBIT_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_pixelbit.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_PIXELBIT_TITLE)
+      .appendField(Blockly.Msg.LIOU_ROBOT_WHEN+" "+Blockly.Msg.LIOU_ROBOT_BUTTON)
+      .appendField(new Blockly.FieldDropdown([["A","4"],["B","5"]]),"AB_BUTTON")
+      .appendField(Blockly.Msg.KEYBOARDS_EVENT_LIST[0][0]);
+  this.setInputsInline(!0);
+  this.appendStatementInput("MSG_BUTTON_CALL_PRESSED");
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_BASIC_BUTTON_EVENT+" "+Blockly.Msg.KEYBOARDS_EVENT_LIST[1][0]);
+  this.appendStatementInput("MSG_BUTTON_CALL_RELEASED");
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_PIXELBIT_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_pixelbit_arduino_pins={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_PIXELBIT_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_pixelbit.HUE1);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_PIXELBIT_TITLE)
+      .appendField("arduino")
+      .appendField(Blockly.Msg.LIOU_ROBOT_PIN)
+      .appendField(new Blockly.FieldDropdown([["2","2"],["3 ~PWM","3"],["6 ~PWM","6"],["7","7"],["8","8"],["9 ~PWM","9"],["10 ~PWM","10"],["11 ~PWM","11"],["12","12"],["13","13"],["A0","A0"],["A1","A1"],["A2","A2"],["A3","A3"],["A4","A4"],["A5","A5"],["A6","A6"],["A7","A7"]]),"ARDUINO_PIN");
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Number");
+  this.setTooltip(Blockly.Msg.LJJ_PIXELBIT_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_pixelbit_microbit_pins={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_PIXELBIT_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_pixelbit.HUE1);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_PIXELBIT_TITLE)
+      .appendField("micro:bit")
+      .appendField(Blockly.Msg.LIOU_ROBOT_PIN)
+      .appendField(new Blockly.FieldDropdown([["P0 ~PWM","3"],["P1 ~analog","A0"],["P2 ~analog","A1"],["P3 ~analog","A2"],["P4 ~analog","A3"],["P6 ~PWM","6"],["P7","7"],["P8","2"],["P9","8"],["P10 ~analog","A7"],["P12 ~PWM","9"],["P13","13"],["P14","12"],["P15 ~PWM","11"],["P16 ~PWM","10"],["P19 ~analog","A5"],["P20 ~analog","A4"]]),"ARDUINO_PIN");
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Number");
+  this.setTooltip(Blockly.Msg.LJJ_PIXELBIT_TOOLTIP)}
+};

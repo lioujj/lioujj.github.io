@@ -194,6 +194,11 @@
         </value>
       </block>
     </category>
+    <category id="category_ljj_pixelbit" name="Pixel:Bit">
+      <block type="ljj_pixelbit_button"></block>
+      <block type="ljj_pixelbit_arduino_pins"></block>
+      <block type="ljj_pixelbit_microbit_pins"></block>
+    </category>
     <category id="category_ljj_quno" name="Quno">
       <block type="ljj_quno_button"></block>
       <block type="ljj_quno_button_boolean"></block>
