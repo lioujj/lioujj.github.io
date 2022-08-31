@@ -1041,6 +1041,9 @@ Blockly.Msg.LJJ_MAX7219_EFFECT_TYPE = [["scroll up","PA_SCROLL_UP"],["scroll dow
 Blockly.Msg.LJJ_MAX7219_ANIMATE = "continue scrolling";
 Blockly.Msg.LJJ_MAX7219_ANIMATE_STOP = "stop scrolling";
 Blockly.Msg.LJJ_MAX7219_BEGIN = "reset";
+Blockly.Msg.LJJ_MAX7219_BITMAP = "setup and show bitmap";
+Blockly.Msg.LJJ_MAX7219_DEV_INDEX = "on device:";
+Blockly.Msg.LJJ_MAX7219_DEV_INDEX_LIST=[["1","0"],["2","1"],["3","2"],["4","3"],["5","4"],["6","5"]];
 
 //NKNU5012
 Blockly.Msg.LJJ_5012_HELPURL = "";

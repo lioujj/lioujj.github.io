@@ -1034,6 +1034,9 @@ Blockly.Msg.LJJ_MAX7219_EFFECT_TYPE = [["向上捲動","PA_SCROLL_UP"],["向下�
 Blockly.Msg.LJJ_MAX7219_ANIMATE = "持續運作";
 Blockly.Msg.LJJ_MAX7219_ANIMATE_STOP = "停止捲動特效";
 Blockly.Msg.LJJ_MAX7219_BEGIN = "文字模式重啟";
+Blockly.Msg.LJJ_MAX7219_BITMAP = "設定並顯示點陣圖";
+Blockly.Msg.LJJ_MAX7219_DEV_INDEX = "在哪個裝置：";
+Blockly.Msg.LJJ_MAX7219_DEV_INDEX_LIST=[["1","0"],["2","1"],["3","2"],["4","3"],["5","4"],["6","5"]];
 
 //NKNU5012
 Blockly.Msg.LJJ_5012_HELPURL = "";

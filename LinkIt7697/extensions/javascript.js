@@ -4978,6 +4978,26 @@ Blockly.Arduino.ljj_max7219_getpoint=function(){
   return['mx.getPoint('+a+','+b+')',Blockly.Arduino.ORDER_ATOMIC];
 }
 
+Blockly.Arduino.ljj_max7219_bitmap=function(){
+  var a=this.getFieldValue("DEV_INDEX"),
+      swapStr="",
+      allSwapStr="";
+  for(tempX=0;tempX<8;tempX++){
+    for(tempY=0;tempY<8;tempY++){
+      if (this.getFieldValue("L"+tempX+tempY) == 'TRUE')
+        swapStr+="1";
+      else
+        swapStr+="0";
+    }
+    if (tempX!=7)
+      allSwapStr+=("B"+swapStr+",");
+    else
+      allSwapStr+=("B"+swapStr);
+    swapStr="";
+  }
+  var returnStr='uint8_t myBitmap_dev_'+a+'[] = {'+allSwapStr+'};\nmx.setBuffer((DEVICE_NUMBER-'+a+')*8-1, 8, myBitmap_dev_'+a+');\n';
+  return returnStr;
+}
 
 Blockly.Arduino.ljj_max7219_inverse=function(){
   var a=this.getFieldValue("INVERSE_TYPE");
@@ -5100,6 +5120,27 @@ Blockly.Arduino.ljj_5012_max7219=function(){
   Blockly.Arduino.setups_["ljj_max7219"]='myDisplay.begin();\n  myDisplay.displayClear();\n  mx.begin();';
 	return''
 };
+
+Blockly.Arduino.ljj_5012_max7219_bitmap=function(){
+  var a="0",
+      swapStr="",
+      allSwapStr="";
+  for(tempX=0;tempX<8;tempX++){
+    for(tempY=0;tempY<8;tempY++){
+      if (this.getFieldValue("L"+tempX+tempY) == 'TRUE')
+        swapStr+="1";
+      else
+        swapStr+="0";
+    }
+    if (tempX!=7)
+      allSwapStr+=("B"+swapStr+",");
+    else
+      allSwapStr+=("B"+swapStr);
+    swapStr="";
+  }
+  var returnStr='uint8_t myBitmap_dev_'+a+'[] = {'+allSwapStr+'};\nmx.setBuffer((DEVICE_NUMBER-'+a+')*8-1, 8, myBitmap_dev_'+a+');\n';
+  return returnStr;
+}
 
 Blockly.Arduino.ljj_5012_neopixel_begin=function(){
   var a=Blockly.Arduino.valueToCode(this,"BRIGHTNESS",Blockly.Arduino.ORDER_ATOMIC)||"0";
