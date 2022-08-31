@@ -4989,13 +4989,11 @@ Blockly.Arduino.ljj_max7219_bitmap=function(){
       else
         swapStr+="0";
     }
-    if (tempX!=7)
-      allSwapStr+=("B"+swapStr+",");
-    else
-      allSwapStr+=("B"+swapStr);
+    allSwapStr+=('  myBitmap_max7219['+tempX+']=B'+swapStr+';\n');
     swapStr="";
   }
-  var returnStr='uint8_t myBitmap_dev_'+a+'[] = {'+allSwapStr+'};\nmx.setBuffer((DEVICE_NUMBER-'+a+')*8-1, 8, myBitmap_dev_'+a+');\n';
+  Blockly.Arduino.definitions_.define_ljj_5012_max7219_invoke='uint8_t myBitmap_max7219[8] ={0};';
+  returnStr='for(int i=0;i<8;i++){\n'+allSwapStr+'}\nmx.setBuffer((DEVICE_NUMBER-'+a+')*8-1, 8, myBitmap_max7219);\n';
   return returnStr;
 }
 
@@ -5132,13 +5130,11 @@ Blockly.Arduino.ljj_5012_max7219_bitmap=function(){
       else
         swapStr+="0";
     }
-    if (tempX!=7)
-      allSwapStr+=("B"+swapStr+",");
-    else
-      allSwapStr+=("B"+swapStr);
+    allSwapStr+=('  myBitmap_max7219['+tempX+']=B'+swapStr+';\n');
     swapStr="";
   }
-  var returnStr='uint8_t myBitmap_dev_'+a+'[] = {'+allSwapStr+'};\nmx.setBuffer((DEVICE_NUMBER-'+a+')*8-1, 8, myBitmap_dev_'+a+');\n';
+  Blockly.Arduino.definitions_.define_ljj_5012_max7219_invoke='uint8_t myBitmap_max7219[8] ={0};';
+  returnStr='for(int i=0;i<8;i++){\n'+allSwapStr+'}\nmx.setBuffer(7, 8, myBitmap_max7219);\n';
   return returnStr;
 }
 
