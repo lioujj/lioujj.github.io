@@ -456,13 +456,7 @@
     </category>
     <category id="category_ljj_5012" name="NKNU5012">
       <category id="category_ljj_max7219" name="MAX7219">
-        <block type="ljj_5012_max7219">
-          <value name="DEV_NUM">
-            <block type="math_number">
-              <field name="NUM">1</field>
-            </block>
-          </value>
-        </block>
+        <block type="ljj_5012_max7219"></block>
         <block type="ljj_max7219_clear"></block>
         <block type="ljj_max7219_setpoint">
           <value name="X">

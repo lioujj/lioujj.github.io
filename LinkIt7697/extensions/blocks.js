@@ -8384,9 +8384,6 @@ Blockly.Blocks.ljj_5012_max7219={init:function(){
       .appendField(Blockly.Msg.LJJ_5012_TITLE)
       .appendField(Blockly.Msg.LJJ_MAX7219_TITLE)
       .appendField(Blockly.Msg.LJJ_MAX7219_INIT);
-  this.appendValueInput("DEV_NUM")
-      .setCheck("Number")
-      .appendField(Blockly.Msg.LJJ_MAX7219_DEV_MAX);
   this.setInputsInline(!0);
   this.setPreviousStatement(!0,null);
   this.setNextStatement(!0,null);

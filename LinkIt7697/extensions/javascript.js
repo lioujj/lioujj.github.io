@@ -5112,7 +5112,7 @@ Blockly.Arduino.ljj_5012_max7219=function(){
   var a=12,
       b=10,
       c=11,
-      d=Blockly.Arduino.valueToCode(this,"DEV_NUM",Blockly.Arduino.ORDER_ATOMIC)||"";
+      d=1;
   Blockly.Arduino.definitions_.define_ljj_max7219_include="#include <MD_Parola.h>\n#include <MD_MAX72xx.h>\n#define HARDWARE_TYPE MD_MAX72XX::GENERIC_HW\n#define DEVICE_NUMBER "+d;
   Blockly.Arduino.definitions_.define_ljj_max7219_invoke='char *max7219Char;\nString max7219Str="";\nMD_Parola myDisplay = MD_Parola(HARDWARE_TYPE,'+a+','+c+','+b+',DEVICE_NUMBER);\nMD_MAX72XX mx = MD_MAX72XX(HARDWARE_TYPE,'+a+','+c+','+b+',DEVICE_NUMBER);\n';
   Blockly.Arduino.setups_["ljj_max7219"]='myDisplay.begin();\n  myDisplay.displayClear();\n  mx.begin();';
