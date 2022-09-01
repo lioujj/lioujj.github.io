@@ -1022,7 +1022,7 @@ Blockly.Msg.LJJ_BASIC_DHT11 = "DHT11 get";
 Blockly.Msg.LJJ_BASIC_DHT11_MODE = [["temperature(C)","temperature"],["humidity(%)","humidity"]];
 
 //MAX7219
-Blockly.Msg.LJJ_MAX7219_HELPURL = "";
+Blockly.Msg.LJJ_MAX7219_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/max7219";
 Blockly.Msg.LJJ_MAX7219_TOOLTIP = "";
 Blockly.Msg.LJJ_MAX7219_TITLE = "MAX7219";
 Blockly.Msg.LJJ_MAX7219_INIT = "initial";

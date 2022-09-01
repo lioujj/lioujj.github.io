@@ -4030,6 +4030,19 @@ Blockly.Blocks.KSB065_ir_receive={init:function(){
   this.setTooltip(Blockly.Msg.IR_TOOLTIP)}
 };
 
+Blockly.Blocks.KSB065_pinMap={init:function(){
+  this.setHelpUrl(Blockly.Msg.KSB065_HELPURL);
+  this.setColour(Blockly.Blocks.pocketcard.HUE);
+  this.appendDummyInput()
+      .appendField("KSB065")
+      .appendField(Blockly.Msg.MTK7697BIT_PINMAP_TITLE);
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown([["P0","26"],["P1","33"],["P2","32"],["P3 (INPUT ONLY)","35"],["P4","4"],["P5","14"],["P6","16"],["P7","17"],["P8","27"],["P9","13"],["P10","2"],["P11","25"],["P12","15"],["P13","18"],["P14","19"],["P15","23"],["P16","5"]]),"KSB065_PIN");
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Number");
+  this.setTooltip(Blockly.Msg.KSB065_TOOLTIP)}
+};
+
 //MPU9250
 Blockly.Blocks.mpu9250={};
 Blockly.Blocks.mpu9250.HUE=120;

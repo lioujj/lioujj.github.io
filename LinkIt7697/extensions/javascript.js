@@ -2512,6 +2512,11 @@ Blockly.Arduino.KSB065_ir_receive=function(){
   return''
 };
 
+Blockly.Arduino.KSB065_pinMap=function(){
+  var a=this.getFieldValue("KSB065_PIN");
+  return[a,Blockly.Arduino.ORDER_ATOMIC];
+};
+
 //MPU9250
 Blockly.Arduino.mpu9250={};
 Blockly.Arduino.mpu9250_accel_begin=function(){

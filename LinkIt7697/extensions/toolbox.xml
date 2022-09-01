@@ -1151,6 +1151,7 @@
       <block type="ir_remote_received"></block>
       <block type="ir_received_type"></block>
       <block type="ir_received_code"></block>
+      <block type="KSB065_pinMap"></block>
     </category>
     <category id="category_ttgo" name="TTGO">
       <category id="category_ttgo_button" name="TTGO_BUTTON">
