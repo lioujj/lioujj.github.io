@@ -89,7 +89,10 @@ Blockly.Arduino.connect_mqtt=function(){
 Blockly.Arduino.publish_mqtt=function(){
 	var a=Blockly.Arduino.valueToCode(this,"TOPIC",Blockly.Arduino.ORDER_ATOMIC)||"",
 	    b=Blockly.Arduino.valueToCode(this,"MESSAGE",Blockly.Arduino.ORDER_ATOMIC)||"";
-	return'myClient.publish(String('+a+').c_str(),String('+b+').c_str());\n'
+  if (this.getFieldValue("RETAIN") == 'TRUE')
+    return'myClient.publish(String('+a+').c_str(),String('+b+').c_str(),true);\n'
+  else
+	  return'myClient.publish(String('+a+').c_str(),String('+b+').c_str());\n'
 };
 
 Blockly.Arduino.subscribe_mqtt=function(){

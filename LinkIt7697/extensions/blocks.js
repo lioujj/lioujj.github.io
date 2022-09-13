@@ -145,6 +145,9 @@ Blockly.Blocks.publish_mqtt={init:function(){
       .setCheck("String").setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg.MQTT_TOPIC);
   this.appendValueInput("MESSAGE")
       .setCheck("String").setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg.MQTT_MESSAGE);
+  this.appendDummyInput()
+      .appendField("retain")
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "RETAIN");
   this.setInputsInline(!0);
   this.setPreviousStatement(!0,null);
   this.setNextStatement(!0,null);
