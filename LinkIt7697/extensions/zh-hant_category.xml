@@ -25,7 +25,7 @@
 <category><name>IoT</name><replace>物聯網</replace></category>
 <category><name>MQTT</name><replace>MQTT</replace></category>
 <category><name>ThingSpeak</name><replace>ThingSpeak</replace></category>
-<category><name>Broadcast</name><replace>網路廣播</replace></category>
+<category><name>Broadcast</name><replace>UDP網路廣播</replace></category>
 <category><name>WebServer</name><replace>網頁伺服器</replace></category>
 <category><name>Boards</name><replace>開發板</replace></category>
 <category><name>ESP32</name><replace>ESP32</replace></category>
@@ -71,4 +71,5 @@
 <category><name>MAX7219</name><replace>MAX7219(8x8 LED)</replace></category>
 <category><name>MAX7219</name><replace>MAX7219(8x8 LED)</replace></category>
 <category><name>NKNU5012</name><replace>FabLab-NKNU</replace></category>
+<category><name>ESP_NOW</name><replace>ESP_NOW廣播</replace></category>
 </xml>

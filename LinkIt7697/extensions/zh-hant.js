@@ -1050,3 +1050,12 @@ Blockly.Msg.LJJ_5012_TITLE="Fablab-NKNU";
 Blockly.Msg.LJJ_PIXELBIT_HELPURL = "";
 Blockly.Msg.LJJ_PIXELBIT_TITLE = "Pixel:Bit";
 Blockly.Msg.LJJ_PIXELBIT_TOOLTIP = "";
+
+//ESP_NOW
+Blockly.Msg.LJJ_BROADCAST_HELPURL = "";
+Blockly.Msg.LJJ_BROADCAST_TITLE = "ESP_NOW廣播";
+Blockly.Msg.LJJ_BROADCAST_INIT = "初始化";
+Blockly.Msg.LJJ_BROADCAST_GROUP = "群組編號(0~255)";
+Blockly.Msg.LJJ_BROADCAST_TOOLTIP = "";
+Blockly.Msg.LJJ_BROADCAST_SEND_DATA = "發送訊息";
+Blockly.Msg.LJJ_BROADCAST_RESET_GROUP = "重設群組編號(0~255)";

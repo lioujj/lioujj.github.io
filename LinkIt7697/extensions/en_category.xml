@@ -24,7 +24,7 @@
 <category><name>IoT</name><replace>IoT</replace></category>
 <category><name>MQTT</name><replace>MQTT</replace></category>
 <category><name>ThingSpeak</name><replace>ThingSpeak</replace></category>
-<category><name>Broadcast</name><replace>Broadcast</replace></category>
+<category><name>Broadcast</name><replace>UDP Broadcast</replace></category>
 <category><name>WebServer</name><replace>Web Server</replace></category>
 <category><name>Boards</name><replace>Boards</replace></category>
 <category><name>ESP32</name><replace>ESP32</replace></category>
@@ -70,4 +70,5 @@
 <category><name>MAX7219</name><replace>MAX7219</replace></category>
 <category><name>MAX7219</name><replace>MAX7219</replace></category>
 <category><name>NKNU5012</name><replace>FabLab-NKNU</replace></category>
+<category><name>ESP_NOW</name><replace>ESP_NOW Broadcast</replace></category>
 </xml>

@@ -5240,6 +5240,49 @@ function getBoardShortName() {
 		return "";
 }
 
+//ESP_NOW
+Blockly.Arduino.ljj_broadcast={};
+Blockly.Arduino.ljj_broadcast_init=function(){
+  var a=Blockly.Arduino.valueToCode(this,"GROUP",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+	  Blockly.Arduino.definitions_.define_ljj_broadcast_include="#include <esp_now.h>\n#include <WiFi.h>"
+    Blockly.Arduino.definitions_.define_ljj_broadcast_invoke='#define PRINTSCANRESULTS 0\n#define DELETEBEFOREPAIR 0\n\nesp_now_peer_info_t slave;\nString recBroadcastStr="";\nboolean receivedBroadcast=false;\nuint8_t broadcastChannel=1;\nuint8_t broadGroup=0;';
+    Blockly.Arduino.definitions_.define_ljj_broadcast_event='void InitESPNow() {\n  if (esp_now_init() == ESP_OK) {\n    Serial.println("ESPNow Init Success");\n  }\n  else {\n    Serial.println("ESPNow Init Failed");\n    ESP.restart();\n  }\n}\n\nvoid initBroadcastSlave() {\n  memset(&slave, 0, sizeof(slave));\n  for (int ii = 0; ii < 6; ++ii)\n    slave.peer_addr[ii] = (uint8_t)0xff;\n  slave.channel = broadcastChannel;\n  slave.encrypt = 0;\n  manageSlave();\n}\n\nbool manageSlave() {\n  if (slave.channel == broadcastChannel) {\n    if (DELETEBEFOREPAIR) {\n      deletePeer();\n    }\n    const esp_now_peer_info_t *peer = &slave;\n    const uint8_t *peer_addr = slave.peer_addr;\n    bool exists = esp_now_is_peer_exist(peer_addr);\n    if (exists) {\n      return true;\n    }\n    else {\n      esp_err_t addStatus = esp_now_add_peer(peer);\n      if (addStatus == ESP_OK) {\n        return true;\n     }\n      else if (addStatus == ESP_ERR_ESPNOW_NOT_INIT) {\n        return false;\n      }\n      else if (addStatus == ESP_ERR_ESPNOW_ARG) {\n        return false;\n     }\n      else if (addStatus == ESP_ERR_ESPNOW_FULL) {\n        return false;\n      }\n      else if (addStatus == ESP_ERR_ESPNOW_NO_MEM) {\n        return false;\n      }\n      else if (addStatus == ESP_ERR_ESPNOW_EXIST) {\n        return true;\n      }\n      else {\n        return false;\n      }\n   }\n  }\n  else {\n    return false;\n  }\n}\n\nvoid deletePeer() {\n  const esp_now_peer_info_t *peer = &slave;\n  const uint8_t *peer_addr = slave.peer_addr;\n  esp_err_t delStatus = esp_now_del_peer(peer_addr);\n}\n\nvoid sendBroadcastData(String broadcastSendStr) {\n  broadcastSendStr=String("G_")+broadGroup+"="+broadcastSendStr;\n  const char* tempChar=broadcastSendStr.c_str();\n  uint8_t dataToSend[broadcastSendStr.length()+1];\n  memcpy(dataToSend, tempChar, broadcastSendStr.length()+1);\n  const uint8_t *peer_addr = slave.peer_addr;\n  Serial.print("Sending: "); Serial.println((const char*)dataToSend);\n  esp_err_t result = esp_now_send(peer_addr, dataToSend, broadcastSendStr.length()+1);\n}\n\nvoid onBroadcastDataRecv(const uint8_t *mac_addr, const uint8_t *data, int data_len) {\n  String recTempStr=String((const char*)data);\n  if (recTempStr.startsWith(String("G_")+broadGroup+"=")){\n    recTempStr.replace(String("G_")+broadGroup+"=","");\n    recBroadcastStr=recTempStr;\n    receivedBroadcast=true;\n  } else{\n    receivedBroadcast=false;\n  }\n}\n';
+    Blockly.Arduino.setups_["ljj_broadcast"]='broadGroup='+a+';\n  WiFi.mode(WIFI_STA);\n  InitESPNow();\n  esp_now_register_recv_cb(onBroadcastDataRecv);\n  initBroadcastSlave();\n';
+  }
+  return"";
+};
+
+Blockly.Arduino.ljj_broadcast_sendData=function(){
+  var a=Blockly.Arduino.valueToCode(this,"MSG",Blockly.Arduino.ORDER_ATOMIC)||"";
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    return'sendBroadcastData(String('+a+'));\n';
+  } else {
+    return"";
+  }
+};
+
+Blockly.Arduino.ljj_broadcast_on_receive=function(){
+  var a=Blockly.Arduino.statementToCode(this,"STATEMENT_RECEIVE");
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    Blockly.Arduino.definitions_.define_ljj_broadcast_receive_event='void myCheckEspNow(){\n'+a+'}\n\nvoid checkBroadcastEspNow(){\n  if (receivedBroadcast){\n    myCheckEspNow();\n    receivedBroadcast=false;\n  }\n}\n';
+    Blockly.Arduino.loops_.ljj_broadcast_loop="checkBroadcastEspNow();\n";
+  }
+  return'';
+};
+
+Blockly.Arduino.ljj_broadcast_msg=function(){
+  return["recBroadcastStr",Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.ljj_broadcast_group=function(){
+  var a=Blockly.Arduino.valueToCode(this,"GROUP",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    return'broadGroup='+a+';\n';
+  } else
+    return'';
+};
+
 setTimeout(function(){
 	if (Blockly.Blocks.board_initializes_setup)
 		var xmlDoc = Blockly.Xml.textToDom('<xml xmlns="https://developers.google.com/blockly/xml"><block type="board_initializes_setup" id="0" x="100" y="50"><next><block type="initializes_loop" id="1"></block></next></block></xml>');
