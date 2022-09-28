@@ -1052,10 +1052,11 @@ Blockly.Msg.LJJ_PIXELBIT_TITLE = "Pixel:Bit";
 Blockly.Msg.LJJ_PIXELBIT_TOOLTIP = "";
 
 //ESP_NOW
-Blockly.Msg.LJJ_BROADCAST_HELPURL = "";
+Blockly.Msg.LJJ_BROADCAST_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/esp_now網路廣播";
 Blockly.Msg.LJJ_BROADCAST_TITLE = "ESP_NOW廣播";
 Blockly.Msg.LJJ_BROADCAST_INIT = "初始化";
-Blockly.Msg.LJJ_BROADCAST_GROUP = "群組編號(0~255)";
-Blockly.Msg.LJJ_BROADCAST_TOOLTIP = "";
+Blockly.Msg.LJJ_BROADCAST_CHANNEL = "頻道編號(1~13)";
+Blockly.Msg.LJJ_BROADCAST_TOOLTIP = "ESP_NOW";
 Blockly.Msg.LJJ_BROADCAST_SEND_DATA = "發送訊息";
-Blockly.Msg.LJJ_BROADCAST_RESET_GROUP = "重設群組編號(0~255)";
+Blockly.Msg.LJJ_BROADCAST_SOURCE_MAC_CHAR = "接收到的MAC位址";
+Blockly.Msg.LJJ_BROADCAST_SELF_MAC_CHAR = "自己的MAC位址";

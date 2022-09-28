@@ -8807,9 +8807,9 @@ Blockly.Blocks.ljj_broadcast_init={init:function(){
   this.appendDummyInput()
       .appendField(Blockly.Msg.LJJ_BROADCAST_TITLE)
       .appendField(Blockly.Msg.LJJ_BROADCAST_INIT);
-  this.appendValueInput("GROUP")
+  this.appendValueInput("CHANNEL")
       .setCheck("Number")
-      .appendField(Blockly.Msg.LJJ_BROADCAST_GROUP);
+      .appendField(Blockly.Msg.LJJ_BROADCAST_CHANNEL);
   this.setInputsInline(!0);
   this.setPreviousStatement(!0);
   this.setNextStatement(!0);
@@ -8852,16 +8852,24 @@ Blockly.Blocks.ljj_broadcast_msg={init:function(){
   this.setTooltip(Blockly.Msg.LJJ_BROADCAST_TOOLTIP)}
 };
 
-Blockly.Blocks.ljj_broadcast_group={init:function(){
+Blockly.Blocks.ljj_broadcast_source_mac={init:function(){
   this.setHelpUrl(Blockly.Msg.LJJ_BROADCAST_HELPURL);
   this.setColour(Blockly.Blocks.ljj_broadcast.HUE);
   this.appendDummyInput()
       .appendField(Blockly.Msg.LJJ_BROADCAST_TITLE)
-  this.appendValueInput("GROUP")
-      .setCheck("Number")
-      .appendField(Blockly.Msg.LJJ_BROADCAST_RESET_GROUP);
+      .appendField(Blockly.Msg.LJJ_BROADCAST_SOURCE_MAC_CHAR);
   this.setInputsInline(!0);
-  this.setPreviousStatement(!0);
-  this.setNextStatement(!0);
+  this.setOutput(!0,"String");
+  this.setTooltip(Blockly.Msg.LJJ_BROADCAST_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_broadcast_self_mac={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_BROADCAST_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_broadcast.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_BROADCAST_TITLE)
+      .appendField(Blockly.Msg.LJJ_BROADCAST_SELF_MAC_CHAR);
+  this.setInputsInline(!0);
+  this.setOutput(!0,"String");
   this.setTooltip(Blockly.Msg.LJJ_BROADCAST_TOOLTIP)}
 };

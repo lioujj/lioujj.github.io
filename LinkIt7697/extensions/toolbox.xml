@@ -2175,9 +2175,9 @@
     </category>
     <category id="category_ljj_broadcast" name="ESP_NOW">
       <block type="ljj_broadcast_init">
-        <value name="GROUP">
+        <value name="CHANNEL">
 					<block type="math_number">
-						<field name="NUM">0</field>
+						<field name="NUM">1</field>
 					</block>
 				</value>
       </block>
@@ -2190,13 +2190,8 @@
       </block>
       <block type="ljj_broadcast_on_receive"></block>
       <block type="ljj_broadcast_msg"></block>
-      <block type="ljj_broadcast_group">
-        <value name="GROUP">
-					<block type="math_number">
-						<field name="NUM">0</field>
-					</block>
-				</value>
-      </block>
+      <block type="ljj_broadcast_source_mac"></block>
+      <block type="ljj_broadcast_self_mac"></block>
     </category>
 	</category>
   <category id="category_crawler" name="WebCrawler">
