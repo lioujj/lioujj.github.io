@@ -128,6 +128,8 @@ Blockly.Msg.LJJ_TOOLS_CONVERT_STR_INT = "Convert String to Int";
 Blockly.Msg.LJJ_TOOLS_CONVERT_STR_FLOAT = "Convert String to Float";
 Blockly.Msg.TOOLS_ARRAY_VALUE = "Convert String to Array Value";
 Blockly.Msg.LJJ_TOOLS_SERIAL_READUNTIL_N = "read String until '\\n'";
+Blockly.Msg.LJJ_TOOLS_STRING = "string";
+Blockly.Msg.LJJ_TOOLS_STARTS_WITH = 'starts with';
 
 //Maqueen
 Blockly.Msg.CATEGORY_MAQUEEN = "Maqueen";
@@ -678,6 +680,8 @@ Blockly.Msg.TTGO_TFT_TRANSPARENT_COLOR = "transparent color";
 Blockly.Msg.TTGO_TFT_PUSH_IMAGE = "push jpeg image";
 Blockly.Msg.TTGO_TFT_GET_CAMERA = "show camera image";
 Blockly.Msg.TTGO_TFT_GET_CAMERA_SCALE= "scale";
+Blockly.Msg.TTGO_TFT_DRAW_U8G2_TEXT = "show U8G2 string";
+Blockly.Msg.TTGO_TFT_DRAW_U8G2_FONT_NAME = "font name";
 
 //S20
 Blockly.Msg.S20_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/s20智慧插座積木";
@@ -1067,3 +1071,4 @@ Blockly.Msg.LJJ_BROADCAST_TOOLTIP = "ESP_NOW";
 Blockly.Msg.LJJ_BROADCAST_SEND_DATA = "send message";
 Blockly.Msg.LJJ_BROADCAST_SOURCE_MAC_CHAR = "source MAC address";
 Blockly.Msg.LJJ_BROADCAST_SELF_MAC_CHAR = "MAC address";
+Blockly.Msg.LJJ_BROADCAST_GET_CHANNEL = 'Wi-Fi channel';

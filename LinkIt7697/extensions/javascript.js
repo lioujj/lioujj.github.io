@@ -294,6 +294,14 @@ Blockly.Arduino.create_custom_array=function(){
 	return[a,Blockly.Arduino.ORDER_ATOMIC]
 };
 
+Blockly.Arduino.ljj_string_startswith=function(){
+	var a=Blockly.Arduino.valueToCode(this,"SOURCE",Blockly.Arduino.ORDER_ATOMIC),
+      b=Blockly.Arduino.valueToCode(this,"INCLUDE",Blockly.Arduino.ORDER_ATOMIC)||"";
+ 	return[a+'.startsWith('+b+')',Blockly.Arduino.ORDER_ATOMIC]
+  //return['',Blockly.Arduino.ORDER_ATOMIC]
+};
+
+
 Blockly.Arduino.ljj_serial_readuntil_n=function(){
 	var a=this.getFieldValue("UART_NO");
 	return[a+".readStringUntil('\\n')",Blockly.Arduino.ORDER_ATOMIC]
@@ -2935,6 +2943,16 @@ Blockly.Arduino.ttgo_tft_set_font_color=function(){
   return 'tft_fg_color='+a+';\ntft_bg_color='+b+';\ntft.setTextColor(tft_fg_color,tft_bg_color,true);\nu8g2.setForegroundColor(tft_fg_color);\nu8g2.setBackgroundColor(tft_bg_color);\n';
 };
 
+Blockly.Arduino.ttgo_tft_draw_u8g2_text=function(){
+  var a=Blockly.Arduino.valueToCode(this,"START_X",Blockly.Arduino.ORDER_NONE)||"0",
+  b=Blockly.Arduino.valueToCode(this,"START_Y",Blockly.Arduino.ORDER_NONE)||"0",
+  c=Blockly.Arduino.valueToCode(this,"CONTENT",Blockly.Arduino.ORDER_NONE)||"",
+  d=this.getFieldValue("TRANSPARENT"),
+  e=Blockly.Arduino.valueToCode(this,"FONT_NAME",Blockly.Arduino.ORDER_NONE)||"";
+  e=e.replace(/\"/g,"");
+  return"u8g2.setFont("+e+");\nu8g2.setFontMode("+d+");\nu8g2.setCursor("+a+", "+b+");\nu8g2.print(String("+c+").c_str());\n"
+};
+
 Blockly.Arduino.ttgo_tft_draw_chinese_text=function(){
   var a=Blockly.Arduino.valueToCode(this,"START_X",Blockly.Arduino.ORDER_NONE)||"0",
   b=Blockly.Arduino.valueToCode(this,"START_Y",Blockly.Arduino.ORDER_NONE)||"0",
@@ -5248,9 +5266,14 @@ Blockly.Arduino.ljj_broadcast_init=function(){
 	  Blockly.Arduino.definitions_.define_ljj_broadcast_include="#include <esp_now.h>\n#include <WiFi.h>\n#include <esp_wifi.h>"
     Blockly.Arduino.definitions_.define_ljj_broadcast_invoke='#define PRINTSCANRESULTS 0\n#define DELETEBEFOREPAIR 0\n\nesp_now_peer_info_t slave;\nString recBroadcastStr="";\nboolean receivedBroadcast=false;\nuint8_t broadcastChannel=1;\nchar sourceMacChar[18]={\0};\nchar selfMacChar[18]={\0};';
     Blockly.Arduino.definitions_.define_ljj_broadcast_event='void InitESPNow() {\n  if (esp_now_init() == ESP_OK) {\n    Serial.println("ESPNow Init Success");\n  }\n  else {\n    Serial.println("ESPNow Init Failed");\n    ESP.restart();\n  }\n}\n\nvoid initBroadcastSlave() {\n  memset(&slave, 0, sizeof(slave));\n  for (int ii = 0; ii < 6; ++ii)\n    slave.peer_addr[ii] = (uint8_t)0xff;\n  slave.channel = broadcastChannel;\n  slave.encrypt = 0;\n  manageSlave();\n}\n\nbool manageSlave() {\n  if (slave.channel == broadcastChannel) {\n    if (DELETEBEFOREPAIR) {\n      deletePeer();\n    }\n    const esp_now_peer_info_t *peer = &slave;\n    const uint8_t *peer_addr = slave.peer_addr;\n    bool exists = esp_now_is_peer_exist(peer_addr);\n    if (exists) {\n      return true;\n    }\n    else {\n      esp_err_t addStatus = esp_now_add_peer(peer);\n      if (addStatus == ESP_OK) {\n        return true;\n     }\n      else if (addStatus == ESP_ERR_ESPNOW_NOT_INIT) {\n        return false;\n      }\n      else if (addStatus == ESP_ERR_ESPNOW_ARG) {\n        return false;\n     }\n      else if (addStatus == ESP_ERR_ESPNOW_FULL) {\n        return false;\n      }\n      else if (addStatus == ESP_ERR_ESPNOW_NO_MEM) {\n        return false;\n      }\n      else if (addStatus == ESP_ERR_ESPNOW_EXIST) {\n        return true;\n      }\n      else {\n        return false;\n      }\n   }\n  }\n  else {\n    return false;\n  }\n}\n\nvoid deletePeer() {\n  const esp_now_peer_info_t *peer = &slave;\n  const uint8_t *peer_addr = slave.peer_addr;\n  esp_err_t delStatus = esp_now_del_peer(peer_addr);\n}\n\nvoid sendBroadcastData(String broadcastSendStr) {\n  const char* tempChar=broadcastSendStr.c_str();\n  uint8_t dataToSend[broadcastSendStr.length()+1];\n  memcpy(dataToSend, tempChar, broadcastSendStr.length()+1);\n  const uint8_t *peer_addr = slave.peer_addr;\n  Serial.print("Sending: "); Serial.println((const char*)dataToSend);\n  esp_err_t result = esp_now_send(peer_addr, dataToSend, broadcastSendStr.length()+1);\n}\n\nvoid onBroadcastDataRecv(const uint8_t *mac_addr, const uint8_t *data, int data_len){\n  snprintf(sourceMacChar, sizeof(sourceMacChar),"%02x:%02x:%02x:%02x:%02x:%02x",mac_addr[0], mac_addr[1], mac_addr[2], mac_addr[3], mac_addr[4], mac_addr[5]);\n  recBroadcastStr=String((const char*)data);\n  receivedBroadcast=true;\n}\n\nvoid getMyMacAddr(){\n  uint8_t mac_addr[6];\n  WiFi.macAddress(mac_addr);\n  snprintf(selfMacChar, sizeof(selfMacChar),"%02x:%02x:%02x:%02x:%02x:%02x",mac_addr[0], mac_addr[1], mac_addr[2], mac_addr[3], mac_addr[4], mac_addr[5]);\n}\n\n';
-    Blockly.Arduino.setups_["ljj_broadcast"]='broadcastChannel='+a+';\n  WiFi.mode(WIFI_STA);\n  InitESPNow();\n  esp_wifi_set_promiscuous(true);\n  esp_wifi_set_channel(broadcastChannel, WIFI_SECOND_CHAN_NONE);\n  esp_wifi_set_promiscuous(false);\n  esp_now_register_recv_cb(onBroadcastDataRecv);\n  initBroadcastSlave();\n  getMyMacAddr();\n';
-  }
-  return"";
+    //Blockly.Arduino.setups_["ljj_broadcast"]='broadcastChannel='+a+';\n  WiFi.mode(WIFI_STA);\n  InitESPNow();\n  esp_wifi_set_promiscuous(true);\n  esp_wifi_set_channel(broadcastChannel, WIFI_SECOND_CHAN_NONE);\n  esp_wifi_set_promiscuous(false);\n  esp_now_register_recv_cb(onBroadcastDataRecv);\n  initBroadcastSlave();\n  getMyMacAddr();\n';
+    return'broadcastChannel='+a+';\nWiFi.mode(WIFI_STA);\nInitESPNow();\nesp_wifi_set_promiscuous(true);\nesp_wifi_set_channel(broadcastChannel, WIFI_SECOND_CHAN_NONE);\nesp_wifi_set_promiscuous(false);\nesp_now_register_recv_cb(onBroadcastDataRecv);\ninitBroadcastSlave();\ngetMyMacAddr();\n';
+  } else
+    return"";
+};
+
+Blockly.Arduino.ljj_broadcast_get_channel=function(){
+  return["WiFi.channel()",Blockly.Arduino.ORDER_ATOMIC];
 };
 
 Blockly.Arduino.ljj_broadcast_sendData=function(){

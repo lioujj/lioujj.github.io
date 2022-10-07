@@ -1549,6 +1549,28 @@
           </value>
         </block>
         <block type="ttgo_tft_draw_clock"></block>
+        <block type="ttgo_tft_draw_u8g2_text">
+          <value name="START_X">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="START_Y">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="FONT_NAME">
+            <block type="text">
+              <field name="TEXT">u8g2_font_fub25_tf</field>
+            </block>
+          </value>
+          <value name="CONTENT">
+            <block type="text">
+              <field name="TEXT"></field>
+            </block>
+          </value>
+        </block>
         <block type="ttgo_tft_draw_chinese_text">
           <value name="START_X">
             <block type="math_number">
@@ -2188,6 +2210,7 @@
 					</block>
 				</value>
       </block>
+      <block type="ljj_broadcast_get_channel"></block>
       <block type="ljj_broadcast_on_receive"></block>
       <block type="ljj_broadcast_msg"></block>
       <block type="ljj_broadcast_source_mac"></block>
@@ -3760,6 +3783,18 @@
 		  </block>
 		  <block type="create_custom_array">
 			  <value name="MY_VAR">
+				  <block type="text">
+					  <field name="TEXT"></field>
+				  </block>
+			  </value>
+		  </block>
+		  <block type="ljj_string_startswith">
+			  <value name="SOURCE">
+				  <block type="text">
+					  <field name="TEXT"></field>
+				  </block>
+			  </value>
+			  <value name="INCLUDE">
 				  <block type="text">
 					  <field name="TEXT"></field>
 				  </block>

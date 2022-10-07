@@ -454,6 +454,23 @@ Blockly.Blocks.create_custom_array={init:function(){
   this.setTooltip(Blockly.Msg.LJJ_TOOLS_TOOLTIP)}
 };
 
+Blockly.Blocks.ljj_string_startswith={init:function(){
+  this.setHelpUrl(Blockly.Msg.TOOLS_HELPURL);
+  this.setColour(Blockly.Blocks.math.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_TOOLS_STRING);
+  this.appendValueInput("SOURCE")
+      .setCheck("String");
+  this.appendValueInput("INCLUDE")
+      .setCheck("String")
+      .appendField(Blockly.Msg.LJJ_TOOLS_STARTS_WITH);
+  this.appendDummyInput()
+      .appendField("?");
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Boolean");
+  this.setTooltip(Blockly.Msg.LJJ_TOOLS_TOOLTIP)}
+};
+
 Blockly.Blocks.ljj_serial_readuntil_n={init:function(){
   this.setHelpUrl(Blockly.Msg.TOOLS_HELPURL);
   this.setColour(Blockly.Blocks.math.HUE);
@@ -4896,6 +4913,35 @@ Blockly.Blocks.ttgo_tft_set_font_color={init:function(){
   this.setTooltip(Blockly.Msg.TTGO_TFT_TOOLTIP)}
 };
 
+Blockly.Blocks.ttgo_tft_draw_u8g2_text={init:function(){
+  this.setHelpUrl(Blockly.Msg.TTGO_TFT_HELPURL);
+  this.setColour(Blockly.Blocks.ttgo_tft.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.TTGO_TFT_TITLE)
+      .appendField(Blockly.Msg.TTGO_TFT_DRAW_U8G2_TEXT);
+  this.appendValueInput("START_X")
+      .setCheck("Number")
+      .appendField("X:");
+  this.appendValueInput("START_Y")
+      .setCheck("Number")
+      .appendField("Y:");
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.TTGO_TFT_DRAW_U8G2_FONT_NAME);
+  this.appendValueInput("FONT_NAME")
+      .setCheck("String");
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.OLED_DISPLAY_DRAW_TEXT_CONTENT);
+  this.appendValueInput("CONTENT")
+      .setCheck("String");
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.TTGO_TFT_TRANSPARENT)
+      .appendField(new Blockly.FieldDropdown([["Yes","1"],["No","0"]]),"TRANSPARENT");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.TTGO_TFT_TOOLTIP)}
+};
+
 Blockly.Blocks.ttgo_tft_draw_chinese_text={init:function(){
   this.setHelpUrl(Blockly.Msg.TTGO_TFT_HELPURL);
   this.setColour(Blockly.Blocks.ttgo_tft.HUE);
@@ -8813,6 +8859,16 @@ Blockly.Blocks.ljj_broadcast_init={init:function(){
   this.setInputsInline(!0);
   this.setPreviousStatement(!0);
   this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_BROADCAST_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_broadcast_get_channel={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_BROADCAST_HELPURL);
+  this.setColour(Blockly.Blocks.linkit.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_BROADCAST_GET_CHANNEL);
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Number");
   this.setTooltip(Blockly.Msg.LJJ_BROADCAST_TOOLTIP)}
 };
 

@@ -127,6 +127,8 @@ Blockly.Msg.LJJ_TOOLS_CONVERT_STR_INT = "轉換字串為數字";
 Blockly.Msg.LJJ_TOOLS_CONVERT_STR_FLOAT= "轉換字串為浮點數";
 Blockly.Msg.TOOLS_ARRAY_VALUE = "轉換字串當成陣列值";
 Blockly.Msg.LJJ_TOOLS_SERIAL_READUNTIL_N = "讀取字串直到讀到 '\\n'";
+Blockly.Msg.LJJ_TOOLS_STRING = "字串";
+Blockly.Msg.LJJ_TOOLS_STARTS_WITH = '開頭為';
 
 //Maqueen
 Blockly.Msg.CATEGORY_MAQUEEN = "麥昆小車";
@@ -672,6 +674,8 @@ Blockly.Msg.TTGO_TFT_TRANSPARENT_COLOR = "透明顏色";
 Blockly.Msg.TTGO_TFT_PUSH_IMAGE = "顯示jpeg圖檔";
 Blockly.Msg.TTGO_TFT_GET_CAMERA = "顯示相機影像";
 Blockly.Msg.TTGO_TFT_GET_CAMERA_SCALE= "縮放";
+Blockly.Msg.TTGO_TFT_DRAW_U8G2_TEXT = "顯示U8G2字串";
+Blockly.Msg.TTGO_TFT_DRAW_U8G2_FONT_NAME = "字型名稱";
 
 //S20
 Blockly.Msg.S20_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/s20智慧插座積木";
@@ -1060,3 +1064,4 @@ Blockly.Msg.LJJ_BROADCAST_TOOLTIP = "ESP_NOW";
 Blockly.Msg.LJJ_BROADCAST_SEND_DATA = "發送訊息";
 Blockly.Msg.LJJ_BROADCAST_SOURCE_MAC_CHAR = "接收到的MAC位址";
 Blockly.Msg.LJJ_BROADCAST_SELF_MAC_CHAR = "自己的MAC位址";
+Blockly.Msg.LJJ_BROADCAST_GET_CHANNEL = 'Wi-Fi頻道編號';
