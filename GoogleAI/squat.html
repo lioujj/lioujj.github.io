@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head><meta charset='utf-8'><meta http-equiv='Access-Control-Allow-Origin' content='*'><meta http-equiv='Access-Control-Allow-Credentials' content='true'><script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/GameElements_20190131/gameelements.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/holistic_20201012/holistic_video.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/holistic_20201012/holistic.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/TextToSpeech_20220729/texttospeech.js'></script></head><body><script>const delay=(seconds)=>{return new Promise((resolve)=>{setTimeout(resolve,seconds*1000);});};const main=async()=>{var detectPeriod, inPosition, myCounts, seconds, stayTime, leftHip, leftFoot, rightHip, rightFoot, myTimer;
+<!DOCTYPE html><html><head><meta charset='utf-8'><meta http-equiv='Access-Control-Allow-Origin' content='*'><meta http-equiv='Access-Control-Allow-Credentials' content='true'><script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/GameElements_20190131/gameelements.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/holistic_20201012/holistic_video.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/holistic_20201012/holistic.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/TextToSpeech_20220729/texttospeech.js'></script></head><body><script>const delay=(seconds)=>{return new Promise((resolve)=>{setTimeout(resolve,seconds*1000);});};const main=async()=>{var detectPeriod, inPosition, myCounts, seconds, stayTime, leftHip, myTimer, leftFoot, rightHip, rightFoot;
 
 
 detectPeriod = false;
@@ -33,37 +33,14 @@ holistic_state(0);
   leftHip = (holistic_pose_position("23","y"));
   rightFoot = (holistic_pose_position("30","y"));
   rightHip = (holistic_pose_position("24","y"));
-  if (leftFoot > 400 && leftFoot < 480 && rightFoot > 400 && rightFoot < 480) {
+  if (leftFoot > 320 && leftFoot < 480 && rightFoot > 320 && rightFoot < 480) {
     if (leftFoot - leftHip < 90 && rightFoot - rightHip < 90) {
       inPosition = true;
       if (!detectPeriod) {
         detectPeriod = true;
         seconds = 0;
         myTimer = setInterval(async function(){
-          seconds = (typeof seconds === 'number' ? seconds : 0) + 1;
-          if (seconds > stayTime) {
-            if (inPosition) {
-              span_set('spanSeconds',"innerHTML",(String(seconds) + '秒'));
-            } else {
-              myCounts = (typeof myCounts === 'number' ? myCounts : 0) + 1;
-              span_set('spanCounts',"innerHTML",('目前深蹲次數：' + String(myCounts)));
-              ttsSetVoice(("Microsoft Hanhan - Chinese (Traditional, Taiwan)"));
-              tts.text = (['深蹲',myCounts,'次'].join(''));
-              synth.speak(tts);
-              detectPeriod = false;
-              clearInterval(myTimer);
-            }
-          } else {
-            if (inPosition) {
-              span_set('spanSeconds',"innerHTML",(String(seconds) + '秒'));
-            } else {
-              ttsSetVoice(("Microsoft Hanhan - Chinese (Traditional, Taiwan)"));
-              tts.text = '深蹲秒數不足';
-              synth.speak(tts);
-              detectPeriod = false;
-              clearInterval(myTimer);
-            }
-          }
+          await doCountDown();
         },1000);
       }
     } else {
@@ -71,9 +48,48 @@ holistic_state(0);
       span_set('spanSeconds',"innerHTML",'');
     }
   } else {
+    clearInterval(myTimer);
+    seconds = 0;
     detectPeriod = false;
     inPosition = false;
+    span_set('spanSeconds',"innerHTML",'');
   }
 
 holistic_state(1);};
+
+async function doCountDown(){
+  if (detectPeriod) {
+    seconds = (typeof seconds === 'number' ? seconds : 0) + 1;
+    if (seconds > stayTime) {
+      if (inPosition) {
+        span_set('spanSeconds',"innerHTML",(String(seconds) + '秒'));
+      } else {
+        myCounts = (typeof myCounts === 'number' ? myCounts : 0) + 1;
+        span_set('spanCounts',"innerHTML",('目前深蹲次數：' + String(myCounts)));
+        ttsSetVoice(("Microsoft Hanhan - Chinese (Traditional, Taiwan)"));
+        tts.text = (['深蹲',myCounts,'次'].join(''));
+        synth.speak(tts);
+        detectPeriod = false;
+        seconds = 0;
+        clearInterval(myTimer);
+      }
+    } else {
+      if (inPosition) {
+        span_set('spanSeconds',"innerHTML",(String(seconds) + '秒'));
+      } else {
+        ttsSetVoice(("Microsoft Hanhan - Chinese (Traditional, Taiwan)"));
+        tts.text = '深蹲秒數不足';
+        synth.speak(tts);
+        detectPeriod = false;
+        seconds = 0;
+        clearInterval(myTimer);
+      }
+    }
+  } else {
+    detectPeriod = false;
+    seconds = 0;
+    span_set('spanSeconds',"innerHTML",'');
+    clearInterval(myTimer);
+  }
+};
 };main();</script></body></html>
