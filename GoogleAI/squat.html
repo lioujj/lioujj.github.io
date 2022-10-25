@@ -1,6 +1,8 @@
-<!DOCTYPE html><html><head><meta charset='utf-8'><meta http-equiv='Access-Control-Allow-Origin' content='*'><meta http-equiv='Access-Control-Allow-Credentials' content='true'><script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/GameElements_20190131/gameelements.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/holistic_20201012/holistic_video.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/holistic_20201012/holistic.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/TextToSpeech_20220729/texttospeech.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/SpeechRecognition_20220729/speechrecognition.js'></script></head><body><script>const delay=(seconds)=>{return new Promise((resolve)=>{setTimeout(resolve,seconds*1000);});};const main=async()=>{var detectPeriod, inPosition, seconds, myCounts, stayTime, myTimer, leftHip, leftFoot, rightHip, leftRate, rightRate, rightFoot, leftShoulder, rightShoulder, Result;
+<!DOCTYPE html><html><head><meta charset='utf-8'><meta http-equiv='Access-Control-Allow-Origin' content='*'><meta http-equiv='Access-Control-Allow-Credentials' content='true'><script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/GameElements_20190131/gameelements.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/holistic_20201012/holistic_video.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/holistic_20201012/holistic.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/TextToSpeech_20220729/texttospeech.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/SpeechRecognition_20220729/speechrecognition.js'></script></head><body><script>const delay=(seconds)=>{return new Promise((resolve)=>{setTimeout(resolve,seconds*1000);});};const main=async()=>{var detectPeriod, seconds, inPosition, myCounts, stayTime, myTimer, leftHip, leftFoot, leftRate, rightRate, rightHip, rightFoot, leftShoulder, rightShoulder, Result;
 
 
+recognition.lang="cmn-Hant-TW";
+if (!recognizing) startButton(event);
 detectPeriod = false;
 inPosition = false;
 myCounts = 0;
@@ -37,6 +39,8 @@ holistic_startvideo_media(640,480,"front",0);
 holistic_video("block","0","1","0","0","1","1");
 holistic_recognitionFinish = async function() {
 holistic_state(0);
+  recognition.lang="cmn-Hant-TW";
+  if (!recognizing) startButton(event);
   leftFoot = (holistic_pose_position("29","y"));
   leftHip = (holistic_pose_position("23","y"));
   rightFoot = (holistic_pose_position("30","y"));
@@ -68,9 +72,6 @@ holistic_state(0);
   }
 
 holistic_state(1);};
-recognition.lang="cmn-Hant-TW";
-if (!recognizing) startButton(event);
-span_interim(0,500,20,999,true);
 setInterval(async function(){
   Result = (Recognition_final_get());
   if (Result.toLowerCase().indexOf('重新計算'.toLowerCase())!=-1) {
@@ -78,7 +79,11 @@ setInterval(async function(){
     detectPeriod = false;
     myCounts = 0;
     seconds = 0;
-    span_set('spanCounts',"innerHTML",('重新計算目前深蹲次數：' + String(myCounts)));
+    span_set('spanCounts',"innerHTML",('目前深蹲次數：' + String(myCounts)));
+    Result = '';
+    ttsSetVoice(("Microsoft Hanhan - Chinese (Traditional, Taiwan)"));
+    tts.text = '已重新計算';
+    synth.speak(tts);
   }
 },10);
 
