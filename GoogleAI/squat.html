@@ -82,7 +82,7 @@ setInterval(async function(){
     span_set('spanCounts',"innerHTML",('目前深蹲次數：' + String(myCounts)));
     Result = '';
     ttsSetVoice(("Microsoft Hanhan - Chinese (Traditional, Taiwan)"));
-    tts.text = '已重新計算';
+    tts.text = '深蹲次數已歸零';
     synth.speak(tts);
   }
 },10);
