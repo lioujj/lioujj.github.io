@@ -1,0 +1,136 @@
+<!DOCTYPE html><html><head><meta charset='utf-8'><meta http-equiv='Access-Control-Allow-Origin' content='*'><meta http-equiv='Access-Control-Allow-Credentials' content='true'><script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/GameElements_20190131/gameelements.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/holistic_20201012/holistic_video.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/holistic_20201012/holistic.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/TextToSpeech_20220729/texttospeech.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/SpeechRecognition_20220729/speechrecognition.js'></script></head><body><script>const delay=(seconds)=>{return new Promise((resolve)=>{setTimeout(resolve,seconds*1000);});};const main=async()=>{var detectPeriod, inPosition, seconds, myCounts, stayTime, myTimer, leftHip, leftFoot, rightHip, leftRate, rightRate, rightFoot, leftShoulder, rightShoulder, Result;
+
+
+detectPeriod = false;
+inPosition = false;
+myCounts = 0;
+seconds = 0;
+stayTime = 2;
+leftHip = 0;
+leftFoot = 0;
+rightHip = 0;
+rightFoot = 0;
+leftShoulder = 0;
+rightShoulder = 0;
+leftRate = 0;
+rightRate = 0;
+Result = '';
+span_create('',700,20,50,'',999);
+span_set('',"color",(HextoRgb('#000000')));
+span_set('',"innerHTML",'設定深蹲停留秒數：');
+text_create('',60,50,1150,25,'#ffffff','#000000',50,1,stayTime,999,true);
+button_create('',120,70,1230,20,1,null,'確認',50,999,true);
+async function gamebutton__onclick (event) {
+  stayTime = (text_to_number((text_get('',"value"))));
+};
+document.getElementById("gamebutton_").addEventListener("click", gamebutton__onclick, true);
+span_create('spanNote',700,100,36,'',999);
+span_set('spanNote',"color",(HextoRgb('#ff0000')));
+span_set('spanNote',"innerHTML",'肩部以下至足部請完全置於相機範圍內');
+span_create('spanCounts',700,170,50,'',999);
+span_set('spanCounts',"color",(HextoRgb('#000099')));
+span_set('spanCounts',"innerHTML",('目前深蹲次數：' + String(myCounts)));
+span_create('spanReset',700,250,36,'喊「重新計算」可以將次數歸零',999);
+span_set('spanReset',"color",(HextoRgb('#ff0000')));
+span_create('spanSeconds',700,290,100,'',999);
+span_set('spanSeconds',"color",(HextoRgb('#ff0000')));
+span_set('spanSeconds',"innerHTML",'');
+holistic_startvideo_media(640,480,"front",0);
+holistic_video("block","0","1","0","0","1","1");
+holistic_recognitionFinish = async function() {
+holistic_state(0);
+  recognition.lang="cmn-Hant-TW";
+  if (!recognizing) startButton(event);
+  leftFoot = (holistic_pose_position("29","y"));
+  leftHip = (holistic_pose_position("23","y"));
+  rightFoot = (holistic_pose_position("30","y"));
+  rightHip = (holistic_pose_position("24","y"));
+  leftShoulder = (holistic_pose_position("11","y"));
+  rightShoulder = (holistic_pose_position("12","y"));
+  if (leftFoot > 320 && leftFoot < 480 && rightFoot > 320 && rightFoot < 480) {
+    leftRate = (leftFoot - leftHip) / (leftFoot - leftShoulder);
+    rightRate = (rightFoot - rightHip) / (rightFoot - rightShoulder);
+    if (leftRate < 0.45 && leftRate > 0.35 && rightRate < 0.45 && rightRate > 0.35) {
+      inPosition = true;
+      if (!detectPeriod) {
+        detectPeriod = true;
+        seconds = 0;
+        myTimer = setInterval(async function(){
+          await doCountDown();
+        },1000);
+      }
+    } else {
+      inPosition = false;
+      span_set('spanSeconds',"innerHTML",'');
+    }
+  } else {
+    clearInterval(myTimer);
+    seconds = 0;
+    detectPeriod = false;
+    inPosition = false;
+    span_set('spanSeconds',"innerHTML",'');
+  }
+
+holistic_state(1);};
+setInterval(async function(){
+  Result = (Recognition_final_get());
+  if (Result.toLowerCase().indexOf('重新計算'.toLowerCase())!=-1) {
+    inPosition = false;
+    detectPeriod = false;
+    myCounts = 0;
+    seconds = 0;
+    span_set('spanCounts',"innerHTML",('目前深蹲次數：' + String(myCounts)));
+    Result = '';
+    ttsSetVoice(("Microsoft Hanhan - Chinese (Traditional, Taiwan)"));
+    tts.text = '深蹲次數已歸零';
+    synth.speak(tts);
+  }
+},10);
+
+async function doCountDown(){
+  if (detectPeriod) {
+    seconds = (typeof seconds === 'number' ? seconds : 0) + 1;
+    if (seconds > stayTime) {
+      if (inPosition) {
+        span_set('spanSeconds',"innerHTML",(String(seconds) + '秒'));
+      } else {
+        if (leftRate > 0.54 && rightRate > 0.54) {
+          myCounts = (typeof myCounts === 'number' ? myCounts : 0) + 1;
+          span_set('spanCounts',"innerHTML",('目前深蹲次數：' + String(myCounts)));
+          ttsSetVoice(("Microsoft Hanhan - Chinese (Traditional, Taiwan)"));
+          tts.text = (['深蹲',myCounts,'次'].join(''));
+          synth.speak(tts);
+          detectPeriod = false;
+          seconds = 0;
+          clearInterval(myTimer);
+        }
+      }
+    } else {
+      if (inPosition) {
+        span_set('spanSeconds',"innerHTML",(String(seconds) + '秒'));
+      } else {
+        if (seconds < 2 && rightRate <= 0.35 && leftRate <= 0.35) {
+          detectPeriod = false;
+          seconds = 0;
+          clearInterval(myTimer);
+          ttsSetVoice(("Microsoft Hanhan - Chinese (Traditional, Taiwan)"));
+          tts.text = '腳跟要著地，上身挺直，臀部盡量靠近腳跟';
+          synth.speak(tts);
+        } else {
+          detectPeriod = false;
+          seconds = 0;
+          clearInterval(myTimer);
+          ttsSetVoice(("Microsoft Hanhan - Chinese (Traditional, Taiwan)"));
+          tts.text = '深蹲秒數不足';
+          synth.speak(tts);
+        }
+      }
+    }
+  } else {
+    detectPeriod = false;
+    seconds = 0;
+    span_set('spanSeconds',"innerHTML",'');
+    clearInterval(myTimer);
+  }
+};
+};main();</script></body></html>
