@@ -90,7 +90,7 @@ setInterval(async function(){
 repeatSTT = setInterval(async function(){
   recognition.lang="cmn-Hant-TW";
   if (!recognizing) startButton(event);
-},500);
+},15000);
 
 async function doCountDown(){
   if (detectPeriod) {
