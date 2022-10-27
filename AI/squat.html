@@ -1,6 +1,8 @@
-<!DOCTYPE html><html><head><meta charset='utf-8'><meta http-equiv='Access-Control-Allow-Origin' content='*'><meta http-equiv='Access-Control-Allow-Credentials' content='true'><script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/GameElements_20190131/gameelements.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/holistic_20201012/holistic_video.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/holistic_20201012/holistic.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/TextToSpeech_20220729/texttospeech.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/SpeechRecognition_20220729/speechrecognition.js'></script></head><body><script>const delay=(seconds)=>{return new Promise((resolve)=>{setTimeout(resolve,seconds*1000);});};const main=async()=>{var detectPeriod, inPosition, seconds, myCounts, stayTime, myTimer, leftHip, leftFoot, rightHip, leftRate, rightRate, rightFoot, leftShoulder, rightShoulder, Result;
+<!DOCTYPE html><html><head><meta charset='utf-8'><meta http-equiv='Access-Control-Allow-Origin' content='*'><meta http-equiv='Access-Control-Allow-Credentials' content='true'><script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/GameElements_20190131/gameelements.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/holistic_20201012/holistic_video.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/holistic_20201012/holistic.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/TextToSpeech_20220729/texttospeech.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/SpeechRecognition_20220729/speechrecognition.js'></script></head><body><script>const delay=(seconds)=>{return new Promise((resolve)=>{setTimeout(resolve,seconds*1000);});};const main=async()=>{var detectPeriod, inPosition, seconds, myCounts, stayTime, myTimer, leftHip, leftFoot, rightHip, leftRate, rightRate, rightFoot, leftShoulder, rightShoulder, Result, repeatSTT;
 
 
+recognition.lang="cmn-Hant-TW";
+if (!recognizing) startButton(event);
 detectPeriod = false;
 inPosition = false;
 myCounts = 0;
@@ -15,6 +17,7 @@ rightShoulder = 0;
 leftRate = 0;
 rightRate = 0;
 Result = '';
+head_add_viewport(1,1,2,"yes");
 span_create('',700,20,50,'',999);
 span_set('',"color",(HextoRgb('#000000')));
 span_set('',"innerHTML",'設定深蹲停留秒數：');
@@ -39,8 +42,6 @@ holistic_startvideo_media(640,480,"front",0);
 holistic_video("block","0","1","0","0","1","1");
 holistic_recognitionFinish = async function() {
 holistic_state(0);
-  recognition.lang="cmn-Hant-TW";
-  if (!recognizing) startButton(event);
   leftFoot = (holistic_pose_position("29","y"));
   leftHip = (holistic_pose_position("23","y"));
   rightFoot = (holistic_pose_position("30","y"));
@@ -86,6 +87,10 @@ setInterval(async function(){
     synth.speak(tts);
   }
 },10);
+repeatSTT = setInterval(async function(){
+  recognition.lang="cmn-Hant-TW";
+  if (!recognizing) startButton(event);
+},500);
 
 async function doCountDown(){
   if (detectPeriod) {
