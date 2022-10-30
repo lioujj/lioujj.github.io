@@ -1,6 +1,18 @@
-<!DOCTYPE html><html><head><meta charset='utf-8'><meta http-equiv='Access-Control-Allow-Origin' content='*'><meta http-equiv='Access-Control-Allow-Credentials' content='true'><script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/GameElements_20190131/gameelements.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/MQTT_20220324/mqtt.min.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/TextToSpeech_20220729/texttospeech.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/SpeechRecognition_20220729/speechrecognition.js'></script></head><body><script>const delay=(seconds)=>{return new Promise((resolve)=>{setTimeout(resolve,seconds*1000);});};const main=async()=>{var Result;
+<!DOCTYPE html><html><head><meta charset='utf-8'><meta http-equiv='Access-Control-Allow-Origin' content='*'><meta http-equiv='Access-Control-Allow-Credentials' content='true'><script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/GameElements_20190131/gameelements.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/MQTT_20220324/mqtt.min.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/TextToSpeech_20220729/texttospeech.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/SpeechRecognition_20220729/speechrecognition.js'></script></head><body><script>const delay=(seconds)=>{return new Promise((resolve)=>{setTimeout(resolve,seconds*1000);});};const main=async()=>{
+var Result;
 
 
+span_create('spanTitle',60,20,50,'KSB065聲控',999);
+span_create('spanCommand',0,85,30,'語音命令：',999);
+span_set('spanCommand',"color",(HextoRgb('#ff0000')));
+span_create('spanResponse',0,120,30,'',999);
+span_set('spanResponse',"color",(HextoRgb('#000099')));
+button_create('',90,30,80,170,1,null,'開啟語音朗讀',12,999,true);
+async function gamebutton__onclick (event) {
+  ttsSetProperty(1, 1, 1, "cmn-Hant-TW");
+  button_delete('');
+};
+document.getElementById("gamebutton_").addEventListener("click", gamebutton__onclick, true);
 const clientId = "mqtt_" + Math.random().toString(16).substr(2, 8);
 const options = {
 	username: '',
@@ -21,22 +33,19 @@ mqtt_client.on("connect", ()=>{
 	mqtt_client.on("message", async function (topic, payload) {
   if (topic=='ljj/response') {
     span_set('spanResponse',"innerHTML",('收到訊息：' + String(new TextDecoder().decode(payload))));
-    ttsSetVoice(("Google 國語（臺灣）"));
-    tts.text = (new TextDecoder().decode(payload));
-    synth.speak(tts);
+    ttsSpeak(("Google 國語（臺灣）"), (new TextDecoder().decode(payload)));
   }
    })
   }
 )
 
-span_create('spanTitle',60,20,50,'KSB065聲控',999);
-span_create('spanCommand',0,85,30,'語音命令：',999);
-span_set('spanCommand',"color",(HextoRgb('#ff0000')));
-span_create('spanResponse',0,120,30,'',999);
-span_set('spanResponse',"color",(HextoRgb('#000099')));
 recognition.lang="cmn-Hant-TW";
-if (!recognizing) startButton(event);
 span_interim(150,85,30,999,true);
+setInterval(async function(){
+  if (!recognizing) {
+    Recognition_switch(1);
+}
+},500);
 setInterval(async function(){
   Result = (Recognition_final_get());
   if (Result.toLowerCase().indexOf('現在溫度'.toLowerCase())!=-1) {
