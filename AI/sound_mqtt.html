@@ -47,7 +47,7 @@ setInterval(async function(){
     Recognition_switch(1);
 }
 },500);
-setInterval(async function(){
+Recognition_recognitionFinish = async function() {
   Result = (Recognition_final_get());
   if (Result.toLowerCase().indexOf('現在溫度'.toLowerCase())!=-1) {
     mqtt_client.publish('ljj/command', String('現在溫度'));
@@ -58,5 +58,6 @@ setInterval(async function(){
   } else if (Result.toLowerCase().indexOf('關燈'.toLowerCase())!=-1) {
     mqtt_client.publish('ljj/command', String('關燈'));
   }
-},10);
+
+};
 };main();</script></body></html>
