@@ -10,6 +10,7 @@ span_set('spanResponse',"color",(HextoRgb('#000099')));
 button_create('',90,30,80,170,1,null,'開啟語音朗讀',12,999,true);
 async function gamebutton__onclick (event) {
   ttsSetProperty(1, 1, 1, "en-US");
+  ttsSpeak(("Google 國語（臺灣）"), '語音朗讀功能啟動');
   button_delete('');
 };
 document.getElementById("gamebutton_").addEventListener("click", gamebutton__onclick, true);
