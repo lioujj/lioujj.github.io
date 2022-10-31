@@ -49,9 +49,9 @@ mqtt_client.on("connect", ()=>{
   }
 )
 
-span_interim(150,85,30,999,true);
 Recognition_recognitionFinish = async function() {
   Result = (Recognition_final_get());
+  span_set('spanCommand',"innerHTML",('語音命令：' + String(Result)));
   if (Result.toLowerCase().indexOf('現在溫度'.toLowerCase())!=-1) {
     mqtt_client.publish('ljj/command', String('現在溫度'));
   } else if (Result.toLowerCase().indexOf('現在濕度'.toLowerCase())!=-1) {
