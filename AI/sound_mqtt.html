@@ -60,6 +60,8 @@ Recognition_recognitionFinish = async function() {
     mqtt_client.publish('ljj/command', String('開燈'));
   } else if (Result.toLowerCase().indexOf('關燈'.toLowerCase())!=-1) {
     mqtt_client.publish('ljj/command', String('關燈'));
+  } else if (Result.toLowerCase().indexOf('換照片'.toLowerCase())!=-1) {
+    mqtt_client.publish('ljj/command', String('換照片'));
   }
 
 };
