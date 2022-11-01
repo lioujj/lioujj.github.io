@@ -38,4 +38,9 @@ Recognition_recognitionFinish = async function() {
   span_set('spanResponse',"innerHTML",'');
 
 };
+setInterval(async function(){
+  if (!(Recognition_state())) {
+    Recognition_switch(1);
+  }
+},1000);
 };main();</script></body></html>
