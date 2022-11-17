@@ -235,6 +235,18 @@
       </block>
     </category>
     <category id="category_ljj_pixelbit" name="Pixel:Bit">
+      <block type="board_initializes_setup">
+        <field name="BOARD_TYPE">Arduino</field>
+          <statement name="CONTENT">
+            <block type="ljj_serial_begin">
+              <field name="SERIAL_PORT">Serial</field>
+              <field name="BOUND_RATE">57600</field>
+            </block>
+          </statement>
+        <next>
+          <block type="initializes_loop"></block>
+        </next>
+      </block>
       <block type="ljj_pixelbit_button"></block>
       <block type="ljj_pixelbit_arduino_pins"></block>
       <block type="ljj_pixelbit_microbit_pins"></block>
