@@ -8,7 +8,7 @@ Blockly.Blocks.ljj_serial_begin={init:function(){
       .appendField(Blockly.Msg.LJJ_SERIAL_TITLE)
       .appendField(Blockly.Msg.LJJ_SERIAL_INIT);
   this.appendDummyInput()
-      .appendField(new Blockly.FieldDropdown([["Serial","Serial"],["Serial1","Serial1"],["Seria2","Seria2"]]),"SERIAL_PORT");
+      .appendField(new Blockly.FieldDropdown([["Serial","Serial"],["Serial1","Serial1"],["Serial2","Serial2"]]),"SERIAL_PORT");
   this.appendDummyInput()
       .appendField(Blockly.Msg.LJJ_SERIAL_BAUDRATE)
       .appendField(new Blockly.FieldDropdown([["4800","4800"],["9600","9600"],["19200","19200"],["38400","38400"],["57600","57600"],["115200","115200"],["230400","230400"]]),"BOUND_RATE");
@@ -7961,6 +7961,87 @@ Blockly.Blocks.ljj_basic_dht11={init:function(){
       .appendField(Blockly.Msg.LIOU_ROBOT_PIN);
   this.setInputsInline(!0);
   this.setOutput(!0,"Number");
+  this.setTooltip(Blockly.Msg.LJJ_BASIC_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_ws2812_neopixel_begin={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_BASIC_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_5012.HUE5);
+  this.appendDummyInput()
+      .appendField("WS2812")
+      .appendField(Blockly.Msg.LJJ_MAX7219_INIT);
+  this.appendValueInput("PIN")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LIOU_ROBOT_PIN);
+  this.appendValueInput("TOTAL")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LJJ_BASIC_LEDS_TOTAL);
+  this.appendValueInput("BRIGHTNESS")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.POCKETCARD_PIXELS_BRIGHTNESS );
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_BASIC_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_ws2812_neopixel_set_color={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_BASIC_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_5012.HUE5);
+  this.appendDummyInput()
+      .appendField("WS2812");
+  this.appendValueInput("INDEX")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.EZ_NEOPIXEL_TITLE);
+  this.appendValueInput("COLOR")
+      .setCheck("String")
+      .appendField(Blockly.Msg.NEOPIXEL_CUSTOM_SETPIXELCOLOR);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.LJJ_BASIC_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_ws2812_neopixel_show={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_BASIC_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_5012.HUE5);
+  this.appendDummyInput()
+      .appendField("WS2812")
+      .appendField(Blockly.Msg.EZ_NEOPIXEL_TITLE)
+      .appendField(Blockly.Msg.NEOPIXEL_SHOW);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_BASIC_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_ws2812_neopixel_set_colors={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_BASIC_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_5012.HUE5);
+  this.appendDummyInput()
+      .appendField("WS2812")
+      .appendField(Blockly.Msg.EZ_NEOPIXEL_TITLE)
+  this.appendValueInput("COLOR")
+      .setCheck("String")
+      .appendField(Blockly.Msg.startPlus_NEOPIXEL_SET_ALL_COLORS);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.LJJ_BASIC_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_ws2812_neopixel_brightness={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_BASIC_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_5012.HUE5);
+  this.appendDummyInput()
+      .appendField("WS2812")
+      .appendField(Blockly.Msg.EZ_NEOPIXEL_TITLE)
+  this.appendValueInput("BRIGHTNESS")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.POCKETCARD_PIXELS_BRIGHTNESS);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
   this.setTooltip(Blockly.Msg.LJJ_BASIC_TOOLTIP)}
 };
 

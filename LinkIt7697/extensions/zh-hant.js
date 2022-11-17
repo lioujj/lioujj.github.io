@@ -1017,6 +1017,7 @@ Blockly.Msg.LJJ_BASIC_PIN_MODE = [["高電位","HIGH"],["低電位","LOW"]];
 Blockly.Msg.LJJ_BASIC_BUTTON_EVENT = "被";
 Blockly.Msg.LJJ_BASIC_DHT11 = "DHT11 取得";
 Blockly.Msg.LJJ_BASIC_DHT11_MODE = [["溫度(C)","temperature"],["濕度(%)","humidity"]];
+Blockly.Msg.LJJ_BASIC_LEDS_TOTAL="燈泡數量";
 
 //MAX7219
 Blockly.Msg.LJJ_MAX7219_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/max7219";

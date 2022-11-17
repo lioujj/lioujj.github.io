@@ -2901,7 +2901,7 @@ Blockly.Arduino.ttgo_tft_init=function(){
     Blockly.Arduino.setups_.ttgo_tft='tft.begin();\n  tft.setRotation(3);\n';
   else
     Blockly.Arduino.setups_.ttgo_tft='tft.begin();\n';
-  Blockly.Arduino.setups_.ttgo_tft+='  tft.fillScreen(TFT_BLACK);\n  u8g2.begin(tft);\n  tft.setTextColor(tft_color);\n  u8g2.setForegroundColor(tft_color);\n';
+  Blockly.Arduino.setups_.ttgo_tft+='  tft.setTextFont(tftTextFont);\n  tft.setTextSize(tftTextSize);\n  tft.fillScreen(TFT_BLACK);\n  u8g2.begin(tft);\n  tft.setTextColor(tft_color);\n  u8g2.setForegroundColor(tft_color);\n';
   return'';
 };
 
@@ -3123,6 +3123,15 @@ Blockly.Arduino.ttgo_tft_push_image=function(){
   return 'drawJpegFile(String('+a+').c_str(),'+b+','+c+','+d+',1,&tft);\n'
 };
 
+
+
+
+//Blockly.Arduino.definitions_['define_linkit_wifi_include']
+
+
+
+
+
 Blockly.Arduino.ttgo_tft_get_camera=function(){
   var a=this.getFieldValue("SCALE"),
       b=Blockly.Arduino.valueToCode(this,"X",Blockly.Arduino.ORDER_NONE)||"0",
@@ -3135,7 +3144,18 @@ Blockly.Arduino.ttgo_tft_get_camera=function(){
     Blockly.Arduino.setups_.ttgo_tft+='  tft.initDMA(true);\n  tft.setSwapBytes(true);\n';
   var returnStr='TJpgDec.setJpgScale('+a+');\ntft.startWrite();\nTJpgDec.drawJpg('+b+','+c+', fb->buf, fb->len);\ntft.endWrite();\n';
   if (Blockly.Arduino.definitions_.stream_function){
+    if (Blockly.Arduino.definitions_.define_ttgo_tft_include.indexOf('include <TFT_eSPI_PIXELBIT.h>')>-1){
+      if (Blockly.Arduino.definitions_.define_esp_http_server_h_include){
+        Blockly.Arduino.definitions_.define_esp_http_server_h_include=Blockly.Arduino.definitions_.define_esp_http_server_h_include.replace('#include <tca5405.h>\n',('#include <tca5405.h>\n'+Blockly.Arduino.definitions_.define_ttgo_tft_include+'\n'));
+        //Blockly.Arduino.definitions_.define_ttgo_tft_show_fb_event='void TFTShowCamera() {\n  camera_fb_t *fb = NULL;\n  fb = esp_camera_fb_get();\n  if (!fb) {\n    Serial.println("Camera capture failed");\n    esp_camera_fb_return(fb);\n    return;\n  }\n  if (fb->format != PIXFORMAT_JPEG) {\n    Serial.println("Non-JPEG data not implemented");\n    return;\n  }\n  TJpgDec.setJpgScale(1);\n  tft.startWrite();\n  TJpgDec.drawJpg(0,0, fb->buf, fb->len);\n  tft.endWrite();\n  esp_camera_fb_return(fb);\n}\n';
+        //Blockly.Arduino.setups_.ttgo_tft_resb='sensor_t *sg = esp_camera_sensor_get();\n  sg->set_brightness(sg, -1);\n  sg->set_contrast(sg, 1);\n  sg->set_saturation(sg, 1);\n';
+        delete Blockly.Arduino.definitions_.define_ttgo_tft_include;
+        //return'TFTShowCamera();\n';
+      }
+    }
     var tempIndex=Blockly.Arduino.definitions_.stream_function.indexOf('if(fb)');
+    if (tempIndex<0)
+      tempIndex=Blockly.Arduino.definitions_.stream_function.indexOf('if (fb)');
     if (tempIndex>-1){
       var tempMe=Blockly.Arduino.definitions_.stream_function.substring(tempIndex);
       var tempIndex2=tempMe.indexOf('esp_camera_fb_return(fb)');
@@ -3143,11 +3163,22 @@ Blockly.Arduino.ttgo_tft_get_camera=function(){
         Blockly.Arduino.definitions_.stream_function=(Blockly.Arduino.definitions_.stream_function.substring(0,tempIndex)+tempMe.substring(0,tempIndex2)+returnStr+tempMe.substring(tempIndex2));
     }
     return'';
-  } else if (Blockly.Arduino.definitions_.getRequest){
-    var tempIndex=Blockly.Arduino.definitions_.getRequest.indexOf('esp_camera_fb_return(fb)');
-    if (tempIndex>-1)
-      Blockly.Arduino.definitions_.getRequest=(Blockly.Arduino.definitions_.getRequest.substring(0,tempIndex)+returnStr+Blockly.Arduino.definitions_.getRequest.substring(tempIndex));
-    return'';
+  }
+  else if (Blockly.Arduino.definitions_.getRequest){
+    if (Blockly.Arduino.definitions_.define_ttgo_tft_include.indexOf('include <TFT_eSPI_PIXELBIT.h>')>-1){
+      if (Blockly.Arduino.definitions_['define_linkit_wifi_include']){
+        Blockly.Arduino.definitions_['define_linkit_wifi_include']=Blockly.Arduino.definitions_['define_linkit_wifi_include'].replace('#include <tca5405.h>\n',('#include <tca5405.h>\n'+Blockly.Arduino.definitions_.define_ttgo_tft_include+'\n'));
+        Blockly.Arduino.definitions_.define_ttgo_tft_show_fb_event='void TFTShowCamera() {\n  camera_fb_t *fb = NULL;\n  fb = esp_camera_fb_get();\n  if (!fb) {\n    Serial.println("Camera capture failed");\n    esp_camera_fb_return(fb);\n    return;\n  }\n  if (fb->format != PIXFORMAT_JPEG) {\n    Serial.println("Non-JPEG data not implemented");\n    return;\n  }\n  TJpgDec.setJpgScale('+a+');\n  tft.startWrite();\n  TJpgDec.drawJpg(0,0, fb->buf, fb->len);\n  tft.endWrite();\n  esp_camera_fb_return(fb);\n}\n';
+        Blockly.Arduino.setups_.ttgo_tft_resb='sensor_t *sg = esp_camera_sensor_get();\n  sg->set_brightness(sg, -1);\n  sg->set_contrast(sg, 1);\n  sg->set_saturation(sg, 1);\n';
+        delete Blockly.Arduino.definitions_.define_ttgo_tft_include;
+        return'TFTShowCamera();\n';
+      }
+    } else{
+      var tempIndex=Blockly.Arduino.definitions_.getRequest.indexOf('esp_camera_fb_return(fb)');
+      if (tempIndex>-1)
+        Blockly.Arduino.definitions_.getRequest=(Blockly.Arduino.definitions_.getRequest.substring(0,tempIndex)+returnStr+Blockly.Arduino.definitions_.getRequest.substring(tempIndex));
+      return'';
+    }
   } else
     return returnStr;
 }
@@ -4967,6 +4998,53 @@ Blockly.Arduino.ljj_basic_dht11=function(){
   Blockly.Arduino.setups_["setup_dht_"]="dht11_p"+a+".begin();";
   return["dht11_p"+a+"."+myType+"()",Blockly.Arduino.ORDER_ATOMIC];
 };
+
+Blockly.Arduino.ljj_ws2812_neopixel_begin=function(){
+  var a=Blockly.Arduino.valueToCode(this,"BRIGHTNESS",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      c=Blockly.Arduino.valueToCode(this,"TOTAL",Blockly.Arduino.ORDER_ATOMIC)||"0";
+	Blockly.Arduino.definitions_.define_include_neopixel="#include <Adafruit_NeoPixel.h>";
+  Blockly.Arduino.definitions_.define_ws2812_neopixel='int ws2812LEDs='+c+';\nAdafruit_NeoPixel ws2812Pixels = Adafruit_NeoPixel(ws2812LEDs,'+b+',NEO_GRB + NEO_KHZ800);\n';
+  Blockly.Arduino.definitions_.ljj_ws2812_event='void setAllLedsColor(int counts,uint32_t myLedColor)\n{\n  for(int i=0;i<counts;i++)\n    ws2812Pixels.setPixelColor(i,myLedColor);\n  ws2812Pixels.show();\n}\n';
+  Blockly.Arduino.setups_.setup_ws2812_neopixel="ws2812Pixels.begin();\n  ws2812Pixels.setBrightness("+a+");\n  ws2812Pixels.show();\n  setAllLedsColor("+c+",ws2812Pixels.Color(0,0,0));";
+  return"";
+};
+
+Blockly.Arduino.ljj_ws2812_neopixel_set_color=function(){
+  var a=Blockly.Arduino.valueToCode(this,"INDEX",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=Blockly.Arduino.valueToCode(this,"COLOR",Blockly.Arduino.ORDER_ATOMIC)||"";
+  b=b.replace("tft.color565","ws2812Pixels.Color");
+  return"ws2812Pixels.setPixelColor("+a+","+b+");\n";
+};
+
+Blockly.Arduino.ljj_ws2812_neopixel_show=function(){
+  return"ws2812Pixels.show();\n";
+};
+
+Blockly.Arduino.ljj_ws2812_neopixel_set_colors=function(){
+  var a=Blockly.Arduino.valueToCode(this,"COLOR",Blockly.Arduino.ORDER_ATOMIC)||"";
+  a=a.replace("tft.color565","ws2812Pixels.Color");
+  return"setAllLedsColor(ws2812LEDs,"+a+");\n";
+};
+
+Blockly.Arduino.ljj_ws2812_neopixel_brightness=function(){
+  var a=Blockly.Arduino.valueToCode(this,"BRIGHTNESS",Blockly.Arduino.ORDER_ATOMIC)||"";
+  return"ws2812Pixels.setBrightness("+a+");\nws2812Pixels.show();\n";
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //MAX7219
 Blockly.Arduino.ljj_max7219={};

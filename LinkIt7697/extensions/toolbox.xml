@@ -193,6 +193,46 @@
           </block>
         </value>
       </block>
+      <block type="ljj_ws2812_neopixel_begin">
+        <value name="PIN">
+          <block type="board_nano_pins">
+            <field name="MY_PIN">2</field>
+          </block>
+        </value>
+        <value name="TOTAL">
+          <block type="math_number">
+            <field name="NUM">10</field>
+          </block>
+        </value>
+        <value name="BRIGHTNESS">
+          <block type="math_number">
+            <field name="NUM">30</field>
+          </block>
+        </value>
+      </block>
+      <block type="ljj_ws2812_neopixel_set_color">
+        <value name="INDEX">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="COLOR">
+          <block type="ttgo_getFromColorPicker"></block>
+        </value>
+      </block>
+      <block type="ljj_ws2812_neopixel_show"></block>
+      <block type="ljj_ws2812_neopixel_set_colors">
+        <value name="COLOR">
+          <block type="ttgo_getFromColorPicker"></block>
+        </value>
+      </block>
+      <block type="ljj_ws2812_neopixel_brightness">
+        <value name="BRIGHTNESS">
+          <block type="math_number">
+            <field name="NUM">30</field>
+          </block>
+        </value>
+      </block>
     </category>
     <category id="category_ljj_pixelbit" name="Pixel:Bit">
       <block type="ljj_pixelbit_button"></block>
@@ -1642,6 +1682,41 @@
               <field name="NUM">1</field>
             </block>
           </value>
+        </block>
+        <block type="tft_drawFont">
+          <field name="font">Arial</field>
+          <field name="size">24</field>
+          <field name="str"></field>
+          <value name="PROGMEM">
+            <block type="text">
+            <field name="TEXT"></field>
+            </block>
+          </value>			
+        </block>
+        <block type="tft_drawXBMP_PROGMEM">
+          <value name="width">
+            <shadow type="math_number">
+            <field name="NUM">16</field>
+            </shadow>
+          </value>
+          <value name="height">
+            <shadow type="math_number">
+            <field name="NUM">16</field>
+            </shadow>
+          </value>
+          <value name="x">
+            <shadow type="math_number">
+            <field name="NUM">0</field>
+            </shadow>
+          </value>
+          <value name="y">
+            <shadow type="math_number">
+            <field name="NUM">0</field>
+            </shadow>
+          </value>
+          <value name="color">
+            <block type="ttgo_getFromColorPicker"></block>
+          </value>	
         </block>
         <block type="ttgo_tft_draw_chart">
           <value name="INPUT">

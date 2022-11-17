@@ -1024,6 +1024,7 @@ Blockly.Msg.LJJ_BASIC_PIN_MODE = [["HIGH","HIGH"],["LOW","LOW"]];
 Blockly.Msg.LJJ_BASIC_BUTTON_EVENT = "is";
 Blockly.Msg.LJJ_BASIC_DHT11 = "DHT11 get";
 Blockly.Msg.LJJ_BASIC_DHT11_MODE = [["temperature(C)","temperature"],["humidity(%)","humidity"]];
+Blockly.Msg.LJJ_BASIC_LEDS_TOTAL="how many LEDs?";
 
 //MAX7219
 Blockly.Msg.LJJ_MAX7219_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/max7219";
