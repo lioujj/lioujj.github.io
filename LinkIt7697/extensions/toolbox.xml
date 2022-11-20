@@ -237,17 +237,137 @@
     <category id="category_ljj_pixelbit" name="Pixel:Bit">
       <block type="board_initializes_setup">
         <field name="BOARD_TYPE">Arduino</field>
-          <statement name="CONTENT">
-            <block type="ljj_serial_begin">
-              <field name="SERIAL_PORT">Serial</field>
-              <field name="BOUND_RATE">57600</field>
-            </block>
-          </statement>
+        <statement name="CONTENT">
+          <block type="ljj_serial_begin">
+            <field name="SERIAL_PORT">Serial</field>
+            <field name="BOUND_RATE">57600</field>
+          </block>
+        </statement>
         <next>
-          <block type="initializes_loop"></block>
+          <block type="initializes_loop">
+            <statement name="CONTENT">
+              <block type="ljj_serial_readuntil">
+                <field name="SERIAL_PORT">Serial</field>
+                <value name="TEXT">
+                  <block type="breakLine"></block>
+                </value>
+                <statement name="STATEMENT">
+                  <block type="controls_if">
+                    <value name="IF0">
+                      <block type="logic_compare">
+                        <field name="OP">EQ</field>
+                        <value name="A">
+                          <block type="ljj_serial_read_result"></block>
+                        </value>
+                        <value name="B">
+                          <block type="text">
+                            <field name="TEXT"></field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </statement>
+              </block>
+            </statement>
+          </block>
         </next>
       </block>
+      <block type="ljj_serial_println">
+        <value name="TEXT">
+          <block type="text">
+            <field name="TEXT"></field>
+          </block>
+        </value>
+      </block>
       <block type="ljj_pixelbit_button"></block>
+      <block type="ljj_basic_led">
+        <value name="PIN">
+          <block type="ljj_pixelbit_microbit_pins">
+            <field name="ARDUINO_PIN">3</field>
+          </block>
+        </value>
+        <value name="ON_OFF">
+          <block type="inout_highlow">
+            <field name="BOOL">HIGH</field>
+          </block>
+        </value>
+      </block>
+      <block type="ljj_basic_led_analog">
+        <value name="PIN">
+          <block type="ljj_pixelbit_microbit_pins">
+            <field name="ARDUINO_PIN">3</field>
+          </block>
+        </value>
+        <value name="NUM">
+          <block type="math_number">
+            <field name="NUM">255</field>
+          </block>
+        </value>
+      </block>
+      <block type="inout_custom_digital_write">
+        <value name="PIN">
+          <block type="ljj_pixelbit_microbit_pins">
+            <field name="ARDUINO_PIN">3</field>
+          </block>
+        </value>
+        <value name="STAT">
+          <block type="inout_highlow">
+            <field name="BOOL">HIGH</field>
+          </block>
+        </value>
+      </block>
+      <block type="inout_custom_analog_write">
+        <value name="PIN_ANALOGWRITE">
+          <block type="ljj_pixelbit_microbit_pins">
+            <field name="ARDUINO_PIN">3</field>
+          </block>
+        </value>
+        <value name="NUM">
+          <block type="math_number">
+            <field name="NUM">255</field>
+          </block>
+        </value>
+      </block>
+      <block type="inout_custom_analog_read">
+        <value name="PIN_ANALOGREAD">
+          <block type="ljj_pixelbit_microbit_pins">
+            <field name="ARDUINO_PIN">A0</field>
+          </block>
+        </value>
+      </block>
+      <block type="servo_write_pin">
+        <value name="PIN">
+          <block type="ljj_pixelbit_microbit_pins">
+            <field name="ARDUINO_PIN">3</field>
+          </block>
+        </value>
+        <value name="ANGLE">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
+      <block type="ljj_basic_dht11">
+        <field name="DHT11_TYPE">temperature</field>
+        <value name="PIN">
+          <block type="ljj_pixelbit_microbit_pins">
+            <field name="ARDUINO_PIN">3</field>
+          </block>
+        </value>
+      </block>
+      <block type="ljj_basic_sonar">
+        <value name="TRIG_PIN">
+          <block type="ljj_pixelbit_microbit_pins">
+            <field name="ARDUINO_PIN">7</field>
+          </block>
+        </value>
+        <value name="ECHO_PIN">
+          <block type="ljj_pixelbit_microbit_pins">
+            <field name="ARDUINO_PIN">2</field>
+          </block>
+        </value>
+      </block>
       <block type="ljj_pixelbit_arduino_pins"></block>
       <block type="ljj_pixelbit_microbit_pins"></block>
     </category>

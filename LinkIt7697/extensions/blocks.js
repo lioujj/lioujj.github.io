@@ -24,7 +24,7 @@ Blockly.Blocks.ljj_serial_print={init:function(){
   this.appendDummyInput()
       .appendField(Blockly.Msg.LJJ_SERIAL_TITLE);
   this.appendDummyInput()
-      .appendField(new Blockly.FieldDropdown([["Serial","Serial"],["Serial1","Serial1"],["Seria2","Seria2"]]),"SERIAL_PORT");
+      .appendField(new Blockly.FieldDropdown([["Serial","Serial"],["Serial1","Serial1"],["Serial2","Serial2"]]),"SERIAL_PORT");
   this.appendValueInput("TEXT")
       .setCheck("String")
       .appendField(Blockly.Msg.LJJ_SERIAL_PRINT);
@@ -40,7 +40,7 @@ Blockly.Blocks.ljj_serial_println={init:function(){
   this.appendDummyInput()
       .appendField(Blockly.Msg.LJJ_SERIAL_TITLE);
   this.appendDummyInput()
-      .appendField(new Blockly.FieldDropdown([["Serial","Serial"],["Serial1","Serial1"],["Seria2","Seria2"]]),"SERIAL_PORT");
+      .appendField(new Blockly.FieldDropdown([["Serial","Serial"],["Serial1","Serial1"],["Serial2","Serial2"]]),"SERIAL_PORT");
   this.appendValueInput("TEXT")
       .setCheck("String")
       .appendField(Blockly.Msg.LJJ_SERIAL_PRINTLN);
@@ -56,7 +56,7 @@ Blockly.Blocks.ljj_serial_readString={init:function(){
   this.appendDummyInput()
       .appendField(Blockly.Msg.LJJ_SERIAL_TITLE);
   this.appendDummyInput()
-      .appendField(new Blockly.FieldDropdown([["Serial","Serial"],["Serial1","Serial1"],["Seria2","Seria2"]]),"SERIAL_PORT")
+      .appendField(new Blockly.FieldDropdown([["Serial","Serial"],["Serial1","Serial1"],["Serial2","Serial2"]]),"SERIAL_PORT")
       .appendField(Blockly.Msg.LJJ_SERIAL_READ_STRING);
   this.appendStatementInput("STATEMENT");
   this.setInputsInline(!0);
@@ -71,7 +71,7 @@ Blockly.Blocks.ljj_serial_readuntil={init:function(){
   this.appendDummyInput()
       .appendField(Blockly.Msg.LJJ_SERIAL_TITLE);
   this.appendDummyInput()
-      .appendField(new Blockly.FieldDropdown([["Serial","Serial"],["Serial1","Serial1"],["Seria2","Seria2"]]),"SERIAL_PORT");
+      .appendField(new Blockly.FieldDropdown([["Serial","Serial"],["Serial1","Serial1"],["Serial2","Serial2"]]),"SERIAL_PORT");
   this.appendValueInput("TEXT")
       .setCheck("String")
       .appendField(Blockly.Msg.LJJ_SERIAL_READUNTIL);
