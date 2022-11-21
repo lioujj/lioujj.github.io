@@ -3205,7 +3205,7 @@ Blockly.Blocks.board_initializes_setup={init:function(){
   this.setColour(Blockly.Blocks.initializes.HUE);
   this.appendDummyInput()
       .appendField(Blockly.Msg.BOARDS_TITLE)
-      .appendField(new Blockly.FieldDropdown([["7697","7697"],["Arduino","Arduino"],["ESP32","ESP32"],["ESP8266","ESP8266"],["ATtiny85","ATtiny85"],["micro:bit","micro:bit"]]),"BOARD_TYPE")
+      .appendField(new Blockly.FieldDropdown([["7697","7697"],["Arduino","Arduino"],["ESP32","ESP32"],["Pico","Pico"],["ESP8266","ESP8266"],["ATtiny85","ATtiny85"],["micro:bit","micro:bit"]]),"BOARD_TYPE")
       .appendField(Blockly.Msg.INITIALIZES_SETUP_APPENDTEXT);
   this.appendStatementInput("CONTENT");
   this.setInputsInline(!0);
