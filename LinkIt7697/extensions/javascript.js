@@ -1525,10 +1525,10 @@ Blockly.Arduino.airbox_fetchData=function(){
     //Blockly.Arduino.definitions_.define_fetch_airbox_invoke=Blockly.Arduino.definitions_.define_fetch_airbox_invoke.replace("/data/last.php?device_id=","/macros/s/AKfycbynReIi6nVvMfPu3Wo4sIRnTLw_JxipQEJXgQCcqKjbsHmZGImAJFQUID2wULqhjZBz_Q/exec?device_id=");
     Blockly.Arduino.definitions_.define_fetch_airbox_invoke='void fetchAirboxInfo(String myID){\n  static TLSClient client;\n  if (!client.connect("script.google.com", 443)) {\n    return;\n  }\n  const String url = String() + "/macros/s/AKfycbynReIi6nVvMfPu3Wo4sIRnTLw_JxipQEJXgQCcqKjbsHmZGImAJFQUID2wULqhjZBz_Q/exec?device_id="+myID;\n  client.println("GET " + url + " HTTP/1.1");\n  client.println("Host: script.google.com");\n  client.println("Accept: */*");\n  client.println("Connection: close");\n  client.println();\n  client.println();\n  String newUrl="";\n  while (client.connected()) {\n    newUrl = client.readStringUntil(\'\\n\');\n    if (newUrl.startsWith("Location: https://")) {\n      newUrl.replace("Location: ","");\n      break;\n    }\n  }\n  client.stop();\n  if (!client.connect("script.google.com", 443)) {\n    return;\n  }\n  client.println("GET " + newUrl + " HTTP/1.1");\n  client.println(String()+"Host: script.google.com");\n  client.println("Accept: */*");\n  client.println("Connection: close");\n  client.println();\n  client.println();\n  while (client.connected()) {\n    String line = client.readStringUntil(\'\\n\');\n    if (line.startsWith("{")) {\n      DeserializationError error = deserializeJson(docAirbox, line);\n      break;\n    }\n  }\n  client.stop();\n}\n';
   }  
-  if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
+  if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266" || Blockly.Arduino.my_board_type=="Pico"){
     Blockly.Arduino.definitions_.define_secure_include="#include <WiFiClientSecure.h>";
     Blockly.Arduino.definitions_.define_fetch_airbox_invoke=Blockly.Arduino.definitions_.define_fetch_airbox_invoke.replace("TLSClient","WiFiClientSecure");
-    if ((arduinoCore_ESP32) || (Blockly.Arduino.my_board_type=="ESP8266"))
+    if ((arduinoCore_ESP32) || (Blockly.Arduino.my_board_type=="ESP8266") || (Blockly.Arduino.my_board_type=="Pico"))
       Blockly.Arduino.definitions_.define_fetch_airbox_invoke=Blockly.Arduino.definitions_.define_fetch_airbox_invoke.replace(" client;\n"," client;\n  client.setInsecure();\n");
   }
   var a=Blockly.Arduino.valueToCode(this,"DEVICEID",Blockly.Arduino.ORDER_ATOMIC)||"";
@@ -1548,10 +1548,10 @@ Blockly.Arduino.stock_fetchData=function(){
   //  Blockly.Arduino.definitions_.define_json_esp8266_stock_fingerprint="const char stockFingerPrint[] PROGMEM=\"0ddb07fcad53ec3e1713f4a5897fc4a4561675ac\";";
   Blockly.Arduino.definitions_.define_stock_json_invoke="const size_t capacity_stock = JSON_ARRAY_SIZE(1) + 2*JSON_OBJECT_SIZE(8) + JSON_OBJECT_SIZE(36) + 680;\nDynamicJsonDocument docStock(capacity_stock);";
 	Blockly.Arduino.definitions_.define_fetch_stock_invoke='void fetchStockInfo(String myID){\n  static TLSClient stockClient;\n  if (!stockClient.connect("mis.twse.com.tw", 443)) {\n    return;\n  }\n  const String url = String() + "/stock/api/getStockInfo.jsp?ex_ch=tse_"+myID+".tw";\n  stockClient.println("GET " + url + " HTTP/1.1");\n  stockClient.println("Host: mis.twse.com.tw");\n  stockClient.println("Accept: */*");\n  stockClient.println("Connection: close");\n  stockClient.println();\n  stockClient.println();\n  while (stockClient.connected()) {\n    String line = stockClient.readStringUntil(\'\\n\');\n    if (line.startsWith("{\\"msgArray")) {\n      line.replace(".0000",".00");\n      DeserializationError error = deserializeJson(docStock, line);\n      break;\n    }\n  }\n  stockClient.stop();\n}\n';
-  if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
+  if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266" || Blockly.Arduino.my_board_type=="Pico"){
     Blockly.Arduino.definitions_.define_secure_include="#include <WiFiClientSecure.h>";
     Blockly.Arduino.definitions_.define_fetch_stock_invoke=Blockly.Arduino.definitions_.define_fetch_stock_invoke.replace("TLSClient","WiFiClientSecure");
-    if ((arduinoCore_ESP32) || (Blockly.Arduino.my_board_type=="ESP8266"))
+    if ((arduinoCore_ESP32) || (Blockly.Arduino.my_board_type=="ESP8266") || (Blockly.Arduino.my_board_type=="Pico"))
       Blockly.Arduino.definitions_.define_fetch_stock_invoke=Blockly.Arduino.definitions_.define_fetch_stock_invoke.replace(" stockClient;\n"," stockClient;\n  stockClient.setInsecure();\n");
   }
   var a=Blockly.Arduino.valueToCode(this,"STOCKID",Blockly.Arduino.ORDER_ATOMIC)||"";
@@ -1571,10 +1571,10 @@ Blockly.Arduino.fetchTranslation=function(){
   Blockly.Arduino.definitions_.define_translation_invoke='String translateResult="";';
   Blockly.Arduino.definitions_.define_urlencode_event="String URLEncode(const char* msg)\n{\n  const char *hex = \"0123456789abcdef\";\n  String encodedMsg = \"\";\n  while (*msg!='\\0'){\n      if( ('a' <= *msg && *msg <= 'z')\n              || ('A' <= *msg && *msg <= 'Z')\n              || ('0' <= *msg && *msg <= '9') ) {\n          encodedMsg += *msg;\n      } else {\n          encodedMsg += '%';\n          encodedMsg += hex[*msg >> 4];\n          encodedMsg += hex[*msg & 15];\n      }\n      msg++;\n  }\n  return encodedMsg;\n}\n";
   Blockly.Arduino.definitions_.define_fetch_translation_invoke='void translateText(const String& lang_code, const String& myText){\n  translateResult="";\n  static TLSClient translateClient;\n  const char* host="translate.googleapis.com";\n  String url="/translate_a/single?client=gtx&sl=auto&dt=t&tl="+lang_code+"&q="+myText;\n  translateClient.connect(host, 443);\n  while (!translateClient.connected());\n  translateClient.print("GET " + url + " HTTP/1.1\\n"+String()+"Host: "+host+"\\nAccept: */*\\nConnection: close\\n\\n\\n");\n  while (!translateClient.available());\n  String result="";\n  while (translateClient.available()){\n    result=translateClient.readStringUntil(\'\\n\');\n    if (result.startsWith("[[[\\"")){\n      result.replace("[[[\\"","");\n      result.replace("\\\\\\"","&&&");\n      result=result.substring(0,result.indexOf(\'\\"\'));\n      result.replace("&&&","\\"");\n      translateResult=result;\n      break;\n    }\n  }\n  translateClient.stop();\n}\n';
-  if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
+  if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266" || Blockly.Arduino.my_board_type=="Pico"){
     Blockly.Arduino.definitions_.define_secure_include="#include <WiFiClientSecure.h>";
     Blockly.Arduino.definitions_.define_fetch_translation_invoke=Blockly.Arduino.definitions_.define_fetch_translation_invoke.replace("TLSClient","WiFiClientSecure");
-    if ((arduinoCore_ESP32) || (Blockly.Arduino.my_board_type=="ESP8266"))
+    if ((arduinoCore_ESP32) || (Blockly.Arduino.my_board_type=="ESP8266") || (Blockly.Arduino.my_board_type=="Pico"))
       Blockly.Arduino.definitions_.define_fetch_translation_invoke=Blockly.Arduino.definitions_.define_fetch_translation_invoke.replace(" translateClient;\n"," translateClient;\n  translateClient.setInsecure();\n");
   }
 	return'translateText('+b+',URLEncode(String('+a+').c_str()));\n'
@@ -1922,7 +1922,7 @@ Blockly.Arduino.linkit_wifi_wait_until_ready=function(){
     Blockly.Arduino.my_board_type="7697";
   if (Blockly.Arduino.my_board_type=="7697")
     Blockly.Arduino.definitions_.define_linkit_wifi_include="#include <LWiFi.h>";
-  else if (Blockly.Arduino.my_board_type=="ESP32")
+  else if ((Blockly.Arduino.my_board_type=="ESP32") || (Blockly.Arduino.my_board_type=="Pico"))
     Blockly.Arduino.definitions_.define_linkit_wifi_include="#include <WiFi.h>";
   else if (Blockly.Arduino.my_board_type=="ESP8266")
     Blockly.Arduino.definitions_.define_linkit_wifi_include="#include <ESP8266WiFi.h>";
@@ -1930,7 +1930,7 @@ Blockly.Arduino.linkit_wifi_wait_until_ready=function(){
   Blockly.Arduino.definitions_.define_linkit_wifi_pass='char _lwifi_pass[] = "'+b+'";';
   if (Blockly.Arduino.my_board_type=="7697")
     return"while (WiFi.begin(_lwifi_ssid, _lwifi_pass) != WL_CONNECTED) { delay(1000); }\n";
-  else if (Blockly.Arduino.my_board_type=="ESP32")
+  else if ((Blockly.Arduino.my_board_type=="ESP32") || (Blockly.Arduino.my_board_type=="Pico"))
     return"WiFi.disconnect();\nWiFi.softAPdisconnect(true);\nWiFi.mode(WIFI_STA);\nWiFi.begin(_lwifi_ssid, _lwifi_pass);\nwhile (WiFi.status() != WL_CONNECTED) { delay(500); }\ndelay(300);\n";
   else if (Blockly.Arduino.my_board_type=="ESP8266")
     return"WiFi.begin(_lwifi_ssid, _lwifi_pass);\nwhile (WiFi.status() != WL_CONNECTED) { delay(500); }\ndelay(300);\n";
@@ -1963,7 +1963,7 @@ Blockly.Arduino.dht_read=function(){
       b=this.getFieldValue("PIN"),
       c=this.getFieldValue("TYPE"),
       d=a.toLowerCase()+"_p"+b;
-  if (Blockly.Arduino.my_board_type=="Arduino")
+  if (Blockly.Arduino.my_board_type=="Arduino" || Blockly.Arduino.my_board_type=="Pico")
     Blockly.Arduino.definitions_.define_dht_include="#include <DHT_mini.h>";
   else
     Blockly.Arduino.definitions_.define_dht_include="#include <DHT.h>";
@@ -1989,7 +1989,7 @@ Blockly.Arduino.dht_read_pin=function(){
   b=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
   c=this.getFieldValue("TYPE"),
   d=a.toLowerCase()+"_p"+b;
-  if (Blockly.Arduino.my_board_type=="Arduino")
+  if (Blockly.Arduino.my_board_type=="Arduino" || Blockly.Arduino.my_board_type=="Pico")
     Blockly.Arduino.definitions_.define_dht_include="#include <DHT_mini.h>";
   else
     Blockly.Arduino.definitions_.define_dht_include="#include <DHT.h>";
@@ -2662,10 +2662,10 @@ Blockly.Arduino.setupForm=function(){
 Blockly.Arduino.sendToGoogle=function(){
   var a=this.getFieldValue("dateInclude");
   Blockly.Arduino.definitions_.define_send_sheet_event='void  sendToGoogleSheets(const String& dateInclude,const String& data)\n{\n  static TLSClient sheetClient;\n  const char* host="script.google.com";\n  if (sheetClient.connect(host, 443)) {\n      const String url = String() +"https://"+host+"/macros/s/"+asId+"/exec?type=insert&dateInclude="+dateInclude+"&sheetId="+sheetId+"&sheetTag="+sheetTag+"&data="+data;\n      sheetClient.println("GET " + url + " HTTP/1.1");\n      sheetClient.println(String()+"Host: "+host);\n      sheetClient.println("Accept: */*");\n      sheetClient.println("Connection: close");\n      sheetClient.println();\n      sheetClient.println();\n      sheetClient.stop();\n  }\n}\n';
-  if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
+  if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266" || Blockly.Arduino.my_board_type=="Pico"){
     Blockly.Arduino.definitions_.define_secure_include="#include <WiFiClientSecure.h>";
     Blockly.Arduino.definitions_.define_send_sheet_event=Blockly.Arduino.definitions_.define_send_sheet_event.replace("TLSClient","WiFiClientSecure");
-    if ((arduinoCore_ESP32) || (Blockly.Arduino.my_board_type=="ESP8266"))
+    if ((arduinoCore_ESP32) || (Blockly.Arduino.my_board_type=="ESP8266") || (Blockly.Arduino.my_board_type=="Pico"))
       Blockly.Arduino.definitions_.define_send_sheet_event=Blockly.Arduino.definitions_.define_send_sheet_event.replace(" sheetClient;\n"," sheetClient;\n  sheetClient.setInsecure();\n");
   }
   var c=Blockly.Arduino.valueToCode(this,"data",Blockly.Arduino.ORDER_ATOMIC)||"";
@@ -2675,10 +2675,10 @@ Blockly.Arduino.sendToGoogle=function(){
 Blockly.Arduino.getLastRow=function(){
   //Blockly.Arduino.definitions_.define_read_sheet_last_row_event='int getSheetLastRow(){\n  static TLSClient sheetClient;\n  const char* host="script.google.com";\n  String newUrl="";\n  while (!newUrl.startsWith("https:")){\n     if (!sheetClient.connect(host, 443)) {\n      return 0;\n    }\n    const String url = String() +"https://"+host+"/macros/s/"+asId+"/exec?type=getLastRow&sheetId="+sheetId+"&sheetTag="+sheetTag;\n    sheetClient.print("GET " + url + " HTTP/1.1\\n"+String()+"Host: "+host+"\\nAccept: */*\\nConnection: keep-alive\\n\\n\\n");\n    while (sheetClient.connected()) {\n      newUrl = sheetClient.readStringUntil(\'\\n\');\n      if (newUrl.startsWith("Location: https://")) {\n        newUrl.replace("Location: ","");\n        break;\n      }\n    }\n  }\n  sheetClient.stop();\n  String jsonData ="";\n  String dataResult="";\n  while(!jsonData.startsWith("{")){\n    if (!sheetClient.connect(host, 443)) {\n      return 0;\n    }\n    sheetClient.print("GET " + newUrl + " HTTP/1.1\\n"+String()+"Host: "+host+"\\nAccept: */*\\nConnection: keep-alive\\n\\n\\n");\n    while (sheetClient.connected()) {\n      jsonData = sheetClient.readStringUntil(\'\\n\');\n      if (jsonData.startsWith("{")) {\n        dataResult=jsonData;\n        dataResult.replace("{\\"lastRow\\":","");\n        dataResult.replace("}","");\n        break;\n      }\n    }\n  }\n  sheetClient.stop();\n  return dataResult.toInt();\n}\n';
   Blockly.Arduino.definitions_.define_read_sheet_last_row_event='int getSheetLastRow(){\n  static TLSClient sheetClient;\n  const char* host="script.google.com";\n  String newUrl="";\n  sheetClient.connect(host, 443);\n  while (!sheetClient.connected());\n  const String url = String() +"https://"+host+"/macros/s/"+asId+"/exec?type=getLastRow&sheetId="+sheetId+"&sheetTag="+sheetTag;\n  sheetClient.print("GET " + url + " HTTP/1.1\\n"+String()+"Host: "+host+"\\nAccept: */*\\nConnection: close\\n\\n\\n");\n  while (!newUrl.startsWith("https:")){\n    newUrl = sheetClient.readStringUntil(\'\\n\');\n    if (newUrl.startsWith("Location: https://")) {\n      newUrl.replace("Location: ","");\n      break;\n    }\n  }\n  sheetClient.stop();\n  String jsonData ="";\n  String dataResult="";\n  sheetClient.connect(host, 443);\n  while (!sheetClient.connected());\n  sheetClient.print("GET " + newUrl + " HTTP/1.1\\n"+String()+"Host: "+host+"\\nAccept: */*\\nConnection: close\\n\\n\\n");\n  while(!jsonData.startsWith("{")){\n    jsonData = sheetClient.readStringUntil(\'\\n\');\n    if (jsonData.startsWith("{")) {\n      dataResult=jsonData;\n      dataResult.replace("{\\"lastRow\\":","");\n      dataResult.replace("}","");\n      break;\n    }\n  }\n  sheetClient.stop();\n  return dataResult.toInt();\n}\n';
-  if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
+  if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266" || Blockly.Arduino.my_board_type=="Pico"){
     Blockly.Arduino.definitions_.define_secure_include="#include <WiFiClientSecure.h>";
     Blockly.Arduino.definitions_.define_read_sheet_last_row_event=Blockly.Arduino.definitions_.define_read_sheet_last_row_event.replace("TLSClient","WiFiClientSecure");
-    if ((arduinoCore_ESP32) || (Blockly.Arduino.my_board_type=="ESP8266"))
+    if ((arduinoCore_ESP32) || (Blockly.Arduino.my_board_type=="ESP8266") || (Blockly.Arduino.my_board_type=="Pico"))
       Blockly.Arduino.definitions_.define_read_sheet_last_row_event=Blockly.Arduino.definitions_.define_read_sheet_last_row_event.replace(" sheetClient;\n"," sheetClient;\n  sheetClient.setInsecure();\n");
   }
   return['getSheetLastRow()',Blockly.Arduino.ORDER_ATOMIC];
@@ -2705,10 +2705,10 @@ Blockly.Arduino.fetchFromSheet=function(){
   //Blockly.Arduino.definitions_.define_read_sheet_invoke='void fetchFromSheet(const String& begin, const String& end){\n  static WiFiClientSecure sheetClient;\n  const char* host="script.google.com";\n  if (!sheetClient.connect(host, 443)) {\n    return;\n  }\n  const String url = String() +"https://"+host+"/macros/s/"+asId+"/exec?type=read&sheetId="+sheetId+"&sheetTag="+sheetTag+"&begin="+begin+"&end="+end;\n  sheetClient.println("GET " + url + " HTTP/1.1");\n  sheetClient.println(String()+"Host: "+host);\n  sheetClient.println("Accept: */*");\n  sheetClient.println("Connection: close");\n  sheetClient.println();\n  sheetClient.println();\n  String newUrl="";\n  while (sheetClient.connected()) {\n    newUrl = sheetClient.readStringUntil(\'\\n\');\n    if (newUrl.startsWith("The document has moved <A HREF=\\"")) {\n      newUrl.replace("The document has moved <A HREF=\\"","");\n      newUrl.replace("\\">here</A>.","");\n      newUrl.replace("amp;","");\n      break;\n    }\n  }\n  sheetClient.stop();\n  if (!sheetClient.connect(host, 443)) {\n    return;\n  }\n  sheetClient.println("GET " + newUrl + " HTTP/1.1");\n  sheetClient.println(String()+"Host: "+host);\n  sheetClient.println("Accept: */*");\n  sheetClient.println("Connection: close");\n  sheetClient.println();\n  sheetClient.println();\n  while (sheetClient.connected()) {\n    String line = sheetClient.readStringUntil(\'\\n\');\n    if (line.startsWith("{")) {\n      DeserializationError error = deserializeJson(docSheet, line);\n      break;\n    }\n  }\n  sheetClient.stop();\n}\n';
   //Blockly.Arduino.definitions_.define_read_sheet_event='void fetchFromSheet(const String& begin, const String& end){\n  static TLSClient sheetClient;\n  const char* host="script.google.com";\n  String newUrl="";\n  while (!newUrl.startsWith("https:")){\n     if (!sheetClient.connect(host, 443)) {\n      return;\n    }\n    const String url = String() +"https://"+host+"/macros/s/"+asId+"/exec?type=read&sheetId="+sheetId+"&sheetTag="+sheetTag+"&begin="+begin+"&end="+end;\n    sheetClient.print("GET " + url + " HTTP/1.1\\n"+String()+"Host: "+host+"\\nAccept: */*\\nConnection: close\\n\\n\\n");\n    while (sheetClient.connected()) {\n      newUrl = sheetClient.readStringUntil(\'\\n\');\n      if (newUrl.startsWith("Location: https://")) {\n        newUrl.replace("Location: ","");\n        break;\n      }\n    }\n  }\n  sheetClient.stop();\n  String jsonData ="";\n  while(!jsonData.startsWith("{")){\n    if (!sheetClient.connect(host, 443)) {\n      return;\n    }\n    sheetClient.print("GET " + newUrl + " HTTP/1.1\\n"+String()+"Host: "+host+"\\nAccept: */*\\nConnection: close\\n\\n\\n");\n    while (sheetClient.connected()) {\n      jsonData = sheetClient.readStringUntil(\'\\n\');\n      if (jsonData.startsWith("{")) {\n        DeserializationError error = deserializeJson(docSheet, jsonData);\n        break;\n      }\n    }\n  }\n  sheetClient.stop();\n}\n';
   Blockly.Arduino.definitions_.define_read_sheet_event='void fetchFromSheet(const String& begin, const String& end){\n  static TLSClient sheetClient;\n  const char* host="script.google.com";\n  String newUrl="";\n  sheetClient.connect(host, 443);\n  while (!sheetClient.connected());\n  const String url = String() +"https://"+host+"/macros/s/"+asId+"/exec?type=read&sheetId="+sheetId+"&sheetTag="+sheetTag+"&begin="+begin+"&end="+end;\n  sheetClient.print("GET " + url + " HTTP/1.1\\n"+String()+"Host: "+host+"\\nAccept: */*\\nConnection: close\\n\\n\\n");\n  while (!newUrl.startsWith("https:")){\n    newUrl = sheetClient.readStringUntil(\'\\n\');\n    if (newUrl.startsWith("Location: https://")) {\n      newUrl.replace("Location: ","");\n      break;\n    }\n  }\n  sheetClient.stop();\n  String jsonData ="";\n  sheetClient.connect(host, 443);\n  while (!sheetClient.connected());\n  sheetClient.print("GET " + newUrl + " HTTP/1.1\\n"+String()+"Host: "+host+"\\nAccept: */*\\nConnection: close\\n\\n\\n");\n  while(!jsonData.startsWith("{")){\n    jsonData = sheetClient.readStringUntil(\'\\n\');\n    if (jsonData.startsWith("{")) {\n      DeserializationError error = deserializeJson(docSheet, jsonData);\n      break;\n    }\n  }\n  sheetClient.stop();\n}\n';
-  if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
+  if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266" || Blockly.Arduino.my_board_type=="Pico"){
     Blockly.Arduino.definitions_.define_secure_include="#include <WiFiClientSecure.h>";
     Blockly.Arduino.definitions_.define_read_sheet_event=Blockly.Arduino.definitions_.define_read_sheet_event.replace("TLSClient","WiFiClientSecure");
-    if ((arduinoCore_ESP32) || (Blockly.Arduino.my_board_type=="ESP8266"))
+    if ((arduinoCore_ESP32) || (Blockly.Arduino.my_board_type=="ESP8266") || (Blockly.Arduino.my_board_type=="Pico"))
       Blockly.Arduino.definitions_.define_read_sheet_event=Blockly.Arduino.definitions_.define_read_sheet_event.replace(" sheetClient;\n"," sheetClient;\n  sheetClient.setInsecure();\n");
   }
   return'fetchFromSheet('+a+','+b+');\n';
@@ -2722,10 +2722,10 @@ Blockly.Arduino.searchSheet=function(){
   Blockly.Arduino.definitions_.define_sheet_json_doc_invoke='DynamicJsonDocument docSheet(2048);\n';
   Blockly.Arduino.definitions_.define_search_sheet_event='void searchSheet(const String& fname, const String& sname){\n  static TLSClient sheetClient;\n  const char* host="script.google.com";\n  String newUrl="";\n  sheetClient.connect(host, 443);\n  while (!sheetClient.connected());\n  const String url = String() +"https://"+host+"/macros/s/"+asId+"/exec?type=search&sheetId="+sheetId+"&sheetTag="+sheetTag+"&fname="+fname+"&sname="+sname;\n  sheetClient.print("GET " + url + " HTTP/1.1\\n"+String()+"Host: "+host+"\\nAccept: */*\\nConnection: close\\n\\n\\n");\n  while (!newUrl.startsWith("https:")){\n    newUrl = sheetClient.readStringUntil(\'\\n\');\n    if (newUrl.startsWith("Location: https://")) {\n      newUrl.replace("Location: ","");\n      break;\n    }\n  }\n  sheetClient.stop();\n  String jsonData ="";\n  sheetClient.connect(host, 443);\n  while (!sheetClient.connected());\n  sheetClient.print("GET " + newUrl + " HTTP/1.1\\n"+String()+"Host: "+host+"\\nAccept: */*\\nConnection: close\\n\\n\\n");\n  while(!jsonData.startsWith("{")){\n    jsonData = sheetClient.readStringUntil(\'\\n\');\n    if (jsonData.startsWith("{")) {\n      DeserializationError error = deserializeJson(docSheet, jsonData);\n      break;\n    }\n  }\n  sheetClient.stop();\n}\n';
   //Blockly.Arduino.definitions_.define_search_sheet_event='void searchSheet(const String& fname, const String& sname){\n  static TLSClient sheetClient;\n  const char* host="script.google.com";\n  String newUrl="";\n  while (!newUrl.startsWith("https:")){\n     if (!sheetClient.connect(host, 443)) {\n      return;\n    }\n    const String url = String() +"https://"+host+"/macros/s/"+asId+"/exec?type=search&sheetId="+sheetId+"&sheetTag="+sheetTag+"&fname="+fname+"&sname="+sname;\n    sheetClient.print("GET " + url + " HTTP/1.1\\n"+String()+"Host: "+host+"\\nAccept: */*\\nConnection: keep-alive\\n\\n\\n");\n    while (sheetClient.connected()) {\n      newUrl = sheetClient.readStringUntil(\'\\n\');\n      if (newUrl.startsWith("Location: https://")) {\n        newUrl.replace("Location: ","");\n        break;\n      }\n    }\n  }\n  sheetClient.stop();\n  String jsonData ="";\n  while(!jsonData.startsWith("{")){\n    if (!sheetClient.connect(host, 443)) {\n      return;\n    }\n    sheetClient.print("GET " + newUrl + " HTTP/1.1\\n"+String()+"Host: "+host+"\\nAccept: */*\\nConnection: keep-alive\\n\\n\\n");\n    while (sheetClient.connected()) {\n      jsonData = sheetClient.readStringUntil(\'\\n\');\n      if (jsonData.startsWith("{")) {\n        DeserializationError error = deserializeJson(docSheet, jsonData);\n        break;\n      }\n    }\n  }\n  sheetClient.stop();\n}\n';
-  if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
+  if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266" || Blockly.Arduino.my_board_type=="Pico"){
     Blockly.Arduino.definitions_.define_secure_include="#include <WiFiClientSecure.h>";
     Blockly.Arduino.definitions_.define_search_sheet_event=Blockly.Arduino.definitions_.define_search_sheet_event.replace("TLSClient","WiFiClientSecure");
-    if ((arduinoCore_ESP32) || (Blockly.Arduino.my_board_type=="ESP8266"))
+    if ((arduinoCore_ESP32) || (Blockly.Arduino.my_board_type=="ESP8266") || (Blockly.Arduino.my_board_type=="Pico"))
       Blockly.Arduino.definitions_.define_search_sheet_event=Blockly.Arduino.definitions_.define_search_sheet_event.replace(" sheetClient;\n"," sheetClient;\n  sheetClient.setInsecure();\n");
   }
   return'searchSheet('+a+',URLEncode(String('+b+').c_str()).c_str());\n'
@@ -2736,10 +2736,10 @@ Blockly.Arduino.deleteSearch=function(){
       b=Blockly.Arduino.valueToCode(this,"keyWord",Blockly.Arduino.ORDER_ATOMIC)||"";
   a=a.toUpperCase();
   Blockly.Arduino.definitions_.define_delete_search_sheet_event='void deleteSearch(const String& fname, const String& sname){\n  static TLSClient sheetClient;\n  const char* host="script.google.com";\n  String newUrl="";\n  sheetClient.connect(host, 443);\n  while (!sheetClient.connected());\n  const String url = String() +"https://"+host+"/macros/s/"+asId+"/exec?type=deleteQ&sheetId="+sheetId+"&sheetTag="+sheetTag+"&fname="+fname+"&sname="+sname;\n  sheetClient.print("GET " + url + " HTTP/1.1\\n"+String()+"Host: "+host+"\\nAccept: */*\\nConnection: close\\n\\n\\n");\n  sheetClient.stop();\n}\n';
-  if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
+  if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266" || Blockly.Arduino.my_board_type=="Pico"){
     Blockly.Arduino.definitions_.define_secure_include="#include <WiFiClientSecure.h>";
     Blockly.Arduino.definitions_.define_delete_search_sheet_event=Blockly.Arduino.definitions_.define_delete_search_sheet_event.replace("TLSClient","WiFiClientSecure");
-    if ((arduinoCore_ESP32) || (Blockly.Arduino.my_board_type=="ESP8266"))
+    if ((arduinoCore_ESP32) || (Blockly.Arduino.my_board_type=="ESP8266") || (Blockly.Arduino.my_board_type=="Pico"))
       Blockly.Arduino.definitions_.define_delete_search_sheet_event=Blockly.Arduino.definitions_.define_delete_search_sheet_event.replace(" sheetClient;\n"," sheetClient;\n  sheetClient.setInsecure();\n");
   }
   return'deleteSearch('+a+',URLEncode(String('+b+').c_str()).c_str());\n'
@@ -2748,10 +2748,10 @@ Blockly.Arduino.deleteSearch=function(){
 Blockly.Arduino.deleteRow=function(){
   var a=Blockly.Arduino.valueToCode(this,"RowIndex",Blockly.Arduino.ORDER_ATOMIC)||"";
   Blockly.Arduino.definitions_.define_delete_rows_sheet_event='void deleteRows(int nBegin, int nEnd){\n  static TLSClient sheetClient;\n  const char* host="script.google.com";\n  String newUrl="";\n  sheetClient.connect(host, 443);\n  while (!sheetClient.connected());\n  String url="";\n  if (nEnd<0){\n    url= String() +"https://"+host+"/macros/s/"+asId+"/exec?type=deleteRow&sheetId="+sheetId+"&sheetTag="+sheetTag+"&dBegin="+nBegin;\n  } else {\n    url= String() +"https://"+host+"/macros/s/"+asId+"/exec?type=deleteRows&sheetId="+sheetId+"&sheetTag="+sheetTag+"&dBegin="+nBegin+"&dEnd="+nEnd;\n  }\n  sheetClient.print("GET " + url + " HTTP/1.1\\n"+String()+"Host: "+host+"\\nAccept: */*\\nConnection: close\\n\\n\\n");\n  sheetClient.stop();\n}\n';
-  if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
+  if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266" || Blockly.Arduino.my_board_type=="Pico"){
     Blockly.Arduino.definitions_.define_secure_include="#include <WiFiClientSecure.h>";
     Blockly.Arduino.definitions_.define_delete_rows_sheet_event=Blockly.Arduino.definitions_.define_delete_rows_sheet_event.replace("TLSClient","WiFiClientSecure");
-    if ((arduinoCore_ESP32) || (Blockly.Arduino.my_board_type=="ESP8266"))
+    if ((arduinoCore_ESP32) || (Blockly.Arduino.my_board_type=="ESP8266") || (Blockly.Arduino.my_board_type=="Pico"))
       Blockly.Arduino.definitions_.define_delete_rows_sheet_event=Blockly.Arduino.definitions_.define_delete_rows_sheet_event.replace(" sheetClient;\n"," sheetClient;\n  sheetClient.setInsecure();\n");
   }
   return'deleteRows('+a+',-1);\n'
@@ -2775,10 +2775,10 @@ Blockly.Arduino.updateCellValue=function(){
   var a=Blockly.Arduino.valueToCode(this,"cell",Blockly.Arduino.ORDER_ATOMIC)||"",
       b=Blockly.Arduino.valueToCode(this,"data",Blockly.Arduino.ORDER_ATOMIC)||"";
   Blockly.Arduino.definitions_.define_update_sheet_event='void  updateCellValue(const String& cell,const String& data)\n{\n  static TLSClient sheetClient;\n  const char* host="script.google.com";\n  if (sheetClient.connect(host, 443)) {\n      const String url = String() +"https://"+host+"/macros/s/"+asId+"/exec?type=update&sheetId="+sheetId+"&sheetTag="+sheetTag+"&cell="+cell+"&data="+data;\n      sheetClient.println("GET " + url + " HTTP/1.1");\n      sheetClient.println(String()+"Host: "+host);\n      sheetClient.println("Accept: */*");\n      sheetClient.println("Connection: close");\n      sheetClient.println();\n      sheetClient.println();\n      sheetClient.stop();\n  }\n}\n';
-  if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
+  if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266" || Blockly.Arduino.my_board_type=="Pico"){
     Blockly.Arduino.definitions_.define_secure_include="#include <WiFiClientSecure.h>";
     Blockly.Arduino.definitions_.define_update_sheet_event=Blockly.Arduino.definitions_.define_update_sheet_event.replace("TLSClient","WiFiClientSecure");
-    if ((arduinoCore_ESP32) || (Blockly.Arduino.my_board_type=="ESP8266"))
+    if ((arduinoCore_ESP32) || (Blockly.Arduino.my_board_type=="ESP8266") || (Blockly.Arduino.my_board_type=="Pico"))
       Blockly.Arduino.definitions_.define_update_sheet_event=Blockly.Arduino.definitions_.define_update_sheet_event.replace(" sheetClient;\n"," sheetClient;\n  sheetClient.setInsecure();\n");
   }
   var c=Blockly.Arduino.valueToCode(this,"data",Blockly.Arduino.ORDER_ATOMIC)||"";
@@ -2856,10 +2856,10 @@ Blockly.Arduino.setLineToken=function(){
 Blockly.Arduino.sendLineMsg=function(){
   var a=Blockly.Arduino.valueToCode(this,"CONTENT",Blockly.Arduino.ORDER_ATOMIC)||"";
   Blockly.Arduino.definitions_.define_send_line_notify_invoke='void sendLineMsg(String myMsg) {\n  static TLSClient line_client;\n  myMsg.replace("%","%25");\n  myMsg.replace("&","%26");\n  myMsg.replace("§","&");\n  myMsg.replace("\\\\n","\\n");\n  if (line_client.connect("notify-api.line.me", 443)) {\n    line_client.println("POST /api/notify HTTP/1.1");\n    line_client.println("Connection: close");\n    line_client.println("Host: notify-api.line.me");\n    line_client.println("Authorization: Bearer " + lineToken);\n    line_client.println("Content-Type: application/x-www-form-urlencoded");\n    line_client.println("Content-Length: " + String(myMsg.length()));\n    line_client.println();\n    line_client.println(myMsg);\n    line_client.println();\n    line_client.stop();\n  }\n  else {\n    Serial.println("Line Notify failed");\n  }\n}\n';
-  if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
+  if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266" || Blockly.Arduino.my_board_type=="Pico"){
     Blockly.Arduino.definitions_.define_secure_include="#include <WiFiClientSecure.h>";
     Blockly.Arduino.definitions_.define_send_line_notify_invoke=Blockly.Arduino.definitions_.define_send_line_notify_invoke.replace("TLSClient","WiFiClientSecure");
-    if ((arduinoCore_ESP32) || (Blockly.Arduino.my_board_type=="ESP8266"))
+    if ((arduinoCore_ESP32) || (Blockly.Arduino.my_board_type=="ESP8266") || (Blockly.Arduino.my_board_type=="Pico"))
       Blockly.Arduino.definitions_.define_send_line_notify_invoke=Blockly.Arduino.definitions_.define_send_line_notify_invoke.replace(" line_client;\n"," line_client;\n  line_client.setInsecure();\n");
   }
   return'sendLineMsg(String("message=\\n")+'+a+');\n';
@@ -2870,10 +2870,10 @@ Blockly.Arduino.sendSticker=function(){
   b=Blockly.Arduino.valueToCode(this,"PACKAGEID",Blockly.Arduino.ORDER_ATOMIC)||"",
   c=Blockly.Arduino.valueToCode(this,"STICKERID",Blockly.Arduino.ORDER_ATOMIC)||"";
   Blockly.Arduino.definitions_.define_send_line_notify_invoke='void sendLineMsg(String myMsg) {\n  static TLSClient line_client;\n  myMsg.replace("%","%25");\n  myMsg.replace("&","%26");\n  myMsg.replace("§","&");\n  myMsg.replace("\\\\n","\\n");\n  if (line_client.connect("notify-api.line.me", 443)) {\n    line_client.println("POST /api/notify HTTP/1.1");\n    line_client.println("Connection: close");\n    line_client.println("Host: notify-api.line.me");\n    line_client.println("Authorization: Bearer " + lineToken);\n    line_client.println("Content-Type: application/x-www-form-urlencoded");\n    line_client.println("Content-Length: " + String(myMsg.length()));\n    line_client.println();\n    line_client.println(myMsg);\n    line_client.println();\n    line_client.stop();\n  }\n  else {\n    Serial.println("Line Notify failed");\n  }\n}\n';
-  if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
+  if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266" || Blockly.Arduino.my_board_type=="Pico"){
     Blockly.Arduino.definitions_.define_secure_include="#include <WiFiClientSecure.h>";
     Blockly.Arduino.definitions_.define_send_line_notify_invoke=Blockly.Arduino.definitions_.define_send_line_notify_invoke.replace("TLSClient","WiFiClientSecure");
-    if ((arduinoCore_ESP32) || (Blockly.Arduino.my_board_type=="ESP8266"))
+    if ((arduinoCore_ESP32) || (Blockly.Arduino.my_board_type=="ESP8266") || (Blockly.Arduino.my_board_type=="Pico"))
       Blockly.Arduino.definitions_.define_send_line_notify_invoke=Blockly.Arduino.definitions_.define_send_line_notify_invoke.replace(" line_client;\n"," line_client;\n  line_client.setInsecure();\n");
   }
   return'sendLineMsg(String("message=\\n")+'+a+'+"§stickerPackageId="+'+b+'+"§stickerId="+'+c+');\n';
@@ -3527,7 +3527,7 @@ Blockly.Arduino.sd_file_download=function(){
         b=Blockly.Arduino.valueToCode(this,"URL",Blockly.Arduino.ORDER_ATOMIC)||"";
     Blockly.Arduino.definitions_.define_HTTPCLIENT_include='#include <HTTPClient.h>';
     Blockly.Arduino.definitions_.define_SDFAT_download_event = 'void saveToSD(String myLink,String fileName)\n{\n  myLink.replace("www.dropbox","dl.dropboxusercontent");\n  myLink.replace("?dl=0","");\n  myLink.replace(" ","%20");\n  File mySDFile;\n  if(fileName.indexOf("/")!=0)\n    fileName="/"+fileName;\n  if(!SD_exists){\n    return;\n  }\n  mySDFile = mySD.open(fileName, O_CREAT | O_WRITE);\n  if (!mySDFile) {\n    return;\n  }\n  WiFiClientSecure sslClient;\n  HTTPClient http;\n  http.begin(sslClient,myLink);\n  int httpCode = http.GET();\n  if (httpCode == HTTP_CODE_OK) {\n      http.writeToStream(&mySDFile);\n  }\n  mySDFile.close();\n  http.end();\n}\n';
-    if ((arduinoCore_ESP32) || (Blockly.Arduino.my_board_type=="ESP8266"))
+    if ((arduinoCore_ESP32) || (Blockly.Arduino.my_board_type=="ESP8266") || (Blockly.Arduino.my_board_type=="Pico"))
       Blockly.Arduino.definitions_.define_SDFAT_download_event=Blockly.Arduino.definitions_.define_SDFAT_download_event.replace("WiFiClientSecure sslClient;\n","WiFiClientSecure sslClient;\n  sslClient.setInsecure();\n");
     else if (Blockly.Arduino.my_board_type=="7697")
       Blockly.Arduino.definitions_.define_SDFAT_download_event=Blockly.Arduino.definitions_.define_SDFAT_download_event.replace("WiFiClientSecure","TLSClient");
@@ -3800,7 +3800,7 @@ Blockly.Arduino.startPlus_dht11=function(){
      checkOK=true;
   }
   if (checkOK){
-    if (Blockly.Arduino.my_board_type=="Arduino")
+    if (Blockly.Arduino.my_board_type=="Arduino" || Blockly.Arduino.my_board_type=="Pico")
       Blockly.Arduino.definitions_['define_dht_']="#include <DHT_mini.h>";
     else
       Blockly.Arduino.definitions_['define_dht_']="#include <DHT.h>";
@@ -4209,7 +4209,7 @@ Blockly.Arduino.spiffs_file_download=function(){
         b=Blockly.Arduino.valueToCode(this,"URL",Blockly.Arduino.ORDER_ATOMIC)||"";
     Blockly.Arduino.definitions_.define_HTTPCLIENT_include='#include <HTTPClient.h>';
     Blockly.Arduino.definitions_.define_SPIFFS_download_event='void saveToSPIFFS(String myLink,String fileName)\n{\n  myLink.replace("www.dropbox","dl.dropboxusercontent");\n  myLink.replace("?dl=0","");\n  myLink.replace(" ","%20");\n  File myTTSFile;\n  if(fileName.indexOf("/")!=0)\n    fileName="/"+fileName;\n  if(!SPIFFS_exists){\n    return;\n  }\n  myTTSFile = SPIFFS.open(fileName, "w");\n  if (!myTTSFile) {\n    return;\n  }\n  WiFiClientSecure sslClient;\n  HTTPClient http;\n  http.begin(sslClient,myLink);\n  int httpCode = http.GET();\n  if (httpCode == HTTP_CODE_OK) {\n      http.writeToStream(&myTTSFile);\n  }\n  myTTSFile.close();\n  http.end();\n}\n';
-    if ((arduinoCore_ESP32) || (Blockly.Arduino.my_board_type=="ESP8266"))
+    if ((arduinoCore_ESP32) || (Blockly.Arduino.my_board_type=="ESP8266") || (Blockly.Arduino.my_board_type=="Pico"))
       Blockly.Arduino.definitions_.define_SPIFFS_download_event=Blockly.Arduino.definitions_.define_SPIFFS_download_event.replace("WiFiClientSecure sslClient;\n","WiFiClientSecure sslClient;\n  sslClient.setInsecure();\n");
     return 'saveToSPIFFS('+b+','+a+');\n';
   }
@@ -4990,7 +4990,7 @@ Blockly.Arduino.ljj_basic_dht11=function(){
   else if (b=='humidity')
     myType='readHumidity';
   var tempBoardName=getBoardFullName();
-  if (tempBoardName=='arduino:avr:pro' || tempBoardName=='arduino:avr:nano')
+  if (tempBoardName=='arduino:avr:pro' || tempBoardName=='arduino:avr:nano' || tempBoardName.startsWith("rp2040:rp2040:rpipico"))
     Blockly.Arduino.definitions_['define_dht_']="#include <DHT_mini.h>";
   else
     Blockly.Arduino.definitions_['define_dht_']="#include <DHT.h>";
@@ -5031,20 +5031,6 @@ Blockly.Arduino.ljj_ws2812_neopixel_brightness=function(){
   var a=Blockly.Arduino.valueToCode(this,"BRIGHTNESS",Blockly.Arduino.ORDER_ATOMIC)||"";
   return"ws2812Pixels.setBrightness("+a+");\nws2812Pixels.show();\n";
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //MAX7219
 Blockly.Arduino.ljj_max7219={};
