@@ -1073,3 +1073,12 @@ Blockly.Msg.LJJ_BROADCAST_SEND_DATA = "send message";
 Blockly.Msg.LJJ_BROADCAST_SOURCE_MAC_CHAR = "source MAC address";
 Blockly.Msg.LJJ_BROADCAST_SELF_MAC_CHAR = "MAC address";
 Blockly.Msg.LJJ_BROADCAST_GET_CHANNEL = 'Wi-Fi channel';
+
+//Pico Dual Core
+Blockly.Msg.PICO_DUAL_CORE_HELPURL="";
+Blockly.Msg.PICO_DUAL_CORE_TOOLTIP = "";
+Blockly.Msg.PICO_TITLE = "Pico";
+Blockly.Msg.PICO_DUAL_CORE_1_TITLE = "Core 1";
+Blockly.Msg.PICO_IDLE_OTHER = "idle the other core";
+Blockly.Msg.PICO_RESUME_OTHER = "resume the other core";
+Blockly.Msg.PICO_RESTART = "restart core 1";

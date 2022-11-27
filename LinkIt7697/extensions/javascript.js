@@ -36,6 +36,9 @@ Blockly.Arduino.finish=function(a){
 //--------------------
 
 	var e=new Date((new Date).getTime());
+  //if ((Blockly.Arduino.my_board_type=="Pico") && (Blockly.Arduino.definitions_["define_ljj_pico_dual_core_1_event"]))
+  //   b=b.join("\n")+"\n\n"+c.join("\n")+"\n"+f.join("\n")+"\n\nvoid setup() \n{\n  rp2040.idleOtherCore();"+d.join("\n  ")+"\n  rp2040.resumeOtherCore();\n}\n\n";
+  //else
 	b=b.join("\n")+"\n\n"+c.join("\n")+"\n"+f.join("\n")+"\n\nvoid setup() \n{\n  "+d.join("\n  ")+"\n}\n\n";
 //------------------------
 	b=b.replace(/\n\n+/g,"\n\n").replace(/\n*$/,"\n\n")+a+"\n\n"+g.join("\n\n");
@@ -5369,6 +5372,38 @@ Blockly.Arduino.ljj_broadcast_source_mac=function(){
 Blockly.Arduino.ljj_broadcast_self_mac=function(){
   return["selfMacChar",Blockly.Arduino.ORDER_ATOMIC];
 };
+
+//Pico Dual Core
+Blockly.Arduino.ljj_pico_dual_core={};
+Blockly.Arduino.ljj_pico_core1_task=function(){
+  var b=Blockly.Arduino.statementToCode(this,"setup1"),
+      c=Blockly.Arduino.statementToCode(this,"loop1");
+  if (Blockly.Arduino.my_board_type=="Pico")
+  Blockly.Arduino.definitions_["define_ljj_pico_dual_core_1_event"]="void setup1(){\n"+b+"}\n\nvoid loop1(){\n"+c+"}\n";
+  return'';
+}
+
+Blockly.Arduino.ljj_pico_core_idle=function(){
+  if (Blockly.Arduino.my_board_type=="Pico")
+    return'rp2040.idleOtherCore();\n';
+  else
+    return'';
+}
+
+Blockly.Arduino.ljj_pico_core_resume=function(){
+  if (Blockly.Arduino.my_board_type=="Pico")
+    return'rp2040.resumeOtherCore();\n';
+  else
+    return'';
+}
+
+Blockly.Arduino.ljj_pico_core1_restart=function(){
+  if (Blockly.Arduino.my_board_type=="Pico")
+    return'rp2040.restartCore1();\n';
+  else
+    return'';
+}
+
 
 setTimeout(function(){
 	if (Blockly.Blocks.board_initializes_setup)

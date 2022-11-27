@@ -71,4 +71,5 @@
 <category><name>MAX7219</name><replace>MAX7219</replace></category>
 <category><name>NKNU5012</name><replace>FabLab-NKNU</replace></category>
 <category><name>ESP_NOW</name><replace>ESP_NOW Broadcast</replace></category>
+<category><name>picoDualCore</name><replace>Dual-Core</replace></category>
 </xml>

@@ -744,6 +744,9 @@
         <block type="ljj_max7219_animate_stop"></block>
         <block type="ljj_max7219_begin"></block>
       </category>
+      <block type="inout_buildin_led">
+        <field name="STAT">HIGH</field>
+      </block>
       <block type="ljj_5012_sonar"></block>
       <block type="ljj_5012_dht11"></block>
       <block type="ljj_5012_hall"></block>
@@ -2036,6 +2039,14 @@
       <block type="s20_button"></block>
       <block type="s20_button_bool"></block>
       <block type="s20_relay_bool"></block>
+    </category>
+  </category>
+  <category id="category_ljj_pico" name="Pico">
+    <category id="category_ljj_pico_dual_core" name="picoDualCore">
+      <block type="ljj_pico_core1_task"></block>
+      <block type="ljj_pico_core_idle"></block>
+      <block type="ljj_pico_core_resume"></block>
+      <block type="ljj_pico_core1_restart"></block>
     </category>
   </category>
 	<category id="category_iot" name="IoT">

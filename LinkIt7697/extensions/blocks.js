@@ -9010,3 +9010,60 @@ Blockly.Blocks.ljj_broadcast_self_mac={init:function(){
   this.setOutput(!0,"String");
   this.setTooltip(Blockly.Msg.LJJ_BROADCAST_TOOLTIP)}
 };
+
+
+//Pico Dual Core
+Blockly.Blocks.ljj_pico_dual_core={};
+Blockly.Blocks.ljj_pico_dual_core.HUE=180;
+Blockly.Blocks.ljj_pico_core1_task={init:function(){
+  this.setHelpUrl(Blockly.Msg.PICO_DUAL_CORE_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_pico_dual_core.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.PICO_TITLE)
+      .appendField(Blockly.Msg.PICO_DUAL_CORE_1_TITLE)
+      .appendField(Blockly.Msg.CORE_SETUP);
+  this.appendStatementInput("setup1");
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.CORE_LOOP);
+  this.appendStatementInput("loop1");
+  this.setInputsInline(!0);
+  this.setTooltip(Blockly.Msg.PICO_DUAL_CORE_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_pico_core_idle={init:function(){
+  this.setHelpUrl(Blockly.Msg.PICO_DUAL_CORE_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_pico_dual_core.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.PICO_TITLE)
+      .appendField(Blockly.Msg.PICO_IDLE_OTHER);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.PICO_DUAL_CORE_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_pico_core_resume={init:function(){
+  this.setHelpUrl(Blockly.Msg.PICO_DUAL_CORE_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_pico_dual_core.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.PICO_TITLE)
+      .appendField(Blockly.Msg.PICO_RESUME_OTHER);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.PICO_DUAL_CORE_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_pico_core1_restart={init:function(){
+  this.setHelpUrl(Blockly.Msg.PICO_DUAL_CORE_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_pico_dual_core.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.PICO_TITLE)
+      .appendField(Blockly.Msg.PICO_RESTART);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.PICO_DUAL_CORE_TOOLTIP)}
+};
+
+

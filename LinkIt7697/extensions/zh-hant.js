@@ -1066,3 +1066,12 @@ Blockly.Msg.LJJ_BROADCAST_SEND_DATA = "發送訊息";
 Blockly.Msg.LJJ_BROADCAST_SOURCE_MAC_CHAR = "接收到的MAC位址";
 Blockly.Msg.LJJ_BROADCAST_SELF_MAC_CHAR = "自己的MAC位址";
 Blockly.Msg.LJJ_BROADCAST_GET_CHANNEL = 'Wi-Fi頻道編號';
+
+//Pico Dual Core
+Blockly.Msg.PICO_DUAL_CORE_HELPURL="";
+Blockly.Msg.PICO_DUAL_CORE_TOOLTIP = "";
+Blockly.Msg.PICO_TITLE = "Pico";
+Blockly.Msg.PICO_DUAL_CORE_1_TITLE = "核心1";
+Blockly.Msg.PICO_IDLE_OTHER = "暫停另一核心的運作";
+Blockly.Msg.PICO_RESUME_OTHER = "恢復另一核心的運作";
+Blockly.Msg.PICO_RESTART = "重新啟動核心1";
