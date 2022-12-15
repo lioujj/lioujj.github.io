@@ -1075,3 +1075,19 @@ Blockly.Msg.PICO_DUAL_CORE_1_TITLE = "核心1";
 Blockly.Msg.PICO_IDLE_OTHER = "暫停另一核心的運作";
 Blockly.Msg.PICO_RESUME_OTHER = "恢復另一核心的運作";
 Blockly.Msg.PICO_RESTART = "重新啟動核心1";
+
+//WiFi Extra
+Blockly.Msg.LINKIT_CHECK_CONNECTION_TITLE = "Wi-Fi遺失連線？";
+Blockly.Msg.LINKIT_RECONNECT_TITLE = "Wi-Fi重新連線";
+
+//hx711
+Blockly.Msg.LJJ_HX711_HELPURL = "";
+Blockly.Msg.LJJ_HX711_TITLE = "HX711重量感測";
+Blockly.Msg.LJJ_HX711_INIT = "初始化";
+Blockly.Msg.LJJ_HX711_TOOLTIP = "HX711";
+Blockly.Msg.LJJ_HX711_SET_SCALE = "設定比例參數";
+Blockly.Msg.LJJ_HX711_TARE = "皮重";
+Blockly.Msg.LJJ_HX711_GET_UNITS = "讀取平均重量(g)";
+Blockly.Msg.LJJ_HX711_GET_UNITS_TIMES = "次";
+Blockly.Msg.LJJ_HX711_POWER = "設定裝置";
+Blockly.Msg.LJJ_HX711_POWER_MODE=[["啟動","up"],["關閉","down"]];

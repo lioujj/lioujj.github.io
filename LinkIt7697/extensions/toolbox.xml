@@ -3564,6 +3564,36 @@
       <block type="ljj_max7219_animate_stop"></block>
       <block type="ljj_max7219_begin"></block>
     </category>
+    <category id="category_ljj_hx711" name="HX711">
+      <block type="ljj_hx711_init">
+        <value name="DATA_PIN">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="SCK_PIN">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
+      <block type="ljj_hx711_set_scale">
+        <value name="SCALE">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
+      <block type="ljj_hx711_tare"></block>
+      <block type="ljj_hx711_get_units">
+        <value name="AVERAGE_TIMES">
+          <block type="math_number">
+            <field name="NUM">10</field>
+          </block>
+        </value>
+      </block>
+      <block type="ljj_hx711_power"></block>
+    </category>
 <!--
     <category id="category_mpu6050" name="MPU6050_I2C">
 			<block type="mpu6050_accel_begin"></block>

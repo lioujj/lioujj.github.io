@@ -1082,3 +1082,19 @@ Blockly.Msg.PICO_DUAL_CORE_1_TITLE = "Core 1";
 Blockly.Msg.PICO_IDLE_OTHER = "idle the other core";
 Blockly.Msg.PICO_RESUME_OTHER = "resume the other core";
 Blockly.Msg.PICO_RESTART = "restart core 1";
+
+//WiFi Extra
+Blockly.Msg.LINKIT_CHECK_CONNECTION_TITLE = "Wi-Fi lost connection?";
+Blockly.Msg.LINKIT_RECONNECT_TITLE = "Wi-Fi reconnect";
+
+//hx711
+Blockly.Msg.LJJ_HX711_HELPURL = "";
+Blockly.Msg.LJJ_HX711_TITLE = "HX711 Weight";
+Blockly.Msg.LJJ_HX711_INIT = "initial";
+Blockly.Msg.LJJ_HX711_TOOLTIP = "HX711";
+Blockly.Msg.LJJ_HX711_SET_SCALE = "setup scale";
+Blockly.Msg.LJJ_HX711_TARE = "tare";
+Blockly.Msg.LJJ_HX711_GET_UNITS = "the average(g) readings of";
+Blockly.Msg.LJJ_HX711_GET_UNITS_TIMES = "times";
+Blockly.Msg.LJJ_HX711_POWER = "set device power";
+Blockly.Msg.LJJ_HX711_POWER_MODE=[["up","up"],["down","down"]];

@@ -5404,6 +5404,53 @@ Blockly.Arduino.ljj_pico_core1_restart=function(){
     return'';
 }
 
+//WiFi extra
+Blockly.Arduino.linkit_wifi_check_conncetion=function(){
+  return["(WiFi.status() != WL_CONNECTED)",Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.linkit_wifi_reconnect=function(){
+  if (Blockly.Arduino.my_board_type=="7697")
+    return"WiFi.disconnect();\nwhile (WiFi.begin(_lwifi_ssid, _lwifi_pass) != WL_CONNECTED) { delay(1000); }\n";
+  else if ((Blockly.Arduino.my_board_type=="ESP32") || (Blockly.Arduino.my_board_type=="Pico"))
+    return"WiFi.disconnect();\nWiFi.softAPdisconnect(true);\nWiFi.mode(WIFI_STA);\nWiFi.begin(_lwifi_ssid, _lwifi_pass);\nwhile (WiFi.status() != WL_CONNECTED) { delay(500); }\ndelay(300);\n";
+  else if (Blockly.Arduino.my_board_type=="ESP8266")
+    return"WiFi.disconnect();\nWiFi.begin(_lwifi_ssid, _lwifi_pass);\nwhile (WiFi.status() != WL_CONNECTED) { delay(500); }\ndelay(300);\n";
+  else
+    return'';
+};
+
+//HX711
+Blockly.Arduino.ljj_hx711={};
+Blockly.Arduino.ljj_hx711_init=function(){
+  var a=Blockly.Arduino.valueToCode(this,"DATA_PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=Blockly.Arduino.valueToCode(this,"SCK_PIN",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  Blockly.Arduino.definitions_.define_ljj_hx711_include="#include \"HX711.h\"";
+  Blockly.Arduino.definitions_.define_ljj_hx711_invoke="HX711 loadCell;\nfloat scale_factor;";
+  return'loadCell.begin('+a+', '+b+');\n';
+};
+
+Blockly.Arduino.ljj_hx711_set_scale=function(){
+  var a=Blockly.Arduino.valueToCode(this,"SCALE",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  if (a=="0")
+    return"loadCell.set_scale();\n";
+  else
+    return'loadCell.set_scale('+a+');\n';
+}
+
+Blockly.Arduino.ljj_hx711_tare=function(){
+  return'loadCell.tare();\n';
+}
+
+Blockly.Arduino.ljj_hx711_get_units=function(){
+  var a=Blockly.Arduino.valueToCode(this,"AVERAGE_TIMES",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  return['loadCell.get_units('+a+')',Blockly.Arduino.ORDER_ATOMIC];
+}
+
+Blockly.Arduino.ljj_hx711_power=function(){
+  var a=this.getFieldValue("POWER");
+  return'loadCell.power_'+a+'();\n';
+}
 
 setTimeout(function(){
 	if (Blockly.Blocks.board_initializes_setup)
