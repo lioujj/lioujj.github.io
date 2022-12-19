@@ -1081,7 +1081,7 @@ Blockly.Msg.LINKIT_CHECK_CONNECTION_TITLE = "Wi-Fi遺失連線？";
 Blockly.Msg.LINKIT_RECONNECT_TITLE = "Wi-Fi重新連線";
 
 //hx711
-Blockly.Msg.LJJ_HX711_HELPURL = "";
+Blockly.Msg.LJJ_HX711_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/hx711重量感測";
 Blockly.Msg.LJJ_HX711_TITLE = "HX711重量感測";
 Blockly.Msg.LJJ_HX711_INIT = "初始化";
 Blockly.Msg.LJJ_HX711_TOOLTIP = "HX711";
