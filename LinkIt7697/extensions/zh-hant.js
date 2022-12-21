@@ -1050,6 +1050,7 @@ Blockly.Msg.LJJ_5012_FAN = "風扇";
 Blockly.Msg.LJJ_5012_HALL = "霍爾感應器磁力值";
 Blockly.Msg.LJJ_5012_JOYSTICK = "搖桿";
 Blockly.Msg.LJJ_5012_TITLE="Fablab-NKNU";
+Blockly.Msg.LJJ_5012_BH1750="光照度(流明)";
 
 //PixelBit
 Blockly.Msg.LJJ_PIXELBIT_HELPURL = "";

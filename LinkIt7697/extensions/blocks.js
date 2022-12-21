@@ -8657,7 +8657,7 @@ Blockly.Blocks.ljj_5012_bh1750={init:function(){
   this.setColour(Blockly.Blocks.ljj_5012.HUE);
   this.appendDummyInput()
       .appendField(Blockly.Msg.LJJ_5012_TITLE)
-      .appendField(Blockly.Msg.POCKETCARD_LIGHT_SENSOR);
+      .appendField(Blockly.Msg.LJJ_5012_BH1750);
   this.setInputsInline(!0);
   this.setOutput(!0,"Number");
   this.setTooltip(Blockly.Msg.LJJ_5012_TOOLTIP)}
