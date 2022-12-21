@@ -4770,7 +4770,7 @@ Blockly.Arduino.ljj_serial_readString=function(){
       c=Blockly.Arduino.statementToCode(this,"STATEMENT");
   Blockly.Arduino.definitions_.define_ljj_serial_invoke='String serialStr="";';
   //var returnStr='if ('+a+'.available()) {\n  serialStr = "";\n  while ('+a+'.available()) {\n    serialStr='+a+'.readStringUntil('+b+');\n    serialStr.replace("\\r","");\n'+c+'  }\n}\n';
-  var returnStr='if ('+a+'.available()) {\n  serialStr = "";\n  while ('+a+'.available()) {\n    char tempChar='+a+'.read();\n    if (tempChar!=\'\\n\'&& tempChar!=\'\\r\')\n    serialStr+=String(tempChar);\n    delay(1);\n  }\n'+c+'}\n'
+  var returnStr='if ('+a+'.available()) {\n  serialStr = "";\n  while ('+a+'.available()) {\n    char tempChar='+a+'.read();\n    if (tempChar!=\'\\n\'&& tempChar!=\'\\r\')\n      serialStr+=String(tempChar);\n    delay(1);\n  }\n'+c+'}\n'
   return returnStr;
 }
 
