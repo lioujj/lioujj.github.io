@@ -46,7 +46,7 @@ Blockly.Arduino.finish=function(a){
 //------------------------
 
 	Blockly.Arduino.mqtt_exist="no";
-	b="//Generated Date: "+e.toUTCString()+b
+	b="//Generated Date: "+e.toUTCString()+"\n"+b
   if (Blockly.Arduino.webserver.webserver_exist=="yes"){
     b=b+Blockly.Arduino.webserver.webserver_header+Blockly.Arduino.webserver.webserver_body+Blockly.Arduino.webserver.webserver_footer;
     Blockly.Arduino.webserver.webserver_exist="no";
