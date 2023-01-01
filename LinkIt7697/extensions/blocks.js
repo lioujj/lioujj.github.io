@@ -9158,3 +9158,27 @@ Blockly.Blocks.ljj_hx711_power={init:function(){
   this.setNextStatement(!0);
   this.setTooltip(Blockly.Msg.LJJ_HX711_TOOLTIP)}
 };
+
+Blockly.Blocks.ljj_2023_init={init:function(){
+  this.setHelpUrl("");
+  this.setColour(120);
+  this.appendDummyInput()
+      .appendField("2023年初始化！")
+      .appendField("不知您為何元旦還開啟BlocklyDuino F2，但只有今天開啟的人能看到這個祝福！")
+      .appendField("吉哥和法蘭斯積木願您新年初始化就成功！");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip("")}
+};
+
+Blockly.Blocks.ljj_2023_loop={init:function(){
+  this.setHelpUrl("");
+  this.setColour(120);
+  this.appendDummyInput()
+      .appendField("2023年新年快樂，平安幸福，重複無限迴圈！");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip("")}
+};
