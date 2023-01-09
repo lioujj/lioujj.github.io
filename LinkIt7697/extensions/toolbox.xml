@@ -2434,6 +2434,35 @@
       <block type="ljj_broadcast_source_mac"></block>
       <block type="ljj_broadcast_self_mac"></block>
     </category>
+    <category id="category_ljj_ifttt" name="IFTTT">
+      <block type="ljj_ifttt_webhook">
+        <value name="KEY">
+          <block type="text">
+            <field name="TEXT">your WebHook key</field>
+          </block>
+        </value>
+        <value name="EVENT">
+          <block type="text">
+            <field name="TEXT">your Event Name</field>
+          </block>
+        </value>
+        <value name="VALUE1">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="VALUE2">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="VALUE3">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
+    </category>
 	</category>
   <category id="category_crawler" name="WebCrawler">
     <category id="category_weather" name="WorldWeather">

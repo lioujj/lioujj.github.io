@@ -9159,6 +9159,31 @@ Blockly.Blocks.ljj_hx711_power={init:function(){
   this.setTooltip(Blockly.Msg.LJJ_HX711_TOOLTIP)}
 };
 
+
+//IFTTT
+Blockly.Blocks.ljj_ifttt={};
+Blockly.Blocks.ljj_ifttt.HUE=180;
+Blockly.Blocks.ljj_ifttt_webhook={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_IFTTT_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_ifttt.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_IFTTT_TITLE);
+  this.appendValueInput("KEY")
+      .setCheck("String")
+	    .setAlign(Blockly.ALIGN_RIGHT)
+	    .appendField(Blockly.Msg.LJJ_IFTTT_KEY);
+  this.appendValueInput("EVENT")
+      .setCheck("String")
+	    .setAlign(Blockly.ALIGN_RIGHT)
+	    .appendField(Blockly.Msg.LJJ_IFTTT_EVENT_NAME);
+  this.appendValueInput("VALUE1").setAlign(Blockly.ALIGN_RIGHT).appendField("Value 1:");
+  this.appendValueInput("VALUE2").setAlign(Blockly.ALIGN_RIGHT).appendField("Value 2:");
+  this.appendValueInput("VALUE3").setAlign(Blockly.ALIGN_RIGHT).appendField("Value 3:");
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_IFTTT_TOOLTIP)}
+};  
+
 Blockly.Blocks.ljj_2023_init={init:function(){
   this.setHelpUrl("");
   this.setColour(120);

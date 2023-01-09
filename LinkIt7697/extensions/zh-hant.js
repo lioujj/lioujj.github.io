@@ -1092,3 +1092,10 @@ Blockly.Msg.LJJ_HX711_GET_UNITS = "讀取平均重量(g)";
 Blockly.Msg.LJJ_HX711_GET_UNITS_TIMES = "次";
 Blockly.Msg.LJJ_HX711_POWER = "設定裝置";
 Blockly.Msg.LJJ_HX711_POWER_MODE=[["啟動","up"],["關閉","down"]];
+
+//IFTTT
+Blockly.Msg.LJJ_IFTTT_HELPURL = "";
+Blockly.Msg.LJJ_IFTTT_TITLE = "IFTTT";
+Blockly.Msg.LJJ_IFTTT_KEY = "WebHook金鑰";
+Blockly.Msg.LJJ_IFTTT_EVENT_NAME = "事件名稱";
+Blockly.Msg.LJJ_IFTTT_TOOLTIP = "";

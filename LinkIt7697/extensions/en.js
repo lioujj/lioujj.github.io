@@ -1099,3 +1099,10 @@ Blockly.Msg.LJJ_HX711_GET_UNITS = "the average(g) readings of";
 Blockly.Msg.LJJ_HX711_GET_UNITS_TIMES = "times";
 Blockly.Msg.LJJ_HX711_POWER = "set device power";
 Blockly.Msg.LJJ_HX711_POWER_MODE=[["up","up"],["down","down"]];
+
+//IFTTT
+Blockly.Msg.LJJ_IFTTT_HELPURL = "";
+Blockly.Msg.LJJ_IFTTT_TITLE = "IFTTT";
+Blockly.Msg.LJJ_IFTTT_KEY = "WebHook key";
+Blockly.Msg.LJJ_IFTTT_EVENT_NAME = "Event Name";
+Blockly.Msg.LJJ_IFTTT_TOOLTIP = "";
