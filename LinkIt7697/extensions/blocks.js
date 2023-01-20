@@ -9188,12 +9188,86 @@ Blockly.Blocks.ljj_2023_init={init:function(){
   this.setHelpUrl("");
   this.setColour(120);
   this.appendDummyInput()
-      .appendField("2023年初始化！")
-      .appendField("不知您為何元旦還開啟BlocklyDuino F2，但只有今天開啟的人能看到這個祝福！")
-      .appendField("吉哥和法蘭斯積木願您新年初始化就成功！");
+      .appendField("新年快樂！給過年還在寫程式的您：兔年初始化就大吉大利！");
   this.setInputsInline(!0);
   this.setPreviousStatement(!0);
   this.setNextStatement(!0);
+  this.setTooltip("")}
+};
+
+Blockly.Blocks.ljj_2023_who={init:function(){
+  this.setHelpUrl("");
+  this.setColour(0);
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown([
+      ["大家","1"],
+      ["自己","2"],
+      ["父親大人","19"],
+      ["母親大人","20"],
+      ["老公","3"],
+      ["老婆","4"],
+      ["男朋友","5"],
+      ["女朋友","6"],
+      ["好朋友","7"],
+      ["兒子","8"],
+      ["女兒","9"],
+      ["家人","10"],
+      ["學生","11"],
+      ["同學","12"],
+      ["同事","13"],
+      ["老闆","14"],
+      ["校長","15"],
+      ["鄰居","16"],
+      ["舊情人","19"],
+      ["隔壁老王","17"],
+      ["遠方小三","18"],
+      ["舊情人","21"]]),"WHO");
+  this.setInputsInline(!0);
+  this.setOutput(!0,"String");
+  this.setTooltip("")}
+};
+
+
+Blockly.Blocks.ljj_2023_what={init:function(){
+  this.setHelpUrl("");
+  this.setColour(0);
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown([
+      ["兔飛猛進，錢兔無量","0"],
+      ["小人退散","1"],
+      ["一切平安","2"],
+      ["心想事成","3"],
+      ["談一場戀愛","4"],
+      ["減肥五十公斤","5"],
+      ["跑一場馬拉松","6"],
+      ["月跑量200公里","7"],
+      ["發大財","8"],
+      ["如願退休","9"],
+      ["繼續工作做到65歲","10"],
+      ["升官加新","11"],
+      ["週遊世界，遊遍百國","12"],
+      ["結婚，順利脫單","13"],
+      ["私房錢愈藏愈多，不被找到","27"],
+      ["桃花處處開，左右逢源","28"],
+      ["有人幫忙推輪椅出去曬太陽","29"],
+      ["計畫多到忙不完","30"],
+      ["寫程式順到找不到bug","31"],
+      ["完成拖了好幾年的論文","32"],
+      ["找到男朋友","14"],
+      ["找到女朋友","15"],
+      ["生小孩增產報國","16"],
+      ["身材火辣","17"],
+      ["體格健壯","18"],
+      ["溫柔賢慧","19"],
+      ["聰明智慧","20"],
+      ["疾病退散","21"],
+      ["身體健康","22"],
+      ["健康快樂","23"],
+      ["刮刮樂每刮必中","24"],
+      ["樂透中千億","25"],
+      ["百病消散","26"]]),"WHAT");
+  this.setInputsInline(!0);
+  this.setOutput(!0,"String");
   this.setTooltip("")}
 };
 
@@ -9201,9 +9275,81 @@ Blockly.Blocks.ljj_2023_loop={init:function(){
   this.setHelpUrl("");
   this.setColour(120);
   this.appendDummyInput()
-      .appendField("2023年新年快樂，平安幸福，重複無限迴圈！");
+      .appendField("願");
+  this.appendValueInput("WHO")
+      .setCheck("String");
+  this.appendDummyInput()
+      .appendField("新的一年能");
+  this.appendValueInput("WHAT")
+      .setCheck("String");
   this.setInputsInline(!0);
   this.setPreviousStatement(!0);
   this.setNextStatement(!0);
   this.setTooltip("")}
 };
+
+/*
+Blockly.Blocks.ljj_2023_loop={init:function(){
+  this.setHelpUrl("");
+  this.setColour(120);
+  this.appendDummyInput()
+      .appendField("願")
+      .appendField(new Blockly.FieldDropdown([
+      ["大家","1"],
+      ["自己","2"],
+      ["父親大人","19"],
+      ["母親大人","20"],
+      ["老公","3"],
+      ["老婆","4"],
+      ["男朋友","5"],
+      ["女朋友","6"],
+      ["好朋友","7"],
+      ["兒子","8"],
+      ["女兒","9"],
+      ["家人","10"],
+      ["學生","11"],
+      ["同學","12"],
+      ["同事","13"],
+      ["老闆","14"],
+      ["校長","15"],
+      ["鄰居","16"],
+      ["隔壁老王","17"],
+      ["遠處小三","18"],]),"WHO")
+      .appendField("新的一年能")
+      .appendField(new Blockly.FieldDropdown([
+      ["兔飛猛進，錢兔無量","0"],
+      ["小人退散","1"],
+      ["一切平安","2"],
+      ["心想事成","3"],
+      ["談一場戀愛","4"],
+      ["減肥五十公斤","5"],
+      ["跑一場馬拉松","6"],
+      ["月跑量200公里","7"],
+      ["發大財","8"],
+      ["如願退休","9"],
+      ["繼續做到65歲","10"],
+      ["升官加新","11"],
+      ["週遊世界，遊遍百國","12"],
+      ["結婚，順利脫單","13"],
+      ["私房錢愈藏愈多，不被找到","27"],
+      ["桃花處處開，左右逢源","28"],
+      ["有人幫忙推輪椅出去曬太陽","29"],
+      ["找到男朋友","14"],
+      ["找到女朋友","15"],
+      ["生小孩增產報國","16"],
+      ["身材火辣","17"],
+      ["體格健壯","18"],
+      ["溫柔賢慧","19"],
+      ["聰明智慧","20"],
+      ["疾病退散","21"],
+      ["身體健康","22"],
+      ["健康快樂","23"],
+      ["刮刮樂每刮必中","24"],
+      ["樂透中千億","25"],
+      ["百病消散","26"]]),"WHAT");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip("")}
+};
+*/
