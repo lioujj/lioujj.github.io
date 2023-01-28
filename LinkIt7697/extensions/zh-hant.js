@@ -1009,6 +1009,10 @@ Blockly.Msg.LJJ_QUNO_SONAR = "超音波感測距離(cm)";
 Blockly.Msg.EZ_LED_BLUE = "藍色";
 Blockly.Msg.LJJ_QUNO_IR = "人體紅外線感測器";
 Blockly.Msg.LJJ_QUNO_WHEN_DETECT_IR = "偵測到紅外線位移？";
+Blockly.Msg.LJJ_QUNO_WIFI_PASSWORD = "密碼";
+Blockly.Msg.LJJ_QUNO_WIFI_CONNECT_TO = "連線到Wi-Fi";
+Blockly.Msg.LJJ_QUNO_SHEET_READ_FROM = "讀取儲存格";
+Blockly.Msg.LJJ_QUNO_SHEET_APPEND = "新增資料到欄位";
 
 //Basic
 Blockly.Msg.LJJ_BASIC_HELPURL = "";
@@ -1099,3 +1103,11 @@ Blockly.Msg.LJJ_IFTTT_TITLE = "IFTTT";
 Blockly.Msg.LJJ_IFTTT_KEY = "WebHook金鑰";
 Blockly.Msg.LJJ_IFTTT_EVENT_NAME = "事件名稱";
 Blockly.Msg.LJJ_IFTTT_TOOLTIP = "";
+
+//WuKong
+Blockly.Msg.LJJ_WUKONG_HELPURL = "";
+Blockly.Msg.LJJ_WUKONG_TITLE = "悟空";
+Blockly.Msg.LJJ_WUKONG_TOOLTIP = "";
+Blockly.Msg.LJJ_WUKONG_MOTORS_LIST=[["M1","0x01"],["M2","0x02"],["所有","all"]];
+Blockly.Msg.LJJ_WUKONG_MOTOR_DIRECTION = [["正轉","0x01"],["反轉","0x02"]];
+Blockly.Msg.LJJ_WUKONG_BOARD_BLUE_LED = "板底藍色LED呼吸燈模式";

@@ -1016,6 +1016,10 @@ Blockly.Msg.LJJ_QUNO_SONAR = "get sonar distance";
 Blockly.Msg.EZ_LED_BLUE = "Blue";
 Blockly.Msg.LJJ_QUNO_IR = "PIR";
 Blockly.Msg.LJJ_QUNO_WHEN_DETECT_IR = "IR is detected?";
+Blockly.Msg.LJJ_QUNO_WIFI_PASSWORD = "password";
+Blockly.Msg.LJJ_QUNO_WIFI_CONNECT_TO = "connect to Wi-Fi";
+Blockly.Msg.LJJ_QUNO_SHEET_READ_FROM = "cell value";
+Blockly.Msg.LJJ_QUNO_SHEET_APPEND = "append data to column:";
 
 //Basic
 Blockly.Msg.LJJ_BASIC_HELPURL = "";
@@ -1106,3 +1110,11 @@ Blockly.Msg.LJJ_IFTTT_TITLE = "IFTTT";
 Blockly.Msg.LJJ_IFTTT_KEY = "WebHook key";
 Blockly.Msg.LJJ_IFTTT_EVENT_NAME = "Event Name";
 Blockly.Msg.LJJ_IFTTT_TOOLTIP = "";
+
+//WuKong
+Blockly.Msg.LJJ_WUKONG_HELPURL = "";
+Blockly.Msg.LJJ_WUKONG_TITLE = "WuKong";
+Blockly.Msg.LJJ_WUKONG_TOOLTIP = "";
+Blockly.Msg.LJJ_WUKONG_MOTORS_LIST=[["M1","0x01"],["M2","0x02"],["ALL","all"]];
+Blockly.Msg.LJJ_WUKONG_MOTOR_DIRECTION = [["clockWise","0x01"],["counterClockWise","0x02"]];
+Blockly.Msg.LJJ_WUKONG_BOARD_BLUE_LED = "on board blue LED breath mode";

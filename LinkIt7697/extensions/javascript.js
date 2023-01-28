@@ -2508,7 +2508,6 @@ Blockly.Arduino.KSB065_neopixel_set_color=function(){
 
 Blockly.Arduino.KSB065_neopixel_show=function(){
   return"ksb065Pixels.show();\n";
-
 };
 
 Blockly.Arduino.KSB065_neopixel_set_colors=function(){
@@ -4795,6 +4794,65 @@ Blockly.Arduino.ljj_serial_read_result=function(){
 
 //Quno
 Blockly.Arduino.ljj_quno={};
+Blockly.Arduino.ljj_quno_wifi=function(){
+  var a=Blockly.Arduino.valueToCode(this,"SSID",Blockly.Arduino.ORDER_ATOMIC)||"",
+      b=Blockly.Arduino.valueToCode(this,"PASSWORD",Blockly.Arduino.ORDER_ATOMIC)||"";
+      Blockly.Arduino.definitions_.define_ljj_quno_wifi_include="#include <esp8266_ifttt.h>";
+  return'setWifiInfo('+a+', '+b+');\n';
+}
+
+Blockly.Arduino.ljj_quno_ifttt=function(){
+  var a=Blockly.Arduino.valueToCode(this,"EVENT",Blockly.Arduino.ORDER_ATOMIC)||'"event"',
+      b=Blockly.Arduino.valueToCode(this,"KEY",Blockly.Arduino.ORDER_ATOMIC)||'"---"',
+      c=Blockly.Arduino.valueToCode(this,"VALUE1",Blockly.Arduino.ORDER_ATOMIC)||"",
+      d=Blockly.Arduino.valueToCode(this,"VALUE2",Blockly.Arduino.ORDER_ATOMIC)||"",
+      e=Blockly.Arduino.valueToCode(this,"VALUE3",Blockly.Arduino.ORDER_ATOMIC)||"";
+  return'sendIFTTTMessage('+b+', '+a+', String('+c+'), String('+d+'), String('+e+'));\n';
+};
+
+Blockly.Arduino.ljj_quno_thingspeak=function(){
+  var a=Blockly.Arduino.valueToCode(this,"KEY",Blockly.Arduino.ORDER_ATOMIC)||'"---"',
+    b=Blockly.Arduino.valueToCode(this,"FIELD1",Blockly.Arduino.ORDER_ATOMIC)||"0",
+    c=Blockly.Arduino.valueToCode(this,"FIELD2",Blockly.Arduino.ORDER_ATOMIC)||"0",
+    d=Blockly.Arduino.valueToCode(this,"FIELD3",Blockly.Arduino.ORDER_ATOMIC)||"0",
+    e=Blockly.Arduino.valueToCode(this,"FIELD4",Blockly.Arduino.ORDER_ATOMIC)||"0",
+    f=Blockly.Arduino.valueToCode(this,"FIELD5",Blockly.Arduino.ORDER_ATOMIC)||"0",
+    g=Blockly.Arduino.valueToCode(this,"FIELD6",Blockly.Arduino.ORDER_ATOMIC)||"0",
+    h=Blockly.Arduino.valueToCode(this,"FIELD7",Blockly.Arduino.ORDER_ATOMIC)||"0",
+    i=Blockly.Arduino.valueToCode(this,"FIELD8",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  return'sendThingSpeakMessage('+a+', String('+b+'), String('+c+'), String('+d+'), String('+e+'), String('+f+'), String('+g+'), String('+h+'), String('+i+'));\n';
+};
+
+
+
+Blockly.Arduino.ljj_quno_sheet_id=function(){
+  var a=Blockly.Arduino.valueToCode(this,"sheetId",Blockly.Arduino.ORDER_ATOMIC)||"";
+  Blockly.Arduino.definitions_.define_ljj_quno_sheets='String qunoSheetId="";\n';
+  return'qunoSheetId='+a+';\n';
+};
+
+
+Blockly.Arduino.ljj_quno_sheet_append=function(){
+  var d="qunoSheetId",
+      a=Blockly.Arduino.valueToCode(this,"VALUE1",Blockly.Arduino.ORDER_ATOMIC)||"",
+      b=Blockly.Arduino.valueToCode(this,"VALUE2",Blockly.Arduino.ORDER_ATOMIC)||"",
+      c=Blockly.Arduino.valueToCode(this,"VALUE3",Blockly.Arduino.ORDER_ATOMIC)||"";
+  return'sendGoogleSheet("append", '+d+', "A1", String('+a+'), String('+b+'), String('+c+'));\n';
+};
+
+Blockly.Arduino.ljj_quno_sheet_update=function(){
+  var a="qunoSheetId",
+      b=Blockly.Arduino.valueToCode(this,"CELL",Blockly.Arduino.ORDER_ATOMIC)||"",
+      c=Blockly.Arduino.valueToCode(this,"VALUE1",Blockly.Arduino.ORDER_ATOMIC)||"";
+  return'sendGoogleSheet("update", '+a+', '+b+', String('+c+'));\n';
+};
+
+Blockly.Arduino.ljj_quno_sheet_read=function(){
+  var a="qunoSheetId",
+      b=Blockly.Arduino.valueToCode(this,"CELL",Blockly.Arduino.ORDER_ATOMIC)||"";
+  return['sendGoogleSheet("read", '+a+', '+b+')',Blockly.Arduino.ORDER_ATOMIC];
+};
+
 Blockly.Arduino.ljj_quno_rgb=function(){
   var a=Blockly.Arduino.valueToCode(this,"COLOR",Blockly.Arduino.ORDER_ATOMIC)||"";
   a=a.replace("tft.color565","QunoLedColor");
@@ -5487,26 +5545,99 @@ Blockly.Arduino.ljj_ifttt_webhook=function(){
 	return"invokeIFTTT("+[b,a,"String("+c+")","String("+d+")","String("+e+")"].join(", ")+");\n"
 };
 
+//WuKong
+Blockly.Arduino.ljj_wukong={};
+Blockly.Arduino.ljj_wukong_motor_move=function(){
+  var a=this.getFieldValue("STAT1"),
+      b=this.getFieldValue("STAT2"),
+      c=Blockly.Arduino.valueToCode(this,"SPEED",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  Blockly.Arduino.definitions_.define_wire="#include <Wire.h>";
+  Blockly.Arduino.setups_.setup_wire_lib="Wire.begin();";
+  Blockly.Arduino.definitions_.define_ljj_wukong_motor_run='void wukongMotorRun(byte addr,byte motor, byte dir ,byte power){\n  Wire.setClock(100000);\n  byte myParams[]={motor,dir,power,0};\n  Wire.beginTransmission(addr);\n  Wire.write(myParams,4);\n  Wire.endTransmission();\n}'; 
+  if (a == "all") {
+     return'wukongMotorRun(0x10,0x01,'+b+','+c+');\nwukongMotorRun(0x10,0x02,'+b+','+c+');\n'
+  } else {
+     return'wukongMotorRun(0x10,'+a+','+b+','+c+');\n'
+  }
+};
+
+Blockly.Arduino.ljj_wukong_motor_stop=function(){
+  var a=this.getFieldValue("STAT1");
+  Blockly.Arduino.definitions_.define_wire="#include <Wire.h>";
+  Blockly.Arduino.setups_.setup_wire_lib="Wire.begin();";
+  Blockly.Arduino.definitions_.define_ljj_wukong_motor_run='void wukongMotorRun(byte addr,byte motor, byte dir ,byte power){\n  Wire.setClock(100000);\n  byte myParams[]={motor,dir,power,0};\n  Wire.beginTransmission(addr);\n  Wire.write(myParams,4);\n  Wire.endTransmission();\n}'; 
+  if (a == "all") {
+     return'wukongMotorRun(0x10,0x01,0x01,0);\nwukongMotorRun(0x10,0x02,0x01,0);\n'
+  } else {
+     return'wukongMotorRun(0x10,'+a+',0x01,0);\n'
+  }
+};
+
+Blockly.Arduino.ljj_wukong_neopixel_begin=function(){
+  var a=Blockly.Arduino.valueToCode(this,"BRIGHTNESS",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=this.getFieldValue("CARD_TYPE");
+      b=b.replace("_1","");
+	  Blockly.Arduino.definitions_.define_include_neopixel="#include <Adafruit_NeoPixel.h>";
+    Blockly.Arduino.definitions_.define_wukong_neopixel='Adafruit_NeoPixel wukongPixels = Adafruit_NeoPixel(4,'+b+',NEO_GRB + NEO_KHZ800);\n';
+    Blockly.Arduino.setups_.setup_plus_neopixel="wukongPixels.begin();\n  wukongPixels.setBrightness("+a+");\n  wukongPixels.show();\n  wukongPixels.setPixelColor(0,wukongPixels.Color(0,0,0));\n  wukongPixels.setPixelColor(1,wukongPixels.Color(0,0,0));\n  wukongPixels.setPixelColor(2,wukongPixels.Color(0,0,0));\n  wukongPixels.setPixelColor(3,wukongPixels.Color(0,0,0));\n  wukongPixels.show();";
+  return"";
+};
+
+Blockly.Arduino.ljj_wukong_neopixel_set_color=function(){
+  var a=Blockly.Arduino.valueToCode(this,"INDEX",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=Blockly.Arduino.valueToCode(this,"COLOR",Blockly.Arduino.ORDER_ATOMIC)||"";
+  b=b.replace("tft.color565","wukongPixels.Color");
+  return"wukongPixels.setPixelColor("+a+","+b+");\n";
+};
+
+Blockly.Arduino.ljj_wukong_neopixel_set_colors=function(){
+  var a=Blockly.Arduino.valueToCode(this,"COLOR",Blockly.Arduino.ORDER_ATOMIC)||"";
+  a=a.replace("tft.color565","wukongPixels.Color");
+  return"wukongPixels.setPixelColor(0,"+a+");\nwukongPixels.setPixelColor(1,"+a+");\nwukongPixels.setPixelColor(2,"+a+");\nwukongPixels.setPixelColor(3,"+a+");\nwukongPixels.show();\n";
+};
+
+Blockly.Arduino.ljj_wukong_neopixel_show=function(){
+  return"wukongPixels.show();\n";
+};
+
+Blockly.Arduino.ljj_wukong_neopixel_brightness=function(){
+  var a=Blockly.Arduino.valueToCode(this,"BRIGHTNESS",Blockly.Arduino.ORDER_ATOMIC)||"";
+  return"wukongPixels.setBrightness("+a+");\nwukongPixels.show();\n";
+};
+
+Blockly.Arduino.ljj_wukong_board_blue_enable=function(){
+  var a=this.getFieldValue("MODE");
+  Blockly.Arduino.definitions_.define_wire="#include <Wire.h>";
+  Blockly.Arduino.setups_.setup_wire_lib="Wire.begin();";
+  Blockly.Arduino.definitions_.define_ljj_wukong_motor_run='void wukongMotorRun(byte addr,byte motor, byte dir ,byte power){\n  Wire.setClock(100000);\n  byte myParams[]={motor,dir,power,0};\n  Wire.beginTransmission(addr);\n  Wire.write(myParams,4);\n  Wire.endTransmission();\n}'; 
+  if (a == "up") {
+     return'wukongMotorRun(0x10,0x11,0x00,0);\nwukongMotorRun(0x10,0x12,150,0);\n'
+  } else {
+     return'wukongMotorRun(0x10,0x12,0,0);\nwukongMotorRun(0x10,0x11,160,0);\n'
+  }
+};
+
+Blockly.Arduino.ljj_wukong_board_blue_brightness=function(){
+  var a=Blockly.Arduino.valueToCode(this,"BRIGHTNESS",Blockly.Arduino.ORDER_ATOMIC)||"";
+  Blockly.Arduino.definitions_.define_wire="#include <Wire.h>";
+  Blockly.Arduino.setups_.setup_wire_lib="Wire.begin();";
+  Blockly.Arduino.definitions_.define_ljj_wukong_motor_run='void wukongMotorRun(byte addr,byte motor, byte dir ,byte power){\n  Wire.setClock(100000);\n  byte myParams[]={motor,dir,power,0};\n  Wire.beginTransmission(addr);\n  Wire.write(myParams,4);\n  Wire.endTransmission();\n}'; 
+  return'wukongMotorRun(0x10,0x12,'+a+',0);\nwukongMotorRun(0x10,0x11,160,0);\n'
+};
 
 
 setTimeout(function(){
-
+/*
 	if (Blockly.Blocks.board_initializes_setup)
 		var xmlDoc = Blockly.Xml.textToDom('<xml xmlns="https://developers.google.com/blockly/xml"><block type="board_initializes_setup" id="0" x="100" y="50"><statement name="CONTENT"><block type="ljj_2023_init"></block></statement><next><block type="initializes_loop" id="1"><statement name="CONTENT"><block type="ljj_2023_loop"><value name="WHO"><block type="ljj_2023_who"></block></value><value name="WHAT"><block type="ljj_2023_what"></block></value></block></statement></block></next></block></xml>');
 	else
 		var xmlDoc = Blockly.Xml.textToDom('<xml xmlns="https://developers.google.com/blockly/xml"><block type="initializes_setup" id="0" x="100" y="50"><next><block type="initializes_loop" id="1"></block></next></block></xml>');
-/*
-	if (Blockly.Blocks.board_initializes_setup)
-		var xmlDoc = Blockly.Xml.textToDom('<xml xmlns="https://developers.google.com/blockly/xml"><block type="board_initializes_setup" id="0" x="100" y="50"><statement name="CONTENT"><block type="ljj_2023_init"></block></statement><next><block type="initializes_loop" id="1"><statement name="CONTENT"><block type="ljj_2023_loop"></block></statement></block></next></block></xml>');
-	else
-		var xmlDoc = Blockly.Xml.textToDom('<xml xmlns="https://developers.google.com/blockly/xml"><block type="initializes_setup" id="0" x="100" y="50"><next><block type="initializes_loop" id="1"></block></next></block></xml>');
 */
-/*
 	if (Blockly.Blocks.board_initializes_setup)
 		var xmlDoc = Blockly.Xml.textToDom('<xml xmlns="https://developers.google.com/blockly/xml"><block type="board_initializes_setup" id="0" x="100" y="50">         <next><block type="initializes_loop" id="1"></block></next></block></xml>');
 	else
 		var xmlDoc = Blockly.Xml.textToDom('<xml xmlns="https://developers.google.com/blockly/xml"><block type="initializes_setup" id="0" x="100" y="50"><next><block type="initializes_loop" id="1"></block></next></block></xml>');
-*/
+
 	Blockly.mainWorkspace.clear();					
 	Blockly.Xml.domToWorkspace(xmlDoc, Blockly.mainWorkspace);
 }, 3000);

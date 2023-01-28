@@ -74,4 +74,5 @@
 <category><name>ESP_NOW</name><replace>ESP_NOW廣播</replace></category>
 <category><name>picoDualCore</name><replace>雙核心</replace></category>
 <category><name>HX711</name><replace>HX711重量感測</replace></category>
+<category><name>WuKong</name><replace>悟空擴展板</replace></category>
 </xml>

@@ -372,6 +372,137 @@
       <block type="ljj_pixelbit_microbit_pins"></block>
     </category>
     <category id="category_ljj_quno" name="Quno">
+      <category id="category_ljj_quno_wifi" name="Quno WiFi">
+        <block type="ljj_quno_wifi">
+          <value name="SSID">
+            <block type="text">
+              <field name="TEXT"></field>
+            </block>
+          </value>
+          <value name="PASSWORD">
+            <block type="text">
+              <field name="TEXT"></field>
+            </block>
+          </value>
+        </block>
+        <block type="ljj_quno_ifttt">
+          <value name="KEY">
+            <block type="text">
+              <field name="TEXT">your WebHook key</field>
+            </block>
+          </value>
+          <value name="EVENT">
+            <block type="text">
+              <field name="TEXT">your Event Name</field>
+            </block>
+          </value>
+          <value name="VALUE1">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="VALUE2">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="VALUE3">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+        </block>
+				<block type="ljj_quno_thingspeak">
+					<value name="KEY">
+						<block type="text">
+							<field name="TEXT">your ThingSpeak key</field>
+						</block>
+					</value>
+					<value name="FIELD1">
+						<block type="math_number">
+							<field name="NUM">0</field>
+						</block>
+					</value>
+					<value name="FIELD2">
+						<block type="math_number">
+							<field name="NUM">0</field>
+						</block>
+					</value>
+					<value name="FIELD3">
+						<block type="math_number">
+							<field name="NUM">0</field>
+						</block>
+					</value>
+					<value name="FIELD4">
+						<block type="math_number">
+							<field name="NUM">0</field>
+						</block>
+					</value>
+					<value name="FIELD5">
+						<block type="math_number">
+							<field name="NUM">0</field>
+						</block>
+					</value>
+					<value name="FIELD6">
+						<block type="math_number">
+							<field name="NUM">0</field>
+						</block>
+					</value>
+					<value name="FIELD7">
+						<block type="math_number">
+							<field name="NUM">0</field>
+						</block>
+					</value>
+					<value name="FIELD8">
+						<block type="math_number">
+							<field name="NUM">0</field>
+						</block>
+					</value>
+				</block>
+        <block type="ljj_quno_sheet_id">
+          <value name="sheetId">
+            <block type="text">
+              <field name="TEXT">Enter your SheetID</field>
+            </block>
+          </value>
+        </block>
+        <block type="ljj_quno_sheet_append">
+          <value name="VALUE1">
+            <block type="text">
+              <field name="TEXT">$datetime$</field>
+            </block>
+          </value>
+          <value name="VALUE2">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="VALUE3">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+        </block>
+        <block type="ljj_quno_sheet_update">
+          <value name="CELL">
+            <block type="text">
+              <field name="TEXT">A1</field>
+            </block>
+          </value>        
+          <value name="VALUE1">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+        </block>
+        <block type="ljj_quno_sheet_read">
+          <value name="CELL">
+            <block type="text">
+              <field name="TEXT">A1</field>
+            </block>
+          </value>        
+        </block>
+      </category>
       <category id="category_ljj_max7219" name="MAX7219">
         <block type="ljj_max7219_init">
           <value name="PIN_DIN">
@@ -2691,6 +2822,54 @@
         <value name="DURATION">
           <block type="math_number">
             <field name="NUM">300</field>
+          </block>
+        </value>
+      </block>
+    </category>
+    <category id="category_ljj_wukong" name="WuKong">
+			<block type="ljj_wukong_motor_move">
+				<value name="SPEED">
+					<block type="math_number">
+						<field name="NUM">0</field>
+						</block>
+				</value>
+			</block>
+			<block type="ljj_wukong_motor_stop"></block>
+      <block type="ljj_wukong_neopixel_begin">
+        <value name="BRIGHTNESS">
+          <block type="math_number">
+            <field name="NUM">30</field>
+          </block>
+        </value>
+      </block>
+      <block type="ljj_wukong_neopixel_set_color">
+        <value name="INDEX">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="COLOR">
+          <block type="ttgo_getFromColorPicker"></block>
+        </value>
+      </block>
+      <block type="ljj_wukong_neopixel_show"></block>
+      <block type="ljj_wukong_neopixel_set_colors">
+        <value name="COLOR">
+          <block type="ttgo_getFromColorPicker"></block>
+        </value>
+      </block>
+      <block type="ljj_wukong_neopixel_brightness">
+        <value name="BRIGHTNESS">
+          <block type="math_number">
+            <field name="NUM">30</field>
+          </block>
+        </value>
+      </block>
+      <block type="ljj_wukong_board_blue_enable"></block>
+      <block type="ljj_wukong_board_blue_brightness">
+        <value name="BRIGHTNESS">
+          <block type="math_number">
+            <field name="NUM">0</field>
           </block>
         </value>
       </block>
