@@ -4954,7 +4954,7 @@ Blockly.Arduino.ljj_quno_dht11=function(){
     myType='readTemperature';
   else if (b=='humidity')
     myType='readHumidity';
-  Blockly.Arduino.definitions_['define_dht_']="#include <DHT.h>";
+  Blockly.Arduino.definitions_['define_dht_']="#include <DHT_mini.h>";
   Blockly.Arduino.definitions_['define_dht_set']="DHT dht11_p"+a+"("+a+", DHT11);";
   Blockly.Arduino.setups_["setup_dht_"]="dht11_p"+a+".begin();";
   return["dht11_p"+a+"."+myType+"()",Blockly.Arduino.ORDER_ATOMIC];
