@@ -5051,10 +5051,10 @@ Blockly.Arduino.ljj_basic_dht11=function(){
   else if (b=='humidity')
     myType='readHumidity';
   var tempBoardName=getBoardFullName();
-  if (tempBoardName=='arduino:avr:pro' || tempBoardName=='arduino:avr:nano' || tempBoardName.startsWith("rp2040:rp2040:rpipico"))
-    Blockly.Arduino.definitions_['define_dht_']="#include <DHT_mini.h>";
-  else
-    Blockly.Arduino.definitions_['define_dht_']="#include <DHT.h>";
+  //if (tempBoardName=='arduino:avr:pro' || tempBoardName=='arduino:avr:nano' || tempBoardName.startsWith("rp2040:rp2040:rpipico"))
+  Blockly.Arduino.definitions_['define_dht_']="#include <DHT_mini.h>";
+  //else
+  //  Blockly.Arduino.definitions_['define_dht_']="#include <DHT.h>";
   Blockly.Arduino.definitions_['define_dht_set']="DHT dht11_p"+a+"("+a+", DHT11);";
   Blockly.Arduino.setups_["setup_dht_"]="dht11_p"+a+".begin();";
   return["dht11_p"+a+"."+myType+"()",Blockly.Arduino.ORDER_ATOMIC];
