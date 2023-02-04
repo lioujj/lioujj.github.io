@@ -385,6 +385,7 @@
             </block>
           </value>
         </block>
+        <block type="ljj_quno_wifi_localIP"></block>
         <block type="ljj_quno_ifttt">
           <value name="KEY">
             <block type="text">
@@ -502,6 +503,29 @@
             </block>
           </value>        
         </block>
+        <block type="ljj_quno_udp_register">
+          <value name="IP">
+            <block type="text">
+              <field name="TEXT"></field>
+            </block>
+          </value>
+          <value name="PORT">
+            <block type="math_number">
+              <field name="NUM">7697</field>
+            </block>
+          </value>          
+        </block>
+        <block type="ljj_quno_udp_broadcastIP"></block>
+        <block type="ljj_quno_udp_unrigister"></block>
+        <block type="ljj_quno_udp_send">
+          <value name="MESSAGE">
+            <block type="text">
+              <field name="TEXT"></field>
+            </block>
+          </value>        
+        </block>
+        <block type="ljj_quno_udp_received_event"></block>
+        <block type="ljj_quno_udp_received_msg"></block>
       </category>
       <category id="category_ljj_max7219" name="MAX7219">
         <block type="ljj_max7219_init">

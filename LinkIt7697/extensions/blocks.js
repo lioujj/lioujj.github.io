@@ -8059,6 +8059,7 @@ Blockly.Blocks.ljj_quno.HUE6=60;
 Blockly.Blocks.ljj_quno.HUE7=320;
 Blockly.Blocks.ljj_quno.HUE8=120;
 Blockly.Blocks.ljj_quno.HUE9=250;
+Blockly.Blocks.ljj_quno.HUE10=160;
 
 Blockly.Blocks.ljj_quno_wifi={init:function(){
   this.setHelpUrl(Blockly.Msg.LJJ_QUNO_HELPURL);
@@ -8075,6 +8076,17 @@ Blockly.Blocks.ljj_quno_wifi={init:function(){
   this.setInputsInline(!0);
   this.setPreviousStatement(!0,null);
   this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.LJJ_QUNO_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_quno_wifi_localIP={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_QUNO_HELPURL);
+  this.setColour(Blockly.Blocks.linkit.HUE);
+  this.appendDummyInput()
+      .appendField("Quno")
+      .appendField(Blockly.Msg.LJJ_QUNO_WIFI_LOCAL_IP);
+  this.setInputsInline(!0);
+  this.setOutput(!0,"String");
   this.setTooltip(Blockly.Msg.LJJ_QUNO_TOOLTIP)}
 };
 
@@ -8183,6 +8195,90 @@ Blockly.Blocks.ljj_quno_sheet_read={init:function(){
 	    .appendField(Blockly.Msg.LJJ_QUNO_SHEET_READ_FROM);
   this.setInputsInline(!0);
   this.setOutput(!0,"String");
+  this.setTooltip(Blockly.Msg.LJJ_QUNO_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_quno_udp_register={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_QUNO_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_quno.HUE10);
+  this.appendDummyInput()
+      .appendField("Quno")
+      .appendField(Blockly.Msg.UDP_RIGISTER);
+  this.appendValueInput("IP")
+      .setCheck("String")
+	    .setAlign(Blockly.ALIGN_RIGHT)
+	    .appendField(Blockly.Msg.LJJ_QUNO_REMOTE_IP);
+  this.appendValueInput("PORT")
+      .setCheck("Number")
+	    .setAlign(Blockly.ALIGN_RIGHT)
+	    .appendField(Blockly.Msg.LJJ_QUNO_REMOTE_PORT);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_QUNO_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_quno_udp_broadcastIP={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_QUNO_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_quno.HUE10);
+  this.appendDummyInput()
+      .appendField("Quno")
+      .appendField(Blockly.Msg.LJJ_QUNO_UDP_BROADCAST_IP);
+  this.setInputsInline(!0);
+  this.setOutput(!0,"String");
+  this.setTooltip(Blockly.Msg.LJJ_QUNO_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_quno_udp_send={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_QUNO_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_quno.HUE10);
+  this.appendDummyInput()
+      .appendField("Quno")
+      .appendField(Blockly.Msg.UDP_RIGISTER);
+  this.appendValueInput("MESSAGE")
+      .setCheck("String")
+	    .setAlign(Blockly.ALIGN_RIGHT)
+	    .appendField(Blockly.Msg.LJJ_QUNO_UDP_SEND);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_QUNO_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_quno_udp_received_event={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_QUNO_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_quno.HUE10);
+  this.appendDummyInput()
+      .appendField("Quno")
+      .appendField(Blockly.Msg.UDP_RIGISTER)
+      .appendField(Blockly.Msg.LJJ_QUNO_UDP_RECEIVED_EVENT);
+  this.setInputsInline(!0);
+  this.appendStatementInput("MSG_UDP");
+  this.setTooltip(Blockly.Msg.LJJ_QUNO_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_quno_udp_received_msg={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_QUNO_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_quno.HUE10);
+  this.appendDummyInput()
+      .appendField("Quno")
+      .appendField(Blockly.Msg.UDP_RIGISTER)
+      .appendField(Blockly.Msg.LJJ_QUNO_RECEIVED_MSG);
+  this.setInputsInline(!0);
+  this.setOutput(!0,"String");
+  this.setTooltip(Blockly.Msg.LJJ_QUNO_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_quno_udp_unrigister={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_QUNO_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_quno.HUE10);
+  this.appendDummyInput()
+      .appendField("Quno")
+      .appendField(Blockly.Msg.UDP_RIGISTER)
+      .appendField(Blockly.Msg.UDP_UNRIGISTER);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
   this.setTooltip(Blockly.Msg.LJJ_QUNO_TOOLTIP)}
 };
 

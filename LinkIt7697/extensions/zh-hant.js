@@ -1013,6 +1013,15 @@ Blockly.Msg.LJJ_QUNO_WIFI_PASSWORD = "密碼";
 Blockly.Msg.LJJ_QUNO_WIFI_CONNECT_TO = "連線到Wi-Fi";
 Blockly.Msg.LJJ_QUNO_SHEET_READ_FROM = "讀取儲存格";
 Blockly.Msg.LJJ_QUNO_SHEET_APPEND = "新增資料到欄位";
+Blockly.Msg.UDP_RIGISTER = "UDP";
+Blockly.Msg.UDP_UNRIGISTER = "停止UDP功能";
+Blockly.Msg.LJJ_QUNO_REMOTE_IP = "聆聽遠端IP";
+Blockly.Msg.LJJ_QUNO_REMOTE_PORT = "設定互相通訊埠";
+Blockly.Msg.LJJ_QUNO_UDP_SEND = "發送UDP訊息";
+Blockly.Msg.LJJ_QUNO_UDP_RECEIVED_EVENT = "當收到UDP訊息時";
+Blockly.Msg.LJJ_QUNO_RECEIVED_MSG = "收到的UDP訊息";
+Blockly.Msg.LJJ_QUNO_UDP_BROADCAST_IP = "取得UDP廣播IP位址";
+Blockly.Msg.LJJ_QUNO_WIFI_LOCAL_IP = "取得WiFi IP位址";
 
 //Basic
 Blockly.Msg.LJJ_BASIC_HELPURL = "";

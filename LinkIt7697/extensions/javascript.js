@@ -4798,8 +4798,13 @@ Blockly.Arduino.ljj_quno_wifi=function(){
   var a=Blockly.Arduino.valueToCode(this,"SSID",Blockly.Arduino.ORDER_ATOMIC)||"",
       b=Blockly.Arduino.valueToCode(this,"PASSWORD",Blockly.Arduino.ORDER_ATOMIC)||"";
       Blockly.Arduino.definitions_.define_ljj_quno_wifi_include="#include <esp8266_ifttt.h>";
-  return'setWifiInfo('+a+', '+b+');\n';
+      Blockly.Arduino.definitions_.define_ljj_quno_wifi_invoke='String qunoLocalIP="";\nString qunoBroadcastIP="";\n';
+  return'qunoLocalIP=setWifiInfo('+a+', '+b+');\nqunoBroadcastIP=qunoLocalIP.substring(0,  qunoLocalIP.lastIndexOf("."))+".255";\n';
 }
+
+Blockly.Arduino.ljj_quno_wifi_localIP=function(){
+  return['qunoLocalIP',Blockly.Arduino.ORDER_ATOMIC];
+};
 
 Blockly.Arduino.ljj_quno_ifttt=function(){
   var a=Blockly.Arduino.valueToCode(this,"EVENT",Blockly.Arduino.ORDER_ATOMIC)||'"event"',
@@ -4823,14 +4828,11 @@ Blockly.Arduino.ljj_quno_thingspeak=function(){
   return'sendThingSpeakMessage('+a+', String('+b+'), String('+c+'), String('+d+'), String('+e+'), String('+f+'), String('+g+'), String('+h+'), String('+i+'));\n';
 };
 
-
-
 Blockly.Arduino.ljj_quno_sheet_id=function(){
   var a=Blockly.Arduino.valueToCode(this,"sheetId",Blockly.Arduino.ORDER_ATOMIC)||"";
   Blockly.Arduino.definitions_.define_ljj_quno_sheets='String qunoSheetId="";\n';
   return'qunoSheetId='+a+';\n';
 };
-
 
 Blockly.Arduino.ljj_quno_sheet_append=function(){
   var d="qunoSheetId",
@@ -4851,6 +4853,40 @@ Blockly.Arduino.ljj_quno_sheet_read=function(){
   var a="qunoSheetId",
       b=Blockly.Arduino.valueToCode(this,"CELL",Blockly.Arduino.ORDER_ATOMIC)||"";
   return['sendGoogleSheet("read", '+a+', '+b+')',Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.ljj_quno_udp_register=function(){
+  var a=Blockly.Arduino.valueToCode(this,"IP",Blockly.Arduino.ORDER_ATOMIC)||"",
+      b=Blockly.Arduino.valueToCode(this,"PORT",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  return'listenUdpPort('+a+','+b+');\n';
+};
+
+
+Blockly.Arduino.ljj_quno_udp_broadcastIP=function(){
+  return['qunoBroadcastIP',Blockly.Arduino.ORDER_ATOMIC];
+};
+
+
+Blockly.Arduino.ljj_quno_udp_unrigister=function(){
+  return'stopUDP();\n';
+};
+
+Blockly.Arduino.ljj_quno_udp_send=function(){
+  var a=Blockly.Arduino.valueToCode(this,"MESSAGE",Blockly.Arduino.ORDER_ATOMIC)||"";
+  return'sendUDPmessage('+a+');\n';
+};
+
+Blockly.Arduino.ljj_quno_udp_received_event=function(){
+  var a=Blockly.Arduino.statementToCode(this,"MSG_UDP");
+  a=a.replace(/\n  /g,"\n  ");
+  Blockly.Arduino.definitions_.define_ljj_quno_udp_msg_invoke='String qunoUDPmsg="";';
+  Blockly.Arduino.definitions_.define_ljj_quno_udp_event='void qunoCheckUDP(){\n  qunoUDPmsg=checkUDPmessage();\n'+a+'}\n';
+  Blockly.Arduino.loops_.ljj_quno_udp_loop="qunoCheckUDP();\n";
+  return'';
+}
+
+Blockly.Arduino.ljj_quno_udp_received_msg=function(){
+  return['qunoUDPmsg',Blockly.Arduino.ORDER_ATOMIC];
 };
 
 Blockly.Arduino.ljj_quno_rgb=function(){

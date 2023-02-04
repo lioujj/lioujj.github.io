@@ -1020,6 +1020,15 @@ Blockly.Msg.LJJ_QUNO_WIFI_PASSWORD = "password";
 Blockly.Msg.LJJ_QUNO_WIFI_CONNECT_TO = "connect to Wi-Fi";
 Blockly.Msg.LJJ_QUNO_SHEET_READ_FROM = "cell value";
 Blockly.Msg.LJJ_QUNO_SHEET_APPEND = "append data to column:";
+Blockly.Msg.UDP_RIGISTER = "UDP";
+Blockly.Msg.UDP_UNRIGISTER = "stop UDP";
+Blockly.Msg.LJJ_QUNO_REMOTE_IP = "listen to remote ip";
+Blockly.Msg.LJJ_QUNO_REMOTE_PORT = "set port";
+Blockly.Msg.LJJ_QUNO_UDP_SEND = "send UDP message";
+Blockly.Msg.LJJ_QUNO_UDP_RECEIVED_EVENT = "when receive UDP message";
+Blockly.Msg.LJJ_QUNO_RECEIVED_MSG = "received message";
+Blockly.Msg.LJJ_QUNO_UDP_BROADCAST_IP = "get UDP broadcast IP";
+Blockly.Msg.LJJ_QUNO_WIFI_LOCAL_IP = "get WiFi local IP";
 
 //Basic
 Blockly.Msg.LJJ_BASIC_HELPURL = "";
