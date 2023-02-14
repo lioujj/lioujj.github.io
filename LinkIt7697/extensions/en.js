@@ -1038,6 +1038,10 @@ Blockly.Msg.LJJ_BASIC_BUTTON_EVENT = "is";
 Blockly.Msg.LJJ_BASIC_DHT11 = "DHT11 get";
 Blockly.Msg.LJJ_BASIC_DHT11_MODE = [["temperature(C)","temperature"],["humidity(%)","humidity"]];
 Blockly.Msg.LJJ_BASIC_LEDS_TOTAL="how many LEDs?";
+Blockly.Msg.LJJ_BASIC_LEDS_PIXEL_INDEX="LED";
+Blockly.Msg.LJJ_BASIC_LEDS_SET_ALL_COLORS="set all LEDs color";
+Blockly.Msg.LJJ_BASIC_VARIABLE_NAME='variable';
+Blockly.Msg.LJJ_BASIC_LEDS_CLEAR = 'clear all LEDs';
 
 //MAX7219
 Blockly.Msg.LJJ_MAX7219_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/max7219";

@@ -143,6 +143,23 @@
         </value>
       </block>
       <block type="ttgo_getFromColorPicker"></block>
+      <block type="ttgo_getRGBcolor">
+        <value name="RED">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="GREEN">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="BLUE">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
       <block type="ljj_basic_tone">
         <value name="PIN">
           <block type="board_nano_pins">
@@ -233,6 +250,7 @@
           </block>
         </value>
       </block>
+      <block type="ljj_ws2812_neopixel_clear"></block>
     </category>
     <category id="category_ljj_pixelbit" name="Pixel:Bit">
       <block type="board_initializes_setup">
@@ -3825,6 +3843,67 @@
         </value>
       </block>
       <block type="ljj_hx711_power"></block>
+    </category>
+    <category id="category_ljj_ws2812" name="WS2812">
+      <block type="ljj_ws2812_neopixel_begin">
+        <value name="PIN">
+          <block type="math_number">
+            <field name="NUM">2</field>
+          </block>
+        </value>
+        <value name="TOTAL">
+          <block type="math_number">
+            <field name="NUM">10</field>
+          </block>
+        </value>
+        <value name="BRIGHTNESS">
+          <block type="math_number">
+            <field name="NUM">30</field>
+          </block>
+        </value>
+      </block>
+      <block type="ljj_ws2812_neopixel_set_color">
+        <value name="INDEX">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="COLOR">
+          <block type="ttgo_getFromColorPicker"></block>
+        </value>
+      </block>
+      <block type="ljj_ws2812_neopixel_show"></block>
+      <block type="ljj_ws2812_neopixel_set_colors">
+        <value name="COLOR">
+          <block type="ttgo_getFromColorPicker"></block>
+        </value>
+      </block>
+      <block type="ljj_ws2812_neopixel_brightness">
+        <value name="BRIGHTNESS">
+          <block type="math_number">
+            <field name="NUM">30</field>
+          </block>
+        </value>
+      </block>
+      <block type="ljj_ws2812_neopixel_clear"></block>
+      <block type="ttgo_getFromColorPicker"></block>
+      <block type="ttgo_getRGBcolor">
+        <value name="RED">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="GREEN">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="BLUE">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
     </category>
 <!--
     <category id="category_mpu6050" name="MPU6050_I2C">

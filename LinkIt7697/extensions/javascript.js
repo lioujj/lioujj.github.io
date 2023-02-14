@@ -5099,34 +5099,44 @@ Blockly.Arduino.ljj_basic_dht11=function(){
 Blockly.Arduino.ljj_ws2812_neopixel_begin=function(){
   var a=Blockly.Arduino.valueToCode(this,"BRIGHTNESS",Blockly.Arduino.ORDER_ATOMIC)||"0",
       b=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
-      c=Blockly.Arduino.valueToCode(this,"TOTAL",Blockly.Arduino.ORDER_ATOMIC)||"0";
+      c=Blockly.Arduino.valueToCode(this,"TOTAL",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      d=Blockly.Arduino.nameDB_.getName(this.getFieldValue('varName'), Blockly.VARIABLE_CATEGORY_NAME);
 	Blockly.Arduino.definitions_.define_include_neopixel="#include <Adafruit_NeoPixel.h>";
-  Blockly.Arduino.definitions_.define_ws2812_neopixel='int ws2812LEDs='+c+';\nAdafruit_NeoPixel ws2812Pixels = Adafruit_NeoPixel(ws2812LEDs,'+b+',NEO_GRB + NEO_KHZ800);\n';
-  Blockly.Arduino.definitions_.ljj_ws2812_event='void setAllLedsColor(int counts,uint32_t myLedColor)\n{\n  for(int i=0;i<counts;i++)\n    ws2812Pixels.setPixelColor(i,myLedColor);\n  ws2812Pixels.show();\n}\n';
-  Blockly.Arduino.setups_.setup_ws2812_neopixel="ws2812Pixels.begin();\n  ws2812Pixels.setBrightness("+a+");\n  ws2812Pixels.show();\n  setAllLedsColor("+c+",ws2812Pixels.Color(0,0,0));";
+  Blockly.Arduino.definitions_['define_ws2812_neopixel_'+d]='Adafruit_NeoPixel '+d+' = Adafruit_NeoPixel('+c+','+b+',NEO_GRB + NEO_KHZ800);';
+  Blockly.Arduino.definitions_['ljj_ws2812_'+d+'_event']='void '+d+'SetAllLedsColor(uint32_t myLedColor)\n{\n  for(int i=0;i<'+c+';i++)\n    '+d+'.setPixelColor(i,myLedColor);\n  '+d+'.show();\n}\n';
+  Blockly.Arduino.setups_['setup_ws2812_neopixel_'+d]=''+d+'.begin();\n  '+d+'.setBrightness('+a+');\n  '+d+'.show();\n  '+d+'SetAllLedsColor('+d+'.Color(0,0,0));';
   return"";
 };
 
 Blockly.Arduino.ljj_ws2812_neopixel_set_color=function(){
   var a=Blockly.Arduino.valueToCode(this,"INDEX",Blockly.Arduino.ORDER_ATOMIC)||"0",
-      b=Blockly.Arduino.valueToCode(this,"COLOR",Blockly.Arduino.ORDER_ATOMIC)||"";
-  b=b.replace("tft.color565","ws2812Pixels.Color");
-  return"ws2812Pixels.setPixelColor("+a+","+b+");\n";
+      b=Blockly.Arduino.valueToCode(this,"COLOR",Blockly.Arduino.ORDER_ATOMIC)||"",
+      c=Blockly.Arduino.nameDB_.getName(this.getFieldValue('varName'), Blockly.VARIABLE_CATEGORY_NAME);
+  b=b.replace('tft.color565',c+'.Color');
+  return c+'.setPixelColor('+a+','+b+');\n';
 };
 
 Blockly.Arduino.ljj_ws2812_neopixel_show=function(){
-  return"ws2812Pixels.show();\n";
+  var a=Blockly.Arduino.nameDB_.getName(this.getFieldValue('varName'), Blockly.VARIABLE_CATEGORY_NAME);
+  return a+'.show();\n';
 };
 
 Blockly.Arduino.ljj_ws2812_neopixel_set_colors=function(){
-  var a=Blockly.Arduino.valueToCode(this,"COLOR",Blockly.Arduino.ORDER_ATOMIC)||"";
-  a=a.replace("tft.color565","ws2812Pixels.Color");
-  return"setAllLedsColor(ws2812LEDs,"+a+");\n";
+  var a=Blockly.Arduino.valueToCode(this,"COLOR",Blockly.Arduino.ORDER_ATOMIC)||"",
+      b=Blockly.Arduino.nameDB_.getName(this.getFieldValue('varName'), Blockly.VARIABLE_CATEGORY_NAME);
+  a=a.replace('tft.color565',b+'.Color');
+  return b+'SetAllLedsColor('+a+');\n';
 };
 
 Blockly.Arduino.ljj_ws2812_neopixel_brightness=function(){
-  var a=Blockly.Arduino.valueToCode(this,"BRIGHTNESS",Blockly.Arduino.ORDER_ATOMIC)||"";
-  return"ws2812Pixels.setBrightness("+a+");\nws2812Pixels.show();\n";
+  var a=Blockly.Arduino.valueToCode(this,"BRIGHTNESS",Blockly.Arduino.ORDER_ATOMIC)||"",
+      b=Blockly.Arduino.nameDB_.getName(this.getFieldValue('varName'), Blockly.VARIABLE_CATEGORY_NAME);
+  return b+'.setBrightness('+a+');\n'+b+'.show();\n';
+};
+
+Blockly.Arduino.ljj_ws2812_neopixel_clear=function(){
+  var a=Blockly.Arduino.nameDB_.getName(this.getFieldValue('varName'), Blockly.VARIABLE_CATEGORY_NAME);
+  return a+'.clear();\n'+a+'.show();\n';
 };
 
 //MAX7219
