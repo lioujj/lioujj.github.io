@@ -7967,7 +7967,7 @@ Blockly.Blocks.ljj_basic_dht11={init:function(){
 };
 
 Blockly.Blocks.ljj_ws2812_neopixel_begin={init:function(){
-  this.setHelpUrl(Blockly.Msg.LJJ_BASIC_HELPURL);
+  this.setHelpUrl(Blockly.Msg.LJJ_WS2812_HELPURL);
   this.setColour(Blockly.Blocks.ljj_5012.HUE5);
   this.appendDummyInput()
       .appendField("WS2812")
@@ -7990,7 +7990,7 @@ Blockly.Blocks.ljj_ws2812_neopixel_begin={init:function(){
 };
 
 Blockly.Blocks.ljj_ws2812_neopixel_set_color={init:function(){
-  this.setHelpUrl(Blockly.Msg.LJJ_BASIC_HELPURL);
+  this.setHelpUrl(Blockly.Msg.LJJ_WS2812_HELPURL);
   this.setColour(Blockly.Blocks.ljj_5012.HUE5);
   this.appendDummyInput()
       .appendField("WS2812")
@@ -8009,7 +8009,7 @@ Blockly.Blocks.ljj_ws2812_neopixel_set_color={init:function(){
 };
 
 Blockly.Blocks.ljj_ws2812_neopixel_show={init:function(){
-  this.setHelpUrl(Blockly.Msg.LJJ_BASIC_HELPURL);
+  this.setHelpUrl(Blockly.Msg.LJJ_WS2812_HELPURL);
   this.setColour(Blockly.Blocks.ljj_5012.HUE5);
   this.appendDummyInput()
       .appendField("WS2812")
@@ -8023,7 +8023,7 @@ Blockly.Blocks.ljj_ws2812_neopixel_show={init:function(){
 };
 
 Blockly.Blocks.ljj_ws2812_neopixel_set_colors={init:function(){
-  this.setHelpUrl(Blockly.Msg.LJJ_BASIC_HELPURL);
+  this.setHelpUrl(Blockly.Msg.LJJ_WS2812_HELPURL);
   this.setColour(Blockly.Blocks.ljj_5012.HUE5);
   this.appendDummyInput()
       .appendField("WS2812")
@@ -8039,7 +8039,7 @@ Blockly.Blocks.ljj_ws2812_neopixel_set_colors={init:function(){
 };
 
 Blockly.Blocks.ljj_ws2812_neopixel_brightness={init:function(){
-  this.setHelpUrl(Blockly.Msg.LJJ_BASIC_HELPURL);
+  this.setHelpUrl(Blockly.Msg.LJJ_WS2812_HELPURL);
   this.setColour(Blockly.Blocks.ljj_5012.HUE5);
   this.appendDummyInput()
       .appendField("WS2812")
@@ -8055,7 +8055,7 @@ Blockly.Blocks.ljj_ws2812_neopixel_brightness={init:function(){
 };
 
 Blockly.Blocks.ljj_ws2812_neopixel_clear={init:function(){
-  this.setHelpUrl(Blockly.Msg.LJJ_BASIC_HELPURL);
+  this.setHelpUrl(Blockly.Msg.LJJ_WS2812_HELPURL);
   this.setColour(Blockly.Blocks.ljj_5012.HUE5);
   this.appendDummyInput()
       .appendField("WS2812")

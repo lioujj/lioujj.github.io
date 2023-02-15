@@ -1035,6 +1035,7 @@ Blockly.Msg.LJJ_BASIC_LEDS_PIXEL_INDEX="LED";
 Blockly.Msg.LJJ_BASIC_LEDS_SET_ALL_COLORS="設定並顯示所有LED燈";
 Blockly.Msg.LJJ_BASIC_VARIABLE_NAME="變數";
 Blockly.Msg.LJJ_BASIC_LEDS_CLEAR = '關閉所有LED';
+Blockly.Msg.LJJ_WS2812_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/ws2812";
 
 //MAX7219
 Blockly.Msg.LJJ_MAX7219_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/max7219";

@@ -1042,6 +1042,7 @@ Blockly.Msg.LJJ_BASIC_LEDS_PIXEL_INDEX="LED";
 Blockly.Msg.LJJ_BASIC_LEDS_SET_ALL_COLORS="set all LEDs color";
 Blockly.Msg.LJJ_BASIC_VARIABLE_NAME='variable';
 Blockly.Msg.LJJ_BASIC_LEDS_CLEAR = 'clear all LEDs';
+Blockly.Msg.LJJ_WS2812_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/ws2812";
 
 //MAX7219
 Blockly.Msg.LJJ_MAX7219_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/max7219";
