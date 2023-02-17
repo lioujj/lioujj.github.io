@@ -4880,7 +4880,7 @@ Blockly.Arduino.ljj_quno_udp_received_event=function(){
   var a=Blockly.Arduino.statementToCode(this,"MSG_UDP");
   a=a.replace(/\n  /g,"\n  ");
   Blockly.Arduino.definitions_.define_ljj_quno_udp_msg_invoke='String qunoUDPmsg="";';
-  Blockly.Arduino.definitions_.define_ljj_quno_udp_event='void qunoCheckUDP(){\n  qunoUDPmsg=checkUDPmessage();\n'+a+'}\n';
+  Blockly.Arduino.definitions_.define_ljj_quno_udp_event='void qunoCheckUDP(){\n  qunoUDPmsg=checkUDPmessage();\n  if (qunoUDPmsg=="")\n    return;\n'+a+'}\n';
   Blockly.Arduino.loops_.ljj_quno_udp_loop="qunoCheckUDP();\n";
   return'';
 }
@@ -4957,6 +4957,18 @@ Blockly.Arduino.ljj_quno_sonar=function(){
   return['ultrasonic_.convert(ultrasonic_.timing(), Ultrasonic::CM)',Blockly.Arduino.ORDER_ATOMIC];
 };
 
+Blockly.Arduino.ljj_quno_digital_read=function(){
+  var a=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"";
+  Blockly.Arduino.setups_["setup_"+a+"_"]="pinMode("+a+", INPUT);";
+  return["digitalRead("+a+")",Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.ljj_quno_analog_read=function(){
+  var a=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"";
+  Blockly.Arduino.setups_["setup_"+a+"_"]="pinMode("+a+", INPUT);";
+  return["analogRead("+a+")",Blockly.Arduino.ORDER_ATOMIC];
+};
+
 Blockly.Arduino.ljj_quno_pir_init=function(){
   var a=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"";
   Blockly.Arduino.definitions_.define_ljj_quno_pir_invoke="byte pir_pin="+a+";";
@@ -4991,8 +5003,8 @@ Blockly.Arduino.ljj_quno_dht11=function(){
   else if (b=='humidity')
     myType='readHumidity';
   Blockly.Arduino.definitions_['define_dht_']="#include <DHT_mini.h>";
-  Blockly.Arduino.definitions_['define_dht_set']="DHT dht11_p"+a+"("+a+", DHT11);";
-  Blockly.Arduino.setups_["setup_dht_"]="dht11_p"+a+".begin();";
+  Blockly.Arduino.definitions_['define_dht_set_'+a]="DHT dht11_p"+a+"("+a+", DHT11);";
+  Blockly.Arduino.setups_["setup_dht_"+a]="dht11_p"+a+".begin();";
   return["dht11_p"+a+"."+myType+"()",Blockly.Arduino.ORDER_ATOMIC];
 };
 
@@ -5070,12 +5082,18 @@ Blockly.Arduino.ljj_basic_custom_tone=function(){
   return"tone(buzzPin, "+b+");\ndelay("+c+");\nnoTone(buzzPin);\n";
 };
 
-Blockly.Arduino.ljj_basic_sonar=function(){
+Blockly.Arduino.ljj_basic_sonar_init=function(){
   var a=Blockly.Arduino.valueToCode(this,"TRIG_PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
-      b=Blockly.Arduino.valueToCode(this,"ECHO_PIN",Blockly.Arduino.ORDER_ATOMIC)||"0";
+      b=Blockly.Arduino.valueToCode(this,"ECHO_PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      c=Blockly.Arduino.nameDB_.getName(this.getFieldValue('varName'), Blockly.VARIABLE_CATEGORY_NAME);
   Blockly.Arduino.definitions_.define_ljj_quno_sonar_include="#include <Ultrasonic.h>";
-  Blockly.Arduino.definitions_.define_ljj_quno_sonar_invoke="Ultrasonic ultrasonic_("+a+", "+b+");";
-  return['ultrasonic_.convert(ultrasonic_.timing(), Ultrasonic::CM)',Blockly.Arduino.ORDER_ATOMIC];
+  Blockly.Arduino.definitions_['define_ljj_quno_sonar_'+c+'_invoke']='Ultrasonic '+c+'('+a+', '+b+');';
+  return'';
+};
+
+Blockly.Arduino.ljj_basic_sonar=function(){
+  var a=Blockly.Arduino.nameDB_.getName(this.getFieldValue('varName'), Blockly.VARIABLE_CATEGORY_NAME);
+  return[a+'.convert('+a+'.timing(), Ultrasonic::CM)',Blockly.Arduino.ORDER_ATOMIC];
 };
 
 Blockly.Arduino.ljj_basic_dht11=function(){
@@ -5091,8 +5109,8 @@ Blockly.Arduino.ljj_basic_dht11=function(){
   Blockly.Arduino.definitions_['define_dht_']="#include <DHT_mini.h>";
   //else
   //  Blockly.Arduino.definitions_['define_dht_']="#include <DHT.h>";
-  Blockly.Arduino.definitions_['define_dht_set']="DHT dht11_p"+a+"("+a+", DHT11);";
-  Blockly.Arduino.setups_["setup_dht_"]="dht11_p"+a+".begin();";
+  Blockly.Arduino.definitions_['define_dht_set_'+a]="DHT dht11_p"+a+"("+a+", DHT11);";
+  Blockly.Arduino.setups_['setup_dht_'+a]="dht11_p"+a+".begin();";
   return["dht11_p"+a+"."+myType+"()",Blockly.Arduino.ORDER_ATOMIC];
 };
 
@@ -5241,8 +5259,8 @@ Blockly.Arduino.ljj_5012_dht11=function(){
   else if (b=='humidity')
     myType='readHumidity';
   Blockly.Arduino.definitions_['define_dht_']="#include <DHT_mini.h>";
-  Blockly.Arduino.definitions_['define_dht_set']="DHT dht11_p"+a+"("+a+", DHT11);";
-  Blockly.Arduino.setups_["setup_dht_"]="dht11_p"+a+".begin();";
+  Blockly.Arduino.definitions_['define_dht_set_'+a]="DHT dht11_p"+a+"("+a+", DHT11);";
+  Blockly.Arduino.setups_["setup_dht_"+a]="dht11_p"+a+".begin();";
   return["dht11_p"+a+"."+myType+"()",Blockly.Arduino.ORDER_ATOMIC];
 };
 
@@ -5647,7 +5665,7 @@ Blockly.Arduino.ljj_wukong_neopixel_show=function(){
 };
 
 Blockly.Arduino.ljj_wukong_neopixel_brightness=function(){
-  var a=Blockly.Arduino.valueToCode(this,"BRIGHTNESS",Blockly.Arduino.ORDER_ATOMIC)||"";
+  var a=Blockly.Arduino.valueToCode(this,"BRIGHTNESS",Blockly.Arduino.ORDER_ATOMIC)||"0";
   return"wukongPixels.setBrightness("+a+");\nwukongPixels.show();\n";
 };
 
@@ -5664,13 +5682,51 @@ Blockly.Arduino.ljj_wukong_board_blue_enable=function(){
 };
 
 Blockly.Arduino.ljj_wukong_board_blue_brightness=function(){
-  var a=Blockly.Arduino.valueToCode(this,"BRIGHTNESS",Blockly.Arduino.ORDER_ATOMIC)||"";
+  var a=Blockly.Arduino.valueToCode(this,"BRIGHTNESS",Blockly.Arduino.ORDER_ATOMIC)||"0";
   Blockly.Arduino.definitions_.define_wire="#include <Wire.h>";
   Blockly.Arduino.setups_.setup_wire_lib="Wire.begin();";
   Blockly.Arduino.definitions_.define_ljj_wukong_motor_run='void wukongMotorRun(byte addr,byte motor, byte dir ,byte power){\n  Wire.setClock(100000);\n  byte myParams[]={motor,dir,power,0};\n  Wire.beginTransmission(addr);\n  Wire.write(myParams,4);\n  Wire.endTransmission();\n}'; 
   return'wukongMotorRun(0x10,0x12,'+a+',0);\nwukongMotorRun(0x10,0x11,160,0);\n'
 };
 
+
+//LCD1602
+Blockly.Arduino.ljj_lcd1602_init = function(block) { 
+  var a = this.getFieldValue('ADDRESS'),
+      b = this.getFieldValue('TYPE');
+  Blockly.Arduino.definitions_.define_ljj_lcd1602_include = '#include "LiquidCrystal_I2C.h"';
+  Blockly.Arduino.definitions_.define_ljj_lcd1602_invoke = 'LiquidCrystal_I2C lcd('+a+');';
+  Blockly.Arduino.setups_.ljj_lcd1602 = 'lcd.begin('+b+');';
+  return '';
+};
+
+Blockly.Arduino.ljj_lcd1602_show = function(block) { 
+  var a=Blockly.Arduino.valueToCode(this,"X",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=Blockly.Arduino.valueToCode(this,"Y",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      c=Blockly.Arduino.valueToCode(this,"TEXT",Blockly.Arduino.ORDER_ATOMIC)||"";
+  return 'lcd.setCursor('+a+','+b+');\nlcd.print(String('+c+'));\n';
+};
+
+Blockly.Arduino.ljj_lcd1602_clear = function(block) { 
+  return 'lcd.clear();\n';
+};
+
+Blockly.Arduino.ljj_lcd1602_scroll = function(block) { 
+  var a = this.getFieldValue('MODE');
+  return 'lcd.'+a+'();\n';
+};
+
+Blockly.Arduino.ljj_lcd1602_backlight = function(block) { 
+  var a = this.getFieldValue('MODE');
+  return 'lcd.setBacklight('+(a=='up'?'HIGH':'LOW')+');\n';
+};
+
+/*
+Blockly.Arduino.ljj_lcd1602_blink = function(block) { 
+  var a = this.getFieldValue('BLINK');
+  return 'lcd.'+a+'();\n';
+};
+*/
 
 setTimeout(function(){
 /*

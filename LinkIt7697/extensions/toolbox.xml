@@ -191,7 +191,7 @@
           </block>
         </value>
       </block>
-      <block type="ljj_basic_sonar">
+      <block type="ljj_basic_sonar_init">
         <value name="TRIG_PIN">
           <block type="board_nano_pins">
             <field name="MY_PIN">2</field>
@@ -203,6 +203,7 @@
           </block>
         </value>
       </block>
+      <block type="ljj_basic_sonar"></block>
       <block type="ljj_basic_dht11">
         <value name="PIN">
           <block type="board_nano_pins">
@@ -545,6 +546,29 @@
         <block type="ljj_quno_udp_received_event"></block>
         <block type="ljj_quno_udp_received_msg"></block>
       </category>
+      <category id="category_ljj_lcd1602" name="LCD1602">
+        <block type="ljj_lcd1602_init"></block>
+        <block type="ljj_lcd1602_show">
+          <value name="X">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="Y">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="TEXT">
+            <block type="text">
+              <field name="TEXT"></field>
+            </block>
+          </value>        
+        </block>
+        <block type="ljj_lcd1602_clear"></block>
+        <block type="ljj_lcd1602_scroll"></block>
+        <block type="ljj_lcd1602_backlight"></block>
+      </category>
       <category id="category_ljj_max7219" name="MAX7219">
         <block type="ljj_max7219_init">
           <value name="PIN_DIN">
@@ -753,6 +777,20 @@
         <value name="ANGLE">
           <block type="math_number">
             <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
+      <block type="ljj_quno_digital_read">
+        <value name="PIN">
+          <block type="ljj_quno_pins">
+            <field name="QUNO_PIN">6</field>
+          </block>
+        </value>
+      </block>
+      <block type="ljj_quno_analog_read">
+        <value name="PIN">
+          <block type="ljj_quno_pins">
+            <field name="QUNO_PIN">A2</field>
           </block>
         </value>
       </block>
@@ -3904,6 +3942,29 @@
           </block>
         </value>
       </block>
+    </category>
+    <category id="category_ljj_lcd1602" name="LCD1602">
+      <block type="ljj_lcd1602_init"></block>
+      <block type="ljj_lcd1602_show">
+        <value name="X">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="Y">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+				<value name="TEXT">
+					<block type="text">
+						<field name="TEXT"></field>
+          </block>
+				</value>        
+      </block>
+      <block type="ljj_lcd1602_clear"></block>
+      <block type="ljj_lcd1602_scroll"></block>
+      <block type="ljj_lcd1602_backlight"></block>
     </category>
 <!--
     <category id="category_mpu6050" name="MPU6050_I2C">

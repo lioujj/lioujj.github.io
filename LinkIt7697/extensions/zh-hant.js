@@ -1007,6 +1007,8 @@ Blockly.Msg.LJJ_QUNO_TOOLTIP = "Quno";
 Blockly.Msg.LJJ_QUNO_RGB_COLOR = "設定RGB LED顏色";
 Blockly.Msg.LJJ_QUNO_SONAR = "超音波感測距離(cm)";
 Blockly.Msg.EZ_LED_BLUE = "藍色";
+Blockly.Msg.LJJ_QUNO_DIGITAL_READ = "數位讀取";
+Blockly.Msg.LJJ_QUNO_ANALOG_READ = "類比讀取";
 Blockly.Msg.LJJ_QUNO_IR = "人體紅外線感測器";
 Blockly.Msg.LJJ_QUNO_WHEN_DETECT_IR = "偵測到紅外線位移？";
 Blockly.Msg.LJJ_QUNO_WIFI_PASSWORD = "密碼";
@@ -1036,6 +1038,18 @@ Blockly.Msg.LJJ_BASIC_LEDS_SET_ALL_COLORS="設定並顯示所有LED燈";
 Blockly.Msg.LJJ_BASIC_VARIABLE_NAME="變數";
 Blockly.Msg.LJJ_BASIC_LEDS_CLEAR = '關閉所有LED';
 Blockly.Msg.LJJ_WS2812_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/ws2812";
+Blockly.Msg.LJJ_BASIC_SONAR = "超音波感測器";
+Blockly.Msg.LJJ_BASIC_SONAR_DISTANCE = "距離(CM)";
+
+//LCD1602
+Blockly.Msg.LJJ_LCD1602_HELPURL = "";
+Blockly.Msg.LJJ_LCD1602_TITLE = "LCD顯示器";
+Blockly.Msg.LJJ_LCD1602_ADDRESS = "I2C位址";
+Blockly.Msg.LJJ_LCD1602_TOOLTIP = "";
+Blockly.Msg.LJJ_LCD1602_BACKLIGHT = "背光";
+Blockly.Msg.LJJ_LCD1602_SCROLL = "捲動";
+Blockly.Msg.LJJ_LCD1602_SCROLL_TYPE=[['向左','scrollDisplayLeft'],['向右','scrollDisplayRight']];
+Blockly.Msg.LJJ_LCD1602_SCROLL_CHARACTER = "一個字元";
 
 //MAX7219
 Blockly.Msg.LJJ_MAX7219_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/max7219";

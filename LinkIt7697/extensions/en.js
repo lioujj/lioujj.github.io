@@ -1014,6 +1014,8 @@ Blockly.Msg.LJJ_QUNO_TOOLTIP = "Quno";
 Blockly.Msg.LJJ_QUNO_RGB_COLOR = "set RGB LED color";
 Blockly.Msg.LJJ_QUNO_SONAR = "get sonar distance";
 Blockly.Msg.EZ_LED_BLUE = "Blue";
+Blockly.Msg.LJJ_QUNO_DIGITAL_READ = "digital read";
+Blockly.Msg.LJJ_QUNO_ANALOG_READ = "analog read";
 Blockly.Msg.LJJ_QUNO_IR = "PIR";
 Blockly.Msg.LJJ_QUNO_WHEN_DETECT_IR = "IR is detected?";
 Blockly.Msg.LJJ_QUNO_WIFI_PASSWORD = "password";
@@ -1043,6 +1045,18 @@ Blockly.Msg.LJJ_BASIC_LEDS_SET_ALL_COLORS="set all LEDs color";
 Blockly.Msg.LJJ_BASIC_VARIABLE_NAME='variable';
 Blockly.Msg.LJJ_BASIC_LEDS_CLEAR = 'clear all LEDs';
 Blockly.Msg.LJJ_WS2812_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/ws2812";
+Blockly.Msg.LJJ_BASIC_SONAR = "UltraSonic";
+Blockly.Msg.LJJ_BASIC_SONAR_DISTANCE = "distance(CM)";
+
+//LCD1602
+Blockly.Msg.LJJ_LCD1602_HELPURL = "";
+Blockly.Msg.LJJ_LCD1602_TITLE = "LCD Diaplay";
+Blockly.Msg.LJJ_LCD1602_ADDRESS = "I2C address";
+Blockly.Msg.LJJ_LCD1602_TOOLTIP = "";
+Blockly.Msg.LJJ_LCD1602_BACKLIGHT = "back light";
+Blockly.Msg.LJJ_LCD1602_SCROLL = "scroll";
+Blockly.Msg.LJJ_LCD1602_SCROLL_TYPE=[['leftward','scrollDisplayLeft'],['rightward','scrollDisplayRight']];
+Blockly.Msg.LJJ_LCD1602_SCROLL_CHARACTER = "a space";
 
 //MAX7219
 Blockly.Msg.LJJ_MAX7219_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/max7219";

@@ -74,4 +74,6 @@
 <category><name>picoDualCore</name><replace>Dual-Core</replace></category>
 <category><name>HX711</name><replace>HX711 weight</replace></category>
 <category><name>WuKong</name><replace>WuKong Board</replace></category>
+<category><name>LCD1602</name><replace>LCD Display</replace></category>
+<category><name>LCD1602</name><replace>LCD Display</replace></category>
 </xml>
