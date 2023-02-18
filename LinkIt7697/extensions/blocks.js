@@ -9720,7 +9720,7 @@ Blockly.Blocks.ljj_time_delay={init:function(){
   this.setHelpUrl(Blockly.Msg.LJJ_TIME_HELPURL);
   this.setColour(Blockly.Blocks.esp32_irq.HUE);
   this.appendDummyInput()
-      .appendField(Blockly.Blocks.LJJ_TIME)
+      .appendField(Blockly.Msg.LJJ_TIME)
       .appendField(Blockly.Msg.CORE_RUN)
       .appendField(Blockly.Msg.ESP32_IRQ_FUNCTION)
       .appendField(Blockly.Msg.ESP32_IRQ_FUNCTION_NAME)
@@ -9734,6 +9734,18 @@ Blockly.Blocks.ljj_time_delay={init:function(){
   this.appendStatementInput("TIME_EVENT");
   this.setPreviousStatement(!0);
   this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_TIME_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_time_system_time={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_TIME_HELPURL);
+  this.setColour(Blockly.Blocks.esp32_irq.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_TIME)
+      .appendField(Blockly.Msg.LJJ_TIME_SYSTEM_TIME)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.ESP32_IRQ_TIMER_UNIT), "MODE");
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Number");
   this.setTooltip(Blockly.Msg.LJJ_TIME_TOOLTIP)}
 };
 

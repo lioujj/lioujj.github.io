@@ -5595,8 +5595,6 @@ Blockly.Arduino.ljj_2023_what=function(){
   return["",Blockly.Arduino.ORDER_ATOMIC];
 }
 
-
-
 //IFTTT
 Blockly.Arduino.ljj_ifttt={};
 Blockly.Arduino.ljj_ifttt_webhook=function(){
@@ -5741,7 +5739,14 @@ Blockly.Arduino.ljj_time_delay = function(block) {
   Blockly.Arduino.definitions_['define_time_'+c]='unsigned long '+b+'=0;';
   var returnStr='if ('+b+'==0){\n  '+b+'=millis();\n'+c+'}\nif (millis()>= ('+b+'+'+a+'))\n  '+b+'=0;\n';
   return returnStr;
+};
 
+Blockly.Arduino.ljj_time_system_time = function(block) { 
+  var a = this.getFieldValue('MODE');
+  if (a=='1000')
+    return['millis()',Blockly.Arduino.ORDER_ATOMIC];
+  else
+    return['micros()',Blockly.Arduino.ORDER_ATOMIC];
 };
 
 setTimeout(function(){

@@ -1142,7 +1142,8 @@ Blockly.Msg.LJJ_WUKONG_BOARD_BLUE_LED = "板底藍色LED呼吸燈模式";
 
 //TimeStamp
 Blockly.Msg.LJJ_TIME_HELPURL = '';
-Blockly.Blocks.LJJ_TIME = '時間';
+Blockly.Msg.LJJ_TIME = '時間';
 Blockly.Msg.LJJ_TIME_EVENT = '執行並等待時間(ms)';
 Blockly.Msg.LJJ_TIME_TOOLTIP = '';
 Blockly.Msg.LJJ_TIME_MS = '毫秒(ms)';
+Blockly.Msg.LJJ_TIME_SYSTEM_TIME = '已運作時間';

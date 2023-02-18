@@ -1149,7 +1149,8 @@ Blockly.Msg.LJJ_WUKONG_BOARD_BLUE_LED = "on board blue LED breath mode";
 
 //TimeStamp
 Blockly.Msg.LJJ_TIME_HELPURL = '';
-Blockly.Blocks.LJJ_TIME = 'Time';
+Blockly.Msg.LJJ_TIME = 'Time';
 Blockly.Msg.LJJ_TIME_EVENT = 'run and delay(ms)';
 Blockly.Msg.LJJ_TIME_TOOLTIP = '';
 Blockly.Msg.LJJ_TIME_MS = 'ms';
+Blockly.Msg.LJJ_TIME_SYSTEM_TIME = 'system time';
