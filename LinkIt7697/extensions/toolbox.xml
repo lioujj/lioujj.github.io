@@ -4448,5 +4448,14 @@
 	  <category id="category_pimMap" name="pin_map">
       <block type="pinMap_7697ext"></block>
     </category>
+	  <category id="category_ljj_time" name="Time">
+      <block type="ljj_time_delay">
+        <value name="DELAY">
+          <block type="math_number">
+            <field name="NUM">1000</field>
+          </block>
+        </value>
+      </block>
+    </category>
 	</category>
 </category>

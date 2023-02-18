@@ -77,4 +77,5 @@
 <category><name>WuKong</name><replace>悟空擴展板</replace></category>
 <category><name>LCD1602</name><replace>LCD顯示器</replace></category>
 <category><name>LCD1602</name><replace>LCD顯示器</replace></category>
+<category><name>Time</name><replace>時間</replace></category>
 </xml>

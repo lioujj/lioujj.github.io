@@ -128,7 +128,7 @@ Blockly.Msg.LJJ_TOOLS_CONVERT_STR_FLOAT= "轉換字串為浮點數";
 Blockly.Msg.TOOLS_ARRAY_VALUE = "轉換字串當成陣列值";
 Blockly.Msg.LJJ_TOOLS_SERIAL_READUNTIL_N = "讀取字串直到讀到 '\\n'";
 Blockly.Msg.LJJ_TOOLS_STRING = "字串";
-Blockly.Msg.LJJ_TOOLS_STARTS_WITH = '開頭為';
+Blockly.Msg.LJJ_TOOLS_SUBSTRING_LIST=[['開頭為','startsWith'],['結尾為','endsWith'],['包含','indexOf']];
 
 //Maqueen
 Blockly.Msg.CATEGORY_MAQUEEN = "麥昆小車";
@@ -1139,3 +1139,10 @@ Blockly.Msg.LJJ_WUKONG_TOOLTIP = "";
 Blockly.Msg.LJJ_WUKONG_MOTORS_LIST=[["M1","0x01"],["M2","0x02"],["所有","all"]];
 Blockly.Msg.LJJ_WUKONG_MOTOR_DIRECTION = [["正轉","0x01"],["反轉","0x02"]];
 Blockly.Msg.LJJ_WUKONG_BOARD_BLUE_LED = "板底藍色LED呼吸燈模式";
+
+//TimeStamp
+Blockly.Msg.LJJ_TIME_HELPURL = '';
+Blockly.Blocks.LJJ_TIME = '時間';
+Blockly.Msg.LJJ_TIME_EVENT = '執行並等待時間(ms)';
+Blockly.Msg.LJJ_TIME_TOOLTIP = '';
+Blockly.Msg.LJJ_TIME_MS = '毫秒(ms)';

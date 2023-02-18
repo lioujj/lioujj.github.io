@@ -461,9 +461,10 @@ Blockly.Blocks.ljj_string_startswith={init:function(){
       .appendField(Blockly.Msg.LJJ_TOOLS_STRING);
   this.appendValueInput("SOURCE")
       .setCheck("String");
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_TOOLS_SUBSTRING_LIST),"STAT");
   this.appendValueInput("INCLUDE")
       .setCheck("String")
-      .appendField(Blockly.Msg.LJJ_TOOLS_STARTS_WITH);
   this.appendDummyInput()
       .appendField("?");
   this.setInputsInline(!0);
@@ -9714,6 +9715,27 @@ Blockly.Blocks.ljj_lcd1602_blink={init:function(){
   this.setTooltip(Blockly.Msg.LJJ_LCD1602_TOOLTIP)}
 };
 */
+
+Blockly.Blocks.ljj_time_delay={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_TIME_HELPURL);
+  this.setColour(Blockly.Blocks.esp32_irq.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Blocks.LJJ_TIME)
+      .appendField(Blockly.Msg.CORE_RUN)
+      .appendField(Blockly.Msg.ESP32_IRQ_FUNCTION)
+      .appendField(Blockly.Msg.ESP32_IRQ_FUNCTION_NAME)
+      .appendField(new Blockly.FieldVariable("timeEvent"), "varName");
+  this.appendValueInput("DELAY")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.ESP32_IRQ_TIMER_DURATION);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_TIME_MS);
+  this.setInputsInline(!0);
+  this.appendStatementInput("TIME_EVENT");
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_TIME_TOOLTIP)}
+};
 
 Blockly.Blocks.ljj_2023_init={init:function(){
   this.setHelpUrl("");

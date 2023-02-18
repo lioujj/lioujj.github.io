@@ -129,7 +129,7 @@ Blockly.Msg.LJJ_TOOLS_CONVERT_STR_FLOAT = "Convert String to Float";
 Blockly.Msg.TOOLS_ARRAY_VALUE = "Convert String to Array Value";
 Blockly.Msg.LJJ_TOOLS_SERIAL_READUNTIL_N = "read String until '\\n'";
 Blockly.Msg.LJJ_TOOLS_STRING = "string";
-Blockly.Msg.LJJ_TOOLS_STARTS_WITH = 'starts with';
+Blockly.Msg.LJJ_TOOLS_SUBSTRING_LIST=[['starts with','startsWith'],['ends with','endsWith'],['includes','indexOf']];
 
 //Maqueen
 Blockly.Msg.CATEGORY_MAQUEEN = "Maqueen";
@@ -1146,3 +1146,10 @@ Blockly.Msg.LJJ_WUKONG_TOOLTIP = "";
 Blockly.Msg.LJJ_WUKONG_MOTORS_LIST=[["M1","0x01"],["M2","0x02"],["ALL","all"]];
 Blockly.Msg.LJJ_WUKONG_MOTOR_DIRECTION = [["clockWise","0x01"],["counterClockWise","0x02"]];
 Blockly.Msg.LJJ_WUKONG_BOARD_BLUE_LED = "on board blue LED breath mode";
+
+//TimeStamp
+Blockly.Msg.LJJ_TIME_HELPURL = '';
+Blockly.Blocks.LJJ_TIME = 'Time';
+Blockly.Msg.LJJ_TIME_EVENT = 'run and delay(ms)';
+Blockly.Msg.LJJ_TIME_TOOLTIP = '';
+Blockly.Msg.LJJ_TIME_MS = 'ms';
