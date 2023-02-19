@@ -785,7 +785,7 @@ Blockly.Msg.ESP32_IRQ_TOOLTIP = "Interrupts";
 Blockly.Msg.ESP32_IRQ_RUN = "run";
 Blockly.Msg.ESP32_IRQ_RUN_ON_TIMER = "on Timer";
 Blockly.Msg.ESP32_IRQ_TIMER_DURATION= "every";
-Blockly.Msg.ESP32_IRQ_TIMER_UNIT = [["millisecond","1000"],["microseconds","1"]];
+Blockly.Msg.ESP32_IRQ_TIMER_UNIT = [["millisecond","1000"],["microsecond","1"]];
 Blockly.Msg.ESP32_IRQ_DELETE = "delete timer task";
 Blockly.Msg.ESP32_IRQ_TIMER_WARNIG = "You have to set \""+Blockly.Msg.ESP32_IRQ_TIMER_TITLE+" "+Blockly.Msg.ESP32_IRQ_FUNCTION+"\" first.";
 Blockly.Msg.ESP32_IRQ_TIMER_DELETE_WARNIG = "You have to set \""+Blockly.Msg.ESP32_IRQ_TIMER_TITLE+" "+Blockly.Msg.ESP32_IRQ_RUN+" "+Blockly.Msg.ESP32_IRQ_RUN_ON_TIMER+"\" first.";
@@ -1031,6 +1031,7 @@ Blockly.Msg.LJJ_QUNO_UDP_RECEIVED_EVENT = "when receive UDP message";
 Blockly.Msg.LJJ_QUNO_RECEIVED_MSG = "received message";
 Blockly.Msg.LJJ_QUNO_UDP_BROADCAST_IP = "get UDP broadcast IP";
 Blockly.Msg.LJJ_QUNO_WIFI_LOCAL_IP = "get WiFi local IP";
+Blockly.Msg.LJJ_QUNO_WIFI_DATETIME = "get datetime string";
 
 //Basic
 Blockly.Msg.LJJ_BASIC_HELPURL = "";

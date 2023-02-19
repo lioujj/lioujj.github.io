@@ -1024,6 +1024,7 @@ Blockly.Msg.LJJ_QUNO_UDP_RECEIVED_EVENT = "當收到UDP訊息時";
 Blockly.Msg.LJJ_QUNO_RECEIVED_MSG = "收到的UDP訊息";
 Blockly.Msg.LJJ_QUNO_UDP_BROADCAST_IP = "取得UDP廣播IP位址";
 Blockly.Msg.LJJ_QUNO_WIFI_LOCAL_IP = "取得WiFi IP位址";
+Blockly.Msg.LJJ_QUNO_WIFI_DATETIME = "取得網路時間字串";
 
 //Basic
 Blockly.Msg.LJJ_BASIC_HELPURL = "";
@@ -1146,4 +1147,4 @@ Blockly.Msg.LJJ_TIME = '時間';
 Blockly.Msg.LJJ_TIME_EVENT = '執行並等待時間(ms)';
 Blockly.Msg.LJJ_TIME_TOOLTIP = '';
 Blockly.Msg.LJJ_TIME_MS = '毫秒(ms)';
-Blockly.Msg.LJJ_TIME_SYSTEM_TIME = '已運作時間';
+Blockly.Msg.LJJ_TIME_SYSTEM_TIME = '系統運作時間';
