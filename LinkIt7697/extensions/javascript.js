@@ -4811,6 +4811,11 @@ Blockly.Arduino.ljj_quno_wifi_localIP=function(){
   return['qunoLocalIP',Blockly.Arduino.ORDER_ATOMIC];
 };
 
+Blockly.Arduino.ljj_quno_wifi_datetime=function(){
+  var a=this.getFieldValue("TYPE");
+  return['getQunoDatime('+a+')',Blockly.Arduino.ORDER_ATOMIC];
+};
+
 Blockly.Arduino.ljj_quno_ifttt=function(){
   var a=Blockly.Arduino.valueToCode(this,"EVENT",Blockly.Arduino.ORDER_ATOMIC)||'"event"',
       b=Blockly.Arduino.valueToCode(this,"KEY",Blockly.Arduino.ORDER_ATOMIC)||'"---"',
@@ -5737,7 +5742,7 @@ Blockly.Arduino.ljj_time_delay = function(block) {
       c=Blockly.Arduino.statementToCode(this,"TIME_EVENT");
   c=c.replace(/\n  /g,"\n  ");
   Blockly.Arduino.definitions_['define_time_'+c]='unsigned long '+b+'=0;';
-  var returnStr='if ('+b+'==0){\n  '+b+'=millis();\n'+c+'}\nif (millis()>= ('+b+'+'+a+'))\n  '+b+'=0;\n';
+  var returnStr='if ('+b+'==0){\n  '+b+'=millis();\n'+c+'}\nif (millis()-'+b+'>='+a+')\n  '+b+'=0;\n';
   return returnStr;
 };
 
