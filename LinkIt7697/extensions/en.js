@@ -130,6 +130,9 @@ Blockly.Msg.TOOLS_ARRAY_VALUE = "Convert String to Array Value";
 Blockly.Msg.LJJ_TOOLS_SERIAL_READUNTIL_N = "read String until '\\n'";
 Blockly.Msg.LJJ_TOOLS_STRING = "string";
 Blockly.Msg.LJJ_TOOLS_SUBSTRING_LIST=[['starts with','startsWith'],['ends with','endsWith'],['includes','indexOf']];
+Blockly.Msg.LJJ_TOOLS_CONVERT_FLOAT= 'Convert Float';
+Blockly.Msg.LJJ_TOOLS_DECIMAL_PLACES = 'decimal places';
+Blockly.Msg.LJJ_TOOLS_CONVERT_TO_STRING = 'to String';
 
 //Maqueen
 Blockly.Msg.CATEGORY_MAQUEEN = "Maqueen";
@@ -1155,3 +1158,30 @@ Blockly.Msg.LJJ_TIME_EVENT = 'run and delay(ms)';
 Blockly.Msg.LJJ_TIME_TOOLTIP = '';
 Blockly.Msg.LJJ_TIME_MS = 'ms';
 Blockly.Msg.LJJ_TIME_SYSTEM_TIME = 'system time';
+
+//SU-03T
+Blockly.Msg.LJJ_SU03T_HELPURL = '';
+Blockly.Msg.LJJ_SU03T_TOOLTIP = 'SU-03T';
+Blockly.Msg.LJJ_SU03T_TITLE = 'SU-03T ASR';
+Blockly.Msg.LJJ_SU03T_CONNECT_TO_SERIAL = 'connect to UART';
+Blockly.Msg.LJJ_SU03T_LISTENING = 'begin to listen';
+Blockly.Msg.LJJ_SU03T_LISTENED_RESULT = 'recognizeed';
+Blockly.Msg.LJJ_SU03T_VOICE_COMMAND_LIST = [
+  ["吉哥你好","00,00"],["打開電燈","00,01"],["關閉電燈","00,02"],["打開繼電器","00,03"],["關閉繼電器","00,04"],["打開開關","00,05"],["關閉開關","00,06"],["亮一點","00,07"],["暗一點","00,08"],
+  ["前進","00,0B"],["後退","00,0C"],["左轉","00,0D"],["右轉","00,0E"],["停止","00,0F"],["開啟鏡頭","00,10"],["關閉鏡頭","00,11"],["快一點","00,12"],["慢一點","00,13"],
+  ["播放音樂","00,15"],["暫停播放","00,16"],["停止播放","00,17"],["上一首","00,18"],["下一首","00,19"],["第一首","00,1A"],["最後一首","00,1B"],
+  ["紅色","00,1F"],["綠色","00,20"],["藍色","00,21"],["黃色","00,22"],["青色","00,23"],["洋紅色","00,24"],["白色","00,25"],["黑色","00,26"],
+  ["溫度","00,29"],["濕度","00,2A"],["亮度","00,2B"],["距離","00,2C"],
+  ["顯示圖片","00,33"],["下一張圖","00,34"],["上一張圖","00,35"],["清除螢幕","00,36"]
+];
+Blockly.Msg.LJJ_SU03T_SEND_AND_SAY = 'send data and say';
+Blockly.Msg.LJJ_SU03T_SAY_COMMAND_LIST = [["溫度","2"],["濕度","3"],["亮度","4"],["距離","5"]];
+Blockly.Msg.LJJ_SU03T_VALUE_INTEGER = "value(int)";
+Blockly.Msg.LJJ_SU03T_SAY_CUSTOM_COMMAND_LIST = [["integer","1"],["float","2"]];
+Blockly.Msg.LJJ_SU03T_VALUE="value";
+Blockly.Msg.LJJ_SU03T_EXECUTE = 'execute system command';
+Blockly.Msg.LJJ_SU03T_SYSTEM_COMMAND_LIST = [["wakeup","1"]];
+Blockly.Msg.LJJ_SU03T_SYSTEM_COMMAND_LIST = [["wakeup","1"],["sleep","14"],["mute","8"],["unmute","9"],["max volume","10"],["min volume","11"],["louder","12"],["quieter","13"]];
+Blockly.Msg.LJJ_SU03T_PINMAP = "remap UART pin";
+Blockly.Msg.LJJ_SU03T_SAY_SOMETHING = 'say something';
+Blockly.Msg.LJJ_SU03T_SAY_SOMETHING_LIST = [["歡迎光臨","15"],["有人入侵","16"],["做得太好了，繼續加油","17"],["時間到了，該起床了","18"]];

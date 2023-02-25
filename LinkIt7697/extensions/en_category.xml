@@ -76,4 +76,5 @@
 <category><name>WuKong</name><replace>WuKong Board</replace></category>
 <category><name>LCD1602</name><replace>LCD Display</replace></category>
 <category><name>LCD1602</name><replace>LCD Display</replace></category>
+<category><name>SU-03T</name><replace>SU-03T ASR</replace></category>
 </xml>

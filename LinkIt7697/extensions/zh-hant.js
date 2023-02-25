@@ -129,6 +129,9 @@ Blockly.Msg.TOOLS_ARRAY_VALUE = "轉換字串當成陣列值";
 Blockly.Msg.LJJ_TOOLS_SERIAL_READUNTIL_N = "讀取字串直到讀到 '\\n'";
 Blockly.Msg.LJJ_TOOLS_STRING = "字串";
 Blockly.Msg.LJJ_TOOLS_SUBSTRING_LIST=[['開頭為','startsWith'],['結尾為','endsWith'],['包含','indexOf']];
+Blockly.Msg.LJJ_TOOLS_CONVERT_FLOAT = '轉換浮點數';
+Blockly.Msg.LJJ_TOOLS_DECIMAL_PLACES = '小數位數';
+Blockly.Msg.LJJ_TOOLS_CONVERT_TO_STRING = '為字串';
 
 //Maqueen
 Blockly.Msg.CATEGORY_MAQUEEN = "麥昆小車";
@@ -1148,3 +1151,35 @@ Blockly.Msg.LJJ_TIME_EVENT = '執行並等待時間(ms)';
 Blockly.Msg.LJJ_TIME_TOOLTIP = '';
 Blockly.Msg.LJJ_TIME_MS = '毫秒(ms)';
 Blockly.Msg.LJJ_TIME_SYSTEM_TIME = '系統運作時間';
+
+//SU-03T
+Blockly.Msg.LJJ_SU03T_HELPURL = '';
+Blockly.Msg.LJJ_SU03T_TOOLTIP = 'SU-03T';
+Blockly.Msg.LJJ_SU03T_TITLE = 'SU-03T語音辨識';
+Blockly.Msg.LJJ_SU03T_CONNECT_TO_SERIAL = '連接到序列埠';
+Blockly.Msg.LJJ_SU03T_LISTENING = '開始聆聽語音命令';
+Blockly.Msg.LJJ_SU03T_LISTENED_RESULT = '辨識出';
+Blockly.Msg.LJJ_SU03T_VOICE_COMMAND_LIST = [
+  ["吉哥你好","00,00"],["打開電燈","00,01"],["關閉電燈","00,02"],["打開繼電器","00,03"],["關閉繼電器","00,04"],["打開開關","00,05"],["關閉開關","00,06"],["亮一點","00,07"],["暗一點","00,08"],
+  ["前進","00,0B"],["後退","00,0C"],["左轉","00,0D"],["右轉","00,0E"],["停止","00,0F"],["開啟鏡頭","00,10"],["關閉鏡頭","00,11"],["快一點","00,12"],["慢一點","00,13"],
+  ["播放音樂","00,15"],["暫停播放","00,16"],["停止播放","00,17"],["上一首","00,18"],["下一首","00,19"],["第一首","00,1A"],["最後一首","00,1B"],
+  ["紅色","00,1F"],["綠色","00,20"],["藍色","00,21"],["黃色","00,22"],["青色","00,23"],["洋紅色","00,24"],["白色","00,25"],["黑色","00,26"],
+  ["溫度","00,29"],["濕度","00,2A"],["亮度","00,2B"],["距離","00,2C"],
+  ["顯示圖片","00,33"],["下一張圖","00,34"],["上一張圖","00,35"],["清除螢幕","00,36"]
+];
+Blockly.Msg.LJJ_SU03T_SEND_AND_SAY = '傳送數字到晶片並唸出';
+Blockly.Msg.LJJ_SU03T_SAY_COMMAND_LIST = [["溫度","2"],["濕度","3"],["亮度","4"],["距離","5"]];
+Blockly.Msg.LJJ_SU03T_VALUE_INTEGER = "數值(整數)";
+Blockly.Msg.LJJ_SU03T_SAY_CUSTOM_COMMAND_LIST = [["整數","1"],["小數","2"]];
+Blockly.Msg.LJJ_SU03T_VALUE="數值";
+Blockly.Msg.LJJ_SU03T_EXECUTE = '執行系統指令';
+Blockly.Msg.LJJ_SU03T_SYSTEM_COMMAND_LIST = [["喚醒","1"],["進入睡眠","14"],["靜音","8"],["取消靜音","9"],["最大音量","10"],["最小音量","11"],["大聲一點","12"],["小聲一點","13"]];
+Blockly.Msg.LJJ_SU03T_PINMAP = "重新設定序列埠腳位";
+Blockly.Msg.LJJ_SU03T_SAY_SOMETHING = '晶片唸出';
+Blockly.Msg.LJJ_SU03T_SAY_SOMETHING_LIST = [["歡迎光臨","15"],["有人入侵","16"],["做得太好了，繼續加油","17"],["時間到了，該起床了","18"]];
+
+
+
+
+
+

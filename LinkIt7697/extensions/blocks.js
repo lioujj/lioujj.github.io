@@ -443,6 +443,21 @@ Blockly.Blocks.convert_str_float={init:function(){
   this.setTooltip(Blockly.Msg.LJJ_TOOLS_TOOLTIP)}
 };
 
+Blockly.Blocks.convert_float_str={init:function(){
+  this.setHelpUrl(Blockly.Msg.TOOLS_HELPURL);
+  this.setColour(Blockly.Blocks.math.HUE);
+  this.appendValueInput("MY_VAR")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LJJ_TOOLS_CONVERT_FLOAT);
+  this.appendValueInput("PLACES")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LJJ_TOOLS_CONVERT_TO_STRING)
+      .appendField(Blockly.Msg.LJJ_TOOLS_DECIMAL_PLACES);
+  this.setInputsInline(!0);
+  this.setOutput(!0,"String");
+  this.setTooltip(Blockly.Msg.LJJ_TOOLS_TOOLTIP)}
+};
+
 Blockly.Blocks.create_custom_array={init:function(){
   this.setHelpUrl(Blockly.Msg.TOOLS_HELPURL);
   this.setColour(Blockly.Blocks.math.HUE);
@@ -8130,6 +8145,18 @@ Blockly.Blocks.ljj_quno_wifi_localIP={init:function(){
   this.setTooltip(Blockly.Msg.LJJ_QUNO_TOOLTIP)}
 };
 
+Blockly.Blocks.ljj_quno_wifi_datetime={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_QUNO_HELPURL);
+  this.setColour(Blockly.Blocks.linkit.HUE);
+  this.appendDummyInput()
+      .appendField("Quno")
+      .appendField(Blockly.Msg.LJJ_QUNO_WIFI_DATETIME)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.ESP32NTP_TIME_FORMAT),"TYPE");
+  this.setInputsInline(!0);
+  this.setOutput(!0,"String");
+  this.setTooltip(Blockly.Msg.LJJ_QUNO_TOOLTIP)}
+};
+
 Blockly.Blocks.ljj_quno_ifttt={init:function(){
   this.setHelpUrl(Blockly.Msg.LJJ_QUNO_HELPURL);
   this.setColour(Blockly.Blocks.ljj_quno.HUE8);
@@ -9749,6 +9776,126 @@ Blockly.Blocks.ljj_time_system_time={init:function(){
   this.setTooltip(Blockly.Msg.LJJ_TIME_TOOLTIP)}
 };
 
+//SU-03T
+Blockly.Blocks.ljj_su03t={};
+Blockly.Blocks.ljj_su03t.HUE=80;
+Blockly.Blocks.ljj_su03t_init={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_SU03T_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_su03t.HUE);
+	this.appendDummyInput()
+	    .appendField(Blockly.Msg.LJJ_SU03T_TITLE)
+      .appendField(Blockly.Msg.LJJ_SU03T_CONNECT_TO_SERIAL)
+      .appendField(new Blockly.FieldDropdown([["Serial","Serial"],["Serial1","Serial1"],["Serial2","Serial2"]]),"SERIAL_PORT");
+	this.setInputsInline(true);
+	this.setPreviousStatement(!0);
+	this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_SU03T_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_su03t_init_pinmap={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_SU03T_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_su03t.HUE);
+	this.appendDummyInput()
+	    .appendField(Blockly.Msg.LJJ_SU03T_TITLE)
+      .appendField(Blockly.Msg.LJJ_SU03T_CONNECT_TO_SERIAL)
+      .appendField(new Blockly.FieldDropdown([["Serial","Serial"],["Serial1","Serial1"],["Serial2","Serial2"]]),"SERIAL_PORT");
+  this.appendValueInput("RX")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LJJ_SU03T_PINMAP +" RX");
+  this.appendValueInput("TX")
+      .setCheck("Number")
+      .appendField("TX");
+	this.setInputsInline(true);
+	this.setPreviousStatement(!0);
+	this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_SU03T_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_su03t_listening={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_SU03T_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_su03t.HUE);
+	this.appendDummyInput()
+	    .appendField(Blockly.Msg.LJJ_SU03T_TITLE)
+      .appendField(Blockly.Msg.LJJ_SU03T_LISTENING)
+	this.setInputsInline(true);
+  this.appendStatementInput("SU03T_IF");
+	this.setPreviousStatement(!0);
+	this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_SU03T_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_su03t_listened_result={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_SU03T_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_su03t.HUE);
+	this.appendDummyInput()
+	    .appendField(Blockly.Msg.LJJ_SU03T_TITLE)
+      .appendField(Blockly.Msg.LJJ_SU03T_LISTENED_RESULT)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_SU03T_VOICE_COMMAND_LIST),"COMMAND")
+      .appendField("?");
+	this.setInputsInline(true);
+  this.setOutput(!0,"Boolean");
+  this.setTooltip(Blockly.Msg.LJJ_SU03T_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_su03t_send_data={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_SU03T_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_su03t.HUE);
+	this.appendDummyInput()
+	    .appendField(Blockly.Msg.LJJ_SU03T_TITLE)
+      .appendField(Blockly.Msg.LJJ_SU03T_SEND_AND_SAY)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_SU03T_SAY_COMMAND_LIST),"COMMAND");
+  this.appendValueInput("SAY_DATA")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LJJ_SU03T_VALUE_INTEGER);
+	this.setInputsInline(true);
+	this.setPreviousStatement(!0);
+	this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_SU03T_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_su03t_send_custom_data={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_SU03T_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_su03t.HUE);
+	this.appendDummyInput()
+	    .appendField(Blockly.Msg.LJJ_SU03T_TITLE)
+      .appendField(Blockly.Msg.LJJ_SU03T_SEND_AND_SAY)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_SU03T_SAY_CUSTOM_COMMAND_LIST),"COMMAND");
+  this.appendValueInput("SAY_DATA")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LJJ_SU03T_VALUE);
+	this.setInputsInline(true);
+	this.setPreviousStatement(!0);
+	this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_SU03T_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_su03t_system_command={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_SU03T_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_su03t.HUE);
+	this.appendDummyInput()
+	    .appendField(Blockly.Msg.LJJ_SU03T_TITLE)
+      .appendField(Blockly.Msg.LJJ_SU03T_EXECUTE)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_SU03T_SYSTEM_COMMAND_LIST),"COMMAND");
+	this.setInputsInline(true);
+	this.setPreviousStatement(!0);
+	this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_SU03T_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_su03t_say_something={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_SU03T_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_su03t.HUE);
+	this.appendDummyInput()
+	    .appendField(Blockly.Msg.LJJ_SU03T_TITLE)
+      .appendField(Blockly.Msg.LJJ_SU03T_SAY_SOMETHING)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_SU03T_SAY_SOMETHING_LIST),"COMMAND");
+	this.setInputsInline(true);
+	this.setPreviousStatement(!0);
+	this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_SU03T_TOOLTIP)}
+};
+
+//-----------------------------------------------
 Blockly.Blocks.ljj_2023_init={init:function(){
   this.setHelpUrl("");
   this.setColour(120);
