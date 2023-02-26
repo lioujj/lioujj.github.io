@@ -1151,6 +1151,7 @@ Blockly.Msg.LJJ_TIME_EVENT = '執行並等待時間(ms)';
 Blockly.Msg.LJJ_TIME_TOOLTIP = '';
 Blockly.Msg.LJJ_TIME_MS = '毫秒(ms)';
 Blockly.Msg.LJJ_TIME_SYSTEM_TIME = '系統運作時間';
+Blockly.Msg.LJJ_TIME_TIMER_RESET = '計時器歸零';
 
 //SU-03T
 Blockly.Msg.LJJ_SU03T_HELPURL = '';

@@ -5752,6 +5752,11 @@ Blockly.Arduino.ljj_time_delay = function() {
   return returnStr;
 };
 
+Blockly.Arduino.ljj_time_reset = function() { 
+  var a=Blockly.Arduino.nameDB_.getName(this.getFieldValue('varName'), Blockly.VARIABLE_CATEGORY_NAME);
+  return a+'=0;\n'
+};
+
 Blockly.Arduino.ljj_time_system_time = function() { 
   var a = this.getFieldValue('MODE');
   if (a=='1000')

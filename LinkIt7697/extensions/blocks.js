@@ -9764,6 +9764,20 @@ Blockly.Blocks.ljj_time_delay={init:function(){
   this.setTooltip(Blockly.Msg.LJJ_TIME_TOOLTIP)}
 };
 
+Blockly.Blocks.ljj_time_reset={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_TIME_HELPURL);
+  this.setColour(Blockly.Blocks.esp32_irq.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_TIME)
+      .appendField(Blockly.Msg.LJJ_TIME_TIMER_RESET)
+      .appendField(Blockly.Msg.ESP32_IRQ_FUNCTION)
+      .appendField(new Blockly.FieldVariable("timeEvent"), "varName");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_TIME_TOOLTIP)}
+};
+
 Blockly.Blocks.ljj_time_system_time={init:function(){
   this.setHelpUrl(Blockly.Msg.LJJ_TIME_HELPURL);
   this.setColour(Blockly.Blocks.esp32_irq.HUE);

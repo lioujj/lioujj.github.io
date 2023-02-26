@@ -4513,6 +4513,7 @@
           </block>
         </value>
       </block>
+      <block type="ljj_time_reset"></block>
       <block type="ljj_time_system_time"></block>
     </category>
 	</category>

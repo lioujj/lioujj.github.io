@@ -1158,6 +1158,7 @@ Blockly.Msg.LJJ_TIME_EVENT = 'run and delay(ms)';
 Blockly.Msg.LJJ_TIME_TOOLTIP = '';
 Blockly.Msg.LJJ_TIME_MS = 'ms';
 Blockly.Msg.LJJ_TIME_SYSTEM_TIME = 'system time';
+Blockly.Msg.LJJ_TIME_TIMER_RESET = 'reset timer';
 
 //SU-03T
 Blockly.Msg.LJJ_SU03T_HELPURL = '';
