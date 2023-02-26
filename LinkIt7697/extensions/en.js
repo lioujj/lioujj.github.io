@@ -1184,4 +1184,7 @@ Blockly.Msg.LJJ_SU03T_SYSTEM_COMMAND_LIST = [["wakeup","1"]];
 Blockly.Msg.LJJ_SU03T_SYSTEM_COMMAND_LIST = [["wakeup","1"],["sleep","14"],["mute","8"],["unmute","9"],["max volume","10"],["min volume","11"],["louder","12"],["quieter","13"]];
 Blockly.Msg.LJJ_SU03T_PINMAP = "remap UART pin";
 Blockly.Msg.LJJ_SU03T_SAY_SOMETHING = 'say something';
-Blockly.Msg.LJJ_SU03T_SAY_SOMETHING_LIST = [["歡迎光臨","15"],["有人入侵","16"],["做得太好了，繼續加油","17"],["時間到了，該起床了","18"]];
+Blockly.Msg.LJJ_SU03T_SAY_SOMETHING_LIST = [["歡迎光臨","15"],["有人入侵","16"],["做得太好了，繼續加油","17"],["時間到了，該起床了","18"],["溫度太高了","19"],
+  ["溫度太低了","20"],["光線太亮了","21"],["光線太暗了","22"],["我愛你","23"],["祝你生日快樂","24"],["這個資料不太正常","25"],["速度太慢了，請加速","26"],
+  ["速度太快了，請注意安全","27"],["前方有障礙物","28"],
+];
