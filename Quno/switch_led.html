@@ -1,0 +1,70 @@
+<!DOCTYPE html><html><head><meta charset='utf-8'><meta http-equiv='Access-Control-Allow-Origin' content='*'><meta http-equiv='Access-Control-Allow-Credentials' content='true'><script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/GameElements_20190131/gameelements.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/WebSerial_20220126/WebSerial_elements.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/WebSerial_20220126/WebSerial.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/chart_20220723/jquery.simpleswitch.js'></script><link href='https://fustyles.github.io/webduino/SpBlocklyJS/chart_20220723/simpleswitch.css' type='text/css' rel='stylesheet'></script></head><body><script>const delay=(seconds)=>{return new Promise((resolve)=>{setTimeout(resolve,seconds*1000);});};const main=async()=>{
+webserial_baudrate(115200);
+webserial_button("gamebutton_webserial_open","block");
+while (!webserial_getState()) {
+  await delay(1);
+}
+webserial_button("gamebutton_webserial_open","none");
+simpleSwitch({
+	id: 'switchRed',
+	width: 80,
+	height: 30,
+	left: 210,
+	top: 60,
+	text: '紅色開關',
+	size: 14,
+	color: '#ff0000',
+	val: 0,
+	func: switch_HDnkYkT
+});
+simpleSwitch({
+	id: 'switchGreen',
+	width: 80,
+	height: 30,
+	left: 300,
+	top: 60,
+	text: '綠色開關',
+	size: 14,
+	color: '#009900',
+	val: 0,
+	func: switch_oGdQRFhGsW
+});
+simpleSwitch({
+	id: 'switchBlue',
+	width: 80,
+	height: 30,
+	left: 390,
+	top: 60,
+	text: '綠色開關',
+	size: 14,
+	color: '#000099',
+	val: 0,
+	func: switch_zmqQoZq
+});
+
+function switch_HDnkYkT() {
+    if ($("#gamecheckbox_"+'switchRed').is(":checked")) {
+    webserial_sendText('red');
+  } else {
+    webserial_sendText('black');
+  }
+
+}
+
+function switch_oGdQRFhGsW() {
+    if ($("#gamecheckbox_"+'switchGreen').is(":checked")) {
+    webserial_sendText('green');
+  } else {
+    webserial_sendText('black');
+  }
+
+}
+
+function switch_zmqQoZq() {
+    if ($("#gamecheckbox_"+'switchBlue').is(":checked")) {
+    webserial_sendText('blue');
+  } else {
+    webserial_sendText('black');
+  }
+
+}};main();</script></body></html>
