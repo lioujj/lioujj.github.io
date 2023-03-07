@@ -44,6 +44,8 @@ simpleSwitch({
 
 function switch_HDnkYkT() {
     if ($("#gamecheckbox_"+'switchRed').is(":checked")) {
+    simpleSwitch({id: 'switchGreen',val: 0});
+    simpleSwitch({id: 'switchBlue',val: 0});
     webserial_sendText('red');
   } else {
     webserial_sendText('black');
@@ -53,6 +55,8 @@ function switch_HDnkYkT() {
 
 function switch_oGdQRFhGsW() {
     if ($("#gamecheckbox_"+'switchGreen').is(":checked")) {
+    simpleSwitch({id: 'switchRed',val: 0});
+    simpleSwitch({id: 'switchBlue',val: 0});
     webserial_sendText('green');
   } else {
     webserial_sendText('black');
@@ -62,6 +66,8 @@ function switch_oGdQRFhGsW() {
 
 function switch_zmqQoZq() {
     if ($("#gamecheckbox_"+'switchBlue').is(":checked")) {
+    simpleSwitch({id: 'switchRed',val: 0});
+    simpleSwitch({id: 'switchGreen',val: 0});
     webserial_sendText('blue');
   } else {
     webserial_sendText('black');
