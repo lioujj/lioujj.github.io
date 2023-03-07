@@ -1,0 +1,214 @@
+<!DOCTYPE html><html><head><meta charset='utf-8'><meta http-equiv='Access-Control-Allow-Origin' content='*'><meta http-equiv='Access-Control-Allow-Credentials' content='true'><script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/GameElements_20190131/gameelements.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/WebSerial_20220126/WebSerial_elements.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/WebSerial_20220126/WebSerial.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/chart_20220723/Chart.min.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/chart_20220723/linechart.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/chart_20220723/Chart.min.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/chart_20220723/jquery.simplegauge.js'></script><link href='https://fustyles.github.io/webduino/SpBlocklyJS/chart_20220723/jquery.simplegauge.css' type='text/css' rel='stylesheet'></script></head><body><script>const delay=(seconds)=>{return new Promise((resolve)=>{setTimeout(resolve,seconds*1000);});};const main=async()=>{
+var _E5_82_B3_E4_BE_86_E8_B3_87_E6_96_99, _E6_BA_AB_E5_BA_A6, _E6_BF_95_E5_BA_A6, _E4_BA_AE_E5_BA_A6, newdate;
+
+
+webserial_baudrate(115200);
+webserial_button("gamebutton_webserial_open","block");
+while (!webserial_getState()) {
+  await delay(1);
+}
+webserial_button("gamebutton_webserial_open","none");
+var config = {
+	  id: 'chartTemp',
+	  type: "line",
+	  data: {
+			  labels: [],
+			  datasets: [
+				{  label: '溫度',  data: [],
+  borderColor: '#ff0000',  backgroundColor: '#000000'}
+			  ]
+	  },
+	  options: {
+		responsive: true,
+		maintainAspectRatio: false,
+		plugins: {
+		  legend: {
+			position: "top",
+		  },
+		  title: {
+			display: true,
+			text: ''
+		  }
+		},
+		scales: {
+				yAxes: {
+					title: {
+						display: true,
+						text: '數值',
+					},
+					ticks: {
+						precision: 0
+					}
+				},
+				xAxes: {
+					title: {
+						display: true,
+						text: '溫度折線圖',
+					}
+				}
+			}
+	  },
+	  width: 500,
+	  height: 400,
+	  left: 50,
+	  top: 20,
+	  count: 10
+	};
+	linechart(config);
+var config = {
+	  id: 'chartHumi',
+	  type: "line",
+	  data: {
+			  labels: [],
+			  datasets: [
+				{  label: '濕度',  data: [],
+  borderColor: '#000099',  backgroundColor: '#000000'}
+			  ]
+	  },
+	  options: {
+		responsive: true,
+		maintainAspectRatio: false,
+		plugins: {
+		  legend: {
+			position: "top",
+		  },
+		  title: {
+			display: true,
+			text: ''
+		  }
+		},
+		scales: {
+				yAxes: {
+					title: {
+						display: true,
+						text: '數值',
+					},
+					ticks: {
+						precision: 0
+					}
+				},
+				xAxes: {
+					title: {
+						display: true,
+						text: '濕度折線圖',
+					}
+				}
+			}
+	  },
+	  width: 500,
+	  height: 400,
+	  left: 600,
+	  top: 20,
+	  count: 10
+	};
+	linechart(config);
+simpleGauge({
+	id:  'chartLumen',
+   value: 0,
+   min: 0,
+   max: 1023,
+	width: 300,
+	height: 300,
+	left: 50,
+	top: 450,
+	decimal: 0,
+	unit: '',
+    template: [
+        "<div class='simpleGauge_container'>",
+        "<div class='simpleGauge'>",
+        "<div class='simpleGauge_title'></div>",
+        "<svg class='simpleGauge_bars simpleGauge_block' version='1.1' xmlns='http://www.w3.org/2000/svg'></svg>",
+        "<div class='simpleGauge_labels simpleGauge_block'></div>",
+        "<div class='simpleGauge_ticks simpleGauge_block'></div>",
+        "<svg class='simpleGauge_pointers simpleGauge_block' version='1.1' xmlns='http://www.w3.org/2000/svg'></svg>",
+        "<div class='simpleGauge_digital'></div>",
+        "</div>",
+        "</div>"
+    ].join(""),
+    type:   "analog digital",
+    container: {
+        scale: 90,
+        style: {}
+    },
+    title: {
+        text: '亮度',
+        style: {}
+    },
+    digital: {
+        text: "{value.1}",
+        style: {
+            color: "auto"
+        }
+    },
+    analog: {
+        minAngle: -120,
+        maxAngle: 120
+    },
+    labels: {
+        text:   "{value}",
+        count:  10,
+        scale:  95,
+        style:  ""
+    },
+    ticks: {
+        count:  10,
+        scale1: 77,
+        scale2: 83,
+        style:  ""
+    },
+    subTicks: {
+        count:  0,
+        scale1: 80,
+        scale2: 83,
+        style:  ""
+    },
+    bars: {
+        scale1: 75,
+        scale2: 80,
+        style:  "",
+        colors:
+            [[ 0, '#ff0000', 0, 0 ], [ 512, '#33ff33', 0, 0 ]]
+    },
+    pointer: {
+        scale: 85,
+        shape: [
+            "-2,-10",
+            "2,-10",
+            "2.1,-5.3",
+            "4,-4",
+            "5.3,-2.1",
+            "5.7,0",
+            "5.3,2.1",
+            "4,4",
+            "2.1,5.3",
+            "2,50",
+            "1.5,96",
+            "0,100",
+            "-1,96",
+            "-2,50",
+            "-2.1,5.3",
+            "-4,4",
+            "-5.3,2.1",
+            "-5.7,0",
+            "-5.3,-2.1",
+            "-4,-4",
+            "-2.1,-5.3",
+            "-2,-10"
+        ].join(" "),
+        style: {
+            color: "#8778",
+            borderWidth: 0,
+            borderColor: "#8778"
+        }
+    }
+});webserial_getdata = async function() {
+  _E5_82_B3_E4_BE_86_E8_B3_87_E6_96_99 = ((webserial_get()).split(','));
+  _E6_BA_AB_E5_BA_A6 = (text_to_number((_E5_82_B3_E4_BE_86_E8_B3_87_E6_96_99[0])));
+  _E6_BF_95_E5_BA_A6 = (text_to_number((_E5_82_B3_E4_BE_86_E8_B3_87_E6_96_99[1])));
+  _E4_BA_AE_E5_BA_A6 = (text_to_number((_E5_82_B3_E4_BE_86_E8_B3_87_E6_96_99[2])));
+  linechart({id: 'chartTemp', data: [(getDatetime(newdate, "time")), _E6_BA_AB_E5_BA_A6]});
+  linechart({id: 'chartHumi', data: [(getDatetime(newdate, "time")), _E6_BF_95_E5_BA_A6]});
+  simpleGauge({id:'chartLumen', value: _E4_BA_AE_E5_BA_A6});
+
+};
+};main();</script></body></html>
