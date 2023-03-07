@@ -4810,7 +4810,8 @@ Blockly.Arduino.ljj_quno_wifi=function(){
       b=Blockly.Arduino.valueToCode(this,"PASSWORD",Blockly.Arduino.ORDER_ATOMIC)||"";
       Blockly.Arduino.definitions_.define_ljj_quno_wifi_include="#include <esp8266_ifttt.h>";
       Blockly.Arduino.definitions_.define_ljj_quno_wifi_invoke='String qunoLocalIP="";\nString qunoBroadcastIP="";\n';
-  return'qunoLocalIP=setWifiInfo('+a+', '+b+');\nqunoBroadcastIP=qunoLocalIP.substring(0,  qunoLocalIP.lastIndexOf("."))+".255";\n';
+      //Blockly.Arduino.setups_.setup_ljj_quno_wifi='qunoLocalIP=setWifiInfo('+a+', '+b+');\n  qunoBroadcastIP=qunoLocalIP.substring(0,  qunoLocalIP.lastIndexOf("."))+".255";';
+  return'qunoLocalIP=setWifiInfo('+a+', '+b+');\nqunoBroadcastIP=qunoLocalIP.substring(0,qunoLocalIP.lastIndexOf("."))+".255";';    
 }
 
 Blockly.Arduino.ljj_quno_wifi_localIP=function(){
@@ -4964,7 +4965,7 @@ Blockly.Arduino.ljj_quno_custom_tone=function(){
   var a=Blockly.Arduino.valueToCode(this,"FREQ",Blockly.Arduino.ORDER_ATOMIC)||"0",
       b=Blockly.Arduino.valueToCode(this,"DURATION",Blockly.Arduino.ORDER_ATOMIC)||"0";
   Blockly.Arduino.definitions_.define_ljj_quno_tone_invoke="byte buzz_pin=3;";
-  return"tone(buzz_pin, "+a+");\ndelay("+b+");\nnoTone(buzz_pin);\n";
+  return"tone(buzz_pin, "+a+");\ndelay("+b+");\nnoTone(buzz_pin);\ndelay(2);\n";
 };
 
 Blockly.Arduino.ljj_quno_sonar=function(){
@@ -4996,13 +4997,18 @@ Blockly.Arduino.ljj_quno_pir_detected=function(){
   return['(digitalRead(pir_pin)==1)',Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.ljj_quno_servo_write_pin=function(){
+Blockly.Arduino.ljj_quno_servo_init=function(){
   var a=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
-  b=Blockly.Arduino.valueToCode(this,"ANGLE",Blockly.Arduino.ORDER_ATOMIC)||"90";
-  Blockly.Arduino.definitions_.define_servo="#include <Servo.h>";
-  Blockly.Arduino.definitions_["define_class_servo_"+a]="Servo __myservo"+a+";";
-  Blockly.Arduino.setups_["servo_"+a]||(Blockly.Arduino.setups_["servo_"+a]="__myservo"+a+".attach("+a+");");
-  return"__myservo"+a+".write("+b+");\n"
+      b=Blockly.Arduino.nameDB_.getName(this.getFieldValue('varName'), Blockly.VARIABLE_CATEGORY_NAME);
+  Blockly.Arduino.definitions_.define_servo="#include <ServoTimer2.h>";
+  Blockly.Arduino.definitions_["define_class_servo_"+a]="ServoTimer2 "+b+";";
+  return b+'.attach('+a+');\n';
+};
+
+Blockly.Arduino.ljj_quno_servo_write_pin=function(){
+  var a=Blockly.Arduino.nameDB_.getName(this.getFieldValue('varName'), Blockly.VARIABLE_CATEGORY_NAME),
+      b=Blockly.Arduino.valueToCode(this,"ANGLE",Blockly.Arduino.ORDER_ATOMIC)||"90";
+  return a+".write("+b+");\n"
 };
 
 Blockly.Arduino.ljj_quno_pins=function(){
@@ -5337,6 +5343,11 @@ Blockly.Arduino.ljj_5012_custom_tone=function(){
       b=Blockly.Arduino.valueToCode(this,"DURATION",Blockly.Arduino.ORDER_ATOMIC)||"0";
   Blockly.Arduino.definitions_.define_ljj_quno_tone_invoke="byte buzz_pin=8;";
   return"tone(buzz_pin, "+a+");\ndelay("+b+");\nnoTone(buzz_pin);\n";
+};
+
+Blockly.Arduino.ljj_tone_list=function(){
+  var a=this.getFieldValue("FREQ");
+  return[a,Blockly.Arduino.ORDER_ATOMIC];
 };
 
 Blockly.Arduino.ljj_5012_max7219=function(){
@@ -5824,6 +5835,44 @@ Blockly.Arduino.ljj_su03t_say_something = function() {
   var a=this.getFieldValue('COMMAND');
   return 'su03tSaySomething('+a+');\n';
 };
+
+//Cage Bot
+Blockly.Arduino.ljj_cagebot={};
+Blockly.Arduino.ljj_cagebot_motor_run=function(){
+  var a=this.getFieldValue("MOTOR"),
+      b=this.getFieldValue("DIR"),
+      c=Blockly.Arduino.valueToCode(this,"SPEED",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      returnValue="";
+  if (a=="both"){
+    if (b=="1")
+      returnValue='digitalWrite(m1aL9110,0);\nanalogWrite(m1bL9110,'+c+');\ndigitalWrite(m2aL9110,1);\nanalogWrite(m2bL9110,'+c+');\n';
+    else
+      returnValue='digitalWrite(m1aL9110,1);\nanalogWrite(m1bL9110,'+c+');\ndigitalWrite(m2aL9110,0);\nanalogWrite(m2bL9110,'+c+');\n';
+  } else {
+    //if (b=="1"){
+      returnValue='digitalWrite('+a+'aL9110,'+(a=='m1'?0:1)+');\nanalogWrite('+a+'bL9110,'+c+');\n';
+    //} else {
+    //  returnValue='digitalWrite('+a+'aL9110,0);\nanalogWrite('+a+'bL9110,'+c+');\n';
+    //}
+  }
+  Blockly.Arduino.definitions_.define_cagebot_motor_invoke='byte m1aL9110=7;\nbyte m1bL9110=5;\nbyte m2aL9110=4;\nbyte m2bL9110=6;\n';
+  Blockly.Arduino.setups_["setup_cagebot_motor"]='pinMode(m1aL9110,OUTPUT);\n  pinMode(m1bL9110,OUTPUT);\n  pinMode(m2aL9110,OUTPUT);\n  pinMode(m2bL9110,OUTPUT);\n';
+  return returnValue;
+}
+
+Blockly.Arduino.ljj_cagebot_motor_stop=function(){
+  var a=this.getFieldValue("MOTOR"),
+      returnValue="";
+  if (a=="both"){
+    returnValue='digitalWrite(m1aL9110,0);\nanalogWrite(m1bL9110,0);\ndigitalWrite(m2aL9110,0);\nanalogWrite(m2bL9110,0);\n';
+  } else {
+    returnValue='digitalWrite('+a+'aL9110,0);\nanalogWrite('+a+'bL9110,0);\n';
+  }
+  Blockly.Arduino.definitions_.define_cagebot_motor_invoke='byte m1aL9110=7;\nbyte m1bL9110=5;\nbyte m2aL9110=4;\nbyte m2bL9110=6;\n';
+  Blockly.Arduino.setups_["setup_cagebot_motor"]='pinMode(m1aL9110,OUTPUT);\n  pinMode(m1bL9110,OUTPUT);\n  pinMode(m2aL9110,OUTPUT);\n  pinMode(m2bL9110,OUTPUT);\n';
+  return returnValue;
+}
+
 
 //----------------------------------------
 setTimeout(function(){

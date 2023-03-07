@@ -79,4 +79,5 @@
 <category><name>LCD1602</name><replace>LCD顯示器</replace></category>
 <category><name>Time</name><replace>時間</replace></category>
 <category><name>SU-03T</name><replace>SU-03T語音辨識</replace></category>
+<category><name>cagebot</name><replace>科技寶</replace></category>
 </xml>
