@@ -2987,14 +2987,24 @@
       </block>
     </category>
     <category id="category_ljj_cagebot" name="cagebot">
-      <block type="ljj_basic_button">
-        <field name="PIN_MODE">LOW</field>
-        <value name="PIN">
-          <block type="math_number">
-            <field name="NUM">12</field>
+      <block type="ljj_cagebot_line_follower_init">
+        <value name="LEFT_PIN">
+          <block type="board_nano_pins">
+            <field name="MY_PIN">A1</field>
+          </block>
+        </value>
+        <value name="MIDDLE_PIN">
+          <block type="board_nano_pins">
+            <field name="MY_PIN">A2</field>
+          </block>
+        </value>
+        <value name="RIGHT_PIN">
+          <block type="board_nano_pins">
+            <field name="MY_PIN">A3</field>
           </block>
         </value>
       </block>
+      <block type="ljj_cagebot_line_follower_read"></block>
       <block type="ljj_cagebot_motor_run">
         <value name="SPEED">
           <block type="math_number">
@@ -3003,6 +3013,14 @@
         </value>
       </block>
       <block type="ljj_cagebot_motor_stop"></block>
+      <block type="ljj_basic_button">
+        <field name="PIN_MODE">LOW</field>
+        <value name="PIN">
+          <block type="math_number">
+            <field name="NUM">12</field>
+          </block>
+        </value>
+      </block>
       <block type="ljj_basic_sonar_init">
         <value name="TRIG_PIN">
           <block type="math_number">

@@ -9944,6 +9944,42 @@ Blockly.Blocks.ljj_su03t_say_something={init:function(){
 //Cage Bot
 Blockly.Blocks.ljj_cagebot={};
 Blockly.Blocks.ljj_cagebot.HUE=340;
+Blockly.Blocks.ljj_cagebot.HUE1=157;
+
+Blockly.Blocks.ljj_cagebot_line_follower_init={init:function(){
+  this.setColour(Blockly.Blocks.l9110.HUE1);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.CAGEBOT_TITLE)
+      .appendField(Blockly.Msg.LIOU_ROBOT_LINE_FOLLOWER)
+      .appendField(Blockly.Msg.PROBBIE_INIT);
+  this.appendValueInput("LEFT_PIN")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.CAGEBOT_LINE_FOLLOWER_LEFT);
+  this.appendValueInput("MIDDLE_PIN")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.CAGEBOT_LINE_FOLLOWER_MIDDLE);
+  this.appendValueInput("RIGHT_PIN")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.CAGEBOT_LINE_FOLLOWER_RIGHT);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);}
+};
+
+Blockly.Blocks.ljj_cagebot_line_follower_read={init:function(){
+  this.setColour(Blockly.Blocks.l9110.HUE1);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.CAGEBOT_TITLE)
+      .appendField(Blockly.Msg.LIOU_ROBOT_LINE_FOLLOWER);
+	this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.CAGEBOT_LINE_FOLLOWER_LIST),"PLACE");
+	this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.LIOU_ROBOT_BLACK,"1"],[Blockly.Msg.LIOU_ROBOT_WHITE,"0"]]),"VALUE")
+      .appendField("?");
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Boolean");}
+};
+
 Blockly.Blocks.ljj_cagebot_motor_run={init:function(){
   this.setColour(Blockly.Blocks.l9110.HUE);
   this.appendDummyInput()

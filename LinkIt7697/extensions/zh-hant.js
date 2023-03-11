@@ -20,7 +20,7 @@ Blockly.Msg.LIOU_ROBOT_MOVE_SPEED = "速度(0~255)";
 Blockly.Msg.LIOU_ROBOT_LEFT_SIDE= "左";
 Blockly.Msg.LIOU_ROBOT_RIGHT_SIDE= "右";
 Blockly.Msg.LIOU_ROBOT_WHEEL = "輪";
-Blockly.Msg.LIOU_ROBOT_LINE_FOLLOWER = "巡線感應器";
+Blockly.Msg.LIOU_ROBOT_LINE_FOLLOWER = "循線感應器";
 Blockly.Msg.LIOU_ROBOT_BLACK = "黑";
 Blockly.Msg.LIOU_ROBOT_WHITE = "白";
 Blockly.Msg.LIOU_ROBOT_SERVO = "伺服馬達";
@@ -1197,3 +1197,7 @@ Blockly.Msg.LJJ_TONE_LIST=[
 //Cage Bot
 Blockly.Msg.CAGEBOT_TITLE = '科技寶';
 Blockly.Msg.CAGEBOT_MOTOR_LIST = [["M1","m1"],["M2","m2"],["both","both"]];
+Blockly.Msg.CAGEBOT_LINE_FOLLOWER_LEFT = '左側腳位';
+Blockly.Msg.CAGEBOT_LINE_FOLLOWER_MIDDLE = '中間腳位';
+Blockly.Msg.CAGEBOT_LINE_FOLLOWER_RIGHT = '右側腳位';
+Blockly.Msg.CAGEBOT_LINE_FOLLOWER_LIST=[["左","left"],["中","middle"],["右","right"]];

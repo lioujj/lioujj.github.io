@@ -5036,8 +5036,11 @@ Blockly.Arduino.ljj_basic_button=function(){
   var a=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"",
       b=this.getFieldValue("PIN_MODE"),
       c=Blockly.Arduino.statementToCode(this,"MSG_BUTTON_CALL_PRESSED"),
-      d=Blockly.Arduino.statementToCode(this,"MSG_BUTTON_CALL_RELEASED")
-  Blockly.Arduino.setups_["button_"+a]='pinMode('+a+', INPUT);';
+      d=Blockly.Arduino.statementToCode(this,"MSG_BUTTON_CALL_RELEASED");
+  if (b=='LOW')
+    Blockly.Arduino.setups_["button_"+a]='pinMode('+a+', INPUT_PULLUP);';
+  else
+    Blockly.Arduino.setups_["button_"+a]='pinMode('+a+', INPUT);';
 	return'if (digitalRead('+a+')=='+b+'){\n'+c+'  while(digitalRead('+a+')=='+b+'){}\n'+d+'}\n'
 };
 
@@ -5838,6 +5841,28 @@ Blockly.Arduino.ljj_su03t_say_something = function() {
 
 //Cage Bot
 Blockly.Arduino.ljj_cagebot={};
+
+Blockly.Arduino.ljj_cagebot_line_follower_init=function(){
+  var a=Blockly.Arduino.valueToCode(this,"LEFT_PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=Blockly.Arduino.valueToCode(this,"MIDDLE_PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      c=Blockly.Arduino.valueToCode(this,"RIGHT_PIN",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  Blockly.Arduino.definitions_.define_cagebot_line_invoke='byte cageBotLeftPin='+a+';\nbyte cageBotMiddlePin='+b+';\nbyte cageBotRightPin='+c+';\n'
+  Blockly.Arduino.setups_["setup_cagebot_line"]='pinMode(cageBotLeftPin,INPUT);\n  pinMode(cageBotMiddlePin,INPUT);\n  pinMode(cageBotRightPin,INPUT);\n';
+  return'';
+}
+
+Blockly.Arduino.ljj_cagebot_line_follower_read=function(){
+  var a=this.getFieldValue("PLACE"),
+      b=this.getFieldValue("VALUE");
+  if (a=="left")
+    a="cageBotLeftPin";
+  else if (a=="middle")
+    a="cageBotMiddlePin";
+  else
+    a="cageBotRightPin";
+  return[(b==0?'!':'')+'digitalRead('+a+')',Blockly.Arduino.ORDER_ATOMIC];
+}
+
 Blockly.Arduino.ljj_cagebot_motor_run=function(){
   var a=this.getFieldValue("MOTOR"),
       b=this.getFieldValue("DIR"),
@@ -5849,11 +5874,11 @@ Blockly.Arduino.ljj_cagebot_motor_run=function(){
     else
       returnValue='digitalWrite(m1aL9110,1);\nanalogWrite(m1bL9110,'+c+');\ndigitalWrite(m2aL9110,0);\nanalogWrite(m2bL9110,'+c+');\n';
   } else {
-    //if (b=="1"){
+    if (b=="1"){
       returnValue='digitalWrite('+a+'aL9110,'+(a=='m1'?0:1)+');\nanalogWrite('+a+'bL9110,'+c+');\n';
-    //} else {
-    //  returnValue='digitalWrite('+a+'aL9110,0);\nanalogWrite('+a+'bL9110,'+c+');\n';
-    //}
+    } else {
+      returnValue='digitalWrite('+a+'aL9110,'+(a=='m1'?1:0)+');\nanalogWrite('+a+'bL9110,'+c+');\n';
+    }
   }
   Blockly.Arduino.definitions_.define_cagebot_motor_invoke='byte m1aL9110=7;\nbyte m1bL9110=5;\nbyte m2aL9110=4;\nbyte m2bL9110=6;\n';
   Blockly.Arduino.setups_["setup_cagebot_motor"]='pinMode(m1aL9110,OUTPUT);\n  pinMode(m1bL9110,OUTPUT);\n  pinMode(m2aL9110,OUTPUT);\n  pinMode(m2bL9110,OUTPUT);\n';

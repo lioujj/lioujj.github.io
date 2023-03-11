@@ -1205,3 +1205,7 @@ Blockly.Msg.LJJ_TONE_LIST=[
 //Cage Bot
 Blockly.Msg.CAGEBOT_TITLE = 'CageBot';
 Blockly.Msg.CAGEBOT_MOTOR_LIST = [["M1","m1"],["M2","m2"],["both","both"]];
+Blockly.Msg.CAGEBOT_LINE_FOLLOWER_LEFT = 'left pin';
+Blockly.Msg.CAGEBOT_LINE_FOLLOWER_MIDDLE = 'middle pin';
+Blockly.Msg.CAGEBOT_LINE_FOLLOWER_RIGHT = 'right pin';
+Blockly.Msg.CAGEBOT_LINE_FOLLOWER_LIST=[["left","left"],["middle","middle"],["right","right"]];
