@@ -1048,7 +1048,11 @@ Blockly.Msg.LJJ_BASIC_LEDS_PIXEL_INDEX="LED";
 Blockly.Msg.LJJ_BASIC_LEDS_SET_ALL_COLORS="set all LEDs color";
 Blockly.Msg.LJJ_BASIC_VARIABLE_NAME='variable';
 Blockly.Msg.LJJ_BASIC_LEDS_CLEAR = 'clear all LEDs';
+Blockly.Msg.LJJ_BASIC_LEDS_DISPLAY = 'display LEDs as setup';
 Blockly.Msg.LJJ_WS2812_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/ws2812";
+Blockly.Msg.LJJ_WS2812_SET_COLORS = "set colors and show";
+Blockly.Msg.LJJ_WS2812_FLOW = 'color flow';
+Blockly.Msg.LJJ_WS2812_FLOW_LIST = [['upward','1'],['downward','2']];
 Blockly.Msg.LJJ_BASIC_SONAR = "UltraSonic";
 Blockly.Msg.LJJ_BASIC_SONAR_DISTANCE = "distance(CM)";
 

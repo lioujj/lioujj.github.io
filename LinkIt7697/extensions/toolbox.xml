@@ -248,6 +248,20 @@
           <block type="ttgo_getFromColorPicker"></block>
         </value>
       </block>
+      <block type="ljj_ws2812_color_join">
+        <mutation items="2"></mutation>
+        <value name="ADD0">
+          <block type="ttgo_getFromColorPicker">
+            <field name="RGB">#ff0000</field>
+          </block>
+        </value>
+        <value name="ADD1">
+          <block type="ttgo_getFromColorPicker">
+            <field name="RGB">#0000ff</field>
+          </block>
+        </value>
+      </block>
+      <block type="ljj_ws2812_color_flow"></block>
       <block type="ljj_ws2812_neopixel_brightness">
         <value name="BRIGHTNESS">
           <block type="math_number">
@@ -256,6 +270,7 @@
         </value>
       </block>
       <block type="ljj_ws2812_neopixel_clear"></block>
+      <block type="ljj_ws2812_neopixel_display"></block>
     </category>
     <category id="category_ljj_pixelbit" name="Pixel:Bit">
       <block type="board_initializes_setup">
@@ -4101,6 +4116,20 @@
           <block type="ttgo_getFromColorPicker"></block>
         </value>
       </block>
+      <block type="ljj_ws2812_color_join">
+        <mutation items="2"></mutation>
+        <value name="ADD0">
+          <block type="ttgo_getFromColorPicker">
+            <field name="RGB">#ff0000</field>
+          </block>
+        </value>
+        <value name="ADD1">
+          <block type="ttgo_getFromColorPicker">
+            <field name="RGB">#0000ff</field>
+          </block>
+        </value>
+      </block>
+      <block type="ljj_ws2812_color_flow"></block>
       <block type="ljj_ws2812_neopixel_brightness">
         <value name="BRIGHTNESS">
           <block type="math_number">
@@ -4109,6 +4138,7 @@
         </value>
       </block>
       <block type="ljj_ws2812_neopixel_clear"></block>
+      <block type="ljj_ws2812_neopixel_display"></block>
       <block type="ttgo_getFromColorPicker"></block>
       <block type="ttgo_getRGBcolor">
         <value name="RED">
