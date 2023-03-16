@@ -5144,8 +5144,9 @@ Blockly.Arduino.ljj_ws2812_neopixel_begin=function(){
       b=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
       c=Blockly.Arduino.valueToCode(this,"TOTAL",Blockly.Arduino.ORDER_ATOMIC)||"0",
       d=Blockly.Arduino.nameDB_.getName(this.getFieldValue('varName'), Blockly.VARIABLE_CATEGORY_NAME);
+      e=this.getFieldValue("PIXEL_FORMAT");
 	Blockly.Arduino.definitions_.define_include_neopixel="#include <Adafruit_NeoPixel.h>";
-  Blockly.Arduino.definitions_['define_ws2812_neopixel_'+d]='Adafruit_NeoPixel '+d+' = Adafruit_NeoPixel('+c+','+b+',NEO_GRB + NEO_KHZ800);\nuint32_t '+d+'_arr['+c+']={0};';
+  Blockly.Arduino.definitions_['define_ws2812_neopixel_'+d]='Adafruit_NeoPixel '+d+' = Adafruit_NeoPixel('+c+','+b+',NEO_'+e+' + NEO_KHZ800);\nuint32_t '+d+'_arr['+c+']={0};';
 //  Blockly.Arduino.definitions_['ljj_ws2812_'+d+'_event']='void '+d+'SetAllLedsColor(uint32_t myLedColor)\n{\n  for(int i=0;i<'+c+';i++)\n    '+d+'.setPixelColor(i,myLedColor);\n  '+d+'.show();\n}\n';
   Blockly.Arduino.definitions_['ljj_ws2812_'+d+'_event']='void '+d+'SetAllLedsColor(uint32_t myLedColor)\n{\n  for(int i=0;i<'+c+';i++)\n    '+d+'_arr[i]=myLedColor;\n}\n\nvoid '+d+'ShowAllLedsColor()\n{\n  for(int i=0;i<'+c+';i++)\n    '+d+'.setPixelColor(i,'+d+'_arr[i]);\n  '+d+'.show();\n}\n\nvoid '+d+'FlowLedsColors(byte dir)\n{\n  uint32_t tempData=0;\n  if (dir==1){\n    tempData='+d+'_arr[0];\n    for(int i=0;i<'+(parseInt(c)-1)+';i++)\n      '+d+'_arr[i]='+d+'_arr[i+1];\n    '+d+'_arr['+(parseInt(c)-1)+']=tempData;\n  } else if (dir==2){\n    tempData='+d+'_arr['+(parseInt(c)-1)+'];\n    for(int i='+(parseInt(c)-1)+';i>0;i--)\n      '+d+'_arr[i]='+d+'_arr[i-1];\n    '+d+'_arr[0]=tempData;\n  }\n  '+d+'ShowAllLedsColor();\n}\n';
   Blockly.Arduino.setups_['setup_ws2812_neopixel_'+d]=''+d+'.begin();\n  '+d+'.setBrightness('+a+');\n  '+d+'.show();\n  '+d+'ShowAllLedsColor();';

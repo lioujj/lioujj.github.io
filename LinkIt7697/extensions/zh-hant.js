@@ -1044,6 +1044,7 @@ Blockly.Msg.LJJ_BASIC_LEDS_CLEAR = '關閉所有LED';
 Blockly.Msg.LJJ_BASIC_LEDS_DISPLAY = '依關閉LED之前的顏色顯示LED';
 Blockly.Msg.LJJ_WS2812_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/ws2812";
 Blockly.Msg.LJJ_WS2812_SET_COLORS = "設定燈色並顯示";
+Blockly.Msg.LJJ_WS2812_PIXEL_FORMAT = '規格設定';
 Blockly.Msg.LJJ_WS2812_FLOW = '燈色流動';
 Blockly.Msg.LJJ_WS2812_FLOW_LIST = [['往前','1'],['往後','2']];
 Blockly.Msg.LJJ_BASIC_SONAR = "超音波感測器";

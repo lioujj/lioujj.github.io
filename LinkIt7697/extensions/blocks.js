@@ -8007,6 +8007,9 @@ Blockly.Blocks.ljj_ws2812_neopixel_begin={init:function(){
       .appendField(Blockly.Msg.LJJ_BASIC_VARIABLE_NAME)
       .appendField(new Blockly.FieldVariable("strip"), "varName")
       .appendField(Blockly.Msg.LJJ_MAX7219_INIT);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_WS2812_PIXEL_FORMAT)
+      .appendField(new Blockly.FieldDropdown([["GRB","GRB"],["RGB","RGB"]]),"PIXEL_FORMAT");
   this.appendValueInput("PIN")
       .setCheck("Number")
       .appendField(Blockly.Msg.LIOU_ROBOT_PIN);
