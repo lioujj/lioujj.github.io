@@ -5270,7 +5270,8 @@ Blockly.Arduino.ljj_max7219_inverse=function(){
 Blockly.Arduino.ljj_max7219_print=function(){
   var a=Blockly.Arduino.valueToCode(this,"TEXT",Blockly.Arduino.ORDER_ATOMIC)||"",
       b=this.getFieldValue("POSITION_TYPE");
-  return'max7219Str='+a+';\nmax7219Char = new char [max7219Str.length()+1];\nstrcpy (max7219Char, max7219Str.c_str());\nmyDisplay.begin();\nmyDisplay.displayText(max7219Char,'+b+',0,0,PA_NO_EFFECT,PA_NO_EFFECT);\nif (myDisplay.displayAnimate()) {myDisplay.displayReset();}\n';
+  //return'max7219Str='+a+';\nmax7219Char = new char [max7219Str.length()+1];\nstrcpy (max7219Char, max7219Str.c_str());\nmyDisplay.begin();\nmyDisplay.displayText(max7219Char,'+b+',0,0,PA_NO_EFFECT,PA_NO_EFFECT);\nif (myDisplay.displayAnimate()) {myDisplay.displayReset();}\n';
+  return'myDisplay.print(String('+a+'));\n';
 }
 
 Blockly.Arduino.ljj_max7219_scroll=function(){

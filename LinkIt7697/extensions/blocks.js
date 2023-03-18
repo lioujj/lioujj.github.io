@@ -8622,8 +8622,7 @@ Blockly.Blocks.ljj_quno_led={init:function(){
       .appendField("Quno")
       .appendField(Blockly.Msg.EZ_LED)
       .appendField(new Blockly.FieldDropdown([[Blockly.Msg.EZ_LED_RED,"10"],[Blockly.Msg.EZ_LED_GREEN,"9"],[Blockly.Msg.EZ_LED_BLUE,"11"]]),"LED")
-  this.appendValueInput("ON_OFF")
-      .setCheck("Boolean");
+  this.appendValueInput("ON_OFF");
   this.setInputsInline(!0);
   this.setPreviousStatement(!0,null);
   this.setNextStatement(!0,null);
@@ -9020,11 +9019,12 @@ Blockly.Blocks.ljj_max7219_print={init:function(){
   this.appendDummyInput()
       .appendField(Blockly.Msg.LJJ_MAX7219_TITLE);
   this.appendValueInput("TEXT")
-      .setCheck("String")
       .appendField(Blockly.Msg.LJJ_MAX7219_PRINT);
+/*
   this.appendDummyInput()
       .appendField(Blockly.Msg.LJJ_MAX7219_POSITION)
       .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_MAX7219_POSITION_TYPE),"POSITION_TYPE");
+*/
   this.setInputsInline(!0);
   this.setPreviousStatement(!0,null);
   this.setNextStatement(!0,null);
