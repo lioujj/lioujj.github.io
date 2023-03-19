@@ -1,0 +1,78 @@
+<!DOCTYPE html><html><head><meta charset='utf-8'><meta http-equiv='Access-Control-Allow-Origin' content='*'><meta http-equiv='Access-Control-Allow-Credentials' content='true'><script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/GameElements_20190131/gameelements.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/WebSerial_20220126/WebSerial_elements.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/WebSerial_20220126/WebSerial.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/SpeechRecognition_20220729/speechrecognition.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/chart_20220723/jquery.simpleswitch.js'></script><link href='https://fustyles.github.io/webduino/SpBlocklyJS/chart_20220723/simpleswitch.css' type='text/css' rel='stylesheet'></script></head><body><script>const delay=(seconds)=>{return new Promise((resolve)=>{setTimeout(resolve,seconds*1000);});};const main=async()=>{
+var Result;
+
+
+webserial_baudrate(115200);
+webserial_button("gamebutton_webserial_open","block");
+while (!webserial_getState()) {
+  await delay(1);
+}
+webserial_button("gamebutton_webserial_open","none");
+recognition.lang="cmn-Hant-TW";
+Recognition_switch(1);
+span_interim(150,350,20,999,true);
+span_create('標題',150,50,40,'Quno聲控垃圾桶',999);
+span_set('標題',"color",'#000099');
+span_create('辨識結果標題',150,325,20,'',999);
+span_set('辨識結果標題',"color",'#ff0000');
+span_set('辨識結果標題',"innerHTML",'辨識結果：');
+Recognition_recognitionFinish = async function() {
+  Result = (Recognition_final_get());
+  if (Result == '打開垃圾桶') {
+    simpleSwitch({id: '垃圾桶',val: 1});
+    webserial_sendText(Result);
+  } else if (Result == '關上垃圾桶') {
+    simpleSwitch({id: '垃圾桶',val: 0});
+    webserial_sendText(Result);
+  } else if (Result == '開啟自動功能') {
+    simpleSwitch({id: '自動開關',val: 1});
+    webserial_sendText(Result);
+  } else if (Result == '關閉自動功能') {
+    simpleSwitch({id: '自動開關',val: 0});
+    webserial_sendText(Result);
+  }
+
+};
+
+simpleSwitch({
+	id: '垃圾桶',
+	width: 100,
+	height: 30,
+	left: 50,
+	top: 100,
+	text: '垃圾桶開關',
+	size: 14,
+	color: '#ff0000',
+	val: 0,
+	func: switch_PhMXbKkCjW
+});
+simpleSwitch({
+	id: '自動開關',
+	width: 140,
+	height: 30,
+	left: 200,
+	top: 100,
+	text: '自動功能開關',
+	size: 14,
+	color: '#009900',
+	val: 0,
+	func: switch_gqWvEEoAFZQxJb
+});
+
+function switch_PhMXbKkCjW() {
+    if ($("#gamecheckbox_"+'垃圾桶').is(":checked")) {
+    webserial_sendText('打開垃圾桶');
+  } else {
+    webserial_sendText('關上垃圾桶');
+  }
+
+}
+
+function switch_gqWvEEoAFZQxJb() {
+    if ($("#gamecheckbox_"+'自動開關').is(":checked")) {
+    webserial_sendText('開啟自動功能');
+  } else {
+    webserial_sendText('關閉自動功能');
+  }
+
+}};main();</script></body></html>
