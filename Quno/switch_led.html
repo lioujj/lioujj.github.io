@@ -5,8 +5,10 @@ while (!webserial_getState()) {
   await delay(1);
 }
 webserial_button("gamebutton_webserial_open","none");
+span_create('',480,20,30,'Quno的LED開關控制',999);
+span_set('',"color",'#ff0000');
 simpleSwitch({
-	id: 'switchRed',
+	id: '紅色開關',
 	width: 80,
 	height: 30,
 	left: 210,
@@ -17,8 +19,9 @@ simpleSwitch({
 	val: 0,
 	func: switch_HDnkYkT
 });
+
 simpleSwitch({
-	id: 'switchGreen',
+	id: '綠色開關',
 	width: 80,
 	height: 30,
 	left: 300,
@@ -29,13 +32,14 @@ simpleSwitch({
 	val: 0,
 	func: switch_oGdQRFhGsW
 });
+
 simpleSwitch({
-	id: 'switchBlue',
+	id: '藍色開關',
 	width: 80,
 	height: 30,
 	left: 390,
 	top: 60,
-	text: '綠色開關',
+	text: '藍色開關',
 	size: 14,
 	color: '#000099',
 	val: 0,
@@ -43,9 +47,9 @@ simpleSwitch({
 });
 
 function switch_HDnkYkT() {
-    if ($("#gamecheckbox_"+'switchRed').is(":checked")) {
-    simpleSwitch({id: 'switchGreen',val: 0});
-    simpleSwitch({id: 'switchBlue',val: 0});
+    if ($("#gamecheckbox_"+'紅色開關').is(":checked")) {
+    simpleSwitch({id: '綠色開關',val: 0});
+    simpleSwitch({id: '藍色開關',val: 0});
     webserial_sendText('red');
   } else {
     webserial_sendText('black');
@@ -54,9 +58,9 @@ function switch_HDnkYkT() {
 }
 
 function switch_oGdQRFhGsW() {
-    if ($("#gamecheckbox_"+'switchGreen').is(":checked")) {
-    simpleSwitch({id: 'switchRed',val: 0});
-    simpleSwitch({id: 'switchBlue',val: 0});
+    if ($("#gamecheckbox_"+'綠色開關').is(":checked")) {
+    simpleSwitch({id: '紅色開關',val: 0});
+    simpleSwitch({id: '藍色開關',val: 0});
     webserial_sendText('green');
   } else {
     webserial_sendText('black');
@@ -65,9 +69,9 @@ function switch_oGdQRFhGsW() {
 }
 
 function switch_zmqQoZq() {
-    if ($("#gamecheckbox_"+'switchBlue').is(":checked")) {
-    simpleSwitch({id: 'switchRed',val: 0});
-    simpleSwitch({id: 'switchGreen',val: 0});
+    if ($("#gamecheckbox_"+'藍色開關').is(":checked")) {
+    simpleSwitch({id: '紅色開關',val: 0});
+    simpleSwitch({id: '綠色開關',val: 0});
     webserial_sendText('blue');
   } else {
     webserial_sendText('black');
