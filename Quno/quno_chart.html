@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head><meta charset='utf-8'><meta http-equiv='Access-Control-Allow-Origin' content='*'><meta http-equiv='Access-Control-Allow-Credentials' content='true'><script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/GameElements_20190131/gameelements.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/WebSerial_20220126/WebSerial_elements.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/WebSerial_20220126/WebSerial.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/chart_20220723/Chart.min.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/chart_20220723/linechart.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/chart_20220723/Chart.min.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/chart_20220723/jquery.simplegauge.js'></script><link href='https://fustyles.github.io/webduino/SpBlocklyJS/chart_20220723/jquery.simplegauge.css' type='text/css' rel='stylesheet'></script></head><body><script>const delay=(seconds)=>{return new Promise((resolve)=>{setTimeout(resolve,seconds*1000);});};const main=async()=>{
+<!DOCTYPE html><html><head><meta charset='utf-8'><meta http-equiv='Access-Control-Allow-Origin' content='*'><meta http-equiv='Access-Control-Allow-Credentials' content='true'><script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/GameElements_20190131/gameelements.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/WebSerial_20220126/WebSerial_elements.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/WebSerial_20220126/WebSerial.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/chart_20220723/jquery.tempgauge.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/chart_20220723/Chart.min.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/chart_20220723/linechart.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/chart_20220723/Chart.min.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/chart_20220723/jquery.simplegauge.js'></script><link href='https://fustyles.github.io/webduino/SpBlocklyJS/chart_20220723/jquery.simplegauge.css' type='text/css' rel='stylesheet'></script></head><body><script>const delay=(seconds)=>{return new Promise((resolve)=>{setTimeout(resolve,seconds*1000);});};const main=async()=>{
 var _E5_82_B3_E4_BE_86_E8_B3_87_E6_96_99, _E6_BA_AB_E5_BA_A6, _E6_BF_95_E5_BA_A6, _E4_BA_AE_E5_BA_A6, newdate;
 
 
@@ -8,8 +8,10 @@ while (!webserial_getState()) {
   await delay(1);
 }
 webserial_button("gamebutton_webserial_open","none");
+span_create('',450,20,30,'Quno環境感測氣象站',999);
+span_set('',"color",'#009900');
 var config = {
-	  id: 'chartTemp',
+	  id: '溫度折線圖',
 	  type: "line",
 	  data: {
 			  labels: [],
@@ -27,14 +29,14 @@ var config = {
 		  },
 		  title: {
 			display: true,
-			text: ''
+			text: '溫度折線圖'
 		  }
 		},
 		scales: {
 				yAxes: {
 					title: {
 						display: true,
-						text: '數值',
+						text: '溫度',
 					},
 					ticks: {
 						precision: 0
@@ -43,7 +45,7 @@ var config = {
 				xAxes: {
 					title: {
 						display: true,
-						text: '溫度折線圖',
+						text: '時間',
 					}
 				}
 			}
@@ -51,12 +53,12 @@ var config = {
 	  width: 500,
 	  height: 400,
 	  left: 50,
-	  top: 20,
+	  top: 70,
 	  count: 10
 	};
 	linechart(config);
 var config = {
-	  id: 'chartHumi',
+	  id: '濕度折線圖',
 	  type: "line",
 	  data: {
 			  labels: [],
@@ -74,14 +76,14 @@ var config = {
 		  },
 		  title: {
 			display: true,
-			text: ''
+			text: '溫度折線圖'
 		  }
 		},
 		scales: {
 				yAxes: {
 					title: {
 						display: true,
-						text: '數值',
+						text: '濕度',
 					},
 					ticks: {
 						precision: 0
@@ -90,7 +92,7 @@ var config = {
 				xAxes: {
 					title: {
 						display: true,
-						text: '濕度折線圖',
+						text: '時間',
 					}
 				}
 			}
@@ -98,19 +100,36 @@ var config = {
 	  width: 500,
 	  height: 400,
 	  left: 600,
-	  top: 20,
+	  top: 70,
 	  count: 10
 	};
 	linechart(config);
+
+temperatureGauge({
+	id: '溫度圖',
+	name: '溫度',
+	width: 100,
+	left: 250,
+	top: 470,
+	val: 0,
+	min: 0,
+	max: 50,
+	fillColor: '#ff0000',
+	borderWidth: 4,
+	unit: " "+'°C',
+	decimal: 1,
+	showLabel: true,
+	labelSize: 14,
+});
 simpleGauge({
-	id:  'chartLumen',
+	id:  '亮度圖',
    value: 0,
    min: 0,
    max: 1023,
 	width: 300,
 	height: 300,
-	left: 50,
-	top: 450,
+	left: 700,
+	top: 470,
 	decimal: 0,
 	unit: '',
     template: [
@@ -201,14 +220,16 @@ simpleGauge({
             borderColor: "#8778"
         }
     }
-});webserial_getdata = async function() {
+});
+webserial_getdata = async function() {
   _E5_82_B3_E4_BE_86_E8_B3_87_E6_96_99 = ((webserial_get()).split(','));
   _E6_BA_AB_E5_BA_A6 = (text_to_number((_E5_82_B3_E4_BE_86_E8_B3_87_E6_96_99[0])));
   _E6_BF_95_E5_BA_A6 = (text_to_number((_E5_82_B3_E4_BE_86_E8_B3_87_E6_96_99[1])));
   _E4_BA_AE_E5_BA_A6 = (text_to_number((_E5_82_B3_E4_BE_86_E8_B3_87_E6_96_99[2])));
-  linechart({id: 'chartTemp', data: [(getDatetime(newdate, "time")), _E6_BA_AB_E5_BA_A6]});
-  linechart({id: 'chartHumi', data: [(getDatetime(newdate, "time")), _E6_BF_95_E5_BA_A6]});
-  simpleGauge({id:'chartLumen', value: _E4_BA_AE_E5_BA_A6});
+  linechart({id: '溫度折線圖', data: [(getDatetime(newdate, "time")), _E6_BA_AB_E5_BA_A6]});
+  linechart({id: '濕度折線圖', data: [(getDatetime(newdate, "time")), _E6_BF_95_E5_BA_A6]});
+  temperatureGauge({id: '溫度圖',val: _E6_BA_AB_E5_BA_A6});
+  simpleGauge({id:'亮度圖', value: _E4_BA_AE_E5_BA_A6});
 
 };
 };main();</script></body></html>
