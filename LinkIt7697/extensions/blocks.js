@@ -9593,6 +9593,24 @@ Blockly.Blocks.ljj_broadcast_self_mac={init:function(){
 };
 
 
+//Pico setup
+Blockly.Blocks.ljj_pico_i2c_reset={init:function(){
+  this.setColour(Blockly.Blocks.initializes.HUE);
+  this.appendDummyInput()
+      .appendField("Pico")
+      .appendField(Blockly.Msg.BOARDS_I2C_RESET)
+      .appendField(new Blockly.FieldDropdown([["I2C0","Wire"],["I2C1","Wire1"]]),"WIRE_LIST");
+  this.appendValueInput("SDA")
+      .setCheck("Number")
+      .appendField("SDA");
+  this.appendValueInput("SCL")
+      .setCheck("Number")
+      .appendField("SCL");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);}
+};
+
 //Pico Dual Core
 Blockly.Blocks.ljj_pico_dual_core={};
 Blockly.Blocks.ljj_pico_dual_core.HUE=180;

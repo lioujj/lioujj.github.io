@@ -5551,6 +5551,19 @@ Blockly.Arduino.ljj_broadcast_self_mac=function(){
   return["selfMacChar",Blockly.Arduino.ORDER_ATOMIC];
 };
 
+//Pico setup
+Blockly.Arduino.ljj_pico_setup={};
+Blockly.Arduino.ljj_pico_i2c_reset=function(){
+  var a=Blockly.Arduino.valueToCode(this,"SDA",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=Blockly.Arduino.valueToCode(this,"SCL",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      c=this.getFieldValue("WIRE_LIST");
+  if (Blockly.Arduino.my_board_type=="Pico"){
+    Blockly.Arduino.definitions_.define_wire="#include <Wire.h>";
+    Blockly.Arduino.setups_.setup_wire_lib=c+'.setSDA('+a+');\n  '+c+'.setSCL('+b+');';
+  }
+  return'';
+}
+
 //Pico Dual Core
 Blockly.Arduino.ljj_pico_dual_core={};
 Blockly.Arduino.ljj_pico_core1_task=function(){

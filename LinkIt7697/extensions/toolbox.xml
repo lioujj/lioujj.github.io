@@ -2300,6 +2300,20 @@
     </category>
   </category>
   <category id="category_ljj_pico" name="Pico">
+    <category id="category_ljj_pico_setup" name="picoSetup">
+      <block type="ljj_pico_i2c_reset">
+			  <value name="SDA">
+          <block type="math_number">
+            <field name="NUM">4</field>
+          </block>
+       </value>
+			  <value name="SCL">
+          <block type="math_number">
+            <field name="NUM">5</field>
+          </block>
+       </value>
+      </block>
+    </category>
     <category id="category_ljj_pico_dual_core" name="picoDualCore">
       <block type="ljj_pico_core1_task"></block>
       <block type="ljj_pico_core_idle"></block>
