@@ -517,7 +517,7 @@ Blockly.Blocks.ksb045_init={init:function(){
   this.setColour(Blockly.Blocks.ksb045.HUE1);
   this.appendDummyInput()
       .appendField(Blockly.Msg.KSB045_TITLE)
-      .appendField(new Blockly.FieldDropdown([["KSB045","KSB045"],["Joystick:bit","Joystick:bit"],["waveshare","waveshare"]]),"TYPE")
+      .appendField(new Blockly.FieldDropdown([["KSB045","KSB045"],["GYRO","GYRO"],["Joystick:bit","Joystick:bit"],["waveshare","waveshare"]]),"TYPE")
       .appendField(Blockly.Msg.PROBBIE_INIT);
   this.setInputsInline(!0);
   this.setPreviousStatement(!0,null);
@@ -10076,8 +10076,9 @@ Blockly.Blocks.ljj_su03t_init={init:function(){
 	this.appendDummyInput()
 	    .appendField(Blockly.Msg.LJJ_SU03T_TITLE)
       .appendField(Blockly.Msg.LJJ_SU03T_CONNECT_TO_SERIAL)
-      .appendField(new Blockly.FieldDropdown([["Serial","Serial"],["Serial1","Serial1"],["Serial2","Serial2"]]),"SERIAL_PORT");
-	this.setInputsInline(true);
+      .appendField(new Blockly.FieldDropdown([["Serial","Serial"],["Serial1","Serial1"],["Serial2","Serial2"]]),"SERIAL_PORT")
+      .appendField('(RX-->B7,TX-->B6)');     
+  this.setInputsInline(true);
 	this.setPreviousStatement(!0);
 	this.setNextStatement(!0);
   this.setTooltip(Blockly.Msg.LJJ_SU03T_TOOLTIP)}
@@ -10089,7 +10090,8 @@ Blockly.Blocks.ljj_su03t_init_pinmap={init:function(){
 	this.appendDummyInput()
 	    .appendField(Blockly.Msg.LJJ_SU03T_TITLE)
       .appendField(Blockly.Msg.LJJ_SU03T_CONNECT_TO_SERIAL)
-      .appendField(new Blockly.FieldDropdown([["Serial","Serial"],["Serial1","Serial1"],["Serial2","Serial2"]]),"SERIAL_PORT");
+      .appendField(new Blockly.FieldDropdown([["Serial","Serial"],["Serial1","Serial1"],["Serial2","Serial2"]]),"SERIAL_PORT")
+      .appendField('(RX-->B7,TX-->B6)');
   this.appendValueInput("RX")
       .setCheck("Number")
       .appendField(Blockly.Msg.LJJ_SU03T_PINMAP +" RX");
