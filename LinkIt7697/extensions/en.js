@@ -974,9 +974,9 @@ Blockly.Msg.LMX_7SEG_TX_PIN = "RX connect to";
 Blockly.Msg.LMX_7SEG_RX_PIN = "TX connect to";
 
 //MPU6050
-Blockly.Msg.MPU6050_HELPURL = "";
-Blockly.Msg.MPU6050_TITLE = "MPU6050";
-Blockly.Msg.MPU6050_TOOLTIP = "MPU6050";
+Blockly.Msg.LJJ_MPU6050_HELPURL = "";
+Blockly.Msg.LJJ_MPU6050_TITLE = "MPU6050";
+Blockly.Msg.LJJ_MPU6050_TOOLTIP = "MPU6050";
 
 //CAMERA
 Blockly.Msg.LJJ_CAMERA_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/camera相機積木";

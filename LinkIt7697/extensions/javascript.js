@@ -335,10 +335,10 @@ Blockly.Arduino.ksb045_init=function(){
       Blockly.Arduino.definitions_.define_ksb045_pin_map='#define padX 33\n#define padY 32\n#define padSW 27\n#define padA 14\n#define padB 25\n#define padC 23\n#define padD 19\n#define padE 18\n#define padF 15\n#define padBuz 26\n#define padMotor 5\n';
     else if (Blockly.Arduino.ksb045.board_type=="Joystick:bit")
       Blockly.Arduino.definitions_.define_ksb045_pin_map='#define padX 33\n#define padY 32\n#define padSW 27\n#define padA 14\n#define padB 25\n#define padC 15\n#define padD 18\n#define padE 19\n#define padF 23\n#define padBuz 26\n#define padMotor 5\n';
-    else if (Blockly.Arduino.ksb045.board_type=="GYRO")
+    else if (Blockly.Arduino.ksb045.board_type=="kodorobot")
       Blockly.Arduino.definitions_.define_ksb045_pin_map='#define padX 32\n#define padY 33\n#define padSW 16\n#define padA 2\n#define padB 23\n#define padC 14\n#define padD 5\n#define padE 18\n#define padF 17\n#define padMotor 19\n';
     Blockly.Arduino.setups_["esp32_tone1"]="tone(padBuz,255,0,0);\n  delay(1);\n  noTone(padBuz,0);\n";
-    if (Blockly.Arduino.ksb045.board_type=="GYRO"){
+    if (Blockly.Arduino.ksb045.board_type=="kodorobot"){
       delete Blockly.Arduino.definitions_.define_tone;
       delete Blockly.Arduino.setups_["esp32_tone1"];
     }
@@ -350,7 +350,7 @@ Blockly.Arduino.ksb045_init=function(){
     else if (Blockly.Arduino.ksb045.board_type=="Joystick:bit")
       Blockly.Arduino.definitions_.define_ksb045_pin_map='#define padX 15\n#define padY 16\n#define padSW 17\n#define padA 0\n#define padB 7\n#define padC 4\n#define padD 13\n#define padE 12\n#define padF 11\n#define padBuz 14\n#define padMotor 10\n';
   } else if (Blockly.Arduino.my_board_type=="Pico"){
-    if (Blockly.Arduino.ksb045.board_type=="GYRO")
+    if (Blockly.Arduino.ksb045.board_type=="kodorobot")
       Blockly.Arduino.definitions_.define_ksb045_pin_map='#define padX 27\n#define padY 26\n#define padSW 5\n#define padA 4\n#define padB 14\n#define padC 17\n#define padD 8\n#define padE 9\n#define padF 7\n#define padMotor 10\n';
   }
   Blockly.Arduino.definitions_.define_ksb045_mid_xy="int padMidX=0;\nint padMidY=0;\n";
@@ -363,7 +363,7 @@ Blockly.Arduino.ksb045_init=function(){
   } else if (Blockly.Arduino.ksb045.board_type=="waveshare"){
     Blockly.Arduino.definitions_.define_ksb045_button='bool checkPinPressed(byte myPin)\n{\n  if (digitalRead(myPin) == 1)\n    return false;\n  else\n    return true;\n}\n';
     Blockly.Arduino.setups_.setup_ksb045_button='pinMode(padX, INPUT);\n  pinMode(padY, INPUT);\n  pinMode(padSW, INPUT);\n  pinMode(padA, INPUT);\n  pinMode(padB, INPUT);\n  pinMode(padC, INPUT);\n  pinMode(padD, INPUT);\n  pinMode(padE, INPUT);\n  pinMode(padF, INPUT);\n  pinMode(padMotor, OUTPUT);\n  digitalWrite(padMotor,0);\n  delay(300);\n  padMidX=analogRead(padX);\n  padMidY=analogRead(padY);\n';
-  } else if (Blockly.Arduino.ksb045.board_type=="GYRO"){
+  } else if (Blockly.Arduino.ksb045.board_type=="kodorobot"){
     Blockly.Arduino.definitions_.define_ksb045_button='bool checkPinPressed(byte myPin)\n{\n  if (digitalRead(myPin) == 1)\n    return false;\n  else\n    return true;\n}\n';
     Blockly.Arduino.setups_.setup_ksb045_button='pinMode(padX, INPUT);\n  pinMode(padY, INPUT);\n  pinMode(padSW, INPUT_PULLUP);\n  pinMode(padA, INPUT_PULLUP);\n  pinMode(padB, INPUT_PULLUP);\n  pinMode(padC, INPUT_PULLUP);\n  pinMode(padD, INPUT_PULLUP);\n  pinMode(padE, INPUT_PULLUP);\n  pinMode(padF, INPUT_PULLUP);\n  pinMode(padMotor, OUTPUT);\n  digitalWrite(padMotor,0);\n  delay(300);\n  padMidX=analogRead(padX);\n  padMidY=analogRead(padY);\n';
   }
@@ -390,7 +390,7 @@ Blockly.Arduino.ksb045_xy=function(){
       xyPin='analogRead(padY)';
   } else if (a=="Joystick:bit"){
     xyPin='(4095-analogRead(pad'+b+'))';
-  } else if (a=="GYRO"){
+  } else if (a=="kodorobot"){
     xyPin='analogRead(pad'+b+')';
   } else{
     xyPin='analogRead(pad'+b+')';
@@ -419,7 +419,7 @@ Blockly.Arduino.ksb045_vibration=function(){
 
 Blockly.Arduino.ksb045_tone=function(){
   var a=this.getFieldValue("FREQ");
-  if (Blockly.Arduino.ksb045.board_type=="GYRO")
+  if (Blockly.Arduino.ksb045.board_type=="kodorobot")
     return'';
   else if (Blockly.Arduino.my_board_type=="ESP32"){
     return'tone(padBuz,'+a+',0,0);\n';
@@ -428,7 +428,7 @@ Blockly.Arduino.ksb045_tone=function(){
   }
 };
 Blockly.Arduino.ksb045_no_tone=function(){
-  if (Blockly.Arduino.ksb045.board_type=="GYRO")
+  if (Blockly.Arduino.ksb045.board_type=="kodorobot")
     return'';
   else if (Blockly.Arduino.my_board_type=="ESP32"){
     return'noTone(padBuz,0);\n';
@@ -440,7 +440,7 @@ Blockly.Arduino.ksb045_no_tone=function(){
 Blockly.Arduino.ksb045_custom_tone=function(){
   var a=Blockly.Arduino.valueToCode(this,"FREQ",Blockly.Arduino.ORDER_ATOMIC)||0,
       b=Blockly.Arduino.valueToCode(this,"DURATION",Blockly.Arduino.ORDER_ATOMIC)||0;
-  if (Blockly.Arduino.ksb045.board_type=="GYRO")
+  if (Blockly.Arduino.ksb045.board_type=="kodorobot")
     return'';
   else if (Blockly.Arduino.my_board_type=="ESP32"){
     return'tone(padBuz,'+a+','+b+',0);\n';
@@ -4632,49 +4632,51 @@ Blockly.Arduino.keyboards_value=function(){
 
 
 //MPU6050
-Blockly.Arduino.mpu6050={};
-Blockly.Arduino.mpu6050_accel_begin=function(){
+/*
+Blockly.Arduino.ljj_mpu6050={};
+Blockly.Arduino.ljj_mpu6050_accel_begin=function(){
   var a=this.getFieldValue("ACCEL_MODE");
-  Blockly.Arduino.definitions_.define_mpu6050_include="#include <MPU6050.h>";
-  Blockly.Arduino.definitions_.define_mpu6050_invoke="MPU6050 myMPU6050;";
-  //Blockly.Arduino.definitions_.define_mpu6050_pitch_roll_invoke="void calcMPU6050angle(){\n   pitch = atan2 (myMPU6050.accelY() ,( sqrt ((myMPU6050.accelX() * myMPU6050.accelX()) + (myMPU6050.accelZ() * myMPU6050.accelZ()))))*57.3;\n   roll = atan2(myMPU6050.accelX() ,( sqrt((myMPU6050.accelY() * myMPU6050.accelY()) + (myMPU6050.accelZ() * myMPU6050.accelZ()))))*57.3;\n}\n";
-  Blockly.Arduino.definitions_.define_mpu6050_pitch_roll_invoke='';
+  Blockly.Arduino.definitions_.define_ljj_mpu6050_include="#include <MPU6050.h>";
+  Blockly.Arduino.definitions_.define_ljj_mpu6050_invoke="MPU6050 myMPU6050;";
+  //Blockly.Arduino.definitions_.define_ljj_mpu6050_pitch_roll_invoke="void calcMPU6050angle(){\n   pitch = atan2 (myMPU6050.accelY() ,( sqrt ((myMPU6050.accelX() * myMPU6050.accelX()) + (myMPU6050.accelZ() * myMPU6050.accelZ()))))*57.3;\n   roll = atan2(myMPU6050.accelX() ,( sqrt((myMPU6050.accelY() * myMPU6050.accelY()) + (myMPU6050.accelZ() * myMPU6050.accelZ()))))*57.3;\n}\n";
+  Blockly.Arduino.definitions_.define_ljj_mpu6050_pitch_roll_invoke='';
   Blockly.Arduino.setups_.setup_mpu6050_begin="myMPU6050.begin();";
 	return'myMPU6050.setRange('+a+');\n';
 };
 
-Blockly.Arduino.mpu6050_accel_fetch=function(){
+Blockly.Arduino.ljj_mpu6050_accel_fetch=function(){
 	return"Vector normAccel = myMPU6050.readNormalizeAccel();\n"
 };
 
-Blockly.Arduino.mpu6050_accel_3axis=function(){
+Blockly.Arduino.ljj_mpu6050_accel_3axis=function(){
   var a=this.getFieldValue("3AXIS_MODE");
   return[a,Blockly.Arduino.ORDER_ATOMIC];
 };
 
 
 
-Blockly.Arduino.mpu6050_gyro_begin=function(){
+Blockly.Arduino.ljj_mpu6050_gyro_begin=function(){
   var a=this.getFieldValue("GYRO_MODE");
-  Blockly.Arduino.definitions_.define_mpu6050_include="#include <MPU6050.h>";
-  Blockly.Arduino.definitions_.define_mpu6050_invoke="MPU6050 myMPU6050;";
-  Blockly.Arduino.definitions_.define_mpu6050_pitch_roll_invoke='';
+  Blockly.Arduino.definitions_.define_ljj_mpu6050_include="#include <MPU6050.h>";
+  Blockly.Arduino.definitions_.define_ljj_mpu6050_invoke="MPU6050 myMPU6050;";
+  Blockly.Arduino.definitions_.define_ljj_mpu6050_pitch_roll_invoke='';
   Blockly.Arduino.setups_.setup_mpu6050_begin="myMPU6050.begin();";
 	return'myMPU6050.setScale('+a+');\nmyMPU6050.calibrateGyro();\n';
 };
 
-Blockly.Arduino.mpu6050_gyro_fetch=function(){
+Blockly.Arduino.ljj_mpu6050_gyro_fetch=function(){
 	return"Vector normGyro = myMPU6050.readNormalizeGyro();\n"
 };
 
-Blockly.Arduino.mpu6050_gyro_3axis=function(){
+Blockly.Arduino.ljj_mpu6050_gyro_3axis=function(){
   var a=this.getFieldValue("3AXIS_MODE");
   return[a,Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.mpu6050_temperature=function(){
+Blockly.Arduino.ljj_mpu6050_temperature=function(){
   return['myMPU6050.readTemperature()',Blockly.Arduino.ORDER_ATOMIC];
 };
+*/
 
 //CAMERA
 Blockly.Arduino.ljj_camera={};

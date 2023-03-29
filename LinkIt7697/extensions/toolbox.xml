@@ -4195,6 +4195,17 @@
       <block type="ljj_lcd1602_scroll"></block>
       <block type="ljj_lcd1602_backlight"></block>
     </category>
+<!--
+    <category id="category_ljj_mpu6050" name="MPU6050_I2C">
+			<block type="ljj_mpu6050_accel_begin"></block>
+      <block type="ljj_mpu6050_accel_fetch"></block>
+      <block type="ljj_mpu6050_accel_3axis"></block>
+			<block type="ljj_mpu6050_gyro_begin"></block>
+      <block type="ljj_mpu6050_gyro_fetch"></block>
+      <block type="ljj_mpu6050_gyro_3axis"></block>
+      <block type="ljj_mpu6050_temperature"></block>
+    </category>
+-->
     <category id="category_ljj_su03t" name="SU-03T">
       <block type="ljj_su03t_init"></block>
       <block type="ljj_su03t_init_pinmap">
@@ -4239,17 +4250,6 @@
       <block type="ljj_su03t_system_command"></block>
       <block type="ljj_su03t_say_something"></block>
     </category>
-<!--
-    <category id="category_mpu6050" name="MPU6050_I2C">
-			<block type="mpu6050_accel_begin"></block>
-      <block type="mpu6050_accel_fetch"></block>
-      <block type="mpu6050_accel_3axis"></block>
-			<block type="mpu6050_gyro_begin"></block>
-      <block type="mpu6050_gyro_fetch"></block>
-      <block type="mpu6050_gyro_3axis"></block>
-      <block type="mpu6050_temperature"></block>
-    </category>
--->
   </category>
   <category id="category_lumex" name="Lumex">
     <category id="category_ldm6432" name="LDM6432MQTT">
