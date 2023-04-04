@@ -365,7 +365,7 @@ Blockly.Arduino.ksb045_init=function(){
     Blockly.Arduino.setups_.setup_ksb045_button='pinMode(padX, INPUT);\n  pinMode(padY, INPUT);\n  pinMode(padSW, INPUT);\n  pinMode(padA, INPUT);\n  pinMode(padB, INPUT);\n  pinMode(padC, INPUT);\n  pinMode(padD, INPUT);\n  pinMode(padE, INPUT);\n  pinMode(padF, INPUT);\n  pinMode(padMotor, OUTPUT);\n  digitalWrite(padMotor,0);\n  delay(300);\n  padMidX=analogRead(padX);\n  padMidY=analogRead(padY);\n';
   } else if (Blockly.Arduino.ksb045.board_type=="kodorobot"){
     Blockly.Arduino.definitions_.define_ksb045_button='bool checkPinPressed(byte myPin)\n{\n  if (digitalRead(myPin) == 1)\n    return false;\n  else\n    return true;\n}\n';
-    Blockly.Arduino.setups_.setup_ksb045_button='pinMode(padX, INPUT);\n  pinMode(padY, INPUT);\n  pinMode(padSW, INPUT_PULLUP);\n  pinMode(padA, INPUT_PULLUP);\n  pinMode(padB, INPUT_PULLUP);\n  pinMode(padC, INPUT_PULLUP);\n  pinMode(padD, INPUT_PULLUP);\n  pinMode(padE, INPUT_PULLUP);\n  pinMode(padF, INPUT_PULLUP);\n  pinMode(padMotor, OUTPUT);\n  digitalWrite(padMotor,0);\n  delay(300);\n  padMidX=analogRead(padX);\n  padMidY=analogRead(padY);\n';
+    Blockly.Arduino.setups_.setup_ksb045_button='pinMode(padX, INPUT);\n  pinMode(padY, INPUT);\n  pinMode(padSW, INPUT_PULLUP);\n  pinMode(padA, INPUT_PULLUP);\n  pinMode(padB, INPUT_PULLUP);\n  pinMode(padC, INPUT_PULLUP);\n  pinMode(padD, INPUT_PULLUP);\n  pinMode(padE, INPUT_PULLUP);\n  pinMode(padF, INPUT_PULLUP);\n  pinMode(padMotor, OUTPUT);\n  digitalWrite(padMotor,0);\n  delay(300);\n  padMidX=('+(Blockly.Arduino.my_board_type=='ESP32'?4095:1023)+'-analogRead(padX));\n  padMidY=('+(Blockly.Arduino.my_board_type=='ESP32'?4095:1023)+'-analogRead(padY));\n';
   }
   return'';
 };
@@ -391,7 +391,7 @@ Blockly.Arduino.ksb045_xy=function(){
   } else if (a=="Joystick:bit"){
     xyPin='(4095-analogRead(pad'+b+'))';
   } else if (a=="kodorobot"){
-    xyPin='analogRead(pad'+b+')';
+    xyPin='('+(Blockly.Arduino.my_board_type=='ESP32'?4095:1023)+'-analogRead(pad'+b+'))';
   } else{
     xyPin='analogRead(pad'+b+')';
   }
@@ -1725,11 +1725,11 @@ Blockly.Arduino.broadcast_udp_init=function(){
   var a=Blockly.Arduino.valueToCode(this,"PORT",Blockly.Arduino.ORDER_ATOMIC)||"0";
   Blockly.Arduino.definitions_.define_broadcast_include="#include <WiFiUdp.h>";
   delete Blockly.Arduino.definitions_.define_udp;
-  Blockly.Arduino.definitions_.define_broadcast_port="const int UDP_BUFFER_SIZE=255;\nuint16_t UDP_LISTEN_PORT="+a+";\nWiFiUDP castUdp;\n//IPAddress broadcastIP;\nchar broadcastBuffer[UDP_BUFFER_SIZE];\n";
+  Blockly.Arduino.definitions_.define_broadcast_port="const int UDP_BUFFER_SIZE=255;\nuint16_t UDP_LISTEN_PORT="+a+";\nWiFiUDP castUdp;\nIPAddress broadcastIP;\nIPAddress myBroadCastIP;\nchar broadcastBuffer[UDP_BUFFER_SIZE];\n";
   Blockly.Arduino.definitions_.define_broadcast_send_event="\nvoid sendBroadcastUDP(IPAddress broadcastIP, const char* myMessage){\n  castUdp.beginPacket(broadcastIP,UDP_LISTEN_PORT);\n  for (int myi = 0; myi < strlen(myMessage); myi++)\n  {\n    castUdp.write(myMessage[myi]);\n  }\n  castUdp.endPacket();\n}\n";
   Blockly.Arduino.definitions_.define_broadcast_check1_event="\nvoid myCheckUDP(){\n}\n";
   Blockly.Arduino.definitions_.define_broadcast_check2_event="\nvoid checkBroadcastUDP(){\n  int packetSize = castUdp.parsePacket();\n  if (packetSize) {\n    int len = castUdp.read(broadcastBuffer, UDP_BUFFER_SIZE);\n    if (len > 0) {\n      broadcastBuffer[len] = 0;\n      myCheckUDP();\n    }\n  }\n}\n";
-  return"castUdp.begin(UDP_LISTEN_PORT);\n"
+  return"castUdp.begin(UDP_LISTEN_PORT);\nbroadcastIP=IPAddress(WiFi.localIP()[0],WiFi.localIP()[1],WiFi.localIP()[2],255);\n"
 };
 
 Blockly.Arduino.broadcast_udp_check_msg=function(){
@@ -1739,7 +1739,8 @@ Blockly.Arduino.broadcast_udp_check_msg=function(){
 
 Blockly.Arduino.broadcast_udp_send=function(){
   var a=Blockly.Arduino.valueToCode(this,"MESSAGE",Blockly.Arduino.ORDER_ATOMIC)||"";
-  var myReturStr='IPAddress myBroadCastIP(WiFi.localIP()[0],WiFi.localIP()[1],WiFi.localIP()[2],255);\nsendBroadcastUDP(myBroadCastIP,String('+a+').c_str());\n'
+  //var myReturStr='IPAddress myBroadCastIP(WiFi.localIP()[0],WiFi.localIP()[1],WiFi.localIP()[2],255);\nsendBroadcastUDP(myBroadCastIP,String('+a+').c_str());\n'
+  var myReturStr='sendBroadcastUDP(broadcastIP,String('+a+').c_str());\n'
   return myReturStr;
 };
 
@@ -1748,7 +1749,7 @@ Blockly.Arduino.broadcast_udp_send_to_ip=function(){
       b=Blockly.Arduino.valueToCode(this,"IP",Blockly.Arduino.ORDER_ATOMIC)||"";
   b=b.replace(/\"/g,"");
   b=b.replace(/\./g,",");
-  var myReturStr='IPAddress myBroadCastIP('+b+');\nsendBroadcastUDP(myBroadCastIP,String('+a+').c_str());\n'
+  var myReturStr='myBroadCastIP=IPAddress('+b+');\nsendBroadcastUDP(myBroadCastIP,String('+a+').c_str());\n'
   return myReturStr;
 };
 
