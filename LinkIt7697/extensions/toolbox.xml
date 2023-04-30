@@ -2320,6 +2320,43 @@
       <block type="ljj_pico_core_resume"></block>
       <block type="ljj_pico_core1_restart"></block>
     </category>
+    <category id="category_ljj_pico_ntp" name="PICO_RTC">
+       <block type="set_ntp_time"></block>
+       <block type="get_RTC_str"></block>
+       <block type="get_RTC_field"></block>
+       <block type="set_manual_time">
+		    <value name="YEAR">
+			    <block type="math_number">
+				    <field name="NUM">2021</field>
+			    </block>
+		    </value>
+		    <value name="MONTH">
+			    <block type="math_number">
+				    <field name="NUM">1</field>
+			    </block>
+		    </value>
+		    <value name="DAY">
+			    <block type="math_number">
+				    <field name="NUM">1</field>
+			    </block>
+		    </value>
+		    <value name="HOUR">
+			    <block type="math_number">
+				    <field name="NUM">0</field>
+			    </block>
+		    </value>
+		    <value name="MINUTE">
+			    <block type="math_number">
+				    <field name="NUM">0</field>
+			    </block>
+		    </value>
+		    <value name="SECOND">
+			    <block type="math_number">
+				    <field name="NUM">0</field>
+			    </block>
+		    </value>
+       </block>
+    </category>
   </category>
 	<category id="category_iot" name="IoT">
 		<category id="category_mqtt" name="MQTT">

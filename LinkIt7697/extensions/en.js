@@ -621,7 +621,7 @@ Blockly.Msg.GOOGLESHEETS_ROWINDEX = "row index is";
 //ESP32 NTP
 Blockly.Msg.ESP32NTP_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/rtc及網路校時";
 Blockly.Msg.ESP32NTP_TOOLTIP = "NTP Time";
-Blockly.Msg.ESP32NTP_TITLE = "ESP32 RTC";
+Blockly.Msg.ESP32NTP_TITLE = "RTC";
 Blockly.Msg.ESP32NTP_SETUP_TITLE = "setup time from NTP";
 Blockly.Msg.ESP32NTP_TIMEZONE = "TimeZone";
 Blockly.Msg.ESP32NTP_GET_RTC_STR = "get string from RTC";

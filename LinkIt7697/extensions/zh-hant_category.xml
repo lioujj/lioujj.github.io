@@ -81,4 +81,5 @@
 <category><name>SU-03T</name><replace>SU-03T語音辨識</replace></category>
 <category><name>cagebot</name><replace>科技寶</replace></category>
 <category><name>picoSetup</name><replace>Pico設定</replace></category>
+<category><name>PICO_RTC</name><replace>RTC網路校時</replace></category>
 </xml>

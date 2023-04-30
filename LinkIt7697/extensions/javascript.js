@@ -2823,10 +2823,17 @@ Blockly.Arduino.updateCellValue=function(){
 Blockly.Arduino.esp32_ntp={};
 Blockly.Arduino.set_ntp_time=function(){
   var a=this.getFieldValue("TZ");
-  if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
+  if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266" || Blockly.Arduino.my_board_type=="Pico"){
     Blockly.Arduino.definitions_.define_ESP_time_include="#include <time.h>";
     Blockly.Arduino.definitions_.define_getDataFromRTC_event="int get_data_from_RTC(byte dataType) {\n  int myResult=0;\n  time_t t = time(NULL);\n  struct tm *t_st;\n  t_st = localtime(&t);\n  switch(dataType){\n    case 0:\n      myResult=(1900 + t_st->tm_year);\n      break;\n    case 1:\n      myResult=( 1 + t_st->tm_mon);\n      break;\n    case 2:\n      myResult=t_st->tm_mday;\n      break;\n    case 3:\n      myResult=t_st->tm_hour;\n      break;\n    case 4:\n      myResult=t_st->tm_min;\n      break;\n    case 5:\n      myResult=t_st->tm_sec;\n      break;\n    case 6:\n      myResult=t_st->tm_wday;\n      break;\n  }\n  return myResult;\n}\n";
-    return'configTime('+a+'*3600, 0, "time.stdtime.gov.tw","time.nist.gov");\nwhile(get_data_from_RTC(0)<2000){delay(500);}\n'
+    if (Blockly.Arduino.my_board_type=="Pico"){
+      if (a.substr(0,1)=='-')
+        a=a.replace('-','+');
+      else
+        a=('-'+a);
+      return'putenv("TZ=UTC'+a+'");\nconfigTime(0, 0, "time.stdtime.gov.tw","time.nist.gov");\nwhile(get_data_from_RTC(0)<2000){delay(500);}\n'
+    } else
+      return'configTime('+a+'*3600, 0, "time.stdtime.gov.tw","time.nist.gov");\nwhile(get_data_from_RTC(0)<2000){delay(500);}\n'
   }else{
     return''
   }
@@ -2834,7 +2841,7 @@ Blockly.Arduino.set_ntp_time=function(){
 
 Blockly.Arduino.get_RTC_str=function(){
   var a=this.getFieldValue("TIMEFORMAT");
-  if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
+  if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266" || Blockly.Arduino.my_board_type=="Pico"){
     Blockly.Arduino.definitions_.define_ESP_time_include="#include <time.h>";
     Blockly.Arduino.definitions_.define_getStrFromRTC_invoke='String get_time_from_RTC(byte myStrType) {\n  time_t t = time(NULL);\n  struct tm *t_st;\n  t_st = localtime(&t);\n  static char buffer[] = "YYYY-MM-DDTHH:MM:SS+08";\n  switch(myStrType){\n    case 0:\n      sprintf(buffer, "%04d-%02d-%02dT%02d:%02d:%02d",\n        1900 + t_st->tm_year,\n        1 + t_st->tm_mon,\n        t_st->tm_mday,\n        t_st->tm_hour,\n        t_st->tm_min,\n        t_st->tm_sec);\n      break;\n    case 1:\n      sprintf(buffer, "%04d-%02d-%02d",\n        1900 + t_st->tm_year,\n        1 + t_st->tm_mon,\n        t_st->tm_mday);\n      break;\n    case 2:\n      sprintf(buffer, "%02d:%02d:%02d",\n        t_st->tm_hour,\n        t_st->tm_min,\n        t_st->tm_sec);\n      break;\n  }\n  return String(buffer);\n}\n';
     //Blockly.Arduino.definitions_.define_getStrFromRTC_invoke='String get_time_from_RTC() {\n  time_t t = time(NULL);\n  struct tm *t_st;\n  t_st = localtime(&t);\n  static char buffer[] = "YYYY-MM-DDTHH:MM:SS+08";\n  sprintf(buffer, "%04d-%02d-%02dT%02d:%02d:%02d",\n    1900 + t_st->tm_year,\n    1 + t_st->tm_mon,\n    t_st->tm_mday,\n    t_st->tm_hour,\n    t_st->tm_min,\n    t_st->tm_sec);\n  return String(buffer);\n}\n';
@@ -2846,7 +2853,7 @@ Blockly.Arduino.get_RTC_str=function(){
 
 Blockly.Arduino.get_RTC_field=function(){
   var a=this.getFieldValue("FIELDTYPE");
-  if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
+  if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266" || Blockly.Arduino.my_board_type=="Pico"){
     if (a=='7'){
       return['millis()',Blockly.Arduino.ORDER_ATOMIC] 
     } else {
@@ -2869,7 +2876,7 @@ Blockly.Arduino.set_manual_time=function(){
   if (parseInt(year)>=1900)
     year=""+(parseInt(year)-1900);
   month=""+(parseInt(month)-1);
-  if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266"){
+  if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266" || Blockly.Arduino.my_board_type=="Pico"){
     Blockly.Arduino.definitions_.define_ESP_time_include="#include <time.h>";
     Blockly.Arduino.definitions_.define_ESP_time_set_include="#include <sys/time.h>";
     Blockly.Arduino.definitions_.define_setDataTime_invoke='void setDateTimeRTC(int y,byte m,byte d,byte h,byte min,byte s)\n{\n  time_t today=time(NULL);\n  struct tm myDay={s,min,h,d,m,y};\n  today=mktime(&myDay);\n  struct timeval tv={ .tv_sec = today };\n  settimeofday(&tv, NULL);\n  //setenv("TZ","CST-8",1);\n}\n';
