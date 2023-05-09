@@ -622,7 +622,7 @@ Blockly.Msg.GOOGLESHEETS_ROWINDEX = "row index is";
 Blockly.Msg.ESP32NTP_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/rtc及網路校時";
 Blockly.Msg.ESP32NTP_TOOLTIP = "NTP Time";
 Blockly.Msg.ESP32NTP_TITLE = "RTC";
-Blockly.Msg.ESP32NTP_SETUP_TITLE = "setup time from NTP";
+Blockly.Msg.ESP32NTP_SETUP_TITLE = "setup DateTime from NTP";
 Blockly.Msg.ESP32NTP_TIMEZONE = "TimeZone";
 Blockly.Msg.ESP32NTP_GET_RTC_STR = "get string from RTC";
 Blockly.Msg.ESP32NTP_GET_RTC_FIELD = "get number from RTC";
@@ -1196,6 +1196,12 @@ Blockly.Msg.LJJ_SU03T_SAY_SOMETHING_LIST = [["歡迎光臨","15"],["有人入侵
   ["速度太快了，請注意安全","27"],["前方有障礙物","28"],["魔鏡魔鏡，誰是世界上最美的人","29"],["煙霧超標","30"],["瓦斯超標","31"],["人體感應偵測觸發","32"],
   ["請注意安全，走廊上不要跑步","33"]
 ];
+
+//ljj_servo
+Blockly.Msg.LJJ_SERVO_360 = "Continuous Rotation Servo";
+Blockly.Msg.LJJ_SERVO_360_DIRECTION = [["clockWise","0"],["counterClockWise","180"],["stop","90"]];
+Blockly.Msg.LJJ_SERVO_PULSE_RANGE='pulse width range';
+Blockly.Msg.LJJ_SERVO_DETACH = 'detach';
 
 //Tone
 Blockly.Msg.LJJ_TONE_LIST=[

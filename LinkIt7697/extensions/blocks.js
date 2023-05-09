@@ -9657,6 +9657,36 @@ Blockly.Blocks.ljj_pico_core1_restart={init:function(){
   this.setTooltip(Blockly.Msg.PICO_DUAL_CORE_TOOLTIP)}
 };
 
+//pico:bit
+Blockly.Blocks.ljj_picobit={};
+Blockly.Blocks.ljj_picobit.HUE=80;
+Blockly.Blocks.ljj_picobit_button={init:function(){
+  this.setColour(Blockly.Blocks.mtk7697bit.HUE);
+  this.appendDummyInput()
+      .appendField("Pico:Bit")
+      .appendField(Blockly.Msg.LIOU_ROBOT_WHEN+Blockly.Msg.LIOU_ROBOT_BUTTON)
+      .appendField(new Blockly.FieldDropdown([["A","A"],["B","B"],["A+B","C"]]),"AB_BUTTON");
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LIOU_ROBOT_BUTTON_CHECK);
+  this.setInputsInline(!0);
+  this.appendStatementInput("MSG_BUTTON_CALL");
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.MTK7697BIT_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_picobit_pinMap={init:function(){
+  this.setColour(Blockly.Blocks.mtk7697bit.HUE);
+  this.appendDummyInput()
+      .appendField("Pico:Bit")
+      .appendField(Blockly.Msg.MTK7697BIT_PINMAP_TITLE);
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown([["P0","26"],["P1","27"],["P2","28"],["P3","0"],["P4","1"],["P5","2"],["P6","6"],["P7","7"],["P8","8"],["P9","9"],["P10","22"],["P11","20"],["P12","21"],["P13","18"],["P14","16"],["P15","19"],["P16","17"],["P19","5"],["P20","4"]]),"PICO_BIT_PIN");
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Number");
+  this.setTooltip(Blockly.Msg.MTK7697BIT_TOOLTIP)}
+};
+
 //WiFi extra
 Blockly.Blocks.linkit_wifi_check_conncetion={init:function(){
   this.setHelpUrl(Blockly.Msg.LINKIT_SET_WIFI_HELPURL);
@@ -10178,6 +10208,99 @@ Blockly.Blocks.ljj_su03t_say_something={init:function(){
 	this.setPreviousStatement(!0);
 	this.setNextStatement(!0);
   this.setTooltip(Blockly.Msg.LJJ_SU03T_TOOLTIP)}
+};
+
+
+//ljj_servo
+Blockly.Blocks.ljj_servo={};
+//Blockly.Blocks.ljj_servo.HUE=80;
+Blockly.Blocks.ljj_servo_init={init:function(){
+  //this.setHelpUrl(Blockly.Msg.LJJ_QUNO_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_quno.HUE4);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LIOU_ROBOT_SERVO)
+      .appendField(Blockly.Msg.CORE_SETUP);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.ESP32_IRQ_FUNCTION_NAME)
+      .appendField(new Blockly.FieldVariable("servo1"), "varName");
+   this.appendValueInput("PIN")      
+      .appendField(Blockly.Msg.LIOU_ROBOT_PIN);
+  this.appendDummyInput().appendField(Blockly.Msg.SERVO_ANGLE_TEXT2);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_QUNO_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_servo_custom_init={init:function(){
+  //this.setHelpUrl(Blockly.Msg.LJJ_QUNO_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_quno.HUE4);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LIOU_ROBOT_SERVO)
+      .appendField(Blockly.Msg.CORE_SETUP);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.ESP32_IRQ_FUNCTION_NAME)
+      .appendField(new Blockly.FieldVariable("servo1"), "varName");
+  this.appendValueInput("PIN")      
+      .appendField(Blockly.Msg.LIOU_ROBOT_PIN)
+      .appendField(Blockly.Msg.SERVO_ANGLE_TEXT2);
+  this.appendValueInput("MIN")   
+      .appendField(Blockly.Msg.LJJ_SERVO_PULSE_RANGE);
+  this.appendValueInput("MAX")      
+      .appendField(Blockly.Msg.DAC_TTS_SAVE_TO);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_QUNO_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_servo_write_pin={init:function(){
+  //this.setHelpUrl(Blockly.Msg.LJJ_QUNO_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_quno.HUE4);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LIOU_ROBOT_SERVO)
+      .appendField(Blockly.Msg.ESP32_IRQ_FUNCTION_NAME)
+      .appendField(new Blockly.FieldVariable("servo1"), "varName");
+  this.appendValueInput("ANGLE")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.SERVO_ANGLE_TEXT1);
+  this.appendDummyInput().appendField(Blockly.Msg.SERVO_ANGLE_TEXT2);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_QUNO_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_servo_360={init:function(){
+  //this.setHelpUrl(Blockly.Msg.LJJ_QUNO_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_quno.HUE4);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_SERVO_360)
+      .appendField(Blockly.Msg.ESP32_IRQ_FUNCTION_NAME)
+      .appendField(new Blockly.FieldVariable("servo1"), "varName");
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.L9110_ROTATE)  
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_SERVO_360_DIRECTION),"DIR");
+  this.appendDummyInput().appendField(Blockly.Msg.SERVO_ANGLE_TEXT2);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_QUNO_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_servo_detach={init:function(){
+  //this.setHelpUrl(Blockly.Msg.LJJ_QUNO_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_quno.HUE4);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LIOU_ROBOT_SERVO)
+      .appendField(Blockly.Msg.ESP32_IRQ_FUNCTION_NAME)
+      .appendField(new Blockly.FieldVariable("servo1"), "varName")
+      .appendField(Blockly.Msg.LJJ_SERVO_DETACH);
+  this.appendDummyInput().appendField(Blockly.Msg.SERVO_ANGLE_TEXT2);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_QUNO_TOOLTIP)}
 };
 
 //Cage Bot

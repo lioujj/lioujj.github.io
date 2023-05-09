@@ -1189,6 +1189,13 @@ Blockly.Msg.LJJ_SU03T_SAY_SOMETHING_LIST = [["歡迎光臨","15"],["有人入侵
   ["請注意安全，走廊上不要跑步","33"]
 ];
 
+//ljj_servo
+Blockly.Msg.LJJ_SERVO_360 = "伺服馬達 360度";
+Blockly.Msg.LJJ_SERVO_360_DIRECTION = [["順時針","0"],["逆時針","180"],["停止","90"]];
+Blockly.Msg.LJJ_SERVO_PULSE_RANGE='脈衝寬度範圍';
+Blockly.Msg.LJJ_SERVO_DETACH = '解除連結控制';
+
+
 //Tone
 Blockly.Msg.LJJ_TONE_LIST=[
   ["C3(131)","131"],["C#3(139)","139"],["D3(147)","147"],["D#3(156)","156"],["E3(165)","165"],["F3(175)","175"],["F#3(185)","185"],["G3(196)","196"],["G#3(208)","208"],["A3(220)","220"],["A#3(233)","233"],["B3(247)","247"],

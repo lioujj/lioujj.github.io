@@ -36,7 +36,7 @@
 <category><name>MPU9250_I2C</name><replace>MPU9250 9-axis</replace></category>
 <category><name>MSA301_I2C</name><replace>MSA301 3-axis</replace></category>
 <category><name>GoogleSheets</name><replace>Google Sheets</replace></category>
-<category><name>ESP32_NTP</name><replace>NTP Time</replace></category>
+<category><name>ESP32_NTP</name><replace>RTC</replace></category>
 <category><name>LineNotify</name><replace>Line Notify</replace></category>
 <category><name>TTGO</name><replace>TTGO</replace></category>
 <category><name>TTGO_TFT</name><replace>TFT Display</replace></category>
@@ -79,5 +79,7 @@
 <category><name>SU-03T</name><replace>SU-03T ASR</replace></category>
 <category><name>cagebot</name><replace>Cage Bot</replace></category>
 <category><name>picoSetup</name><replace>Pico Setup</replace></category>
-<category><name>PICO_RTC</name><replace>NTP Time</replace></category>
+<category><name>PICO_RTC</name><replace>RTC</replace></category>
+<category><name>Servo</name><replace>Servo</replace></category>
+<category><name>Pico_Modules</name><replace>Modules</replace></category>
 </xml>

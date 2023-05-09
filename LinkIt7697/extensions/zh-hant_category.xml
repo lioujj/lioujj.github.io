@@ -82,4 +82,6 @@
 <category><name>cagebot</name><replace>科技寶</replace></category>
 <category><name>picoSetup</name><replace>Pico設定</replace></category>
 <category><name>PICO_RTC</name><replace>RTC網路校時</replace></category>
+<category><name>Servo</name><replace>伺服馬達</replace></category>
+<category><name>Pico_Modules</name><replace>模組</replace></category>
 </xml>

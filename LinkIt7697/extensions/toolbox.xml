@@ -2357,6 +2357,12 @@
 		    </value>
        </block>
     </category>
+    <category id="category_ljj_pico_modules" name="Pico_Modules">
+      <category id="category_ljj_picobit" name="Pico:Bit">
+        <block type="ljj_picobit_button"></block>
+        <block type="ljj_picobit_pinMap"></block>
+      </category>
+    </category>
   </category>
 	<category id="category_iot" name="IoT">
 		<category id="category_mqtt" name="MQTT">
@@ -4286,6 +4292,41 @@
       </block>
       <block type="ljj_su03t_system_command"></block>
       <block type="ljj_su03t_say_something"></block>
+    </category>
+    <category id="category_ljj_servo" name="Servo">
+      <block type="ljj_servo_init">
+        <value name="PIN">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
+      <block type="ljj_servo_custom_init">
+        <value name="PIN">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="MIN">
+          <block type="math_number">
+            <field name="NUM">400</field>
+          </block>
+        </value>
+        <value name="MAX">
+          <block type="math_number">
+            <field name="NUM">2600</field>
+          </block>
+        </value>
+      </block>
+      <block type="ljj_servo_write_pin">
+        <value name="ANGLE">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
+      <block type="ljj_servo_360"></block>
+      <block type="ljj_servo_detach"></block>
     </category>
   </category>
   <category id="category_lumex" name="Lumex">

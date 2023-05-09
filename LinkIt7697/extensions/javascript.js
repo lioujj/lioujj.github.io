@@ -5625,6 +5625,24 @@ Blockly.Arduino.ljj_pico_core1_restart=function(){
     return'';
 }
 
+//Pico:bit
+Blockly.Arduino.ljj_picobit={};
+Blockly.Arduino.ljj_picobit_button=function(){
+    var a=this.getFieldValue("AB_BUTTON"),
+	    b=Blockly.Arduino.statementToCode(this,"MSG_BUTTON_CALL");
+	  b=b.replace(/\n/g,'\n  ');
+    Blockly.Arduino.definitions_.define_m_button="char myBtnStatus;\nbool buttonPressed(char btnName)\n{\n  byte A_Pin=2;\n  byte B_Pin=20;\n  if (btnName=='A'){\n    if (digitalRead(A_Pin) == 1)\n      return false;\n    else\n      return true;\n  }\n  else if (btnName=='B'){\n    if (digitalRead(B_Pin) == 1)\n      return false;\n    else\n      return true;\n  } else {\n    if ((digitalRead(A_Pin) == 1) && (digitalRead(B_Pin) == 1))\n      return false;\n    else\n      return true;\n  }\n}\n"
+    Blockly.Arduino.definitions_.define_m_getBtnStatus="char getBtnStatus(){\n  char buttonStatus=' ';\n  int checkButtonDelay=200;\n  if (buttonPressed('A')){\n    delay(checkButtonDelay);\n    if (buttonPressed('A')){\n      buttonStatus='A';\n      if (buttonPressed('B'))\n        buttonStatus='C';\n    }\n  } else if (buttonPressed('B')){\n      delay(checkButtonDelay);\n      if (buttonPressed('B')){\n        buttonStatus='B';\n        if (buttonPressed('A'))\n          buttonStatus='C';\n      }\n  }\n  return buttonStatus;\n}\n";
+    Blockly.Arduino.setups_.setup_button='pinMode(2, INPUT_PULLUP);\n  pinMode(20, INPUT_PULLUP);\n';
+	  return"if (myBtnStatus=='"+a+"'){\n"+b+"  while(buttonPressed('"+a+"')){}\n}\n"
+};
+
+Blockly.Arduino.ljj_picobit_pinMap=function(){
+  var a=this.getFieldValue("PICO_BIT_PIN");
+  return[a,Blockly.Arduino.ORDER_ATOMIC];
+};
+
+
 //WiFi extra
 Blockly.Arduino.linkit_wifi_check_conncetion=function(){
   return["(WiFi.status() != WL_CONNECTED)",Blockly.Arduino.ORDER_ATOMIC];
@@ -5906,6 +5924,43 @@ Blockly.Arduino.ljj_su03t_system_command = function() {
 Blockly.Arduino.ljj_su03t_say_something = function() { 
   var a=this.getFieldValue('COMMAND');
   return 'su03tSaySomething('+a+');\n';
+};
+
+//ljj_servo
+Blockly.Arduino.ljj_servo={};
+Blockly.Arduino.ljj_servo_init=function(){
+  var a=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=Blockly.Arduino.nameDB_.getName(this.getFieldValue('varName'), Blockly.VARIABLE_CATEGORY_NAME);
+  Blockly.Arduino.definitions_.define_servo="#include <Servo.h>";
+  Blockly.Arduino.definitions_["define_class_servo_"+a]="Servo "+b+";";
+  return b+'.attach('+a+');\n';
+};
+
+Blockly.Arduino.ljj_servo_custom_init=function(){
+  var a=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=Blockly.Arduino.nameDB_.getName(this.getFieldValue('varName'), Blockly.VARIABLE_CATEGORY_NAME),
+      c=Blockly.Arduino.valueToCode(this,"MIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      d=Blockly.Arduino.valueToCode(this,"MAX",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  Blockly.Arduino.definitions_.define_servo="#include <Servo.h>";
+  Blockly.Arduino.definitions_["define_class_servo_"+a]="Servo "+b+";";
+  return b+'.attach('+a+','+c+','+d+');\n';
+};
+
+Blockly.Arduino.ljj_servo_write_pin=function(){
+  var a=Blockly.Arduino.nameDB_.getName(this.getFieldValue('varName'), Blockly.VARIABLE_CATEGORY_NAME),
+      b=Blockly.Arduino.valueToCode(this,"ANGLE",Blockly.Arduino.ORDER_ATOMIC)||"90";
+  return a+".write("+b+");\n"
+};
+
+Blockly.Arduino.ljj_servo_360=function(){
+  var a=Blockly.Arduino.nameDB_.getName(this.getFieldValue('varName'), Blockly.VARIABLE_CATEGORY_NAME),
+      b=this.getFieldValue('DIR');
+  return a+".write("+b+");\n"
+};
+
+Blockly.Arduino.ljj_servo_detach=function(){
+  var a=Blockly.Arduino.nameDB_.getName(this.getFieldValue('varName'), Blockly.VARIABLE_CATEGORY_NAME);
+  return a+".detach();\n"
 };
 
 //Cage Bot
