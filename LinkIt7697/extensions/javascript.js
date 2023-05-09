@@ -5932,7 +5932,7 @@ Blockly.Arduino.ljj_servo_init=function(){
   var a=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
       b=Blockly.Arduino.nameDB_.getName(this.getFieldValue('varName'), Blockly.VARIABLE_CATEGORY_NAME);
   Blockly.Arduino.definitions_.define_servo="#include <Servo.h>";
-  Blockly.Arduino.definitions_["define_class_servo_"+a]="Servo "+b+";";
+  Blockly.Arduino.definitions_["define_class_servo_"+b]="Servo "+b+";";
   return b+'.attach('+a+');\n';
 };
 
@@ -5942,7 +5942,7 @@ Blockly.Arduino.ljj_servo_custom_init=function(){
       c=Blockly.Arduino.valueToCode(this,"MIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
       d=Blockly.Arduino.valueToCode(this,"MAX",Blockly.Arduino.ORDER_ATOMIC)||"0";
   Blockly.Arduino.definitions_.define_servo="#include <Servo.h>";
-  Blockly.Arduino.definitions_["define_class_servo_"+a]="Servo "+b+";";
+  Blockly.Arduino.definitions_["define_class_servo_"+b]="Servo "+b+";";
   return b+'.attach('+a+','+c+','+d+');\n';
 };
 
