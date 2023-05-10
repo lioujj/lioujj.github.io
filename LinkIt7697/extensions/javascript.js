@@ -3721,8 +3721,8 @@ Blockly.Arduino.l9110_init=function(){
       c=Blockly.Arduino.valueToCode(this,"M2A",Blockly.Arduino.ORDER_ATOMIC)||"0",
       d=Blockly.Arduino.valueToCode(this,"M2B",Blockly.Arduino.ORDER_ATOMIC)||"0";
   if (Blockly.Arduino.my_board_type=="ESP32"){
-    Blockly.Arduino.definitions_.define_L9110_invoke='byte m1aL9110='+a+';\nbyte m1bL9110='+b+';\nbyte m2aL9110='+c+';\nbyte m2bL9110='+d+';\nbyte m1aCH=11;\nbyte m1bCH=12;\nbyte m2aCH=13;\nbyte m2bCH=14;\n';
-    Blockly.Arduino.setups_["setup_L9110"]='ledcSetup(m1aCH, 5000, 8);\n  ledcAttachPin(m1aL9110,m1aCH);\n  ledcSetup(m1bCH, 5000, 8);\n  ledcAttachPin(m1bL9110,m1bCH);\n  ledcSetup(m2aCH, 5000, 8);\n  ledcAttachPin(m2aL9110,m2aCH);\n  ledcSetup(m2bCH, 5000, 8);\n  ledcAttachPin(m2bL9110,m2bCH);\n';   
+    Blockly.Arduino.definitions_.define_L9110_invoke='byte m1aL9110='+a+';\nbyte m1bL9110='+b+';\nbyte m2aL9110='+c+';\nbyte m2bL9110='+d+';\nbyte m1bCH=13;\nbyte m2bCH=14;\n';
+    Blockly.Arduino.setups_["setup_L9110"]='pinMode(m1aL9110,OUTPUT);\n  pinMode(m2aL9110,OUTPUT);\n  ledcSetup(m1bCH, 5000, 8);\n  ledcAttachPin(m1bL9110,m1bCH);\n  ledcSetup(m2bCH, 5000, 8);\n  ledcAttachPin(m2bL9110,m2bCH);\n';   
   } else {
     Blockly.Arduino.definitions_.define_L9110_invoke='byte m1aL9110='+a+';\nbyte m1bL9110='+b+';\nbyte m2aL9110='+c+';\nbyte m2bL9110='+d+';\n';
     Blockly.Arduino.setups_["setup_L9110"]='pinMode(m1aL9110,OUTPUT);\n  pinMode(m1bL9110,OUTPUT);\n  pinMode(m2aL9110,OUTPUT);\n  pinMode(m2bL9110,OUTPUT);\n';
@@ -3749,9 +3749,9 @@ Blockly.Arduino.l9110_run=function(){
     }
   if (Blockly.Arduino.my_board_type=="ESP32"){
     returnValue=returnValue.replace(/analogWrite/g,"ledcWrite");
-    returnValue=returnValue.replace(/m1aL9110/g,"m1aCH");
+    //returnValue=returnValue.replace(/m1aL9110/g,"m1aCH");
     returnValue=returnValue.replace(/m1bL9110/g,"m1bCH");
-    returnValue=returnValue.replace(/m2aL9110/g,"m2aCH");
+    //returnValue=returnValue.replace(/m2aL9110/g,"m2aCH");
     returnValue=returnValue.replace(/m2bL9110/g,"m2bCH");
   } 
   return returnValue;
@@ -3767,9 +3767,9 @@ Blockly.Arduino.l9110_stop=function(){
     }
   if (Blockly.Arduino.my_board_type=="ESP32"){
     returnValue=returnValue.replace(/analogWrite/g,"ledcWrite");
-    returnValue=returnValue.replace(/m1aL9110/g,"m1aCH");
+    //returnValue=returnValue.replace(/m1aL9110/g,"m1aCH");
     returnValue=returnValue.replace(/m1bL9110/g,"m1bCH");
-    returnValue=returnValue.replace(/m2aL9110/g,"m2aCH");
+    //returnValue=returnValue.replace(/m2aL9110/g,"m2aCH");
     returnValue=returnValue.replace(/m2bL9110/g,"m2bCH");
   } 
   return returnValue;
