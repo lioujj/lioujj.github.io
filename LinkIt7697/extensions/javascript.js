@@ -3761,9 +3761,9 @@ Blockly.Arduino.l9110_stop=function(){
   var a=this.getFieldValue("MOTOR"),
       returnValue="";
     if (a=="both"){
-      returnValue='digitalWrite(m1aL9110,0);\nanalogWrite(m1bL9110,0);\ndigitalWrite(m2aL9110,0);\nanalogWrite(m2bL9110,0);\n';
+      returnValue='digitalWrite(m1aL9110,1);\nanalogWrite(m1bL9110,255);\ndigitalWrite(m2aL9110,1);\nanalogWrite(m2bL9110,255);\n';
     } else {
-      returnValue='digitalWrite('+a+'aL9110,0);\nanalogWrite('+a+'bL9110,0);\n';
+      returnValue='digitalWrite('+a+'aL9110,1);\nanalogWrite('+a+'bL9110,255);\n';
     }
   if (Blockly.Arduino.my_board_type=="ESP32"){
     returnValue=returnValue.replace(/analogWrite/g,"ledcWrite");
