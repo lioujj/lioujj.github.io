@@ -1054,6 +1054,11 @@ Blockly.Msg.LJJ_WS2812_SET_COLORS = "set colors and show";
 Blockly.Msg.LJJ_WS2812_PIXEL_FORMAT = 'pixel format';
 Blockly.Msg.LJJ_WS2812_FLOW = 'color flow';
 Blockly.Msg.LJJ_WS2812_FLOW_LIST = [['forward','1'],['backward','2']];
+Blockly.Msg.LJJ_WS2812_COLOR_NEXT = 'change color step by step';
+Blockly.Msg.LJJ_WS2812_DIRECTION= 'direction';
+Blockly.Msg.LJJ_WS2812_TIME_INTERVAL = 'time interval(ms)';
+Blockly.Msg.LJJ_WS2812_COLOR_BLINK = '2 colors blink';
+Blockly.Msg.LJJ_WS2812_BREATHE = 'starts to breathe once';
 Blockly.Msg.LJJ_BASIC_SONAR = "UltraSonic";
 Blockly.Msg.LJJ_BASIC_SONAR_DISTANCE = "distance(CM)";
 

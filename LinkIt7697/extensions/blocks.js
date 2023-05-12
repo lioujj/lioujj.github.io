@@ -8082,6 +8082,72 @@ Blockly.Blocks.ljj_ws2812_color_flow={init:function(){
   this.setTooltip(Blockly.Msg.LJJ_BASIC_TOOLTIP)}
 };
 
+Blockly.Blocks.ljj_ws2812_color_next={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_WS2812_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_5012.HUE5);
+  this.appendDummyInput()
+      .appendField("WS2812")
+      .appendField(Blockly.Msg.LJJ_BASIC_VARIABLE_NAME)
+      .appendField(new Blockly.FieldVariable("strip"), "varName");
+  this.appendValueInput("COLOR")
+      .setCheck("String")
+      .appendField(Blockly.Msg.LJJ_WS2812_COLOR_NEXT);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_WS2812_DIRECTION)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_WS2812_FLOW_LIST),"DIRECTION");
+  this.appendValueInput("INTERVAL")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LJJ_WS2812_TIME_INTERVAL);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.LJJ_BASIC_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_ws2812_2_colors_blink={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_WS2812_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_5012.HUE5);
+  this.appendDummyInput()
+      .appendField("WS2812")
+      .appendField(Blockly.Msg.LJJ_BASIC_VARIABLE_NAME)
+      .appendField(new Blockly.FieldVariable("strip"), "varName");
+  this.appendValueInput("COLOR1")
+      .setCheck("String")
+      .appendField(Blockly.Msg.LJJ_WS2812_COLOR_BLINK)
+      .appendField(Blockly.Msg.PROBBIE_COLOR+"1");
+  this.appendValueInput("COLOR2")
+      .setCheck("String")
+      .appendField(Blockly.Msg.PROBBIE_COLOR+"2");
+  this.appendValueInput("INTERVAL")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LJJ_WS2812_TIME_INTERVAL);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.LJJ_BASIC_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_ws2812_breathe={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_WS2812_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_5012.HUE5);
+  this.appendDummyInput()
+      .appendField("WS2812")
+      .appendField(Blockly.Msg.LJJ_BASIC_VARIABLE_NAME)
+      .appendField(new Blockly.FieldVariable("strip"), "varName");
+  this.appendValueInput("COLOR")
+      .setCheck("String")
+      .appendField(Blockly.Msg.LJJ_WS2812_BREATHE)
+      .appendField(Blockly.Msg.PROBBIE_COLOR);
+  this.appendValueInput("INTERVAL")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LJJ_WS2812_TIME_INTERVAL);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.LJJ_BASIC_TOOLTIP)}
+};
+
+
 Blockly.Blocks.ljj_ws2812_neopixel_brightness={init:function(){
   this.setHelpUrl(Blockly.Msg.LJJ_WS2812_HELPURL);
   this.setColour(Blockly.Blocks.ljj_5012.HUE5);

@@ -1047,6 +1047,11 @@ Blockly.Msg.LJJ_WS2812_SET_COLORS = "設定燈色並顯示";
 Blockly.Msg.LJJ_WS2812_PIXEL_FORMAT = '規格設定';
 Blockly.Msg.LJJ_WS2812_FLOW = '燈色流動';
 Blockly.Msg.LJJ_WS2812_FLOW_LIST = [['往前','1'],['往後','2']];
+Blockly.Msg.LJJ_WS2812_COLOR_NEXT = '逐顆改變顏色';
+Blockly.Msg.LJJ_WS2812_DIRECTION = '方向';
+Blockly.Msg.LJJ_WS2812_TIME_INTERVAL = '時間差(ms)';
+Blockly.Msg.LJJ_WS2812_COLOR_BLINK = '兩個顏色交互閃爍';
+Blockly.Msg.LJJ_WS2812_BREATHE = '呼吸燈呼吸一次';
 Blockly.Msg.LJJ_BASIC_SONAR = "超音波感測器";
 Blockly.Msg.LJJ_BASIC_SONAR_DISTANCE = "距離(CM)";
 

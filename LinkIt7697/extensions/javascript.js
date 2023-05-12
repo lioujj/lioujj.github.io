@@ -5176,6 +5176,7 @@ Blockly.Arduino.ljj_ws2812_neopixel_begin=function(){
       c=Blockly.Arduino.valueToCode(this,"TOTAL",Blockly.Arduino.ORDER_ATOMIC)||"0",
       d=Blockly.Arduino.nameDB_.getName(this.getFieldValue('varName'), Blockly.VARIABLE_CATEGORY_NAME);
       e=this.getFieldValue("PIXEL_FORMAT");
+  Blockly.Arduino.ljj_basic[d+'_ws2812_brightness']=a;
 	Blockly.Arduino.definitions_.define_include_neopixel="#include <Adafruit_NeoPixel.h>";
   Blockly.Arduino.definitions_['define_ws2812_neopixel_'+d]='Adafruit_NeoPixel '+d+' = Adafruit_NeoPixel('+c+','+b+',NEO_'+e+' + NEO_KHZ800);\nuint32_t '+d+'_arr['+c+']={0};';
 //  Blockly.Arduino.definitions_['ljj_ws2812_'+d+'_event']='void '+d+'SetAllLedsColor(uint32_t myLedColor)\n{\n  for(int i=0;i<'+c+';i++)\n    '+d+'.setPixelColor(i,myLedColor);\n  '+d+'.show();\n}\n';
@@ -5207,6 +5208,7 @@ Blockly.Arduino.ljj_ws2812_neopixel_set_colors=function(){
 Blockly.Arduino.ljj_ws2812_neopixel_brightness=function(){
   var a=Blockly.Arduino.valueToCode(this,"BRIGHTNESS",Blockly.Arduino.ORDER_ATOMIC)||"",
       b=Blockly.Arduino.nameDB_.getName(this.getFieldValue('varName'), Blockly.VARIABLE_CATEGORY_NAME);
+  Blockly.Arduino.ljj_basic[b+'_ws2812_brightness']=a;
   return b+'.setBrightness('+a+');\n'+b+'.show();\n';
 };
 
@@ -5236,6 +5238,37 @@ Blockly.Arduino.ljj_ws2812_color_flow=function(){
   var a=Blockly.Arduino.nameDB_.getName(this.getFieldValue('varName'), Blockly.VARIABLE_CATEGORY_NAME),
       b=this.getFieldValue("DIRECTION");
   return a+'FlowLedsColors('+b+');\n';
+};
+
+Blockly.Arduino.ljj_ws2812_color_next=function(){
+  var a=Blockly.Arduino.nameDB_.getName(this.getFieldValue('varName'), Blockly.VARIABLE_CATEGORY_NAME),
+      b=this.getFieldValue("DIRECTION"),
+      c=Blockly.Arduino.valueToCode(this,"COLOR",Blockly.Arduino.ORDER_ATOMIC)||"",
+      d=Blockly.Arduino.valueToCode(this,"INTERVAL",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  c=c.replace("tft.color565",a+".Color");
+  Blockly.Arduino.definitions_['ljj_ws2812_next_'+a+'_color_event']='void '+a+'ChangeNextColor(uint32_t myLedColor,byte dir,uint8_t interval)\n{\n  int myLength=(sizeof('+a+'_arr)/sizeof('+a+'_arr[0]));\n  if (dir==2){\n    for(int i=0;i<myLength;i++){\n      '+a+'_arr[i]=myLedColor;\n      '+a+'.setPixelColor(i,myLedColor);\n      '+a+'.show();\n      delay(interval);\n    }\n  } else if (dir==1){\n    for(int i=(myLength-1);i>-1;i--){\n      '+a+'_arr[i]=myLedColor;\n      '+a+'.setPixelColor(i,myLedColor);\n      '+a+'.show();\n      delay(interval);\n    }\n  }\n}\n';
+  return a+'ChangeNextColor('+c+','+b+','+d+');\n';
+};
+
+Blockly.Arduino.ljj_ws2812_2_colors_blink=function(){
+  var a=Blockly.Arduino.nameDB_.getName(this.getFieldValue('varName'), Blockly.VARIABLE_CATEGORY_NAME),
+      b=Blockly.Arduino.valueToCode(this,"COLOR1",Blockly.Arduino.ORDER_ATOMIC)||"",
+      c=Blockly.Arduino.valueToCode(this,"COLOR2",Blockly.Arduino.ORDER_ATOMIC)||"",
+      d=Blockly.Arduino.valueToCode(this,"INTERVAL",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  b=b.replace("tft.color565",a+".Color");
+  c=c.replace("tft.color565",a+".Color");
+  Blockly.Arduino.definitions_['ljj_ws2812_'+a+'_2color_blink_event']='void '+a+'ColorsBlink(uint32_t myLedColor1,uint32_t myLedColor2,uint8_t interval)\n{\n  int myLength=(sizeof('+a+'_arr)/sizeof('+a+'_arr[0]));\n  for(int i=0;i<myLength;i++){\n    if ((i%2)==0)\n      '+a+'_arr[i]=myLedColor1;\n    else\n      '+a+'_arr[i]=myLedColor2;\n    '+a+'.setPixelColor(i,'+a+'_arr[i]);\n  }\n  '+a+'.show();\n  delay(interval);\n}\n';
+  return a+'ColorsBlink('+b+','+c+','+d+');\n'+a+'ColorsBlink('+c+','+b+','+d+');\n';
+};
+
+Blockly.Arduino.ljj_ws2812_breathe=function(){
+  var a=Blockly.Arduino.nameDB_.getName(this.getFieldValue('varName'), Blockly.VARIABLE_CATEGORY_NAME),
+      b=Blockly.Arduino.valueToCode(this,"COLOR",Blockly.Arduino.ORDER_ATOMIC)||"",
+      c=Blockly.Arduino.valueToCode(this,"INTERVAL",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  b=b.replace("tft.color565",a+".Color");
+  Blockly.Arduino.definitions_['ljj_ws2812_'+a+'_breathe_event']='void '+a+'Breathe(uint32_t myLedColor,uint8_t interval)\n{\n  '+a+'.clear();\n  '+a+'.show();\n  '+a+'.setBrightness(0);\n  '+a+'SetAllLedsColor(myLedColor);\n  '+a+'ShowAllLedsColor();\n  for(int i=0;i<255;i++){\n    '+a+'.setBrightness(i);\n    '+a+'.show();\n    if (i==1)\n      '+a+'ShowAllLedsColor();\n    delay(interval);\n  }\n  for(int i=255;i>-1;i--){\n    '+a+'.setBrightness(i);\n    '+a+'.show();\n    delay(interval);\n  }\n}\n';
+  //return a+'Breathe('+b+','+c+');\n'+a+'.setBrightness('+Blockly.Arduino.ljj_basic[a+'_ws2812_brightness']+');\n'+a+'SetAllLedsColor('+a+'.Color(0,0,0));\n'+a+'ShowAllLedsColor();'
+  return a+'Breathe('+b+','+c+');\n'+a+'.setBrightness('+Blockly.Arduino.ljj_basic[a+'_ws2812_brightness']+');\n'
 };
 
 //MAX7219
