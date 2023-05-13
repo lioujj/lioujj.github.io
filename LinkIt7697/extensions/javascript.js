@@ -5806,7 +5806,6 @@ Blockly.Arduino.ljj_wukong_servo360=function(){
   else if (a=='180')
     speed='('+c+'+90)';
   Blockly.Arduino.definitions_.define_ljj_wukong_motor_run='void wukongMotorRun(byte addr,byte motor, byte dir ,byte power){\n  Wire.setClock(100000);\n  byte myParams[]={motor,dir,power,0};\n  Wire.beginTransmission(addr);\n  Wire.write(myParams,4);\n  Wire.endTransmission();\n}'; 
-  //return'wukongMotorRun(0x10,'+b+','+a+',0);\n'
   return'wukongMotorRun(0x10,'+b+','+speed+',0);\n'
 };
 
@@ -6012,21 +6011,15 @@ Blockly.Arduino.ljj_servo_write_pin=function(){
 
 Blockly.Arduino.ljj_servo_360=function(){
   var a=Blockly.Arduino.nameDB_.getName(this.getFieldValue('varName'), Blockly.VARIABLE_CATEGORY_NAME),
-      b=this.getFieldValue('DIR');    
-  return a+'.write('+b+');\n'
-};
-
-Blockly.Arduino.ljj_servo_360_mg90s=function(){
-  var a=Blockly.Arduino.nameDB_.getName(this.getFieldValue('varName'), Blockly.VARIABLE_CATEGORY_NAME),
       b=this.getFieldValue('DIR'),
-      c=Blockly.Arduino.valueToCode(this,"SPEED",Blockly.Arduino.ORDER_ATOMIC)||"0",
-      d=this.getFieldValue('TYPE');
-  var speed='1500';
-  if (b=='1400')
-    speed='1500-'+c+'*8';
-  else if (b=='1600')
-    speed='1500+'+c+'*8';      
-  return a+".writeMicroseconds("+speed+");\n"
+      c=Blockly.Arduino.valueToCode(this,"SPEED",Blockly.Arduino.ORDER_ATOMIC)||"0"; 
+  var speed='90';
+  if (b=='0')
+    speed='90-'+c;
+  else if (b=='180')
+    speed='90+'+c;      
+  return a+".write("+speed+");\n"      
+  //return a+'.write('+b+');\n'
 };
 
 Blockly.Arduino.ljj_servo_detach=function(){
