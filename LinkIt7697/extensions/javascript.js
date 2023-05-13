@@ -6012,14 +6012,20 @@ Blockly.Arduino.ljj_servo_write_pin=function(){
 
 Blockly.Arduino.ljj_servo_360=function(){
   var a=Blockly.Arduino.nameDB_.getName(this.getFieldValue('varName'), Blockly.VARIABLE_CATEGORY_NAME),
+      b=this.getFieldValue('DIR');    
+  return a+'.write('+b+');\n'
+};
+
+Blockly.Arduino.ljj_servo_360_mg90s=function(){
+  var a=Blockly.Arduino.nameDB_.getName(this.getFieldValue('varName'), Blockly.VARIABLE_CATEGORY_NAME),
       b=this.getFieldValue('DIR'),
       c=Blockly.Arduino.valueToCode(this,"SPEED",Blockly.Arduino.ORDER_ATOMIC)||"0",
       d=this.getFieldValue('TYPE');
   var speed='1500';
   if (b=='1400')
-    speed='1500-'+c+'*'+d;
+    speed='1500-'+c+'*8';
   else if (b=='1600')
-    speed='1500+'+c+'*'+d;      
+    speed='1500+'+c+'*8';      
   return a+".writeMicroseconds("+speed+");\n"
 };
 

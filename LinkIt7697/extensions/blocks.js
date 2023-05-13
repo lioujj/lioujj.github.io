@@ -10380,11 +10380,27 @@ Blockly.Blocks.ljj_servo_360={init:function(){
   this.setColour(Blockly.Blocks.ljj_quno.HUE4);
   this.appendDummyInput()
       .appendField(Blockly.Msg.LJJ_SERVO_360)
+      .appendField("SG90")
       .appendField(Blockly.Msg.ESP32_IRQ_FUNCTION_NAME)
       .appendField(new Blockly.FieldVariable("servo1"), "varName");
   this.appendDummyInput()
-      .appendField(Blockly.Msg.I2S_MIC_DB_MODEL)  
-      .appendField(new Blockly.FieldDropdown([["SG90","1"],["MG90S","8"]]),"TYPE");
+      .appendField(Blockly.Msg.L9110_ROTATE)  
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_SERVO_360_DIRECTION),"DIR");
+  this.appendDummyInput().appendField(Blockly.Msg.SERVO_ANGLE_TEXT2);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_QUNO_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_servo_360_mg90s={init:function(){
+  //this.setHelpUrl(Blockly.Msg.LJJ_QUNO_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_quno.HUE4);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_SERVO_360)
+      .appendField("MG90S")
+      .appendField(Blockly.Msg.ESP32_IRQ_FUNCTION_NAME)
+      .appendField(new Blockly.FieldVariable("servo1"), "varName");
   this.appendDummyInput()
       .appendField(Blockly.Msg.L9110_ROTATE)  
       .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_SERVO_360_DIRECTION_1),"DIR");

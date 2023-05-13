@@ -4380,7 +4380,8 @@
           </block>
         </value>
       </block>
-      <block type="ljj_servo_360">
+      <block type="ljj_servo_360"></block>
+      <block type="ljj_servo_360_mg90s">
         <value name="SPEED">
           <block type="math_number">
             <field name="NUM">0</field>
