@@ -9876,6 +9876,7 @@ Blockly.Blocks.ljj_wukong={};
 Blockly.Blocks.ljj_wukong.HUE1=80;
 Blockly.Blocks.ljj_wukong.HUE2=290;
 Blockly.Blocks.ljj_wukong.HUE3=150;
+Blockly.Blocks.ljj_wukong.HUE4=100;
 Blockly.Blocks.ljj_wukong_motor_move={init:function(){
   this.setHelpUrl(Blockly.Msg.LJJ_WUKONG_HELPURL);
   this.setColour(Blockly.Blocks.ljj_wukong.HUE1);
@@ -9904,6 +9905,43 @@ Blockly.Blocks.ljj_wukong_motor_stop={init:function(){
       .appendField(Blockly.Msg.L9110_MOTOR)
       .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_WUKONG_MOTORS_LIST),"STAT1")
       .appendField(Blockly.Msg.LIOU_ROBOT_STOP);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.LJJ_WUKONG_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_wukong_servo180={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_WUKONG_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_wukong.HUE4);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_WUKONG_TITLE)
+      .appendField(Blockly.Msg.LIOU_ROBOT_SERVO)
+      .appendField(Blockly.Msg.LIOU_ROBOT_PIN)
+      .appendField(new Blockly.FieldDropdown([["S0","0x03"],["S1","0x04"],["S2","0x05"],["S3","0x06"],["S4","0x07"],["S5","0x08"],["S6","0x09"],["S7","0x10"],]),"PIN")
+  this.appendValueInput("ANGLE")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.SERVO_ANGLE_TEXT1);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.LJJ_WUKONG_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_wukong_servo360={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_WUKONG_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_wukong.HUE4);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_WUKONG_TITLE)
+      .appendField(Blockly.Msg.LJJ_SERVO_360)
+      .appendField(Blockly.Msg.LIOU_ROBOT_PIN)
+      .appendField(new Blockly.FieldDropdown([["S0","0x03"],["S1","0x04"],["S2","0x05"],["S3","0x06"],["S4","0x07"],["S5","0x08"],["S6","0x09"],["S7","0x10"],]),"PIN")
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.L9110_ROTATE)  
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_SERVO_360_DIRECTION),"DIR");
+  this.appendValueInput("SPEED")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LIOU_ROBOT_MOVE_SPEED.replace('~255','~90'));
   this.setInputsInline(!0);
   this.setPreviousStatement(!0,null);
   this.setNextStatement(!0,null);
@@ -10345,8 +10383,14 @@ Blockly.Blocks.ljj_servo_360={init:function(){
       .appendField(Blockly.Msg.ESP32_IRQ_FUNCTION_NAME)
       .appendField(new Blockly.FieldVariable("servo1"), "varName");
   this.appendDummyInput()
+      .appendField(Blockly.Msg.I2S_MIC_DB_MODEL)  
+      .appendField(new Blockly.FieldDropdown([["SG90","1"],["MG90S","8"]]),"TYPE");
+  this.appendDummyInput()
       .appendField(Blockly.Msg.L9110_ROTATE)  
-      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_SERVO_360_DIRECTION),"DIR");
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_SERVO_360_DIRECTION_1),"DIR");
+  this.appendValueInput("SPEED")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LIOU_ROBOT_MOVE_SPEED.replace('~255','~100'));
   this.appendDummyInput().appendField(Blockly.Msg.SERVO_ANGLE_TEXT2);
   this.setInputsInline(!0);
   this.setPreviousStatement(!0);

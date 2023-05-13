@@ -3019,6 +3019,20 @@
 				</value>
 			</block>
 			<block type="ljj_wukong_motor_stop"></block>
+      <block type="ljj_wukong_servo180">
+        <value name="ANGLE">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
+      <block type="ljj_wukong_servo360">
+        <value name="SPEED">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
       <block type="ljj_wukong_neopixel_begin">
         <value name="BRIGHTNESS">
           <block type="math_number">
@@ -4366,7 +4380,13 @@
           </block>
         </value>
       </block>
-      <block type="ljj_servo_360"></block>
+      <block type="ljj_servo_360">
+        <value name="SPEED">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
       <block type="ljj_servo_detach"></block>
     </category>
   </category>

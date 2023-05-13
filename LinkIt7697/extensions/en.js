@@ -1205,6 +1205,7 @@ Blockly.Msg.LJJ_SU03T_SAY_SOMETHING_LIST = [["歡迎光臨","15"],["有人入侵
 //ljj_servo
 Blockly.Msg.LJJ_SERVO_360 = "Continuous Rotation Servo";
 Blockly.Msg.LJJ_SERVO_360_DIRECTION = [["clockWise","0"],["counterClockWise","180"],["stop","90"]];
+Blockly.Msg.LJJ_SERVO_360_DIRECTION_1 = [["clockWise","1400"],["counterClockWise","1600"],["stop","1500"]];
 Blockly.Msg.LJJ_SERVO_PULSE_RANGE='pulse width range';
 Blockly.Msg.LJJ_SERVO_DETACH = 'detach';
 

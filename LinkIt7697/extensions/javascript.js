@@ -5267,7 +5267,6 @@ Blockly.Arduino.ljj_ws2812_breathe=function(){
       c=Blockly.Arduino.valueToCode(this,"INTERVAL",Blockly.Arduino.ORDER_ATOMIC)||"0";
   b=b.replace("tft.color565",a+".Color");
   Blockly.Arduino.definitions_['ljj_ws2812_'+a+'_breathe_event']='void '+a+'Breathe(uint32_t myLedColor,uint8_t interval)\n{\n  '+a+'.clear();\n  '+a+'.show();\n  '+a+'.setBrightness(0);\n  '+a+'SetAllLedsColor(myLedColor);\n  '+a+'ShowAllLedsColor();\n  for(int i=0;i<255;i++){\n    '+a+'.setBrightness(i);\n    '+a+'.show();\n    if (i==1)\n      '+a+'ShowAllLedsColor();\n    delay(interval);\n  }\n  for(int i=255;i>-1;i--){\n    '+a+'.setBrightness(i);\n    '+a+'.show();\n    delay(interval);\n  }\n}\n';
-  //return a+'Breathe('+b+','+c+');\n'+a+'.setBrightness('+Blockly.Arduino.ljj_basic[a+'_ws2812_brightness']+');\n'+a+'SetAllLedsColor('+a+'.Color(0,0,0));\n'+a+'ShowAllLedsColor();'
   return a+'Breathe('+b+','+c+');\n'+a+'.setBrightness('+Blockly.Arduino.ljj_basic[a+'_ws2812_brightness']+');\n'
 };
 
@@ -5786,6 +5785,31 @@ Blockly.Arduino.ljj_wukong_motor_stop=function(){
   }
 };
 
+Blockly.Arduino.ljj_wukong_servo180=function(){
+  var a=Blockly.Arduino.valueToCode(this,"ANGLE",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=this.getFieldValue("PIN");
+  Blockly.Arduino.definitions_.define_wire="#include <Wire.h>";
+  Blockly.Arduino.setups_.setup_wire_lib="Wire.begin();";
+  Blockly.Arduino.definitions_.define_ljj_wukong_motor_run='void wukongMotorRun(byte addr,byte motor, byte dir ,byte power){\n  Wire.setClock(100000);\n  byte myParams[]={motor,dir,power,0};\n  Wire.beginTransmission(addr);\n  Wire.write(myParams,4);\n  Wire.endTransmission();\n}'; 
+  return'wukongMotorRun(0x10,'+b+','+a+',0);\n'
+};
+
+Blockly.Arduino.ljj_wukong_servo360=function(){
+  var a=this.getFieldValue("DIR"),
+      b=this.getFieldValue("PIN"),
+      c=Blockly.Arduino.valueToCode(this,"SPEED",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  Blockly.Arduino.definitions_.define_wire="#include <Wire.h>";
+  Blockly.Arduino.setups_.setup_wire_lib="Wire.begin();";
+  var speed='90';
+  if (a=='0')
+    speed='(90-'+c+')';
+  else if (a=='180')
+    speed='('+c+'+90)';
+  Blockly.Arduino.definitions_.define_ljj_wukong_motor_run='void wukongMotorRun(byte addr,byte motor, byte dir ,byte power){\n  Wire.setClock(100000);\n  byte myParams[]={motor,dir,power,0};\n  Wire.beginTransmission(addr);\n  Wire.write(myParams,4);\n  Wire.endTransmission();\n}'; 
+  //return'wukongMotorRun(0x10,'+b+','+a+',0);\n'
+  return'wukongMotorRun(0x10,'+b+','+speed+',0);\n'
+};
+
 Blockly.Arduino.ljj_wukong_neopixel_begin=function(){
   var a=Blockly.Arduino.valueToCode(this,"BRIGHTNESS",Blockly.Arduino.ORDER_ATOMIC)||"0",
       b=this.getFieldValue("CARD_TYPE");
@@ -5988,8 +6012,15 @@ Blockly.Arduino.ljj_servo_write_pin=function(){
 
 Blockly.Arduino.ljj_servo_360=function(){
   var a=Blockly.Arduino.nameDB_.getName(this.getFieldValue('varName'), Blockly.VARIABLE_CATEGORY_NAME),
-      b=this.getFieldValue('DIR');
-  return a+".write("+b+");\n"
+      b=this.getFieldValue('DIR'),
+      c=Blockly.Arduino.valueToCode(this,"SPEED",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      d=this.getFieldValue('TYPE');
+  var speed='1500';
+  if (b=='1400')
+    speed='1500-'+c+'*'+d;
+  else if (b=='1600')
+    speed='1500+'+c+'*'+d;      
+  return a+".writeMicroseconds("+speed+");\n"
 };
 
 Blockly.Arduino.ljj_servo_detach=function(){
