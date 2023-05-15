@@ -5988,8 +5988,13 @@ Blockly.Arduino.ljj_servo={};
 Blockly.Arduino.ljj_servo_init=function(){
   var a=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
       b=Blockly.Arduino.nameDB_.getName(this.getFieldValue('varName'), Blockly.VARIABLE_CATEGORY_NAME);
-  Blockly.Arduino.definitions_.define_servo="#include <Servo.h>";
-  Blockly.Arduino.definitions_["define_class_servo_"+b]="Servo "+b+";";
+  if (Blockly.Arduino.my_board_type=="ATtiny85"){
+    Blockly.Arduino.definitions_.define_servo="#include <Adafruit_SoftServo.h>";
+    Blockly.Arduino.definitions_["define_class_servo_"+b]="Adafruit_SoftServo "+b+";";
+  } else{
+    Blockly.Arduino.definitions_.define_servo="#include <Servo.h>";
+    Blockly.Arduino.definitions_["define_class_servo_"+b]="Servo "+b+";";
+  }
   return b+'.attach('+a+');\n';
 };
 
@@ -5998,8 +6003,13 @@ Blockly.Arduino.ljj_servo_custom_init=function(){
       b=Blockly.Arduino.nameDB_.getName(this.getFieldValue('varName'), Blockly.VARIABLE_CATEGORY_NAME),
       c=Blockly.Arduino.valueToCode(this,"MIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
       d=Blockly.Arduino.valueToCode(this,"MAX",Blockly.Arduino.ORDER_ATOMIC)||"0";
-  Blockly.Arduino.definitions_.define_servo="#include <Servo.h>";
-  Blockly.Arduino.definitions_["define_class_servo_"+b]="Servo "+b+";";
+  if (Blockly.Arduino.my_board_type=="ATtiny85"){
+    Blockly.Arduino.definitions_.define_servo="#include <Adafruit_SoftServo.h>";
+    Blockly.Arduino.definitions_["define_class_servo_"+b]="Adafruit_SoftServo "+b+";";
+  } else{
+    Blockly.Arduino.definitions_.define_servo="#include <Servo.h>";
+    Blockly.Arduino.definitions_["define_class_servo_"+b]="Servo "+b+";";
+  }
   return b+'.attach('+a+','+c+','+d+');\n';
 };
 
@@ -6017,9 +6027,11 @@ Blockly.Arduino.ljj_servo_360=function(){
   if (b=='0')
     speed='90-'+c;
   else if (b=='180')
-    speed='90+'+c;      
-  return a+".write("+speed+");\n"      
-  //return a+'.write('+b+');\n'
+    speed='90+'+c; 
+  if (Blockly.Arduino.my_board_type=="ATtiny85")
+    return a+".write360("+speed+");\n"
+  else
+    return a+".write("+speed+");\n"
 };
 
 Blockly.Arduino.ljj_servo_detach=function(){
