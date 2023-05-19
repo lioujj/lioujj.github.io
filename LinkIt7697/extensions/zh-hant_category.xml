@@ -1,7 +1,7 @@
 <xml>
 <category><name>Liou</name><replace>吉哥積木</replace></category>
 <category><name>Tools</name><replace>工具</replace></category>
-<category><name>String_tool</name><replace>字串處理</replace></category>
+<category><name>String_tool</name><replace>字串及數值轉換</replace></category>
 <category><name>Custom_block</name><replace>客製化程式碼</replace></category>
 <category><name>Lumex</name><replace>Lumex</replace></category>
 <category><name>LDM6432MQTT</name><replace>LDM6432燈板</replace></category>

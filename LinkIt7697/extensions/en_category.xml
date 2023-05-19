@@ -1,7 +1,7 @@
 <xml>
 <category><name>Liou</name><replace>Liou's Blocks</replace></category>
 <category><name>Tools</name><replace>Tools</replace></category>
-<category><name>String_tool</name><replace>String tools</replace></category>
+<category><name>String_tool</name><replace>String Number conversion</replace></category>
 <category><name>Custom_block</name><replace>Custom blocks</replace></category>
 <category><name>Lumex</name><replace>Lumex</replace></category>
 <category><name>LDM6432MQTT</name><replace>LDM6432</replace></category>

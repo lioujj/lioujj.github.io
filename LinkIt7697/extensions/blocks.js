@@ -487,15 +487,46 @@ Blockly.Blocks.ljj_string_startswith={init:function(){
   this.setTooltip(Blockly.Msg.LJJ_TOOLS_TOOLTIP)}
 };
 
-Blockly.Blocks.ljj_serial_readuntil_n={init:function(){
+Blockly.Blocks.ljj_string_startswith={init:function(){
   this.setHelpUrl(Blockly.Msg.TOOLS_HELPURL);
   this.setColour(Blockly.Blocks.math.HUE);
   this.appendDummyInput()
-      .appendField(new Blockly.FieldDropdown([["Serial","Serial"],["Serial1","Serial1"],["Serial2","Serial2"]]),"UART_NO")
-      .appendField(Blockly.Msg.LJJ_TOOLS_SERIAL_READUNTIL_N)
+      .appendField(Blockly.Msg.LJJ_TOOLS_STRING);
+  this.appendValueInput("SOURCE")
+      .setCheck("String");
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_TOOLS_SUBSTRING_LIST),"STAT");
+  this.appendValueInput("INCLUDE")
+      .setCheck("String")
+  this.appendDummyInput()
+      .appendField("?");
   this.setInputsInline(!0);
-  this.setOutput(!0,String);
+  this.setOutput(!0,"Boolean");
   this.setTooltip(Blockly.Msg.LJJ_TOOLS_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_number_map={init:function(){
+  this.setHelpUrl(Blockly.Msg.TOOLS_HELPURL);
+  this.setColour(Blockly.Msg["MATH_HUE"]);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.MATH_MAP_APPENDTEXT_MAP);
+  this.appendValueInput("ORG_NUMBER")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.MATH_MAP_APPENDTEXT_VALUE);
+  this.appendValueInput("FROM_LOW")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.MATH_MAP_APPENDTEXT_FROMLOW);
+  this.appendValueInput("FROM_HIGH")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.MATH_MAP_APPENDTEXT_FROMHIGH);
+  this.appendValueInput("TO_LOW")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.MATH_MAP_APPENDTEXT_TOLOW);
+  this.appendValueInput("TO_HIGH")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.MATH_MAP_APPENDTEXT_TOHIGH);
+  this.setOutput(!0,"Number");
+  this.setTooltip(Blockly.Msg.MATH_MAP_TOOLTIP)}
 };
 
 //KSB045

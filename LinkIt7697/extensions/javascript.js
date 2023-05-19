@@ -315,10 +315,13 @@ Blockly.Arduino.ljj_string_startswith=function(){
   //return['',Blockly.Arduino.ORDER_ATOMIC]
 };
 
-
-Blockly.Arduino.ljj_serial_readuntil_n=function(){
-	var a=this.getFieldValue("UART_NO");
-	return[a+".readStringUntil('\\n')",Blockly.Arduino.ORDER_ATOMIC]
+Blockly.Arduino.ljj_number_map=function(){
+	var a=Blockly.Arduino.valueToCode(this,"ORG_NUMBER",Blockly.Arduino.ORDER_ATOMIC)||0,
+      b=Blockly.Arduino.valueToCode(this,"FROM_LOW",Blockly.Arduino.ORDER_ATOMIC)||0,
+      c=Blockly.Arduino.valueToCode(this,"FROM_HIGH",Blockly.Arduino.ORDER_ATOMIC)||0,
+      d=Blockly.Arduino.valueToCode(this,"TO_LOW",Blockly.Arduino.ORDER_ATOMIC)||0,
+      e=Blockly.Arduino.valueToCode(this,"TO_HIGH",Blockly.Arduino.ORDER_ATOMIC)||0;
+  return['map('+a+','+b+','+c+','+d+','+e+')',Blockly.Arduino.ORDER_ATOMIC];
 };
 
 //KSB045

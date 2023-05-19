@@ -4844,7 +4844,33 @@
 				  </block>
 			  </value>
 		  </block>
-		  <block type="ljj_serial_readuntil_n"></block>
+		  <block type="ljj_number_map">
+        <value name="ORG_NUMBER">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="FROM_LOW">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="FROM_HIGH">
+          <block type="math_number">
+            <field name="NUM">1023</field>
+          </block>
+        </value>
+        <value name="TO_LOW">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="TO_HIGH">
+          <block type="math_number">
+            <field name="NUM">255</field>
+          </block>
+        </value>
+      </block>
     </category>
 	  <category id="category_custom_block" name="Custom_block">
 		  <block type="custom_include">
