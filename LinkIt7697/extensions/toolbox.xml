@@ -262,7 +262,6 @@
           </block>
         </value>
       </block>
-      <block type="ljj_ws2812_color_flow"></block>
       <block type="ljj_ws2812_neopixel_brightness">
         <value name="BRIGHTNESS">
           <block type="math_number">
@@ -272,6 +271,48 @@
       </block>
       <block type="ljj_ws2812_neopixel_clear"></block>
       <block type="ljj_ws2812_neopixel_display"></block>
+      <block type="ljj_ws2812_color_flow"></block>
+      <block type="ljj_ws2812_color_next">
+        <value name="COLOR">
+          <block type="ttgo_getFromColorPicker">
+            <field name="RGB">#ff0000</field>
+          </block>
+        </value>
+        <value name="INTERVAL">
+          <block type="math_number">
+            <field name="NUM">50</field>
+          </block>
+        </value>       
+      </block>
+      <block type="ljj_ws2812_2_colors_blink">
+        <value name="COLOR1">
+          <block type="ttgo_getFromColorPicker">
+            <field name="RGB">#ff0000</field>
+          </block>
+        </value>
+        <value name="COLOR2">
+          <block type="ttgo_getFromColorPicker">
+            <field name="RGB">#000000</field>
+          </block>
+        </value>
+        <value name="INTERVAL">
+          <block type="math_number">
+            <field name="NUM">50</field>
+          </block>
+        </value>         
+      </block>
+      <block type="ljj_ws2812_breathe">
+        <value name="COLOR">
+          <block type="ttgo_getFromColorPicker">
+            <field name="RGB">#ff0000</field>
+          </block>
+        </value>
+        <value name="INTERVAL">
+          <block type="math_number">
+            <field name="NUM">10</field>
+          </block>
+        </value> 
+      </block>
     </category>
     <category id="category_ljj_pixelbit" name="Pixel:Bit">
       <block type="board_initializes_setup">
