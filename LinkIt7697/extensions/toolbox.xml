@@ -1,6 +1,7 @@
 <category id="category_ljj" name="Liou" colour="30">
   <category id="category_ljj_serial" name="LJJ_SERIAL">
     <block type="ljj_serial_begin"></block>
+    <block type="ljj_serial_end"></block>
     <block type="ljj_serial_print">
       <value name="TEXT">
         <block type="text">
@@ -605,6 +606,41 @@
             </block>
           </value>        
         </block>
+        <block type="ljj_lcd1602_char">
+          <value name="X">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="Y">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="INDEX">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+        </block>
+        <block type="ljj_lcd1602_bitmap"></block>
+        <block type="ljj_lcd1602_bitmap_show">
+          <value name="X">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="Y">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="INDEX">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+        </block>
         <block type="ljj_lcd1602_clear"></block>
         <block type="ljj_lcd1602_scroll"></block>
         <block type="ljj_lcd1602_backlight"></block>
@@ -657,72 +693,72 @@
             </block>
           </value>     
         </block>
-          <block type="ljj_max7219_bitmap">
-            <field name="L07">FALSE</field>
-            <field name="L17">FALSE</field>
-            <field name="L27">FALSE</field>
-            <field name="L37">FALSE</field>
-            <field name="L47">FALSE</field>
-            <field name="L57">FALSE</field>
-            <field name="L67">FALSE</field>
-            <field name="L77">FALSE</field>
-            <field name="L06">FALSE</field>
-            <field name="L16">FALSE</field>
-            <field name="L26">FALSE</field>
-            <field name="L36">FALSE</field>
-            <field name="L46">FALSE</field>
-            <field name="L56">FALSE</field>
-            <field name="L66">FALSE</field>
-            <field name="L76">FALSE</field>
-            <field name="L05">FALSE</field>
-            <field name="L15">FALSE</field>
-            <field name="L25">FALSE</field>
-            <field name="L35">FALSE</field>
-            <field name="L45">FALSE</field>
-            <field name="L55">FALSE</field>
-            <field name="L65">FALSE</field>
-            <field name="L75">FALSE</field>
-            <field name="L04">FALSE</field>
-            <field name="L14">FALSE</field>
-            <field name="L24">FALSE</field>
-            <field name="L34">FALSE</field>
-            <field name="L44">FALSE</field>
-            <field name="L54">FALSE</field>
-            <field name="L64">FALSE</field>
-            <field name="L74">FALSE</field>
-            <field name="L03">FALSE</field>
-            <field name="L13">FALSE</field>
-            <field name="L23">FALSE</field>
-            <field name="L33">FALSE</field>
-            <field name="L43">FALSE</field>
-            <field name="L53">FALSE</field>
-            <field name="L63">FALSE</field>
-            <field name="L73">FALSE</field>
-            <field name="L02">FALSE</field>
-            <field name="L12">FALSE</field>
-            <field name="L22">FALSE</field>
-            <field name="L32">FALSE</field>
-            <field name="L42">FALSE</field>
-            <field name="L52">FALSE</field>
-            <field name="L62">FALSE</field>
-            <field name="L72">FALSE</field>
-            <field name="L01">FALSE</field>
-            <field name="L11">FALSE</field>
-            <field name="L21">FALSE</field>
-            <field name="L31">FALSE</field>
-            <field name="L41">FALSE</field>
-            <field name="L51">FALSE</field>
-            <field name="L61">FALSE</field>
-            <field name="L71">FALSE</field>
-            <field name="L00">FALSE</field>
-            <field name="L10">FALSE</field>
-            <field name="L20">FALSE</field>
-            <field name="L30">FALSE</field>
-            <field name="L40">FALSE</field>
-            <field name="L50">FALSE</field>
-            <field name="L60">FALSE</field>
-            <field name="L70">FALSE</field>
-          </block>
+        <block type="ljj_max7219_bitmap">
+          <field name="L07">FALSE</field>
+          <field name="L17">FALSE</field>
+          <field name="L27">FALSE</field>
+          <field name="L37">FALSE</field>
+          <field name="L47">FALSE</field>
+          <field name="L57">FALSE</field>
+          <field name="L67">FALSE</field>
+          <field name="L77">FALSE</field>
+          <field name="L06">FALSE</field>
+          <field name="L16">FALSE</field>
+          <field name="L26">FALSE</field>
+          <field name="L36">FALSE</field>
+          <field name="L46">FALSE</field>
+          <field name="L56">FALSE</field>
+          <field name="L66">FALSE</field>
+          <field name="L76">FALSE</field>
+          <field name="L05">FALSE</field>
+          <field name="L15">FALSE</field>
+          <field name="L25">FALSE</field>
+          <field name="L35">FALSE</field>
+          <field name="L45">FALSE</field>
+          <field name="L55">FALSE</field>
+          <field name="L65">FALSE</field>
+          <field name="L75">FALSE</field>
+          <field name="L04">FALSE</field>
+          <field name="L14">FALSE</field>
+          <field name="L24">FALSE</field>
+          <field name="L34">FALSE</field>
+          <field name="L44">FALSE</field>
+          <field name="L54">FALSE</field>
+          <field name="L64">FALSE</field>
+          <field name="L74">FALSE</field>
+          <field name="L03">FALSE</field>
+          <field name="L13">FALSE</field>
+          <field name="L23">FALSE</field>
+          <field name="L33">FALSE</field>
+          <field name="L43">FALSE</field>
+          <field name="L53">FALSE</field>
+          <field name="L63">FALSE</field>
+          <field name="L73">FALSE</field>
+          <field name="L02">FALSE</field>
+          <field name="L12">FALSE</field>
+          <field name="L22">FALSE</field>
+          <field name="L32">FALSE</field>
+          <field name="L42">FALSE</field>
+          <field name="L52">FALSE</field>
+          <field name="L62">FALSE</field>
+          <field name="L72">FALSE</field>
+          <field name="L01">FALSE</field>
+          <field name="L11">FALSE</field>
+          <field name="L21">FALSE</field>
+          <field name="L31">FALSE</field>
+          <field name="L41">FALSE</field>
+          <field name="L51">FALSE</field>
+          <field name="L61">FALSE</field>
+          <field name="L71">FALSE</field>
+          <field name="L00">FALSE</field>
+          <field name="L10">FALSE</field>
+          <field name="L20">FALSE</field>
+          <field name="L30">FALSE</field>
+          <field name="L40">FALSE</field>
+          <field name="L50">FALSE</field>
+          <field name="L60">FALSE</field>
+          <field name="L70">FALSE</field>
+        </block>
         <block type="ljj_max7219_inverse"></block>
         <block type="ljj_max7219_print">
           <value name="TEXT">
@@ -4289,6 +4325,41 @@
           </block>
 				</value>        
       </block>
+      <block type="ljj_lcd1602_char">
+        <value name="X">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="Y">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="INDEX">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
+      <block type="ljj_lcd1602_bitmap"></block>
+      <block type="ljj_lcd1602_bitmap_show">
+        <value name="X">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="Y">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="INDEX">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
       <block type="ljj_lcd1602_clear"></block>
       <block type="ljj_lcd1602_scroll"></block>
       <block type="ljj_lcd1602_backlight"></block>
@@ -4318,6 +4389,7 @@
           </block>
         </value>         
       </block>
+      <block type="ljj_su03t_reconnect"></block>
       <block type="ljj_su03t_listening">
         <statement name="SU03T_IF">
           <block type="controls_if">

@@ -1750,9 +1750,14 @@ Blockly.Arduino.broadcast_udp_send=function(){
 Blockly.Arduino.broadcast_udp_send_to_ip=function(){
   var a=Blockly.Arduino.valueToCode(this,"MESSAGE",Blockly.Arduino.ORDER_ATOMIC)||"",
       b=Blockly.Arduino.valueToCode(this,"IP",Blockly.Arduino.ORDER_ATOMIC)||"";
-  b=b.replace(/\"/g,"");
-  b=b.replace(/\./g,",");
-  var myReturStr='myBroadCastIP=IPAddress('+b+');\nsendBroadcastUDP(myBroadCastIP,String('+a+').c_str());\n'
+  //var myReturStr='';
+  //if (b.indexOf(".")>0){
+  //  b=b.replace(/\"/g,"");
+  //  b=b.replace(/\./g,",");
+  //  myReturStr='myBroadCastIP=IPAddress('+b+');\nsendBroadcastUDP(myBroadCastIP,String('+a+').c_str());\n'
+  //}
+  //else
+    myReturStr='myBroadCastIP.fromString('+b+');\nsendBroadcastUDP(myBroadCastIP,String('+a+').c_str());\n'
   return myReturStr;
 };
 
@@ -4797,6 +4802,11 @@ Blockly.Arduino.ljj_serial_begin=function(){
   return a+'.begin('+b+');\n';
 }
 
+Blockly.Arduino.ljj_serial_end=function(){
+  var a=this.getFieldValue("SERIAL_PORT");
+  return a+'.end();\n';
+}
+
 Blockly.Arduino.ljj_serial_print=function(){
   var a=this.getFieldValue("SERIAL_PORT"),
       b=Blockly.Arduino.valueToCode(this,"TEXT",Blockly.Arduino.ORDER_ATOMIC)||"";
@@ -5034,8 +5044,11 @@ Blockly.Arduino.ljj_quno_pir_detected=function(){
 Blockly.Arduino.ljj_quno_servo_init=function(){
   var a=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
       b=Blockly.Arduino.nameDB_.getName(this.getFieldValue('varName'), Blockly.VARIABLE_CATEGORY_NAME);
-  Blockly.Arduino.definitions_.define_servo="#include <ServoTimer2.h>";
-  Blockly.Arduino.definitions_["define_class_servo_"+a]="ServoTimer2 "+b+";";
+  //Blockly.Arduino.definitions_.define_servo="#include <ServoTimer2.h>";
+  Blockly.Arduino.definitions_.define_servo="#include <Adafruit_SoftServo.h>";
+  //Blockly.Arduino.definitions_.define_servo="#include <Servo.h>";
+  Blockly.Arduino.definitions_["define_class_servo_"+a]="Adafruit_SoftServo "+b+";";
+  //Blockly.Arduino.definitions_["define_class_servo_"+a]="Servo "+b+";";
   return b+'.attach('+a+');\n';
 };
 
@@ -5882,6 +5895,44 @@ Blockly.Arduino.ljj_lcd1602_show = function() {
   return 'lcd.setCursor('+a+','+b+');\nlcd.print(String('+c+'));\n';
 };
 
+Blockly.Arduino.ljj_lcd1602_char = function() { 
+  var a=Blockly.Arduino.valueToCode(this,"X",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=Blockly.Arduino.valueToCode(this,"Y",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      c=Blockly.Arduino.valueToCode(this,"INDEX",Blockly.Arduino.ORDER_ATOMIC)||"",
+      d=this.getFieldValue('BINARY');
+      if (d=='TRUE')
+        c='B'+c;
+  return 'lcd.setCursor('+a+','+b+');\nlcd.write('+c+');\n';
+};
+
+Blockly.Arduino.ljj_lcd1602_bitmap=function(){
+  var a=this.getFieldValue('INDEX'),
+      swapStr="0b",
+      allSwapStr="{";
+  for(tempY=0;tempY<8;tempY++){
+    for(tempX=0;tempX<5;tempX++){
+      if (this.getFieldValue("L"+tempY+tempX) == 'TRUE')
+        swapStr+="1";
+      else
+        swapStr+="0";
+    }
+    allSwapStr+=swapStr;
+    if (tempY<7)
+      allSwapStr+=',';
+    swapStr="0b";
+  }
+  allSwapStr+='}';
+  Blockly.Arduino.definitions_['define_ljj_lcd1602_bitmap_'+a+'invoke']='const uint8_t lcdBitmap_'+a+'[8]='+allSwapStr+';';
+  return 'lcd.createChar('+a+',(uint8_t *)lcdBitmap_'+a+');\n';
+}
+
+Blockly.Arduino.ljj_lcd1602_bitmap_show=function(){
+  var a=Blockly.Arduino.valueToCode(this,"X",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=Blockly.Arduino.valueToCode(this,"Y",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      c=Blockly.Arduino.valueToCode(this,"INDEX",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  return 'lcd.setCursor('+a+','+b+');\nlcd.write('+c+');\n';
+}
+
 Blockly.Arduino.ljj_lcd1602_clear = function() { 
   return 'lcd.clear();\n';
 };
@@ -5942,6 +5993,11 @@ Blockly.Arduino.ljj_su03t_init_pinmap = function() {
   Blockly.Arduino.ljj_su03t.serial_port=a;
   Blockly.Arduino.definitions_.define_ljj_su03t_send_event = '\nvoid su03tSendInteger(byte command,long data){\n  typedef union {\n    long longInt;\n    byte binary[4];\n  } myType;\n  myType sharedData;\n  sharedData.longInt = data;\n  '+Blockly.Arduino.ljj_su03t.serial_port+'.write(0xAA);\n  '+Blockly.Arduino.ljj_su03t.serial_port+'.write(command);\n  '+Blockly.Arduino.ljj_su03t.serial_port+'.write(sharedData.binary,4);\n  '+Blockly.Arduino.ljj_su03t.serial_port+'.write(0xFF);\n}\n\nvoid su03tSaySomething(byte command){\n  byte buff[3]={0xAA,0,0xFF};\n  buff[1]=command;\n  Serial.write(buff,3);\n}\n';
   return a+'.begin(115200,SERIAL_8N1,'+b+','+c+');\n';
+};
+
+Blockly.Arduino.ljj_su03t_reconnect = function() {
+  var a = Blockly.Arduino.ljj_su03t.serial_port;
+  return a+'.end();\n'+a+'.begin(115200);\n';
 };
 
 Blockly.Arduino.ljj_su03t_listening = function() { 

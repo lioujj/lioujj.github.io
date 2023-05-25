@@ -18,6 +18,20 @@ Blockly.Blocks.ljj_serial_begin={init:function(){
   this.setTooltip(Blockly.Msg.LJJ_SERIAL_TOOLTIP)}
 };
 
+Blockly.Blocks.ljj_serial_end={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_SERIAL_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_serial.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_SERIAL_TITLE);
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown([["Serial","Serial"],["Serial1","Serial1"],["Serial2","Serial2"]]),"SERIAL_PORT")
+      .appendField(Blockly.Msg.LJJ_SERIAL_END);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.LJJ_SERIAL_TOOLTIP)}
+};
+
 Blockly.Blocks.ljj_serial_print={init:function(){
   this.setHelpUrl(Blockly.Msg.LJJ_SERIAL_HELPURL);
   this.setColour(Blockly.Blocks.ljj_serial.HUE);
@@ -10124,6 +10138,114 @@ Blockly.Blocks.ljj_lcd1602_show={init:function(){
   this.setTooltip(Blockly.Msg.LJJ_LCD1602_TOOLTIP)}
 };
 
+Blockly.Blocks.ljj_lcd1602_char={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_LCD1602_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_lcd1602.HUE);
+	this.appendDummyInput()
+	    .appendField(Blockly.Msg.LJJ_LCD1602_TITLE)
+	    .appendField(Blockly.Msg.LJJ_LCD1602_CHAR);
+  this.appendValueInput("X")
+      .setCheck("Number")
+      .appendField("X");
+  this.appendValueInput("Y")
+      .setCheck("Number")
+      .appendField("Y");
+  this.appendValueInput("INDEX")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LJJ_LCD1602_CHAR_INDEX);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_LCD1602_CHAR_BINARY)
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "BINARY");
+	this.setInputsInline(true);
+	this.setPreviousStatement(!0);
+	this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_LCD1602_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_lcd1602_bitmap={init: function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_LCD1602_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_lcd1602.HUE);
+  this.appendDummyInput()
+	    .appendField(Blockly.Msg.LJJ_LCD1602_TITLE)
+      .appendField(Blockly.Msg.LJJ_LCD1602_BITMAP);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_LCD1602_BITMAP_INDEX)
+		  .appendField(new Blockly.FieldDropdown([["0","0"],["1","1"],["2","2"],["3","3"],["4","4"],["5","5"],["6","6"],["7","7"]]), "INDEX");
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "L00")
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "L01")
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "L02")
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "L03")
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "L04");
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "L10")
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "L11")
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "L12")
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "L13")
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "L14");
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "L20")
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "L21")
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "L22")
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "L23")
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "L24");
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "L30")
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "L31")
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "L32")
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "L33")
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "L34");
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "L40")
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "L41")
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "L42")
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "L43")
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "L44");
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "L50")
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "L51")
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "L52")
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "L53")
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "L54");
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "L60")
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "L61")
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "L62")
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "L63")
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "L64");
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "L70")
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "L71")
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "L72")
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "L73")
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "L74");
+	this.setInputsInline(false);
+	this.setPreviousStatement(!0);
+	this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_LCD1602_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_lcd1602_bitmap_show={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_LCD1602_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_lcd1602.HUE);
+	this.appendDummyInput()
+	    .appendField(Blockly.Msg.LJJ_LCD1602_TITLE)
+      .appendField(Blockly.Msg.LJJ_LCD1602_BITMAP_SHOW);
+  this.appendValueInput("INDEX")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LJJ_LCD1602_BITMAP_INDEX);
+  this.appendValueInput("X")
+      .setCheck("Number")
+      .appendField("X");
+  this.appendValueInput("Y")
+      .setCheck("Number")
+      .appendField("Y");
+	this.setInputsInline(true);
+	this.setPreviousStatement(!0);
+	this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_LCD1602_TOOLTIP)}
+};
+
 Blockly.Blocks.ljj_lcd1602_clear={init:function(){
   this.setHelpUrl(Blockly.Msg.LJJ_LCD1602_HELPURL);
   this.setColour(Blockly.Blocks.ljj_lcd1602.HUE);
@@ -10256,6 +10378,18 @@ Blockly.Blocks.ljj_su03t_init_pinmap={init:function(){
       .setCheck("Number")
       .appendField("TX");
 	this.setInputsInline(true);
+	this.setPreviousStatement(!0);
+	this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_SU03T_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_su03t_reconnect={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_SU03T_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_su03t.HUE);
+	this.appendDummyInput()
+	    .appendField(Blockly.Msg.LJJ_SU03T_TITLE)
+      .appendField(Blockly.Msg.LJJ_SU03T_RECONNECT);  
+  this.setInputsInline(true);
 	this.setPreviousStatement(!0);
 	this.setNextStatement(!0);
   this.setTooltip(Blockly.Msg.LJJ_SU03T_TOOLTIP)}
