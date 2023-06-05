@@ -1005,6 +1005,10 @@ Blockly.Msg.LJJ_CAMERA_VALUE_HINT = "值(-2到2)";
 Blockly.Msg.LJJ_CAMERA_EFFECT_VALUE = "值(0到6)";
 Blockly.Msg.LJJ_CAMERA_FACE_DETECTED = "擷取畫面中偵測到人臉";
 
+//KSB069
+Blockly.Msg.LJJ_KSB069_HELPURL = '';
+Blockly.Msg.LJJ_KSB069_TOOLTIP = 'KSB069';
+
 //Quno
 Blockly.Msg.LJJ_QUNO_HELPURL = "";
 Blockly.Msg.LJJ_QUNO_TOOLTIP = "Quno";
@@ -1222,7 +1226,7 @@ Blockly.Msg.LJJ_TONE_LIST=[
 
 //Cage Bot
 Blockly.Msg.CAGEBOT_TITLE = '科技寶';
-Blockly.Msg.CAGEBOT_MOTOR_LIST = [["M1","m1"],["M2","m2"],["both","both"]];
+Blockly.Msg.CAGEBOT_MOTOR_LIST = [["M1","m1"],["M2","m2"],["全部","both"]];
 Blockly.Msg.CAGEBOT_LINE_FOLLOWER_LEFT = '左側腳位';
 Blockly.Msg.CAGEBOT_LINE_FOLLOWER_MIDDLE = '中間腳位';
 Blockly.Msg.CAGEBOT_LINE_FOLLOWER_RIGHT = '右側腳位';

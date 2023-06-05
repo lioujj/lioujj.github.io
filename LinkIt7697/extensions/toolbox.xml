@@ -2353,6 +2353,18 @@
         </block>
         <block type="ljj_camera_fb_free"></block>
       </category>
+      <category id="category_ljj_ksb069" name="KSB069">
+        <block type="ljj_ksb069_motor_init"></block>
+        <block type="ljj_ksb069_motor_run">
+          <value name="SPEED">
+            <block type="math_number">
+              <field name="NUM">255</field>
+            </block>
+          </value>
+        </block>
+        <block type="ljj_ksb069_motor_stop"></block>
+        <block type="ljj_ksb069_cam_pins_clear"></block>
+      </category>
     </category>
   </category>
   <category id="category_esp8266" name="ESP8266">
@@ -2438,6 +2450,17 @@
       <category id="category_ljj_picobit" name="Pico:Bit">
         <block type="ljj_picobit_button"></block>
         <block type="ljj_picobit_pinMap"></block>
+      </category>
+      <category id="category_ljj_ksb069_pico" name="KSB069">
+        <block type="ljj_ksb069_motor_init"></block>
+        <block type="ljj_ksb069_motor_run">
+          <value name="SPEED">
+            <block type="math_number">
+              <field name="NUM">255</field>
+            </block>
+          </value>
+        </block>
+        <block type="ljj_ksb069_motor_stop"></block>
       </category>
     </category>
   </category>

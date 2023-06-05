@@ -355,11 +355,13 @@ Blockly.Arduino.ksb045_init=function(){
   } else if (Blockly.Arduino.my_board_type=="Pico"){
     if (Blockly.Arduino.ksb045.board_type=="kodorobot")
       Blockly.Arduino.definitions_.define_ksb045_pin_map='#define padX 27\n#define padY 26\n#define padSW 5\n#define padA 4\n#define padB 14\n#define padC 17\n#define padD 8\n#define padE 9\n#define padF 7\n#define padMotor 10\n';
+    else if (Blockly.Arduino.ksb045.board_type=="KSB045")
+      Blockly.Arduino.definitions_.define_ksb045_pin_map='#define padX 28\n#define padY 27\n#define padSW 8\n#define padA 2\n#define padB 19\n#define padC 7\n#define padD 4\n#define padE 6\n#define padF 18\n#define padBuz 3\n#define padMotor 9\n';
   }
   Blockly.Arduino.definitions_.define_ksb045_mid_xy="int padMidX=0;\nint padMidY=0;\n";
   if (Blockly.Arduino.ksb045.board_type=="KSB045"){
     Blockly.Arduino.definitions_.define_ksb045_button='bool checkPinPressed(byte myPin)\n{\n  if (digitalRead(myPin) == 1)\n    return false;\n  else\n    return true;\n}\n';
-    Blockly.Arduino.setups_.setup_ksb045_button='pinMode(padX, INPUT);\n  pinMode(padY, INPUT);\n  pinMode(padSW, INPUT);\n  pinMode(padA, INPUT);\n  pinMode(padB, INPUT);\n  pinMode(padC, INPUT);\n  pinMode(padD, INPUT);\n  pinMode(padE, INPUT);\n  pinMode(padF, INPUT);\n  pinMode(padMotor, OUTPUT);\n  digitalWrite(padMotor,0);\n  delay(300);\n  padMidX=(4095-analogRead(padX));\n  padMidY=analogRead(padY);\n';
+    Blockly.Arduino.setups_.setup_ksb045_button='pinMode(padX, INPUT);\n  pinMode(padY, INPUT);\n  pinMode(padSW, INPUT);\n  pinMode(padA, INPUT);\n  pinMode(padB, INPUT);\n  pinMode(padC, INPUT);\n  pinMode(padD, INPUT);\n  pinMode(padE, INPUT);\n  pinMode(padF, INPUT);\n  pinMode(padMotor, OUTPUT);\n  digitalWrite(padMotor,0);\n  delay(300);\n  padMidX=('+(Blockly.Arduino.my_board_type=='Pico'?1023:4095)+'-analogRead(padX));\n  padMidY=analogRead(padY);\n';
   } else if (Blockly.Arduino.ksb045.board_type=="Joystick:bit"){
     Blockly.Arduino.definitions_.define_ksb045_button='bool checkPinPressed(byte myPin)\n{\n  if (digitalRead(myPin) == 1)\n    return false;\n  else\n    return true;\n}\n';
     Blockly.Arduino.setups_.setup_ksb045_button='pinMode(padX, INPUT);\n  pinMode(padY, INPUT);\n  pinMode(padSW, INPUT);\n  pinMode(padA, INPUT);\n  pinMode(padB, INPUT);\n  pinMode(padC, INPUT_PULLUP);\n  pinMode(padD, INPUT_PULLUP);\n  pinMode(padE, INPUT_PULLUP);\n  pinMode(padF, INPUT_PULLUP);\n  pinMode(padMotor, OUTPUT);\n  digitalWrite(padMotor,1);\n  delay(300);\n  padMidX=(4095-analogRead(padX));\n  padMidY=(4095-analogRead(padY));\n';
@@ -388,7 +390,7 @@ Blockly.Arduino.ksb045_xy=function(){
       xyPin='padX';;
   if (a=="KSB045"){
     if (b=="X")
-      xyPin='(4095-analogRead(padX))';
+      xyPin='('+(Blockly.Arduino.my_board_type=='Pico'?1023:4095)+'-analogRead(padX))';
     else
       xyPin='analogRead(padY)';
   } else if (a=="Joystick:bit"){
@@ -4793,6 +4795,74 @@ Blockly.Arduino.ljj_camera_fb_save=function(){
     Blockly.Arduino.setups_.ttgo_tft='SPIFFS.begin();\n  SPIFFS.end();\n  '+Blockly.Arduino.setups_.ttgo_tft;
   return'cameraSaveTo('+b+','+c+',fb);\n';
 }
+
+
+//KSB069
+Blockly.Arduino.ljj_ksb069={};
+Blockly.Arduino.ljj_ksb069_motor_init=function(){
+  var a=2,
+      b=15,
+      c=12,
+      d=4;
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    Blockly.Arduino.definitions_.define_L9110_invoke='byte m1aL9110='+a+';\nbyte m1bL9110='+b+';\nbyte m2aL9110='+c+';\nbyte m2bL9110='+d+';\nbyte m1bCH=13;\nbyte m2bCH=14;\n';
+    Blockly.Arduino.setups_["setup_L9110"]='pinMode(m1aL9110,OUTPUT);\n  pinMode(m2aL9110,OUTPUT);\n  ledcSetup(m1bCH, 5000, 8);\n  ledcAttachPin(m1bL9110,m1bCH);\n  ledcSetup(m2bCH, 5000, 8);\n  ledcAttachPin(m2bL9110,m2bCH);\n  digitalWrite(m1aL9110,0);\n  ledcWrite(m1bCH,0);\n  digitalWrite(m2aL9110,0);\n  ledcWrite(m2bCH,0);\n';
+  } else {
+    a=3;
+    b=2;
+    c=28;
+    d=5;
+    Blockly.Arduino.definitions_.define_L9110_invoke='byte m1aL9110='+a+';\nbyte m1bL9110='+b+';\nbyte m2aL9110='+c+';\nbyte m2bL9110='+d+';\n';
+    Blockly.Arduino.setups_["setup_L9110"]='pinMode(m1aL9110,OUTPUT);\n  pinMode(m1bL9110,OUTPUT);\n  pinMode(m2aL9110,OUTPUT);\n  pinMode(m2bL9110,OUTPUT);\n  digitalWrite(m1aL9110,0);\n  analogWrite(m1bL9110,0);\n  digitalWrite(m2aL9110,0);\n  analogWrite(m2bL9110,0);\n';
+  }
+  return'';
+}
+
+Blockly.Arduino.ljj_ksb069_motor_run=function(){
+  var a=this.getFieldValue("MOTOR"),
+      b=this.getFieldValue("DIR"),
+      c=Blockly.Arduino.valueToCode(this,"SPEED",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      returnValue="";
+    if (a=="both"){
+      if (b=="1")
+        returnValue='digitalWrite(m1aL9110,1);\nanalogWrite(m1bL9110,255-'+c+');\ndigitalWrite(m2aL9110,1);\nanalogWrite(m2bL9110,255-'+c+');\n';
+      else
+        returnValue='digitalWrite(m1aL9110,0);\nanalogWrite(m1bL9110,'+c+');\ndigitalWrite(m2aL9110,0);\nanalogWrite(m2bL9110,'+c+');\n';
+    } else {
+      if (b=="1")
+        returnValue='digitalWrite('+a+'aL9110,1);\nanalogWrite('+a+'bL9110,255-'+c+');\n';
+      else
+        returnValue='digitalWrite('+a+'aL9110,0);\nanalogWrite('+a+'bL9110,'+c+');\n';
+    }
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    returnValue=returnValue.replace(/analogWrite/g,"ledcWrite");
+    returnValue=returnValue.replace(/m1bL9110/g,"m1bCH");
+    returnValue=returnValue.replace(/m2bL9110/g,"m2bCH");
+  } 
+  return returnValue;
+}
+
+Blockly.Arduino.ljj_ksb069_motor_stop=function(){
+  var a=this.getFieldValue("MOTOR"),
+      returnValue="";
+    if (a=="both"){
+      returnValue='digitalWrite(m1aL9110,0);\nanalogWrite(m1bL9110,0);\ndigitalWrite(m2aL9110,0);\nanalogWrite(m2bL9110,0);\n';
+    } else {
+      returnValue='digitalWrite('+a+'aL9110,0);\nanalogWrite('+a+'bL9110,0);\n';
+    }
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    returnValue=returnValue.replace(/analogWrite/g,"ledcWrite");
+    returnValue=returnValue.replace(/m1bL9110/g,"m1bCH");
+    returnValue=returnValue.replace(/m2bL9110/g,"m2bCH");
+  } 
+  return returnValue;
+}
+
+Blockly.Arduino.ljj_ksb069_cam_pins_clear=function(){
+  var a=this.getFieldValue("VFLIP_VALUE"),
+      b=this.getFieldValue("HMIRROR_VALUE");
+  return's->set_vflip(s, '+a+');\ns->set_hmirror(s, '+b+');\n'
+};
 
 //Serial
 Blockly.Arduino.ljj_serial={};

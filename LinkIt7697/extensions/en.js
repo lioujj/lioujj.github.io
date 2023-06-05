@@ -1012,6 +1012,10 @@ Blockly.Msg.LJJ_CAMERA_VALUE_HINT = "value(-2 to 2)";
 Blockly.Msg.LJJ_CAMERA_EFFECT_VALUE = "value(0 to 6)";
 Blockly.Msg.LJJ_CAMERA_FACE_DETECTED = "detected face";
 
+//KSB069
+Blockly.Msg.LJJ_KSB069_HELPURL = '';
+Blockly.Msg.LJJ_KSB069_TOOLTIP = 'KSB069';
+
 //Quno
 Blockly.Msg.LJJ_QUNO_HELPURL = "";
 Blockly.Msg.LJJ_QUNO_TOOLTIP = "Quno";
