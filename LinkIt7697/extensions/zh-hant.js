@@ -1164,6 +1164,7 @@ Blockly.Msg.LJJ_WUKONG_TOOLTIP = "";
 Blockly.Msg.LJJ_WUKONG_MOTORS_LIST=[["M1","0x01"],["M2","0x02"],["所有","all"]];
 Blockly.Msg.LJJ_WUKONG_MOTOR_DIRECTION = [["正轉","0x01"],["反轉","0x02"]];
 Blockly.Msg.LJJ_WUKONG_BOARD_BLUE_LED = "板底藍色LED呼吸燈模式";
+Blockly.Msg.LJJ_WUKONG_RESET_I2C = "重設Pico I2C腳位";
 
 //TimeStamp
 Blockly.Msg.LJJ_TIME_HELPURL = 'https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/timer時間計時器';

@@ -3111,6 +3111,7 @@
       </block>
     </category>
     <category id="category_ljj_wukong" name="WuKong">
+      <block type="ljj_wukong_i2c_reset"></block>
 			<block type="ljj_wukong_motor_move">
 				<value name="SPEED">
 					<block type="math_number">

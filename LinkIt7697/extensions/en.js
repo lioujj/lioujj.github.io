@@ -1171,6 +1171,7 @@ Blockly.Msg.LJJ_WUKONG_TOOLTIP = "";
 Blockly.Msg.LJJ_WUKONG_MOTORS_LIST=[["M1","0x01"],["M2","0x02"],["ALL","all"]];
 Blockly.Msg.LJJ_WUKONG_MOTOR_DIRECTION = [["clockWise","0x01"],["counterClockWise","0x02"]];
 Blockly.Msg.LJJ_WUKONG_BOARD_BLUE_LED = "on board blue LED breath mode";
+Blockly.Msg.LJJ_WUKONG_RESET_I2C = "reset Pico I2C pin";
 
 //TimeStamp
 Blockly.Msg.LJJ_TIME_HELPURL = 'https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/timer時間計時器';

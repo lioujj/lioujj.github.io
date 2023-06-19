@@ -9993,6 +9993,21 @@ Blockly.Blocks.ljj_wukong.HUE1=80;
 Blockly.Blocks.ljj_wukong.HUE2=290;
 Blockly.Blocks.ljj_wukong.HUE3=150;
 Blockly.Blocks.ljj_wukong.HUE4=100;
+Blockly.Blocks.ljj_wukong_i2c_reset={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_WUKONG_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_wukong.HUE2);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_WUKONG_TITLE)
+      .appendField(Blockly.Msg.LJJ_SERIAL_INIT)
+      .appendField(Blockly.Msg.LJJ_CAMERA_TYPE)
+      .appendField(new Blockly.FieldDropdown([["PocketCard","5"],["Pixel:Bit","10"],["7697:Bit","10_1"],["Pico:Bit","17_1"],["KSB072","5_9"]]),"CARD_TYPE");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_WUKONG_TOOLTIP)}
+};
+
+
 Blockly.Blocks.ljj_wukong_motor_move={init:function(){
   this.setHelpUrl(Blockly.Msg.LJJ_WUKONG_HELPURL);
   this.setColour(Blockly.Blocks.ljj_wukong.HUE1);
@@ -10068,9 +10083,9 @@ Blockly.Blocks.ljj_wukong_neopixel_begin={init:function(){
   this.setHelpUrl(Blockly.Msg.LJJ_WUKONG_HELPURL);
   this.setColour(Blockly.Blocks.ljj_wukong.HUE2);
   this.appendDummyInput()
-      .appendField(Blockly.Msg.LJJ_WUKONG_TITLE)
-      .appendField(Blockly.Msg.LJJ_CAMERA_TYPE)
-      .appendField(new Blockly.FieldDropdown([["PocketCard","5"],["Pixel:Bit","10"],["7697:Bit","10_1"],["Pico:Bit","17_1"]]),"CARD_TYPE");
+      .appendField(Blockly.Msg.LJJ_WUKONG_TITLE);
+//      .appendField(Blockly.Msg.LJJ_CAMERA_TYPE)
+//      .appendField(new Blockly.FieldDropdown([["PocketCard","5"],["Pixel:Bit","10"],["7697:Bit","10_1"],["Pico:Bit","17_1"],["KSB072","5_9"]]),"CARD_TYPE");
    this.appendDummyInput()     
       .appendField(Blockly.Msg.EZ_NEOPIXEL_BEGIN_BRIGHTNESS);
   this.appendValueInput("BRIGHTNESS")

@@ -1587,6 +1587,8 @@ Blockly.Arduino.stock_fetchData=function(){
   //  Blockly.Arduino.definitions_.define_json_esp8266_stock_fingerprint="const char stockFingerPrint[] PROGMEM=\"0ddb07fcad53ec3e1713f4a5897fc4a4561675ac\";";
   Blockly.Arduino.definitions_.define_stock_json_invoke="const size_t capacity_stock = JSON_ARRAY_SIZE(1) + 2*JSON_OBJECT_SIZE(8) + JSON_OBJECT_SIZE(36) + 680;\nDynamicJsonDocument docStock(capacity_stock);";
 	Blockly.Arduino.definitions_.define_fetch_stock_invoke='void fetchStockInfo(String myID){\n  static TLSClient stockClient;\n  if (!stockClient.connect("mis.twse.com.tw", 443)) {\n    return;\n  }\n  const String url = String() + "/stock/api/getStockInfo.jsp?ex_ch=tse_"+myID+".tw";\n  stockClient.println("GET " + url + " HTTP/1.1");\n  stockClient.println("Host: mis.twse.com.tw");\n  stockClient.println("Accept: */*");\n  stockClient.println("Connection: close");\n  stockClient.println();\n  stockClient.println();\n  while (stockClient.connected()) {\n    String line = stockClient.readStringUntil(\'\\n\');\n    if (line.startsWith("{\\"msgArray")) {\n      line.replace(".0000",".00");\n      DeserializationError error = deserializeJson(docStock, line);\n      break;\n    }\n  }\n  stockClient.stop();\n}\n';
+  if (Blockly.Arduino.my_board_type=="Pico")
+    Blockly.Arduino.definitions_.define_fetch_stock_invoke=Blockly.Arduino.definitions_.define_fetch_stock_invoke.replace(" close"," Keep-Alive"); 
   if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266" || Blockly.Arduino.my_board_type=="Pico"){
     Blockly.Arduino.definitions_.define_secure_include="#include <WiFiClientSecure.h>";
     Blockly.Arduino.definitions_.define_fetch_stock_invoke=Blockly.Arduino.definitions_.define_fetch_stock_invoke.replace("TLSClient","WiFiClientSecure");
@@ -4712,36 +4714,49 @@ Blockly.Arduino.ljj_camera_init=function(){
   }
   Blockly.Arduino.setups_.setup_ljj_camera='camera_config_t config;\n  config.ledc_channel=LEDC_CHANNEL_0;\n  config.ledc_timer=LEDC_TIMER_0;\n  config.pin_d0=Y2_GPIO_NUM;\n  config.pin_d1=Y3_GPIO_NUM;\n  config.pin_d2=Y4_GPIO_NUM;\n  config.pin_d3=Y5_GPIO_NUM;\n  config.pin_d4=Y6_GPIO_NUM;\n  config.pin_d5=Y7_GPIO_NUM;\n  config.pin_d6=Y8_GPIO_NUM;\n  config.pin_d7=Y9_GPIO_NUM;\n  config.pin_xclk=XCLK_GPIO_NUM;\n  config.pin_pclk=PCLK_GPIO_NUM;\n  config.pin_vsync=VSYNC_GPIO_NUM;\n  config.pin_href=HREF_GPIO_NUM;\n  config.pin_sscb_sda=SIOD_GPIO_NUM;\n  config.pin_sscb_scl=SIOC_GPIO_NUM;\n  config.pin_pwdn=PWDN_GPIO_NUM;\n  config.pin_reset=RESET_GPIO_NUM;\n  config.xclk_freq_hz=20000000;\n  config.pixel_format=PIXFORMAT_JPEG;\n  config.frame_size=FRAMESIZE_QVGA;\n  config.fb_count=2;\n  config.jpeg_quality=10;\n  esp_err_t err = esp_camera_init(&config);\n  if (err != ESP_OK) {\n    Serial.printf("Camera init failed with error 0x%x", err);\n    return;\n  }\n  myCamera = esp_camera_sensor_get();\n  myCamera->set_brightness(myCamera, -1);\n  myCamera->set_contrast(myCamera, 1);\n  myCamera->set_saturation(myCamera, 1);\n';
   Blockly.Arduino.setups_.setup_ljj_camera=Blockly.Arduino.setups_.setup_ljj_camera.replace("_QVGA",("_"+b));
-  //if (a=="KSB065")
-  //  Blockly.Arduino.setups_.setup_ljj_camera+='  myCamera->set_vflip(myCamera, 1);\n  myCamera->set_hmirror(myCamera, 1);\n';
 	return'';
 };
 
 Blockly.Arduino.ljj_camera_rotation=function(){
   var a=this.getFieldValue("ROTATION_TYPE"),
       b=this.getFieldValue("VALUE");
-	return'myCamera->set_'+a+'(myCamera, '+b+');\n'
+  var returnStr='myCamera->set_'+a+'(myCamera, '+b+');\n'
+  if (Blockly.Arduino.definitions_['define_linkit_wifi_include'])
+    returnStr=returnStr.replace(/myCamera/g,"s");
+  return returnStr;
 };
 
 Blockly.Arduino.ljj_camera_resolution=function(){
   var a=this.getFieldValue("RES_TYPE");
-	return'myCamera->set_framesize(myCamera, FRAMESIZE_'+a+');\n'
+	var returnStr='myCamera->set_framesize(myCamera, FRAMESIZE_'+a+');\n'
+  if (Blockly.Arduino.definitions_['define_linkit_wifi_include'])
+    returnStr=returnStr.replace(/myCamera/g,"s");
+  return returnStr;
 };
 
 Blockly.Arduino.ljj_camera_effect1=function(){
   var a=this.getFieldValue("EFFECT_TYPE");
-	return'myCamera->set_special_effect(myCamera, '+a+');\n'
+	var returnStr='myCamera->set_special_effect(myCamera, '+a+');\n'
+  if (Blockly.Arduino.definitions_['define_linkit_wifi_include'])
+    returnStr=returnStr.replace(/myCamera/g,"s");
+  return returnStr;
 };
 
 Blockly.Arduino.ljj_camera_effect2=function(){
   var a=Blockly.Arduino.valueToCode(this,"VALUE",Blockly.Arduino.ORDER_ATOMIC)||"0";
-	return'myCamera->set_special_effect(myCamera, '+a+');\n'
+	var returnStr='myCamera->set_special_effect(myCamera, '+a+');\n'
+  if (Blockly.Arduino.definitions_['define_linkit_wifi_include'])
+    returnStr=returnStr.replace(/myCamera/g,"s");
+  return returnStr;
 };
 
 Blockly.Arduino.ljj_camera_image=function(){
   var a=this.getFieldValue("TYPE"),
       b=Blockly.Arduino.valueToCode(this,"VALUE",Blockly.Arduino.ORDER_ATOMIC)||"0";
-	return'myCamera->set_'+a+'(myCamera, '+b+');\n'
+	var returnStr='myCamera->set_'+a+'(myCamera, '+b+');\n'
+  if (Blockly.Arduino.definitions_['define_linkit_wifi_include'])
+    returnStr=returnStr.replace(/myCamera/g,"s");
+  return returnStr;
 };
 
 Blockly.Arduino.ljj_camera_fb_get=function(){
@@ -5845,6 +5860,25 @@ Blockly.Arduino.ljj_ifttt_webhook=function(){
 
 //WuKong
 Blockly.Arduino.ljj_wukong={};
+
+Blockly.Arduino.ljj_wukong_i2c_reset=function(){
+  var b=this.getFieldValue("CARD_TYPE");
+      b=b.replace("_1","");
+  if (b=="5_9"){
+    if (Blockly.Arduino.my_board_type=="ESP32")
+      b=b.substring(0,1);
+    else if (Blockly.Arduino.my_board_type=="Pico")
+      b=b.substring(2,3);
+  }
+  Blockly.Arduino.ljj_wukong.ws2812_pin=b;
+  Blockly.Arduino.definitions_.define_wire="#include <Wire.h>";
+  if ((Blockly.Arduino.my_board_type=="Pico") && (b=="9"))
+    Blockly.Arduino.setups_.setup_wire_lib_before="Wire.setSDA(20);\n  Wire.setSCL(21);";
+  Blockly.Arduino.setups_.setup_wire_lib="Wire.begin();";
+  return'';
+};
+
+
 Blockly.Arduino.ljj_wukong_motor_move=function(){
   var a=this.getFieldValue("STAT1"),
       b=this.getFieldValue("STAT2"),
@@ -5896,12 +5930,13 @@ Blockly.Arduino.ljj_wukong_servo360=function(){
 };
 
 Blockly.Arduino.ljj_wukong_neopixel_begin=function(){
-  var a=Blockly.Arduino.valueToCode(this,"BRIGHTNESS",Blockly.Arduino.ORDER_ATOMIC)||"0",
-      b=this.getFieldValue("CARD_TYPE");
-      b=b.replace("_1","");
-	  Blockly.Arduino.definitions_.define_include_neopixel="#include <Adafruit_NeoPixel.h>";
-    Blockly.Arduino.definitions_.define_wukong_neopixel='Adafruit_NeoPixel wukongPixels = Adafruit_NeoPixel(4,'+b+',NEO_GRB + NEO_KHZ800);\n';
-    Blockly.Arduino.setups_.setup_plus_neopixel="wukongPixels.begin();\n  wukongPixels.setBrightness("+a+");\n  wukongPixels.show();\n  wukongPixels.setPixelColor(0,wukongPixels.Color(0,0,0));\n  wukongPixels.setPixelColor(1,wukongPixels.Color(0,0,0));\n  wukongPixels.setPixelColor(2,wukongPixels.Color(0,0,0));\n  wukongPixels.setPixelColor(3,wukongPixels.Color(0,0,0));\n  wukongPixels.show();";
+  var a=Blockly.Arduino.valueToCode(this,"BRIGHTNESS",Blockly.Arduino.ORDER_ATOMIC)||"0";
+      b="5";
+  if (Blockly.Arduino.ljj_wukong.ws2812_pin!=null)
+    b=Blockly.Arduino.ljj_wukong.ws2812_pin;
+	Blockly.Arduino.definitions_.define_include_neopixel="#include <Adafruit_NeoPixel.h>";
+  Blockly.Arduino.definitions_.define_wukong_neopixel='Adafruit_NeoPixel wukongPixels = Adafruit_NeoPixel(4,'+b+',NEO_GRB + NEO_KHZ800);\n';
+  Blockly.Arduino.setups_.setup_plus_neopixel="wukongPixels.begin();\n  wukongPixels.setBrightness("+a+");\n  wukongPixels.show();\n  wukongPixels.setPixelColor(0,wukongPixels.Color(0,0,0));\n  wukongPixels.setPixelColor(1,wukongPixels.Color(0,0,0));\n  wukongPixels.setPixelColor(2,wukongPixels.Color(0,0,0));\n  wukongPixels.setPixelColor(3,wukongPixels.Color(0,0,0));\n  wukongPixels.show();";
   return"";
 };
 
