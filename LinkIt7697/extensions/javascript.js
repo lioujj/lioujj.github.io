@@ -1776,6 +1776,20 @@ Blockly.Arduino.broadcast_udp_received_msg=function(){
   return["String(broadcastBuffer)",Blockly.Arduino.ORDER_ATOMIC];
 };
 
+Blockly.Arduino.broadcast_udp_received_msg_v7rc=function(){
+  var a=this.getFieldValue("TYPE"),
+      b=this.getFieldValue("CHANNEL"),
+      startsIndex=0,
+      endsIndex=0;
+  if (a=="SRV" || a=="SRT"){
+    startsIndex=parseInt(b)*4+3;
+    endsIndex=startsIndex+4;
+    var c='String(broadcastBuffer).substring('+startsIndex+','+endsIndex+').toInt()';
+    return['(String(broadcastBuffer).startsWith("'+a+'")?'+c+':0)',Blockly.Arduino.ORDER_ATOMIC];
+  } else
+    return['0',Blockly.Arduino.ORDER_ATOMIC];
+}
+
 Blockly.Arduino.broadcast_udp_reset=function(){
 	var a=Blockly.Arduino.valueToCode(this,"PORT",Blockly.Arduino.ORDER_ATOMIC)||"0";
   return"castUdp.stop();\nUDP_LISTEN_PORT="+a+";\ncastUdp.begin(UDP_LISTEN_PORT);\n"
@@ -6262,6 +6276,65 @@ Blockly.Arduino.ljj_cagebot_motor_stop=function(){
   return returnValue;
 }
 
+//ESP32_BLE
+Blockly.Arduino.ljj_esp32_BLE={};
+
+Blockly.Arduino.ljj_esp32_ble_init=function(){
+  var a=Blockly.Arduino.valueToCode(this,"BLE_NAME",Blockly.Arduino.ORDER_ATOMIC)||"",
+      b=Blockly.Arduino.valueToCode(this,"UUID",Blockly.Arduino.ORDER_ATOMIC)||"";
+  var myIndex=b.indexOf('-');
+  var indexChar=b.substring(myIndex-1,myIndex);
+  var uuidFirst=b.substring(0,myIndex-1);
+  var uuidLast=b.substring(myIndex);
+  var c="4",d="5";
+  if (!isNaN(parseInt(indexChar)))
+  {
+    var tempNum=parseInt(indexChar)+1;
+    if (tempNum>9)
+      tempNum=1;
+    c=""+tempNum;
+    d=""+(tempNum+1);
+  }    
+  c=uuidFirst+c+uuidLast;
+  d=uuidFirst+d+uuidLast;
+  Blockly.Arduino.definitions_.define_ljj_esp32_ble_include='#include <BLEDevice.h>\n#include <BLEServer.h>\n#include <BLEUtils.h>\n#include <BLE2902.h>';
+  Blockly.Arduino.definitions_.define_ljj_esp32_ble_invoke='\n#define SERVICE_UUID           '+b+'\n#define CHARACTERISTIC_UUID_RX '+c+'\n#define CHARACTERISTIC_UUID_TX '+d+'\n\r\nBLECharacteristic *pCharacteristic;\nbool btConnected = false;\nbool btReceiveDone=false;\nString btRxLoad="";\n';
+  Blockly.Arduino.definitions_.define_ljj_esp32_ble_event='class btLjjServerCallbacks: public BLEServerCallbacks {\n    void onConnect(BLEServer* pServer) {\n      btConnected = true;\n    };\n    void onDisconnect(BLEServer* pServer) {\n      btConnected = false;\n    }\n};\n\nclass btLjjCallbacks: public BLECharacteristicCallbacks {\n    void onWrite(BLECharacteristic *pCharacteristic) {\n      btReceiveDone=false;\n      std::string rxValue = pCharacteristic->getValue();\n      if (rxValue.length() > 0) {\n        btRxLoad="";\n        for (int i = 0; i < rxValue.length(); i++){\n          btRxLoad +=(char)rxValue[i];\n        }\n        btReceiveDone=true;\n      }\n    }\n};\n\nvoid setupBLE(String BLEName){\n  const char *ble_name=BLEName.c_str();\n  BLEDevice::init(ble_name);\n  BLEServer *pServer = BLEDevice::createServer();\n  pServer->setCallbacks(new btLjjServerCallbacks());\n  BLEService *pService = pServer->createService(SERVICE_UUID);\n  pCharacteristic= pService->createCharacteristic(CHARACTERISTIC_UUID_TX,BLECharacteristic::PROPERTY_NOTIFY);\n  pCharacteristic->addDescriptor(new BLE2902());\n  BLECharacteristic *pCharacteristic = pService->createCharacteristic(CHARACTERISTIC_UUID_RX,BLECharacteristic::PROPERTY_WRITE);\n  pCharacteristic->setCallbacks(new btLjjCallbacks());\n  pService->start();\n  pServer->getAdvertising()->addServiceUUID(SERVICE_UUID);\n  pServer->getAdvertising()->setScanResponse(true);\n  pServer->getAdvertising()->setMinPreferred(0x06);\n  pServer->getAdvertising()->setMinPreferred(0x12);\n  pServer->getAdvertising()->start();\n}\n';
+  //Blockly.Arduino.setups_["setup_ljj_esp32_ble"]='setupBLE('+a+');';
+  return'setupBLE('+a+');\n';
+}
+
+Blockly.Arduino.ljj_esp32_ble_recv_avalable=function(){
+  var a=Blockly.Arduino.statementToCode(this,"STATEMENT");
+  return 'if (btConnected && btReceiveDone && btRxLoad.length()>0){\n'+a+'  btRxLoad="";\n}\n';
+}
+
+Blockly.Arduino.ljj_esp32_ble_read_result=function(){
+  return['btRxLoad',Blockly.Arduino.ORDER_ATOMIC];
+}
+
+Blockly.Arduino.ljj_esp32_ble_read_v7rc_result=function(){
+  var a=this.getFieldValue("TYPE"),
+      b=this.getFieldValue("CHANNEL"),
+      startsIndex=0,
+      endsIndex=0;
+  if (a=="SRV" || a=="SRT"){
+    startsIndex=parseInt(b)*4+3;
+    endsIndex=startsIndex+4;
+    var c='btRxLoad.substring('+startsIndex+','+endsIndex+').toInt()';
+    return['(btRxLoad.startsWith("'+a+'")?'+c+':0)',Blockly.Arduino.ORDER_ATOMIC];
+  } else
+    return['0',Blockly.Arduino.ORDER_ATOMIC];
+}
+
+Blockly.Arduino.ljj_esp32_ble_send=function(){
+  var a=Blockly.Arduino.valueToCode(this,"MESSAGE",Blockly.Arduino.ORDER_ATOMIC)||"";
+  return'pCharacteristic->setValue(String('+a+').c_str());\npCharacteristic->notify();\n';
+}
+
+Blockly.Arduino.ljj_esp32_ble_connected=function(){
+  return['btConnected',Blockly.Arduino.ORDER_ATOMIC];
+}
 
 //----------------------------------------
 setTimeout(function(){

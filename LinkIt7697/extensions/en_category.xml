@@ -82,4 +82,5 @@
 <category><name>PICO_RTC</name><replace>RTC</replace></category>
 <category><name>Servo</name><replace>Servo</replace></category>
 <category><name>Pico_Modules</name><replace>Modules</replace></category>
+<category><name>BLE</name><replace>BLE</replace></category>
 </xml>

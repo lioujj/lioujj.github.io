@@ -1232,3 +1232,12 @@ Blockly.Msg.CAGEBOT_LINE_FOLLOWER_LEFT = '左側腳位';
 Blockly.Msg.CAGEBOT_LINE_FOLLOWER_MIDDLE = '中間腳位';
 Blockly.Msg.CAGEBOT_LINE_FOLLOWER_RIGHT = '右側腳位';
 Blockly.Msg.CAGEBOT_LINE_FOLLOWER_LIST=[["左","left"],["中","middle"],["右","right"]];
+
+//ESP32_BLE
+Blockly.Msg.LJJ_ESP32_BLE_HELPURL = "";
+Blockly.Msg.LJJ_ESP32_BLE_TITLE = "藍芽BLE";
+Blockly.Msg.LJJ_ESP32_BLE_NAME = "設定名稱";
+Blockly.Msg.LJJ_ESP32_BLE_TOOLTIP = "BLE";
+Blockly.Msg.LJJ_ESP32_BLE_V7RC_CONVERT = "轉換成V7RC";
+Blockly.Msg.LJJ_ESP32_BLE_V7RC_DATATYPE=[["車輛","SRV"],["坦克","SRT"]];
+Blockly.Msg.LJJ_ESP32_BLE_CONNECTED = "已有裝置連上線？"
