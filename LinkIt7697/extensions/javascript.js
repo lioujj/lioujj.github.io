@@ -1754,14 +1754,7 @@ Blockly.Arduino.broadcast_udp_send=function(){
 Blockly.Arduino.broadcast_udp_send_to_ip=function(){
   var a=Blockly.Arduino.valueToCode(this,"MESSAGE",Blockly.Arduino.ORDER_ATOMIC)||"",
       b=Blockly.Arduino.valueToCode(this,"IP",Blockly.Arduino.ORDER_ATOMIC)||"";
-  //var myReturStr='';
-  //if (b.indexOf(".")>0){
-  //  b=b.replace(/\"/g,"");
-  //  b=b.replace(/\./g,",");
-  //  myReturStr='myBroadCastIP=IPAddress('+b+');\nsendBroadcastUDP(myBroadCastIP,String('+a+').c_str());\n'
-  //}
-  //else
-    myReturStr='myBroadCastIP.fromString('+b+');\nsendBroadcastUDP(myBroadCastIP,String('+a+').c_str());\n'
+  myReturStr='myBroadCastIP.fromString('+b+');\nsendBroadcastUDP(myBroadCastIP,String('+a+').c_str());\n'
   return myReturStr;
 };
 
@@ -1776,18 +1769,21 @@ Blockly.Arduino.broadcast_udp_received_msg=function(){
   return["String(broadcastBuffer)",Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.broadcast_udp_received_msg_v7rc=function(){
+Blockly.Arduino.broadcast_udp_received_v7rc=function(){
   var a=this.getFieldValue("TYPE"),
-      b=this.getFieldValue("CHANNEL"),
-      startsIndex=0,
-      endsIndex=0;
-  if (a=="SRV" || a=="SRT"){
-    startsIndex=parseInt(b)*4+3;
-    endsIndex=startsIndex+4;
-    var c='String(broadcastBuffer).substring('+startsIndex+','+endsIndex+').toInt()';
-    return['(String(broadcastBuffer).startsWith("'+a+'")?'+c+':0)',Blockly.Arduino.ORDER_ATOMIC];
-  } else
-    return['0',Blockly.Arduino.ORDER_ATOMIC];
+      b=Blockly.Arduino.statementToCode(this,"STATEMENT");
+  return 'if (String(broadcastBuffer).startsWith("'+a+'")){\n  byte numberBase='+ ((a=='LED' || a=='LE2')?'16':'10') +';\n'+b+'}\n'
+}
+
+Blockly.Arduino.broadcast_udp_received_msg_v7rc=function(){
+  var a=this.getFieldValue("CHANNEL"),
+      b=this.getFieldValue("VALUE_TYPE"),
+      startsIndex=parseInt(a)*4+3,
+      endsIndex=startsIndex+4;
+  if (b=="Number")
+    return['strtol(String(broadcastBuffer).substring('+startsIndex+','+endsIndex+').c_str(),0,numberBase)',Blockly.Arduino.ORDER_ATOMIC];
+  else
+    return['String(broadcastBuffer).substring('+startsIndex+','+endsIndex+')',Blockly.Arduino.ORDER_ATOMIC];
 }
 
 Blockly.Arduino.broadcast_udp_reset=function(){
@@ -6313,18 +6309,21 @@ Blockly.Arduino.ljj_esp32_ble_read_result=function(){
   return['btRxLoad',Blockly.Arduino.ORDER_ATOMIC];
 }
 
-Blockly.Arduino.ljj_esp32_ble_read_v7rc_result=function(){
+Blockly.Arduino.ljj_esp32_ble_read_v7rc=function(){
   var a=this.getFieldValue("TYPE"),
-      b=this.getFieldValue("CHANNEL"),
-      startsIndex=0,
-      endsIndex=0;
-  if (a=="SRV" || a=="SRT"){
-    startsIndex=parseInt(b)*4+3;
-    endsIndex=startsIndex+4;
-    var c='btRxLoad.substring('+startsIndex+','+endsIndex+').toInt()';
-    return['(btRxLoad.startsWith("'+a+'")?'+c+':0)',Blockly.Arduino.ORDER_ATOMIC];
-  } else
-    return['0',Blockly.Arduino.ORDER_ATOMIC];
+      b=Blockly.Arduino.statementToCode(this,"STATEMENT");
+  return 'if (btRxLoad.startsWith("'+a+'")){\n  byte numberBase='+ ((a=='LED' || a=='LE2')?'16':'10') +';\n'+b+'}\n'
+}
+
+Blockly.Arduino.ljj_esp32_ble_read_v7rc_result=function(){
+  var a=this.getFieldValue("CHANNEL"),
+      b=this.getFieldValue("VALUE_TYPE"),
+      startsIndex=parseInt(a)*4+3,
+      endsIndex=startsIndex+4;
+  if (b=="Number")
+    return['strtol(btRxLoad.substring('+startsIndex+','+endsIndex+').c_str(),0,numberBase)',Blockly.Arduino.ORDER_ATOMIC];
+  else
+    return['btRxLoad.substring('+startsIndex+','+endsIndex+')',Blockly.Arduino.ORDER_ATOMIC];
 }
 
 Blockly.Arduino.ljj_esp32_ble_send=function(){

@@ -1386,6 +1386,13 @@
       </block>
       <block type="ljj_esp32_ble_recv_avalable"></block>
       <block type="ljj_esp32_ble_read_result"></block>
+      <block type="ljj_esp32_ble_recv_avalable">
+        <statement name="STATEMENT">
+          <block type="ljj_esp32_ble_read_v7rc">
+            <field name="TYPE">SRV</field>
+          </block>
+        </statement>
+      </block>
       <block type="ljj_esp32_ble_read_v7rc_result"></block>
       <block type="ljj_esp32_ble_send">
         <value name="MESSAGE">
@@ -2716,6 +2723,13 @@
       </block>
       <block type="broadcast_udp_received_event"></block>
       <block type="broadcast_udp_received_msg"></block>
+      <block type="broadcast_udp_received_event">
+        <statement name="MSG_UDP">
+          <block type="broadcast_udp_received_v7rc">
+            <field name="TYPE">SRV</field>
+          </block>
+        </statement>
+      </block>
       <block type="broadcast_udp_received_msg_v7rc"></block>
       <block type="broadcast_udp_reset">
         <value name="PORT">

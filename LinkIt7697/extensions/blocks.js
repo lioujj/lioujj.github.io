@@ -2861,6 +2861,22 @@ Blockly.Blocks.broadcast_udp_received_msg={init:function(){
   this.setTooltip(Blockly.Msg.BROADCAST_UDP_TOOLTIP)}
 };
 
+Blockly.Blocks.broadcast_udp_received_v7rc={init:function(){
+  this.setHelpUrl(Blockly.Msg.BROADCAST_UDP_HELPURL);
+  this.setColour(Blockly.Blocks.broadcast_udp.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.BROADCAST_UDP_TITLE)
+      .appendField(Blockly.Msg.BROADCAST_UDP_V7RC);
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_ESP32_BLE_V7RC_DATATYPE),"TYPE")
+      .appendField("?");
+  this.appendStatementInput("STATEMENT");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.BROADCAST_UDP_TOOLTIP)}
+};
+
 Blockly.Blocks.broadcast_udp_received_msg_v7rc={init:function(){
   this.setHelpUrl(Blockly.Msg.BROADCAST_UDP_HELPURL);
   this.setColour(Blockly.Blocks.broadcast_udp.HUE);
@@ -2869,13 +2885,14 @@ Blockly.Blocks.broadcast_udp_received_msg_v7rc={init:function(){
       .appendField(Blockly.Msg.BROADCAST_UDP_RECEIVED_MSG);
   this.appendDummyInput()
       .appendField(Blockly.Msg.LJJ_ESP32_BLE_V7RC_CONVERT)
-      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_ESP32_BLE_V7RC_DATATYPE),"TYPE");
-  this.appendDummyInput()
-      .appendField(new Blockly.FieldDropdown([["channel_1","0"],["channel_2","1"],["channel_3","2"],["channel_4","3"]]),"CHANNEL")
-      .appendField(Blockly.Msg.LJJ_SU03T_VALUE_INTEGER);
+      .appendField("channel:")
+      .appendField(new Blockly.FieldDropdown([["1","0"],["2","1"],["3","2"],["4","3"]]),"CHANNEL")
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_ESP32_BLE_V7RC_VALUETYPE),"VALUE_TYPE");
   this.setInputsInline(!0);
   this.setOutput(!0,"Number");
-  this.setTooltip(Blockly.Msg.BROADCAST_UDP_TOOLTIP)}
+  this.setTooltip(Blockly.Msg.BROADCAST_UDP_TOOLTIP)},onchange:function(){
+      this.setOutput(!0,this.getFieldValue("VALUE_TYPE"));
+  }
 };
 
 Blockly.Blocks.broadcast_udp_reset={init:function(){
@@ -6317,8 +6334,24 @@ Blockly.Blocks.ljj_esp32_ble_read_result={init:function(){
   this.setColour(Blockly.Blocks.ljj_esp32_BLE.HUE);
   this.appendDummyInput()
       .appendField(Blockly.Msg.LJJ_ESP32_BLE_TITLE)
-      .appendField(Blockly.Msg.LJJ_SERIAL_READ_RESULT);
+      .appendField(Blockly.Msg.LJJ_ESP32_BLE_MESSAGE);
   this.setOutput(!0,"String");
+  this.setTooltip(Blockly.Msg.LJJ_ESP32_BLE_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_esp32_ble_read_v7rc={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_ESP32_BLE_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_esp32_BLE.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_ESP32_BLE_TITLE)
+      .appendField(Blockly.Msg.LJJ_ESP32_BLE_V7RC);
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_ESP32_BLE_V7RC_DATATYPE),"TYPE")
+      .appendField("?");
+  this.appendStatementInput("STATEMENT");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
   this.setTooltip(Blockly.Msg.LJJ_ESP32_BLE_TOOLTIP)}
 };
 
@@ -6327,16 +6360,17 @@ Blockly.Blocks.ljj_esp32_ble_read_v7rc_result={init:function(){
   this.setColour(Blockly.Blocks.ljj_esp32_BLE.HUE);
   this.appendDummyInput()
       .appendField(Blockly.Msg.LJJ_ESP32_BLE_TITLE)
-      .appendField(Blockly.Msg.LJJ_SERIAL_READ_RESULT);
+      .appendField(Blockly.Msg.LJJ_ESP32_BLE_MESSAGE);
   this.appendDummyInput()
       .appendField(Blockly.Msg.LJJ_ESP32_BLE_V7RC_CONVERT)
-      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_ESP32_BLE_V7RC_DATATYPE),"TYPE");
-  this.appendDummyInput()
-      .appendField(new Blockly.FieldDropdown([["channel_1","0"],["channel_2","1"],["channel_3","2"],["channel_4","3"]]),"CHANNEL")
-      .appendField(Blockly.Msg.LJJ_SU03T_VALUE_INTEGER);
+      .appendField("channel:")
+      .appendField(new Blockly.FieldDropdown([["1","0"],["2","1"],["3","2"],["4","3"]]),"CHANNEL")
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_ESP32_BLE_V7RC_VALUETYPE),"VALUE_TYPE");
   this.setInputsInline(!0);
   this.setOutput(!0,"Number");
-  this.setTooltip(Blockly.Msg.LJJ_ESP32_BLE_TOOLTIP)}
+  this.setTooltip(Blockly.Msg.LJJ_ESP32_BLE_TOOLTIP)},onchange:function(){
+      this.setOutput(!0,this.getFieldValue("VALUE_TYPE"));
+  }
 };
 
 Blockly.Blocks.ljj_esp32_ble_send={init:function(){
