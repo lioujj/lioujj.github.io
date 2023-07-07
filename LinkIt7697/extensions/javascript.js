@@ -6283,13 +6283,15 @@ Blockly.Arduino.ljj_esp32_ble_init=function(){
   var uuidFirst=b.substring(0,myIndex-1);
   var uuidLast=b.substring(myIndex);
   var c="4",d="5";
-  if (!isNaN(parseInt(indexChar)))
+  if (!isNaN(parseInt(indexChar,16)))
   {
-    var tempNum=parseInt(indexChar)+1;
-    if (tempNum>9)
+    var tempNum=parseInt(indexChar,16)+1;
+    if (tempNum>15)
       tempNum=1;
-    c=""+tempNum;
-    d=""+(tempNum+1);
+    c=""+tempNum.toString(16);
+    c=c.toUpperCase();
+    d=""+(tempNum+1).toString(16);
+    d=d.toUpperCase();
   }    
   c=uuidFirst+c+uuidLast;
   d=uuidFirst+d+uuidLast;
@@ -6304,11 +6306,13 @@ Blockly.Arduino.ljj_esp32_ble_init=function(){
 
 Blockly.Arduino.ljj_esp32_ble_onConnected=function(){
   var a=Blockly.Arduino.statementToCode(this,"STATEMENT"),
-      b=this.getFieldValue("STATUS");
-  if (b=='connected')
-    Blockly.Arduino.definitions_['define_ljj_esp32_ble_'+b+'_event']='void ljjBtConnected(){\n'+a+'\n}\n';
-  else
-    Blockly.Arduino.definitions_['define_ljj_esp32_ble_'+b+'_event']='void ljjBtDisconnected(){\n'+a+'\n}\n';
+      b=this.getFieldValue("STATUS"),
+      c=b.charAt(0).toUpperCase() + b.slice(1);
+  Blockly.Arduino.definitions_['define_ljj_esp32_ble_'+b+'_event']='void ljjBt'+c+'(){\n'+a+'\n}\n';
+  //if (b=='connected')
+  //  Blockly.Arduino.definitions_['define_ljj_esp32_ble_'+b+'_event']='void ljjBtConnected(){\n'+a+'\n}\n';
+  //else
+  //  Blockly.Arduino.definitions_['define_ljj_esp32_ble_'+b+'_event']='void ljjBtDisconnected(){\n'+a+'\n}\n';
   return'';
 }
 

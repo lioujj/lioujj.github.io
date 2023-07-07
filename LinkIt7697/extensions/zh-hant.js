@@ -1236,7 +1236,7 @@ Blockly.Msg.CAGEBOT_LINE_FOLLOWER_LIST=[["左","left"],["中","middle"],["右","
 
 //ESP32_BLE
 Blockly.Msg.LJJ_ESP32_BLE_HELPURL = "";
-Blockly.Msg.LJJ_ESP32_BLE_TITLE = "藍芽BLE";
+Blockly.Msg.LJJ_ESP32_BLE_TITLE = "藍芽BLE伺服";
 Blockly.Msg.LJJ_ESP32_BLE_MESSAGE = "讀取到的字串";
 Blockly.Msg.LJJ_ESP32_BLE_NAME = "設定名稱";
 Blockly.Msg.LJJ_ESP32_BLE_TOOLTIP = "BLE";

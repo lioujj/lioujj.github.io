@@ -83,4 +83,5 @@
 <category><name>Servo</name><replace>Servo</replace></category>
 <category><name>Pico_Modules</name><replace>Modules</replace></category>
 <category><name>BLE</name><replace>BLE</replace></category>
+<category><name>BLE Server</name><replace>BLE Server</replace></category>
 </xml>

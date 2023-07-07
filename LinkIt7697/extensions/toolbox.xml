@@ -1372,37 +1372,39 @@
       </block>
     </category>
     <category id="category_ljj_esp32_BLE" name="BLE">
-      <block type="ljj_esp32_ble_init">
-        <value name="BLE_NAME">
-          <block type="text">
-            <field name="TEXT">ESP32_BLE</field>
-          </block>
-        </value>
-        <value name="UUID">
-          <block type="text">
-            <field name="TEXT">6E400001-B5A3-F393-E0A9-E50E24DCCA9E</field>
-          </block>
-        </value>
-      </block>
-      <block type="ljj_esp32_ble_onConnected"></block>
-      <block type="ljj_esp32_ble_recv_avalable"></block>
-      <block type="ljj_esp32_ble_read_result"></block>
-      <block type="ljj_esp32_ble_recv_avalable">
-        <statement name="STATEMENT">
-          <block type="ljj_esp32_ble_read_v7rc">
-            <field name="TYPE">SRV</field>
-          </block>
-        </statement>
-      </block>
-      <block type="ljj_esp32_ble_read_v7rc_result"></block>
-      <block type="ljj_esp32_ble_send">
-        <value name="MESSAGE">
-          <block type="text">
-            <field name="TEXT"></field>
-          </block>
-        </value>
-      </block>
-      <block type="ljj_esp32_ble_connected"></block>
+      <category id="category_ljj_esp32_BLE_Server" name="BLE Server">
+        <block type="ljj_esp32_ble_init">
+          <value name="BLE_NAME">
+            <block type="text">
+              <field name="TEXT">ESP32_BLE</field>
+            </block>
+          </value>
+          <value name="UUID">
+            <block type="text">
+              <field name="TEXT">6E400001-B5A3-F393-E0A9-E50E24DCCA9E</field>
+            </block>
+          </value>
+        </block>
+        <block type="ljj_esp32_ble_onConnected"></block>
+        <block type="ljj_esp32_ble_recv_avalable"></block>
+        <block type="ljj_esp32_ble_read_result"></block>
+        <block type="ljj_esp32_ble_recv_avalable">
+          <statement name="STATEMENT">
+            <block type="ljj_esp32_ble_read_v7rc">
+              <field name="TYPE">SRV</field>
+            </block>
+          </statement>
+        </block>
+        <block type="ljj_esp32_ble_read_v7rc_result"></block>
+        <block type="ljj_esp32_ble_send">
+          <value name="MESSAGE">
+            <block type="text">
+              <field name="TEXT"></field>
+            </block>
+          </value>
+        </block>
+        <block type="ljj_esp32_ble_connected"></block>
+      </category>
     </category>
     <category id="category_spiffs" name="SPIFFS">
       <block type="spiffs_init"></block>
