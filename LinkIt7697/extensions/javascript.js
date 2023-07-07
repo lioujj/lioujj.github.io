@@ -6295,10 +6295,40 @@ Blockly.Arduino.ljj_esp32_ble_init=function(){
   d=uuidFirst+d+uuidLast;
   Blockly.Arduino.definitions_.define_ljj_esp32_ble_include='#include <BLEDevice.h>\n#include <BLEServer.h>\n#include <BLEUtils.h>\n#include <BLE2902.h>';
   Blockly.Arduino.definitions_.define_ljj_esp32_ble_invoke='\n#define SERVICE_UUID           '+b+'\n#define CHARACTERISTIC_UUID_RX '+c+'\n#define CHARACTERISTIC_UUID_TX '+d+'\n\r\nBLECharacteristic *pCharacteristic;\nbool btConnected = false;\nbool btReceiveDone=false;\nString btRxLoad="";\n';
-  Blockly.Arduino.definitions_.define_ljj_esp32_ble_event='class btLjjServerCallbacks: public BLEServerCallbacks {\n    void onConnect(BLEServer* pServer) {\n      btConnected = true;\n    };\n    void onDisconnect(BLEServer* pServer) {\n      btConnected = false;\n    }\n};\n\nclass btLjjCallbacks: public BLECharacteristicCallbacks {\n    void onWrite(BLECharacteristic *pCharacteristic) {\n      btReceiveDone=false;\n      std::string rxValue = pCharacteristic->getValue();\n      if (rxValue.length() > 0) {\n        btRxLoad="";\n        for (int i = 0; i < rxValue.length(); i++){\n          btRxLoad +=(char)rxValue[i];\n        }\n        btReceiveDone=true;\n      }\n    }\n};\n\nvoid setupBLE(String BLEName){\n  const char *ble_name=BLEName.c_str();\n  BLEDevice::init(ble_name);\n  BLEServer *pServer = BLEDevice::createServer();\n  pServer->setCallbacks(new btLjjServerCallbacks());\n  BLEService *pService = pServer->createService(SERVICE_UUID);\n  pCharacteristic= pService->createCharacteristic(CHARACTERISTIC_UUID_TX,BLECharacteristic::PROPERTY_NOTIFY);\n  pCharacteristic->addDescriptor(new BLE2902());\n  BLECharacteristic *pCharacteristic = pService->createCharacteristic(CHARACTERISTIC_UUID_RX,BLECharacteristic::PROPERTY_WRITE);\n  pCharacteristic->setCallbacks(new btLjjCallbacks());\n  pService->start();\n  pServer->getAdvertising()->addServiceUUID(SERVICE_UUID);\n  pServer->getAdvertising()->setScanResponse(true);\n  pServer->getAdvertising()->setMinPreferred(0x06);\n  pServer->getAdvertising()->setMinPreferred(0x12);\n  pServer->getAdvertising()->start();\n}\n';
+  Blockly.Arduino.definitions_.define_ljj_esp32_ble_connected_event='void ljjBtConnected(){\n\n}\n';
+  Blockly.Arduino.definitions_.define_ljj_esp32_ble_disconnected_event='void ljjBtDisconnected(){\n\n}\n';
+  Blockly.Arduino.definitions_.define_ljj_esp32_ble_event='class btLjjServerCallbacks: public BLEServerCallbacks {\n    void onConnect(BLEServer* pServer) {\n      btConnected = true;\n      ljjBtConnected();\n    };\n    void onDisconnect(BLEServer* pServer) {\n      btConnected = false;\n      ljjBtDisconnected();\n    }\n};\n\nclass btLjjCallbacks: public BLECharacteristicCallbacks {\n    void onWrite(BLECharacteristic *pCharacteristic) {\n      btReceiveDone=false;\n      std::string rxValue = pCharacteristic->getValue();\n      if (rxValue.length() > 0) {\n        btRxLoad="";\n        for (int i = 0; i < rxValue.length(); i++){\n          btRxLoad +=(char)rxValue[i];\n        }\n        btReceiveDone=true;\n      }\n    }\n};\n\nvoid setupBLE(String BLEName){\n  const char *ble_name=BLEName.c_str();\n  BLEDevice::init(ble_name);\n  BLEServer *pServer = BLEDevice::createServer();\n  pServer->setCallbacks(new btLjjServerCallbacks());\n  BLEService *pService = pServer->createService(SERVICE_UUID);\n  pCharacteristic= pService->createCharacteristic(CHARACTERISTIC_UUID_TX,BLECharacteristic::PROPERTY_NOTIFY);\n  pCharacteristic->addDescriptor(new BLE2902());\n  BLECharacteristic *pCharacteristic = pService->createCharacteristic(CHARACTERISTIC_UUID_RX,BLECharacteristic::PROPERTY_WRITE);\n  pCharacteristic->setCallbacks(new btLjjCallbacks());\n  pService->start();\n  pServer->getAdvertising()->addServiceUUID(SERVICE_UUID);\n  pServer->getAdvertising()->setScanResponse(true);\n  pServer->getAdvertising()->setMinPreferred(0x06);\n  pServer->getAdvertising()->setMinPreferred(0x12);\n  pServer->getAdvertising()->start();\n}\n';
   //Blockly.Arduino.setups_["setup_ljj_esp32_ble"]='setupBLE('+a+');';
   return'setupBLE('+a+');\n';
 }
+
+Blockly.Arduino.ljj_esp32_ble_onConnected=function(){
+  var a=Blockly.Arduino.statementToCode(this,"STATEMENT"),
+      b=this.getFieldValue("STATUS");
+  if (b=='connected')
+    Blockly.Arduino.definitions_['define_ljj_esp32_ble_'+b+'_event']='void ljjBtConnected(){\n'+a+'\n}\n';
+  else
+    Blockly.Arduino.definitions_['define_ljj_esp32_ble_'+b+'_event']='void ljjBtDisconnected(){\n'+a+'\n}\n';
+  return'';
+}
+
+Blockly.Blocks.ljj_esp32_ble_onConnected={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_ESP32_BLE_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_esp32_BLE.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_ESP32_BLE_TITLE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_ESP32_BLE_ON)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_ESP32_BLE_CONNECTED_STATUS),"STATUS")
+  this.appendStatementInput("STATEMENT");
+  this.setInputsInline(!0);
+  this.setTooltip(Blockly.Msg.LJJ_ESP32_BLE_TOOLTIP)}
+};
+
+
+
+
+
 
 Blockly.Arduino.ljj_esp32_ble_recv_avalable=function(){
   var a=Blockly.Arduino.statementToCode(this,"STATEMENT");

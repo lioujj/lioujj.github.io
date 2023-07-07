@@ -6316,6 +6316,19 @@ Blockly.Blocks.ljj_esp32_ble_init={init:function(){
   this.setTooltip(Blockly.Msg.LJJ_ESP32_BLE_TOOLTIP)}
 };
 
+Blockly.Blocks.ljj_esp32_ble_onConnected={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_ESP32_BLE_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_esp32_BLE.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_ESP32_BLE_TITLE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_ESP32_BLE_ON)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_ESP32_BLE_CONNECTED_STATUS),"STATUS")
+  this.appendStatementInput("STATEMENT");
+  this.setInputsInline(!0);
+  this.setTooltip(Blockly.Msg.LJJ_ESP32_BLE_TOOLTIP)}
+};
+
 Blockly.Blocks.ljj_esp32_ble_recv_avalable={init:function(){
   this.setHelpUrl(Blockly.Msg.LJJ_ESP32_BLE_HELPURL);
   this.setColour(Blockly.Blocks.ljj_esp32_BLE.HUE);

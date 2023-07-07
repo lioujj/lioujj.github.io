@@ -1245,3 +1245,5 @@ Blockly.Msg.LJJ_ESP32_BLE_V7RC_DATATYPE=[["車輛","SRV"],["坦克","SRT"],["LED
 Blockly.Msg.LJJ_ESP32_BLE_V7RC_VALUETYPE = [["數字","Number"],["字串","String"]];
 Blockly.Msg.LJJ_ESP32_BLE_CONNECTED = "已有裝置連上線？"
 Blockly.Msg.LJJ_ESP32_BLE_V7RC = "如果讀到的字串含有V7RC控制碼";
+Blockly.Msg.LJJ_ESP32_BLE_ON = '當';
+Blockly.Msg.LJJ_ESP32_BLE_CONNECTED_STATUS = [["連線時","connected"],["斷線時","disconnected"]];

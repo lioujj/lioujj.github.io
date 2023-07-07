@@ -1243,7 +1243,7 @@ Blockly.Msg.CAGEBOT_LINE_FOLLOWER_LIST=[["left","left"],["middle","middle"],["ri
 
 //ESP32_BLE
 Blockly.Msg.LJJ_ESP32_BLE_HELPURL = "";
-Blockly.Msg.LJJ_ESP32_BLE_TITLE = "BLE";
+Blockly.Msg.LJJ_ESP32_BLE_TITLE = "Bluetooth(BLE)";
 Blockly.Msg.LJJ_ESP32_BLE_MESSAGE = "message";
 Blockly.Msg.LJJ_ESP32_BLE_NAME = "set BLE name";
 Blockly.Msg.LJJ_ESP32_BLE_TOOLTIP = "BLE";
@@ -1252,3 +1252,5 @@ Blockly.Msg.LJJ_ESP32_BLE_V7RC_DATATYPE=[["vehicle","SRV"],["tank","SRT"],["LED1
 Blockly.Msg.LJJ_ESP32_BLE_V7RC_VALUETYPE = [["number","Number"],["string","String"]];
 Blockly.Msg.LJJ_ESP32_BLE_CONNECTED = "is connected to device?"
 Blockly.Msg.LJJ_ESP32_BLE_V7RC = "if received message includes V7RC control code";
+Blockly.Msg.LJJ_ESP32_BLE_ON = 'on';
+Blockly.Msg.LJJ_ESP32_BLE_CONNECTED_STATUS = [["connected","connected"],["disconnected","disconnected"]];

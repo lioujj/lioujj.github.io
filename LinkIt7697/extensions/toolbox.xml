@@ -1384,6 +1384,7 @@
           </block>
         </value>
       </block>
+      <block type="ljj_esp32_ble_onConnected"></block>
       <block type="ljj_esp32_ble_recv_avalable"></block>
       <block type="ljj_esp32_ble_read_result"></block>
       <block type="ljj_esp32_ble_recv_avalable">
