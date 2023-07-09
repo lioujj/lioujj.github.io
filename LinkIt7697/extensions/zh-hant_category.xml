@@ -86,4 +86,6 @@
 <category><name>Pico_Modules</name><replace>模組</replace></category>
 <category><name>BLE</name><replace>藍芽BLE</replace></category>
 <category><name>BLE Server</name><replace>BLE伺服端</replace></category>
+<category><name>BLE</name><replace>藍芽BLE</replace></category>
+<category><name>BLE Server</name><replace>BLE伺服端</replace></category>
 </xml>

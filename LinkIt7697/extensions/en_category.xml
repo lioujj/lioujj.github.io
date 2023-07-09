@@ -84,4 +84,6 @@
 <category><name>Pico_Modules</name><replace>Modules</replace></category>
 <category><name>BLE</name><replace>BLE</replace></category>
 <category><name>BLE Server</name><replace>BLE Server</replace></category>
+<category><name>BLE</name><replace>BLE</replace></category>
+<category><name>BLE Server</name><replace>BLE Server</replace></category>
 </xml>
