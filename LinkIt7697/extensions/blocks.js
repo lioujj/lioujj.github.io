@@ -10735,6 +10735,27 @@ Blockly.Blocks.ljj_servo_init={init:function(){
   this.setTooltip(Blockly.Msg.LJJ_QUNO_TOOLTIP)}
 };
 
+Blockly.Blocks.ljj_esp32_servo_init={init:function(){
+  //this.setHelpUrl(Blockly.Msg.LJJ_QUNO_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_quno.HUE4);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LIOU_ROBOT_SERVO)
+      .appendField("ESP32")
+      .appendField(Blockly.Msg.CORE_SETUP);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.ESP32_IRQ_FUNCTION_NAME)
+      .appendField(new Blockly.FieldVariable("servo1"), "varName");
+   this.appendValueInput("PIN")      
+      .appendField(Blockly.Msg.LIOU_ROBOT_PIN);
+   this.appendValueInput("CHANNEL")      
+      .appendField(Blockly.Msg.ESP32_ANALOG_WRITE_CHANNEL);
+  this.appendDummyInput().appendField(Blockly.Msg.SERVO_ANGLE_TEXT2);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_QUNO_TOOLTIP)}
+};
+
 Blockly.Blocks.ljj_servo_custom_init={init:function(){
   //this.setHelpUrl(Blockly.Msg.LJJ_QUNO_HELPURL);
   this.setColour(Blockly.Blocks.ljj_quno.HUE4);

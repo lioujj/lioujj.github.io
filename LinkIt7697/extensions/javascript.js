@@ -6172,6 +6172,18 @@ Blockly.Arduino.ljj_servo_init=function(){
   return b+'.attach('+a+');\n';
 };
 
+Blockly.Arduino.ljj_esp32_servo_init=function(){
+  var a=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=Blockly.Arduino.nameDB_.getName(this.getFieldValue('varName'), Blockly.VARIABLE_CATEGORY_NAME),
+      c=Blockly.Arduino.valueToCode(this,"CHANNEL",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    Blockly.Arduino.definitions_.define_servo="#include <Servo.h>";
+    Blockly.Arduino.definitions_["define_class_servo_"+b]="Servo "+b+";";
+    return b+'.attach('+a+','+c+');\n';
+  } else
+    return'';
+};
+
 Blockly.Arduino.ljj_servo_custom_init=function(){
   var a=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
       b=Blockly.Arduino.nameDB_.getName(this.getFieldValue('varName'), Blockly.VARIABLE_CATEGORY_NAME),

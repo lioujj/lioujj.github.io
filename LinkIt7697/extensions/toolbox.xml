@@ -4571,6 +4571,18 @@
           </block>
         </value>
       </block>
+      <block type="ljj_esp32_servo_init">
+        <value name="PIN">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="CHANNEL">
+          <block type="math_number">
+            <field name="NUM">2</field>
+          </block>
+        </value>
+      </block>
       <block type="ljj_servo_custom_init">
         <value name="PIN">
           <block type="math_number">
