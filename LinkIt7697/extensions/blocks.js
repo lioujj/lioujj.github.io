@@ -8330,6 +8330,23 @@ Blockly.Blocks.ljj_ws2812_neopixel_set_colors={init:function(){
   this.setTooltip(Blockly.Msg.LJJ_BASIC_TOOLTIP)}
 };
 
+Blockly.Blocks.ljj_ws2812_neopixel_current_color={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_WS2812_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_5012.HUE5);
+  this.appendDummyInput()
+      .appendField("WS2812")
+      .appendField(Blockly.Msg.LJJ_BASIC_VARIABLE_NAME)
+      .appendField(new Blockly.FieldVariable("strip"), "varName");
+  this.appendValueInput("INDEX")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LJJ_BASIC_LEDS_PIXEL_INDEX);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_WS2812_CURRENT_COLOR);
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Number");
+  this.setTooltip(Blockly.Msg.LJJ_BASIC_TOOLTIP)}
+};
+
 Blockly.Blocks.ljj_ws2812_color_flow={init:function(){
   this.setHelpUrl(Blockly.Msg.LJJ_WS2812_HELPURL);
   this.setColour(Blockly.Blocks.ljj_5012.HUE5);

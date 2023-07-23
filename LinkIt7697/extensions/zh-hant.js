@@ -1060,6 +1060,7 @@ Blockly.Msg.LJJ_WS2812_COLOR_BLINK = '兩個顏色交互閃爍';
 Blockly.Msg.LJJ_WS2812_BREATHE = '呼吸燈呼吸一次';
 Blockly.Msg.LJJ_BASIC_SONAR = "超音波感測器";
 Blockly.Msg.LJJ_BASIC_SONAR_DISTANCE = "距離(CM)";
+Blockly.Msg.LJJ_WS2812_CURRENT_COLOR = "目前顏色值";
 
 //LCD1602
 Blockly.Msg.LJJ_LCD1602_HELPURL = "";

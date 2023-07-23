@@ -5316,6 +5316,12 @@ Blockly.Arduino.ljj_ws2812_neopixel_set_colors=function(){
   return b+'SetAllLedsColor('+a+');\n'+b+'ShowAllLedsColor();\n';
 };
 
+Blockly.Arduino.ljj_ws2812_neopixel_current_color=function(){
+  var a=Blockly.Arduino.nameDB_.getName(this.getFieldValue('varName'), Blockly.VARIABLE_CATEGORY_NAME),
+      b=Blockly.Arduino.valueToCode(this,"INDEX",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  return[a+'_arr['+b+']',Blockly.Arduino.ORDER_ATOMIC];
+};
+
 Blockly.Arduino.ljj_ws2812_neopixel_brightness=function(){
   var a=Blockly.Arduino.valueToCode(this,"BRIGHTNESS",Blockly.Arduino.ORDER_ATOMIC)||"",
       b=Blockly.Arduino.nameDB_.getName(this.getFieldValue('varName'), Blockly.VARIABLE_CATEGORY_NAME);

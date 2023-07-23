@@ -1067,6 +1067,7 @@ Blockly.Msg.LJJ_WS2812_COLOR_BLINK = '2 colors blink';
 Blockly.Msg.LJJ_WS2812_BREATHE = 'starts to breathe once';
 Blockly.Msg.LJJ_BASIC_SONAR = "UltraSonic";
 Blockly.Msg.LJJ_BASIC_SONAR_DISTANCE = "distance(CM)";
+Blockly.Msg.LJJ_WS2812_CURRENT_COLOR = "color value";
 
 //LCD1602
 Blockly.Msg.LJJ_LCD1602_HELPURL = "";

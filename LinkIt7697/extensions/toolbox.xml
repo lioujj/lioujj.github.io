@@ -262,6 +262,13 @@
           </block>
         </value>
       </block>
+      <block type="ljj_ws2812_neopixel_current_color">
+        <value name="INDEX">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
       <block type="ljj_ws2812_neopixel_brightness">
         <value name="BRIGHTNESS">
           <block type="math_number">
@@ -4376,6 +4383,13 @@
         <value name="ADD1">
           <block type="ttgo_getFromColorPicker">
             <field name="RGB">#0000ff</field>
+          </block>
+        </value>
+      </block>
+      <block type="ljj_ws2812_neopixel_current_color">
+        <value name="INDEX">
+          <block type="math_number">
+            <field name="NUM">0</field>
           </block>
         </value>
       </block>
