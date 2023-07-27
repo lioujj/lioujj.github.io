@@ -1409,8 +1409,35 @@
               <field name="TEXT"></field>
             </block>
           </value>
+          <field name="LINE">FALSE</field>
         </block>
         <block type="ljj_esp32_ble_connected"></block>
+      </category>
+      <category id="category_ljj_esp32_BLE_Client" name="BLE Client">
+        <block type="ljj_esp32_ble_client_init">
+          <value name="BLE_NAME">
+            <block type="text">
+              <field name="TEXT">伺服器藍芽名稱</field>
+            </block>
+          </value>
+          <value name="UUID">
+            <block type="text">
+              <field name="TEXT">6E400001-B5A3-F393-E0A9-E50E24DCCA9E</field>
+            </block>
+          </value>
+        </block>
+        <block type="ljj_esp32_ble_client_onConnected"></block>
+        <block type="ljj_esp32_ble_client_recv_avalable"></block>
+        <block type="ljj_esp32_ble_client_read_result"></block>
+        <block type="ljj_esp32_ble_client_send">
+          <value name="MESSAGE">
+            <block type="text">
+              <field name="TEXT"></field>
+            </block>
+          </value>
+          <field name="LINE">FALSE</field>
+        </block>
+        <block type="ljj_esp32_ble_client_connected"></block>
       </category>
     </category>
     <category id="category_spiffs" name="SPIFFS">
@@ -2780,6 +2807,7 @@
               <field name="TEXT"></field>
             </block>
           </value>
+          <field name="LINE">FALSE</field>
         </block>
         <block type="ljj_esp32_ble_connected"></block>
       </category>

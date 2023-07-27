@@ -1248,3 +1248,12 @@ Blockly.Msg.LJJ_ESP32_BLE_CONNECTED = "已有裝置連上線？"
 Blockly.Msg.LJJ_ESP32_BLE_V7RC = "如果讀到的字串含有V7RC控制碼";
 Blockly.Msg.LJJ_ESP32_BLE_ON = '當';
 Blockly.Msg.LJJ_ESP32_BLE_CONNECTED_STATUS = [["連線時","connected"],["斷線時","disconnected"]];
+
+//ESP32_BLE_CLIENT
+Blockly.Msg.LJJ_ESP32_BLE_CLIENT_HELPURL = "";
+Blockly.Msg.LJJ_ESP32_BLE_CLIENT_TOOLTIP = "藍芽BLE客戶端";
+Blockly.Msg.LJJ_ESP32_BLE_CLIENT_TITLE = "藍芽BLE客戶端";
+Blockly.Msg.LJJ_ESP32_BLE_CLIENT_SCAN_CONNECT = "掃描附近藍芽伺服器並連接";
+Blockly.Msg.LJJ_ESP32_BLE_CLIENT_NAME = "伺服器名稱";
+Blockly.Msg.LJJ_ESP32_BLE_CLIENT_RETURN = "行末加上換行字元";
+Blockly.Msg.LJJ_ESP32_BLE_CLIENT_CONNECTED = "已連上BLE伺服器？"

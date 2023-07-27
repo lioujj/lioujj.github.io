@@ -1255,3 +1255,12 @@ Blockly.Msg.LJJ_ESP32_BLE_CONNECTED = "is connected to device?"
 Blockly.Msg.LJJ_ESP32_BLE_V7RC = "if received message includes V7RC control code";
 Blockly.Msg.LJJ_ESP32_BLE_ON = 'on';
 Blockly.Msg.LJJ_ESP32_BLE_CONNECTED_STATUS = [["connected","connected"],["disconnected","disconnected"]];
+
+//ESP32_BLE_CLIENT
+Blockly.Msg.LJJ_ESP32_BLE_CLIENT_HELPURL = "";
+Blockly.Msg.LJJ_ESP32_BLE_CLIENT_TOOLTIP = "BLE Client";
+Blockly.Msg.LJJ_ESP32_BLE_CLIENT_TITLE = "BLE Client";
+Blockly.Msg.LJJ_ESP32_BLE_CLIENT_SCAN_CONNECT = "scan and connect to BLE server";
+Blockly.Msg.LJJ_ESP32_BLE_CLIENT_NAME = "device name";
+Blockly.Msg.LJJ_ESP32_BLE_CLIENT_RETURN = "include LF";
+Blockly.Msg.LJJ_ESP32_BLE_CLIENT_CONNECTED = "connect to BLE server?"

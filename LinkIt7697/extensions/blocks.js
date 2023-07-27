@@ -6309,7 +6309,7 @@ Blockly.Blocks.ljj_esp32_ble_init={init:function(){
       .appendField(Blockly.Msg.LJJ_ESP32_BLE_NAME);
   this.appendValueInput("UUID")
       .setCheck("String")
-      .appendField("UUID");
+      .appendField("Service UUID");
   this.setInputsInline(!0);
   this.setPreviousStatement(!0,null);
   this.setNextStatement(!0,null);
@@ -6394,6 +6394,9 @@ Blockly.Blocks.ljj_esp32_ble_send={init:function(){
   this.appendValueInput("MESSAGE")
       .setCheck("String")
       .appendField(Blockly.Msg.LINENOTIFY_SEND_MSG);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_ESP32_BLE_CLIENT_RETURN)
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "LINE");
   this.setInputsInline(!0);
   this.setPreviousStatement(!0,null);
   this.setNextStatement(!0,null);
@@ -6408,6 +6411,91 @@ Blockly.Blocks.ljj_esp32_ble_connected={init:function(){
       .appendField(Blockly.Msg.LJJ_ESP32_BLE_CONNECTED);
   this.setOutput(!0,"Boolean");
   this.setTooltip(Blockly.Msg.LJJ_ESP32_BLE_TOOLTIP)}
+};
+
+//ESP32_BLE_CLIENT
+Blockly.Blocks.ljj_esp32_BLE_client={};
+Blockly.Blocks.ljj_esp32_BLE_client.HUE=240;
+
+Blockly.Blocks.ljj_esp32_ble_client_init={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_ESP32_BLE_CLIENT_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_esp32_BLE_client.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_ESP32_BLE_CLIENT_TITLE)
+      .appendField(Blockly.Msg.LJJ_ESP32_BLE_CLIENT_SCAN_CONNECT);
+  this.appendValueInput("BLE_NAME")
+      .setCheck("String")
+      .appendField(Blockly.Msg.LJJ_ESP32_BLE_CLIENT_NAME);
+  this.appendValueInput("UUID")
+      .setCheck("String")
+      .appendField("Service UUID");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.LJJ_ESP32_BLE_CLIENT_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_esp32_ble_client_onConnected={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_ESP32_BLE_CLIENT_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_esp32_BLE_client.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_ESP32_BLE_CLIENT_TITLE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_ESP32_BLE_ON)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_ESP32_BLE_CONNECTED_STATUS),"STATUS")
+  this.appendStatementInput("STATEMENT");
+  this.setInputsInline(!0);
+  this.setTooltip(Blockly.Msg.LJJ_ESP32_BLE_CLIENT_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_esp32_ble_client_recv_avalable={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_ESP32_BLE_CLIENT_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_esp32_BLE_client.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_ESP32_BLE_CLIENT_TITLE)
+      .appendField(Blockly.Msg.BROADCAST_UDP_RECEIVED_EVENT);
+  this.appendStatementInput("STATEMENT");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.LJJ_ESP32_BLE_CLIENT_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_esp32_ble_client_read_result={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_ESP32_BLE_CLIENT_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_esp32_BLE_client.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_ESP32_BLE_CLIENT_TITLE)
+      .appendField(Blockly.Msg.LJJ_ESP32_BLE_MESSAGE);
+  this.setOutput(!0,"String");
+  this.setTooltip(Blockly.Msg.LJJ_ESP32_BLE_CLIENT_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_esp32_ble_client_send={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_ESP32_BLE_CLIENT_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_esp32_BLE_client.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_ESP32_BLE_CLIENT_TITLE);
+  this.appendValueInput("MESSAGE")
+      .setCheck("String")
+      .appendField(Blockly.Msg.LINENOTIFY_SEND_MSG);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_ESP32_BLE_CLIENT_RETURN)
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "LINE");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.LJJ_ESP32_BLE_CLIENT_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_esp32_ble_client_connected={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_ESP32_BLE_CLIENT_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_esp32_BLE_client.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_ESP32_BLE_CLIENT_TITLE)
+      .appendField(Blockly.Msg.LJJ_ESP32_BLE_CLIENT_CONNECTED);
+  this.setOutput(!0,"Boolean");
+  this.setTooltip(Blockly.Msg.LJJ_ESP32_BLE_CLIENT_TOOLTIP)}
 };
 
 //L9110
