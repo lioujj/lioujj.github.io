@@ -458,21 +458,26 @@ Blockly.Arduino.ksb045_custom_tone=function(){
 Blockly.Arduino.maqueen={};
 Blockly.Arduino.maqueen_head_light=function(){
   var a=this.getFieldValue("STAT1"),
-      b=this.getFieldValue("STAT2");
-
+      b=this.getFieldValue("STAT2"),
+      leftPin=17,
+      rightPin=4;
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    leftPin=27;
+    rightPin=15;
+  }
   if (a == "LEFT") {
-	  Blockly.Arduino.setups_["setup_maqueen_headlight_left"]="pinMode(17, OUTPUT);";
+	  Blockly.Arduino.setups_["setup_maqueen_headlight_left"]='pinMode('+leftPin+', OUTPUT);';
 	  if (b == "ON"){
-	     return'digitalWrite(17, 1);\n'
+	     return'digitalWrite('+leftPin+', 1);\n'
 	  } else if (b=="OFF"){
-		 return'digitalWrite(17, 0);\n'
+		 return'digitalWrite('+leftPin+', 0);\n'
 	  }
   } else if (a == "RIGHT"){
-	  Blockly.Arduino.setups_["setup_maqueen_headlight_right"]="pinMode(4, OUTPUT);";
+	  Blockly.Arduino.setups_["setup_maqueen_headlight_right"]='pinMode('+rightPin+', OUTPUT);';
 	  if (b == "ON"){
-	     return'digitalWrite(4, 1);\n'
+	     return'digitalWrite('+rightPin+', 1);\n'
 	  } else if (b=="OFF"){
-		 return'digitalWrite(4, 0);\n'
+		 return'digitalWrite('+rightPin+', 0);\n'
 	  }
   } else
 	  return''
@@ -524,6 +529,9 @@ Blockly.Arduino.maqueen_move_motor=function(){
 Blockly.Arduino.maqueen_sonar=function(){
   Blockly.Arduino.definitions_['define_sonar_']="#include <Ultrasonic.h>";
   Blockly.Arduino.definitions_['define_sonar_set']="Ultrasonic maqueen_sonar(15, 16);"
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    Blockly.Arduino.definitions_['define_sonar_set']="Ultrasonic maqueen_sonar(33, 32);"
+  }
   return ["maqueen_sonar.convert(maqueen_sonar.timing(), Ultrasonic::CM)", Blockly.Arduino.ORDER_ATOMIC];
 };
 
@@ -531,6 +539,13 @@ Blockly.Arduino.maqueen_line_follower=function(){
   var a=this.getFieldValue("STAT1"),
       b=this.getFieldValue("STAT2");
   Blockly.Arduino.setups_["setup_maqueen_line_follower"]="pinMode(13, INPUT);\n  pinMode(12, INPUT);";
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    Blockly.Arduino.setups_["setup_maqueen_line_follower"]="pinMode(18, INPUT);\n  pinMode(19, INPUT);";
+    if (a=="13")
+      a="18";
+    else if (a=="12")
+      a="19";
+  }
   Blockly.Arduino.definitions_.define_maqueen_line_follower='bool detectLine(byte myPin, byte myResult){\n  if (digitalRead(myPin)==myResult)\n     return true;\n  else\n     return false;\n}';
   return['detectLine('+a+','+b+')',Blockly.Arduino.ORDER_ATOMIC];
 };
@@ -550,50 +565,85 @@ Blockly.Arduino.maqueen_servo=function(){
 };
 
 Blockly.Arduino.maqueen_tone=function(){
-  var a=this.getFieldValue("FREQ");
-  return"tone("+14+", "+a+");\n"
+  var a=this.getFieldValue("FREQ"),
+      tonePin=14;
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    Blockly.Arduino.definitions_.define_tone="#include <Tone32.h>";
+    tonePin=26;
+    Blockly.Arduino.setups_["esp32_tone1"]="tone("+tonePin+",100,0,0);\n  delay(1);\n  noTone("+tonePin+",0);\n";
+    return"noTone("+tonePin+",0);\ntone("+tonePin+", "+a+",0,0);\n"
+  } else
+    return"tone("+tonePin+", "+a+");\n"
 };
+
 Blockly.Arduino.maqueen_no_tone=function(){
-    return"noTone(14);\n"
+  var tonePin=14;
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    Blockly.Arduino.definitions_.define_tone="#include <Tone32.h>";
+    tonePin=26;
+    Blockly.Arduino.setups_["esp32_tone1"]="tone("+tonePin+",100,0,0);\n  delay(1);\n  noTone("+tonePin+",0);\n";
+    return"noTone("+tonePin+",0);\n"
+  } else
+    return"noTone("+tonePin+");\n"
 };
 
 Blockly.Arduino.maqueen_custom_tone=function(){
   var a=Blockly.Arduino.valueToCode(this,"FREQ",Blockly.Arduino.ORDER_ATOMIC)||0,
-      b=Blockly.Arduino.valueToCode(this,"DURATION",Blockly.Arduino.ORDER_ATOMIC)||0;
-  return"tone(14, "+a+", "+b+");\n"
+      b=Blockly.Arduino.valueToCode(this,"DURATION",Blockly.Arduino.ORDER_ATOMIC)||0,
+      tonePin=14;
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    Blockly.Arduino.definitions_.define_tone="#include <Tone32.h>";
+    tonePin=26;
+    Blockly.Arduino.setups_["esp32_tone1"]="tone("+tonePin+",100,0,0);\n  delay(1);\n  noTone("+tonePin+",0);\n";
+    return"tone("+tonePin+", "+a+", "+b+",0);\n"
+  } else
+    return"tone("+tonePin+", "+a+", "+b+");\n"
 };
 
 Blockly.Arduino.neopixel_begin_maqueen=function(){
 	var a=this.getFieldValue("NUM"),
-	b=this.getFieldValue("PIN"),
-	c=this.getFieldValue("BRIGHTNESS");
+	    b=this.getFieldValue("PIN"),
+	    c=this.getFieldValue("BRIGHTNESS"),
+      ledPin=11;
+  if (Blockly.Arduino.my_board_type=="ESP32")
+      ledPin=23;    
 	Blockly.Arduino.definitions_.define_include_neopixel="#include <Adafruit_NeoPixel.h>\n";
-	Blockly.Arduino.definitions_.define_neopixel="Adafruit_NeoPixel pixels = Adafruit_NeoPixel(4,11,NEO_GRB + NEO_KHZ800);\n";
+	Blockly.Arduino.definitions_.define_neopixel="Adafruit_NeoPixel pixels = Adafruit_NeoPixel(4,"+ledPin+",NEO_GRB + NEO_KHZ800);\n";
 	Blockly.Arduino.setups_.setup_neopixel_begin="pixels.begin();\n";
-	Blockly.Arduino.setups_.setup_neopixel_brightness="pixels.setBrightness("+c+");\npixels.show();\n";
+	Blockly.Arduino.setups_.setup_neopixel_brightness="pixels.setBrightness("+c+");\n  pixels.show();\n";
   return""
 };
 
 Blockly.Arduino.maqueen_button=function(){
-    var a=this.getFieldValue("AB_BUTTON"),
-	    b=Blockly.Arduino.statementToCode(this,"MSG_BUTTON_CALL");
+  var a=this.getFieldValue("AB_BUTTON"),
+	    b=Blockly.Arduino.statementToCode(this,"MSG_BUTTON_CALL"),
+      A_Pin=0,
+      B_Pin=7;
 	b=b.replace(/\n/g,'\n  ');
-    Blockly.Arduino.definitions_.define_m_button="char myBtnStatus;\nbool buttonPressed(char btnName)\n{\n  byte A_Pin=0;\n  byte B_Pin=7;\n  if (btnName=='A'){\n    if (digitalRead(A_Pin) == 1)\n      return false;\n    else\n      return true;\n  }\n  else if (btnName=='B'){\n    if (digitalRead(B_Pin) == 1)\n      return false;\n    else\n      return true;\n  } else {\n    if ((digitalRead(A_Pin) == 1) && (digitalRead(B_Pin) == 1))\n      return false;\n    else\n      return true;\n  }\n}\n"
-    Blockly.Arduino.definitions_.define_m_getBtnStatus="char getBtnStatus(){\n  char buttonStatus=' ';\n  int checkButtonDelay=200;\n  if (buttonPressed('A')){\n    delay(checkButtonDelay);\n    if (buttonPressed('A')){\n      buttonStatus='A';\n      if (buttonPressed('B'))\n        buttonStatus='C';\n    }\n  } else if (buttonPressed('B')){\n      delay(checkButtonDelay);\n      if (buttonPressed('B')){\n        buttonStatus='B';\n        if (buttonPressed('A'))\n          buttonStatus='C';\n      }\n  }\n  return buttonStatus;\n}\n";
-    Blockly.Arduino.setups_.setup_button='pinMode(0, INPUT);\n  pinMode(7, INPUT);\n';
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    A_Pin=14,
+    B_Pin=25;
+  }
+  Blockly.Arduino.definitions_.define_m_button="char myBtnStatus;\nbool buttonPressed(char btnName)\n{\n  byte A_Pin="+A_Pin+";\n  byte B_Pin="+B_Pin+";\n  if (btnName=='A'){\n    if (digitalRead(A_Pin) == 1)\n      return false;\n    else\n      return true;\n  }\n  else if (btnName=='B'){\n    if (digitalRead(B_Pin) == 1)\n      return false;\n    else\n      return true;\n  } else {\n    if ((digitalRead(A_Pin) == 1) && (digitalRead(B_Pin) == 1))\n      return false;\n    else\n      return true;\n  }\n}\n"
+  Blockly.Arduino.definitions_.define_m_getBtnStatus="char getBtnStatus(){\n  char buttonStatus=' ';\n  int checkButtonDelay=200;\n  if (buttonPressed('A')){\n    delay(checkButtonDelay);\n    if (buttonPressed('A')){\n      buttonStatus='A';\n      if (buttonPressed('B'))\n        buttonStatus='C';\n    }\n  } else if (buttonPressed('B')){\n      delay(checkButtonDelay);\n      if (buttonPressed('B')){\n        buttonStatus='B';\n        if (buttonPressed('A'))\n          buttonStatus='C';\n      }\n  }\n  return buttonStatus;\n}\n";
+  Blockly.Arduino.setups_.setup_button='pinMode('+A_Pin+', INPUT);\n  pinMode('+B_Pin+', INPUT);\n';
 	return"if (myBtnStatus=='"+a+"'){\n"+b+"  while(buttonPressed('"+a+"')){}\n}\n"
 };
 
 Blockly.Arduino.maqueen_ir_event=function(){
-//  var a=this.getFieldValue("IR_EVENT");
   var a=10;
   Blockly.Arduino.definitions_.ljj_define_irremote_include="#include <IRremote.h>";
   Blockly.Arduino.definitions_.ljj_define_irremote_init="IRrecv IrReceiver("+a+");";
   Blockly.Arduino.definitions_.define_irremote_decode="decode_results results;\nString myCodeType;\nString myIRcode;";
   Blockly.Arduino.definitions_.define_irremote_ir_type_event='String ir_type(int tip)\n{\n  if (tip == 1){\n    return "RC5";\n  } else if (tip == 2){\n    return "RC6";\n  } else if (tip == 3){\n    return "NEC";\n  } else if (tip == 4){\n    return "SONY";\n  } else if (tip == 5){\n    return "PANASONIC";\n  } else if (tip == 6){\n    return "JVC";\n  } else if (tip == 7){\n    return "SAMSUNG";\n  } else if (tip == 10){\n    return "LG";\n  } else if (tip == 14){\n    return "SHARP";\n  } else if (tip == 17){\n    return "LEGO_PF";\n  } else {\n    return "UNKNOWN";\n  }\n}\n';
   Blockly.Arduino.setups_["ljj_irremote_"]||(Blockly.Arduino.setups_["ljj_irremote_"]="IrReceiver.enableIRIn();\n");
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    Blockly.Arduino.definitions_.ljj_define_irremote_include="#include <IRremote.hpp>";
+    delete Blockly.Arduino.definitions_.ljj_define_irremote_init;
+    Blockly.Arduino.definitions_.define_irremote_ir_type_event='String ir_type(int tip)\n{\n  if (tip == 14){\n    return "RC5";\n  } else if (tip == 15){\n    return "RC6";\n  } else if (tip == 7){\n    return "NEC";\n  } else if (tip == 18){\n    return "SONY";\n  } else if (tip == 8){\n    return "PANASONIC";\n  } else if (tip == 4){\n    return "JVC";\n  } else if (tip == 16){\n    return "SAMSUNG";\n  } else if (tip == 5){\n    return "LG";\n  } else if (tip == 3){\n    return "SHARP";\n  } else if (tip == 22){\n    return "LEGO_PF";\n  } else {\n    return String(tip);\n  }\n}\n';
+    Blockly.Arduino.setups_["ljj_irremote_"]="IrReceiver.begin(5);\n";
+  }
   return'if (IrReceiver.decode(&results)) {\n  if (results.decode_type>0){\n    myCodeType=ir_type(results.decode_type);\n    if (String(results.value, HEX)!="ffffffff"){\n      myIRcode=String(results.value, HEX);\n'+Blockly.Arduino.statementToCode(this,"IR_EVENT")+'}\n  }\n  IrReceiver.resume();\n}\n'
-//  return'  if (IrReceiver.decode(&results)) {\n'+Blockly.Arduino.statementToCode(this,"IR_EVENT")+'  IrReceiver.resume();\n}\n'
 };
 
 Blockly.Arduino.maqueen_ir_remote_received1=function(){
@@ -604,6 +654,16 @@ Blockly.Arduino.maqueen_ir_remote_received1=function(){
 Blockly.Arduino.maqueen_ir_remote_received2=function(){
   var a=this.getFieldValue("IR_TYPE"),
       b=Blockly.Arduino.valueToCode(this,"IR_SIGNAL",Blockly.Arduino.ORDER_ATOMIC)||"";
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    if (a=="3")
+      a="7";
+    else if (a=="4")
+      a="18";
+    else if (a=="1")
+      a="14";
+    else if (a=="2")
+      a="15";
+  }
   return'if (results.decode_type == '+a+' && String(results.value, HEX) == '+b+') {\n'+Blockly.Arduino.statementToCode(this,"IR_RECEIVED")+'\n}\n';
 };
 Blockly.Arduino.maqueen_ir_received_type=function(){

@@ -811,18 +811,6 @@ Blockly.Blocks.maqueen_custom_tone={init:function(){
     this.setTooltip(Blockly.Msg.INOUT_TONE_TOOLTIP)}
 };
 
-/*
-Blockly.Blocks.neopixel.checkBlocks=function(a){
-	var b=null,
-	    d=a.type;
-		a=a.workspace.getAllBlocks();
-		for(var c=0;c<a.length;c++)
-			if("neopixel_setpixelcolor"!=a[c].type&&"neopixel_custom_setpixelcolor"!=a[c].type&&"neopixel_show"!=a[c].type&&"neopixel_setpixelcolor2"!=a[c].type||null!=b||(b=a[c].type!=d?!0:!1),"neopixel_begin"==a[c].type || "neopixel_begin_maqueen"==a[c].type)
-				return!0;
-		return b
-};
-*/
-
 Blockly.Blocks.neopixel_begin_maqueen={init:function(){
 	this.setHelpUrl(Blockly.Msg.NEOPIXEL_BEGIN_HELPURL);
 	this.setColour(Blockly.Blocks.neopixel.HUE);
@@ -886,7 +874,7 @@ Blockly.Blocks.maqueen_ir_remote_received2={init:function(){
   this.setColour(Blockly.Blocks.maqueen.HUE1);
   this.appendDummyInput()
       .appendField(Blockly.Msg.LIOU_ROBOT_IR_RECEIVED2_TYPE)
-	  .appendField(new Blockly.FieldDropdown([["NEC","3"],["Sony","4"],["RC5","1"],["RC6","2"]]),"IR_TYPE");
+	    .appendField(new Blockly.FieldDropdown([["NEC","3"],["Sony","4"],["RC5","1"],["RC6","2"]]),"IR_TYPE");
   this.appendValueInput("IR_SIGNAL").setCheck("String")
       .appendField(Blockly.Msg.LIOU_ROBOT_IR_RECEIVED2_MSG);
   this.setInputsInline(!0);
