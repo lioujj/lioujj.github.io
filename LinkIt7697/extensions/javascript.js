@@ -6563,6 +6563,47 @@ Blockly.Arduino.ljj_esp32_ble_client_connected=function(){
     return'';
 }
 
+
+//SEN0539
+Blockly.Arduino.ljj_sen0539={};
+Blockly.Arduino.ljj_sen0539_init=function(){
+  Blockly.Arduino.definitions_.define_ljj_sen0539_include='#include "DFRobot_DF2301Q.h"';
+  Blockly.Arduino.definitions_.define_ljj_sen0539_invoke='DFRobot_DF2301Q_I2C sen0539;\nuint8_t sen0539CmdId;';
+  return'sen0539.begin();\n';
+}
+
+Blockly.Arduino.ljj_sen0539_setVolume=function(){
+  var a=Blockly.Arduino.valueToCode(this,"VOLUME",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  return'sen0539.setVolume('+a+');\n';
+}
+
+Blockly.Arduino.ljj_sen0539_wakeup_time=function(){
+  var a=Blockly.Arduino.valueToCode(this,"SECONDS",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  return'sen0539.setWakeTime('+a+');\n';
+}
+
+Blockly.Arduino.ljj_sen0539_setMute=function(){
+  var a=this.getFieldValue("MUTE");
+  return'sen0539.setMuteMode('+a+');\n';
+}
+
+Blockly.Arduino.ljj_sen0539_execute=function(){
+  var a=this.getFieldValue("COMMAND");
+  return'sen0539.playByCMDID('+a+');\n';
+}
+
+Blockly.Arduino.ljj_sen0539_listening = function() { 
+  var a=Blockly.Arduino.statementToCode(this,"SEN0539_IF");
+  a=a.replace("  ","");
+  a=a.replace(/\n  /g,"\n");
+  return 'sen0539CmdId=sen0539.getCMDID();\n'+a+'\n';
+};
+
+Blockly.Arduino.ljj_sen0539_command = function() { 
+  var a=this.getFieldValue('COMMAND');
+    return 'sen0539CmdId=='+a;
+};
+
 //----------------------------------------
 setTimeout(function(){
 /*

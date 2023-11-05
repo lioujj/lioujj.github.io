@@ -10993,6 +10993,131 @@ Blockly.Blocks.ljj_cagebot_motor_stop={init:function(){
   this.setNextStatement(!0,null);}
 };
 
+//SEN0539
+Blockly.Blocks.ljj_sen0539={};
+Blockly.Blocks.ljj_sen0539.HUE=80;
+Blockly.Blocks.ljj_sen0539_init={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_SEN0539_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_sen0539.HUE);
+	this.appendDummyInput()
+	    .appendField(Blockly.Msg.LJJ_SEN0539_TITLE)
+      .appendField(Blockly.Msg.LJJ_SERIAL_INIT);
+  this.setInputsInline(true);
+	this.setPreviousStatement(!0);
+	this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_SEN0539_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_sen0539_setVolume={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_SEN0539_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_sen0539.HUE);
+	this.appendDummyInput()
+	    .appendField(Blockly.Msg.LJJ_SEN0539_TITLE);
+  this.appendValueInput("VOLUME")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LJJ_SEN0539_VOLUME+"(1~7)");       
+  this.setInputsInline(true);
+	this.setPreviousStatement(!0);
+	this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_SEN0539_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_sen0539_setMute={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_SEN0539_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_sen0539.HUE);
+	this.appendDummyInput()
+	    .appendField(Blockly.Msg.LJJ_SEN0539_TITLE)
+      .appendField(Blockly.Msg.LJJ_SEN0539_MUTE)
+      .appendField(new Blockly.FieldDropdown([["ON","1"],["OFF","0"]]),"MUTE");  
+  this.setInputsInline(true);
+	this.setPreviousStatement(!0);
+	this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_SEN0539_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_sen0539_wakeup_time={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_SEN0539_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_sen0539.HUE);
+	this.appendDummyInput()
+	    .appendField(Blockly.Msg.LJJ_SEN0539_TITLE);
+  this.appendValueInput("SECONDS")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LJJ_SEN0539_WAKEUP_SECONDS);      
+  this.setInputsInline(true);
+	this.setPreviousStatement(!0);
+	this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_SEN0539_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_sen0539_execute={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_SEN0539_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_sen0539.HUE);
+	this.appendDummyInput()
+	    .appendField(Blockly.Msg.LJJ_SEN0539_TITLE)
+      .appendField(Blockly.Msg.LJJ_SEN0539_EXECUTE)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_SEN0539_COMMAND_TYPE, this.validate),"TYPE");
+	this.appendDummyInput("opt")
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_SEN0539_FIXED_COMMAND_LIST),"COMMAND");
+  this.setInputsInline(true);
+	this.setPreviousStatement(!0);
+	this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_SEN0539_TOOLTIP)
+  },validate: function(newValue) {
+	  const sourceBlock = this.sourceBlock_;
+	  sourceBlock.getInput("opt").removeField("COMMAND");
+	  if (newValue=="fixed") {
+      sourceBlock.getInput("opt").appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_SEN0539_FIXED_COMMAND_LIST),"COMMAND");		 
+	  } else if (newValue=="wake") {
+		  sourceBlock.getInput("opt").appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_SEN0539_WAKE_COMMAND_LIST),"COMMAND"); 
+	  } else if (newValue=="custom") {
+		  sourceBlock.getInput("opt").appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_SEN0539_CUSTOM_COMMAND_LIST),"COMMAND"); 
+	  } else if (newValue=="learning") {
+		  sourceBlock.getInput("opt").appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_SEN0539_LEARNING_COMMAND_LIST),"COMMAND"); 
+	  }
+  }
+};
+
+Blockly.Blocks.ljj_sen0539_listening={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_SEN0539_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_sen0539.HUE);
+	this.appendDummyInput()
+	    .appendField(Blockly.Msg.LJJ_SEN0539_TITLE)
+      .appendField(Blockly.Msg.LJJ_SU03T_LISTENING);
+	this.setInputsInline(true);
+  this.appendStatementInput("SEN0539_IF");
+	this.setPreviousStatement(!0);
+	this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_SEN0539_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_sen0539_command={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_SEN0539_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_sen0539.HUE);
+	this.appendDummyInput()
+	    .appendField(Blockly.Msg.LJJ_SEN0539_TITLE)
+      .appendField(Blockly.Msg.LJJ_SEN0539_RECOGNIZED)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_SEN0539_COMMAND_TYPE, this.validate),"TYPE");
+ 	this.appendDummyInput("opt")   
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_SEN0539_FIXED_COMMAND_LIST),"COMMAND");
+ 	this.appendDummyInput().appendField("?");
+	this.setInputsInline(true);
+  this.setOutput(!0,"Boolean");
+  this.setTooltip(Blockly.Msg.LJJ_SEN0539_TOOLTIP)
+  },validate: function(newValue) {
+	  const sourceBlock = this.sourceBlock_;
+	  sourceBlock.getInput("opt").removeField("COMMAND");
+	  if (newValue=="fixed") {
+      sourceBlock.getInput("opt").appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_SEN0539_FIXED_COMMAND_LIST),"COMMAND"); 
+	  } else if (newValue=="wake") {
+		  sourceBlock.getInput("opt").appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_SEN0539_WAKE_COMMAND_LIST),"COMMAND");
+	  } else if (newValue=="custom") {
+		  sourceBlock.getInput("opt").appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_SEN0539_CUSTOM_COMMAND_LIST),"COMMAND");
+	  } else if (newValue=="learning") {
+		  sourceBlock.getInput("opt").appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_SEN0539_LEARNING_COMMAND_LIST),"COMMAND"); 
+	  }
+  }
+};
+
 //-----------------------------------------------
 Blockly.Blocks.ljj_2023_init={init:function(){
   this.setHelpUrl("");

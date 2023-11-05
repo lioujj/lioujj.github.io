@@ -87,4 +87,5 @@
 <category><name>BLE</name><replace>BLE</replace></category>
 <category><name>BLE Server</name><replace>BLE Server</replace></category>
 <category><name>BLE Client</name><replace>BLE Client</replace></category>
+<category><name>SEN0539</name><replace>SEN0539 ASR</replace></category>
 </xml>

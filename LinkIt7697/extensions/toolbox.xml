@@ -4658,6 +4658,38 @@
       </block>
       <block type="ljj_servo_detach"></block>
     </category>
+    <category id="category_ljj_sen0539" name="SEN0539">
+      <block type="ljj_sen0539_init"></block>
+      <block type="ljj_sen0539_setVolume">
+        <value name="VOLUME">
+          <block type="math_number">
+            <field name="NUM">7</field>
+          </block>
+        </value>
+      </block>
+      <block type="ljj_sen0539_wakeup_time">
+        <value name="SECONDS">
+          <block type="math_number">
+            <field name="NUM">20</field>
+          </block>
+        </value>
+      </block>
+      <block type="ljj_sen0539_setMute"></block>
+      <block type="ljj_sen0539_listening"></block>
+      <block type="ljj_sen0539_listening">
+        <statement name="SEN0539_IF">
+          <block type="controls_if">
+            <value name="IF0">
+              <block type="ljj_sen0539_command">
+                <field name="COMMAND"></field>
+              </block>
+            </value>
+          </block>
+        </statement>
+      </block>
+      <block type="ljj_sen0539_command"></block>
+      <block type="ljj_sen0539_execute"></block>
+    </category>
   </category>
   <category id="category_lumex" name="Lumex">
     <category id="category_ldm6432" name="LDM6432MQTT">
