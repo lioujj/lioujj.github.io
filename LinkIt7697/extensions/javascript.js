@@ -6164,7 +6164,9 @@ Blockly.Arduino.ljj_su03t_init = function() {
   var a = this.getFieldValue('SERIAL_PORT');
   Blockly.Arduino.ljj_su03t.serial_port=a;
   Blockly.Arduino.definitions_.define_ljj_su03t_send_event = '\nvoid su03tSendInteger(byte command,long data){\n  typedef union {\n    long longInt;\n    byte binary[4];\n  } myType;\n  myType sharedData;\n  sharedData.longInt = data;\n  '+Blockly.Arduino.ljj_su03t.serial_port+'.write(0xAA);\n  '+Blockly.Arduino.ljj_su03t.serial_port+'.write(command);\n  '+Blockly.Arduino.ljj_su03t.serial_port+'.write(sharedData.binary,4);\n  '+Blockly.Arduino.ljj_su03t.serial_port+'.write(0xFF);\n}\n\nvoid su03tSaySomething(byte command){\n  byte buff[3]={0xAA,0,0xFF};\n  buff[1]=command;\n  Serial.write(buff,3);\n}\n';
-  return a+'.begin(115200);\n';
+  if (Blockly.Arduino.ljj_su03t.serial_change_port)
+    delete Blockly.Arduino.ljj_su03t.serial_change_port;
+  return 'delay(300);\n'+a+'.begin(115200);\n';
 };
 
 Blockly.Arduino.ljj_su03t_init_pinmap = function() {
@@ -6173,12 +6175,16 @@ Blockly.Arduino.ljj_su03t_init_pinmap = function() {
       c=Blockly.Arduino.valueToCode(this,"TX",Blockly.Arduino.ORDER_ATOMIC)||"0";
   Blockly.Arduino.ljj_su03t.serial_port=a;
   Blockly.Arduino.definitions_.define_ljj_su03t_send_event = '\nvoid su03tSendInteger(byte command,long data){\n  typedef union {\n    long longInt;\n    byte binary[4];\n  } myType;\n  myType sharedData;\n  sharedData.longInt = data;\n  '+Blockly.Arduino.ljj_su03t.serial_port+'.write(0xAA);\n  '+Blockly.Arduino.ljj_su03t.serial_port+'.write(command);\n  '+Blockly.Arduino.ljj_su03t.serial_port+'.write(sharedData.binary,4);\n  '+Blockly.Arduino.ljj_su03t.serial_port+'.write(0xFF);\n}\n\nvoid su03tSaySomething(byte command){\n  byte buff[3]={0xAA,0,0xFF};\n  buff[1]=command;\n  Serial.write(buff,3);\n}\n';
-  return a+'.begin(115200,SERIAL_8N1,'+b+','+c+');\n';
+  Blockly.Arduino.ljj_su03t.serial_change_port='.begin(115200,SERIAL_8N1,'+b+','+c+');\n';
+  return 'delay(300);\n'+a+'.begin(115200,SERIAL_8N1,'+b+','+c+');\n';
 };
 
 Blockly.Arduino.ljj_su03t_reconnect = function() {
   var a = Blockly.Arduino.ljj_su03t.serial_port;
-  return a+'.end();\n'+a+'.begin(115200);\n';
+  if (Blockly.Arduino.ljj_su03t.serial_change_port)
+    return a+'.end();\n'+a+Blockly.Arduino.ljj_su03t.serial_change_port;
+  else
+    return a+'.end();\n'+a+'.begin(115200);\n';
 };
 
 Blockly.Arduino.ljj_su03t_listening = function() { 
