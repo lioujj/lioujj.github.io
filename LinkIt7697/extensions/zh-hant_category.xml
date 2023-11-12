@@ -85,9 +85,9 @@
 <category><name>Servo</name><replace>伺服馬達</replace></category>
 <category><name>Pico_Modules</name><replace>模組</replace></category>
 <category><name>BLE</name><replace>藍芽BLE</replace></category>
-<category><name>BLE Server</name><replace>BLE伺服端</replace></category>
 <category><name>BLE</name><replace>藍芽BLE</replace></category>
-<category><name>BLE Server</name><replace>BLE伺服端</replace></category>
-<category><name>BLE Client</name><replace>BLE客戶端</replace></category>
+<category><name>BLE_Server</name><replace>BLE伺服端</replace></category>
+<category><name>BLE_Server</name><replace>BLE伺服端</replace></category>
+<category><name>BLE_Client</name><replace>BLE客戶端</replace></category>
 <category><name>SEN0539</name><replace>SEN0539語音辨識</replace></category>
 </xml>
