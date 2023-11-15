@@ -4690,6 +4690,21 @@
       <block type="ljj_sen0539_command"></block>
       <block type="ljj_sen0539_execute"></block>
     </category>
+     <category id="category_ljj_sonar" name="HC-SR04">
+      <block type="ljj_basic_sonar_init">
+        <value name="TRIG_PIN">
+          <block type="math_number">
+            <field name="NUM">9</field>
+          </block>
+        </value>
+        <value name="ECHO_PIN">
+          <block type="math_number">
+            <field name="NUM">10</field>
+          </block>
+        </value>
+      </block>
+      <block type="ljj_basic_sonar"></block>
+    </category>
   </category>
   <category id="category_lumex" name="Lumex">
     <category id="category_ldm6432" name="LDM6432MQTT">
