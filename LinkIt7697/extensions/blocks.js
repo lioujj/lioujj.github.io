@@ -2158,6 +2158,7 @@ Blockly.Blocks.oled_display_setting_new={
     this.setColour(Blockly.Blocks.oled_display.HUE);
     this.appendDummyInput()
         .appendField(Blockly.Msg.OLED_DISPLAY_TITLE +"  "+Blockly.Msg.INITIALIZES_SETUP_APPENDTEXT)
+        .appendField(new Blockly.FieldDropdown([["SSD1306","SSD1306"],["SH1106","SH1106"]]),"OLED_TYPE");
     this.setPreviousStatement(!0);
     this.setNextStatement(!0);
     this.setTooltip(Blockly.Msg.OLED_DISPLAY_TOOLTIP)}

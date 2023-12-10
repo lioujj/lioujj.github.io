@@ -1485,7 +1485,8 @@ Blockly.Arduino.mtk7697bit_pinMap=function(){
 Blockly.Arduino.oled_display_setting_new=function(){
   Blockly.Arduino.definitions_.define_wire='#include "Wire.h"';
   Blockly.Arduino.definitions_.define_u8g2_oled_include='#include "U8g2lib.h"';
-  Blockly.Arduino.definitions_.define_u8g2_oled_declare="U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE);\nint clock_center_x=64;\nint clock_center_y=32;";
+  var a=this.getFieldValue("OLED_TYPE");
+  Blockly.Arduino.definitions_.define_u8g2_oled_declare="U8G2_"+a+"_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE);\nint clock_center_x=64;\nint clock_center_y=32;";
   Blockly.Arduino.setups_.setup_define_u8g2_oled="u8g2.begin();\n  u8g2.enableUTF8Print();\n  u8g2.setFont(u8g2_font_6x10_tf);\n  u8g2.setFontRefHeightExtendedText();\n  u8g2.setDrawColor(1);\n  u8g2.setFontPosTop();\n  u8g2.setFontDirection(0);\n";
   return"";
 }
