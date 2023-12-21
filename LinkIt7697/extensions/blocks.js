@@ -2157,11 +2157,55 @@ Blockly.Blocks.oled_display_setting_new={
     this.setHelpUrl(Blockly.Msg.OLED_DISPLAY_HELPURL_NEW);
     this.setColour(Blockly.Blocks.oled_display.HUE);
     this.appendDummyInput()
-        .appendField(Blockly.Msg.OLED_DISPLAY_TITLE +"  "+Blockly.Msg.INITIALIZES_SETUP_APPENDTEXT)
-        .appendField(new Blockly.FieldDropdown([["SSD1306","SSD1306"],["SH1106","SH1106"]]),"OLED_TYPE");
+        .appendField(Blockly.Msg.OLED_DISPLAY_TITLE +"  "+Blockly.Msg.INITIALIZES_SETUP_APPENDTEXT+'(I2C)')
+        .appendField(new Blockly.FieldDropdown([["SSD1306","U8G2_SSD1306_128X64_NONAME_F_HW_I2C"],["SH1106","U8G2_SH1106_128X64_NONAME_F_HW_I2C"]]),"OLED_TYPE");
     this.setPreviousStatement(!0);
     this.setNextStatement(!0);
     this.setTooltip(Blockly.Msg.OLED_DISPLAY_TOOLTIP)}
+};
+
+Blockly.Blocks.oled_display_setting_spi={
+  init:function(){
+    this.setHelpUrl(Blockly.Msg.OLED_DISPLAY_HELPURL_NEW);
+    this.setColour(Blockly.Blocks.oled_display.HUE);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.OLED_DISPLAY_TITLE +"  "+Blockly.Msg.INITIALIZES_SETUP_APPENDTEXT)
+        .appendField(new Blockly.FieldDropdown(Blockly.Msg.OLED_DISPLAY_SPI_TYPE_LIST,this.validate),"SPI_TYPE");
+    this.appendDummyInput("opt")
+        .appendField(new Blockly.FieldDropdown(Blockly.Msg.OLED_DISPLAY_SPI),"OLED_TYPE");
+    this.appendValueInput("DIN")
+        .setCheck("Number")
+        .appendField("DIN(MOSI) "+Blockly.Msg.LIOU_ROBOT_PIN)
+        .setVisible(false);
+    this.appendValueInput("SCLK")
+        .setCheck("Number")
+        .appendField("SCLK "+Blockly.Msg.LIOU_ROBOT_PIN)
+        .setVisible(false);
+    this.appendValueInput("CS")
+        .setCheck("Number")
+        .appendField("CS "+Blockly.Msg.LIOU_ROBOT_PIN);
+    this.appendValueInput("DC")
+        .setCheck("Number")
+        .appendField("DC "+Blockly.Msg.LIOU_ROBOT_PIN);
+    this.setPreviousStatement(!0);
+    this.setNextStatement(!0);
+    this.setInputsInline(!0);
+    this.setTooltip(Blockly.Msg.OLED_DISPLAY_TOOLTIP)},validate: function(newValue) {
+	    const sourceBlock = this.sourceBlock_;
+	    sourceBlock.getInput("opt").removeField("OLED_TYPE");
+      var myOpts=[];
+      for(i=0;i<Blockly.Msg.OLED_DISPLAY_SPI.length;i++){
+        myOpts.push([Blockly.Msg.OLED_DISPLAY_SPI[i][0],Blockly.Msg.OLED_DISPLAY_SPI[i][1].replace("aa",newValue)]);
+      }
+      sourceBlock.getInput("opt").appendField(new Blockly.FieldDropdown(myOpts),"OLED_TYPE");
+      if (newValue=="SW"){
+        sourceBlock.getInput("DIN").setVisible(true);
+			  sourceBlock.getInput("SCLK").setVisible(true);
+      } else if (newValue="HW"){
+        sourceBlock.getInput("DIN").setVisible(false);
+			  sourceBlock.getInput("SCLK").setVisible(false);
+      }
+    }
 };
 
 Blockly.Blocks.oled_display_rotation={

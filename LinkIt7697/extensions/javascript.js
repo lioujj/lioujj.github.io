@@ -1486,7 +1486,27 @@ Blockly.Arduino.oled_display_setting_new=function(){
   Blockly.Arduino.definitions_.define_wire='#include "Wire.h"';
   Blockly.Arduino.definitions_.define_u8g2_oled_include='#include "U8g2lib.h"';
   var a=this.getFieldValue("OLED_TYPE");
-  Blockly.Arduino.definitions_.define_u8g2_oled_declare="U8G2_"+a+"_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE);\nint clock_center_x=64;\nint clock_center_y=32;";
+  Blockly.Blocks.oled_display.oledtype=a;
+  Blockly.Arduino.definitions_.define_u8g2_oled_declare=Blockly.Blocks.oled_display.oledtype+" u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE);\nint clock_center_x=64;\nint clock_center_y=32;";
+  Blockly.Arduino.setups_.setup_define_u8g2_oled="u8g2.begin();\n  u8g2.enableUTF8Print();\n  u8g2.setFont(u8g2_font_6x10_tf);\n  u8g2.setFontRefHeightExtendedText();\n  u8g2.setDrawColor(1);\n  u8g2.setFontPosTop();\n  u8g2.setFontDirection(0);\n";
+  return"";
+}
+
+Blockly.Arduino.oled_display_setting_spi=function(){
+  Blockly.Arduino.definitions_.define_wire='#include "Wire.h"';
+  Blockly.Arduino.definitions_.define_u8g2_oled_include='#include "U8g2lib.h"';
+  var a=this.getFieldValue("OLED_TYPE"),
+      b=Blockly.Arduino.valueToCode(this,"DIN",Blockly.Arduino.ORDER_ATOMIC)||"",
+      c=Blockly.Arduino.valueToCode(this,"SCLK",Blockly.Arduino.ORDER_ATOMIC)||"",
+      d=Blockly.Arduino.valueToCode(this,"CS",Blockly.Arduino.ORDER_ATOMIC)||"",
+      e=Blockly.Arduino.valueToCode(this,"DC",Blockly.Arduino.ORDER_ATOMIC)||"",
+      myTempChoice="";
+  Blockly.Blocks.oled_display.oledtype=a;
+  if (a.indexOf("4W_HW_SPI")>0)
+    myTempChoice=Blockly.Blocks.oled_display.oledtype+" u8g2(U8G2_R0,"+d+","+e+");\n";
+  else if (a.indexOf("4W_SW_SPI")>0)
+    myTempChoice=Blockly.Blocks.oled_display.oledtype+" u8g2(U8G2_R0,"+c+","+b+","+d+","+e+");\n";
+  Blockly.Arduino.definitions_.define_u8g2_oled_declare=myTempChoice+"int clock_center_x=64;\nint clock_center_y=32;";
   Blockly.Arduino.setups_.setup_define_u8g2_oled="u8g2.begin();\n  u8g2.enableUTF8Print();\n  u8g2.setFont(u8g2_font_6x10_tf);\n  u8g2.setFontRefHeightExtendedText();\n  u8g2.setDrawColor(1);\n  u8g2.setFontPosTop();\n  u8g2.setFontDirection(0);\n";
   return"";
 }
@@ -1590,7 +1610,7 @@ Blockly.Arduino.oled_display_draw_chart=function(){
   f=f.replace("  ","");
   f=f.replace(/\n  /g,"\n");
   Blockly.Arduino.definitions_.define_oled_chartNumList_invoke="int chartNumList[128]={-1};\n";
-  Blockly.Arduino.definitions_.define_oled_drawChart_invoke='void drawChart(U8G2_SSD1306_128X64_NONAME_F_HW_I2C *myOled,int myNumList[],byte chartType=0,byte dirType=0)\n{\n  byte myWidth=myOled->getWidth(),myHeight=myOled->getHeight();\n  myOled->setDrawColor(0);\n  myOled->drawBox(0, 0, myWidth, myHeight);\n  myOled->setDrawColor(1);\n  for (int i = 0; i < ((chartType==0)?(myWidth-1):myWidth) ; i++) {\n    if ((myNumList[i]) >-1 && (myNumList[i + 1]) >-1) {\n      switch(chartType){\n        case 0:\n          if (dirType==0)\n            myOled->drawLine(i, myNumList[i], i + 1, myNumList[i + 1]);\n          else\n            myOled->drawLine(myWidth-1-i, myNumList[i], myWidth-2 -i, myNumList[i + 1]);\n          break;\n        case 1:\n          if (dirType==0)\n            myOled->drawLine(i, myHeight-1, i, myNumList[i]);\n          else\n            myOled->drawLine(myWidth-1-i, myHeight-1, myWidth-1-i, myNumList[i]);\n          break;\n      }\n    }\n  }\n  for (int i = 0; i < (myWidth-1); i++) {\n    myNumList[i] = (myNumList[i + 1]);\n  }\n}\nvoid clearChart()\n{\n  for(int i=0;i<(sizeof(chartNumList)/sizeof(chartNumList[0]));i++)\n   chartNumList[i]=-1;\n}\n';
+  Blockly.Arduino.definitions_.define_oled_drawChart_invoke='void drawChart('+Blockly.Blocks.oled_display.oledtype+' *myOled,int myNumList[],byte chartType=0,byte dirType=0)\n{\n  byte myWidth=myOled->getWidth(),myHeight=myOled->getHeight();\n  myOled->setDrawColor(0);\n  myOled->drawBox(0, 0, myWidth, myHeight);\n  myOled->setDrawColor(1);\n  for (int i = 0; i < ((chartType==0)?(myWidth-1):myWidth) ; i++) {\n    if ((myNumList[i]) >-1 && (myNumList[i + 1]) >-1) {\n      switch(chartType){\n        case 0:\n          if (dirType==0)\n            myOled->drawLine(i, myNumList[i], i + 1, myNumList[i + 1]);\n          else\n            myOled->drawLine(myWidth-1-i, myNumList[i], myWidth-2 -i, myNumList[i + 1]);\n          break;\n        case 1:\n          if (dirType==0)\n            myOled->drawLine(i, myHeight-1, i, myNumList[i]);\n          else\n            myOled->drawLine(myWidth-1-i, myHeight-1, myWidth-1-i, myNumList[i]);\n          break;\n      }\n    }\n  }\n  for (int i = 0; i < (myWidth-1); i++) {\n    myNumList[i] = (myNumList[i + 1]);\n  }\n}\nvoid clearChart()\n{\n  for(int i=0;i<(sizeof(chartNumList)/sizeof(chartNumList[0]));i++)\n   chartNumList[i]=-1;\n}\n';
   Blockly.Arduino.setups_.setup_define_u8g2_oled_chart='clearChart();\n';
   return'chartNumList[u8g2.getWidth()-1] = (map('+a+','+b+','+c+',u8g2.getHeight()-1,0));\ndrawChart(&u8g2,chartNumList,'+d+','+e+');\n'+f+'u8g2.sendBuffer();\n';
 };
@@ -1606,7 +1626,7 @@ Blockly.Arduino.oled_display_draw_qr=function(){
   d=Blockly.Arduino.valueToCode(this,"CONTENT",Blockly.Arduino.ORDER_NONE)||'""';
   if (Blockly.Arduino.definitions_.define_u8g2_oled_include)
     Blockly.Arduino.definitions_.define_u8g2_oled_include+='\n#include \"qrcode.h\"';
-  Blockly.Arduino.definitions_.define_oled_draw_QR_invoke='void drawQRcode(U8G2_SSD1306_128X64_NONAME_F_HW_I2C *myOled,int myX,int myY, byte myVersion,String myData,byte border)\n{\n    QRCode qrcode;\n    uint8_t qrcodeData[qrcode_getBufferSize(myVersion)];\n    qrcode_initText(&qrcode, qrcodeData,myVersion , 0, myData.c_str());\n    myOled->setDrawColor(1);\n    myOled->drawBox(myX,myY,qrcode.size+border*2,qrcode.size+border*2);\n    myOled->setDrawColor(0);\n    myX+=border;\n    myY+=border;\n    myOled->drawBox(myX,myY,qrcode.size,qrcode.size);\n    myOled->setDrawColor(1);\n    for (uint8_t y = 0; y < qrcode.size; y++) {\n        for (uint8_t x = 0; x < qrcode.size; x++) {\n          if (!qrcode_getModule(&qrcode, x, y))\n            myOled->drawPixel(x+myX,y+myY);\n        }\n    }\n}\n';
+  Blockly.Arduino.definitions_.define_oled_draw_QR_invoke='void drawQRcode('+Blockly.Blocks.oled_display.oledtype+' *myOled,int myX,int myY, byte myVersion,String myData,byte border)\n{\n    QRCode qrcode;\n    uint8_t qrcodeData[qrcode_getBufferSize(myVersion)];\n    qrcode_initText(&qrcode, qrcodeData,myVersion , 0, myData.c_str());\n    myOled->setDrawColor(1);\n    myOled->drawBox(myX,myY,qrcode.size+border*2,qrcode.size+border*2);\n    myOled->setDrawColor(0);\n    myX+=border;\n    myY+=border;\n    myOled->drawBox(myX,myY,qrcode.size,qrcode.size);\n    myOled->setDrawColor(1);\n    for (uint8_t y = 0; y < qrcode.size; y++) {\n        for (uint8_t x = 0; x < qrcode.size; x++) {\n          if (!qrcode_getModule(&qrcode, x, y))\n            myOled->drawPixel(x+myX,y+myY);\n        }\n    }\n}\n';
   return'drawQRcode(&u8g2,'+a+','+b+','+c+','+d+',3);\n';
 };
 
@@ -3159,13 +3179,13 @@ Blockly.Arduino.ttgo_tft_draw_chart=function(){
   f=f.replace(/\n  /g,"\n");
   f=f.replace(/tft\./g,"graph.");
   Blockly.Arduino.definitions_.define_ttgo_tft_init_invoke="TFT_eSPI tft = TFT_eSPI();\nTFT_eSprite graph= TFT_eSprite(&tft);\nU8g2_for_TFT_eSPI u8g2;\nuint32_t tft_color=TFT_WHITE;\nuint32_t tft_bg_color=TFT_BLACK;\nuint32_t tft_fg_color=TFT_WHITE;\nbyte tftTextSize=1;\nbyte tftTextFont=1;\n";
-  Blockly.Arduino.definitions_.define_ttgo_tft_charNumList_invoke="int chartNumList[TFT_HEIGHT]={-1};\n";
-  Blockly.Arduino.definitions_.define_ttgo_tft_drawChart_invoke='void drawTFTchart(int myNumList[],byte chartType=0,byte dirType=0,uint16_t myColor=TFT_YELLOW)\n{\n  byte myWidth=tft.width(),myHeight=tft.height();\n  graph.fillSprite(TFT_BLACK);\n  for (int i = 0; i < ((chartType==0)?(myWidth-1):myWidth) ; i++) {\n    if ((myNumList[i]) >-1 && (myNumList[i + 1]) >-1) {\n      switch(chartType){\n        case 0:\n          if (dirType==0)\n            graph.drawLine(i, myNumList[i], i + 1, myNumList[i + 1], myColor);\n          else\n            graph.drawLine(myWidth-1-i, myNumList[i], myWidth-2 -i, myNumList[i + 1], myColor);\n          break;\n        case 1:\n          if (dirType==0)\n            graph.drawLine(i, myHeight-1, i, myNumList[i], myColor);\n          else\n            graph.drawLine(myWidth-1-i, myHeight-1, myWidth-1-i, myNumList[i], myColor);\n          break;\n      }\n    }\n  }\n  for (int i = 0; i < (myWidth-1); i++) {\n    myNumList[i] = (myNumList[i + 1]);\n  }\n}\nvoid clearTFTchart()\n{\n  for(int i=0;i<TFT_HEIGHT;i++)\n    chartNumList[i]=-1;\n}\n';
+  Blockly.Arduino.definitions_.define_ttgo_tft_charNumList_invoke="int tftChartNumList[TFT_HEIGHT]={-1};\n";
+  Blockly.Arduino.definitions_.define_ttgo_tft_drawChart_invoke='void drawTFTchart(int myNumList[],byte chartType=0,byte dirType=0,uint16_t myColor=TFT_YELLOW)\n{\n  byte myWidth=tft.width(),myHeight=tft.height();\n  graph.fillSprite(TFT_BLACK);\n  for (int i = 0; i < ((chartType==0)?(myWidth-1):myWidth) ; i++) {\n    if ((myNumList[i]) >-1 && (myNumList[i + 1]) >-1) {\n      switch(chartType){\n        case 0:\n          if (dirType==0)\n            graph.drawLine(i, myNumList[i], i + 1, myNumList[i + 1], myColor);\n          else\n            graph.drawLine(myWidth-1-i, myNumList[i], myWidth-2 -i, myNumList[i + 1], myColor);\n          break;\n        case 1:\n          if (dirType==0)\n            graph.drawLine(i, myHeight-1, i, myNumList[i], myColor);\n          else\n            graph.drawLine(myWidth-1-i, myHeight-1, myWidth-1-i, myNumList[i], myColor);\n          break;\n      }\n    }\n  }\n  for (int i = 0; i < (myWidth-1); i++) {\n    myNumList[i] = (myNumList[i + 1]);\n  }\n}\nvoid clearTFTchart()\n{\n  for(int i=0;i<TFT_HEIGHT;i++)\n    tftChartNumList[i]=-1;\n}\n';
   Blockly.Arduino.setups_.ttgo_tft_clear_chart='clearTFTchart();\n';
   if (f!="")
-    return'chartNumList[tft.width()-1] = (map('+a+','+b+','+c+',tft.height()-1,0));\ngraph.createSprite(tft.width(),tft.height());\ndrawTFTchart(chartNumList,'+d+','+e+','+g+');\nu8g2.begin(graph);\n'+f+'graph.pushSprite(0, 0);\ngraph.deleteSprite();\nu8g2.begin(tft);\n';
+    return'tftChartNumList[tft.width()-1] = (map('+a+','+b+','+c+',tft.height()-1,0));\ngraph.createSprite(tft.width(),tft.height());\ndrawTFTchart(tftChartNumList,'+d+','+e+','+g+');\nu8g2.begin(graph);\n'+f+'graph.pushSprite(0, 0);\ngraph.deleteSprite();\nu8g2.begin(tft);\n';
   else
-    return'chartNumList[tft.width()-1] = (map('+a+','+b+','+c+',tft.height()-1,0));\ngraph.createSprite(tft.width(),tft.height());\ndrawTFTchart(chartNumList,'+d+','+e+','+g+');\n'+f+'graph.pushSprite(0, 0);\ngraph.deleteSprite();\n';
+    return'tftChartNumList[tft.width()-1] = (map('+a+','+b+','+c+',tft.height()-1,0));\ngraph.createSprite(tft.width(),tft.height());\ndrawTFTchart(tftChartNumList,'+d+','+e+','+g+');\n'+f+'graph.pushSprite(0, 0);\ngraph.deleteSprite();\n';
 };
 
 Blockly.Arduino.ttgo_tft_clear_chart=function(){

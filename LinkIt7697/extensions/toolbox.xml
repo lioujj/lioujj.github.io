@@ -3443,6 +3443,28 @@
   <category id="category_ljj_modules" name="Modules">
     <category id="category_ljj_oled" name="OLED128*64">
       <block type="oled_display_setting_new"></block>
+      <block type="oled_display_setting_spi">
+        <value name="DIN">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="SCLK">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="CS">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="DC">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
       <block type="oled_display_clear"></block>
       <block type="oled_display_rotation"></block>
       <block type="oled_display_flip"></block>
