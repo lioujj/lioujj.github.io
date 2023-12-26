@@ -6132,7 +6132,7 @@ Blockly.Arduino.ljj_lcd1602_bitmap_show=function(){
   var a=Blockly.Arduino.valueToCode(this,"X",Blockly.Arduino.ORDER_ATOMIC)||"0",
       b=Blockly.Arduino.valueToCode(this,"Y",Blockly.Arduino.ORDER_ATOMIC)||"0",
       c=Blockly.Arduino.valueToCode(this,"INDEX",Blockly.Arduino.ORDER_ATOMIC)||"0";
-  return 'lcd.setCursor('+a+','+b+');\nlcd.write('+c+');\n';
+  return 'lcd.setCursor('+a+','+b+');\nlcd.write(byte('+c+'));\n';
 }
 
 Blockly.Arduino.ljj_lcd1602_clear = function() { 
