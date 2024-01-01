@@ -1072,7 +1072,7 @@ Blockly.Msg.LJJ_BASIC_SONAR_DISTANCE = "distance(CM)";
 Blockly.Msg.LJJ_WS2812_CURRENT_COLOR = "color value";
 
 //LCD1602
-Blockly.Msg.LJJ_LCD1602_HELPURL = "";
+Blockly.Msg.LJJ_LCD1602_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/lcd液晶顯示器";
 Blockly.Msg.LJJ_LCD1602_TITLE = "LCD Diaplay";
 Blockly.Msg.LJJ_LCD1602_ADDRESS = "I2C address";
 Blockly.Msg.LJJ_LCD1602_TOOLTIP = "";

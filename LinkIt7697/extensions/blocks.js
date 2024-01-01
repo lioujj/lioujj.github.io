@@ -10603,15 +10603,15 @@ Blockly.Blocks.ljj_lcd1602_bitmap_show={init:function(){
 	this.appendDummyInput()
 	    .appendField(Blockly.Msg.LJJ_LCD1602_TITLE)
       .appendField(Blockly.Msg.LJJ_LCD1602_BITMAP_SHOW);
-  this.appendValueInput("INDEX")
-      .setCheck("Number")
-      .appendField(Blockly.Msg.LJJ_LCD1602_BITMAP_INDEX);
   this.appendValueInput("X")
       .setCheck("Number")
       .appendField("X");
   this.appendValueInput("Y")
       .setCheck("Number")
       .appendField("Y");
+  this.appendValueInput("INDEX")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LJJ_LCD1602_BITMAP_INDEX);
 	this.setInputsInline(true);
 	this.setPreviousStatement(!0);
 	this.setNextStatement(!0);

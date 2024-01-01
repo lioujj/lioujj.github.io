@@ -1065,7 +1065,7 @@ Blockly.Msg.LJJ_BASIC_SONAR_DISTANCE = "距離(CM)";
 Blockly.Msg.LJJ_WS2812_CURRENT_COLOR = "目前顏色值";
 
 //LCD1602
-Blockly.Msg.LJJ_LCD1602_HELPURL = "";
+Blockly.Msg.LJJ_LCD1602_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/lcd液晶顯示器";
 Blockly.Msg.LJJ_LCD1602_TITLE = "LCD顯示器";
 Blockly.Msg.LJJ_LCD1602_ADDRESS = "I2C位址";
 Blockly.Msg.LJJ_LCD1602_TOOLTIP = "";
