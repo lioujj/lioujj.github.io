@@ -11163,6 +11163,136 @@ Blockly.Blocks.ljj_sen0539_command={init:function(){
   }
 };
 
+//STEPPER
+Blockly.Blocks.ljj_stepper={};
+Blockly.Blocks.ljj_stepper.HUE=80;
+Blockly.Blocks.ljj_stepper_init={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_STEPPER_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_stepper.HUE);
+	this.appendDummyInput()
+	    .appendField(Blockly.Msg.LJJ_STEPPER_TITLE)
+      .appendField(Blockly.Msg.LJJ_SERIAL_INIT);
+	this.appendDummyInput() 
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_STEPPER_LIST),"INDEX")
+      .appendField(Blockly.Msg.LIOU_ROBOT_PIN);
+  this.appendValueInput("PIN1")
+      .setCheck("Number")
+      .appendField('IN_1');
+  this.appendValueInput("PIN2")
+      .setCheck("Number")  
+      .appendField('IN_2');
+  this.appendValueInput("PIN3")
+      .setCheck("Number")  
+      .appendField('IN_3');
+  this.appendValueInput("PIN4")
+      .setCheck("Number")  
+      .appendField('IN_4');
+  this.appendValueInput("stepsPerRev")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LJJ_STEPPER_StepsPerRev);
+  this.appendValueInput("stepDelay")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LJJ_STEPPER_SETP_DELAY);
+  this.setInputsInline(true);
+	this.setPreviousStatement(!0);
+	this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_STEPPER_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_stepper_move={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_STEPPER_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_stepper.HUE);
+	this.appendDummyInput()
+	    .appendField(Blockly.Msg.LJJ_STEPPER_TITLE)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_STEPPER_LIST),"INDEX")
+  this.appendValueInput("STEPS")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LJJ_STEPPER_MOVE_STEPS);
+  this.setInputsInline(true);
+	this.setPreviousStatement(!0);
+	this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_STEPPER_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_stepper_move_to={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_STEPPER_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_stepper.HUE);
+	this.appendDummyInput()
+	    .appendField(Blockly.Msg.LJJ_STEPPER_TITLE)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_STEPPER_LIST),"INDEX")
+  this.appendValueInput("STEPS")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LJJ_STEPPER_MOVE_TO);
+  this.setInputsInline(true);
+	this.setPreviousStatement(!0);
+	this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_STEPPER_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_stepper_stop={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_STEPPER_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_stepper.HUE);
+	this.appendDummyInput()
+	    .appendField(Blockly.Msg.LJJ_STEPPER_TITLE)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_STEPPER_LIST),"INDEX")
+      .appendField(Blockly.Msg.LJJ_STEPPER_STOP);
+  this.setInputsInline(true);
+	this.setPreviousStatement(!0);
+	this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_STEPPER_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_stepper_statement_not_moving={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_STEPPER_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_stepper.HUE);
+	this.appendDummyInput()
+	    .appendField(Blockly.Msg.LJJ_STEPPER_TITLE)
+      .appendField(Blockly.Msg.LIOU_ROBOT_WHEN)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_STEPPER_LIST),"INDEX")
+      .appendField(Blockly.Msg.LJJ_STEPPER_STATEMENT_NOT_MOVING);
+	this.setInputsInline(true);
+  this.appendStatementInput("STEPPER_NOT_MOVING_IF");
+	this.setPreviousStatement(!0);
+	this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_STEPPER_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_stepper_is_moving={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_STEPPER_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_stepper.HUE);
+	this.appendDummyInput()
+	    .appendField(Blockly.Msg.LJJ_STEPPER_TITLE)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_STEPPER_LIST),"INDEX")
+      .appendField(Blockly.Msg.LJJ_STEPPER_IS_MOVING);
+  this.setInputsInline(true);
+  this.setOutput(!0,"Boolean");
+  this.setTooltip(Blockly.Msg.LJJ_STEPPER_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_stepper_remain_steps={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_STEPPER_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_stepper.HUE);
+	this.appendDummyInput()
+	    .appendField(Blockly.Msg.LJJ_STEPPER_TITLE)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_STEPPER_LIST),"INDEX")
+      .appendField(Blockly.Msg.LJJ_STEPPER_REMAIN_STEPS);
+  this.setInputsInline(true);
+  this.setOutput(!0,"Number");
+  this.setTooltip(Blockly.Msg.LJJ_STEPPER_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_stepper_position={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_STEPPER_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_stepper.HUE);
+	this.appendDummyInput()
+	    .appendField(Blockly.Msg.LJJ_STEPPER_TITLE)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_STEPPER_LIST),"INDEX")
+      .appendField(Blockly.Msg.LJJ_STEPPER_POSITION);
+  this.setInputsInline(true);
+  this.setOutput(!0,"Number");
+  this.setTooltip(Blockly.Msg.LJJ_STEPPER_TOOLTIP)}
+};
+
 //-----------------------------------------------
 Blockly.Blocks.ljj_2023_init={init:function(){
   this.setHelpUrl("");

@@ -6631,6 +6631,61 @@ Blockly.Arduino.ljj_sen0539_command = function() {
     return 'sen0539CmdId=='+a;
 };
 
+//STEPPER
+Blockly.Arduino.ljj_stepper={};
+Blockly.Arduino.ljj_stepper_init=function(){
+  var a=this.getFieldValue("INDEX"),
+      b=Blockly.Arduino.valueToCode(this,"PIN1",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      c=Blockly.Arduino.valueToCode(this,"PIN2",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      d=Blockly.Arduino.valueToCode(this,"PIN3",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      e=Blockly.Arduino.valueToCode(this,"PIN4",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      f=Blockly.Arduino.valueToCode(this,"stepsPerRev",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      g=Blockly.Arduino.valueToCode(this,"stepDelay",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      h=Math.trunc(parseFloat(g)*1000);
+  Blockly.Arduino.definitions_.define_ljj_stepper_include='#include "Unistep2.h"';
+  Blockly.Arduino.definitions_["define_ljj_stepper_"+a+"_invoke"]='Unistep2 stepper_'+a+'('+b+', '+c+', '+d+', '+e+', '+f+', '+h+');\nbool stepper_'+a+'_FirstStop=true;';
+  Blockly.Arduino.loops_['ljj_stepper_loop_'+a] = "stepper_"+a+".run();\n";
+  return'';
+}
+
+Blockly.Arduino.ljj_stepper_move=function(){
+  var a=this.getFieldValue("INDEX"),
+      b=Blockly.Arduino.valueToCode(this,"STEPS",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  return'stepper_'+a+'.move('+b+');\nstepper_'+a+'_FirstStop=(stepper_'+a+'.stepsToGo() != 0);\n';
+}
+
+Blockly.Arduino.ljj_stepper_move_to=function(){
+  var a=this.getFieldValue("INDEX"),
+      b=Blockly.Arduino.valueToCode(this,"STEPS",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  return'stepper_'+a+'.moveTo('+b+');\nstepper_'+a+'_FirstStop=(stepper_'+a+'.stepsToGo() != 0);\n';
+}
+
+Blockly.Arduino.ljj_stepper_stop=function(){
+  var a=this.getFieldValue("INDEX");
+  return'stepper_'+a+'.stop();\nstepper_'+a+'_FirstStop=false;\n';
+}
+
+Blockly.Arduino.ljj_stepper_statement_not_moving = function() { 
+  var a=this.getFieldValue("INDEX"), 
+      b=Blockly.Arduino.statementToCode(this,"STEPPER_NOT_MOVING_IF");
+  return 'if (stepper_'+a+'_FirstStop && stepper_'+a+'.stepsToGo() == 0) {\n'+b+'}';
+};
+
+Blockly.Arduino.ljj_stepper_is_moving=function(){
+  var a=this.getFieldValue("INDEX");
+  return['stepper_'+a+'.stepsToGo() != 0',Blockly.Arduino.ORDER_ATOMIC];
+}
+
+Blockly.Arduino.ljj_stepper_remain_steps=function(){
+  var a=this.getFieldValue("INDEX");
+  return['stepper_'+a+'.stepsToGo()',Blockly.Arduino.ORDER_ATOMIC];
+}
+
+Blockly.Arduino.ljj_stepper_position=function(){
+  var a=this.getFieldValue("INDEX");
+  return['stepper_'+a+'.currentPosition()',Blockly.Arduino.ORDER_ATOMIC];
+}
+
 //----------------------------------------
 setTimeout(function(){
 /*

@@ -1300,3 +1300,19 @@ Blockly.Msg.LJJ_SEN0539_CUSTOM_COMMAND_LIST = [["第一個自訂命令","5"],["�
 Blockly.Msg.LJJ_SEN0539_LEARNING_COMMAND_LIST = [
   ["學習喚醒詞","200"],["學習命令詞","201"],["重新學習","202"],["退出學習","203"],["我要刪除","204"],["刪除喚醒詞","205"],["刪除命令詞","206"],["退出刪除","207"],["全部刪除","208"]
 ];
+
+//STEPPER
+Blockly.Msg.LJJ_STEPPER_HELPURL = 'https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/步進馬達';
+Blockly.Msg.LJJ_STEPPER_TITLE = '步進馬達';
+Blockly.Msg.LJJ_STEPPER_StepsPerRev = '1圈步數';
+Blockly.Msg.LJJ_STEPPER_SETP_DELAY = '每步暫停時間(毫秒ms)'; 
+Blockly.Msg.LJJ_STEPPER_TOOLTIP= 'Stepper';
+Blockly.Msg.LJJ_STEPPER_LIST=[["馬達1","1"],["馬達2","2"]];
+Blockly.Msg.LJJ_STEPPER_MOVE_STEPS = '移動步數';
+Blockly.Msg.LJJ_STEPPER_MOVE_TO = '移動到位置編號';
+Blockly.Msg.LJJ_STEPPER_STOP = '強制停止';
+Blockly.Msg.LJJ_STEPPER_IS_MOVING = '移動中？';
+Blockly.Msg.LJJ_STEPPER_REMAIN_STEPS = '剩餘步數';
+Blockly.Msg.LJJ_STEPPER_POSITION = '目前位置編號';
+Blockly.Msg.LJJ_STEPPER_STATEMENT_NOT_MOVING = '停止移動時';
+Blockly.Msg.LJJ_STEPPER_TRIGGER = '　　是否觸發停止移動事件';

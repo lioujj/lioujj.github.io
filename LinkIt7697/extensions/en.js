@@ -1308,3 +1308,20 @@ Blockly.Msg.LJJ_SEN0539_CUSTOM_COMMAND_LIST = [["第一個自訂命令","5"],["�
 Blockly.Msg.LJJ_SEN0539_LEARNING_COMMAND_LIST = [
   ["學習喚醒詞","200"],["學習命令詞","201"],["重新學習","202"],["退出學習","203"],["我要刪除","204"],["刪除喚醒詞","205"],["刪除命令詞","206"],["退出刪除","207"],["全部刪除","208"]
 ];
+
+//STEPPER
+Blockly.Msg.LJJ_STEPPER_HELPURL = 'https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/步進馬達';
+Blockly.Msg.LJJ_STEPPER_TITLE = 'StepMotor';
+Blockly.Msg.LJJ_STEPPER_StepsPerRev = 'steps one revolution';
+Blockly.Msg.LJJ_STEPPER_SETP_DELAY = 'step delay(ms)'; 
+Blockly.Msg.LJJ_STEPPER_TOOLTIP= 'Stepper'; 
+Blockly.Msg.LJJ_STEPPER_LIST=[["motor1","1"],["motor2","2"]];
+Blockly.Msg.LJJ_STEPPER_MOVE_STEPS = 'move steps';
+Blockly.Msg.LJJ_STEPPER_MOVE_TO = 'move to position index';
+Blockly.Msg.LJJ_STEPPER_STOP = 'stop moving';
+Blockly.Msg.LJJ_STEPPER_IS_MOVING = 'is moving?';
+Blockly.Msg.LJJ_STEPPER_REMAIN_STEPS = 'steps remaining';
+Blockly.Msg.LJJ_STEPPER_POSITION = 'current position index';
+Blockly.Msg.LJJ_STEPPER_STATEMENT_NOT_MOVING = 'is not moving';
+Blockly.Msg.LJJ_STEPPER_TRIGGER = '    Trig event of moving stopped';
+Blockly.Msg.LJJ_STEPPER_START_TRIGGER = 'Trig on start';

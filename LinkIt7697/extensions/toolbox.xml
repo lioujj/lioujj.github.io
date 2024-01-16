@@ -4731,7 +4731,60 @@
         </value>
       </block>
       <block type="ljj_basic_sonar"></block>
-    </category>
+     </category>
+     <category id="category_ljj_stepper" name="STEPPER">
+      <block type="ljj_stepper_init">
+        <value name="PIN1">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="PIN2">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="PIN3">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="PIN4">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="stepsPerRev">
+          <block type="math_number">
+            <field name="NUM">4096</field>
+          </block>
+        </value>
+        <value name="stepDelay">
+          <block type="math_number">
+            <field name="NUM">1</field>
+          </block>
+        </value>
+      </block>
+      <block type="ljj_stepper_move">
+        <value name="STEPS">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
+      <block type="ljj_stepper_move_to">
+        <value name="STEPS">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
+      <block type="ljj_stepper_stop"></block>
+      <block type="ljj_stepper_statement_not_moving"></block>
+      <block type="ljj_stepper_is_moving"></block>
+      <block type="ljj_stepper_remain_steps"></block>
+      <block type="ljj_stepper_position"></block>      
+     </category>
   </category>
   <category id="category_lumex" name="Lumex">
     <category id="category_ldm6432" name="LDM6432MQTT">
