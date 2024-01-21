@@ -3833,6 +3833,19 @@ Blockly.Arduino.l9110_init=function(){
   return'';
 }
 
+Blockly.Arduino.l9110_init_single=function(){
+  var a=Blockly.Arduino.valueToCode(this,"M1A",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=Blockly.Arduino.valueToCode(this,"M1B",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  if (Blockly.Arduino.my_board_type=="ESP32"){
+    Blockly.Arduino.definitions_.define_L9110_invoke='byte m1aL9110='+a+';\nbyte m1bL9110='+b+';\nbyte m1bCH=13;\n';
+    Blockly.Arduino.setups_["setup_L9110"]='pinMode(m1aL9110,OUTPUT);\n  ledcSetup(m1bCH, 5000, 8);\n  ledcAttachPin(m1bL9110,m1bCH);\n  digitalWrite(m1aL9110,1);\n  ledcWrite(m1bCH,255);\n';
+  } else {
+    Blockly.Arduino.definitions_.define_L9110_invoke='byte m1aL9110='+a+';\nbyte m1bL9110='+b+';\n';
+    Blockly.Arduino.setups_["setup_L9110"]='pinMode(m1aL9110,OUTPUT);\n  pinMode(m1bL9110,OUTPUT);\n  digitalWrite(m1aL9110,1);\n  analogWrite(m1bL9110,255);\n';
+  }
+  return'';
+}
+
 Blockly.Arduino.l9110_run=function(){
   var a=this.getFieldValue("MOTOR"),
       b=this.getFieldValue("DIR"),

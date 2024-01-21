@@ -6550,6 +6550,7 @@ Blockly.Blocks.l9110_init={init:function(){
   this.setColour(Blockly.Blocks.l9110.HUE);
   this.appendDummyInput()
       .appendField(Blockly.Msg.L9110_TITLE)
+      .appendField(Blockly.Msg.L9110_TWO_MOTORS)
       .appendField(Blockly.Msg.L9110_INIT);
   this.appendValueInput("M1A")
       .setCheck("Number")
@@ -6563,6 +6564,25 @@ Blockly.Blocks.l9110_init={init:function(){
   this.appendValueInput("M2B")
       .setCheck("Number")
       .appendField("B-1B"+Blockly.Msg.LIOU_ROBOT_PIN);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.L9110_TOOLTIP)}
+};
+
+Blockly.Blocks.l9110_init_single={init:function(){
+  this.setHelpUrl(Blockly.Msg.L9110_HELPURL);
+  this.setColour(Blockly.Blocks.l9110.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.L9110_TITLE)
+      .appendField(Blockly.Msg.L9110_SINGLE)
+      .appendField(Blockly.Msg.L9110_INIT);
+  this.appendValueInput("M1A")
+      .setCheck("Number")
+      .appendField("A-1A"+Blockly.Msg.LIOU_ROBOT_PIN);
+  this.appendValueInput("M1B")
+      .setCheck("Number")
+      .appendField("A-1B"+Blockly.Msg.LIOU_ROBOT_PIN);
   this.setInputsInline(!0);
   this.setPreviousStatement(!0,null);
   this.setNextStatement(!0,null);

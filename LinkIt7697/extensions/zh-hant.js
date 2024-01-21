@@ -798,6 +798,8 @@ Blockly.Msg.ESP32_IRQ_PIN_DELETE_WARNIG = "必須先設定「"+Blockly.Msg.ESP32
 //L9110
 Blockly.Msg.L9110_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/l9110馬達驅動板";
 Blockly.Msg.L9110_TITLE = "L9110馬達驅動板";
+Blockly.Msg.L9110_SINGLE = '單顆馬達A';
+Blockly.Msg.L9110_TWO_MOTORS = '雙馬達';
 Blockly.Msg.L9110_INIT = "初始化";
 Blockly.Msg.L9110_TOOLTIP = "L9110";
 Blockly.Msg.L9110_MOTOR = "馬達";
