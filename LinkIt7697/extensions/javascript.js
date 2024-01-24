@@ -3824,7 +3824,7 @@ Blockly.Arduino.l9110_init=function(){
       c=Blockly.Arduino.valueToCode(this,"M2A",Blockly.Arduino.ORDER_ATOMIC)||"0",
       d=Blockly.Arduino.valueToCode(this,"M2B",Blockly.Arduino.ORDER_ATOMIC)||"0";
   if (Blockly.Arduino.my_board_type=="ESP32"){
-    Blockly.Arduino.definitions_.define_L9110_invoke='byte m1aL9110='+a+';\nbyte m1bL9110='+b+';\nbyte m2aL9110='+c+';\nbyte m2bL9110='+d+';\nbyte m1bCH=13;\nbyte m2bCH=14;\n';
+    Blockly.Arduino.definitions_.define_L9110_invoke='byte m1aL9110='+a+';\nbyte m1bL9110='+b+';\nbyte m2aL9110='+c+';\nbyte m2bL9110='+d+';\nbyte m1bCH=8;\nbyte m2bCH=9;\n';
     Blockly.Arduino.setups_["setup_L9110"]='pinMode(m1aL9110,OUTPUT);\n  pinMode(m2aL9110,OUTPUT);\n  ledcSetup(m1bCH, 5000, 8);\n  ledcAttachPin(m1bL9110,m1bCH);\n  ledcSetup(m2bCH, 5000, 8);\n  ledcAttachPin(m2bL9110,m2bCH);\n  digitalWrite(m1aL9110,1);\n  ledcWrite(m1bCH,255);\n  digitalWrite(m2aL9110,1);\n  ledcWrite(m2bCH,255);\n';
   } else {
     Blockly.Arduino.definitions_.define_L9110_invoke='byte m1aL9110='+a+';\nbyte m1bL9110='+b+';\nbyte m2aL9110='+c+';\nbyte m2bL9110='+d+';\n';
@@ -3837,7 +3837,7 @@ Blockly.Arduino.l9110_init_single=function(){
   var a=Blockly.Arduino.valueToCode(this,"M1A",Blockly.Arduino.ORDER_ATOMIC)||"0",
       b=Blockly.Arduino.valueToCode(this,"M1B",Blockly.Arduino.ORDER_ATOMIC)||"0";
   if (Blockly.Arduino.my_board_type=="ESP32"){
-    Blockly.Arduino.definitions_.define_L9110_invoke='byte m1aL9110='+a+';\nbyte m1bL9110='+b+';\nbyte m1bCH=13;\n';
+    Blockly.Arduino.definitions_.define_L9110_invoke='byte m1aL9110='+a+';\nbyte m1bL9110='+b+';\nbyte m1bCH=8;\n';
     Blockly.Arduino.setups_["setup_L9110"]='pinMode(m1aL9110,OUTPUT);\n  ledcSetup(m1bCH, 5000, 8);\n  ledcAttachPin(m1bL9110,m1bCH);\n  digitalWrite(m1aL9110,1);\n  ledcWrite(m1bCH,255);\n';
   } else {
     Blockly.Arduino.definitions_.define_L9110_invoke='byte m1aL9110='+a+';\nbyte m1bL9110='+b+';\n';
@@ -3854,14 +3854,14 @@ Blockly.Arduino.l9110_run=function(){
 
     if (a=="both"){
       if (b=="1")
-        returnValue='digitalWrite(m1aL9110,1);\nanalogWrite(m1bL9110,255-'+c+');\ndigitalWrite(m2aL9110,1);\nanalogWrite(m2bL9110,255-'+c+');\n';
-      else
         returnValue='digitalWrite(m1aL9110,0);\nanalogWrite(m1bL9110,'+c+');\ndigitalWrite(m2aL9110,0);\nanalogWrite(m2bL9110,'+c+');\n';
+      else
+        returnValue='digitalWrite(m1aL9110,1);\nanalogWrite(m1bL9110,255-'+c+');\ndigitalWrite(m2aL9110,1);\nanalogWrite(m2bL9110,255-'+c+');\n';
     } else {
       if (b=="1")
-        returnValue='digitalWrite('+a+'aL9110,1);\nanalogWrite('+a+'bL9110,255-'+c+');\n';
-      else
         returnValue='digitalWrite('+a+'aL9110,0);\nanalogWrite('+a+'bL9110,'+c+');\n';
+      else
+        returnValue='digitalWrite('+a+'aL9110,1);\nanalogWrite('+a+'bL9110,255-'+c+');\n';
     }
   if (Blockly.Arduino.my_board_type=="ESP32"){
     returnValue=returnValue.replace(/analogWrite/g,"ledcWrite");
@@ -4924,7 +4924,7 @@ Blockly.Arduino.ljj_ksb069_motor_init=function(){
       c=12,
       d=4;
   if (Blockly.Arduino.my_board_type=="ESP32"){
-    Blockly.Arduino.definitions_.define_L9110_invoke='byte m1aL9110='+a+';\nbyte m1bL9110='+b+';\nbyte m2aL9110='+c+';\nbyte m2bL9110='+d+';\nbyte m1bCH=13;\nbyte m2bCH=14;\n';
+    Blockly.Arduino.definitions_.define_L9110_invoke='byte m1aL9110='+a+';\nbyte m1bL9110='+b+';\nbyte m2aL9110='+c+';\nbyte m2bL9110='+d+';\nbyte m1bCH=8;\nbyte m2bCH=9;\n';
     Blockly.Arduino.setups_["setup_L9110"]='pinMode(m1aL9110,OUTPUT);\n  pinMode(m2aL9110,OUTPUT);\n  ledcSetup(m1bCH, 5000, 8);\n  ledcAttachPin(m1bL9110,m1bCH);\n  ledcSetup(m2bCH, 5000, 8);\n  ledcAttachPin(m2bL9110,m2bCH);\n  digitalWrite(m1aL9110,0);\n  ledcWrite(m1bCH,0);\n  digitalWrite(m2aL9110,0);\n  ledcWrite(m2bCH,0);\n';
   } else {
     a=3;
