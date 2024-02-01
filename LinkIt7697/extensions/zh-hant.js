@@ -800,6 +800,7 @@ Blockly.Msg.L9110_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7
 Blockly.Msg.L9110_TITLE = "L9110馬達驅動板";
 Blockly.Msg.L9110_SINGLE = '單顆馬達A';
 Blockly.Msg.L9110_TWO_MOTORS = '雙馬達';
+Blockly.Msg.L9110_MOTORS_CHANNEL = '設定通道';
 Blockly.Msg.L9110_INIT = "初始化";
 Blockly.Msg.L9110_TOOLTIP = "L9110";
 Blockly.Msg.L9110_MOTOR = "馬達";

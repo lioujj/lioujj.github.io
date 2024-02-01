@@ -3974,6 +3974,18 @@
       </block>
     </category>
     <category id="category_l9110" name="L9110">
+      <block type="l9110_init_channel">
+        <value name="M1B_CHANNEL">
+          <block type="math_number">
+            <field name="NUM">8</field>
+          </block>
+        </value>
+        <value name="M2B_CHANNEL">
+          <block type="math_number">
+            <field name="NUM">9</field>
+          </block>
+        </value>
+      </block>
       <block type="l9110_init">
         <value name="M1A">
           <block type="math_number">

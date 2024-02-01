@@ -6545,6 +6545,30 @@ Blockly.Blocks.l9110.checkBlocks=function(a,slave,master){
 		return b
 };
 
+Blockly.Blocks.l9110_init_channel={init:function(){
+  this.setHelpUrl(Blockly.Msg.L9110_HELPURL);
+  this.setColour(Blockly.Blocks.l9110.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.L9110_TITLE)
+      .appendField('ESP32')
+      .appendField(Blockly.Msg.L9110_MOTORS_CHANNEL);
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.L9110_TWO_MOTORS,'both'],[Blockly.Msg.L9110_SINGLE,'A']],this.validate),'SINGLE')
+  this.appendValueInput("M1B_CHANNEL")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.L9110_MOTOR+'A '+Blockly.Msg.ESP32_ANALOG_WRITE_CHANNEL);
+  this.appendValueInput("M2B_CHANNEL")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.L9110_MOTOR+'B '+Blockly.Msg.ESP32_ANALOG_WRITE_CHANNEL);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.L9110_TOOLTIP)},validate: function(newValue) {
+        const sourceBlock = this.sourceBlock_;
+        sourceBlock.getInput("M2B_CHANNEL").setVisible(newValue=='both');
+  }
+};
+
 Blockly.Blocks.l9110_init={init:function(){
   this.setHelpUrl(Blockly.Msg.L9110_HELPURL);
   this.setColour(Blockly.Blocks.l9110.HUE);
@@ -6567,7 +6591,7 @@ Blockly.Blocks.l9110_init={init:function(){
   this.setInputsInline(!0);
   this.setPreviousStatement(!0,null);
   this.setNextStatement(!0,null);
-  this.setTooltip(Blockly.Msg.L9110_TOOLTIP)}
+  this.setTooltip(Blockly.Msg.L9110_TOOLTIP);}
 };
 
 Blockly.Blocks.l9110_init_single={init:function(){

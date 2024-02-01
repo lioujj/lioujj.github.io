@@ -807,6 +807,7 @@ Blockly.Msg.L9110_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7
 Blockly.Msg.L9110_TITLE = "L9110 motor board";
 Blockly.Msg.L9110_SINGLE = 'single motor A';
 Blockly.Msg.L9110_TWO_MOTORS = 'two motors';
+Blockly.Msg.L9110_MOTORS_CHANNEL = 'set channel';
 Blockly.Msg.L9110_INIT = "init";
 Blockly.Msg.L9110_TOOLTIP = "L9110";
 Blockly.Msg.L9110_MOTOR = "motor";
