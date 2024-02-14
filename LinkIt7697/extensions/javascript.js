@@ -23,12 +23,26 @@ Blockly.Arduino.finish=function(a){
       (d.match(/^#include/)||d.match(/^#define/))?b.push(d):c.push(d);
     }
 	}
+
+
+ d=[];
+ for(e in Blockly.Arduino.setups_){
+  if (Blockly.Arduino.setups_[e].indexOf(".begin(")!=-1)
+   d.push(Blockly.Arduino.setups_[e]);
+ } 
+ for(e in Blockly.Arduino.setups_){
+  if (Blockly.Arduino.setups_[e].indexOf(".begin(")==-1) { 
+   Blockly.Arduino.setups_[e]=Blockly.Arduino.setups_[e].replace("if (myBtnStatus=='","myBtnStatus=getBtnStatus();\n  if (myBtnStatus=='");
+   d.push(Blockly.Arduino.setups_[e]);
+  }
+ }
+/*
 	d=[];
 	for(e in Blockly.Arduino.setups_){
 		Blockly.Arduino.setups_[e]=Blockly.Arduino.setups_[e].replace("if (myBtnStatus=='","myBtnStatus=getBtnStatus();\n  if (myBtnStatus=='");
 		d.push(Blockly.Arduino.setups_[e]);
 	}
-
+*/
 //--------------------
 	var g=[];
 	for(e in Blockly.Arduino.functions_)
