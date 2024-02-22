@@ -36,13 +36,16 @@ Blockly.Arduino.finish=function(a){
    d.push(Blockly.Arduino.setups_[e]);
   }
  }
+
 /*
+
 	d=[];
 	for(e in Blockly.Arduino.setups_){
 		Blockly.Arduino.setups_[e]=Blockly.Arduino.setups_[e].replace("if (myBtnStatus=='","myBtnStatus=getBtnStatus();\n  if (myBtnStatus=='");
 		d.push(Blockly.Arduino.setups_[e]);
 	}
 */
+
 //--------------------
 	var g=[];
 	for(e in Blockly.Arduino.functions_)
@@ -98,9 +101,8 @@ Blockly.Arduino.connect_mqtt=function(){
 	Blockly.Arduino.mqtt_callback_footer='\n}\n';
 	Blockly.Arduino.definitions_.define_mqtt_connect_mqtt_event='void connectMQTT(){\n  while (!myClient.connected()){\n    if (!myClient.connect(MQTT_ID,MQTT_USERNAME,MQTT_PASSWORD))\n    {\n      delay(5000);\n    }\n  }\n}\n';
   Blockly.Arduino.definitions_.define_mqtt_receivedMsg_event=Blockly.Arduino.mqtt_callback_header+Blockly.Arduino.mqtt_callback_body+Blockly.Arduino.mqtt_callback_footer;
-  Blockly.Arduino.setups_["setup_mqtt_"]="myClient.setServer(MQTT_SERVER_IP, MQTT_SERVER_PORT);\n  myClient.setCallback(mqttCallback);\n";
 	Blockly.Arduino.loops_.ljj_mqtt_loop = "myClient.loop();\n"
-  return"connectMQTT();\n"
+  return"myClient.setServer(MQTT_SERVER_IP, MQTT_SERVER_PORT);\nmyClient.setCallback(mqttCallback);\nconnectMQTT();\n"
 };
 
 Blockly.Arduino.publish_mqtt=function(){
