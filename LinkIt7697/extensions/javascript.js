@@ -1,3 +1,27 @@
+Blockly.Arduino.init=function(a){
+
+	Object.getPrototypeOf(this).init.call(this);
+	
+	this.nameDB_?this.nameDB_.reset():this.nameDB_=new Blockly.Names(this.RESERVED_WORDS_);
+	this.nameDB_.setVariableMap(a.getVariableMap());
+	this.nameDB_.populateVariables(a);
+	this.nameDB_.populateProcedures(a);
+	
+	this.variableDB_?this.variableDB_.reset():this.variableDB_=new Blockly.Names(this.RESERVED_WORDS_);
+	this.variableDB_.setVariableMap(a.getVariableMap());
+	this.variableDB_.populateVariables(a);
+	this.variableDB_.populateProcedures(a);
+	
+	this.definitions_=Object.create(null);
+	this.setups_=Object.create(null);
+  this.setupsTop_=Object.create(null);
+	this.functions_=Object.create(null);
+	this.loops_=Object.create(null);
+  this.loopsTop_=Object.create(null);
+  
+	this.isInitialized=!0	
+};
+
 Blockly.Arduino.finish=function(a){
   if (Blockly.Arduino.probbie_type=="Tobbie")
     if (Blockly.Arduino.definitions_.define_linkit_wifi_include!=null)
@@ -6,13 +30,17 @@ Blockly.Arduino.finish=function(a){
     Blockly.Arduino.webserver.webserver_header=Blockly.Arduino.webserver.webserver_header.replace("#title#",Blockly.Arduino.webserver.webserver_myTitle);
     Blockly.Arduino.webserver.webserver_header=Blockly.Arduino.webserver.webserver_header.replace("#color#",Blockly.Arduino.webserver.webserver_myColor);
   }
-  
+ 
+  var m=[];
+  for(e in Blockly.Arduino.loopsTop_)
+    m.push(Blockly.Arduino.loopsTop_[e]);
+ 
 	var h=[];
 	for(e in Blockly.Arduino.loops_)
 		h.push("  "+Blockly.Arduino.loops_[e]);	
   a="  "+a.replace(/\n/g,"\n");
 	a=a.replace(/\n\s+$/,"\n");
-	a="void loop() \n{\n"+h.join("\n\n")+a+"\n}";
+	a="void loop() \n{\n"+  m.join("\n")+h.join("\n\n")+a+"\n}";
 	a=a.replace("  if (myBtnStatus=='","  myBtnStatus=getBtnStatus();\n  if (myBtnStatus=='");
 	var b=[],c=[],f=[];
 	for(e in Blockly.Arduino.definitions_){
@@ -23,6 +51,11 @@ Blockly.Arduino.finish=function(a){
       (d.match(/^#include/)||d.match(/^#define/))?b.push(d):c.push(d);
     }
 	}
+
+  var n=[];
+  for(e in Blockly.Arduino.setupsTop_)
+    n.push(Blockly.Arduino.setupsTop_[e]);
+
 	d=[];
 	for(e in Blockly.Arduino.setups_){
 		Blockly.Arduino.setups_[e]=Blockly.Arduino.setups_[e].replace("if (myBtnStatus=='","myBtnStatus=getBtnStatus();\n  if (myBtnStatus=='");
@@ -38,7 +71,7 @@ Blockly.Arduino.finish=function(a){
   //if ((Blockly.Arduino.my_board_type=="Pico") && (Blockly.Arduino.definitions_["define_ljj_pico_dual_core_1_event"]))
   //   b=b.join("\n")+"\n\n"+c.join("\n")+"\n"+f.join("\n")+"\n\nvoid setup() \n{\n  rp2040.idleOtherCore();"+d.join("\n  ")+"\n  rp2040.resumeOtherCore();\n}\n\n";
   //else
-	b=b.join("\n")+"\n\n"+c.join("\n")+"\n"+f.join("\n")+"\n\nvoid setup() \n{\n  "+d.join("\n  ")+"\n}\n\n";
+	b=b.join("\n")+"\n\n"+c.join("\n")+"\n"+f.join("\n")+"\n\nvoid setup() \n{\n  "+n.join("\n  ")+d.join("\n  ")+"\n}\n\n";
 //------------------------
 	b=b.replace(/\n\n+/g,"\n\n").replace(/\n*$/,"\n\n")+a+"\n\n"+g.join("\n\n");
 	b=b.replace(/\n\n+/g,"\n\n").replace(/\n*$/,"\n\n");
