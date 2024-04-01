@@ -1219,6 +1219,7 @@ Blockly.Msg.LJJ_SERVO_360 = "伺服馬達 360度";
 Blockly.Msg.LJJ_SERVO_360_DIRECTION = [["順時針","0"],["逆時針","180"],["停止","90"]];
 Blockly.Msg.LJJ_SERVO_360_DIRECTION_1 = [["順時針","1400"],["逆時針","1600"],["停止","1500"]];
 Blockly.Msg.LJJ_SERVO_PULSE_RANGE='脈衝寬度範圍';
+Blockly.Msg.LJJ_SERVO_ATTACH = '初始化';
 Blockly.Msg.LJJ_SERVO_DETACH = '解除連結控制';
 
 
