@@ -4863,13 +4863,6 @@
           </block>
         </value>
       </block>
-      <block type="ldm_send_bitmap">
-        <value name="BITMAP">
-          <block type="text">
-            <field name="TEXT"></field>
-          </block>
-        </value>
-      </block>
       <block type="ldm_waitForE"></block>
       <block type="ldm_clock"></block>
       <block type="ldm_esp32_init">
@@ -4932,6 +4925,13 @@
         </value>
       </block>
       <block type="ldm_stop_animation"></block>
+      <block type="ldm_send_bitmap">
+        <value name="BITMAP">
+          <block type="text">
+            <field name="TEXT"></field>
+          </block>
+        </value>
+      </block>
       <block type="ldm_saveToROM"></block>
       <block type="ldm_transparent"></block>
       <block type="ldm_setColor">
@@ -4953,6 +4953,23 @@
           </block>
         </value>
         <value name="COLUMN">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
+      <block type="ldm_putNumber">
+        <value name="PUT_NUMBER">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="X">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="Y">
           <block type="math_number">
             <field name="NUM">0</field>
           </block>

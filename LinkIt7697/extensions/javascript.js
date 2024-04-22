@@ -1068,7 +1068,7 @@ Blockly.Arduino.ldm_send_bitmap=function(){
   if (Blockly.Arduino.LDM_CONNECTION_TYPE=="MQTT")
     return Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(bitmapTopic.c_str(),String('+a+').c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
   else
-    return'';
+    return 'sendBitmapToLDM6432(String('+a+').c_str());\n';
 };
 
 Blockly.Arduino.ldm_esp32_init=function(){
@@ -1078,7 +1078,10 @@ Blockly.Arduino.ldm_esp32_init=function(){
         b=Blockly.Arduino.valueToCode(this,"RX_PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
         c=this.getFieldValue("UART_NO");
     Blockly.Arduino.definitions_.define_ldm6432_esp32_init_event='void sendToLDM6432(const char* myCommand){\n  '+c+'.print(myCommand);\n  while('+c+'.read()!=\'E\'){}\n}\n';
-    return c+'.begin(115200,SERIAL_8N1,'+b+','+a+');\n';
+    Blockly.Arduino.definitions_.define_ldm6432_esp32_init_bitmap_event='void sendBitmapToLDM6432(const char* myBitmap){\n  char tempChars[5]="0x00";\n  for (int i = 0 ; i < 4096; i+=2){\n    tempChars[2]=(char)myBitmap[i];\n    tempChars[3]=(char)myBitmap[i+1];\n    '+c+'.write((byte)strtoul(tempChars, NULL, 0));\n  }\n  while('+c+'.read()!=\'E\'){}\n}\n';
+
+
+  return c+'.begin(115200,SERIAL_8N1,'+b+','+a+');\n';
   } else {
     return'';
   }
@@ -1089,6 +1092,7 @@ Blockly.Arduino.ldm_7697_init=function(){
   if (Blockly.Arduino.my_board_type!="ESP32"){
     var c=this.getFieldValue("UART_NO");
     Blockly.Arduino.definitions_.define_ldm6432_esp32_init_event='void sendToLDM6432(const char* myCommand){\n  '+c+'.print(myCommand);\n  while('+c+'.read()!=\'E\'){}\n}\n';
+    Blockly.Arduino.definitions_.define_ldm6432_esp32_init_bitmap_event='void sendBitmapToLDM6432(const char* myBitmap){\n  char tempChars[5]="0x00";\n  for (int i = 0 ; i < 4096; i+=2){\n    tempChars[2]=(char)myBitmap[i];\n    tempChars[3]=(char)myBitmap[i+1];\n    '+c+'.write((byte)strtoul(tempChars, NULL, 0));\n  }\n  while('+c+'.read()!=\'E\'){}\n}\n';
     return c+'.begin(115200);\n';
   } else {
     return'';
@@ -1245,6 +1249,19 @@ Blockly.Arduino.ldm_putString=function(){
       b=this.getFieldValue("FONT"),
       c=Blockly.Arduino.valueToCode(this,"LINE",Blockly.Arduino.ORDER_ATOMIC)||"",
       d=Blockly.Arduino.valueToCode(this,"COLUMN",Blockly.Arduino.ORDER_ATOMIC)||"";
+  if (Blockly.Arduino.LDM_CONNECTION_TYPE=="MQTT"){
+    a=Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("'+b +'(") +'+c+'+","+'+ d+'+","+'+a+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
+    return a;
+  } else {
+    return 'sendToLDM6432(String(String("'+b +'(") +'+c+'+","+'+ d+'+","+'+a+'+")").c_str());\n';
+  }
+};
+
+Blockly.Arduino.ldm_putNumber=function(){
+  var a=Blockly.Arduino.valueToCode(this,"PUT_NUMBER",Blockly.Arduino.ORDER_ATOMIC)||"",
+      b=this.getFieldValue("FONT"),
+      c=Blockly.Arduino.valueToCode(this,"X",Blockly.Arduino.ORDER_ATOMIC)||"",
+      d=Blockly.Arduino.valueToCode(this,"Y",Blockly.Arduino.ORDER_ATOMIC)||"";
   if (Blockly.Arduino.LDM_CONNECTION_TYPE=="MQTT"){
     a=Blockly.Arduino.LDM_Check_prefix+'  myClient.publish(ldmTopic.c_str(),String(String("'+b +'(") +'+c+'+","+'+ d+'+","+'+a+'+")").c_str());\n'+Blockly.Arduino.LDM_Check_postfix;
     return a;

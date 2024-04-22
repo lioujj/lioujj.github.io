@@ -1749,6 +1749,25 @@ Blockly.Blocks.ldm_putString={init:function(){
   this.setTooltip(Blockly.Msg.LDM6432_TOOLTIP)}
 };
 
+Blockly.Blocks.ldm_putNumber={init:function(){
+  this.setHelpUrl(Blockly.Msg.LDM6432_HELPURL);
+  this.setColour(Blockly.Blocks.ldm6432.HUE);
+  this.appendValueInput("PUT_NUMBER")
+      .appendField(Blockly.Msg.LDM6432_PUT_NUMBER_CONTENT)
+      .setCheck("Number");
+  this.appendDummyInput().appendField(Blockly.Msg.LDM6432_FONTSIZE)
+      .appendField(new Blockly.FieldDropdown([["8*8","AT84="],["8*16","AT85="],["16*16","AT86="]]),"FONT");
+  this.appendValueInput("X")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LDM6432_XY_COLOR_X);
+  this.appendValueInput("Y")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LDM6432_XY_COLOR_Y);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LDM6432_TOOLTIP)}
+};
+
 Blockly.Blocks.ldm_transparent={init:function(){
   this.setHelpUrl(Blockly.Msg.LDM6432_HELPURL);
   this.setColour(Blockly.Blocks.ldm6432.HUE);
