@@ -6769,6 +6769,26 @@ Blockly.Arduino.ljj_stepper_position=function(){
   return['stepper_'+a+'.currentPosition()',Blockly.Arduino.ORDER_ATOMIC];
 }
 
+//RADAR
+Blockly.Arduino.ljj_radar={};
+Blockly.Arduino.ljj_radar_init_pinmap = function() {
+  var a = this.getFieldValue('SERIAL_PORT');
+      b=Blockly.Arduino.valueToCode(this,"RX",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      c=Blockly.Arduino.valueToCode(this,"TX",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  Blockly.Arduino.ljj_radar.serial_port=a;
+  return a+'.begin(250000,SERIAL_8N1,'+b+','+c+');\n';
+};
+
+Blockly.Arduino.ljj_radar_available = function() { 
+  var a=Blockly.Arduino.statementToCode(this,"Rd_03E");
+  return 'if('+Blockly.Arduino.ljj_radar.serial_port+'.available()==7){\n  byte data03E[2] = {};\n  '+Blockly.Arduino.ljj_radar.serial_port+'.read();\n  '+ Blockly.Arduino.ljj_radar.serial_port+'.read();\n  data03E[0]=(byte)'+Blockly.Arduino.ljj_radar.serial_port+  '.read();\n  data03E[1]=(byte)'+Blockly.Arduino.ljj_radar.serial_port+'.read();\n  '+Blockly.Arduino.ljj_radar.serial_port+'.read();\n  '+Blockly.Arduino.ljj_radar.serial_port+'.read();\n  '+Blockly.Arduino.ljj_radar.serial_port+'.read();\n'+a+'}\n';
+};
+
+Blockly.Arduino.ljj_radar_03E_data=function(){
+  var a=this.getFieldValue("INDEX");
+  return['data03E['+a+']',Blockly.Arduino.ORDER_ATOMIC];
+}
+
 //----------------------------------------
 setTimeout(function(){
 /*

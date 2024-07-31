@@ -1321,3 +1321,13 @@ Blockly.Msg.LJJ_STEPPER_REMAIN_STEPS = '剩餘步數';
 Blockly.Msg.LJJ_STEPPER_POSITION = '目前位置編號';
 Blockly.Msg.LJJ_STEPPER_STATEMENT_NOT_MOVING = '停止移動時';
 Blockly.Msg.LJJ_STEPPER_TRIGGER = '　　是否觸發停止移動事件';
+
+
+//RADAR
+Blockly.Msg.LJJ_RADAR_TITLE = '雷達';
+Blockly.Msg.LJJ_RADAR_CONNECT_TO_SERIAL = '連接到';
+Blockly.Msg.LJJ_RADAR_TOOLTIP = 'RADAR';
+Blockly.Msg.LJJ_RADAR_TX = 'TX連到腳位';
+Blockly.Msg.LJJ_RADAR_RX = 'RX連到腳位';
+Blockly.Msg.LJJ_RADAR_RD_03E_GET_DATA = '當Rd-03E讀取到資料';
+Blockly.Msg.LJJ_RADAR_03E_LIST = [["動作代碼","0"],["距離(cm)","1"]];

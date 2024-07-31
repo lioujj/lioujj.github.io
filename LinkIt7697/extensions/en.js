@@ -1330,3 +1330,12 @@ Blockly.Msg.LJJ_STEPPER_POSITION = 'current position index';
 Blockly.Msg.LJJ_STEPPER_STATEMENT_NOT_MOVING = 'is not moving';
 Blockly.Msg.LJJ_STEPPER_TRIGGER = '    Trig event of moving stopped';
 Blockly.Msg.LJJ_STEPPER_START_TRIGGER = 'Trig on start';
+
+//RADAR
+Blockly.Msg.LJJ_RADAR_TITLE = 'RADAR';
+Blockly.Msg.LJJ_RADAR_CONNECT_TO_SERIAL = 'connect to UART';
+Blockly.Msg.LJJ_RADAR_TOOLTIP = 'RADAR';
+Blockly.Msg.LJJ_RADAR_TX = 'TX to PIN';
+Blockly.Msg.LJJ_RADAR_RX = 'RX to PIN';
+Blockly.Msg.LJJ_RADAR_RD_03E_GET_DATA = 'when Rd-03E get data';
+Blockly.Msg.LJJ_RADAR_03E_LIST = [["action code","0"],["distance(cm)","1"]];

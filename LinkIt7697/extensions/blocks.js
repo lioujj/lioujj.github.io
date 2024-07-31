@@ -11353,6 +11353,53 @@ Blockly.Blocks.ljj_stepper_position={init:function(){
   this.setTooltip(Blockly.Msg.LJJ_STEPPER_TOOLTIP)}
 };
 
+//RADAR
+Blockly.Blocks.ljj_radar={};
+Blockly.Blocks.ljj_radar.HUE1=236;
+Blockly.Blocks.ljj_radar_init_pinmap={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_RADAR_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_radar.HUE1);
+	this.appendDummyInput()
+	    .appendField(Blockly.Msg.LJJ_RADAR_TITLE)
+      .appendField(Blockly.Msg.LJJ_RADAR_CONNECT_TO_SERIAL)
+      .appendField(new Blockly.FieldDropdown([["Serial","Serial"],["Serial1","Serial1"],["Serial2","Serial2"]]),"SERIAL_PORT");
+  this.appendValueInput("RX")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LJJ_RADAR_TX);
+  this.appendValueInput("TX")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LJJ_RADAR_RX);
+	this.setInputsInline(true);
+	this.setPreviousStatement(!0);
+	this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_RADAR_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_radar_available={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_RADAR_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_radar.HUE1);
+	this.appendDummyInput()
+	    .appendField(Blockly.Msg.LJJ_RADAR_TITLE)
+      .appendField(Blockly.Msg.LJJ_RADAR_RD_03E_GET_DATA)
+	this.setInputsInline(true);
+  this.appendStatementInput("Rd_03E");
+	this.setPreviousStatement(!0);
+	this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_RADAR_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_radar_03E_data={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_RADAR_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_radar.HUE1);
+	this.appendDummyInput()
+	    .appendField(Blockly.Msg.LJJ_RADAR_TITLE)
+      .appendField("Rd-03E")
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_RADAR_03E_LIST),"INDEX");
+  this.setInputsInline(true);
+  this.setOutput(!0,"Number");
+  this.setTooltip(Blockly.Msg.LJJ_RADAR_TOOLTIP)}
+};
+
 //-----------------------------------------------
 Blockly.Blocks.ljj_2023_init={init:function(){
   this.setHelpUrl("");

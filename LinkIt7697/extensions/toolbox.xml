@@ -4841,6 +4841,25 @@
       <block type="ljj_stepper_remain_steps"></block>
       <block type="ljj_stepper_position"></block>      
      </category>
+     <category id="category_ljj_radar" name="RADAR">
+      <block type="ljj_radar_init_pinmap">
+        <value name="RX">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="TX">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>         
+      </block>
+      <block type="ljj_radar_available">
+        <statement name="Rd_03E">
+        </statement>
+      </block>
+      <block type="ljj_radar_03E_data"></block>
+     </category>
   </category>
   <category id="category_lumex" name="Lumex">
     <category id="category_ldm6432" name="LDM6432MQTT">

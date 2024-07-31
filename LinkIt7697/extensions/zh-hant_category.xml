@@ -92,4 +92,5 @@
 <category><name>SEN0539</name><replace>SEN0539語音辨識</replace></category>
 <category><name>HC-SR04</name><replace>超音波感測器</replace></category>
 <category><name>STEPPER</name><replace>步進馬達</replace></category>
+<category><name>RADAR</name><replace>雷達</replace></category>
 </xml>
