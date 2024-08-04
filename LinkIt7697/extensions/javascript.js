@@ -2654,7 +2654,7 @@ Blockly.Arduino.KSB065_motor_stop=function(){
 };
 
 Blockly.Arduino.KSB065_tone=function(){
-  var a=this.getFieldValue("FREQ");
+  var a=Blockly.Arduino.valueToCode(this,"FREQ",Blockly.Arduino.ORDER_ATOMIC)||"0";
   Blockly.Arduino.definitions_.define_tone="#include <Tone32.h>";
   Blockly.Arduino.definitions_.define_start_plus_tone_invoke="byte buzz_pin=26;\nbyte buzz_ch=0;\n";
   Blockly.Arduino.setups_["esp32_tone1"]="tone(buzz_pin,262,0,buzz_ch);\n  delay(1);\n  noTone(buzz_pin,buzz_ch);";

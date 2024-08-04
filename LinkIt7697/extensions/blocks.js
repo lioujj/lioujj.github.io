@@ -4087,9 +4087,10 @@ Blockly.Blocks.KSB065_tone={init:function(){
   this.setColour(Blockly.Blocks.KSB065.HUE4);
   this.appendDummyInput()
       .appendField("KSB065")
-      .appendField(Blockly.Msg.EZ_TONE)
-      .appendField(Blockly.Msg.INOUT_TONE_APPENDTEXT_FREQ)
-      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_TONE_LIST),"FREQ");
+      .appendField(Blockly.Msg.EZ_TONE);
+  this.appendValueInput("FREQ")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.INOUT_TONE_APPENDTEXT_FREQ);
   this.setInputsInline(!0);
   this.setPreviousStatement(!0);
   this.setNextStatement(!0);

@@ -1670,7 +1670,13 @@
         </value>
       </block>
       <block type="KSB065_motor_stop"></block>
-      <block type="KSB065_tone"></block>
+      <block type="KSB065_tone">
+        <value name="FREQ">
+          <block type="ljj_tone_list">
+            <field name="FREQ">523</field>
+          </block>
+        </value>
+      </block>
       <block type="KSB065_no_tone"></block>
       <block type="KSB065_custom_tone">
         <value name="FREQ">
