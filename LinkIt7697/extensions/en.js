@@ -690,6 +690,57 @@ Blockly.Msg.TTGO_TFT_GET_CAMERA = "show camera image";
 Blockly.Msg.TTGO_TFT_GET_CAMERA_SCALE= "scale";
 Blockly.Msg.TTGO_TFT_DRAW_U8G2_TEXT = "show U8G2 string";
 Blockly.Msg.TTGO_TFT_DRAW_U8G2_FONT_NAME = "font name";
+Blockly.Msg.TTGO_TFT_SET_FREE_FONT = 'built font';
+Blockly.Msg.TTGO_TFT_FREE_FONT_LIST = [
+	["Mono9pt7b", "&FreeMono9pt7b"],
+	["Mono12pt7b", "&FreeMono12pt7b"],
+	["Mono18pt7b", "&FreeMono18pt7b"],
+	["Mono24pt7b", "&FreeMono24pt7b"],
+	["MonoBold9pt7b", "&FreeMonoBold9pt7b"],
+	["MonoBold12pt7b", "&FreeMonoBold12pt7b"],
+	["MonoBold18pt7b", "&FreeMonoBold18pt7b"],
+	["MonoBold24pt7b", "&FreeMonoBold24pt7b"],
+	["MonoOblique9pt7b", "&FreeMonoOblique9pt7b"],
+	["MonoOblique12pt7b", "&FreeMonoOblique12pt7b"],
+	["MonoOblique18pt7b", "&FreeMonoOblique18pt7b"],
+	["MonoOblique24pt7b", "&FreeMonoOblique24pt7b"],
+	["MonoBoldOblique9pt7b", "&FreeMonoBoldOblique9pt7b"],
+	["MonoBoldOblique12pt7b", "&FreeMonoBoldOblique12pt7b"],
+	["MonoBoldOblique18pt7b", "&FreeMonoBoldOblique18pt7b"],
+	["MonoBoldOblique24pt7b", "&FreeMonoBoldOblique24pt7b"],
+	["Sans9pt7b", "&FreeSans9pt7b"],
+	["Sans12pt7b", "&FreeSans12pt7b"],
+	["Sans18pt7b", "&FreeSans18pt7b"],
+	["Sans24pt7b", "&FreeSans24pt7b"],
+	["SansBold9pt7b", "&FreeSansBold9pt7b"],
+	["SansBold12pt7b", "&FreeSansBold12pt7b"],
+	["SansBold18pt7b", "&FreeSansBold18pt7b"],
+	["SansBold24pt7b", "&FreeSansBold24pt7b"],
+	["SansOblique9pt7b", "&FreeSansOblique9pt7b"],
+	["SansOblique12pt7b", "&FreeSansOblique12pt7b"],
+	["SansOblique18pt7b", "&FreeSansOblique18pt7b"],
+	["SansOblique24pt7b", "&FreeSansOblique24pt7b"],
+	["SansBoldOblique9pt7b", "&FreeSansBoldOblique9pt7b"],
+	["SansBoldOblique12pt7b", "&FreeSansBoldOblique12pt7b"],
+	["SansBoldOblique18pt7b", "&FreeSansBoldOblique18pt7b"],
+	["SansBoldOblique24pt7b", "&FreeSansBoldOblique24pt7b"],
+	["Serif9pt7b", "&FreeSerif9pt7b"],
+	["Serif12pt7b", "&FreeSerif12pt7b"],
+	["Serif18pt7b", "&FreeSerif18pt7b"],
+	["Serif24pt7b", "&FreeSerif24pt7b"],
+	["SerifItalic9pt7b", "&FreeSerifItalic9pt7b"],
+	["SerifItalic12pt7b", "&FreeSerifItalic12pt7b"],
+	["SerifItalic18pt7b", "&FreeSerifItalic18pt7b"],
+	["SerifItalic24pt7b", "&FreeSerifItalic24pt7b"],
+	["SerifBold9pt7b", "&FreeSerifBold9pt7b"],
+	["SerifBold12pt7b", "&FreeSerifBold12pt7b"],
+	["SerifBold18pt7b", "&FreeSerifBold18pt7b"],
+	["SerifBold24pt7b", "&FreeSerifBold24pt7b"],
+	["SerifBoldItalic9pt7b", "&FreeSerifBoldItalic9pt7b"],
+	["SerifBoldItalic12pt7b", "&FreeSerifBoldItalic12pt7b"],
+	["SerifBoldItalic18pt7b", "&FreeSerifBoldItalic18pt7b"],
+	["SerifBoldItalic24pt7b", "&FreeSerifBoldItalic24pt7b"]
+];
 
 //S20
 Blockly.Msg.S20_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/s20智慧插座積木";

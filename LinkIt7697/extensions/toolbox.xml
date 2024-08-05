@@ -1988,9 +1988,6 @@
       </category>
       <category id="category_ttgo_tft" name="TTGO_TFT">
         <block type="ttgo_tft_init"></block>
-<!--
-        <block type="ttgo_tft_rotation"></block>
--->
         <block type="ttgo_tft_rotation4"></block>
         <block type="ttgo_tft_wh"></block>
         <block type="ttgo_tft_fill">
@@ -2172,6 +2169,8 @@
               <field name="TEXT">繪製中文</field>
             </block>
           </value>
+        </block>
+        <block type="ttgo_tft_set_free_font">
         </block>
         <block type="ttgo_tft_set_eng_font">
           <value name="SIZE">

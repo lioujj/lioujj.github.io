@@ -5115,6 +5115,20 @@ Blockly.Blocks.ttgo_tft_draw_chinese_text={init:function(){
   this.setTooltip(Blockly.Msg.TTGO_TFT_TOOLTIP)}
 };
 
+Blockly.Blocks.ttgo_tft_set_free_font={init:function(){
+  this.setHelpUrl(Blockly.Msg.TTGO_TFT_HELPURL);
+  this.setColour(Blockly.Blocks.ttgo_tft.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.TTGO_TFT_TITLE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.TTGO_TFT_SET_FREE_FONT)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.TTGO_TFT_FREE_FONT_LIST), "font");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.TTGO_TFT_TOOLTIP)}
+};
+
 Blockly.Blocks.ttgo_tft_set_eng_font={init:function(){
   this.setHelpUrl(Blockly.Msg.TTGO_TFT_HELPURL);
   this.setColour(Blockly.Blocks.ttgo_tft.HUE);

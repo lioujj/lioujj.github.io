@@ -3156,6 +3156,11 @@ Blockly.Arduino.ttgo_tft_draw_chinese_text=function(){
   return"u8g2.setFont(u8g2_font_unifont_t_chinese1);\nu8g2.setFontMode("+d+");\nu8g2.setCursor("+a+", ("+b+"+16));\nu8g2.print(String("+c+").c_str());\n"
 };
 
+Blockly.Arduino.ttgo_tft_set_free_font=function(){
+  var a=this.getFieldValue("font");
+  return 'tft.setFreeFont('+a+');\n';
+};
+
 Blockly.Arduino.ttgo_tft_set_eng_font=function(){
   var a=Blockly.Arduino.valueToCode(this,"SIZE",Blockly.Arduino.ORDER_NONE)||"0";
   return 'tftTextSize='+a+';\ntft.setTextSize(tftTextSize);\n';
