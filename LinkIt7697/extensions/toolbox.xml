@@ -4859,11 +4859,16 @@
           </block>
         </value>         
       </block>
-      <block type="ljj_radar_available">
+      <block type="ljj_radar_03E_available">
         <statement name="Rd_03E">
         </statement>
       </block>
       <block type="ljj_radar_03E_data"></block>
+      <block type="ljj_radar_03D_available">
+        <statement name="Rd_03D">
+        </statement>
+      </block>
+      <block type="ljj_radar_03D_data"></block>
      </category>
   </category>
   <category id="category_lumex" name="Lumex">
