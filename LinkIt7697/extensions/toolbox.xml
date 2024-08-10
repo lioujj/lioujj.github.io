@@ -4864,6 +4864,7 @@
         </statement>
       </block>
       <block type="ljj_radar_03E_data"></block>
+      <block type="ljj_radar_03D_multi_enable"></block>
       <block type="ljj_radar_03D_available">
         <statement name="Rd_03D">
         </statement>

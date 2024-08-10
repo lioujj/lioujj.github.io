@@ -11417,6 +11417,20 @@ Blockly.Blocks.ljj_radar_03E_data={init:function(){
   this.setTooltip(Blockly.Msg.LJJ_RADAR_TOOLTIP)}
 };
 
+Blockly.Blocks.ljj_radar_03D_multi_enable={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_RADAR_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_radar.HUE3);
+	this.appendDummyInput()
+	    .appendField(Blockly.Msg.LJJ_RADAR_TITLE)
+      .appendField("Rd-03D")
+      .appendField(Blockly.Msg.LJJ_RADAR_03D_MULTI_ENABLE)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_RADAR_03D_MULTI_ENABLE_DATATYPE),"DATATYPE");
+	this.setInputsInline(true);
+	this.setPreviousStatement(!0);
+	this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_RADAR_TOOLTIP)}
+};
+
 Blockly.Blocks.ljj_radar_03D_available={init:function(){
   this.setHelpUrl(Blockly.Msg.LJJ_RADAR_HELPURL);
   this.setColour(Blockly.Blocks.ljj_radar.HUE3);

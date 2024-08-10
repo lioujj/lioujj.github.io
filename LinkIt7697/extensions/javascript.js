@@ -6796,12 +6796,18 @@ Blockly.Arduino.ljj_radar_03E_data=function(){
   return['data03E['+a+']',Blockly.Arduino.ORDER_ATOMIC];
 }
 
+Blockly.Arduino.ljj_radar_03D_multi_enable=function(){
+  var a=this.getFieldValue("DATATYPE");
+  Blockly.Arduino.definitions_.define_ljj_radar_rd03d_invoke = 'byte multiTargetCmd[12]={0xFD,0xFC,0xFB,0xFA,0x02,0x00,0x80,0x00,0x04,0x03,0x02,0x01};';
+  return'multiTargetCmd[6]='+a+';\n'+Blockly.Arduino.ljj_radar.serial_port+'.write(multiTargetCmd,12);\n';
+}
+
 Blockly.Arduino.ljj_radar_03D_available = function() { 
   var a=Blockly.Arduino.statementToCode(this,"Rd_03D");
   a='  '+a.replace(/\n/g,'\n  ');
-  Blockly.Arduino.definitions_.define_ljj_radar_rd03d_invoke='typedef struct\n{\n  int x;\n  int y;\n  int s;\n  int d;\n}  targetDataType;\ntargetDataType targetData[3];\n';
+  Blockly.Arduino.definitions_.define_ljj_radar_rd03d_invoke='byte multiTargetCmd[12]={0xFD,0xFC,0xFB,0xFA,0x02,0x00,0x80,0x00,0x04,0x03,0x02,0x01};\ntypedef struct\n{\n  int x;\n  int y;\n  int s;\n  int d;\n}  targetDataType;\ntargetDataType targetData[3];\n';
   Blockly.Arduino.definitions_.define_ljj_radar_rd03d_event='void calcTargetData(byte* bytePtr,byte myIndex)\n{\n  int myTempNumber=0;\n  myTempNumber = (*(bytePtr+0)) | (*(bytePtr+1)) << 8;\n  targetData[myIndex].x=((bitRead(myTempNumber,15)==0)?(0-myTempNumber):(myTempNumber-32768));\n  myTempNumber = (*(bytePtr+2)) | (*(bytePtr+3)) << 8;\n  targetData[myIndex].y=((bitRead(myTempNumber,15)==0)?(0-myTempNumber):(myTempNumber-32768));\n  myTempNumber = (*(bytePtr+4)) | (*(bytePtr+5)) << 8;\n  targetData[myIndex].s=((bitRead(myTempNumber,15)==0)?(0-myTempNumber):(myTempNumber-32768));\n  myTempNumber = (*(bytePtr+6)) | (*(bytePtr+7)) << 8;\n  targetData[myIndex].d=myTempNumber;\n}\n';
-  return 'if ('+Blockly.Arduino.ljj_radar.serial_port+'.available()>=30){\n  byte target[3][8]={};\n  while((byte)Serial1.read()!=170){}\n  if ((byte)'+Blockly.Arduino.ljj_radar.serial_port+'.read()==255)\n  {\n    '+Blockly.Arduino.ljj_radar.serial_port+'.read();\n    '+Blockly.Arduino.ljj_radar.serial_port+'.read();\n    '+Blockly.Arduino.ljj_radar.serial_port+'.readBytes(target[0],8);\n    '+Blockly.Arduino.ljj_radar.serial_port+'.readBytes(target[1],8);\n    '+Blockly.Arduino.ljj_radar.serial_port+'.readBytes(target[2],8);\n    '+Blockly.Arduino.ljj_radar.serial_port+'.read();\n    '+Blockly.Arduino.ljj_radar.serial_port+'.read();\n    calcTargetData(target[0],0);\n    calcTargetData(target[1],1);\n    calcTargetData(target[2],2);\n'+a+'  for(int i=0;i<3;i++)\n      targetData[0]={0,0,0,0};\n  }\n}\n'
+  return 'if ('+Blockly.Arduino.ljj_radar.serial_port+'.available()>=30){\n  byte target[3][8]={};\n  while((byte)Serial1.read()!=0xAA){}\n  if ((byte)'+Blockly.Arduino.ljj_radar.serial_port+'.read()==0xFF  && (byte)'+Blockly.Arduino.ljj_radar.serial_port+'.read()==0x03 && (byte)'+Blockly.Arduino.ljj_radar.serial_port+'.read()==0x00)\n  {\n    '+Blockly.Arduino.ljj_radar.serial_port+'.readBytes(target[0],8);\n    '+Blockly.Arduino.ljj_radar.serial_port+'.readBytes(target[1],8);\n    '+Blockly.Arduino.ljj_radar.serial_port+'.readBytes(target[2],8);\n    '+Blockly.Arduino.ljj_radar.serial_port+'.read();\n    '+Blockly.Arduino.ljj_radar.serial_port+'.read();\n    calcTargetData(target[0],0);\n    calcTargetData(target[1],1);\n    calcTargetData(target[2],2);\n'+a+'  for(int i=0;i<3;i++)\n      targetData[0]={0,0,0,0};\n  }\n}\n'
 }
 
 Blockly.Arduino.ljj_radar_03D_data=function(){
