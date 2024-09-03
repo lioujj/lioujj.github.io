@@ -853,6 +853,7 @@ Blockly.Msg.ESP32_IRQ_PIN_MODE = [["is falling","FALLING"],["is rising","RISING"
 Blockly.Msg.ESP32_IRQ_PIN_WARNIG = "You have to set \""+Blockly.Msg.ESP32_IRQ_PIN_TITLE+" "+Blockly.Msg.ESP32_IRQ_FUNCTION+"\" first.";
 Blockly.Msg.ESP32_IRQ_PIN_DELETE = "detach interrupt";
 Blockly.Msg.ESP32_IRQ_PIN_DELETE_WARNIG = "You have to set \""+Blockly.Msg.ESP32_IRQ_PIN_TITLE+" "+Blockly.Msg.ESP32_IRQ_RUN+"\" first.";
+Blockly.Msg.ESP32_IRQ_PIN_PULLUP = 'INPUT_PULLUP';
 
 //L9110
 Blockly.Msg.L9110_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/l9110馬達驅動板";

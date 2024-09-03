@@ -3854,10 +3854,11 @@ Blockly.Arduino.esp32_irq_pin_task=function(){
 Blockly.Arduino.esp32_irq_pin_run=function(){
   var a=Blockly.Arduino.valueToCode(this,"F_NAME",Blockly.Arduino.ORDER_ATOMIC)||"",
       b=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
-      c=this.getFieldValue("MODE");
+      c=this.getFieldValue("MODE"),
+      d=this.getFieldValue("PULLUP");
   a=a.replace(/\"/g,"");
   if (Blockly.Arduino.my_board_type=="ESP32"){
-    return'pinMode('+b+', INPUT);\nattachInterrupt('+b+','+a+','+c+');\n';
+    return'pinMode('+b+', INPUT'+((d == 'TRUE')?'_PULLUP':'')+');\nattachInterrupt('+b+','+a+','+c+');\n';
   } else {
     return'';
   }

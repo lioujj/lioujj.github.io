@@ -6336,6 +6336,8 @@ Blockly.Blocks.esp32_irq_pin_run={init:function(){
   this.appendValueInput("PIN")
       .setCheck("Number");
   this.appendDummyInput()
+      .appendField(Blockly.Msg.ESP32_IRQ_PIN_PULLUP)
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "PULLUP")
       .appendField(new Blockly.FieldDropdown(Blockly.Msg.ESP32_IRQ_PIN_MODE),"MODE");
   this.appendValueInput("F_NAME")
       .setCheck("String")

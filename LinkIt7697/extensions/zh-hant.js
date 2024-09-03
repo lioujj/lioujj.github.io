@@ -846,6 +846,7 @@ Blockly.Msg.ESP32_IRQ_PIN_MODE = [["電位下降","FALLING"],["電位上升","RI
 Blockly.Msg.ESP32_IRQ_PIN_WARNIG = "必須先設定「"+Blockly.Msg.ESP32_IRQ_PIN_TITLE+" "+Blockly.Msg.ESP32_IRQ_FUNCTION+"」積木";
 Blockly.Msg.ESP32_IRQ_PIN_DELETE = "停止腳位中斷";
 Blockly.Msg.ESP32_IRQ_PIN_DELETE_WARNIG = "必須先設定「"+Blockly.Msg.ESP32_IRQ_PIN_TITLE+" "+Blockly.Msg.ESP32_IRQ_RUN+"」積木";
+Blockly.Msg.ESP32_IRQ_PIN_PULLUP = '上拉電阻';
 
 //L9110
 Blockly.Msg.L9110_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/l9110馬達驅動板";
