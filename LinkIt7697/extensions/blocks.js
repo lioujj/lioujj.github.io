@@ -11459,6 +11459,146 @@ Blockly.Blocks.ljj_radar_03D_data={init:function(){
   this.setTooltip(Blockly.Msg.LJJ_RADAR_TOOLTIP)}
 };
 
+//L293D
+Blockly.Blocks.l293d={};
+Blockly.Blocks.l293d.HUE1=340;
+Blockly.Blocks.l293d.HUE2=80;
+Blockly.Blocks.ljj_l293d_motor_run={init:function(){
+  this.setHelpUrl(Blockly.Msg.L293D_HELPURL);
+  this.setColour(Blockly.Blocks.l293d.HUE1);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.L293D_TITLE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.L293D_MOTOR)
+      .appendField(new Blockly.FieldDropdown([["M1","1"],["M2","2"],["M3","3"],["M4","4"]]),"MOTOR");
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.L293D_DIRECTION),"DIR");
+  this.appendValueInput("SPEED")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LIOU_ROBOT_MOVE_SPEED);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.L293D_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_l293d_motor_stop={init:function(){
+  this.setHelpUrl(Blockly.Msg.L293D_HELPURL);
+  this.setColour(Blockly.Blocks.l293d.HUE1);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.L293D_TITLE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.L293D_MOTOR)
+      .appendField(new Blockly.FieldDropdown([["M1","1"],["M2","2"],["M3","3"],["M4","4"]]),"MOTOR")
+      .appendField(Blockly.Msg.LIOU_ROBOT_STOP);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.L293D_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_l293d_stepper_init={init:function(){
+  this.setHelpUrl(Blockly.Msg.L293D_HELPURL);
+  this.setColour(Blockly.Blocks.l293d.HUE2);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.L293D_TITLE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_STEPPER_TITLE)
+      .appendField(new Blockly.FieldDropdown([["S1","1"],["S2","2"]]),"MOTOR");
+  this.appendValueInput("STEPS")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LJJ_STEPPER_StepsPerRev);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.L293D_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_l293d_stepper_speed={init:function(){
+  this.setHelpUrl(Blockly.Msg.L293D_HELPURL);
+  this.setColour(Blockly.Blocks.l293d.HUE2);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.L293D_TITLE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_STEPPER_TITLE)
+      .appendField(new Blockly.FieldDropdown([["S1","1"],["S2","2"]]),"MOTOR");
+  this.appendValueInput("SPEED")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.L293D_SET_SPEED);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.L293D_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_l293d_stepper_run={init:function(){
+  this.setHelpUrl(Blockly.Msg.L293D_HELPURL);
+  this.setColour(Blockly.Blocks.l293d.HUE2);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.L293D_TITLE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_STEPPER_TITLE)
+      .appendField(new Blockly.FieldDropdown([["S1","1"],["S2","2"]]),"MOTOR");
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.L293D_DIRECTION),"DIR");
+  this.appendValueInput("STEPS")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LJJ_STEPPER_MOVE_STEPS);
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.L293D_STEPPER_METHOD),"METHOD");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.L293D_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_l293d_stepper_stop={init:function(){
+  this.setHelpUrl(Blockly.Msg.L293D_HELPURL);
+  this.setColour(Blockly.Blocks.l293d.HUE2);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.L293D_TITLE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_STEPPER_TITLE)
+      .appendField(new Blockly.FieldDropdown([["S1","1"],["S2","2"]]),"MOTOR")
+      .appendField(Blockly.Msg.LIOU_ROBOT_STOP);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.L293D_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_l293d_servo_run={init:function(){
+  this.setHelpUrl(Blockly.Msg.L293D_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_quno.HUE4);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.L293D_TITLE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LIOU_ROBOT_SERVO)
+      .appendField(new Blockly.FieldDropdown([["Servo1","9"],["Servo2","10"]]),"MOTOR");
+  this.appendValueInput("ANGLE")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.SERVO_ANGLE_TEXT1);
+  this.appendDummyInput().appendField(Blockly.Msg.SERVO_ANGLE_TEXT2);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.L293D_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_l293d_servo_detach={init:function(){
+  this.setHelpUrl(Blockly.Msg.L293D_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_quno.HUE4);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.L293D_TITLE)
+      .appendField(Blockly.Msg.LIOU_ROBOT_SERVO)
+      .appendField(new Blockly.FieldDropdown([["Servo1","9"],["Servo2","10"]]),"MOTOR")
+      .appendField(Blockly.Msg.LJJ_SERVO_DETACH);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.L293D_TOOLTIP)}
+};
+
 //-----------------------------------------------
 Blockly.Blocks.ljj_2023_init={init:function(){
   this.setHelpUrl("");

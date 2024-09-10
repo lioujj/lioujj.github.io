@@ -1048,7 +1048,7 @@ Blockly.Msg.LJJ_CAMERA_RES_TYPE=[
 			["VGA(640x480)","VGA"],
 			["CIF(400x296)","CIF"],
 			["QVGA(320x240)","QVGA"],
-      ["240(240x240)","240X240"],
+            ["240(240x240)","240X240"],
 			["HQVGA(240x176)","HQVGA"],
 			["QQVGA(160x120)","QQVGA"],
 			["QXGA(2048x1564)","QXGA"]];
@@ -1387,3 +1387,12 @@ Blockly.Msg.LJJ_RADAR_03D_TARGET_LIST = [["目標1","0"],["目標2","1"],["目�
 Blockly.Msg.LJJ_RADAR_03D_TARGET_DATATYPE = [["x軸(mm)","x"],["y軸(mm)","y"],["移動速度(cm/s)","s"],["距離分辨率(mm)","d"]];
 Blockly.Msg.LJJ_RADAR_03D_MULTI_ENABLE = '多目標偵測模式';
 Blockly.Msg.LJJ_RADAR_03D_MULTI_ENABLE_DATATYPE = [["啟用","0x90"],["關閉","0x80"]];
+
+//L293D
+Blockly.Msg.L293D_HELPURL = "";
+Blockly.Msg.L293D_TITLE = "L293D馬達擴展板";
+Blockly.Msg.L293D_TOOLTIP = "L293D";
+Blockly.Msg.L293D_MOTOR = "馬達";
+Blockly.Msg.L293D_DIRECTION = [["正轉","FORWARD"],["反轉","BACKWARD"]];
+Blockly.Msg.L293D_SET_SPEED = '設定移動速度RPM (圈/分)';
+Blockly.Msg.L293D_STEPPER_METHOD = [["單相線圈","SINGLE"],["雙相線圈","DOUBLE"],["交錯線圈","INTERLEAVE"],["微步","MICROSTEP"]];

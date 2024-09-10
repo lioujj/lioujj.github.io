@@ -6817,6 +6817,90 @@ Blockly.Arduino.ljj_radar_03D_data=function(){
   return['targetData['+a+'].'+b,Blockly.Arduino.ORDER_ATOMIC];
 }
 
+
+//L293D
+Blockly.Arduino.l293d={};
+Blockly.Arduino.ljj_l293d_motor_run=function(){
+  var a=this.getFieldValue("MOTOR"),
+      b=this.getFieldValue("DIR"),
+      c=Blockly.Arduino.valueToCode(this,"SPEED",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  if (Blockly.Arduino.my_board_type=="Arduino"){
+    Blockly.Arduino.definitions_.define_ljj_l293d_include='#include <AFMotor.h>';
+    Blockly.Arduino.definitions_["define_L293D_M"+a+"_invoke"]='AF_DCMotor L293dMotorM'+a+'('+a+');';
+	return 'L293dMotorM'+a+'.run('+b+');\nL293dMotorM'+a+'.setSpeed('+c+');\n';
+  } else
+	return '';
+}
+
+Blockly.Arduino.ljj_l293d_motor_stop=function(){
+  var a=this.getFieldValue("MOTOR");
+  if (Blockly.Arduino.my_board_type=="Arduino"){
+    Blockly.Arduino.definitions_.define_ljj_l293d_include='#include <AFMotor.h>';
+    Blockly.Arduino.definitions_["define_L293D_M"+a+"_invoke"]='AF_DCMotor L293dMotorM'+a+'('+a+');';
+	return 'L293dMotorM'+a+'.run(RELEASE);\n';
+  } else
+	return '';
+}
+
+Blockly.Arduino.ljj_l293d_stepper_init=function(){
+  var a=this.getFieldValue("MOTOR"),
+      b=Blockly.Arduino.valueToCode(this,"STEPS",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  if (Blockly.Arduino.my_board_type=="Arduino"){
+    Blockly.Arduino.definitions_.define_ljj_l293d_include='#include <AFMotor.h>';
+    Blockly.Arduino.definitions_["define_L293D_S"+a+"_invoke"]='AF_Stepper L293dStepperS'+a+'('+b+','+a+');';
+	return'';
+  } else
+	return '';
+}
+
+Blockly.Arduino.ljj_l293d_stepper_speed=function(){
+  var a=this.getFieldValue("MOTOR"),
+      b=Blockly.Arduino.valueToCode(this,"SPEED",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  if (Blockly.Arduino.my_board_type=="Arduino"){
+	return'L293dStepperS'+a+'.setSpeed('+b+');\n';
+  } else
+	return '';
+}
+
+Blockly.Arduino.ljj_l293d_stepper_run=function(){
+  var a=this.getFieldValue("MOTOR"),
+      b=this.getFieldValue("DIR"),
+	  c=this.getFieldValue("METHOD"),
+      d=Blockly.Arduino.valueToCode(this,"STEPS",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  if (Blockly.Arduino.my_board_type=="Arduino"){
+	return'L293dStepperS'+a+'.step('+d+','+b+','+c+');\n';
+  } else
+	return '';
+}
+
+Blockly.Arduino.ljj_l293d_stepper_stop=function(){
+  var a=this.getFieldValue("MOTOR");
+  if (Blockly.Arduino.my_board_type=="Arduino"){
+	return'L293dStepperS'+a+'.release();\n';
+  } else
+	return '';
+}
+
+Blockly.Arduino.ljj_l293d_servo_run=function(){
+  var a=this.getFieldValue("MOTOR"),
+      b=Blockly.Arduino.valueToCode(this,"ANGLE",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  if (Blockly.Arduino.my_board_type=="Arduino"){
+    Blockly.Arduino.definitions_.define_servo="#include <Servo.h>";
+    Blockly.Arduino.definitions_["define_class_servo_"+b]='Servo L293dServo_'+a+';';
+	Blockly.Arduino.setups_['L293dServo_'+a]='L293dServo_'+a+'.attach('+a+');';
+	return 'L293dServo_'+a+'.write('+b+');\n';
+  } else
+	return '';
+}
+
+Blockly.Arduino.ljj_l293d_servo_detach=function(){
+  var a=this.getFieldValue("MOTOR");
+  if (Blockly.Arduino.my_board_type=="Arduino"){
+	return 'L293dServo_'+a+'.detach();\n';
+  } else
+	return '';
+}
+
 //----------------------------------------
 setTimeout(function(){
 /*

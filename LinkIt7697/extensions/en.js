@@ -1396,3 +1396,12 @@ Blockly.Msg.LJJ_RADAR_03D_TARGET_LIST = [["target 1","0"],["target 2","1"],["tar
 Blockly.Msg.LJJ_RADAR_03D_TARGET_DATATYPE = [["x(mm)","x"],["y(mm)","y"],["speed(cm/s)","s"],["distance(mm)","d"]];
 Blockly.Msg.LJJ_RADAR_03D_MULTI_ENABLE = 'multiple target detection mode';
 Blockly.Msg.LJJ_RADAR_03D_MULTI_ENABLE_DATATYPE = [["enable","0x90"],["disable","0x80"]];
+
+//L293D
+Blockly.Msg.L293D_HELPURL = "";
+Blockly.Msg.L293D_TITLE = "L293D Shield";
+Blockly.Msg.L293D_TOOLTIP = "L293D";
+Blockly.Msg.L293D_MOTOR = "motor";
+Blockly.Msg.L293D_DIRECTION = [["forward","FORWARD"],["backward","BACKWARD"]];
+Blockly.Msg.L293D_SET_SPEED = 'set move speed(rpm)';
+Blockly.Msg.L293D_STEPPER_METHOD = [["single coil","SINGLE"],["double coils","DOUBLE"],["interleave coil","INTERLEAVE"],["micrsostep","MICROSTEP"]];

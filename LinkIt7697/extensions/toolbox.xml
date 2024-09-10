@@ -459,6 +459,46 @@
       <block type="ljj_pixelbit_arduino_pins"></block>
       <block type="ljj_pixelbit_microbit_pins"></block>
     </category>
+    <category id="ljj_l293d" name="L293D">
+	  <block type="ljj_l293d_motor_run">
+	    <value name="SPEED">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+	  </block>
+	  <block type="ljj_l293d_motor_stop"></block>
+	  <block type="ljj_l293d_stepper_init">
+	    <value name="STEPS">
+          <block type="math_number">
+            <field name="NUM">48</field>
+          </block>
+        </value>
+	  </block>
+	  <block type="ljj_l293d_stepper_speed">
+	    <value name="SPEED">
+          <block type="math_number">
+            <field name="NUM">10</field>
+          </block>
+        </value>
+	  </block>
+	  <block type="ljj_l293d_stepper_run">
+	    <value name="STEPS">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+	  </block>
+	  <block type="ljj_l293d_stepper_stop"></block>
+	  <block type="ljj_l293d_servo_run">
+	    <value name="ANGLE">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+	  </block>
+	  <block type="ljj_l293d_servo_detach"></block>
+	</category>
     <category id="category_ljj_quno" name="Quno">
       <category id="category_ljj_quno_wifi" name="Quno WiFi">
         <block type="ljj_quno_wifi">

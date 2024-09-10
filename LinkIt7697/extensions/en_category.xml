@@ -91,4 +91,5 @@
 <category><name>HC-SR04</name><replace>UltraSonic</replace></category>
 <category><name>STEPPER</name><replace>Stepper motor</replace></category>
 <category><name>RADAR</name><replace>RADAR</replace></category>
+<category><name>L293D</name><replace>L293D Shield V1</replace></category>
 </xml>

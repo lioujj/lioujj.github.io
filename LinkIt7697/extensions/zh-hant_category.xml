@@ -93,4 +93,5 @@
 <category><name>HC-SR04</name><replace>超音波感測器</replace></category>
 <category><name>STEPPER</name><replace>步進馬達</replace></category>
 <category><name>RADAR</name><replace>雷達</replace></category>
+<category><name>L293D</name><replace>L293D馬達擴展板V1</replace></category>
 </xml>
