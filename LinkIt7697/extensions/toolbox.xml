@@ -471,7 +471,7 @@
 	  <block type="ljj_l293d_stepper_init">
 	    <value name="STEPS">
           <block type="math_number">
-            <field name="NUM">48</field>
+            <field name="NUM">2048</field>
           </block>
         </value>
 	  </block>
