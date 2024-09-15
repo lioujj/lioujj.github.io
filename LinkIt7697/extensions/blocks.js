@@ -11591,7 +11591,7 @@ Blockly.Blocks.ljj_l293d_servo_detach={init:function(){
   this.appendDummyInput()
       .appendField(Blockly.Msg.L293D_TITLE)
       .appendField(Blockly.Msg.LIOU_ROBOT_SERVO)
-      .appendField(new Blockly.FieldDropdown([["Servo1","9"],["Servo2","10"]]),"MOTOR")
+      .appendField(new Blockly.FieldDropdown([["Servo1","10"],["Servo2","9"]]),"MOTOR")
       .appendField(Blockly.Msg.LJJ_SERVO_DETACH);
   this.setInputsInline(!0);
   this.setPreviousStatement(!0);
