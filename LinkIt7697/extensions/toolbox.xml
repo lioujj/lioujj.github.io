@@ -4911,6 +4911,25 @@
       </block>
       <block type="ljj_radar_03D_data"></block>
      </category>
+	 <category id="ljj_pms" name="PMS7003M">
+      <block type="ljj_pms_init_pinmap">
+        <value name="RX">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="TX">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>         
+      </block>
+      <block type="ljj_pms_available">
+        <statement name="pms_stmt">
+        </statement>
+      </block>
+      <block type="ljj_pms_data"></block>
+	</category>
   </category>
   <category id="category_lumex" name="Lumex">
     <category id="category_ldm6432" name="LDM6432MQTT">

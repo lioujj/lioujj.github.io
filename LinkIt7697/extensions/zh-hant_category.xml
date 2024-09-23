@@ -94,4 +94,5 @@
 <category><name>STEPPER</name><replace>步進馬達</replace></category>
 <category><name>RADAR</name><replace>雷達</replace></category>
 <category><name>L293D</name><replace>L293D馬達擴展板V1</replace></category>
+<category><name>PMS7003M</name><replace>PMS7003空品感測</replace></category>
 </xml>

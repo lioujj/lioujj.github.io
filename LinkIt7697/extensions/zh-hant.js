@@ -1375,6 +1375,7 @@ Blockly.Msg.LJJ_STEPPER_STATEMENT_NOT_MOVING = '停止移動時';
 Blockly.Msg.LJJ_STEPPER_TRIGGER = '　　是否觸發停止移動事件';
 
 //RADAR
+Blockly.Msg.LJJ_RADAR_HELPURL = '';
 Blockly.Msg.LJJ_RADAR_TITLE = '雷達';
 Blockly.Msg.LJJ_RADAR_CONNECT_TO_SERIAL = '連接到';
 Blockly.Msg.LJJ_RADAR_TOOLTIP = 'RADAR';
@@ -1387,6 +1388,15 @@ Blockly.Msg.LJJ_RADAR_03D_TARGET_LIST = [["目標1","0"],["目標2","1"],["目�
 Blockly.Msg.LJJ_RADAR_03D_TARGET_DATATYPE = [["x軸(mm)","x"],["y軸(mm)","y"],["移動速度(cm/s)","s"],["距離分辨率(mm)","d"]];
 Blockly.Msg.LJJ_RADAR_03D_MULTI_ENABLE = '多目標偵測模式';
 Blockly.Msg.LJJ_RADAR_03D_MULTI_ENABLE_DATATYPE = [["啟用","0x90"],["關閉","0x80"]];
+
+//PMS7003M
+Blockly.Msg.LJJ_PMS_HELPURL = '';
+Blockly.Msg.LJJ_PMS_TITLE = 'PMS7003';
+Blockly.Msg.LJJ_PMS_TX = 'TX連到腳位';
+Blockly.Msg.LJJ_PMS_RX = 'RX連到腳位';
+Blockly.Msg.LJJ_PMS_TOOLTIP = 'PMS7003';
+Blockly.Msg.LJJ_PMS_GET_DATA = '當讀取到資料';
+Blockly.Msg.LJJ_PMS_DATATYPE = [["大氣環境PM2.5","PM_AE_UG_2_5"],["大氣環境PM1.0","PM_AE_UG_1_0"],["大氣環境PM10","PM_AE_UG_10_0"],["標準顆粒PM2.5","PM_SP_UG_2_5"],["標準顆粒PM1.0","PM_SP_UG_1_0"],["標準顆粒PM10","PM_SP_UG_10_0"]];
 
 //L293D
 Blockly.Msg.L293D_HELPURL = "";
