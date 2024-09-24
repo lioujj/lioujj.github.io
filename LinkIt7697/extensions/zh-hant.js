@@ -1397,6 +1397,7 @@ Blockly.Msg.LJJ_PMS_RX = 'RX連到腳位';
 Blockly.Msg.LJJ_PMS_TOOLTIP = 'PMS7003';
 Blockly.Msg.LJJ_PMS_GET_DATA = '當讀取到資料';
 Blockly.Msg.LJJ_PMS_DATATYPE = [["大氣環境PM2.5","PM_AE_UG_2_5"],["大氣環境PM1.0","PM_AE_UG_1_0"],["大氣環境PM10","PM_AE_UG_10_0"],["標準顆粒PM2.5","PM_SP_UG_2_5"],["標準顆粒PM1.0","PM_SP_UG_1_0"],["標準顆粒PM10","PM_SP_UG_10_0"]];
+Blockly.Msg.LJJ_PMS_UART_TYPE = [["硬體序列埠","hard"],["軟體序列埠","soft"]];
 
 //L293D
 Blockly.Msg.L293D_HELPURL = "";

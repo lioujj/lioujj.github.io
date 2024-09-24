@@ -2220,7 +2220,7 @@ Blockly.Blocks.oled_display_setting_spi={
       if (newValue=="SW"){
         sourceBlock.getInput("DIN").setVisible(true);
 			  sourceBlock.getInput("SCLK").setVisible(true);
-      } else if (newValue="HW"){
+      } else if (newValue=="HW"){
         sourceBlock.getInput("DIN").setVisible(false);
 			  sourceBlock.getInput("SCLK").setVisible(false);
       }
@@ -11468,6 +11468,7 @@ Blockly.Blocks.ljj_pms_init_pinmap={init:function(){
   this.setColour(Blockly.Blocks.ljj_pms.HUE);
   this.appendDummyInput()
 	  .appendField(Blockly.Msg.LJJ_PMS_TITLE)
+	  .appendField(Blockly.Msg.LJJ_SERIAL_INIT)
       .appendField(Blockly.Msg.LJJ_RADAR_CONNECT_TO_SERIAL)
 	  .appendField("ESP32")
       .appendField(new Blockly.FieldDropdown([["Serial","Serial"],["Serial1","Serial1"],["Serial2","Serial2"]]),"SERIAL_PORT");
@@ -11481,6 +11482,37 @@ Blockly.Blocks.ljj_pms_init_pinmap={init:function(){
   this.setPreviousStatement(!0);
   this.setNextStatement(!0);
   this.setTooltip(Blockly.Msg.LJJ_PMS_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_pms_other_init_pinmap={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_PMS_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_pms.HUE);
+  this.appendDummyInput()
+	  .appendField(Blockly.Msg.LJJ_PMS_TITLE)
+	  .appendField(Blockly.Msg.LJJ_SERIAL_INIT)
+      .appendField(Blockly.Msg.LJJ_RADAR_CONNECT_TO_SERIAL)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_PMS_UART_TYPE,this.validate),"SERIAL_TYPE");
+  this.appendValueInput("RX")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LJJ_PMS_TX)
+      .setVisible(false);
+  this.appendValueInput("TX")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LJJ_PMS_RX)
+      .setVisible(false);
+  this.setInputsInline(true);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_PMS_TOOLTIP)},validate: function(newValue) {
+    const sourceBlock = this.sourceBlock_;
+    if (newValue=="soft"){
+      sourceBlock.getInput("RX").setVisible(true);
+      sourceBlock.getInput("TX").setVisible(true);
+    } else if (newValue=="hard"){
+      sourceBlock.getInput("RX").setVisible(false);
+      sourceBlock.getInput("TX").setVisible(false);
+    }
+  }
 };
 
 Blockly.Blocks.ljj_pms_available={init:function(){

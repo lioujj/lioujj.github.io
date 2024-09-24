@@ -4924,6 +4924,18 @@
           </block>
         </value>         
       </block>
+      <block type="ljj_pms_other_init_pinmap">
+        <value name="RX">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="TX">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>         
+      </block>
       <block type="ljj_pms_available">
         <statement name="pms_stmt">
         </statement>

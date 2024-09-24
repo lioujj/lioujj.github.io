@@ -6819,6 +6819,8 @@ Blockly.Arduino.ljj_radar_03D_data=function(){
 //PMS7003M
 Blockly.Arduino.ljj_pms={};
 Blockly.Arduino.ljj_pms_init_pinmap = function() {
+  if (Blockly.Arduino.my_board_type!="ESP32")
+    return'';
   var a = this.getFieldValue('SERIAL_PORT');
       b=Blockly.Arduino.valueToCode(this,"RX",Blockly.Arduino.ORDER_ATOMIC)||"0",
       c=Blockly.Arduino.valueToCode(this,"TX",Blockly.Arduino.ORDER_ATOMIC)||"0";
@@ -6826,6 +6828,22 @@ Blockly.Arduino.ljj_pms_init_pinmap = function() {
   Blockly.Arduino.definitions_.define_ljj_pms_include = '#include "PMS.h"';
   Blockly.Arduino.definitions_.define_ljj_pms_invoke = 'PMS pms('+a+');\nPMS::DATA ljj_pms_data;';
   return a+'.begin(9600,SERIAL_8N1,'+b+','+c+');\n';
+};
+
+Blockly.Arduino.ljj_pms_other_init_pinmap = function() {
+  var a = this.getFieldValue('SERIAL_TYPE');
+      b=Blockly.Arduino.valueToCode(this,"RX",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      c=Blockly.Arduino.valueToCode(this,"TX",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      d='Serial';
+  if (a=='soft')
+    d='ljjPmsSoftSerial';
+  Blockly.Arduino.definitions_.define_ljj_pms_include = '#include "PMS.h"';
+  Blockly.Arduino.definitions_.define_ljj_pms_invoke = 'PMS pms('+d+');\nPMS::DATA ljj_pms_data;';
+  if (a=='soft'){
+    Blockly.Arduino.definitions_.define_ljj_pms_include+='\n#include <SoftwareSerial.h>';
+    Blockly.Arduino.definitions_.define_ljj_pms_invoke='SoftwareSerial '+d+'('+b+', '+c+');\n'+Blockly.Arduino.definitions_.define_ljj_pms_invoke;
+  }
+  return d+'.begin(9600);\n';
 };
 
 Blockly.Arduino.ljj_pms_available = function() { 
