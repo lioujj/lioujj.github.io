@@ -6813,7 +6813,12 @@ Blockly.Arduino.ljj_radar_03D_available = function() {
 Blockly.Arduino.ljj_radar_03D_data=function(){
   var a=this.getFieldValue("INDEX"),
       b=this.getFieldValue("DATATYPE");
-  return['targetData['+a+'].'+b,Blockly.Arduino.ORDER_ATOMIC];
+  if (b=='a'){
+    Blockly.Arduino.definitions_.define_ljj_radar_rd03d_angle_event='float calculateAngle(int x, int y){\n  if (y<1){\n    return -1.0;\n  }\n  float angleRadians=atan2(y,x);\n  float angleDegrees=angleRadians*180.0/PI;\n  angleDegrees=180-angleDegrees;\n  return angleDegrees;\n}\n';
+    return['calculateAngle(targetData['+a+'].x,targetData['+a+'].y)',Blockly.Arduino.ORDER_ATOMIC];
+  }
+  else
+    return['targetData['+a+'].'+b,Blockly.Arduino.ORDER_ATOMIC];
 }
 
 //PMS7003M

@@ -1385,7 +1385,7 @@ Blockly.Msg.LJJ_RADAR_RD_03E_GET_DATA = '當Rd-03E讀取到資料';
 Blockly.Msg.LJJ_RADAR_03E_LIST = [["動作代碼","0"],["距離(cm)","1"]];
 Blockly.Msg.LJJ_RADAR_RD_03D_GET_DATA = '當Rd-03D讀取到資料';
 Blockly.Msg.LJJ_RADAR_03D_TARGET_LIST = [["目標1","0"],["目標2","1"],["目標3","2"]];
-Blockly.Msg.LJJ_RADAR_03D_TARGET_DATATYPE = [["x軸(mm)","x"],["y軸(mm)","y"],["移動速度(cm/s)","s"],["距離分辨率(mm)","d"]];
+Blockly.Msg.LJJ_RADAR_03D_TARGET_DATATYPE = [["x軸(mm)","x"],["y軸(mm)","y"],["移動速度(cm/s)","s"],["距離分辨率(mm)","d"],["角度","a"]];
 Blockly.Msg.LJJ_RADAR_03D_MULTI_ENABLE = '多目標偵測模式';
 Blockly.Msg.LJJ_RADAR_03D_MULTI_ENABLE_DATATYPE = [["啟用","0x90"],["關閉","0x80"]];
 

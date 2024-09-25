@@ -1394,7 +1394,7 @@ Blockly.Msg.LJJ_RADAR_RD_03E_GET_DATA = 'when Rd-03E get data';
 Blockly.Msg.LJJ_RADAR_03E_LIST = [["action code","0"],["distance(cm)","1"]];
 Blockly.Msg.LJJ_RADAR_RD_03D_GET_DATA = 'when Rd-03D get data';
 Blockly.Msg.LJJ_RADAR_03D_TARGET_LIST = [["target 1","0"],["target 2","1"],["target 3","2"]];
-Blockly.Msg.LJJ_RADAR_03D_TARGET_DATATYPE = [["x(mm)","x"],["y(mm)","y"],["speed(cm/s)","s"],["distance(mm)","d"]];
+Blockly.Msg.LJJ_RADAR_03D_TARGET_DATATYPE = [["x(mm)","x"],["y(mm)","y"],["speed(cm/s)","s"],["distance(mm)","d"],["angle","a"]];
 Blockly.Msg.LJJ_RADAR_03D_MULTI_ENABLE = 'multiple target detection mode';
 Blockly.Msg.LJJ_RADAR_03D_MULTI_ENABLE_DATATYPE = [["enable","0x90"],["disable","0x80"]];
 
