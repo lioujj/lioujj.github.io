@@ -1,0 +1,82 @@
+<!DOCTYPE html><html><head><meta charset='utf-8'><meta http-equiv='Access-Control-Allow-Origin' content='*'><meta http-equiv='Access-Control-Allow-Credentials' content='true'><script src='https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/GameElements_20190131/gameelements.js'></script><link rel='stylesheet' href='https://fustyles.github.io/webduino/SpBlocklyJS/css/icon_custom.css' /><script src='https://fustyles.github.io/webduino/SpBlocklyJS/MQTT_20220324/mqtt.min.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/SpreadsheetSQL_20210403/spreadsheetsql.js'></script><script src='https://fustyles.github.io/webduino/SpBlocklyJS/SpreadsheetSQL_20210403/loader.js'></script></head><body>
+<script>
+const delay = (seconds) => {
+    return new Promise((resolve) => {
+        setTimeout(resolve, seconds * 1000);
+    });
+};
+const main = async () => {
+    var sumData, mqttData, sheetID, sheetName, topicName, i;
+
+    function spreadsheetsql_QueryResponse_(res) {
+        spreadsheetsql_QueryResponse(res, "");
+    }
+    window.spreadsheetsql_QueryResponse_ = spreadsheetsql_QueryResponse_;
+
+    async function spreadsheetsql_getDataFinish_(head_response, response) {
+        spreadsheetsql_getDataTable('', 400, 20, 100, 10, true, "");
+
+    };
+    window.spreadsheetsql_getDataFinish_ = spreadsheetsql_getDataFinish_;
+
+    function mqttBinarytobase64(input_array) {
+        const content = new Uint8Array(input_array);
+        return btoa(String.fromCharCode.apply(null, content));
+    }
+
+
+
+    sumData = 0;
+    mqttData = 0;
+    sheetID = '1yPYRT6EnqEcePSkKPwu6pAkjrlxIwjpboyP5HclP9no';
+    sheetName = '蔬菜庫存';
+    topicName = 'ljj/test';
+    button_create('', 80, 30, 200, 200, 1, null, '清空資料', 12, 999, true);
+    async function gamebutton__onclick(event) {
+        for (i = 2; i <= 6; i++) {
+            spreadsheet_insert("setcell", "", i, 2, String('0'), ['https://docs.google.com/spreadsheets/d/', sheetID, '/edit'].join(''), sheetName, "https://script.google.com/macros/s/AKfycbxA3hhTlntwVTOcqngOC_iJL_zLmRwzcDbMYDs7FD8iinNsY9XZsMkD7AcXTIUbEc33EA/exec");
+        }
+        await delay(2.5);
+        spreadsheetsql_executeSql('select A,B limit 6 offset 0', "");
+    };
+    document.getElementById("gamebutton_").addEventListener("click", gamebutton__onclick, true);
+    spreadsheetsql_settings(sheetID, sheetName, "");
+    spreadsheetsql_executeSql('select A,B limit 6 offset 0', "");
+    const clientId = 'vbudur';
+    const options = {
+        username: '',
+        password: '',
+        keepalive: 60,
+        clientId: clientId,
+        protocolId: "MQTT",
+        protocolVersion: 4,
+        clean: true,
+        reconnectPeriod: 1000,
+        connectTimeout: 30 * 1000
+    }
+
+    var mqtt_client = mqtt.connect('wss://broker.mqttgo.io:8084/mqtt', options);
+    mqtt_client.on("connect", () => {
+        console.log("connected");
+        mqtt_client.subscribe(topicName);
+        mqtt_client.on("message", async function(topic, payload) {
+            if (topic == topicName) {
+                if ((new TextDecoder().decode(payload)) != '') {
+                    mqttData = (Number(payload));
+                    sumData = (text_to_number((spreadsheetsql_getCell(2, mqttData, "")))) + 1;
+                    spreadsheetsql_clearData("");
+                    spreadsheet_insert("setcell", "", mqttData + 1, 2, String(sumData), ['https://docs.google.com/spreadsheets/d/', sheetID, '/edit'].join(''), sheetName, "https://script.google.com/macros/s/AKfycbxA3hhTlntwVTOcqngOC_iJL_zLmRwzcDbMYDs7FD8iinNsY9XZsMkD7AcXTIUbEc33EA/exec");
+                    await delay(1.5);
+                    spreadsheetsql_executeSql('select A,B limit 6 offset 0', "");
+                    while ((text_to_number((spreadsheetsql_getCell(2, mqttData, "")))) != sumData) {
+                        spreadsheetsql_executeSql('select A,B limit 6 offset 0', "");
+                        await delay(1.5);
+                    }
+                }
+            }
+        })
+    })
+};
+main();
+</script>
+</body></html>
