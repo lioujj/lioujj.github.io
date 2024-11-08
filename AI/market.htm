@@ -35,6 +35,7 @@ const main = async () => {
     async function gamebutton__onclick(event) {
         for (i = 2; i <= 6; i++) {
             spreadsheet_insert("setcell", "", i, 2, String('0'), ['https://docs.google.com/spreadsheets/d/', sheetID, '/edit'].join(''), sheetName, "https://script.google.com/macros/s/AKfycbxA3hhTlntwVTOcqngOC_iJL_zLmRwzcDbMYDs7FD8iinNsY9XZsMkD7AcXTIUbEc33EA/exec");
+            await delay(0.5);
         }
         await delay(2.5);
         spreadsheetsql_executeSql('select A,B limit 6 offset 0', "");
