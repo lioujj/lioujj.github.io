@@ -73,8 +73,8 @@ const main = async () => {
             spreadsheet_insert("setcell", "", i, 2, String('0'), ['https://docs.google.com/spreadsheets/d/', sheetID, '/edit'].join(''), sheetName, "https://script.google.com/macros/s/AKfycbxA3hhTlntwVTOcqngOC_iJL_zLmRwzcDbMYDs7FD8iinNsY9XZsMkD7AcXTIUbEc33EA/exec");
             await delay(0.5);
         }
-        await delay(0.5);
-        mqtt_client.publish('syes/clear', String('clear'));
+        await delay(2.5);
+        spreadsheetsql_executeSql('select A,B limit 6 offset 0', "");
     };
     document.getElementById("gamebutton_btnClear").addEventListener("click", gamebutton_btnClear_onclick, true);
     const clientId = ('syes_sheet_' + String(mathRandomInt(1, 3000)));
@@ -93,13 +93,7 @@ const main = async () => {
     var mqtt_client = mqtt.connect('wss://broker.mqttgo.io:8084/mqtt', options);
     mqtt_client.on("connect", () => {
         console.log("connected");
-        mqtt_client.subscribe('syes/clear');
         mqtt_client.on("message", async function(topic, payload) {
-            if (topic == 'syes/clear') {
-                if ((new TextDecoder().decode(payload)) == 'clear') {
-                    spreadsheetsql_executeSql('select A,B limit 6 offset 0', "");
-                }
-            }
             if (topic == topicName) {
                 if ((new TextDecoder().decode(payload)) != '') {
                     mqttData = (Number(payload));
