@@ -20,6 +20,16 @@ const main = async () => {
     };
     window.spreadsheetsql_getDataFinish_ = spreadsheetsql_getDataFinish_;
 
+    function mathRandomInt(a, b) {
+        if (a > b) {
+            // Swap a and b to ensure a is smaller.
+            var c = a;
+            a = b;
+            b = c;
+        }
+        return Math.floor(Math.random() * (b - a + 1) + a);
+    }
+
     function mqttBinarytobase64(input_array) {
         const content = new Uint8Array(input_array);
         return btoa(String.fromCharCode.apply(null, content));
@@ -67,7 +77,7 @@ const main = async () => {
         spreadsheetsql_executeSql('select A,B limit 6 offset 0', "");
     };
     document.getElementById("gamebutton_btnClear").addEventListener("click", gamebutton_btnClear_onclick, true);
-    const clientId = 'vbudur';
+    const clientId = ('syes_sheet_' + String(mathRandomInt(1, 3000)));
     const options = {
         username: '',
         password: '',
