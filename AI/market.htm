@@ -6,7 +6,7 @@ const delay = (seconds) => {
     });
 };
 const main = async () => {
-    var sumData, mqttData, sheetID, sheetName, topicName, i;
+    var sumData, mqttData, sheetID, sheetName, topicName, j, i;
 
     function spreadsheetsql_QueryResponse_(res) {
         spreadsheetsql_QueryResponse(res, "");
@@ -15,6 +15,7 @@ const main = async () => {
 
     async function spreadsheetsql_getDataFinish_(head_response, response) {
         spreadsheetsql_getDataTable('', 400, 20, 100, 10, true, "");
+        button_set('btnClear', "display", true);
 
     };
     window.spreadsheetsql_getDataFinish_ = spreadsheetsql_getDataFinish_;
@@ -28,11 +29,36 @@ const main = async () => {
 
     sumData = 0;
     mqttData = 0;
-    sheetID = '1yPYRT6EnqEcePSkKPwu6pAkjrlxIwjpboyP5HclP9no';
-    sheetName = '蔬菜庫存';
-    topicName = 'ljj/test';
-    button_create('', 80, 30, 200, 200, 1, null, '清空資料', 12, 999, true);
-    async function gamebutton__onclick(event) {
+    sheetID = '';
+    sheetName = '';
+    topicName = '';
+    spreadsheetsql_settings(sheetID, sheetName, "");
+    span_create('label_1', 10, 10, 20, '試算表ID：', 999);
+    text_create('txt_1', 600, 30, 130, 10, '#ffffff', '#000000', 20, 1, sheetID, 999, true);
+    span_create('label_2', 10, 60, 20, '工作表名稱：', 999);
+    text_create('txt_2', 300, 30, 130, 60, '#ffffff', '#000000', 20, 1, sheetName, 999, true);
+    span_create('label_3', 10, 110, 20, 'Topic名稱：', 999);
+    text_create('txt_3', 300, 30, 130, 110, '#ffffff', '#000000', 20, 1, topicName, 999, true);
+    button_create('btnSubmit', 140, 40, 250, 160, 1, null, '開啟庫存資料', 20, 999, true);
+    async function gamebutton_btnSubmit_onclick(event) {
+        if ((text_get('txt_1', "value")) != '' && (text_get('txt_2', "value")) != '' && (text_get('txt_3', "value")) != '') {
+            for (j = 1; j <= 3; j++) {
+                span_set(('label_' + String(j)), "display", false);
+                text_set(('txt_' + String(j)), "display", false);
+                button_set('btnSubmit', "display", false);
+                sheetID = (text_get('txt_1', "value"));
+                sheetName = (text_get('txt_2', "value"));
+                topicName = (text_get('txt_3', "value"));
+                spreadsheetsql_settings(sheetID, sheetName, "");
+                spreadsheetsql_executeSql('select A,B limit 6 offset 0', "");
+                mqtt_client.subscribe(topicName);
+            }
+        }
+    };
+    document.getElementById("gamebutton_btnSubmit").addEventListener("click", gamebutton_btnSubmit_onclick, true);
+    button_create('btnClear', 80, 30, 200, 200, 1, null, '清空資料', 12, 999, false);
+    async function gamebutton_btnClear_onclick(event) {
+        button_set('btnClear', "display", false);
         for (i = 2; i <= 6; i++) {
             spreadsheet_insert("setcell", "", i, 2, String('0'), ['https://docs.google.com/spreadsheets/d/', sheetID, '/edit'].join(''), sheetName, "https://script.google.com/macros/s/AKfycbxA3hhTlntwVTOcqngOC_iJL_zLmRwzcDbMYDs7FD8iinNsY9XZsMkD7AcXTIUbEc33EA/exec");
             await delay(0.5);
@@ -40,9 +66,7 @@ const main = async () => {
         await delay(2.5);
         spreadsheetsql_executeSql('select A,B limit 6 offset 0', "");
     };
-    document.getElementById("gamebutton_").addEventListener("click", gamebutton__onclick, true);
-    spreadsheetsql_settings(sheetID, sheetName, "");
-    spreadsheetsql_executeSql('select A,B limit 6 offset 0', "");
+    document.getElementById("gamebutton_btnClear").addEventListener("click", gamebutton_btnClear_onclick, true);
     const clientId = 'vbudur';
     const options = {
         username: '',
@@ -59,7 +83,6 @@ const main = async () => {
     var mqtt_client = mqtt.connect('wss://broker.mqttgo.io:8084/mqtt', options);
     mqtt_client.on("connect", () => {
         console.log("connected");
-        mqtt_client.subscribe(topicName);
         mqtt_client.on("message", async function(topic, payload) {
             if (topic == topicName) {
                 if ((new TextDecoder().decode(payload)) != '') {
