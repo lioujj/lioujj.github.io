@@ -90,7 +90,7 @@ const main = async () => {
         connectTimeout: 30 * 1000
     }
 
-    var mqtt_client = mqtt.connect('wss://broker.mqttgo.io:8084/mqtt', options);
+    var mqtt_client = mqtt.connect('wss://broker.emqx.io:8084/mqtt', options);
     mqtt_client.on("connect", () => {
         console.log("connected");
         mqtt_client.on("message", async function(topic, payload) {
