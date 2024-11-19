@@ -97,14 +97,16 @@ const main = async () => {
             if (topic == topicName) {
                 if ((new TextDecoder().decode(payload)) != '') {
                     mqttData = (Number(payload));
-                    sumData = (text_to_number((spreadsheetsql_getCell(2, mqttData, "")))) + 1;
-                    spreadsheetsql_clearData("");
-                    spreadsheet_insert("setcell", "", mqttData + 1, 2, String(sumData), ['https://docs.google.com/spreadsheets/d/', sheetID, '/edit'].join(''), sheetName, "https://script.google.com/macros/s/AKfycbxA3hhTlntwVTOcqngOC_iJL_zLmRwzcDbMYDs7FD8iinNsY9XZsMkD7AcXTIUbEc33EA/exec");
-                    await delay(1.5);
-                    spreadsheetsql_executeSql('select A,B limit 6 offset 0', "");
-                    while ((text_to_number((spreadsheetsql_getCell(2, mqttData, "")))) != sumData) {
-                        spreadsheetsql_executeSql('select A,B limit 6 offset 0', "");
+                    if (mqttData > 0 && mqttData < 6) {
+                        sumData = (text_to_number((spreadsheetsql_getCell(2, mqttData, "")))) + 1;
+                        spreadsheetsql_clearData("");
+                        spreadsheet_insert("setcell", "", mqttData + 1, 2, String(sumData), ['https://docs.google.com/spreadsheets/d/', sheetID, '/edit'].join(''), sheetName, "https://script.google.com/macros/s/AKfycbxA3hhTlntwVTOcqngOC_iJL_zLmRwzcDbMYDs7FD8iinNsY9XZsMkD7AcXTIUbEc33EA/exec");
                         await delay(1.5);
+                        spreadsheetsql_executeSql('select A,B limit 6 offset 0', "");
+                        while ((text_to_number((spreadsheetsql_getCell(2, mqttData, "")))) != sumData) {
+                            spreadsheetsql_executeSql('select A,B limit 6 offset 0', "");
+                            await delay(1.5);
+                        }
                     }
                 }
             }
