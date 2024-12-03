@@ -53,9 +53,9 @@ const main = async () => {
 
     sumData = 0;
     mqttData = 0;
-    sheetID = '1squ-BfwYp2SBxOILTv55v-hZKZH4IV5flRzexG6go-E';
-    sheetName = '蔬菜庫存';
-    topicName = 'syes/syes1';
+    sheetID = '1mU6Q-UdlxeB73-rZE5bSkqcAS8V10-C4_bzI6h3gUIE';
+    sheetName = '昆蟲名單';
+    topicName = 'syes/syes2';
     titleName = '';
     spreadsheetsql_settings(sheetID, '標題', "sheetTitle");
     spreadsheetsql_settings(sheetID, sheetName, "");
@@ -65,7 +65,7 @@ const main = async () => {
     text_create('txt_2', 300, 30, 130, 60, '#ffffff', '#000000', 20, 1, sheetName, 999, true);
     span_create('label_3', 10, 110, 20, 'Topic名稱：', 999);
     text_create('txt_3', 300, 30, 130, 110, '#ffffff', '#000000', 20, 1, topicName, 999, true);
-    button_create('btnSubmit', 140, 40, 250, 160, 1, null, '開啟庫存資料', 20, 999, true);
+    button_create('btnSubmit', 140, 40, 250, 160, 1, null, '開啟昆蟲資料', 20, 999, true);
     async function gamebutton_btnSubmit_onclick(event) {
         if ((text_get('txt_1', "value")) != '' && (text_get('txt_2', "value")) != '' && (text_get('txt_3', "value")) != '') {
             for (j = 1; j <= 3; j++) {
