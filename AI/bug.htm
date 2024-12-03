@@ -17,6 +17,7 @@ const main = async () => {
         titleName = (spreadsheetsql_getCell(1, 1, "sheetTitle"));
         spreadsheetsql_clearData("sheetTitle");
         span_set('spanTitle', "innerHTML", titleName);
+        span_set('spanTitle', "color", (HextoRgb('#ff0000')));
         span_set('spanTitle', "display", true);
 
     };
@@ -29,6 +30,13 @@ const main = async () => {
 
     async function spreadsheetsql_getDataFinish_(head_response, response) {
         spreadsheetsql_getDataTable('', 400, 20, 100, 80, true, "");
+        table_td_set('', 1, 0, "textalign", 'center');
+        table_td_set('', 0, 0, "textalign", 'center');
+        table_set('', "background", (HextoRgb('#ffff66')));
+        table_td_set('', 0, 0, "innerHTML", (fontText(5, '#000099', 'Arial', '昆蟲名稱')));
+        table_td_set('', 1, 0, "innerHTML", (fontText(5, '#000099', 'Arial', '數量')));
+        table_td_set('', 1, 0, "background", '#ffff00');
+        table_td_set('', 0, 0, "background", '#ffff00');
         button_set('btnClear', "display", true);
 
     };
@@ -51,6 +59,7 @@ const main = async () => {
 
 
 
+    body_set("backgroundColor", '#99ff99');
     sumData = 0;
     mqttData = 0;
     sheetID = '1mU6Q-UdlxeB73-rZE5bSkqcAS8V10-C4_bzI6h3gUIE';
@@ -86,7 +95,7 @@ const main = async () => {
     document.getElementById("gamebutton_btnSubmit").addEventListener("click", gamebutton_btnSubmit_onclick, true);
     span_create('spanTitle', 100, 20, 30, '', 999);
     span_set('spanTitle', "display", false);
-    button_create('btnClear', 80, 30, 200, 270, 1, null, '清空資料', 12, 999, false);
+    button_create('btnClear', 120, 40, 250, 280, 1, null, '清空資料', 20, 999, false);
     async function gamebutton_btnClear_onclick(event) {
         button_set('btnClear', "display", false);
         for (i = 2; i <= 6; i++) {
