@@ -1390,14 +1390,18 @@ Blockly.Msg.LJJ_RADAR_03D_MULTI_ENABLE = '多目標偵測模式';
 Blockly.Msg.LJJ_RADAR_03D_MULTI_ENABLE_DATATYPE = [["啟用","0x90"],["關閉","0x80"]];
 
 //PMS7003M
-Blockly.Msg.LJJ_PMS_HELPURL = '';
+Blockly.Msg.LJJ_PMS_HELPURL = 'https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/PMS7003';
 Blockly.Msg.LJJ_PMS_TITLE = 'PMS7003';
 Blockly.Msg.LJJ_PMS_TX = 'TX連到腳位';
 Blockly.Msg.LJJ_PMS_RX = 'RX連到腳位';
 Blockly.Msg.LJJ_PMS_TOOLTIP = 'PMS7003';
-Blockly.Msg.LJJ_PMS_GET_DATA = '當讀取到資料';
+Blockly.Msg.LJJ_PMS_GET_DATA = '讀取資料';
 Blockly.Msg.LJJ_PMS_DATATYPE = [["大氣環境PM2.5","PM_AE_UG_2_5"],["大氣環境PM1.0","PM_AE_UG_1_0"],["大氣環境PM10","PM_AE_UG_10_0"],["標準顆粒PM2.5","PM_SP_UG_2_5"],["標準顆粒PM1.0","PM_SP_UG_1_0"],["標準顆粒PM10","PM_SP_UG_10_0"]];
 Blockly.Msg.LJJ_PMS_UART_TYPE = [["硬體序列埠","hard"],["軟體序列埠","soft"]];
+Blockly.Msg.LJJ_PMS_DATATYPE_T = [["溫度(C)","temperature"],["濕度(%)","humidity"]];
+Blockly.Msg.LJJ_PMS_ACTION =[["睡眠模式","sleep"],["喚醒","wakeUp"],["主動偵測","activeMode"],["被動偵測","passiveMode"]];
+Blockly.Msg.LJJ_PMS_REQUEST = "被動模式下請求偵測數據一次";
+Blockly.Msg.LJJ_PMS_TIMEOUT = 'timeout';
 
 //L293D
 Blockly.Msg.L293D_HELPURL = "";

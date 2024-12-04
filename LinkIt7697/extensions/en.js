@@ -1399,14 +1399,18 @@ Blockly.Msg.LJJ_RADAR_03D_MULTI_ENABLE = 'multiple target detection mode';
 Blockly.Msg.LJJ_RADAR_03D_MULTI_ENABLE_DATATYPE = [["enable","0x90"],["disable","0x80"]];
 
 //PMS7003M
-Blockly.Msg.LJJ_PMS_HELPURL = '';
+Blockly.Msg.LJJ_PMS_HELPURL = 'https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/PMS7003';
 Blockly.Msg.LJJ_PMS_TITLE = 'PMS7003';
 Blockly.Msg.LJJ_PMS_TX = 'TX to PIN';
 Blockly.Msg.LJJ_PMS_RX = 'RX to PIN';
 Blockly.Msg.LJJ_PMS_TOOLTIP = 'PMS7003';
-Blockly.Msg.LJJ_PMS_GET_DATA = 'when get data';
+Blockly.Msg.LJJ_PMS_GET_DATA = 'get data';
 Blockly.Msg.LJJ_PMS_DATATYPE = [["Atmospheric environment PM2.5","PM_AE_UG_2_5"],["Atmospheric environment PM1.0","PM_AE_UG_1_0"],["Atmospheric environment PM10","PM_AE_UG_10_0"],["Standard Particles PM2.5","PM_SP_UG_2_5"],["Standard Particles PM1.0","PM_SP_UG_1_0"],["Standard Particles PM10","PM_SP_UG_10_0"]];
 Blockly.Msg.LJJ_PMS_UART_TYPE = [["hardware serial","hard"],["software serial","soft"]];
+Blockly.Msg.LJJ_PMS_DATATYPE_T = [["Temperature(C)","temperature"],["Humidity(%)","humidity"]];
+Blockly.Msg.LJJ_PMS_ACTION =[["sleep","sleep"],["wake up","wakeUp"],["active mode","activeMode"],["passive mode","passiveMode"]];
+Blockly.Msg.LJJ_PMS_REQUEST = "request a single detection under passive mode";
+Blockly.Msg.LJJ_PMS_TIMEOUT = 'timeout';
 
 //L293D
 Blockly.Msg.L293D_HELPURL = "";

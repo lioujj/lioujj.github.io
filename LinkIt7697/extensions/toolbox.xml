@@ -4936,11 +4936,19 @@
           </block>
         </value>         
       </block>
+      <block type="ljj_pms_action"></block>
+      <block type="ljj_pms_request"></block>
       <block type="ljj_pms_available">
+        <value name="TIMEOUT">
+          <block type="math_number">
+            <field name="NUM">1000</field>
+          </block>
+        </value> 
         <statement name="pms_stmt">
         </statement>
       </block>
       <block type="ljj_pms_data"></block>
+      <block type="ljj_pms_data_t"></block>
 	</category>
   </category>
   <category id="category_lumex" name="Lumex">

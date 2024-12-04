@@ -6851,12 +6851,27 @@ Blockly.Arduino.ljj_pms_other_init_pinmap = function() {
   return d+'.begin(9600);\n';
 };
 
+Blockly.Arduino.ljj_pms_action = function() { 
+  var a=this.getFieldValue("ACTION");
+  return 'pms.'+a+'();\n';
+}
+
+Blockly.Arduino.ljj_pms_request = function() { 
+  return 'pms.requestRead();\n';
+}
+
 Blockly.Arduino.ljj_pms_available = function() { 
-  var a=Blockly.Arduino.statementToCode(this,"pms_stmt");
-  return 'if (pms.readUntil(ljj_pms_data)){\n'+a+'}\n';
+  var a=Blockly.Arduino.statementToCode(this,"pms_stmt"),
+      b=Blockly.Arduino.valueToCode(this,"TIMEOUT",Blockly.Arduino.ORDER_ATOMIC)||"1000";
+  return 'if (pms.readUntil(ljj_pms_data,'+b+')){\n'+a+'}\n';
 }
 
 Blockly.Arduino.ljj_pms_data=function(){
+  var a=this.getFieldValue("DATATYPE");
+  return['ljj_pms_data.'+a,Blockly.Arduino.ORDER_ATOMIC];
+}
+
+Blockly.Arduino.ljj_pms_data_t=function(){
   var a=this.getFieldValue("DATATYPE");
   return['ljj_pms_data.'+a,Blockly.Arduino.ORDER_ATOMIC];
 }

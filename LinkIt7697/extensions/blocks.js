@@ -11515,12 +11515,42 @@ Blockly.Blocks.ljj_pms_other_init_pinmap={init:function(){
   }
 };
 
+Blockly.Blocks.ljj_pms_action={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_PMS_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_pms.HUE);
+  this.appendDummyInput()
+	    .appendField(Blockly.Msg.LJJ_PMS_TITLE)
+      .appendField(Blockly.Msg.LJJ_CAMERA_SET)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_PMS_ACTION),"ACTION");
+  this.setInputsInline(true);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_PMS_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_pms_request={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_PMS_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_pms.HUE);
+  this.appendDummyInput()
+	    .appendField(Blockly.Msg.LJJ_PMS_TITLE)
+      .appendField(Blockly.Msg.LJJ_PMS_REQUEST);
+  this.setInputsInline(true);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_PMS_TOOLTIP)}
+};
+
 Blockly.Blocks.ljj_pms_available={init:function(){
   this.setHelpUrl(Blockly.Msg.LJJ_PMS_HELPURL);
   this.setColour(Blockly.Blocks.ljj_pms.HUE);
   this.appendDummyInput()
       .appendField(Blockly.Msg.LJJ_PMS_TITLE)
-      .appendField(Blockly.Msg.LJJ_PMS_GET_DATA)
+      .appendField(Blockly.Msg.LJJ_PMS_GET_DATA);
+  this.appendValueInput("TIMEOUT")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LJJ_PMS_TIMEOUT);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_TIME_MS);
   this.setInputsInline(true);
   this.appendStatementInput("pms_stmt");
   this.setPreviousStatement(!0);
@@ -11532,9 +11562,20 @@ Blockly.Blocks.ljj_pms_data={init:function(){
   this.setHelpUrl(Blockly.Msg.LJJ_PMS_HELPURL);
   this.setColour(Blockly.Blocks.ljj_pms.HUE);
   this.appendDummyInput()
-	  .appendField(Blockly.Msg.LJJ_PMS_TITLE)
+	    .appendField(Blockly.Msg.LJJ_PMS_TITLE)
       .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_PMS_DATATYPE),"DATATYPE")
-	  .appendField("(ug/m3)");
+	    .appendField("(ug/m3)");
+  this.setInputsInline(true);
+  this.setOutput(!0,"Number");
+  this.setTooltip(Blockly.Msg.LJJ_PMS_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_pms_data_t={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_PMS_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_pms.HUE);
+  this.appendDummyInput()
+	    .appendField(Blockly.Msg.LJJ_PMS_TITLE+"(T)")
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_PMS_DATATYPE_T),"DATATYPE");
   this.setInputsInline(true);
   this.setOutput(!0,"Number");
   this.setTooltip(Blockly.Msg.LJJ_PMS_TOOLTIP)}
