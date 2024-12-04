@@ -17,7 +17,6 @@ const main = async () => {
         titleName = (spreadsheetsql_getCell(1, 1, "sheetTitle"));
         spreadsheetsql_clearData("sheetTitle");
         span_set('spanTitle', "innerHTML", titleName);
-        span_set('spanTitle', "color", (HextoRgb('#ff0000')));
         span_set('spanTitle', "display", true);
 
     };
@@ -32,11 +31,11 @@ const main = async () => {
         spreadsheetsql_getDataTable('', 400, 20, 100, 80, true, "");
         table_td_set('', 1, 0, "textalign", 'center');
         table_td_set('', 0, 0, "textalign", 'center');
-        table_set('', "background", (HextoRgb('#ffff66')));
-        table_td_set('', 0, 0, "innerHTML", (fontText(5, '#000099', 'Arial', '昆蟲名稱')));
-        table_td_set('', 1, 0, "innerHTML", (fontText(5, '#000099', 'Arial', '數量')));
-        table_td_set('', 1, 0, "background", '#ffff00');
-        table_td_set('', 0, 0, "background", '#ffff00');
+        table_set('', "background", (HextoRgb('#FBF8EE')));
+        table_td_set('', 0, 0, "innerHTML", (fontText(5, '#000000', 'Arial', '昆蟲名稱')));
+        table_td_set('', 1, 0, "innerHTML", (fontText(5, '#000000', 'Arial', '數量')));
+        table_td_set('', 1, 0, "background", (HextoRgb('#D1DDD5')));
+        table_td_set('', 0, 0, "background", (HextoRgb('#D1DDD5')));
         button_set('btnClear', "display", true);
 
     };
@@ -59,7 +58,6 @@ const main = async () => {
 
 
 
-    body_set("backgroundColor", '#99ff99');
     sumData = 0;
     mqttData = 0;
     sheetID = '1mU6Q-UdlxeB73-rZE5bSkqcAS8V10-C4_bzI6h3gUIE';
@@ -93,7 +91,7 @@ const main = async () => {
         }
     };
     document.getElementById("gamebutton_btnSubmit").addEventListener("click", gamebutton_btnSubmit_onclick, true);
-    span_create('spanTitle', 100, 20, 30, '', 999);
+    span_create('spanTitle', 170, 20, 30, '', 999);
     span_set('spanTitle', "display", false);
     button_create('btnClear', 120, 40, 250, 280, 1, null, '清空資料', 20, 999, false);
     async function gamebutton_btnClear_onclick(event) {
