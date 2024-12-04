@@ -11463,6 +11463,7 @@ Blockly.Blocks.ljj_radar_03D_data={init:function(){
 //PMS7003M
 Blockly.Blocks.ljj_pms={};
 Blockly.Blocks.ljj_pms.HUE=236;
+Blockly.Blocks.ljj_pms.HUE2=120;
 Blockly.Blocks.ljj_pms_init_pinmap={init:function(){
   this.setHelpUrl(Blockly.Msg.LJJ_PMS_HELPURL);
   this.setColour(Blockly.Blocks.ljj_pms.HUE);
@@ -11572,7 +11573,7 @@ Blockly.Blocks.ljj_pms_data={init:function(){
 
 Blockly.Blocks.ljj_pms_data_t={init:function(){
   this.setHelpUrl(Blockly.Msg.LJJ_PMS_HELPURL);
-  this.setColour(Blockly.Blocks.ljj_pms.HUE);
+  this.setColour(Blockly.Blocks.ljj_pms.HUE2);
   this.appendDummyInput()
 	    .appendField(Blockly.Msg.LJJ_PMS_TITLE+"(T)")
       .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_PMS_DATATYPE_T),"DATATYPE");
