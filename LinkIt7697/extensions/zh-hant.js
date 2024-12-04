@@ -1399,7 +1399,7 @@ Blockly.Msg.LJJ_PMS_GET_DATA = '讀取資料';
 Blockly.Msg.LJJ_PMS_DATATYPE = [["大氣環境PM2.5","PM_AE_UG_2_5"],["大氣環境PM1.0","PM_AE_UG_1_0"],["大氣環境PM10","PM_AE_UG_10_0"],["標準顆粒PM2.5","PM_SP_UG_2_5"],["標準顆粒PM1.0","PM_SP_UG_1_0"],["標準顆粒PM10","PM_SP_UG_10_0"]];
 Blockly.Msg.LJJ_PMS_UART_TYPE = [["硬體序列埠","hard"],["軟體序列埠","soft"]];
 Blockly.Msg.LJJ_PMS_DATATYPE_T = [["溫度(C)","temperature"],["濕度(%)","humidity"]];
-Blockly.Msg.LJJ_PMS_ACTION =[["睡眠模式","sleep"],["喚醒","wakeUp"],["主動偵測","activeMode"],["被動偵測","passiveMode"]];
+Blockly.Msg.LJJ_PMS_ACTION =[["被動偵測","passiveMode"],["主動偵測","activeMode"],["睡眠模式","sleep"],["喚醒","wakeUp"]];
 Blockly.Msg.LJJ_PMS_REQUEST = "被動模式下請求偵測數據一次";
 Blockly.Msg.LJJ_PMS_TIMEOUT = 'timeout';
 
