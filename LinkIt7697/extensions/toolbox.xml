@@ -2479,6 +2479,52 @@
         <block type="ljj_ksb069_motor_stop"></block>
         <block type="ljj_ksb069_cam_pins_clear"></block>
       </category>
+      <category id="category_ljj_radar" name="RADAR">
+       <block type="ljj_radar_init_pinmap">
+         <value name="RX">
+           <block type="math_number">
+             <field name="NUM">0</field>
+           </block>
+         </value>
+         <value name="TX">
+           <block type="math_number">
+             <field name="NUM">0</field>
+           </block>
+         </value>         
+       </block>
+ <!--
+       <block type="ljj_radar_other_init_pinmap">
+         <value name="RX">
+           <block type="math_number">
+             <field name="NUM">0</field>
+           </block>
+         </value>
+         <value name="TX">
+           <block type="math_number">
+             <field name="NUM">0</field>
+           </block>
+         </value>         
+       </block>
+ -->
+       <block type="ljj_radar_03E_available">
+         <statement name="Rd_03E">
+         </statement>
+       </block>
+       <block type="ljj_radar_03E_data"></block>
+       <block type="controls_if">
+         <value name="IF0">
+           <block type="ljj_radar_03E_code">
+             <field name="INDEX">1</field>
+           </block>
+         </value>
+       </block>
+       <block type="ljj_radar_03D_multi_enable"></block>
+       <block type="ljj_radar_03D_available">
+         <statement name="Rd_03D">
+         </statement>
+       </block>
+       <block type="ljj_radar_03D_data"></block>
+      </category>
     </category>
   </category>
   <category id="category_esp8266" name="ESP8266">
@@ -4885,31 +4931,6 @@
       <block type="ljj_stepper_is_moving"></block>
       <block type="ljj_stepper_remain_steps"></block>
       <block type="ljj_stepper_position"></block>      
-     </category>
-     <category id="category_ljj_radar" name="RADAR">
-      <block type="ljj_radar_init_pinmap">
-        <value name="RX">
-          <block type="math_number">
-            <field name="NUM">0</field>
-          </block>
-        </value>
-        <value name="TX">
-          <block type="math_number">
-            <field name="NUM">0</field>
-          </block>
-        </value>         
-      </block>
-      <block type="ljj_radar_03E_available">
-        <statement name="Rd_03E">
-        </statement>
-      </block>
-      <block type="ljj_radar_03E_data"></block>
-      <block type="ljj_radar_03D_multi_enable"></block>
-      <block type="ljj_radar_03D_available">
-        <statement name="Rd_03D">
-        </statement>
-      </block>
-      <block type="ljj_radar_03D_data"></block>
      </category>
 	 <category id="ljj_pms" name="PMS7003M">
       <block type="ljj_pms_init_pinmap">

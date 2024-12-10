@@ -1376,7 +1376,7 @@ Blockly.Msg.LJJ_STEPPER_TRIGGER = '　　是否觸發停止移動事件';
 
 //RADAR
 Blockly.Msg.LJJ_RADAR_HELPURL = '';
-Blockly.Msg.LJJ_RADAR_TITLE = '雷達';
+Blockly.Msg.LJJ_RADAR_TITLE = '毫米波雷達';
 Blockly.Msg.LJJ_RADAR_CONNECT_TO_SERIAL = '連接到';
 Blockly.Msg.LJJ_RADAR_TOOLTIP = 'RADAR';
 Blockly.Msg.LJJ_RADAR_TX = 'TX(OT1)連到腳位';
@@ -1388,6 +1388,7 @@ Blockly.Msg.LJJ_RADAR_03D_TARGET_LIST = [["目標1","0"],["目標2","1"],["目�
 Blockly.Msg.LJJ_RADAR_03D_TARGET_DATATYPE = [["x軸(mm)","x"],["y軸(mm)","y"],["移動速度(cm/s)","s"],["距離分辨率(mm)","d"],["角度","a"]];
 Blockly.Msg.LJJ_RADAR_03D_MULTI_ENABLE = '多目標偵測模式';
 Blockly.Msg.LJJ_RADAR_03D_MULTI_ENABLE_DATATYPE = [["啟用","0x90"],["關閉","0x80"]];
+Blockly.Msg.LJJ_RADAR_03E_ACTION_LIST = [["快速移動","1"],["緩慢移動","2"],["無生命","0"]];
 
 //PMS7003M
 Blockly.Msg.LJJ_PMS_HELPURL = 'https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/PMS7003';

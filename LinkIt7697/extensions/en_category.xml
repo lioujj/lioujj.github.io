@@ -90,7 +90,7 @@
 <category><name>SEN0539</name><replace>SEN0539 ASR</replace></category>
 <category><name>HC-SR04</name><replace>UltraSonic</replace></category>
 <category><name>STEPPER</name><replace>Stepper motor</replace></category>
-<category><name>RADAR</name><replace>RADAR</replace></category>
+<category><name>RADAR</name><replace>mmWAVE RADAR</replace></category>
 <category><name>L293D</name><replace>L293D Shield V1</replace></category>
 <category><name>PMS7003M</name><replace>PMS7003</replace></category>
 </xml>

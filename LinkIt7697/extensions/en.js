@@ -1385,7 +1385,7 @@ Blockly.Msg.LJJ_STEPPER_START_TRIGGER = 'Trig on start';
 
 //RADAR
 Blockly.Msg.LJJ_RADAR_HELPURL = '';
-Blockly.Msg.LJJ_RADAR_TITLE = 'RADAR';
+Blockly.Msg.LJJ_RADAR_TITLE = 'mmWAVE RADAR';
 Blockly.Msg.LJJ_RADAR_CONNECT_TO_SERIAL = 'connect to UART';
 Blockly.Msg.LJJ_RADAR_TOOLTIP = 'RADAR';
 Blockly.Msg.LJJ_RADAR_TX = 'TX(OT1) to PIN';
@@ -1397,6 +1397,7 @@ Blockly.Msg.LJJ_RADAR_03D_TARGET_LIST = [["target 1","0"],["target 2","1"],["tar
 Blockly.Msg.LJJ_RADAR_03D_TARGET_DATATYPE = [["x(mm)","x"],["y(mm)","y"],["speed(cm/s)","s"],["distance(mm)","d"],["angle","a"]];
 Blockly.Msg.LJJ_RADAR_03D_MULTI_ENABLE = 'multiple target detection mode';
 Blockly.Msg.LJJ_RADAR_03D_MULTI_ENABLE_DATATYPE = [["enable","0x90"],["disable","0x80"]];
+Blockly.Msg.LJJ_RADAR_03E_ACTION_LIST = [["fast movement","1"],["slow movement","2"],["no life","0"]];
 
 //PMS7003M
 Blockly.Msg.LJJ_PMS_HELPURL = 'https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/PMS7003';

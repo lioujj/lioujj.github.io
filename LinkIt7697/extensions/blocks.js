@@ -11381,7 +11381,7 @@ Blockly.Blocks.ljj_radar_init_pinmap={init:function(){
   this.appendDummyInput()
       .appendField(Blockly.Msg.LJJ_RADAR_TITLE)
       .appendField(Blockly.Msg.LJJ_RADAR_CONNECT_TO_SERIAL)
-	  .appendField("ESP32")
+	    .appendField("ESP32")
       .appendField(new Blockly.FieldDropdown([["Serial","Serial"],["Serial1","Serial1"],["Serial2","Serial2"]]),"SERIAL_PORT");
   this.appendValueInput("RX")
       .setCheck("Number")
@@ -11394,7 +11394,37 @@ Blockly.Blocks.ljj_radar_init_pinmap={init:function(){
   this.setNextStatement(!0);
   this.setTooltip(Blockly.Msg.LJJ_RADAR_TOOLTIP)}
 };
-
+/*
+Blockly.Blocks.ljj_radar_other_init_pinmap={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_RADAR_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_radar.HUE1);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_RADAR_TITLE)
+      .appendField(Blockly.Msg.LJJ_RADAR_CONNECT_TO_SERIAL)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_PMS_UART_TYPE,this.validate),"SERIAL_TYPE");
+  this.appendValueInput("RX")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LJJ_RADAR_TX)
+      .setVisible(false);
+  this.appendValueInput("TX")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LJJ_RADAR_RX)
+      .setVisible(false);
+  this.setInputsInline(true);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_RADAR_TOOLTIP)},validate: function(newValue) {
+    const sourceBlock = this.sourceBlock_;
+    if (newValue=="soft"){
+      sourceBlock.getInput("RX").setVisible(true);
+      sourceBlock.getInput("TX").setVisible(true);
+    } else if (newValue=="hard"){
+      sourceBlock.getInput("RX").setVisible(false);
+      sourceBlock.getInput("TX").setVisible(false);
+    }
+  }
+};
+*/
 Blockly.Blocks.ljj_radar_03E_available={init:function(){
   this.setHelpUrl(Blockly.Msg.LJJ_RADAR_HELPURL);
   this.setColour(Blockly.Blocks.ljj_radar.HUE2);
@@ -11417,6 +11447,21 @@ Blockly.Blocks.ljj_radar_03E_data={init:function(){
       .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_RADAR_03E_LIST),"INDEX");
   this.setInputsInline(true);
   this.setOutput(!0,"Number");
+  this.setTooltip(Blockly.Msg.LJJ_RADAR_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_radar_03E_code={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_RADAR_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_radar.HUE2);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_RADAR_TITLE)
+      .appendField("Rd-03E")
+      .appendField(Blockly.Msg.LJJ_RADAR_03E_LIST[0][0])
+      .appendField(Blockly.Msg.GOOGLESHEETS_KEY_WORD)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_RADAR_03E_ACTION_LIST),"INDEX")
+      .appendField("?")
+  this.setInputsInline(true);
+  this.setOutput(!0,"Boolean");
   this.setTooltip(Blockly.Msg.LJJ_RADAR_TOOLTIP)}
 };
 
