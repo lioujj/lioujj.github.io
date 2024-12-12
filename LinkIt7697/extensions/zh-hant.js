@@ -1375,7 +1375,7 @@ Blockly.Msg.LJJ_STEPPER_STATEMENT_NOT_MOVING = '停止移動時';
 Blockly.Msg.LJJ_STEPPER_TRIGGER = '　　是否觸發停止移動事件';
 
 //RADAR
-Blockly.Msg.LJJ_RADAR_HELPURL = '';
+Blockly.Msg.LJJ_RADAR_HELPURL = 'https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/radar';
 Blockly.Msg.LJJ_RADAR_TITLE = '毫米波雷達';
 Blockly.Msg.LJJ_RADAR_CONNECT_TO_SERIAL = '連接到';
 Blockly.Msg.LJJ_RADAR_TOOLTIP = 'RADAR';

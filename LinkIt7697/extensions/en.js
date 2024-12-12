@@ -1384,7 +1384,7 @@ Blockly.Msg.LJJ_STEPPER_TRIGGER = '    Trig event of moving stopped';
 Blockly.Msg.LJJ_STEPPER_START_TRIGGER = 'Trig on start';
 
 //RADAR
-Blockly.Msg.LJJ_RADAR_HELPURL = '';
+Blockly.Msg.LJJ_RADAR_HELPURL = 'https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/radar';
 Blockly.Msg.LJJ_RADAR_TITLE = 'mmWAVE RADAR';
 Blockly.Msg.LJJ_RADAR_CONNECT_TO_SERIAL = 'connect to UART';
 Blockly.Msg.LJJ_RADAR_TOOLTIP = 'RADAR';
