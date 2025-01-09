@@ -93,4 +93,7 @@
 <category><name>RADAR</name><replace>mmWAVE RADAR</replace></category>
 <category><name>L293D</name><replace>L293D Shield V1</replace></category>
 <category><name>PMS7003M</name><replace>PMS7003</replace></category>
+<category><name>Pico_Robot</name><replace>Robot</replace></category>
+<category><name>Pico_Mango</name><replace>Mango X2</replace></category>
+<category><name>LineFollower</name><replace>Line Follower</replace></category>
 </xml>

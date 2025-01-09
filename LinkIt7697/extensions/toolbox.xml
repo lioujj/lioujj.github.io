@@ -216,6 +216,25 @@
           </block>
         </value>
       </block>
+      <block type="ljj_basic_line_follower_init">
+        <value name="LEFT_PIN">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="MIDDLE_PIN">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="RIGHT_PIN">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
+      <block type="ljj_basic_line_follower_read"></block>
+      <block type="ljj_basic_line_follower_read_value"></block>
       <block type="ljj_ws2812_neopixel_begin">
         <value name="PIN">
           <block type="board_nano_pins">
@@ -2623,6 +2642,187 @@
         <block type="ljj_ksb069_motor_stop"></block>
       </category>
     </category>
+    <category id="category_ljj_pico_robot" name="Pico_Robot">
+      <category id="category_ljj_pico_mango" name="Pico_Mango">
+        <block type="ljj_pico_i2c_reset">
+          <value name="SDA">
+            <block type="math_number">
+              <field name="NUM">20</field>
+            </block>
+         </value>
+          <value name="SCL">
+            <block type="math_number">
+              <field name="NUM">21</field>
+            </block>
+         </value>
+        </block>
+        <block type="l9110_init">
+          <value name="M1A">
+            <block type="math_number">
+              <field name="NUM">8</field>
+            </block>
+          </value>
+          <value name="M1B">
+            <block type="math_number">
+              <field name="NUM">9</field>
+            </block>
+          </value>
+          <value name="M2A">
+            <block type="math_number">
+              <field name="NUM">11</field>
+            </block>
+          </value>
+          <value name="M2B">
+            <block type="math_number">
+              <field name="NUM">10</field>
+            </block>
+          </value>
+        </block>
+        <block type="l9110_run">
+          <value name="SPEED">
+            <block type="math_number">
+              <field name="NUM">255</field>
+            </block>
+          </value>
+        </block>
+        <block type="l9110_stop"></block>
+
+        <block type="ljj_basic_sonar_init">
+          <value name="TRIG_PIN">
+            <block type="math_number">
+              <field name="NUM">12</field>
+            </block>
+          </value>
+          <value name="ECHO_PIN">
+            <block type="math_number">
+              <field name="NUM">13</field>
+            </block>
+          </value>
+        </block>
+        <block type="ljj_basic_sonar"></block>
+        <block type="ljj_basic_tone">
+          <value name="PIN">
+            <block type="math_number">
+              <field name="NUM">22</field>
+            </block>
+          </value>
+          <field name="FREQ">523</field>
+        </block>
+        <block type="ljj_basic_no_tone">
+          <value name="PIN">
+            <block type="math_number">
+              <field name="NUM">22</field>
+            </block>
+          </value>
+        </block>
+        <block type="ljj_basic_custom_tone">
+          <value name="PIN">
+            <block type="math_number">
+              <field name="NUM">22</field>
+            </block>
+          </value>
+          <value name="FREQ">
+            <block type="ljj_tone_list">
+              <field name="FREQ">523</field>
+            </block>
+          </value>
+          <value name="DURATION">
+            <block type="math_number">
+              <field name="NUM">300</field>
+            </block>
+          </value>
+        </block>
+        <block type="ljj_tone_list">
+          <field name="FREQ">523</field>
+        </block>
+        <block type="ljj_ws2812_neopixel_begin">
+          <value name="PIN">
+            <block type="math_number">
+              <field name="NUM">7</field>
+            </block>
+          </value>
+          <value name="TOTAL">
+            <block type="math_number">
+              <field name="NUM">8</field>
+            </block>
+          </value>
+          <value name="BRIGHTNESS">
+            <block type="math_number">
+              <field name="NUM">30</field>
+            </block>
+          </value>
+        </block>
+        <block type="ljj_ws2812_neopixel_set_color">
+          <value name="INDEX">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="COLOR">
+            <block type="ttgo_getFromColorPicker"></block>
+          </value>
+        </block>
+        <block type="ljj_ws2812_neopixel_show"></block>
+        <block type="ljj_ws2812_neopixel_set_colors">
+          <value name="COLOR">
+            <block type="ttgo_getFromColorPicker"></block>
+          </value>
+        </block>
+        <block type="ljj_ws2812_neopixel_brightness">
+          <value name="BRIGHTNESS">
+            <block type="math_number">
+              <field name="NUM">30</field>
+            </block>
+          </value>
+        </block>
+        <block type="ljj_ws2812_neopixel_clear"></block>
+        <block type="ttgo_getFromColorPicker"></block>
+        <block type="ttgo_getRGBcolor">
+          <value name="RED">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="GREEN">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="BLUE">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+        </block>
+        <block type="ljj_basic_line_follower_init">
+          <value name="LEFT_PIN">
+            <block type="math_number">
+              <field name="NUM">14</field>
+            </block>
+          </value>
+          <value name="MIDDLE_PIN">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+          <value name="RIGHT_PIN">
+            <block type="math_number">
+              <field name="NUM">15</field>
+            </block>
+          </value>
+        </block>
+        <block type="ljj_basic_line_follower_read"></block>
+        <block type="ljj_basic_line_follower_read_value"></block>
+        <block type="ljj_basic_button">
+          <field name="PIN_MODE">LOW</field>
+          <value name="PIN">
+            <block type="math_number">
+              <field name="NUM">4</field>
+            </block>
+          </value>
+        </block>
+      </category>
+    </category>
   </category>
 	<category id="category_iot" name="IoT">
 		<category id="category_mqtt" name="MQTT">
@@ -4864,75 +5064,75 @@
       <block type="ljj_sen0539_command"></block>
       <block type="ljj_sen0539_execute"></block>
     </category>
-     <category id="category_ljj_sonar" name="HC-SR04">
-      <block type="ljj_basic_sonar_init">
-        <value name="TRIG_PIN">
-          <block type="math_number">
-            <field name="NUM">9</field>
-          </block>
-        </value>
-        <value name="ECHO_PIN">
-          <block type="math_number">
-            <field name="NUM">10</field>
-          </block>
-        </value>
-      </block>
-      <block type="ljj_basic_sonar"></block>
-     </category>
-     <category id="category_ljj_stepper" name="STEPPER">
-      <block type="ljj_stepper_init">
-        <value name="PIN1">
-          <block type="math_number">
-            <field name="NUM">0</field>
-          </block>
-        </value>
-        <value name="PIN2">
-          <block type="math_number">
-            <field name="NUM">0</field>
-          </block>
-        </value>
-        <value name="PIN3">
-          <block type="math_number">
-            <field name="NUM">0</field>
-          </block>
-        </value>
-        <value name="PIN4">
-          <block type="math_number">
-            <field name="NUM">0</field>
-          </block>
-        </value>
-        <value name="stepsPerRev">
-          <block type="math_number">
-            <field name="NUM">4096</field>
-          </block>
-        </value>
-        <value name="stepDelay">
-          <block type="math_number">
-            <field name="NUM">1</field>
-          </block>
-        </value>
-      </block>
-      <block type="ljj_stepper_move">
-        <value name="STEPS">
-          <block type="math_number">
-            <field name="NUM">0</field>
-          </block>
-        </value>
-      </block>
-      <block type="ljj_stepper_move_to">
-        <value name="STEPS">
-          <block type="math_number">
-            <field name="NUM">0</field>
-          </block>
-        </value>
-      </block>
-      <block type="ljj_stepper_stop"></block>
-      <block type="ljj_stepper_statement_not_moving"></block>
-      <block type="ljj_stepper_is_moving"></block>
-      <block type="ljj_stepper_remain_steps"></block>
-      <block type="ljj_stepper_position"></block>      
-     </category>
-	 <category id="ljj_pms" name="PMS7003M">
+    <category id="category_ljj_sonar" name="HC-SR04">
+     <block type="ljj_basic_sonar_init">
+       <value name="TRIG_PIN">
+         <block type="math_number">
+           <field name="NUM">9</field>
+         </block>
+       </value>
+       <value name="ECHO_PIN">
+         <block type="math_number">
+           <field name="NUM">10</field>
+         </block>
+       </value>
+     </block>
+     <block type="ljj_basic_sonar"></block>
+    </category>
+    <category id="category_ljj_stepper" name="STEPPER">
+     <block type="ljj_stepper_init">
+       <value name="PIN1">
+         <block type="math_number">
+           <field name="NUM">0</field>
+         </block>
+       </value>
+       <value name="PIN2">
+         <block type="math_number">
+           <field name="NUM">0</field>
+         </block>
+       </value>
+       <value name="PIN3">
+         <block type="math_number">
+           <field name="NUM">0</field>
+         </block>
+       </value>
+       <value name="PIN4">
+         <block type="math_number">
+           <field name="NUM">0</field>
+         </block>
+       </value>
+       <value name="stepsPerRev">
+         <block type="math_number">
+           <field name="NUM">4096</field>
+         </block>
+       </value>
+       <value name="stepDelay">
+         <block type="math_number">
+           <field name="NUM">1</field>
+         </block>
+       </value>
+     </block>
+     <block type="ljj_stepper_move">
+       <value name="STEPS">
+         <block type="math_number">
+           <field name="NUM">0</field>
+         </block>
+       </value>
+     </block>
+     <block type="ljj_stepper_move_to">
+       <value name="STEPS">
+         <block type="math_number">
+           <field name="NUM">0</field>
+         </block>
+       </value>
+     </block>
+     <block type="ljj_stepper_stop"></block>
+     <block type="ljj_stepper_statement_not_moving"></block>
+     <block type="ljj_stepper_is_moving"></block>
+     <block type="ljj_stepper_remain_steps"></block>
+     <block type="ljj_stepper_position"></block>      
+    </category>
+    <category id="ljj_pms" name="PMS7003M">
       <block type="ljj_pms_init_pinmap">
         <value name="RX">
           <block type="math_number">
@@ -4970,7 +5170,28 @@
       </block>
       <block type="ljj_pms_data"></block>
       <block type="ljj_pms_data_t"></block>
-	</category>
+    </category>
+    <category id="category_line_follower" name="LineFollower">
+      <block type="ljj_basic_line_follower_init">
+        <value name="LEFT_PIN">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="MIDDLE_PIN">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="RIGHT_PIN">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
+      <block type="ljj_basic_line_follower_read"></block>
+      <block type="ljj_basic_line_follower_read_value"></block>
+    </category>
   </category>
   <category id="category_lumex" name="Lumex">
     <category id="category_ldm6432" name="LDM6432MQTT">

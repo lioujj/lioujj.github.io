@@ -5344,15 +5344,47 @@ Blockly.Arduino.ljj_quno_dht11=function(){
 
 //Basic
 Blockly.Arduino.ljj_basic={};
+
+Blockly.Arduino.ljj_basic_line_follower_init=function(){
+  var a=Blockly.Arduino.valueToCode(this,"LEFT_PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=Blockly.Arduino.valueToCode(this,"MIDDLE_PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      c=Blockly.Arduino.valueToCode(this,"RIGHT_PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      e=this.getFieldValue("WAYS");
+  Blockly.Arduino.definitions_.define_ljj_basic_line_invoke='byte ljjBasicLineLeftPin='+a+';\n'+ (e=="2"?'':('byte ljjBasicLineMiddlePin='+b+';\n'))+'byte ljjBasicLineRightPin='+c+';\n'
+  Blockly.Arduino.setups_["setup_ljj_line"]='pinMode(ljjBasicLineLeftPin,INPUT);\n'+ (e=="2"?'':('  pinMode(ljjBasicLineMiddlePin,INPUT);\n'))+'  pinMode(ljjBasicLineRightPin,INPUT);\n';
+  return'';
+}
+
+Blockly.Arduino.ljj_basic_line_follower_read=function(){
+  var a=this.getFieldValue("PLACE"),
+      b=this.getFieldValue("VALUE");
+  if (a=="left")
+    a="ljjBasicLineLeftPin";
+  else if (a=="right")
+    a="ljjBasicLineRightPin";
+  else
+    a="ljjBasicLineMiddlePin";
+  return[(b==0?'!':'')+'digitalRead('+a+')',Blockly.Arduino.ORDER_ATOMIC];
+}
+
+Blockly.Arduino.ljj_basic_line_follower_read_value=function(){
+  var a=this.getFieldValue("PLACE");
+  if (a=="left")
+    a="ljjBasicLineLeftPin";
+  else if (a=="right")
+    a="ljjBasicLineRightPin";
+  else
+    a="ljjBasicLineMiddlePin";
+  return['digitalRead('+a+')',Blockly.Arduino.ORDER_ATOMIC];
+}
+
 Blockly.Arduino.ljj_basic_button=function(){
   var a=Blockly.Arduino.valueToCode(this,"PIN",Blockly.Arduino.ORDER_ATOMIC)||"",
       b=this.getFieldValue("PIN_MODE"),
       c=Blockly.Arduino.statementToCode(this,"MSG_BUTTON_CALL_PRESSED"),
-      d=Blockly.Arduino.statementToCode(this,"MSG_BUTTON_CALL_RELEASED");
-  if (b=='LOW')
-    Blockly.Arduino.setups_["button_"+a]='pinMode('+a+', INPUT_PULLUP);';
-  else
-    Blockly.Arduino.setups_["button_"+a]='pinMode('+a+', INPUT);';
+      d=Blockly.Arduino.statementToCode(this,"MSG_BUTTON_CALL_RELEASED"),
+      e=this.getFieldValue("RESISTOR");
+  Blockly.Arduino.setups_["button_"+a]='pinMode('+a+', '+e+');';
 	return'if (digitalRead('+a+')=='+b+'){\n'+c+'  while(digitalRead('+a+')=='+b+'){}\n'+d+'}\n'
 };
 

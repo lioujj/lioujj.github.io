@@ -8239,6 +8239,83 @@ Blockly.Blocks.ljj_basic.HUE4=157;
 Blockly.Blocks.ljj_basic.HUE5=290;
 Blockly.Blocks.ljj_basic.HUE6=60;
 Blockly.Blocks.ljj_basic.HUE7=320;
+
+Blockly.Blocks.ljj_basic_line_follower_init={init:function(){
+  this.setColour(Blockly.Blocks.l9110.HUE1);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LIOU_ROBOT_LINE_FOLLOWER)
+      .appendField(Blockly.Msg.PROBBIE_INIT)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_NUMBER,this.validate),"WAYS");
+  this.appendValueInput("LEFT_PIN")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.CAGEBOT_LINE_FOLLOWER_LEFT);
+  this.appendValueInput("MIDDLE_PIN")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.CAGEBOT_LINE_FOLLOWER_MIDDLE)
+      .setVisible(false);
+  this.appendValueInput("RIGHT_PIN")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.CAGEBOT_LINE_FOLLOWER_RIGHT);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.LJJ_RADAR_TOOLTIP)},validate: function(newValue) {
+    const sourceBlock = this.sourceBlock_;
+    if (newValue=="2"){
+      sourceBlock.getInput("MIDDLE_PIN").setVisible(false);
+    } else if (newValue=="3"){
+      sourceBlock.getInput("MIDDLE_PIN").setVisible(true);
+    }
+  }
+};
+
+Blockly.Blocks.ljj_basic_line_follower_read={init:function(){
+  this.setColour(Blockly.Blocks.l9110.HUE1);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LIOU_ROBOT_LINE_FOLLOWER)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_NUMBER,this.validate),"WAYS");
+	this.appendDummyInput("opt")
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_LIST),"PLACE");
+	this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.LIOU_ROBOT_BLACK,"1"],[Blockly.Msg.LIOU_ROBOT_WHITE,"0"]]),"VALUE")
+      .appendField("?");
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Boolean");
+  this.setTooltip(Blockly.Msg.LJJ_RADAR_TOOLTIP)},validate: function(newValue) {
+    const sourceBlock = this.sourceBlock_;
+	  sourceBlock.getInput("opt").removeField("PLACE");
+    var myOpts=[];
+    if (newValue=="2"){
+      sourceBlock.getInput("opt").appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_LIST),"PLACE");
+    } else if (newValue=="3"){
+      sourceBlock.getInput("opt").appendField(new Blockly.FieldDropdown(Blockly.Msg.CAGEBOT_LINE_FOLLOWER_LIST),"PLACE");
+    }
+  }
+};
+
+Blockly.Blocks.ljj_basic_line_follower_read_value={init:function(){
+  this.setColour(Blockly.Blocks.l9110.HUE1);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LIOU_ROBOT_LINE_FOLLOWER)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_NUMBER,this.validate),"WAYS");
+	this.appendDummyInput("opt")
+      .appendField(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_READ)
+      .appendField(Blockly.Msg.LJJ_SU03T_VALUE)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_LIST),"PLACE");
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Number");
+  this.setTooltip(Blockly.Msg.LJJ_RADAR_TOOLTIP)},validate: function(newValue) {
+    const sourceBlock = this.sourceBlock_;
+	  sourceBlock.getInput("opt").removeField("PLACE");
+    var myOpts=[];
+    if (newValue=="2"){
+      sourceBlock.getInput("opt").appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_LIST),"PLACE");
+    } else if (newValue=="3"){
+      sourceBlock.getInput("opt").appendField(new Blockly.FieldDropdown(Blockly.Msg.CAGEBOT_LINE_FOLLOWER_LIST),"PLACE");
+    }
+  }
+};
+
 Blockly.Blocks.ljj_basic_button={init:function(){
   this.setHelpUrl(Blockly.Msg.LJJ_BASIC_HELPURL);
   this.setColour(Blockly.Blocks.ljj_basic.HUE1);
@@ -8248,7 +8325,8 @@ Blockly.Blocks.ljj_basic_button={init:function(){
       .setCheck("Number");
   this.appendDummyInput()
       .appendField(Blockly.Msg.LJJ_BASIC_BUTTON_EVENT+" "+Blockly.Msg.KEYBOARDS_EVENT_LIST[0][0])
-      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_BASIC_PIN_MODE),"PIN_MODE");
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_BASIC_PIN_MODE),"PIN_MODE")
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_BASIC_RESISTOR),"RESISTOR");
   this.setInputsInline(!0);
   this.appendStatementInput("MSG_BUTTON_CALL_PRESSED");
   this.appendDummyInput()

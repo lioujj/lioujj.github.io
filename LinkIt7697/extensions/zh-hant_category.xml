@@ -95,4 +95,7 @@
 <category><name>RADAR</name><replace>毫米波雷達</replace></category>
 <category><name>L293D</name><replace>L293D馬達擴展板V1</replace></category>
 <category><name>PMS7003M</name><replace>PMS7003空品感測</replace></category>
+<category><name>Pico_Robot</name><replace>機器人</replace></category>
+<category><name>Pico_Mango</name><replace>Mango X2</replace></category>
+<category><name>LineFollower</name><replace>循線感測器</replace></category>
 </xml>

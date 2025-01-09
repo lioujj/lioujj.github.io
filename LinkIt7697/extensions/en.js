@@ -857,14 +857,14 @@ Blockly.Msg.ESP32_IRQ_PIN_PULLUP = 'INPUT_PULLUP';
 
 //L9110
 Blockly.Msg.L9110_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/l9110馬達驅動板";
-Blockly.Msg.L9110_TITLE = "L9110 motor board";
-Blockly.Msg.L9110_SINGLE = 'single motor A';
+Blockly.Msg.L9110_TITLE = "motor board";
+Blockly.Msg.L9110_SINGLE = 'single motor A(M1)';
 Blockly.Msg.L9110_TWO_MOTORS = 'two motors';
 Blockly.Msg.L9110_MOTORS_CHANNEL = 'set channel';
 Blockly.Msg.L9110_INIT = "init";
 Blockly.Msg.L9110_TOOLTIP = "L9110";
 Blockly.Msg.L9110_MOTOR = "motor";
-Blockly.Msg.L9110_MOTOR_LIST = [["A","m1"],["B","m2"],["both","both"]];
+Blockly.Msg.L9110_MOTOR_LIST = [["A(M1)","m1"],["B(M2)","m2"],["both","both"]];
 Blockly.Msg.L9110_ROTATE = "rotate";
 Blockly.Msg.L9110_DIRECTION = [["clockWise","1"],["counterClockWise","2"]];
 Blockly.Msg.L9110_WARNING = "You have to set \""+Blockly.Msg.L9110_TITLE+" "+Blockly.Msg.L9110_INIT+"\" first.";
@@ -1126,6 +1126,11 @@ Blockly.Msg.LJJ_WS2812_BREATHE = 'starts to breathe once';
 Blockly.Msg.LJJ_BASIC_SONAR = "UltraSonic";
 Blockly.Msg.LJJ_BASIC_SONAR_DISTANCE = "distance(CM)";
 Blockly.Msg.LJJ_WS2812_CURRENT_COLOR = "color value";
+Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_LIST = [["left","left"],["right","right"]];
+Blockly.Msg.LJJ_BASIC_RESISTOR = [["none resistor","INPUT"],["Pull-up resistor","INPUT_PULLUP"],["Pull-down resistor","INPUT_PULLDOWN"]];
+Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_NUMBER = [["2-sensor","2"],["3-sensor","3"]];
+Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_READ = "read";
+
 
 //LCD1602
 Blockly.Msg.LJJ_LCD1602_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/lcd液晶顯示器";

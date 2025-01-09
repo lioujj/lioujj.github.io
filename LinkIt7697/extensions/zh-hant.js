@@ -850,14 +850,14 @@ Blockly.Msg.ESP32_IRQ_PIN_PULLUP = '上拉電阻';
 
 //L9110
 Blockly.Msg.L9110_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/l9110馬達驅動板";
-Blockly.Msg.L9110_TITLE = "L9110馬達驅動板";
-Blockly.Msg.L9110_SINGLE = '單顆馬達A';
+Blockly.Msg.L9110_TITLE = "馬達驅動板";
+Blockly.Msg.L9110_SINGLE = '單顆馬達A(M1)';
 Blockly.Msg.L9110_TWO_MOTORS = '雙馬達';
 Blockly.Msg.L9110_MOTORS_CHANNEL = '設定通道';
 Blockly.Msg.L9110_INIT = "初始化";
 Blockly.Msg.L9110_TOOLTIP = "L9110";
 Blockly.Msg.L9110_MOTOR = "馬達";
-Blockly.Msg.L9110_MOTOR_LIST = [["A","m1"],["B","m2"],["全部","both"]];
+Blockly.Msg.L9110_MOTOR_LIST = [["A(M1)","m1"],["B(M2)","m2"],["全部","both"]];
 Blockly.Msg.L9110_ROTATE = "轉動";
 Blockly.Msg.L9110_DIRECTION = [["正轉","1"],["反轉","2"]];
 Blockly.Msg.L9110_WARNING = "必須先設定「"+Blockly.Msg.L9110_TITLE+" "+Blockly.Msg.L9110_INIT+"」積木";
@@ -1119,6 +1119,10 @@ Blockly.Msg.LJJ_WS2812_BREATHE = '呼吸燈呼吸一次';
 Blockly.Msg.LJJ_BASIC_SONAR = "超音波感測器";
 Blockly.Msg.LJJ_BASIC_SONAR_DISTANCE = "距離(CM)";
 Blockly.Msg.LJJ_WS2812_CURRENT_COLOR = "目前顏色值";
+Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_LIST = [["左","left"],["右","right"]];
+Blockly.Msg.LJJ_BASIC_RESISTOR = [["無內建電阻","INPUT"],["上拉電阻","INPUT_PULLUP"],["下拉電阻","INPUT_PULLDOWN"]];
+Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_NUMBER = [["二路","2"],["三路","3"]];
+Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_READ = "讀取";
 
 //LCD1602
 Blockly.Msg.LJJ_LCD1602_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/lcd液晶顯示器";
