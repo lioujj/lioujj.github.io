@@ -1126,10 +1126,16 @@ Blockly.Msg.LJJ_WS2812_BREATHE = 'starts to breathe once';
 Blockly.Msg.LJJ_BASIC_SONAR = "UltraSonic";
 Blockly.Msg.LJJ_BASIC_SONAR_DISTANCE = "distance(CM)";
 Blockly.Msg.LJJ_WS2812_CURRENT_COLOR = "color value";
-Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_LIST = [["left","left"],["right","right"]];
+Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_2_WAYS_LIST = [["left","ljjBasicLineLeftPin"],["right","ljjBasicLineRightPin"]];
+Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_3_WAYS_LIST=[["left","ljjBasicLineLeftPin"],["middle","ljjBasicLineMiddlePin"],["right","ljjBasicLineRightPin"]];
+Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_4_WAYS_LIST = [["left outer","ljjBasicLineLeftOuterPin"],["left","ljjBasicLineLeftPin"],["right","ljjBasicLineRightPin"],["right outer","ljjBasicLineRightOuterPin"]];
+Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_5_WAYS_LIST = [["left outer","ljjBasicLineLeftOuterPin"],["left","ljjBasicLineLeftPin"],["middle","ljjBasicLineMiddlePin"],["right","ljjBasicLineRightPin"],["right outer","ljjBasicLineRightOuterPin"]];
 Blockly.Msg.LJJ_BASIC_RESISTOR = [["none resistor","INPUT"],["Pull-up resistor","INPUT_PULLUP"],["Pull-down resistor","INPUT_PULLDOWN"]];
-Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_NUMBER = [["2-sensor","2"],["3-sensor","3"]];
+Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_NUMBER = [["2-sensor","2"],["3-sensor","3"],["4-sensor","4"],["5-sensor","5"]];
 Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_READ = "read";
+Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_PIN_LIST=["left outer pin","left pin","middle pin","right pin","right outer pin"];
+Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_REVERSE = "reverse";
+Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_TOOLTIP = "";
 
 
 //LCD1602

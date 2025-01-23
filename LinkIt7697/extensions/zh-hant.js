@@ -1119,10 +1119,16 @@ Blockly.Msg.LJJ_WS2812_BREATHE = '呼吸燈呼吸一次';
 Blockly.Msg.LJJ_BASIC_SONAR = "超音波感測器";
 Blockly.Msg.LJJ_BASIC_SONAR_DISTANCE = "距離(CM)";
 Blockly.Msg.LJJ_WS2812_CURRENT_COLOR = "目前顏色值";
-Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_LIST = [["左","left"],["右","right"]];
+Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_2_WAYS_LIST = [["左","ljjBasicLineLeftPin"],["右","ljjBasicLineRightPin"]];
+Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_3_WAYS_LIST=[["左","ljjBasicLineLeftPin"],["中","ljjBasicLineMiddlePin"],["右","ljjBasicLineRightPin"]];
+Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_4_WAYS_LIST = [["左外","ljjBasicLineLeftOuterPin"],["左","ljjBasicLineLeftPin"],["右","ljjBasicLineRightPin"],["右外","ljjBasicLineRightOuterPin"]];
+Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_5_WAYS_LIST = [["左外","ljjBasicLineLeftOuterPin"],["左","ljjBasicLineLeftPin"],["中","ljjBasicLineMiddlePin"],["右","ljjBasicLineRightPin"],["右外","ljjBasicLineRightOuterPin"]];
 Blockly.Msg.LJJ_BASIC_RESISTOR = [["無內建電阻","INPUT"],["上拉電阻","INPUT_PULLUP"],["下拉電阻","INPUT_PULLDOWN"]];
-Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_NUMBER = [["二路","2"],["三路","3"]];
+Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_NUMBER = [["二路","2"],["三路","3"],["四路","4"],["五路","5"]];
 Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_READ = "讀取";
+Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_PIN_LIST=["左外側腳位","左側腳位","中間腳位","右側腳位","右外側腳位"];
+Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_REVERSE = "反相";
+Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_TOOLTIP = "";
 
 //LCD1602
 Blockly.Msg.LJJ_LCD1602_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/lcd液晶顯示器";

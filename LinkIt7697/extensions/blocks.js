@@ -8242,29 +8242,52 @@ Blockly.Blocks.ljj_basic.HUE7=320;
 
 Blockly.Blocks.ljj_basic_line_follower_init={init:function(){
   this.setColour(Blockly.Blocks.l9110.HUE1);
-  this.appendDummyInput()
+  this.appendDummyInput("myWays")
       .appendField(Blockly.Msg.LIOU_ROBOT_LINE_FOLLOWER)
       .appendField(Blockly.Msg.PROBBIE_INIT)
       .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_NUMBER,this.validate),"WAYS");
+  this.appendValueInput("LEFT_OUTER_PIN")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_PIN_LIST[0])
+      .setVisible(false);
   this.appendValueInput("LEFT_PIN")
       .setCheck("Number")
-      .appendField(Blockly.Msg.CAGEBOT_LINE_FOLLOWER_LEFT);
+      .appendField(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_PIN_LIST[1])
+      .setVisible(true);
   this.appendValueInput("MIDDLE_PIN")
       .setCheck("Number")
-      .appendField(Blockly.Msg.CAGEBOT_LINE_FOLLOWER_MIDDLE)
+      .appendField(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_PIN_LIST[2])
       .setVisible(false);
   this.appendValueInput("RIGHT_PIN")
       .setCheck("Number")
-      .appendField(Blockly.Msg.CAGEBOT_LINE_FOLLOWER_RIGHT);
+      .appendField(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_PIN_LIST[3])
+      .setVisible(true);
+  this.appendValueInput("RIGHT_OUTER_PIN")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_PIN_LIST[4])
+      .setVisible(false);
   this.setInputsInline(!0);
   this.setPreviousStatement(!0,null);
   this.setNextStatement(!0,null);
-  this.setTooltip(Blockly.Msg.LJJ_RADAR_TOOLTIP)},validate: function(newValue) {
+  this.setTooltip(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_TOOLTIP)},validate: function(newValue) {
     const sourceBlock = this.sourceBlock_;
+    Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_WAYS_COUNTS=newValue;
     if (newValue=="2"){
+      sourceBlock.getInput("LEFT_OUTER_PIN").setVisible(false);
       sourceBlock.getInput("MIDDLE_PIN").setVisible(false);
+      sourceBlock.getInput("RIGHT_OUTER_PIN").setVisible(false);
     } else if (newValue=="3"){
+      sourceBlock.getInput("LEFT_OUTER_PIN").setVisible(false);
       sourceBlock.getInput("MIDDLE_PIN").setVisible(true);
+      sourceBlock.getInput("RIGHT_OUTER_PIN").setVisible(false);
+    } else if (newValue=="4"){
+      sourceBlock.getInput("LEFT_OUTER_PIN").setVisible(true);
+      sourceBlock.getInput("MIDDLE_PIN").setVisible(false);
+      sourceBlock.getInput("RIGHT_OUTER_PIN").setVisible(true);
+    } else if (newValue=="5"){
+      sourceBlock.getInput("LEFT_OUTER_PIN").setVisible(true);
+      sourceBlock.getInput("MIDDLE_PIN").setVisible(true);
+      sourceBlock.getInput("RIGHT_OUTER_PIN").setVisible(true);
     }
   }
 };
@@ -8272,23 +8295,28 @@ Blockly.Blocks.ljj_basic_line_follower_init={init:function(){
 Blockly.Blocks.ljj_basic_line_follower_read={init:function(){
   this.setColour(Blockly.Blocks.l9110.HUE1);
   this.appendDummyInput()
-      .appendField(Blockly.Msg.LIOU_ROBOT_LINE_FOLLOWER)
-      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_NUMBER,this.validate),"WAYS");
+      .appendField(Blockly.Msg.LIOU_ROBOT_LINE_FOLLOWER);
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_NUMBER),"WAYS")
+      .setVisible(false);
 	this.appendDummyInput("opt")
-      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_LIST),"PLACE");
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_2_WAYS_LIST),"PLACE");
 	this.appendDummyInput()
-      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.LIOU_ROBOT_BLACK,"1"],[Blockly.Msg.LIOU_ROBOT_WHITE,"0"]]),"VALUE")
+      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.LIOU_ROBOT_BLACK,"1"],[Blockly.Msg.LIOU_ROBOT_WHITE,"0"]]),"VALUE");
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_REVERSE)
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "REVERSE")
       .appendField("?");
   this.setInputsInline(!0);
   this.setOutput(!0,"Boolean");
-  this.setTooltip(Blockly.Msg.LJJ_RADAR_TOOLTIP)},validate: function(newValue) {
-    const sourceBlock = this.sourceBlock_;
-	  sourceBlock.getInput("opt").removeField("PLACE");
-    var myOpts=[];
-    if (newValue=="2"){
-      sourceBlock.getInput("opt").appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_LIST),"PLACE");
-    } else if (newValue=="3"){
-      sourceBlock.getInput("opt").appendField(new Blockly.FieldDropdown(Blockly.Msg.CAGEBOT_LINE_FOLLOWER_LIST),"PLACE");
+  this.setTooltip(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_TOOLTIP)},onchange:function(ev){
+    if (!Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_WAYS_COUNTS)
+      return;
+    if (Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_WAYS_COUNTS!=this.getField("WAYS").getValue() || ev.type=="create"){
+      var newValue=Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_WAYS_COUNTS;
+      this.getField("WAYS").setValue(newValue);
+      this.getInput("opt").removeField("PLACE");
+      this.getInput("opt").appendField(new Blockly.FieldDropdown(Blockly.Msg["LJJ_BASIC_LINE_FOLLOWER_"+newValue+"_WAYS_LIST"]),"PLACE");
     }
   }
 };
@@ -8296,22 +8324,24 @@ Blockly.Blocks.ljj_basic_line_follower_read={init:function(){
 Blockly.Blocks.ljj_basic_line_follower_read_value={init:function(){
   this.setColour(Blockly.Blocks.l9110.HUE1);
   this.appendDummyInput()
-      .appendField(Blockly.Msg.LIOU_ROBOT_LINE_FOLLOWER)
-      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_NUMBER,this.validate),"WAYS");
+      .appendField(Blockly.Msg.LIOU_ROBOT_LINE_FOLLOWER);
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_NUMBER),"WAYS")
+      .setVisible(false);
 	this.appendDummyInput("opt")
       .appendField(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_READ)
       .appendField(Blockly.Msg.LJJ_SU03T_VALUE)
-      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_LIST),"PLACE");
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_2_WAYS_LIST),"PLACE");
   this.setInputsInline(!0);
   this.setOutput(!0,"Number");
-  this.setTooltip(Blockly.Msg.LJJ_RADAR_TOOLTIP)},validate: function(newValue) {
-    const sourceBlock = this.sourceBlock_;
-	  sourceBlock.getInput("opt").removeField("PLACE");
-    var myOpts=[];
-    if (newValue=="2"){
-      sourceBlock.getInput("opt").appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_LIST),"PLACE");
-    } else if (newValue=="3"){
-      sourceBlock.getInput("opt").appendField(new Blockly.FieldDropdown(Blockly.Msg.CAGEBOT_LINE_FOLLOWER_LIST),"PLACE");
+  this.setTooltip(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_TOOLTIP)},onchange:function(ev){
+    if (!Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_WAYS_COUNTS)
+      return;
+    if (Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_WAYS_COUNTS!=this.getField("WAYS").getValue() || ev.type=="create"){
+      var newValue=Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_WAYS_COUNTS;
+      this.getField("WAYS").setValue(newValue);
+      this.getInput("opt").removeField("PLACE");
+      this.getInput("opt").appendField(new Blockly.FieldDropdown(Blockly.Msg["LJJ_BASIC_LINE_FOLLOWER_"+newValue+"_WAYS_LIST"]),"PLACE");
     }
   }
 };
