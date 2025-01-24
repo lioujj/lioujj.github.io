@@ -8245,7 +8245,7 @@ Blockly.Blocks.ljj_basic_line_follower_init={init:function(){
   this.appendDummyInput("myWays")
       .appendField(Blockly.Msg.LIOU_ROBOT_LINE_FOLLOWER)
       .appendField(Blockly.Msg.PROBBIE_INIT)
-      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_NUMBER,this.validate),"WAYS");
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_NUMBER),"WAYS");
   this.appendValueInput("LEFT_OUTER_PIN")
       .setCheck("Number")
       .appendField(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_PIN_LIST[0])
@@ -8269,25 +8269,58 @@ Blockly.Blocks.ljj_basic_line_follower_init={init:function(){
   this.setInputsInline(!0);
   this.setPreviousStatement(!0,null);
   this.setNextStatement(!0,null);
-  this.setTooltip(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_TOOLTIP)},validate: function(newValue) {
+  this.setTooltip(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_TOOLTIP)},onchange: function(ev) {
     const sourceBlock = this.sourceBlock_;
-    Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_WAYS_COUNTS=newValue;
-    if (newValue=="2"){
-      sourceBlock.getInput("LEFT_OUTER_PIN").setVisible(false);
-      sourceBlock.getInput("MIDDLE_PIN").setVisible(false);
-      sourceBlock.getInput("RIGHT_OUTER_PIN").setVisible(false);
-    } else if (newValue=="3"){
-      sourceBlock.getInput("LEFT_OUTER_PIN").setVisible(false);
-      sourceBlock.getInput("MIDDLE_PIN").setVisible(true);
-      sourceBlock.getInput("RIGHT_OUTER_PIN").setVisible(false);
-    } else if (newValue=="4"){
-      sourceBlock.getInput("LEFT_OUTER_PIN").setVisible(true);
-      sourceBlock.getInput("MIDDLE_PIN").setVisible(false);
-      sourceBlock.getInput("RIGHT_OUTER_PIN").setVisible(true);
-    } else if (newValue=="5"){
-      sourceBlock.getInput("LEFT_OUTER_PIN").setVisible(true);
-      sourceBlock.getInput("MIDDLE_PIN").setVisible(true);
-      sourceBlock.getInput("RIGHT_OUTER_PIN").setVisible(true);
+    var OK=false;
+    var newValue="";
+    if (ev.type==Blockly.Events.BLOCK_CHANGE){
+      OK=(ev.name=="WAYS");
+      Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_WAYS_COUNTS=this.getField(ev.name).getValue();
+    }
+    if (ev.type==Blockly.Events.BLOCK_CREATE){
+       if (this.getField("WAYS").getValue()!=Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_WAYS_COUNTS){
+         this.getField("WAYS").setValue(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_WAYS_COUNTS);
+       }
+       OK=true;
+    }       
+    if (OK){
+      newValue=Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_WAYS_COUNTS;
+      if (newValue=="2"){
+        this.getInput("LEFT_OUTER_PIN").setVisible(false);
+        this.getInput("LEFT_PIN").setVisible(true);
+        this.getInput("MIDDLE_PIN").setVisible(false);
+        this.getInput("RIGHT_PIN").setVisible(true);
+        this.getInput("RIGHT_OUTER_PIN").setVisible(false);
+      } else if (newValue=="3"){
+        this.getInput("LEFT_OUTER_PIN").setVisible(false);
+        this.getInput("LEFT_PIN").setVisible(true);
+        this.getInput("MIDDLE_PIN").setVisible(true);
+        this.getInput("RIGHT_PIN").setVisible(true);
+        this.getInput("RIGHT_OUTER_PIN").setVisible(false);
+      } else if (newValue=="4"){
+        this.getInput("LEFT_OUTER_PIN").setVisible(true);
+        this.getInput("LEFT_PIN").setVisible(true);
+        this.getInput("MIDDLE_PIN").setVisible(false);
+        this.getInput("RIGHT_PIN").setVisible(true);
+        this.getInput("RIGHT_OUTER_PIN").setVisible(true);
+      } else if (newValue=="5"){
+        this.getInput("LEFT_OUTER_PIN").setVisible(true);
+        this.getInput("LEFT_PIN").setVisible(true);
+        this.getInput("MIDDLE_PIN").setVisible(true);
+        this.getInput("RIGHT_PIN").setVisible(true);
+        this.getInput("RIGHT_OUTER_PIN").setVisible(true);
+      }
+      this.render();
+		  var myBlocks=this.workspace.getAllBlocks();
+		  for(var c=0;c<myBlocks.length;c++)
+			  if(myBlocks[c].type=="ljj_basic_line_follower_read" || myBlocks[c].type=="ljj_basic_line_follower_read_value"){
+          if (myBlocks[c].getField("WAYS")!=newValue){
+            myBlocks[c].getField("WAYS").setValue(newValue);
+            myBlocks[c].getInput("opt").removeField("PLACE");
+            myBlocks[c].getInput("opt").appendField(new Blockly.FieldDropdown(Blockly.Msg["LJJ_BASIC_LINE_FOLLOWER_"+newValue+"_WAYS_LIST"]),"PLACE");
+            myBlocks[c].render();
+          }
+        }
     }
   }
 };
@@ -8309,16 +8342,7 @@ Blockly.Blocks.ljj_basic_line_follower_read={init:function(){
       .appendField("?");
   this.setInputsInline(!0);
   this.setOutput(!0,"Boolean");
-  this.setTooltip(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_TOOLTIP)},onchange:function(ev){
-    if (!Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_WAYS_COUNTS)
-      return;
-    if (Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_WAYS_COUNTS!=this.getField("WAYS").getValue() || ev.type=="create"){
-      var newValue=Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_WAYS_COUNTS;
-      this.getField("WAYS").setValue(newValue);
-      this.getInput("opt").removeField("PLACE");
-      this.getInput("opt").appendField(new Blockly.FieldDropdown(Blockly.Msg["LJJ_BASIC_LINE_FOLLOWER_"+newValue+"_WAYS_LIST"]),"PLACE");
-    }
-  }
+  this.setTooltip(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_TOOLTIP)}
 };
 
 Blockly.Blocks.ljj_basic_line_follower_read_value={init:function(){
@@ -8334,16 +8358,7 @@ Blockly.Blocks.ljj_basic_line_follower_read_value={init:function(){
       .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_2_WAYS_LIST),"PLACE");
   this.setInputsInline(!0);
   this.setOutput(!0,"Number");
-  this.setTooltip(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_TOOLTIP)},onchange:function(ev){
-    if (!Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_WAYS_COUNTS)
-      return;
-    if (Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_WAYS_COUNTS!=this.getField("WAYS").getValue() || ev.type=="create"){
-      var newValue=Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_WAYS_COUNTS;
-      this.getField("WAYS").setValue(newValue);
-      this.getInput("opt").removeField("PLACE");
-      this.getInput("opt").appendField(new Blockly.FieldDropdown(Blockly.Msg["LJJ_BASIC_LINE_FOLLOWER_"+newValue+"_WAYS_LIST"]),"PLACE");
-    }
-  }
+  this.setTooltip(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_TOOLTIP)}
 };
 
 Blockly.Blocks.ljj_basic_button={init:function(){

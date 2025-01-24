@@ -1129,6 +1129,7 @@ Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_READ = "讀取";
 Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_PIN_LIST=["左外側腳位","左側腳位","中間腳位","右側腳位","右外側腳位"];
 Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_REVERSE = "反相";
 Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_TOOLTIP = "";
+Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_WAYS_COUNTS = "2";
 
 //LCD1602
 Blockly.Msg.LJJ_LCD1602_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/lcd液晶顯示器";

@@ -1136,6 +1136,7 @@ Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_READ = "read";
 Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_PIN_LIST=["left outer pin","left pin","middle pin","right pin","right outer pin"];
 Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_REVERSE = "reverse";
 Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_TOOLTIP = "";
+Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_WAYS_COUNTS = "2";
 
 
 //LCD1602
