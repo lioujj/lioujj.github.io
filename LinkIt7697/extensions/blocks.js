@@ -8253,18 +8253,21 @@ Blockly.Blocks.ljj_basic_line_follower_init={init:function(){
   this.appendValueInput("LEFT_PIN")
       .setCheck("Number")
       .appendField(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_PIN_LIST[1])
-      .setVisible(true);
+      .setVisible(false);
   this.appendValueInput("MIDDLE_PIN")
       .setCheck("Number")
       .appendField(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_PIN_LIST[2])
-      .setVisible(false);
+      .setVisible(true);
   this.appendValueInput("RIGHT_PIN")
       .setCheck("Number")
       .appendField(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_PIN_LIST[3])
-      .setVisible(true);
+      .setVisible(false);
   this.appendValueInput("RIGHT_OUTER_PIN")
       .setCheck("Number")
       .appendField(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_PIN_LIST[4])
+      .setVisible(false);
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldTextInput(""),'HIDE_VALUE')
       .setVisible(false);
   this.setInputsInline(!0);
   this.setPreviousStatement(!0,null);
@@ -8278,14 +8281,23 @@ Blockly.Blocks.ljj_basic_line_follower_init={init:function(){
       Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_WAYS_COUNTS=this.getField(ev.name).getValue();
     }
     if (ev.type==Blockly.Events.BLOCK_CREATE){
+       if (this.getField("HIDE_VALUE").getValue()=="changed")
+         Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_WAYS_COUNTS=this.getField("WAYS").getValue();
        if (this.getField("WAYS").getValue()!=Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_WAYS_COUNTS){
          this.getField("WAYS").setValue(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_WAYS_COUNTS);
        }
+       this.getField("HIDE_VALUE").setValue("changed");
        OK=true;
     }       
     if (OK){
       newValue=Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_WAYS_COUNTS;
-      if (newValue=="2"){
+      if (newValue=="1"){
+        this.getInput("LEFT_OUTER_PIN").setVisible(false);
+        this.getInput("LEFT_PIN").setVisible(false);
+        this.getInput("MIDDLE_PIN").setVisible(true);
+        this.getInput("RIGHT_PIN").setVisible(false);
+        this.getInput("RIGHT_OUTER_PIN").setVisible(false);
+      } else if (newValue=="2"){
         this.getInput("LEFT_OUTER_PIN").setVisible(false);
         this.getInput("LEFT_PIN").setVisible(true);
         this.getInput("MIDDLE_PIN").setVisible(false);
@@ -8316,8 +8328,14 @@ Blockly.Blocks.ljj_basic_line_follower_init={init:function(){
 			  if(myBlocks[c].type=="ljj_basic_line_follower_read" || myBlocks[c].type=="ljj_basic_line_follower_read_value"){
           if (myBlocks[c].getField("WAYS")!=newValue){
             myBlocks[c].getField("WAYS").setValue(newValue);
-            myBlocks[c].getInput("opt").removeField("PLACE");
-            myBlocks[c].getInput("opt").appendField(new Blockly.FieldDropdown(Blockly.Msg["LJJ_BASIC_LINE_FOLLOWER_"+newValue+"_WAYS_LIST"]),"PLACE");
+            if (newValue=="1"){
+              myBlocks[c].getInput("opt").setVisible(false);
+            }
+            else{
+              myBlocks[c].getInput("opt").setVisible(true);
+              myBlocks[c].getInput("opt").removeField("PLACE");
+              myBlocks[c].getInput("opt").appendField(new Blockly.FieldDropdown(Blockly.Msg["LJJ_BASIC_LINE_FOLLOWER_"+newValue+"_WAYS_LIST"]),"PLACE");
+            }
             myBlocks[c].render();
           }
         }
@@ -8335,6 +8353,7 @@ Blockly.Blocks.ljj_basic_line_follower_read={init:function(){
 	this.appendDummyInput("opt")
       .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_2_WAYS_LIST),"PLACE");
 	this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_SENSED)
       .appendField(new Blockly.FieldDropdown([[Blockly.Msg.LIOU_ROBOT_BLACK,"1"],[Blockly.Msg.LIOU_ROBOT_WHITE,"0"]]),"VALUE");
   this.appendDummyInput()
       .appendField(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_REVERSE)
@@ -8352,9 +8371,10 @@ Blockly.Blocks.ljj_basic_line_follower_read_value={init:function(){
   this.appendDummyInput()
       .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_NUMBER),"WAYS")
       .setVisible(false);
-	this.appendDummyInput("opt")
+	this.appendDummyInput()
       .appendField(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_READ)
-      .appendField(Blockly.Msg.LJJ_SU03T_VALUE)
+      .appendField(Blockly.Msg.LJJ_SU03T_VALUE);
+	this.appendDummyInput("opt")
       .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_2_WAYS_LIST),"PLACE");
   this.setInputsInline(!0);
   this.setOutput(!0,"Number");

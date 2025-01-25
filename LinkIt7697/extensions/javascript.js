@@ -5352,15 +5352,29 @@ Blockly.Arduino.ljj_basic_line_follower_init=function(){
       e=this.getFieldValue("WAYS"),
       f=Blockly.Arduino.valueToCode(this,"LEFT_OUTER_PIN",Blockly.Arduino.ORDER_ATOMIC)||"0",
       g=Blockly.Arduino.valueToCode(this,"RIGHT_OUTER_PIN",Blockly.Arduino.ORDER_ATOMIC)||"0";
-  Blockly.Arduino.definitions_.define_ljj_basic_line_invoke='byte ljjBasicLineLeftPin='+a+';\nbyte ljjBasicLineRightPin='+c+';\n'
-  Blockly.Arduino.setups_["setup_ljj_line"]='pinMode(ljjBasicLineLeftPin,INPUT);\n  pinMode(ljjBasicLineRightPin,INPUT);\n';
-  if (e=="3" || e=="5"){
-    Blockly.Arduino.definitions_.define_ljj_basic_line_invoke+='byte ljjBasicLineMiddlePin='+b+';\n';
-    Blockly.Arduino.setups_["setup_ljj_line"]+='  pinMode(ljjBasicLineMiddlePin,INPUT);\n';
-  }
-  if (e=="4" || e=="5"){
-    Blockly.Arduino.definitions_.define_ljj_basic_line_invoke+='byte ljjBasicLineLeftOuterPin='+f+';\nbyte ljjBasicLineRightOuterPin='+g+';\n'
-    Blockly.Arduino.setups_["setup_ljj_line"]+='  pinMode(ljjBasicLineLeftOuterPin,INPUT);\n  pinMode(ljjBasicLineRightOuterPin,INPUT);\n';
+  var s_invoke_1='byte ljjBasicLineMiddlePin='+b+';\n';
+  var s_setup_1='pinMode(ljjBasicLineMiddlePin,INPUT);\n';
+  var s_invoke_2='byte ljjBasicLineLeftPin='+a+';\nbyte ljjBasicLineRightPin='+c+';\n'
+  var s_setup_2='pinMode(ljjBasicLineLeftPin,INPUT);\n  pinMode(ljjBasicLineRightPin,INPUT);\n';
+  var s_invoke_3='byte ljjBasicLineLeftOuterPin='+f+';\nbyte ljjBasicLineRightOuterPin='+g+';\n'
+  var s_setup_3='pinMode(ljjBasicLineLeftOuterPin,INPUT);\n  pinMode(ljjBasicLineRightOuterPin,INPUT);\n';
+  Blockly.Arduino.definitions_.define_ljj_basic_line_invoke='';
+  Blockly.Arduino.setups_["setup_ljj_line"]='';
+  if (e=="1"){
+    Blockly.Arduino.definitions_.define_ljj_basic_line_invoke=s_invoke_1;
+    Blockly.Arduino.setups_["setup_ljj_line"]=s_setup_1;
+  } else if (e=="2"){
+    Blockly.Arduino.definitions_.define_ljj_basic_line_invoke=s_invoke_2;
+    Blockly.Arduino.setups_["setup_ljj_line"]=s_setup_2;
+  } else if (e=="3"){
+    Blockly.Arduino.definitions_.define_ljj_basic_line_invoke=s_invoke_1+s_invoke_2;
+    Blockly.Arduino.setups_["setup_ljj_line"]=s_setup_1+"  "+s_setup_2;
+  } else if (e=="4"){
+    Blockly.Arduino.definitions_.define_ljj_basic_line_invoke=s_invoke_2+s_invoke_3;
+    Blockly.Arduino.setups_["setup_ljj_line"]=s_setup_2+"  "+s_setup_3;
+  } else if (e=="5"){
+    Blockly.Arduino.definitions_.define_ljj_basic_line_invoke=s_invoke_1+s_invoke_2+s_invoke_3;
+    Blockly.Arduino.setups_["setup_ljj_line"]=s_setup_1+"  "+s_setup_2+"  "+s_setup_3;
   }
   return'';
 }
@@ -5368,14 +5382,20 @@ Blockly.Arduino.ljj_basic_line_follower_init=function(){
 Blockly.Arduino.ljj_basic_line_follower_read=function(){
   var a=this.getFieldValue("PLACE"),
       b=this.getFieldValue("VALUE"),
-      c=(b=="1"?"":"!");
+      c=(b=="1"?"":"!"),
+      e=this.getFieldValue("WAYS");
+  if (e=="1")
+    a="ljjBasicLineMiddlePin";
   if (this.getFieldValue("REVERSE") == 'TRUE')
     c=(b=="1"?"!":"");
   return[c+'digitalRead('+a+')',Blockly.Arduino.ORDER_ATOMIC];
 }
 
 Blockly.Arduino.ljj_basic_line_follower_read_value=function(){
-  var a=this.getFieldValue("PLACE");
+  var a=this.getFieldValue("PLACE"),
+      e=this.getFieldValue("WAYS");
+  if (e=="1")
+    a="ljjBasicLineMiddlePin";
   return['digitalRead('+a+')',Blockly.Arduino.ORDER_ATOMIC];
 }
 

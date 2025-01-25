@@ -1131,13 +1131,13 @@ Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_3_WAYS_LIST=[["left","ljjBasicLineLeftPin"],
 Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_4_WAYS_LIST = [["left outer","ljjBasicLineLeftOuterPin"],["left","ljjBasicLineLeftPin"],["right","ljjBasicLineRightPin"],["right outer","ljjBasicLineRightOuterPin"]];
 Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_5_WAYS_LIST = [["left outer","ljjBasicLineLeftOuterPin"],["left","ljjBasicLineLeftPin"],["middle","ljjBasicLineMiddlePin"],["right","ljjBasicLineRightPin"],["right outer","ljjBasicLineRightOuterPin"]];
 Blockly.Msg.LJJ_BASIC_RESISTOR = [["none resistor","INPUT"],["Pull-up resistor","INPUT_PULLUP"],["Pull-down resistor","INPUT_PULLDOWN"]];
-Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_NUMBER = [["2-sensor","2"],["3-sensor","3"],["4-sensor","4"],["5-sensor","5"]];
+Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_NUMBER = [["1-sensor","1"],["2-sensor","2"],["3-sensor","3"],["4-sensor","4"],["5-sensor","5"]];
 Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_READ = "read";
+Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_SENSED = "sensed";
 Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_PIN_LIST=["left outer pin","left pin","middle pin","right pin","right outer pin"];
 Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_REVERSE = "reverse";
 Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_TOOLTIP = "";
 Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_WAYS_COUNTS = "2";
-
 
 //LCD1602
 Blockly.Msg.LJJ_LCD1602_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/linkit7697/lcd液晶顯示器";
