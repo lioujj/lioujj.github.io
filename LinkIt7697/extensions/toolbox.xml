@@ -2804,25 +2804,35 @@
             </block>
           </value>
         </block>
-        <block type="ljj_basic_line_follower_init">
-          <value name="LEFT_PIN">
-            <block type="math_number">
-              <field name="NUM">14</field>
-            </block>
-          </value>
-          <value name="MIDDLE_PIN">
-            <block type="math_number">
-              <field name="NUM">0</field>
-            </block>
-          </value>
-          <value name="RIGHT_PIN">
-            <block type="math_number">
-              <field name="NUM">15</field>
-            </block>
-          </value>
-        </block>
-        <block type="ljj_basic_line_follower_read"></block>
-        <block type="ljj_basic_line_follower_read_value"></block>
+      <block type="ljj_basic_line_follower_init">
+        <value name="LEFT_OUTER_PIN">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="LEFT_PIN">
+          <block type="math_number">
+            <field name="NUM">14</field>
+          </block>
+        </value>
+        <value name="MIDDLE_PIN">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="RIGHT_PIN">
+          <block type="math_number">
+            <field name="NUM">15</field>
+          </block>
+        </value>
+        <value name="RIGHT_OUTER_PIN">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+      </block>
+      <block type="ljj_basic_line_follower_read"></block>
+      <block type="ljj_basic_line_follower_read_value"></block>
         <block type="ljj_basic_button">
           <field name="PIN_MODE">LOW</field>
           <value name="PIN">
