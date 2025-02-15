@@ -8241,6 +8241,7 @@ Blockly.Blocks.ljj_basic.HUE6=60;
 Blockly.Blocks.ljj_basic.HUE7=320;
 
 Blockly.Blocks.ljj_basic_line_follower_init={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_HELPURL);
   this.setColour(Blockly.Blocks.l9110.HUE1);
   this.appendDummyInput("myWays")
       .appendField(Blockly.Msg.LIOU_ROBOT_LINE_FOLLOWER)
@@ -8278,14 +8279,14 @@ Blockly.Blocks.ljj_basic_line_follower_init={init:function(){
     var newValue="";
     if (ev.type==Blockly.Events.BLOCK_CHANGE){
       OK=(ev.name=="WAYS");
-      Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_WAYS_COUNTS=this.getField(ev.name).getValue();
+      if (OK)
+        Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_WAYS_COUNTS=this.getField(ev.name).getValue();
     }
     if (ev.type==Blockly.Events.BLOCK_CREATE){
        if (this.getField("HIDE_VALUE").getValue()=="changed")
          Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_WAYS_COUNTS=this.getField("WAYS").getValue();
-       if (this.getField("WAYS").getValue()!=Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_WAYS_COUNTS){
+       if (this.getField("WAYS").getValue()!=Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_WAYS_COUNTS)
          this.getField("WAYS").setValue(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_WAYS_COUNTS);
-       }
        this.getField("HIDE_VALUE").setValue("changed");
        OK=true;
     }       
@@ -8327,23 +8328,37 @@ Blockly.Blocks.ljj_basic_line_follower_init={init:function(){
 		  for(var c=0;c<myBlocks.length;c++)
 			  if(myBlocks[c].type=="ljj_basic_line_follower_read" || myBlocks[c].type=="ljj_basic_line_follower_read_value"){
           if (myBlocks[c].getField("WAYS")!=newValue){
+            var tempPlaceStr=myBlocks[c].getField("PLACE").getValue(),
+                tempHideStr=myBlocks[c].getField("HIDE_VALUE").getValue(),
+                findOption=false;
             myBlocks[c].getField("WAYS").setValue(newValue);
-            if (newValue=="1"){
+            if (newValue=="1")
               myBlocks[c].getInput("opt").setVisible(false);
-            }
-            else{
+            else 
               myBlocks[c].getInput("opt").setVisible(true);
-              myBlocks[c].getInput("opt").removeField("PLACE");
-              myBlocks[c].getInput("opt").appendField(new Blockly.FieldDropdown(Blockly.Msg["LJJ_BASIC_LINE_FOLLOWER_"+newValue+"_WAYS_LIST"]),"PLACE");
+            myBlocks[c].getInput("opt").removeField("PLACE");
+            myBlocks[c].getInput("opt").appendField(new Blockly.FieldDropdown(Blockly.Msg["LJJ_BASIC_LINE_FOLLOWER_"+newValue+"_WAYS_LIST"],myBlocks[c].validate),"PLACE");
+            if (tempHideStr!=tempPlaceStr)
+               myBlocks[c].getField("PLACE").setValue(tempHideStr);
+            for(var optCount=0;optCount<Blockly.Msg["LJJ_BASIC_LINE_FOLLOWER_"+newValue+"_WAYS_LIST"].length;optCount++){
+              findOption=(tempHideStr==Blockly.Msg["LJJ_BASIC_LINE_FOLLOWER_"+newValue+"_WAYS_LIST"][optCount][1]);
+              if (findOption){
+                myBlocks[c].getField("PLACE").setValue(Blockly.Msg["LJJ_BASIC_LINE_FOLLOWER_"+newValue+"_WAYS_LIST"][optCount][1]);
+                break;
+              }
             }
-            myBlocks[c].render();
+            if(!findOption){
+              myBlocks[c].getField("HIDE_VALUE").setValue(Blockly.Msg["LJJ_BASIC_LINE_FOLLOWER_"+newValue+"_WAYS_LIST"][0][1]);
+            }
           }
+          myBlocks[c].render();
         }
     }
   }
 };
 
 Blockly.Blocks.ljj_basic_line_follower_read={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_HELPURL);
   this.setColour(Blockly.Blocks.l9110.HUE1);
   this.appendDummyInput()
       .appendField(Blockly.Msg.LIOU_ROBOT_LINE_FOLLOWER);
@@ -8351,7 +8366,7 @@ Blockly.Blocks.ljj_basic_line_follower_read={init:function(){
       .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_NUMBER),"WAYS")
       .setVisible(false);
 	this.appendDummyInput("opt")
-      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_2_WAYS_LIST),"PLACE");
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_2_WAYS_LIST,this.validate),"PLACE");
 	this.appendDummyInput()
       .appendField(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_SENSED)
       .appendField(new Blockly.FieldDropdown([[Blockly.Msg.LIOU_ROBOT_BLACK,"1"],[Blockly.Msg.LIOU_ROBOT_WHITE,"0"]]),"VALUE");
@@ -8359,12 +8374,19 @@ Blockly.Blocks.ljj_basic_line_follower_read={init:function(){
       .appendField(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_REVERSE)
       .appendField(new Blockly.FieldCheckbox("FALSE"), "REVERSE")
       .appendField("?");
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldTextInput(""),'HIDE_VALUE')
+      .setVisible(false);
   this.setInputsInline(!0);
   this.setOutput(!0,"Boolean");
-  this.setTooltip(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_TOOLTIP)}
+  this.setTooltip(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_TOOLTIP)},validate: function(newValue) {
+    const sourceBlock = this.sourceBlock_;
+    sourceBlock.getField("HIDE_VALUE").setValue(newValue);
+  }
 };
 
 Blockly.Blocks.ljj_basic_line_follower_read_value={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_HELPURL);
   this.setColour(Blockly.Blocks.l9110.HUE1);
   this.appendDummyInput()
       .appendField(Blockly.Msg.LIOU_ROBOT_LINE_FOLLOWER);
@@ -8375,10 +8397,17 @@ Blockly.Blocks.ljj_basic_line_follower_read_value={init:function(){
       .appendField(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_READ)
       .appendField(Blockly.Msg.LJJ_SU03T_VALUE);
 	this.appendDummyInput("opt")
-      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_2_WAYS_LIST),"PLACE");
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_2_WAYS_LIST,this.validate),"PLACE");
+  this.appendDummyInput()
+      .appendField(new Blockly.FieldTextInput(""),'HIDE_VALUE')
+      .setVisible(false);
   this.setInputsInline(!0);
   this.setOutput(!0,"Number");
-  this.setTooltip(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_TOOLTIP)}
+  this.setTooltip(Blockly.Msg.LJJ_BASIC_LINE_FOLLOWER_TOOLTIP)},validate: function(newValue) {
+    const sourceBlock = this.sourceBlock_;
+    sourceBlock.getField("HIDE_VALUE").setValue(newValue);
+  }
+  
 };
 
 Blockly.Blocks.ljj_basic_button={init:function(){
