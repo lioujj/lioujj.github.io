@@ -2454,7 +2454,7 @@ Blockly.Arduino.esp32_core_stop=function(){
 Blockly.Arduino.esp32_core_suspend=function(){
   var a=Blockly.Arduino.valueToCode(this,"TASK_NAME",Blockly.Arduino.ORDER_ATOMIC)||"";
   a=a.replace(/\"/g,"");
-  return'if ('+a+'_Created)\n{\n  vTaskSuspennd('+a+');\n}\n';
+  return'if ('+a+'_Created)\n{\n  vTaskSuspend('+a+');\n}\n';
 }
 
 Blockly.Arduino.esp32_core_resume=function(){
@@ -6840,23 +6840,6 @@ Blockly.Arduino.ljj_radar_init_pinmap = function() {
   return a+'.begin(256000,SERIAL_8N1,'+b+','+c+');\n';
 };
 
-/*
-Blockly.Arduino.ljj_radar_other_init_pinmap = function() {
-  var a = this.getFieldValue('SERIAL_TYPE');
-      b=Blockly.Arduino.valueToCode(this,"RX",Blockly.Arduino.ORDER_ATOMIC)||"0",
-      c=Blockly.Arduino.valueToCode(this,"TX",Blockly.Arduino.ORDER_ATOMIC)||"0",
-      d='Serial';
-  if (a=='soft')
-    d='ljjRadarSoftSerial';
-  if (a=='soft'){
-    Blockly.Arduino.definitions_.define_ljj_radar_include='#include <SoftwareSerial.h>';
-    Blockly.Arduino.definitions_.define_ljj_radar_invoke='SoftwareSerial '+d+'('+b+', '+c+');\n';
-  }
-  Blockly.Arduino.ljj_radar.serial_port=d;
-  return d+'.begin(250000);\n';
-};
-*/
-
 Blockly.Arduino.ljj_radar_03E_available = function() { 
   var a=Blockly.Arduino.statementToCode(this,"Rd_03E");
   a='  '+a.replace(/\n/g,'\n  ');
@@ -7034,6 +7017,34 @@ Blockly.Arduino.ljj_l293d_servo_detach=function(){
 	return 'L293dServo_'+a+'.detach();\n';
   } else
 	return '';
+}
+
+//SGP30
+Blockly.Arduino.ljj_sgp30={};
+Blockly.Arduino.ljj_sgp30_init=function(){
+  Blockly.Arduino.definitions_.define_wire='#include "Wire.h"';
+  Blockly.Arduino.definitions_.define_ljj_sgp30="#include \"SparkFun_SGP30_Arduino_Library.h\"";
+  Blockly.Arduino.definitions_.define_ljj_sgp30_invoke='SGP30 sgp30;';
+  Blockly.Arduino.setups_.setup_wire_lib="Wire.begin();";
+  return'sgp30.begin();\nsgp30.initAirQuality();\nsgp30.setHumidity(0);\n'
+}
+
+Blockly.Arduino.ljj_sgp30_measure = function() { 
+  var a=Blockly.Arduino.statementToCode(this,"ljj_sgp30_stmt");
+  return 'sgp30.measureAirQuality();\n';
+}
+
+Blockly.Arduino.ljj_sgp30_getData=function(){
+  var a=this.getFieldValue("DATA_TYPE");
+  return['sgp30.'+a,Blockly.Arduino.ORDER_ATOMIC];
+}
+
+Blockly.Arduino.ljj_sgp30_setHumidity=function(){
+  var a=Blockly.Arduino.valueToCode(this,"TEMPERATURE",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=Blockly.Arduino.valueToCode(this,"HUMIDITY",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  Blockly.Arduino.definitions_.define_ljj_sgp30_event='double getAbsoluteHumidity(float tempC, float relHumidity) {\n  double eSat = 6.11 * pow(10.0, (7.5 * tempC / (237.7 + tempC)));\n  double vaporPressure = (relHumidity * eSat) / 100;\n  double absHumidity = 1000 * vaporPressure * 100 / ((tempC + 273) * 461.5);\n  int power = 1 << 8;\n  double number2 = absHumidity * power;\n  uint16_t value = floor(number2 + 0.5);\n  return value;\n}\n';
+  //Blockly.Arduino.definitions_.define_ljj_sgp30_event='uint32_t getAbsoluteHumidity(float temperature, float humidity) {\n    const float absoluteHumidity = 216.7f * ((humidity / 100.0f) * 6.112f * exp((17.62f * temperature) / (243.12f + temperature)) / (273.15f + temperature));\n    const uint32_t absoluteHumidityScaled = static_cast<uint32_t>(1000.0f * absoluteHumidity);\n    return absoluteHumidityScaled;\n}\n';
+  return 'sgp30.setHumidity(getAbsoluteHumidity('+a+','+b+'));\nsgp30.measureAirQuality();\n';
 }
 
 //----------------------------------------
