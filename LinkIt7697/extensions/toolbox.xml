@@ -5222,6 +5222,23 @@
       <block type="ljj_basic_line_follower_read"></block>
       <block type="ljj_basic_line_follower_read_value"></block>
     </category>
+    <category id="category_sgp30" name="SGP30">
+      <block type="ljj_sgp30_init"></block>
+      <block type="ljj_sgp30_measure"></block>
+      <block type="ljj_sgp30_setHumidity">
+        <value name="TEMPERATURE">
+          <block type="math_number">
+            <field name="NUM">0.0</field>
+          </block>
+        </value>
+        <value name="HUMIDITY">
+          <block type="math_number">
+            <field name="NUM">0.0</field>
+          </block>
+        </value>
+      </block>
+      <block type="ljj_sgp30_getData"></block>
+    </category>
   </category>
   <category id="category_lumex" name="Lumex">
     <category id="category_ldm6432" name="LDM6432MQTT">

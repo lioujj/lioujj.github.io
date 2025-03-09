@@ -1435,3 +1435,10 @@ Blockly.Msg.L293D_MOTOR = "motor";
 Blockly.Msg.L293D_DIRECTION = [["forward","FORWARD"],["backward","BACKWARD"]];
 Blockly.Msg.L293D_SET_SPEED = 'set move speed(rpm)';
 Blockly.Msg.L293D_STEPPER_METHOD = [["single coil","SINGLE"],["double coils","DOUBLE"],["interleave coil","INTERLEAVE"],["micrsostep","MICROSTEP"]];
+
+//SGP30
+Blockly.Msg.LJJ_SGP30_HELPURL = "";
+Blockly.Msg.LJJ_SGP30_TITLE = "SGP30 AirQuality sensor";
+Blockly.Msg.LJJ_SGP30_TOOLTIP = "SGP30";
+Blockly.Msg.LJJ_SGP30_GET_DATA = "start measuring";
+Blockly.Msg.LJJ_SGP30_SETHUMIDITY = "set humditiy compensation then";

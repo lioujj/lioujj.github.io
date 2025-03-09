@@ -1426,3 +1426,10 @@ Blockly.Msg.L293D_MOTOR = "馬達";
 Blockly.Msg.L293D_DIRECTION = [["正轉","FORWARD"],["反轉","BACKWARD"]];
 Blockly.Msg.L293D_SET_SPEED = '設定移動速度RPM (圈/分)';
 Blockly.Msg.L293D_STEPPER_METHOD = [["單相線圈","SINGLE"],["雙相線圈","DOUBLE"],["交錯線圈","INTERLEAVE"],["微步","MICROSTEP"]];
+
+//SGP30
+Blockly.Msg.LJJ_SGP30_HELPURL = "";
+Blockly.Msg.LJJ_SGP30_TITLE = "SGP30空氣品質感測器";
+Blockly.Msg.LJJ_SGP30_TOOLTIP = "SGP30";
+Blockly.Msg.LJJ_SGP30_GET_DATA = "開始測量";
+Blockly.Msg.LJJ_SGP30_SETHUMIDITY = "設定現在溫濕度值進行補償後";

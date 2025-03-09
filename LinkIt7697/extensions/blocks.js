@@ -11939,6 +11939,64 @@ Blockly.Blocks.ljj_l293d_servo_detach={init:function(){
   this.setTooltip(Blockly.Msg.L293D_TOOLTIP)}
 };
 
+//SGP30
+Blockly.Blocks.ljj_sgp30={};
+Blockly.Blocks.ljj_sgp30.HUE=236;
+Blockly.Blocks.ljj_sgp30_init={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_SGP30_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_sgp30.HUE);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_SGP30_TITLE)
+      .appendField(Blockly.Msg.CCS811_INIT);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.LJJ_SGP30_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_sgp30_measure={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_SGP30_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_sgp30.HUE);
+  this.appendDummyInput()
+      .appendField("SGP30")
+      .appendField(Blockly.Msg.LJJ_SGP30_GET_DATA);
+  this.setInputsInline(true);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_SGP30_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_sgp30_getData={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_SGP30_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_sgp30.HUE);
+  this.appendDummyInput()
+      .appendField("SGP30")
+      .appendField(Blockly.Msg.CCS811_GET_DATA)
+      .appendField(new Blockly.FieldDropdown([["eCO2(PPM)","CO2"],["TVOC(PPB)","TVOC"]]),"DATA_TYPE");
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Number");
+  this.setTooltip(Blockly.Msg.LJJ_SGP30_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_sgp30_setHumidity={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_SGP30_HELPURL);
+  this.setColour(Blockly.Blocks.ljj_sgp30.HUE);
+  this.appendDummyInput()
+      .appendField("SGP30")
+      .appendField(Blockly.Msg.LJJ_SGP30_SETHUMIDITY)
+      .appendField(Blockly.Msg.LJJ_SGP30_GET_DATA);
+  this.appendValueInput("TEMPERATURE")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LJJ_PMS_DATATYPE_T[0][0]);
+  this.appendValueInput("HUMIDITY")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LJJ_PMS_DATATYPE_T[1][0]);
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0,null);
+  this.setNextStatement(!0,null);
+  this.setTooltip(Blockly.Msg.LJJ_SGP30_TOOLTIP)}
+};
+
 //-----------------------------------------------
 Blockly.Blocks.ljj_2023_init={init:function(){
   this.setHelpUrl("");
