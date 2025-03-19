@@ -2558,6 +2558,30 @@ Blockly.Arduino.pocketcard_rgb_color=function(){
   return 'pocketCardPixels.setBrightness('+b+');\npocketCardPixels.show();\npocketCardPixels.setPixelColor(0,'+a+');\npocketCardPixels.show();\n';
 };
 
+Blockly.Arduino.pocketcard_tone=function(){
+  var a=Blockly.Arduino.valueToCode(this,"FREQ",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  Blockly.Arduino.definitions_.define_tone="#include <Tone32.h>";
+  Blockly.Arduino.definitions_.define_start_plus_tone_invoke="byte buzz_pin=26;\nbyte buzz_ch=0;\n";
+  Blockly.Arduino.setups_["esp32_tone1"]="tone(buzz_pin,262,0,buzz_ch);\n  delay(1);\n  noTone(buzz_pin,buzz_ch);";
+  //return"noTone(buzz_pin,buzz_ch);\ntone(buzz_pin,"+a+",0,buzz_ch);\n";
+  return"tone(buzz_pin,"+a+",0,buzz_ch);\n";
+};
+
+Blockly.Arduino.pocketcard_no_tone=function(){
+  Blockly.Arduino.definitions_.define_tone="#include <Tone32.h>";
+  Blockly.Arduino.definitions_.define_start_plus_tone_invoke="byte buzz_pin=26;\nbyte buzz_ch=0;\n";
+  Blockly.Arduino.setups_["esp32_tone1"]="tone(buzz_pin,262,0,buzz_ch);\n  delay(1);\n  noTone(buzz_pin,buzz_ch);";
+  return"noTone(buzz_pin,buzz_ch);\n";
+};
+
+Blockly.Arduino.pocketcard_custom_tone=function(){
+  var a=Blockly.Arduino.valueToCode(this,"FREQ",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      b=Blockly.Arduino.valueToCode(this,"DURATION",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  Blockly.Arduino.definitions_.define_tone="#include <Tone32.h>";
+  Blockly.Arduino.definitions_.define_start_plus_tone_invoke="byte buzz_pin=26;\nbyte buzz_ch=0;\n";
+  Blockly.Arduino.setups_["esp32_tone1"]="tone(buzz_pin,262,0,buzz_ch);\n  delay(1);\n  noTone(buzz_pin,buzz_ch);";
+  return"tone(buzz_pin,"+a+","+b+",buzz_ch);\n";
+};
 
 //KSB065
 Blockly.Arduino.KSB065={};
@@ -2610,6 +2634,7 @@ Blockly.Arduino.KSB065_button=function(){
 
 Blockly.Arduino.KSB065_analog=function(){
   var a=this.getFieldValue("TYPE");
+  Blockly.Arduino.setups_["ksb065_pinmode_"+a]="pinMode("+a+",INPUT);";
   return["analogRead("+a+")",Blockly.Arduino.ORDER_ATOMIC];
 };
 
@@ -3074,8 +3099,37 @@ Blockly.Arduino.sendSticker=function(){
   return'sendLineMsg(String("message=\\n")+'+a+'+"§stickerPackageId="+'+b+'+"§stickerId="+'+c+');\n';
 };
 
+Blockly.Arduino.lineBotInit=function(){
+  var a=Blockly.Arduino.valueToCode(this,"TOKEN",Blockly.Arduino.ORDER_ATOMIC)||"",
+      b=Blockly.Arduino.valueToCode(this,"ID",Blockly.Arduino.ORDER_ATOMIC)||"";
+  Blockly.Arduino.definitions_.define_ljj_line_bot_token='String ljjLineToken ="";\nString ljjLineId = "";';
+  Blockly.Arduino.definitions_.define_ljj_send_line_bot_invoke='void sendLineBotMsg(String myMsg,byte stkPkgId,byte stkId) {\n  static TLSClient line_client;\n  myMsg="{\\"to\\":\\""+ljjLineId+"\\",\\"messages\\":[{\\"type\\":\\"text\\",\\"text\\":\\""+myMsg+"\\"}";\n  if (stkPkgId>0 && stkId>0)\n    myMsg+=",{\\"type\\":\\"sticker\\",\\"packageId\\":\\""+String(stkPkgId)+"\\",\\"stickerId\\":\\""+String(stkId)+"\\"}";\n  myMsg+="]}";\n  Serial.println(myMsg);\n  if (line_client.connect("api.line.me", 443)) {\n    line_client.println("POST /v2/bot/message/push HTTP/1.1");\n    line_client.println("Connection: close");\n    line_client.println("Host: api.line.me");\n    line_client.println("Authorization: Bearer " + ljjLineToken);\n    line_client.println("Content-Type: application/json; charset=utf-8");\n    line_client.println("Content-Length: " + String(myMsg.length()));\n    line_client.println();\n    line_client.println(myMsg);\n    line_client.println();\n    line_client.stop();\n  }\n  else {\n    Serial.println("Line Bot push failed");\n  }\n}\n';
+  if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266" || Blockly.Arduino.my_board_type=="Pico"){
+    Blockly.Arduino.definitions_.define_secure_include="#include <WiFiClientSecure.h>";
+    Blockly.Arduino.definitions_.define_ljj_send_line_bot_invoke=Blockly.Arduino.definitions_.define_ljj_send_line_bot_invoke.replace("TLSClient","WiFiClientSecure");
+    if ((arduinoCore_ESP32) || (Blockly.Arduino.my_board_type=="ESP8266") || (Blockly.Arduino.my_board_type=="Pico"))
+      Blockly.Arduino.definitions_.define_ljj_send_line_bot_invoke=Blockly.Arduino.definitions_.define_ljj_send_line_bot_invoke.replace(" line_client;\n"," line_client;\n  line_client.setInsecure();\n");
+  }
+  return'ljjLineToken ='+a+';\nljjLineId = '+b+';\n';
+};
+
+Blockly.Arduino.sendLineBotMsg=function(){
+  var a=Blockly.Arduino.valueToCode(this,"CONTENT",Blockly.Arduino.ORDER_ATOMIC)||"";
+  return'sendLineBotMsg('+a+',0,0);\n';
+};
+
+Blockly.Arduino.sendLineBotSticker=function(){
+  var a=Blockly.Arduino.valueToCode(this,"CONTENT",Blockly.Arduino.ORDER_ATOMIC)||"",
+      b=Blockly.Arduino.valueToCode(this,"PACKAGEID",Blockly.Arduino.ORDER_ATOMIC)||"0",
+      c=Blockly.Arduino.valueToCode(this,"STICKERID",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  return'sendLineBotMsg('+a+','+b+','+c+');\n';
+};
+
 Blockly.Arduino.breakLine=function(){
-  return['"\\n"',Blockly.Arduino.ORDER_ATOMIC]
+  if (Blockly.Arduino.definitions_.define_ljj_line_bot_token)
+    return['"\\\\n"',Blockly.Arduino.ORDER_ATOMIC]
+  else
+    return['"\\n"',Blockly.Arduino.ORDER_ATOMIC]
 }
 
 //TTGO TFT
@@ -6902,6 +6956,7 @@ Blockly.Arduino.ljj_pms_other_init_pinmap = function() {
       d='Serial';
   if (a=='soft')
     d='ljjPmsSoftSerial';
+  Blockly.Arduino.ljj_pms.serial_port=d;
   Blockly.Arduino.definitions_.define_ljj_pms_include = '#include "PMS.h"';
   Blockly.Arduino.definitions_.define_ljj_pms_invoke = 'PMS pms('+d+');\nPMS::DATA_PMS ljj_pms_data;';
   if (a=='soft'){

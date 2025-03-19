@@ -645,6 +645,7 @@ Blockly.Msg.LINENOTIFY_PACKAGEID = "PackageID";
 Blockly.Msg.LINENOTIFY_STICKERID = "StickerID";
 Blockly.Msg.LINENOTIFY_SET_TOKEN_WARNIG = "You have to "+Blockly.Msg.LINENOTIFY_SETUP_TOKEN+" first.";
 Blockly.Msg.LINENOTIFY_LINE_BREAK = "line feed";
+Blockly.Msg.LINE_BOT_TOKEN = "Access Token";
 
 //TTGO TFT
 Blockly.Msg.TTGO_TFT_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/t-display";

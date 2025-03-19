@@ -639,6 +639,7 @@ Blockly.Msg.LINENOTIFY_PACKAGEID = "貼圖包編號";
 Blockly.Msg.LINENOTIFY_STICKERID = "貼圖編號";
 Blockly.Msg.LINENOTIFY_SET_TOKEN_WARNIG = "必須先設定「"+Blockly.Msg.LINENOTIFY_SETUP_TOKEN+"」積木";
 Blockly.Msg.LINENOTIFY_LINE_BREAK = "換行";
+Blockly.Msg.LINE_BOT_TOKEN = "存取權杖";
 
 //TTGO TFT
 Blockly.Msg.TTGO_TFT_HELPURL = "https://sites.google.com/jes.mlc.edu.tw/ljj/esp32/t-display";

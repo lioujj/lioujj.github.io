@@ -1670,36 +1670,15 @@
         </value>
       </block>
       <block type="ttgo_getFromColorPicker"></block>
-      <block type="esp32_tone">
-        <value name="PIN">
-          <block type="math_number">
-            <field name="NUM">26</field>
-          </block>
-        </value>
-        <value name="CHANNEL">
-          <block type="math_number">
-            <field name="NUM">0</field>
+      <block type="pocketcard_tone">
+        <value name="FREQ">
+          <block type="ljj_tone_list">
+            <field name="FREQ">523</field>
           </block>
         </value>
       </block>
-      <block type="esp32_no_tone">
-        <value name="PIN">
-          <block type="math_number">
-            <field name="NUM">26</field>
-          </block>
-        </value>
-        <value name="CHANNEL">
-          <block type="math_number">
-            <field name="NUM">0</field>
-          </block>
-        </value>
-      </block>
-      <block type="esp32_custom_tone">
-        <value name="PIN">
-          <block type="math_number">
-            <field name="NUM">26</field>
-          </block>
-        </value>
+      <block type="pocketcard_no_tone"></block>
+      <block type="pocketcard_custom_tone">
         <value name="FREQ">
           <block type="ljj_tone_list">
             <field name="FREQ">523</field>
@@ -1708,11 +1687,6 @@
         <value name="DURATION">
           <block type="math_number">
             <field name="NUM">300</field>
-          </block>
-        </value>
-        <value name="CHANNEL">
-          <block type="math_number">
-            <field name="NUM">0</field>
           </block>
         </value>
       </block>
@@ -3234,6 +3208,42 @@
         </value>
       </block>
       <block type="sendSticker">
+        <value name="CONTENT">
+          <block type="text">
+            <field name="TEXT"></field>
+          </block>
+        </value>
+        <value name="PACKAGEID">
+          <block type="math_number">
+            <field name="NUM">1</field>
+          </block>
+        </value>
+        <value name="STICKERID">
+          <block type="math_number">
+            <field name="NUM">1</field>
+          </block>
+        </value>
+      </block>
+      <block type="lineBotInit">
+        <value name="ID">
+          <block type="text">
+            <field name="TEXT"></field>
+          </block>
+        </value>
+        <value name="TOKEN">
+          <block type="text">
+            <field name="TEXT"></field>
+          </block>
+        </value>
+      </block>
+      <block type="sendLineBotMsg">
+        <value name="CONTENT">
+          <block type="text">
+            <field name="TEXT"></field>
+          </block>
+        </value>
+      </block>
+      <block type="sendLineBotSticker">
         <value name="CONTENT">
           <block type="text">
             <field name="TEXT"></field>
