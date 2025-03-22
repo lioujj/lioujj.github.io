@@ -5249,6 +5249,17 @@
       </block>
       <block type="ljj_sgp30_getData"></block>
     </category>
+    <category id="category_bmp280" name="BMP280I2C">
+			<block type="ljj_bmp280_init"></block>
+      <block type="ljj_getBmp280_value"></block>
+      <block type="ljj_getBmp280_altitude">
+        <value name="SEA_LEVEL">
+          <block type="math_number">
+            <field name="NUM">1013.25</field>
+          </block>
+        </value>
+      </block>
+    </category>
   </category>
   <category id="category_lumex" name="Lumex">
     <category id="category_ldm6432" name="LDM6432MQTT">

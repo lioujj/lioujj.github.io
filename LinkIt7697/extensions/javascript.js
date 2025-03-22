@@ -7102,6 +7102,27 @@ Blockly.Arduino.ljj_sgp30_setHumidity=function(){
   return 'sgp30.setHumidity(getAbsoluteHumidity('+a+','+b+'));\nsgp30.measureAirQuality();\n';
 }
 
+//BMP280
+Blockly.Arduino.bmp280={};
+Blockly.Arduino.ljj_bmp280_init=function(){
+  var a=this.getFieldValue("ADDRESS");
+  Blockly.Arduino.definitions_.define_bmp280="#include <Adafruit_BMP280.h>\nAdafruit_BMP280 bmp;\nbool bmpStatus=false;";
+  Blockly.Arduino.setups_["bmp280_addr_"]="bmpStatus = bmp.begin("+a+",BMP280_CHIPID);\n  bmp.setSampling(Adafruit_BMP280::MODE_NORMAL,Adafruit_BMP280::SAMPLING_X2,Adafruit_BMP280::SAMPLING_X16,Adafruit_BMP280::FILTER_X16,Adafruit_BMP280::STANDBY_MS_500);\n";
+  return''
+};
+
+Blockly.Arduino.ljj_getBmp280_value=function(){
+  var a=this.getFieldValue("VALUE_TYPE");
+  a='(bmpStatus?'+a+':0)';
+  return[a,Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.ljj_getBmp280_altitude=function(){
+  var a=Blockly.Arduino.valueToCode(this,"SEA_LEVEL",Blockly.Arduino.ORDER_ATOMIC)||"0";
+  a='(bmpStatus?bmp.readAltitude('+a+'):0)';
+  return[a,Blockly.Arduino.ORDER_ATOMIC];
+};
+
 //----------------------------------------
 setTimeout(function(){
 /*

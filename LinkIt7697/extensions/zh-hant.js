@@ -1434,3 +1434,9 @@ Blockly.Msg.LJJ_SGP30_TITLE = "SGP30空氣品質感測器";
 Blockly.Msg.LJJ_SGP30_TOOLTIP = "SGP30";
 Blockly.Msg.LJJ_SGP30_GET_DATA = "開始測量";
 Blockly.Msg.LJJ_SGP30_SETHUMIDITY = "設定現在溫濕度值進行補償後";
+
+//BMP280
+Blockly.Msg.LJJ_BMP280_HELPURL = '';
+Blockly.Msg.LJJ_BMP280_TOOLTIP = 'BMP280';
+Blockly.Msg.LJJ_BMP280_VALUE_TYPE=[['氣壓(hPa)','(bmp.readPressure() / 100.0F)'],['溫度(C)','bmp.readTemperature()']];
+Blockly.Msg.LJJ_BMP280_ALTITUDE = '取得高度(M)，依照目前海平面氣壓(hPa)';

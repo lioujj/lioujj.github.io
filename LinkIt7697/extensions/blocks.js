@@ -12094,6 +12094,50 @@ Blockly.Blocks.ljj_sgp30_setHumidity={init:function(){
   this.setTooltip(Blockly.Msg.LJJ_SGP30_TOOLTIP)}
 };
 
+
+//BMP280
+Blockly.Blocks.bmp280={};
+Blockly.Blocks.bmp280.HUE = "300";
+Blockly.Blocks.ljj_bmp280_init={init:function(){
+  this.setHelpUrl(Blockly.Msg.BMP280_HELPURL);
+  this.setColour(Blockly.Blocks.bmp280.HUE);
+  this.appendDummyInput()
+      .appendField("BMP280")
+      .appendField(Blockly.Msg.CCS811_INIT);
+  this.appendDummyInput()
+      .appendField(Blockly.Msg.LJJ_LCD1602_ADDRESS)
+      .appendField(new Blockly.FieldDropdown([["0x76","0x76"],["0x77","0x77"]]),"ADDRESS");
+  this.setInputsInline(!0);
+  this.setPreviousStatement(!0);
+  this.setNextStatement(!0);
+  this.setTooltip(Blockly.Msg.LJJ_BMP280_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_getBmp280_value={init:function(){
+  this.setHelpUrl(Blockly.Msg.BMP280_HELPURL);
+  this.setColour(Blockly.Blocks.bmp280.HUE);
+  this.appendDummyInput()
+      .appendField("BMP280")
+      .appendField(Blockly.Msg.CCS811_GET_DATA)
+      .appendField(new Blockly.FieldDropdown(Blockly.Msg.LJJ_BMP280_VALUE_TYPE),"VALUE_TYPE");
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Number");
+  this.setTooltip(Blockly.Msg.LJJ_BMP280_TOOLTIP)}
+};
+
+Blockly.Blocks.ljj_getBmp280_altitude={init:function(){
+  this.setHelpUrl(Blockly.Msg.LJJ_BMP280_HELPURL);
+  this.setColour(Blockly.Blocks.bmp280.HUE);
+  this.appendDummyInput()
+      .appendField("BMP280");
+  this.appendValueInput("SEA_LEVEL")
+      .setCheck("Number")
+      .appendField(Blockly.Msg.LJJ_BMP280_ALTITUDE);
+  this.setInputsInline(!0);
+  this.setOutput(!0,"Number");
+  this.setTooltip(Blockly.Msg.LJJ_BMP280_TOOLTIP)}
+};
+
 //-----------------------------------------------
 Blockly.Blocks.ljj_2023_init={init:function(){
   this.setHelpUrl("");

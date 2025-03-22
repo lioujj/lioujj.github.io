@@ -99,4 +99,5 @@
 <category><name>Pico_Mango</name><replace>Mango X2</replace></category>
 <category><name>LineFollower</name><replace>循線感測器</replace></category>
 <category><name>SGP30</name><replace>SGP30空氣品質</replace></category>
+<category><name>BMP280I2C</name><replace>BMP280 I2C</replace></category>
 </xml>

@@ -1443,3 +1443,9 @@ Blockly.Msg.LJJ_SGP30_TITLE = "SGP30 AirQuality sensor";
 Blockly.Msg.LJJ_SGP30_TOOLTIP = "SGP30";
 Blockly.Msg.LJJ_SGP30_GET_DATA = "start measuring";
 Blockly.Msg.LJJ_SGP30_SETHUMIDITY = "set humditiy compensation then";
+
+//BMP280
+Blockly.Msg.LJJ_BMP280_HELPURL = '';
+Blockly.Msg.LJJ_BMP280_TOOLTIP = 'BMP280';
+Blockly.Msg.LJJ_BMP280_VALUE_TYPE=[['pressure(hPa)','(bmp.readPressure() / 100.0F)'],['temperature(C)','bmp.readTemperature()']];
+Blockly.Msg.LJJ_BMP280_ALTITUDE = 'get altitude(m) by sea level pressure(hPa)';

@@ -97,4 +97,5 @@
 <category><name>Pico_Mango</name><replace>Mango X2</replace></category>
 <category><name>LineFollower</name><replace>Line Follower</replace></category>
 <category><name>SGP30</name><replace>SGP30</replace></category>
+<category><name>BMP280I2C</name><replace>BMP280 I2C</replace></category>
 </xml>
