@@ -13,12 +13,13 @@ Blockly.Arduino.init=function(a){
 	this.variableDB_.populateProcedures(a);
 	
 	this.variables_=Object.create(null);
-  this.definitions_=Object.create(null);
+	this.definitions_=Object.create(null);
+	this.definitionsTop_=Object.create(null);	
 	this.setups_=Object.create(null);
-  this.setupsTop_=Object.create(null);
+	this.setupsTop_=Object.create(null);
 	this.functions_=Object.create(null);
 	this.loops_=Object.create(null);
-  this.loopsTop_=Object.create(null);
+	this.loopsTop_=Object.create(null);
   
 	this.isInitialized=!0	
 };
@@ -44,6 +45,9 @@ Blockly.Arduino.finish=function(a){
 	a="void loop() \n{\n"+  m.join("\n")+h.join("\n\n")+a+"\n}";
 	a=a.replace("  if (myBtnStatus=='","  myBtnStatus=getBtnStatus();\n  if (myBtnStatus=='");
 	var b=[],c=[],f=[];
+
+  for(e in Blockly.Arduino.definitionsTop_)
+    b.push(Blockly.Arduino.definitionsTop_[e]);
   for(e in Blockly.Arduino.variables_)
      b.push(Blockly.Arduino.variables_[e]);
 	for(e in Blockly.Arduino.definitions_){
