@@ -3193,6 +3193,7 @@
       </block>
     </category>
     <category id="category_line_notify" name="LineNotify">
+<!--
       <block type="setLineToken">
         <value name="TOKEN">
           <block type="text">
@@ -3213,17 +3214,7 @@
             <field name="TEXT"></field>
           </block>
         </value>
-        <value name="PACKAGEID">
-          <block type="math_number">
-            <field name="NUM">1</field>
-          </block>
-        </value>
-        <value name="STICKERID">
-          <block type="math_number">
-            <field name="NUM">1</field>
-          </block>
-        </value>
-      </block>
+-->
       <block type="lineBotInit">
         <value name="ID">
           <block type="text">

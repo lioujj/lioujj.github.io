@@ -3107,7 +3107,7 @@ Blockly.Arduino.lineBotInit=function(){
   var a=Blockly.Arduino.valueToCode(this,"TOKEN",Blockly.Arduino.ORDER_ATOMIC)||"",
       b=Blockly.Arduino.valueToCode(this,"ID",Blockly.Arduino.ORDER_ATOMIC)||"";
   Blockly.Arduino.definitions_.define_ljj_line_bot_token='String ljjLineToken ="";\nString ljjLineId = "";';
-  Blockly.Arduino.definitions_.define_ljj_send_line_bot_invoke='void sendLineBotMsg(String myMsg,byte stkPkgId,byte stkId) {\n  static TLSClient line_client;\n  myMsg="{\\"to\\":\\""+ljjLineId+"\\",\\"messages\\":[{\\"type\\":\\"text\\",\\"text\\":\\""+myMsg+"\\"}";\n  if (stkPkgId>0 && stkId>0)\n    myMsg+=",{\\"type\\":\\"sticker\\",\\"packageId\\":\\""+String(stkPkgId)+"\\",\\"stickerId\\":\\""+String(stkId)+"\\"}";\n  myMsg+="]}";\n  Serial.println(myMsg);\n  if (line_client.connect("api.line.me", 443)) {\n    line_client.println("POST /v2/bot/message/push HTTP/1.1");\n    line_client.println("Connection: close");\n    line_client.println("Host: api.line.me");\n    line_client.println("Authorization: Bearer " + ljjLineToken);\n    line_client.println("Content-Type: application/json; charset=utf-8");\n    line_client.println("Content-Length: " + String(myMsg.length()));\n    line_client.println();\n    line_client.println(myMsg);\n    line_client.println();\n    line_client.stop();\n  }\n  else {\n    Serial.println("Line Bot push failed");\n  }\n}\n';
+  Blockly.Arduino.definitions_.define_ljj_send_line_bot_invoke='void sendLineBotMsg(String myMsg,unsigned int stkPkgId,unsigned int stkId) {\n  static TLSClient line_client;\n  myMsg="{\\"to\\":\\""+ljjLineId+"\\",\\"messages\\":[{\\"type\\":\\"text\\",\\"text\\":\\""+myMsg+"\\"}";\n  if (stkPkgId>0 && stkId>0)\n    myMsg+=",{\\"type\\":\\"sticker\\",\\"packageId\\":\\""+String(stkPkgId)+"\\",\\"stickerId\\":\\""+String(stkId)+"\\"}";\n  myMsg+="]}";\n  Serial.println(myMsg);\n  if (line_client.connect("api.line.me", 443)) {\n    line_client.println("POST /v2/bot/message/push HTTP/1.1");\n    line_client.println("Connection: close");\n    line_client.println("Host: api.line.me");\n    line_client.println("Authorization: Bearer " + ljjLineToken);\n    line_client.println("Content-Type: application/json; charset=utf-8");\n    line_client.println("Content-Length: " + String(myMsg.length()));\n    line_client.println();\n    line_client.println(myMsg);\n    line_client.println();\n    line_client.stop();\n  }\n  else {\n    Serial.println("Line Bot push failed");\n  }\n}\n';
   if (Blockly.Arduino.my_board_type=="ESP32" || Blockly.Arduino.my_board_type=="ESP8266" || Blockly.Arduino.my_board_type=="Pico"){
     Blockly.Arduino.definitions_.define_secure_include="#include <WiFiClientSecure.h>";
     Blockly.Arduino.definitions_.define_ljj_send_line_bot_invoke=Blockly.Arduino.definitions_.define_ljj_send_line_bot_invoke.replace("TLSClient","WiFiClientSecure");
@@ -3955,7 +3955,7 @@ Blockly.Arduino.l9110_init=function(){
       d=Blockly.Arduino.valueToCode(this,"M2B",Blockly.Arduino.ORDER_ATOMIC)||"0";
   if (Blockly.Arduino.my_board_type=="ESP32"){
     Blockly.Arduino.definitions_.define_L9110_invoke='byte m1aL9110='+a+';\nbyte m1bL9110='+b+';\nbyte m2aL9110='+c+';\nbyte m2bL9110='+d+';\n';
-    Blockly.Arduino.setups_["setup_L9110"]='pinMode(m1aL9110,OUTPUT);\n  pinMode(m2aL9110,OUTPUT);\n  ledcSetup(m1bCH, 5000, 8);\n  ledcAttachPin(m1bL9110,m1bCH);\n  ledcSetup(m2bCH, 5000, 8);\n  ledcAttachPin(m2bL9110,m2bCH);\n  digitalWrite(m1aL9110,1);\n  ledcWrite(m1bCH,255);\n  digitalWrite(m2aL9110,1);\n  ledcWrite(m2bCH,255);\n';
+    Blockly.Arduino.setups_["setup_L9110"]='pinMode(m1aL9110,OUTPUT);\n  pinMode(m2aL9110,OUTPUT);\n  ledcSetup(m1bCH, 1000, 8);\n  ledcAttachPin(m1bL9110,m1bCH);\n  ledcSetup(m2bCH, 1000, 8);\n  ledcAttachPin(m2bL9110,m2bCH);\n  digitalWrite(m1aL9110,1);\n  ledcWrite(m1bCH,255);\n  digitalWrite(m2aL9110,1);\n  ledcWrite(m2bCH,255);\n';
     if(!Blockly.Arduino.definitions_.define_L9110_channel_invoke)
       Blockly.Arduino.definitions_.define_L9110_channel_invoke='byte m1bCH=8;\nbyte m2bCH=9;\n';
   } else {
@@ -3970,7 +3970,7 @@ Blockly.Arduino.l9110_init_single=function(){
       b=Blockly.Arduino.valueToCode(this,"M1B",Blockly.Arduino.ORDER_ATOMIC)||"0";
   if (Blockly.Arduino.my_board_type=="ESP32"){
     Blockly.Arduino.definitions_.define_L9110_invoke='byte m1aL9110='+a+';\nbyte m1bL9110='+b+';\n';
-    Blockly.Arduino.setups_["setup_L9110"]='pinMode(m1aL9110,OUTPUT);\n  ledcSetup(m1bCH, 5000, 8);\n  ledcAttachPin(m1bL9110,m1bCH);\n  digitalWrite(m1aL9110,1);\n  ledcWrite(m1bCH,255);\n';
+    Blockly.Arduino.setups_["setup_L9110"]='pinMode(m1aL9110,OUTPUT);\n  ledcSetup(m1bCH, 1000, 8);\n  ledcAttachPin(m1bL9110,m1bCH);\n  digitalWrite(m1aL9110,1);\n  ledcWrite(m1bCH,255);\n';
     if(!Blockly.Arduino.definitions_.define_L9110_channel_invoke)
       Blockly.Arduino.definitions_.define_L9110_channel_invoke='byte m1bCH=8;\n';
   } else {
